@@ -1,0 +1,352 @@
+{
+  "/dialog/list_alert_none_upcoming.dialog": [
+    "No teniu {kind} propers."
+  ],
+  "/dialog/ocp_missing.dialog": [
+    "El reproductor multimèdia no s'està executant."
+  ],
+  "/dialog/in_time.dialog": [
+    "d'aquí a {remaining}"
+  ],
+  "/dialog/dav_service_cant_connect.dialog": [
+    "No es pot connectar amb el servei {service}"
+  ],
+  "/dialog/error_no_list_name.dialog": [
+    "Heu d'especificar un nom de llista."
+  ],
+  "/dialog/alarm_ocp_request.dialog": [
+    "Quina música he de posar per a despertar-vos?"
+  ],
+  "/dialog/list_todo_items.dialog": [
+    "En la llista de coses per fer hi ha {items}."
+  ],
+  "/dialog/ocp_request_retry.dialog": [
+    "no he trobat res que hi coincideixi. Repetiu el nom o proveu-ne un altre."
+  ],
+  "/dialog/list_todo_subitems.dialog": [
+    "En la llista {name} hi ha {items}."
+  ],
+  "/dialog/error_nothing_to_cancel.dialog": [
+    "No he trobat cap alerta coincident per a cancel·lar-la."
+  ],
+  "/dialog/list_alert_none_missed.dialog": [
+    "No heu perdut cap alerta."
+  ],
+  "/dialog/alert_rescheduled_all_day.dialog": [
+    "{kind} ara és per a tot el dia."
+  ],
+  "/dialog/confirm_snooze_alert.dialog": [
+    "Hi tornaré d'aquí {duration}."
+  ],
+  "/dialog/confirm_cancel_all.dialog": [
+    "D'acord, cancel·lo tots els {kind}, {num} en total."
+  ],
+  "/dialog/expired_timer.dialog": [
+    "El temporitzador {name} està corrent."
+  ],
+  "/dialog/list_todo_add_ask.dialog": [
+    "quines entrades hauria d'afegir a la llista {name}?"
+  ],
+  "/dialog/alarm_ask_time.dialog": [
+    "No he entès l'hora. Repetiu-la."
+  ],
+  "/dialog/list_todo_subitems_added.dialog": [
+    "Hi he afegit {num} entrades."
+  ],
+  "/dialog/confirm_alert_recurring_playback.dialog": [
+    "L'avís {name} sonarà a partir de {begin}, cada {repeat}."
+  ],
+  "/dialog/repeating_every.dialog": [
+    "cada {repeat}"
+  ],
+  "/dialog/list_alert_timeframe_intro.dialog": [
+    "En aquesta estona teniu {num} {type}s:"
+  ],
+  "/dialog/confirm_alert_script.dialog": [
+    "L'script {name} s'executarà a {begin}, d'aquí a {remaining}."
+  ],
+  "/dialog/alert_prenotification_ask.dialog": [
+    "Voleu una breu notificació abans d'aquest esdeveniment?"
+  ],
+  "/dialog/error_no_time.dialog": [
+    "No he sentit cap hora per a  {kind}. Torneu a intentar-ho."
+  ],
+  "/dialog/alert_prenotification.dialog": [
+    "Recordeu {remimder} d'aquí a {time_until}"
+  ],
+  "/dialog/timer_status.dialog": [
+    "Encara queden {remaining} en el temporitzador {name}."
+  ],
+  "/dialog/confirm_todo_set.dialog": [
+    "S'ha definit l'entrada."
+  ],
+  "/dialog/list_alert_missed.dialog": [
+    "{name} {kind}, ha finalitzat {begin}"
+  ],
+  "/dialog/confirm_alert_recurring_script.dialog": [
+    "{name} s'executarà {begin}, cada {repeat}."
+  ],
+  "/dialog/list_alert_intro.dialog": [
+    "Teniu els següents {kind}s:"
+  ],
+  "/dialog/list_alert_timeframe_none.dialog": [
+    "No hi ha res previst en aquesta franja de temps.",
+    "No hi ha res previst a aquest hora."
+  ],
+  "/dialog/at_time.dialog": [
+    "{begin}"
+  ],
+  "/dialog/list_todo_reminder.dialog": [
+    "Us he de recordar {reminders}"
+  ],
+  "/dialog/dav_calendar_list.dialog": [
+    "En el servei {service} hi ha  {calendars}.",
+    "{calendars} en {service}."
+  ],
+  "/dialog/next_alert.dialog": [
+    "La tasca següent és {name} a {begin}."
+  ],
+  "/dialog/list_todo_already_exist.dialog": [
+    "L'entrada {name} ja existeix en la llista per fer"
+  ],
+  "/dialog/list_todo_no_reminder.dialog": [
+    "No teniu cap recordatori desat."
+  ],
+  "/dialog/selection_dav_calendar.dialog": [
+    "Amb quin calendari m'hauria de sincronitzar?"
+  ],
+  "/dialog/pick_multiple_entries.dialog": [
+    "Hi ha diverses entrades similars. Quina voleu triar?"
+  ],
+  "/dialog/alert_rescheduled_repeat.dialog": [
+    "S'ha canviat la repetició a {repeat}."
+  ],
+  "/dialog/list_deleted.dialog": [
+    "S'ha suprimit la llista {name}"
+  ],
+  "/dialog/next_alert_timer.dialog": [
+    "La tasca següent és {name} d'aquí a {remaining}."
+  ],
+  "/dialog/confirm_cancel_alert.dialog": [
+    "S'han cancel·lat {kind} {name}."
+  ],
+  "/dialog/list_todo_exist_confirm.dialog": [
+    "Ja existeix una entrada {existing}. Encara voleu desar-la?"
+  ],
+  "/dialog/dav_credentials_missing.dialog": [
+    "Manquen les credencials DAV. Afegiu-les al fitxer skeleton en la carpeta de sistema de l'habilitat."
+  ],
+  "/dialog/error_no_repeat.dialog": [
+    "Heu d'indicar un interval de temps. Pot ser dies solts o períodes de temps curts."
+  ],
+  "/dialog/list_todo_no_lists.dialog": [
+    "No teniu cap llista oberta"
+  ],
+  "/dialog/error_audio_reminder_too_far.dialog": [
+    "Només puc establir recordatoris d'àudio fins a 24 hores d'antelació. Alternativament, crearé un esdeveniment de calendari."
+  ],
+  "/dialog/list_todo_dont_exist.dialog": [
+    "No hi ha desada cap entrada {name}. "
+  ],
+  "/dialog/list_todo_no_subitems.dialog": [
+    "la llista és buida."
+  ],
+  "/dialog/confirm_alert_playback.dialog": [
+    "L'enregistrament {name} es reproduirà {begin}, d'aquí a {remaining}."
+  ],
+  "/dialog/list_alert_missed_intro.dialog": [
+    "Aquí teniu què us heu perdut:"
+  ],
+  "/dialog/ocp_breaking_up.dialog": [
+    "No s'ha pogut assignar la música. Tanquem."
+  ],
+  "/dialog/todo_item_delete_selection_intro.dialog": [
+    "quin hauria de suprimir?"
+  ],
+  "/dialog/reminder_ask_time.dialog": [
+    "Us ho he de recordar a una hora en concret?"
+  ],
+  "/dialog/ocp_searching.dialog": [
+    "Estic comprovant el títol del contingut multimèdia."
+  ],
+  "/dialog/list_alert_w_duration.dialog": [
+    "{name} de {begin} a {end}."
+  ],
+  "/dialog/error_no_scheduled_kind.dialog": [
+    "No teniu cap {kind} a l'agenda."
+  ],
+  "/dialog/alert_rescheduled_prenotification.dialog": [
+    "La notificació prèvia també ha canviat a {prenotificació}. He d'ajustar l'horari amb antelació?"
+  ],
+  "/dialog/expired_alert.dialog": [
+    "L'alerta {name} és activa."
+  ],
+  "/dialog/timer_status_none_active.dialog": [
+    "No hi ha cap temporitzador actiu."
+  ],
+  "/dialog/alert_rescheduled.dialog": [
+    "S'ha ajustat {name} {type}"
+  ],
+  "/dialog/remove_list_items_ask.dialog": [
+    "Llisteu els elements que s'haurien de suprimir, un per un."
+  ],
+  "/dialog/confirm_timer_started.dialog": [
+    "Temporitzador per a {remaining}, comença ara."
+  ],
+  "/dialog/stopwatch_delta.dialog": [
+    "El temps transcorregut és {delta}"
+  ],
+  "/dialog/list_item_delete_selection_intro.dialog": [
+    "De quina llista?"
+  ],
+  "/dialog/alert_overlapping_ask.dialog": [
+    "En aquest moment teniu {event} a {begin}. Volseu desar-ho de tota manera?"
+  ],
+  "/dialog/expired_audio_alert_intro.dialog": [
+    "Teniu un recordatori d'àudio"
+  ],
+  "/dialog/alert_rescheduled_end.dialog": [
+    "S'ha canviat la finalització de l'entrada {kind} a {end}."
+  ],
+  "/dialog/reschedule_recurring_ask.dialog": [
+    "Això és una entrada {type} recurrent. Voleu reagendar-les totes?"
+  ],
+  "/dialog/list_todo_num_deleted.dialog": [
+    "He suprimit {num} elements per fer."
+  ],
+  "/dialog/confirm_alert_recurring.dialog": [
+    "El {kind} està configurat per a {begin}, cada {repeat}."
+  ],
+  "/dialog/expired_reminder.dialog": [
+    "Aquest és el recordatori: {name}."
+  ],
+  "/dialog/confirm_dismiss_alert.dialog": [
+    "{kind} perduda."
+  ],
+  "/dialog/selection_dav_service.dialog": [
+    "Amb quin servei he de sincronitzar-me?"
+  ],
+  "/dialog/dav_sync_ask.dialog": [
+    "He de sincronitzar {type} amb DAV?"
+  ],
+  "/dialog/alert_expiration_past.dialog": [
+    "Potser m'equivoco, però l'hora indicada correspon al passat."
+  ],
+  "/dialog/confirm_alert_set.dialog": [
+    "L'entranda {kind} començarà {begin}, d'aquí a {remaining}."
+  ],
+  "/dialog/error_no_duration.dialog": [
+    "No he sentit durant quanta estona, torneu-ho a intentar."
+  ],
+  "/dialog/dav_inactive.dialog": [
+    "DAV no és actiu, ara per ara."
+  ],
+  "/dialog/alert_overlapping_duration_ask.dialog": [
+    "A aquesta hora teniu {event} entre {begin} i {end}. Voleu desar-ho de tota manera?"
+  ],
+  "/dialog/list_alert_wo_duration.dialog": [
+    "{name} {begin}."
+  ],
+  "/dialog/confirm_cancel_timeframe.dialog": [
+    "D'acord, cancel·lo totes les entrades {kind} en aquesta estona, {num} en total."
+  ],
+  "/dialog/list_todo_lists.dialog": [
+    "Tinc {num} llistes desades: {lists}"
+  ],
+  "/dialog/selection_not_understood.dialog": [
+    "No he entès què heu dit. Trieu un número entre 1 i {max}"
+  ],
+  "/dialog/words/abbreviation_monday.dialog": [
+    "DL"
+  ],
+  "/dialog/words/abbreviation_friday.dialog": [
+    "DV"
+  ],
+  "/dialog/words/music.dialog": [
+    "música"
+  ],
+  "/dialog/words/until.dialog": [
+    "fins a"
+  ],
+  "/dialog/words/alarm.dialog": [
+    "alarma"
+  ],
+  "/dialog/words/whole_day.dialog": [
+    "tot el dia"
+  ],
+  "/dialog/words/alert.dialog": [
+    "alerta"
+  ],
+  "/dialog/words/abbreviation_tuesday.dialog": [
+    "DT"
+  ],
+  "/dialog/words/reminder.dialog": [
+    "recordatori"
+  ],
+  "/dialog/words/audio.dialog": [
+    "àudio"
+  ],
+  "/dialog/words/video.dialog": [
+    "vídeo"
+  ],
+  "/dialog/words/event.dialog": [
+    "esdeveniment"
+  ],
+  "/dialog/words/audiobook.dialog": [
+    "audiollibre"
+  ],
+  "/dialog/words/podcast.dialog": [
+    "pòdcast"
+  ],
+  "/dialog/words/abbreviation_saturday.dialog": [
+    "DS"
+  ],
+  "/dialog/words/abbreviation_sunday.dialog": [
+    "DG"
+  ],
+  "/dialog/words/todo.dialog": [
+    "per fer"
+  ],
+  "/dialog/words/weekend.dialog": [
+    "dissabte i diumenge"
+  ],
+  "/dialog/words/abbreviation_thursday.dialog": [
+    "DJ"
+  ],
+  "/dialog/words/weekday.dialog": [
+    "De dilluns a divendres"
+  ],
+  "/dialog/words/thursday.dialog": [
+    "dijous"
+  ],
+  "/dialog/words/day.dialog": [
+    "dia"
+  ],
+  "/dialog/words/saturday.dialog": [
+    "dissabte"
+  ],
+  "/dialog/words/wednesday.dialog": [
+    "dimecres"
+  ],
+  "/dialog/words/tuesday.dialog": [
+    "dimarts"
+  ],
+  "/dialog/words/monday.dialog": [
+    "dilluns"
+  ],
+  "/dialog/words/sunday.dialog": [
+    "diumenge"
+  ],
+  "/dialog/words/timer.dialog": [
+    "temporitzador"
+  ],
+  "/dialog/words/friday.dialog": [
+    "divendres"
+  ],
+  "/dialog/words/once.dialog": [
+    "un cop"
+  ],
+  "/dialog/words/abbreviation_wednesday.dialog": [
+    "DC"
+  ]
+}
