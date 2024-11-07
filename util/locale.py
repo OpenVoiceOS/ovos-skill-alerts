@@ -1,44 +1,42 @@
-from os import walk
-from os.path import join, dirname
-from typing import Optional, List, Union, Tuple, Any
 import datetime as dt
 import re
+from os import walk
+from os.path import join, dirname
+from typing import Optional, List, Union, Tuple
 
 from ovos_bus_client.message import Message
-from lingua_franca.format import (
+from ovos_config.locale import get_default_lang, load_language
+from ovos_date_parser import (
     nice_duration,
     nice_time,
     nice_date,
-    nice_date_time,
-    join_list,
+    nice_date_time
 )
-from ovos_config.locale import get_default_lang, load_language
-from lingua_franca.format import nice_duration, expand_options
-
 from ovos_skill_alerts.util import AlertType, Weekdays, WEEKDAYS, WEEKENDS, EVERYDAY
 from ovos_skill_alerts.util.alert import Alert
 from ovos_skill_alerts.util.config import use_24h_format, get_date_format
+from ovos_utils.bracket_expansion import expand_options
+from ovos_workshop.skills.ovos import join_word_list
 
 
 def datetime_display(begin: dt.datetime,
                      end: Optional[dt.datetime] = None) -> str:
-    
     use_24h = use_24h_format()
     date_format = get_date_format()
 
     display = date_display(begin, date_format) + " " + \
-                time_display(begin, use_24h)
+              time_display(begin, use_24h)
     if end and end.date() != begin.date():
         display += " - " + date_display(end, date_format) + " " + \
-                    time_display(end, use_24h)
+                   time_display(end, use_24h)
     elif end:
         display += " - " + time_display(end, use_24h)
-    
+
     return display
 
 
 def time_display(dt_obj: dt.datetime,
-                 use_24h: bool = True) -> str:    
+                 use_24h: bool = True) -> str:
     return nice_time(dt_obj,
                      speech=False,
                      use_24hour=use_24h,
@@ -54,7 +52,7 @@ def date_display(dt_obj: dt.datetime,
     elif date_format == "YMD":
         display = dt_obj.strftime("%Y/%-m/%-d")
     return display
-    
+
 
 def translate(word, lang=None):
     lang = lang or get_default_lang()
@@ -139,11 +137,11 @@ def spoken_duration(alert_time: Union[dt.timedelta, dt.datetime],
     load_language(lang or get_default_lang())
     if isinstance(alert_time, dt.datetime):
         anchor_time = anchor_time or \
-                dt.datetime.now(alert_time.tzinfo).replace(microsecond=0)
+                      dt.datetime.now(alert_time.tzinfo).replace(microsecond=0)
         remaining_time: dt.timedelta = alert_time - anchor_time
     else:
         remaining_time = alert_time
-    
+
     # changing resolution
     # days
     if remaining_time > dt.timedelta(weeks=1):
@@ -302,13 +300,13 @@ def get_alert_dialog_data(alert: Alert,
         elif alert.repeat_days == EVERYDAY:
             data["repeat"] = translate("day", lang)
         else:
-            data["repeat"] = join_list([spoken_weekday(day, lang)
-                                        for day in alert.repeat_days],
-                                       "and")
+            data["repeat"] = join_word_list([spoken_weekday(day, lang)
+                                             for day in alert.repeat_days],
+                                            connector="and", sep=",", lang=lang)
     elif alert.repeat_frequency:
         data["repeat"] = nice_duration(
             alert.repeat_frequency.total_seconds())
-    
+
     if alert.prenotification:
         data["prenotification"] = nice_time(alert.prenotification)
 

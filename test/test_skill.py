@@ -36,14 +36,14 @@ import icalendar
 from json_database import JsonStorage
 from mock import Mock, patch
 from mock.mock import call
-from lingua_franca.format import nice_time, pronounce_number
+from ovos_date_parser import nice_time, nice_date_time, nice_duration
+from ovos_number_parser import pronounce_number
 from ovos_bus_client.message import Message
 from ovos_utils.events import EventSchedulerInterface
 from ovos_utils.messagebus import FakeBus
 from ovos_workshop.skills import OVOSSkill
 
 from ovos_config.locale import load_language, get_default_tz
-from lingua_franca.format import nice_date_time, nice_duration
 
 from ovos_skill_alerts import AlertSkill
 from ovos_skill_alerts.util import AlertPriority, AlertState, AlertType, DAVType, Weekdays, EVERYDAY

@@ -28,7 +28,7 @@
 
 from datetime import datetime
 
-from lingua_franca.format import nice_duration, nice_time
+from ovos_date_parser import nice_duration, nice_time
 from ovos_utils.log import LOG
 
 from ovos_skill_alerts.util.alert import Alert, AlertType

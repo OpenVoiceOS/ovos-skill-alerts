@@ -27,19 +27,15 @@
 # SOFTWARE,  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import datetime as dt
-import re
 from time import time
-from uuid import uuid4
 from typing import Optional, List, Union, Tuple, Any
+from uuid import uuid4
 
 from dateutil.relativedelta import relativedelta
-from ovos_utils.log import LOG
-from ovos_bus_client import Message, MessageBusClient
-from lingua_franca.format import nice_time, nice_day
-from lingua_franca.parse import extract_datetime, extract_duration, normalize, extract_number
+from ovos_bus_client import Message
 from ovos_config.locale import get_default_lang, load_language, get_default_tz
-from rapidfuzz import fuzz
-
+from ovos_date_parser import nice_time, nice_day, extract_datetime, extract_duration
+from ovos_number_parser import extract_number
 from ovos_skill_alerts.util import AlertPriority, Weekdays, AlertType, DAVType, LOCAL_USER
 from ovos_skill_alerts.util.alert import Alert
 from ovos_skill_alerts.util.config import use_24h_format, find_resource_file, get_date_format
@@ -50,6 +46,9 @@ from ovos_skill_alerts.util.locale import (
     spoken_duration,
     get_alert_type
 )
+from ovos_utils.log import LOG
+from ovos_utterance_normalizer import UtteranceNormalizerPlugin
+from rapidfuzz import fuzz
 
 
 class Tokens(list):
@@ -138,7 +137,8 @@ def tokenize_utterance(message: Message) -> Tokens:
             parsed = parsed.strip("-")
             chunks.extend((parsed, word))
         chunks.append(utterance)
-    tokens = Tokens([normalize(chunk, lang=lang, remove_articles=False).lower()
+    normalizer = UtteranceNormalizerPlugin.get_normalizer(lang=lang)
+    tokens = Tokens([normalizer.normalize(chunk).lower()
                      for chunk in chunks if chunk.strip()], message)
     return tokens
 
