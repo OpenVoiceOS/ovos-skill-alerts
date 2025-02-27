@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.1.18a2](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.1.18a2) (2025-02-13)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.1.18a1...0.1.18a2)
+
+**Merged pull requests:**
+
+- added italian [\#31](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/31) ([gitlocalize-app[bot]](https://github.com/apps/gitlocalize-app))
+
 ## [0.1.18a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.1.18a1) (2025-02-09)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.1.17...0.1.18a1)
