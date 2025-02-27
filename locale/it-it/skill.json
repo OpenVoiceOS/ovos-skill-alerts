@@ -1,0 +1,29 @@
+{
+  "title": "Avvisi",
+  "description": "Una competenza per gestire allarmi, timer, promemoria, eventi e cose da fare e, facoltativamente, per sincronizzarli con un servizio CalDAV.",
+  "examples": [
+    "Imposta una sveglia per le 8.",
+    "Imposta un timer per la cottura del pane su 30 minuti.",
+    "Organizza un evento di tennis della durata di 2 ore per le ore 14 di venerdì.",
+    "Imposta una sveglia giornaliera per le 8.",
+    "Imposta la sveglia alle 8 del mattino per ogni sabato.",
+    "ricordami di portare fuori la spazzatura ogni giovedì e domenica alle 19.",
+    "svegliami alle 8 del mattino con la musica.",
+    "Quando è la mia prossima sveglia?",
+    "Quali sono i miei promemoria?",
+    "Annulla tutti gli allarmi.",
+    "Annulla tutti i timer.",
+    "Annulla tutti i promemoria.",
+    "Cosa mi sono perso?",
+    "Mi sono perso qualcosa?"
+  ],
+  "tags": [
+    "Produttività",
+    "Giornaliero",
+    "allarme",
+    "sveglia",
+    "timer",
+    "promemoria",
+    "programma"
+  ]
+}

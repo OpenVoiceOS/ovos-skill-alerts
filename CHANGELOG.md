@@ -1,20 +1,12 @@
 # Changelog
 
-## [0.1.17a2](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.1.17a2) (2025-01-26)
+## [0.1.18a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.1.18a1) (2025-02-09)
 
-[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.1.17a1...0.1.17a2)
-
-**Merged pull requests:**
-
-- Fix deprecation [\#50](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/50) ([JarbasAl](https://github.com/JarbasAl))
-
-## [0.1.17a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.1.17a1) (2025-01-25)
-
-[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.1.16...0.1.17a1)
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.1.17...0.1.18a1)
 
 **Merged pull requests:**
 
-- fix automations [\#48](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/48) ([JarbasAl](https://github.com/JarbasAl))
+- added italian translation [\#53](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/53) ([gitlocalize-app[bot]](https://github.com/apps/gitlocalize-app))
 
 
 
