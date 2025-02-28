@@ -1,7 +1,7 @@
 {
-  "/intent/missed_alerts.intent": [
-    "(gik jeg|) glip af (en|en|enhver|) (begivenhed|påmindelse|timer|alarm|alarm|begivenheder|påmindelser|timere|alarmer|alarmer)",
-    "(har jeg|) misset (en|en|enhver|) (begivenhed|påmindelse|timer|alarm|alarm|begivenheder|påmindelser|timere|alarmer|alarmer)",
-    "(hvad|hvilken) (begivenhed|påmindelse|timer|alarm|alarm|begivenheder|påmindelser|timere|alarmer|alarmer) (gik jeg glip af|har jeg gået glip af)"
-  ]
+    "/intent/missed_alerts.intent": [
+        "(gik jeg|) glip af (en|en|enhver|) (begivenhed|påmindelse|timer|alarm|alarm|begivenheder|påmindelser|timere|alarmer|alarmer)",
+        "(har jeg|) misset (en|en|enhver|) (begivenhed|påmindelse|timer|alarm|alarm|begivenheder|påmindelser|timere|alarmer|alarmer)",
+        "(hvad|hvilken) (begivenhed|påmindelse|timer|alarm|alarm|begivenheder|påmindelser|timere|alarmer|alarmer) (gik jeg glip af|har jeg gået glip af)"
+    ]
 }

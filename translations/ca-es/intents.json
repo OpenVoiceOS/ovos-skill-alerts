@@ -1,7 +1,7 @@
 {
-  "/intent/missed_alerts.intent": [
-    "(que|) (em vaig perdre|em vaig oblidar|vaig perdre|vaig oblidar|perdí|oblidí| em perdí| m'oblidí) (un|una|algun|alguna|cap|qualque|uns|unes|alguns|algunes|qualsevol|qualssevol|qualsevulla|qualssevulla) (event|esdeveniment|recordatori|temportizador|alarma|alerta|events|esdeveniments|recordatoris|temportizadors|alarmes|alertes)",
-    "(que|) (m'he perdut|m'he oblidat|he perdut|he oblidat) (un|una|algun|alguna|cap|qualque|uns|unes|alguns|algunes|qualsevol|qualssevol|qualsevulla|qualssevulla) (event|esdeveniment|recordatori|temportizador|alarma|alerta|events|esdeveniments|recordatoris|temportizadors|alarmes|alertes)",
-    "(quin|quina|quins|quines) (event|esdeveniment|recordatori|temportizador|alarma|alerta|events|esdeveniments|recordatoris|temportizadors|alarmes|alertes) (m'he perdut|m'he oblidat|vaig perdre|vaig oblidar|he perdut|he oblidat|em perdí|m'oblidí|perdí|oblidí)"
-  ]
+    "/intent/missed_alerts.intent": [
+        "(que|) (em vaig perdre|em vaig oblidar|vaig perdre|vaig oblidar|perdí|oblidí| em perdí| m'oblidí) (un|una|algun|alguna|cap|qualque|uns|unes|alguns|algunes|qualsevol|qualssevol|qualsevulla|qualssevulla) (event|esdeveniment|recordatori|temportizador|alarma|alerta|events|esdeveniments|recordatoris|temportizadors|alarmes|alertes)",
+        "(que|) (m'he perdut|m'he oblidat|he perdut|he oblidat) (un|una|algun|alguna|cap|qualque|uns|unes|alguns|algunes|qualsevol|qualssevol|qualsevulla|qualssevulla) (event|esdeveniment|recordatori|temportizador|alarma|alerta|events|esdeveniments|recordatoris|temportizadors|alarmes|alertes)",
+        "(quin|quina|quins|quines) (event|esdeveniment|recordatori|temportizador|alarma|alerta|events|esdeveniments|recordatoris|temportizadors|alarmes|alertes) (m'he perdut|m'he oblidat|vaig perdre|vaig oblidar|he perdut|he oblidat|em perdí|m'oblidí|perdí|oblidí)"
+    ]
 }

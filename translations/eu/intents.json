@@ -1,7 +1,7 @@
 {
     "/intent/missed_alerts.intent": [
-        "Ba al (nuen|zegoen) galdutako (ekitaldirik|gogorarazpenik|tenporizadorerik|alarmarik|alertarik|ekitaldiren bat|gogorarazpenen bat|tenporizadoreren bat|alarmaren bat|alertaren bat)?",
-        "Ba al (dut|dago) galdutako (ekitaldirik|gogorarazpenik|tenporizadorerik|alarmarik|alertarik|ekitaldiren bat|gogorarazpenen bat|tenporizadoreren bat|alarmaren bat|alertaren bat)?",
-        "(zer|zein) (ekitaldi|gogorarazpen|tenporizadore|alarma|alerta) (galdu nuen|galdu dut)?"
+        "(zer|zein) (ekitaldi|gogorarazpen|tenporizadore|alarma|alerta) (galdu nuen|galdu dut)",
+        "Ba al (dut|dago) galdutako (ekitaldirik|gogorarazpenik|tenporizadorerik|alarmarik|alertarik|ekitaldiren bat|gogorarazpenen bat|tenporizadoreren bat|alarmaren bat|alertaren bat)",
+        "Ba al (nuen|zegoen) galdutako (ekitaldirik|gogorarazpenik|tenporizadorerik|alarmarik|alertarik|ekitaldiren bat|gogorarazpenen bat|tenporizadoreren bat|alarmaren bat|alertaren bat)"
     ]
 }

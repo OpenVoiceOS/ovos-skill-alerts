@@ -1,7 +1,7 @@
 {
-  "/intent/missed_alerts.intent": [
-    "ho perso qualcosa?",
-    "cosa mi sono perso?",
-    "mancato allarme?"
-  ]
+    "/intent/missed_alerts.intent": [
+        "cosa mi sono perso",
+        "ho perso qualcosa",
+        "mancato allarme"
+    ]
 }
