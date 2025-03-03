@@ -1,7 +1,7 @@
 {
-  "/intent/missed_alerts.intent": [
-    "ho perso qualcosa?",
-    "cosa mi sono perso?",
-    "mancato allarme?"
-  ]
+    "/intent/missed_alerts.intent": [
+        "(per caso|) (io|) mi (sono perso|\u00e8 sfuggito) (per caso|) (un|una|qualche|degli|delle) (evento|promemoria|timer|allarme|sveglia|eventi|allarmi|sveglie)",
+        "(per caso|) (io|) ho dimenticato (per caso|) (un|una|qualche|degli|delle) (evento|promemoria|timer|allarme|sveglia|eventi|allarmi|sveglie)",
+        "(quale|quali) (evento|promemoria|timer|allarme|sveglia|eventi|allarmi|sveglie) (io|) (mi sono|ho|mi \u00e8) (perso|dimenticato|sfuggito)"
+    ]
 }
