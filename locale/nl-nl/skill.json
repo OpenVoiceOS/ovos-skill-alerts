@@ -1,0 +1,29 @@
+{
+  "title": "Herinneringen en meldingen",
+  "description": "Een skill om wekkers, timers, herinneringen, agenda-afspraken en taken te plannen en te beheren. En deze eventueel te synchroniseren met een CalDAV-service.",
+  "examples": [
+    "Zet een wekker om 8 uur 's ochtends.",
+    "Zet een timer voor 30 minuten",
+    "Plan een tenniswedstrijd van twee uur voor vrijdag om drie uur 's middags.",
+    "Stel een dagelijkse wekker in om 8 uur 's ochtends.",
+    "Zet op zaterdagen een wekker om 8.00 uur",
+    "herinner mij eraan om elke donderdag en zondag om 19.00 uur het vuilnis buiten te zetten.",
+    "Maak me om 8 uur 's ochtends wakker met muziek.",
+    "Wanneer is mijn volgende wekker?",
+    "Wat zijn mijn herinneringen?",
+    "Annuleer alle wekkers.",
+    "Annuleer alle timers.",
+    "Annuleer alle herinneringen.",
+    "Wat heb ik gemist?",
+    "Heb ik iets gemist?"
+  ],
+  "tags": [
+    "Productiviteit",
+    "Dagelijks",
+    "waarschuwing",
+    "wekker",
+    "timer",
+    "herinnering",
+    "schema"
+  ]
+}
