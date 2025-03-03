@@ -1,408 +1,387 @@
 {
-    "/vocab/cancel.voc": [
-        "annuleren",
-        "duidelijk",
-        "weggooien",
-        "verwijderen"
-    ],
-    "/vocab/todo.voc": [
-        "memo's",
-        "noot",
-        "memo",
-        "todos",
-        "todo",
-        "Opmerkingen",
-        "te doen"
-    ],
-    "/vocab/alert.voc": [
-        "waarschuwingen",
-        "waarschuwing"
-    ],
-    "/vocab/calendar.voc": [
-        "kalenders",
-        "kalender"
-    ],
-    "/vocab/no.voc": [
-        "geen",
-        "nope",
-        "negatief",
-        "nah"
-    ],
-    "/vocab/days.voc": [
-        "maandag",
-        "donderdag",
-        "zondag",
-        "zaterdag",
-        "dinsdag",
-        "vrijdag",
-        "zondagen",
-        "woensdag"
-    ],
-    "/vocab/create.voc": [
-        "schema",
-        "stel  in",
-        "ik heb",
-        "start",
-        "maken",
-        "toevoegen",
-        "nieuw"
-    ],
-    "/vocab/everyday.voc": [
-        "nachtelijk",
-        "alledaags",
-        "dagelijks",
-        "elke ochtend",
-        "elke dag",
-        "elke middag",
-        "elke avond"
-    ],
-    "/vocab/timer.voc": [
-        "timer",
-        "timers"
-    ],
-    "/vocab/choice.voc": [
-        "kies",
-        "keuze",
-        "beschikbaar"
-    ],
-    "/vocab/change.voc": [
-        "opschorten",
-        "opnieuw inplannen",
-        "uitstellen",
-        "shift",
-        "veranderen",
-        "druk op",
-        "uitbreiden",
-        "aanpassen",
-        "schorsen",
-        "verplaatsen"
-    ],
-    "/vocab/and.voc": [
-        "en"
-    ],
-    "/vocab/snooze.voc": [
-        "laat me snoozen tot",
-        "toevoegen",
-        "houd",
-        "herinner me aan",
-        "laat me slapen voor",
-        "later",
-        "wacht",
-        "laat me nog een dutje doen",
-        "snooze voor",
-        "laat me slapen tot",
-        "laat me snoozen",
-        "herinner me in",
-        "snooze tot",
-        "laat me nog een slapen",
-        "herinner me eraan",
-        "een ander toevoegen",
-        "snooze",
-        "laat me snoozen voor",
-        "laat me slapen"
-    ],
-    "/vocab/weekdays.voc": [
-        "weekdag",
-        "weekdagen"
-    ],
-    "/vocab/reminder.voc": [
-        "herinneringen",
-        "herinnering"
-    ],
-    "/vocab/priority.voc": [
-        "prioriteitsniveau",
-        "prioriteit"
-    ],
-    "/vocab/wake.voc": [
-        "wakker",
-        "wakker worden",
-        "maak ons wakker",
-        "maak me wakker"
-    ],
-    "/vocab/stored.voc": [
-        "opgeslagen",
-        "geheel",
-        "stel  in",
-        "sla",
-        "heel",
-        "komende",
-        "opslaan",
-        "alle",
-        "geschreven",
-        "in afwachting van",
-        "keuze",
-        "elke"
-    ],
-    "/vocab/query.voc": [
-        "hebben we",
-        "is er",
-        "zeg het me",
-        "iets",
-        "deden we",
-        "wanneer",
-        "heb je",
-        "alles",
-        "verversen",
-        "hebben i",
-        "heb ik",
-        "wat zijn",
-        "van wat",
-        "deed ik",
-        "wat",
-        "doen we",
-        "kreeg",
-        "doe je",
-        "Toon",
-        "hoeveel",
-        "wat is",
-        "die",
-        "vanaf wanneer",
-        "lijst",
-        "waarvan",
-        "doe ik",
-        "hoe",
-        "lees",
-        "vertel het ons",
-        "zijn er"
-    ],
-    "/vocab/later.voc": [
-        "langer",
-        "extra",
-        "uitbreiden",
-        "verhogen",
-        "plus"
-    ],
-    "/vocab/miss.voc": [
-        "gemist",
-        "miss"
-    ],
-    "/vocab/list.voc": [
-        "kaart",
-        "lijst",
-        "lijsten",
-        "kaarten"
-    ],
-    "/vocab/media.voc": [
-        "luisterboek",
-        "audio",
-        "muziek",
-        "radio",
-        "video",
-        "nieuws",
-        "podcast"
-    ],
-    "/vocab/all_day.voc": [
-        "de hele dag",
-        "hele dag",
-        "volledige dag"
-    ],
-    "/vocab/remind.voc": [
-        "zeg tegen",
-        "herinner",
-        "geheugen"
-    ],
-    "/vocab/delete.voc": [
-        "verwijderen",
-        "pop",
-        "wissen",
-        "kras",
-        "weggooien",
-        "druppel"
-    ],
-    "/vocab/time.voc": [
-        "tijd"
-    ],
-    "/vocab/synchronize.voc": [
-        "sync",
-        "synchroniseren",
-        "gesynchroniseerd",
-        "uploaden",
-        "belasting",
-        "synchroon",
-        "downloaden"
-    ],
-    "/vocab/items.voc": [
-        "items",
-        "spul",
-        "objecten",
-        "dingen",
-        "inzendingen",
-        "ding",
-        "object",
-        "ingang",
-        "item"
-    ],
-    "/vocab/remaining.voc": [
-        "lang",
-        "klaar",
-        "gedaan",
-        "eindigt",
-        "status",
-        "einde",
-        "links"
-    ],
-    "/vocab/event.voc": [
-        "afspraak",
-        "evenement",
-        "afspraken",
-        "evenementen"
-    ],
-    "/vocab/until.voc": [
-        "tot",
-        "evenementlengte",
-        "met lengte",
-        "evenementduur",
-        "met duur",
-        "voor de volgende",
-        "lengte",
-        "overspanning",
-        "duur",
-        "met een duur van"
-    ],
-    "/vocab/question.voc": [
-        "moet u",
-        "kunt u",
-        "zou je"
-    ],
-    "/vocab/earlier.voc": [
-        "min",
-        "verlaag",
-        "inkorten",
-        "eerder",
-        "korte"
-    ],
-    "/vocab/repeat.voc": [
-        "herhalen op elke",
-        "frequentie",
-        "herhaling naar",
-        "elke keer terugkerend",
-        "herhaling",
-        "herhaal",
-        "frequentie naar",
-        "het herhalen van elke",
-        "herhalend",
-        "herhalen om",
-        "herhaling naar elke",
-        "frequentie naar elke",
-        "herhaling elke",
-        "herhaal elke",
-        "elke",
-        "frequentie elke",
-        "terugkerend"
-    ],
-    "/vocab/noise_words.voc": [
-        "waarbij",
-        "zij",
-        "naar",
-        "te",
-        "zijn",
-        "wanneer",
-        "het",
-        "met",
-        "ik",
-        "ook",
-        "ben",
-        "waar is",
-        "waarom",
-        "wat",
-        "deed",
-        "dat",
-        "maar",
-        "in",
-        "een",
-        "wat is",
-        "neon",
-        "zal",
-        "voor",
-        "genaamd",
-        "en",
-        "die",
-        "naam",
-        "mijn",
-        "door",
-        "doen",
-        "of",
-        "van",
-        "op",
-        "hoe",
-        "ze",
-        "is",
-        "de",
-        "a"
-    ],
-    "/vocab/put.voc": [
-        "draai",
-        "start",
-        "niet",
-        "zet"
-    ],
-    "/vocab/next.voc": [
-        "volgende"
-    ],
-    "/vocab/playable.voc": [
-        "audio",
-        "hoorbaar",
-        "herhaling",
-        "opgenomen",
-        "spreekbaar",
-        "bespeelbaar",
-        "opname",
-        "stem",
-        "afspelen"
-    ],
-    "/vocab/weekends.voc": [
-        "weekends",
-        "week eindigt",
-        "weekeinde",
-        "weekend"
-    ],
-    "/vocab/dismiss.voc": [
-        "duidelijke herinnering",
-        "stopwekker",
-        "alarm afzetten",
-        "stop",
-        "rustig",
-        "stilte",
-        "waarschuwing annuleren",
-        "stil alarm",
-        "ontslag kennisgeving",
-        "duidelijke waarschuwing",
-        "timer annuleren",
-        "herinnering ontslag",
-        "annuleren",
-        "Herinnering aan stilte",
-        "waarschuwing negeren",
-        "ok\u00e9",
-        "stop notificatie",
-        "alarm wissen",
-        "duidelijke melding",
-        "kennisgeving annuleren",
-        "begrepen",
-        "timer afzetten",
-        "Stilte-alarm",
-        "verlaat",
-        "einde",
-        "ontslag",
-        "stille melding",
-        "timer wissen",
-        "Stiltetimer",
-        "alarm annuleren",
-        "Stop herinnering",
-        "stop alarm",
-        "duidelijk",
-        "zwijgen",
-        "stop alert",
-        "herinnering annuleren"
-    ],
-    "/vocab/alarm.voc": [
-        "maak me wakker",
-        "alarm",
-        "alarmen"
-    ],
-    "/vocab/script.voc": [
-        "vaardigheidsbestand",
-        "script",
-        "bestand",
-        "routine"
-    ]
+  "/vocab/cancel.voc": [
+    "annuleren",
+    "verwijder",
+    "gooi weg",
+    "negeer",
+    "verwijder"
+  ],
+  "/vocab/todo.voc": [
+    "memo's",
+    "noot",
+    "memo",
+    "todos",
+    "todo",
+    "Opmerkingen",
+    "te doen"
+  ],
+  "/vocab/alert.voc": [
+    "waarschuwingen",
+    "waarschuwing"
+  ],
+  "/vocab/calendar.voc": [
+    "kalenders",
+    "kalender"
+  ],
+  "/vocab/no.voc": [
+    "geen",
+    "nope",
+    "nee hoor",
+    "nah"
+  ],
+  "/vocab/days.voc": [
+    "maandag",
+    "maandagen",
+    "dinsdag",
+    "dinsdagen",
+    "woensdag",
+    "woensdagen",
+    "donderdag",
+    "donderdagen",
+    "vrijdag",
+    "vrijdagen",
+    "zaterdag",
+    "zaterdagen",
+    "zondag",
+    "zondagen"
+  ],
+  "/vocab/create.voc": [
+    "zet een",
+    "nieuwe",
+    "maak",
+    "maak",
+    "start",
+    "ik heb",
+    "rooster",
+    "toevoegen"
+  ],
+  "/vocab/everyday.voc": [
+    "dagelijks",
+    "elke dag",
+    "dagelijks",
+    "elke nacht",
+    "elke (ochtend | morgen)",
+    "elke middag",
+    "elke avond",
+    "elke nacht"
+  ],
+  "/vocab/timer.voc": [
+    "timer",
+    "timers"
+  ],
+  "/vocab/choice.voc": [
+    "keuze",
+    "kies",
+    "beschikbare"
+  ],
+  "/vocab/change.voc": [
+    "plan opnieuw",
+    "wijzig",
+    "stel uit",
+    "verplaats",
+    "stel uit",
+    "verplaats",
+    "verdaag",
+    "pas aan",
+    "verplaats",
+    "verleng"
+  ],
+  "/vocab/and.voc": [
+    "en"
+  ],
+  "/vocab/snooze.voc": [
+    "snooze (voor|tot|)",
+    "laat mij (nog) (slapen|snoozen) (voor|tot|)",
+    "later",
+    "wacht",
+    "stel uit",
+    "voeg (nog een|)toe",
+    "herinner mij (in|op|)"
+  ],
+  "/vocab/weekdays.voc": [
+    "weekdag",
+    "weekdagen",
+    "weekdag",
+    "weekdagen"
+  ],
+  "/vocab/reminder.voc": [
+    "herinnering",
+    "Herinneringen"
+  ],
+  "/vocab/priority.voc": [
+    "prioriteit",
+    "prioriteitsniveau"
+  ],
+  "/vocab/wake.voc": [
+    "maak (mij|ons|me) wakker (op|om)"
+  ],
+  "/vocab/stored.voc": [
+    "sla op",
+    "opgeslagen",
+    "keuze",
+    "sla op",
+    "opgeslagen",
+    "geschreven",
+    "alle",
+    "alle",
+    "elk",
+    "de hele",
+    "gehele",
+    "aankomende",
+    "in behandeling",
+    "zet"
+  ],
+  "/vocab/query.voc": [
+    "lijst",
+    "lees",
+    "vertel me",
+    "Wat",
+    "wanneer",
+    "Hoe",
+    "gekregen",
+    "hoe veel",
+    "wat is",
+    "wat zijn",
+    "wat is",
+    "welke",
+    "zijn er",
+    "is er",
+    "heb  ik",
+    "hebben wij",
+    "heb jij",
+    "heb ik",
+    "hebben we",
+    "heb je",
+    "heb ik",
+    "hebben wij",
+    "heb je",
+    "heb ik",
+    "heb je",
+    "vernieuw",
+    "zeg eens",
+    "vertel ons",
+    "vernieuw",
+    "alles",
+    "iets",
+    "van wat",
+    "van wie",
+    "van wanneer"
+  ],
+  "/vocab/later.voc": [
+    "langer",
+    "extra",
+    "verleng",
+    "beid uit",
+    "verhoog",
+    "plus"
+  ],
+  "/vocab/miss.voc": [
+    "gemist",
+    "gemist"
+  ],
+  "/vocab/list.voc": [
+    "lijst",
+    "lijsten",
+    "kaart",
+    "kaarten"
+  ],
+  "/vocab/media.voc": [
+    "audio",
+    "muziek",
+    "video",
+    "audioboek",
+    "podcast",
+    "radio",
+    "nieuws"
+  ],
+  "/vocab/all_day.voc": [
+    "de hele dag",
+    "hele dag",
+    "volledige dag",
+    "hele dag"
+  ],
+  "/vocab/remind.voc": [
+    "herinner me",
+    "geheugen",
+    "vertel"
+  ],
+  "/vocab/delete.voc": [
+    "verwijder",
+    "verwijder",
+    "schrap",
+    "gooi weg",
+    "weggooien",
+    "wis",
+    "wis"
+  ],
+  "/vocab/time.voc": [
+    "tijd"
+  ],
+  "/vocab/synchronize.voc": [
+    "synchroniseer",
+    "gesynchroniseerd",
+    "synchroniseer",
+    "gesynchroniseerd",
+    "laad",
+    "upload",
+    "download"
+  ],
+  "/vocab/items.voc": [
+    "item",
+    "(artikelen | items)",
+    "vermelding",
+    "vermeldingen",
+    "objecten",
+    "object",
+    "object",
+    "dingen",
+    "ding"
+  ],
+  "/vocab/remaining.voc": [
+    "overgebleven",
+    "(toestand|status)",
+    "eindigt",
+    "beëindig",
+    "klaar",
+    "klaar",
+    "lang"
+  ],
+  "/vocab/event.voc": [
+    "afspraak",
+    "afspraken",
+    "afspraken",
+    "afspraken"
+  ],
+  "/vocab/until.voc": [
+    "tot",
+    "tot",
+    "voor de volgende",
+    "met duur",
+    "duur",
+    "duur",
+    "met duur",
+    "met een duur van",
+    "met een duur van",
+    "duur van het evenement",
+    "evenement lengte",
+    "tot en met"
+  ],
+  "/vocab/question.voc": [
+    "zou je",
+    "zou je moeten",
+    "zou je"
+  ],
+  "/vocab/earlier.voc": [
+    "eerder",
+    "eerder",
+    "verkort",
+    "kort",
+    "verminder",
+    "minus|min"
+  ],
+  "/vocab/repeat.voc": [
+    "elke",
+    "herhaal (elke|)",
+    "maak terugkerend (elke|)",
+    "elke keer terugkerend",
+    "herhaal (elke|)",
+    "frequentie (naar|) (elke|)",
+    "herhaling (naar|) (elke|)"
+  ],
+  "/vocab/noise_words.voc": [
+    "genoemd",
+    "naam",
+    "waar is",
+    "waar",
+    "wat is",
+    "welke",
+    "hen",
+    "zij",
+    "wanneer",
+    "Wat",
+    "neon",
+    "Dat",
+    "zullen",
+    "met",
+    "van",
+    "Dat",
+    "Ook",
+    "wie",
+    "Hoe",
+    "deed",
+    "En",
+    "Maar",
+    "de",
+    "ook",
+    "Waarom",
+    "voor",
+    "Zijn",
+    "door",
+    "is",
+    "ben",
+    "Het",
+    "Doen",
+    "op",
+    "in",
+    "een",
+    "Mijn",
+    "mij",
+    "of",
+    "naar",
+    "van",
+    "een"
+  ],
+  "/vocab/put.voc": [
+    "draai",
+    "plaats",
+    "doe geen",
+    "niet doen",
+    "niet doen",
+    "begin"
+  ],
+  "/vocab/next.voc": [
+    "volgende"
+  ],
+  "/vocab/playable.voc": [
+    "speelbare",
+    "weergave",
+    "hoorbaar",
+    "audio",
+    "spreekbate",
+    "stem",
+    "opname",
+    "opgenomen",
+    "herhaalde"
+  ],
+  "/vocab/weekends.voc": [
+    "weekend",
+    "weekenden",
+    "weekend",
+    "weekeinden"
+  ],
+  "/vocab/dismiss.voc": [
+    "stop (alarm|timer|herinnering|wekker|melding|)",
+    "ik snap het",
+    "Oké",
+    "annuleer (wekker|timer|herinnering|alarm|melding|)",
+    "stil",
+    "stop (wekker|timer|herinnering|alarm|melding|)",
+    "zet (wekker|timer|herinnering|alarm|melding|) uit",
+    "hou op",
+    "wis (wekker|timer|herinnering|alarm|melding|)",
+    "beëindig",
+    "beëindig"
+  ],
+  "/vocab/alarm.voc": [
+    "wekker",
+    "zet een wekker",
+    "maak (mij|me) wakker",
+    "zet een wekker"
+  ],
+  "/vocab/script.voc": [
+    "routine",
+    "script",
+    "skill bestand",
+    "bestand"
+  ]
 }
