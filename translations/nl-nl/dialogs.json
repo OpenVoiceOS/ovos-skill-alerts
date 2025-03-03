@@ -1,352 +1,352 @@
 {
-    "/dialog/list_alert_none_upcoming.dialog": [
-        "Je hebt geen aankomende {kind}s."
-    ],
-    "/dialog/ocp_missing.dialog": [
-        "De mediaspeler wordt niet uitgevoerd."
-    ],
-    "/dialog/in_time.dialog": [
-        "in {remaining}"
-    ],
-    "/dialog/dav_service_cant_connect.dialog": [
-        "Kan geen verbinding maken met service {service}"
-    ],
-    "/dialog/error_no_list_name.dialog": [
-        "Je moet een lijstnaam opgeven."
-    ],
-    "/dialog/alarm_ocp_request.dialog": [
-        "Welke muziek moet ik draaien om je wakker te maken?"
-    ],
-    "/dialog/list_todo_items.dialog": [
-        "Op de todo-lijst staat {items}."
-    ],
-    "/dialog/ocp_request_retry.dialog": [
-        "niets gevonden dat overeenkomt. Herhaal de naam of probeer een andere."
-    ],
-    "/dialog/list_todo_subitems.dialog": [
-        "Op de lijst {name} staat {items}."
-    ],
-    "/dialog/error_nothing_to_cancel.dialog": [
-        "Ik kon geen passende waarschuwing vinden om te annuleren."
-    ],
-    "/dialog/list_alert_none_missed.dialog": [
-        "Je hebt geen waarschuwingen gemist."
-    ],
-    "/dialog/alert_rescheduled_all_day.dialog": [
-        "{kind} is nu de hele dag."
-    ],
-    "/dialog/confirm_snooze_alert.dialog": [
-        "Ben terug in {duration}."
-    ],
-    "/dialog/confirm_cancel_all.dialog": [
-        "Ok\u00e9, ik annuleer alle {kind}, {num} in totaal."
-    ],
-    "/dialog/expired_timer.dialog": [
-        "Uw {name} timer is verstreken."
-    ],
-    "/dialog/list_todo_add_ask.dialog": [
-        "Welke nieuwe items moet ik toevoegen aan de {name}-lijst?"
-    ],
-    "/dialog/alarm_ask_time.dialog": [
-        "Sorry. Ik kon de tijd niet verstaan. Herhaal alstublieft."
-    ],
-    "/dialog/list_todo_subitems_added.dialog": [
-        "Ik heb {num} vermeldingen toegevoegd."
-    ],
-    "/dialog/confirm_alert_recurring_playback.dialog": [
-        "Uw {name} wordt afgespeeld op {begin}, elke {repeat}."
-    ],
-    "/dialog/repeating_every.dialog": [
-        "elke {repeat}"
-    ],
-    "/dialog/list_alert_timeframe_intro.dialog": [
-        "In dit tijdsbestek heb je {num} {type}s:"
-    ],
-    "/dialog/confirm_alert_script.dialog": [
-        "Uw {name} script wordt uitgevoerd op {begin}, in {remaining}."
-    ],
-    "/dialog/alert_prenotification_ask.dialog": [
-        "Wilt u een korte kennisgeving voorafgaand aan dit evenement?"
-    ],
-    "/dialog/error_no_time.dialog": [
-        "Ik heb geen tijd gehoord om je {kind} voor in te stellen. Probeer het opnieuw."
-    ],
-    "/dialog/alert_prenotification.dialog": [
-        "Ik wil je herinneren aan {remimder} in {time_until}"
-    ],
-    "/dialog/timer_status.dialog": [
-        "De {name} timer heeft nog {remaining} over."
-    ],
-    "/dialog/confirm_todo_set.dialog": [
-        "De invoer is geplaatst."
-    ],
-    "/dialog/list_alert_missed.dialog": [
-        "{name} {kind}, verlopen {begin}"
-    ],
-    "/dialog/confirm_alert_recurring_script.dialog": [
-        "Uw {name} wordt uitgevoerd op {begin}, elke {repeat}."
-    ],
-    "/dialog/list_alert_intro.dialog": [
-        "Je hebt de volgende {kind}s:"
-    ],
-    "/dialog/list_alert_timeframe_none.dialog": [
-        "Er is niets opgeslagen in dit tijdsbestek.",
-        "Ik heb op dit moment niets opgeslagen."
-    ],
-    "/dialog/at_time.dialog": [
-        "{begin}"
-    ],
-    "/dialog/list_todo_reminder.dialog": [
-        "Ik moet je eraan herinneren {reminders}"
-    ],
-    "/dialog/dav_calendar_list.dialog": [
-        "{calendars} op {service}.",
-        "Op de {service}-service zijn er {calendars}."
-    ],
-    "/dialog/next_alert.dialog": [
-        "Je volgende is {name} bij {begin}."
-    ],
-    "/dialog/list_todo_already_exist.dialog": [
-        "Het item {name} bestaat al in de todo-lijst"
-    ],
-    "/dialog/list_todo_no_reminder.dialog": [
-        "Je hebt geen herinnering opgeslagen."
-    ],
-    "/dialog/selection_dav_calendar.dialog": [
-        "Naar welke agenda moet ik synchroniseren?"
-    ],
-    "/dialog/pick_multiple_entries.dialog": [
-        "Er zijn meerdere vergelijkbare inzendingen. Welke moet ik kiezen?"
-    ],
-    "/dialog/alert_rescheduled_repeat.dialog": [
-        "De herhaling gewijzigd in {repeat}."
-    ],
-    "/dialog/list_deleted.dialog": [
-        "Lijst {name} verwijderd"
-    ],
-    "/dialog/next_alert_timer.dialog": [
-        "Je volgende is {name} in {remaining}."
-    ],
-    "/dialog/confirm_cancel_alert.dialog": [
-        "{kind} {name} annuleren."
-    ],
-    "/dialog/list_todo_exist_confirm.dialog": [
-        "Een item {existing} bestaat al. Wilt u nog steeds opslaan?"
-    ],
-    "/dialog/dav_credentials_missing.dialog": [
-        "De DAV referenties ontbreken. Voeg ze toe aan het skeletbestand in de map van het skill-bestandssysteem."
-    ],
-    "/dialog/error_no_repeat.dialog": [
-        "Je moet me een tijdsinterval geven. Dat kunnen losse dagen of kortere tijdsperioden zijn."
-    ],
-    "/dialog/list_todo_no_lists.dialog": [
-        "Je hebt geen open lijsten."
-    ],
-    "/dialog/error_audio_reminder_too_far.dialog": [
-        "Ik kan alleen audioherinneringen instellen tot 24 uur van tevoren, ik zal in plaats daarvan een kalendergebeurtenis maken."
-    ],
-    "/dialog/list_todo_dont_exist.dialog": [
-        "Er is geen item {name} opgeslagen."
-    ],
-    "/dialog/list_todo_no_subitems.dialog": [
-        "de lijst leeg is."
-    ],
-    "/dialog/confirm_alert_playback.dialog": [
-        "Uw {name} opname wordt afgespeeld op {begin}, in {remaining}."
-    ],
-    "/dialog/list_alert_missed_intro.dialog": [
-        "Dit heb je gemist:"
-    ],
-    "/dialog/ocp_breaking_up.dialog": [
-        "Kon geen muziek toewijzen. Uit elkaar gaan."
-    ],
-    "/dialog/todo_item_delete_selection_intro.dialog": [
-        "Welke moet ik verwijderen?"
-    ],
-    "/dialog/reminder_ask_time.dialog": [
-        "Moet ik je er op een bepaald tijdstip aan herinneren?"
-    ],
-    "/dialog/ocp_searching.dialog": [
-        "Controleren op mediatitel."
-    ],
-    "/dialog/list_alert_w_duration.dialog": [
-        "{name} tussen {begin} en {end}."
-    ],
-    "/dialog/error_no_scheduled_kind.dialog": [
-        "Je hebt geen planning {kind}."
-    ],
-    "/dialog/alert_rescheduled_prenotification.dialog": [
-        "De prenotificatie is ook veranderd in {prenotification}. Moet ik de tijdspanne van tevoren aanpassen?"
-    ],
-    "/dialog/expired_alert.dialog": [
-        "Uw {name}-melding is geplaatst."
-    ],
-    "/dialog/timer_status_none_active.dialog": [
-        "Er zijn geen actieve timers."
-    ],
-    "/dialog/alert_rescheduled.dialog": [
-        "{name} {type} aangepast"
-    ],
-    "/dialog/remove_list_items_ask.dialog": [
-        "Maak een lijst van de items die \u00e9\u00e9n voor \u00e9\u00e9n verwijderd moeten worden."
-    ],
-    "/dialog/confirm_timer_started.dialog": [
-        "Timer voor {remaining}, begint nu."
-    ],
-    "/dialog/stopwatch_delta.dialog": [
-        "De verstreken tijd is {delta}"
-    ],
-    "/dialog/list_item_delete_selection_intro.dialog": [
-        "Van welke lijst?"
-    ],
-    "/dialog/alert_overlapping_ask.dialog": [
-        "Op dit moment heb je {event} bij {begin}. Toch opslaan?"
-    ],
-    "/dialog/expired_audio_alert_intro.dialog": [
-        "Je hebt een audioherinnering."
-    ],
-    "/dialog/alert_rescheduled_end.dialog": [
-        "Veranderde het einde van de {kind} in {end}."
-    ],
-    "/dialog/reschedule_recurring_ask.dialog": [
-        "Dit is een herhalende {type}. Wilt u ze allemaal opnieuw inplannen?"
-    ],
-    "/dialog/list_todo_num_deleted.dialog": [
-        "Ik heb {num} todo-items verwijderd."
-    ],
-    "/dialog/confirm_alert_recurring.dialog": [
-        "Uw {kind} is ingesteld op {begin}, elke {repeat}."
-    ],
-    "/dialog/expired_reminder.dialog": [
-        "Dit is je geheugensteuntje: {name}."
-    ],
-    "/dialog/confirm_dismiss_alert.dialog": [
-        "{kind} afgewezen."
-    ],
-    "/dialog/selection_dav_service.dialog": [
-        "Naar welke service moet ik synchroniseren?"
-    ],
-    "/dialog/dav_sync_ask.dialog": [
-        "Moet ik de {type} synchroniseren met DAV?"
-    ],
-    "/dialog/alert_expiration_past.dialog": [
-        "Misschien heb ik me misrekend, maar de gegeven tijd ligt in het verleden."
-    ],
-    "/dialog/confirm_alert_set.dialog": [
-        "Uw {kind} is ingesteld voor {begin}, in {remaining}."
-    ],
-    "/dialog/error_no_duration.dialog": [
-        "Ik heb niet gehoord hoe lang, probeer het nog eens."
-    ],
-    "/dialog/dav_inactive.dialog": [
-        "DAV is momenteel niet actief."
-    ],
-    "/dialog/alert_overlapping_duration_ask.dialog": [
-        "Op dit moment heb je {event} tussen {begin} en {end}. Toch opslaan?"
-    ],
-    "/dialog/list_alert_wo_duration.dialog": [
-        "{name} {begin}."
-    ],
-    "/dialog/confirm_cancel_timeframe.dialog": [
-        "Ok\u00e9, ik annuleer alle {kind} in het tijdsbestek, {num} in totaal."
-    ],
-    "/dialog/list_todo_lists.dialog": [
-        "Ik heb lijst {num} opgeslagen: {lists}"
-    ],
-    "/dialog/selection_not_understood.dialog": [
-        "Ik heb niet begrepen wat je hebt gezegd. Kies door nummer 1 naar {max}"
-    ],
-    "/dialog/words/abbreviation_monday.dialog": [
-        "MON"
-    ],
-    "/dialog/words/abbreviation_friday.dialog": [
-        "VRI"
-    ],
-    "/dialog/words/music.dialog": [
-        "muziek"
-    ],
-    "/dialog/words/until.dialog": [
-        "tot"
-    ],
-    "/dialog/words/alarm.dialog": [
-        "alarm"
-    ],
-    "/dialog/words/whole_day.dialog": [
-        "hele dag"
-    ],
-    "/dialog/words/alert.dialog": [
-        "waarschuwing"
-    ],
-    "/dialog/words/abbreviation_tuesday.dialog": [
-        "TUE"
-    ],
-    "/dialog/words/reminder.dialog": [
-        "herinnering"
-    ],
-    "/dialog/words/audio.dialog": [
-        "audio"
-    ],
-    "/dialog/words/video.dialog": [
-        "video"
-    ],
-    "/dialog/words/event.dialog": [
-        "evenement"
-    ],
-    "/dialog/words/audiobook.dialog": [
-        "luisterboek"
-    ],
-    "/dialog/words/podcast.dialog": [
-        "podcast"
-    ],
-    "/dialog/words/abbreviation_saturday.dialog": [
-        "ZAT"
-    ],
-    "/dialog/words/abbreviation_sunday.dialog": [
-        "ZON"
-    ],
-    "/dialog/words/todo.dialog": [
-        "todo"
-    ],
-    "/dialog/words/weekend.dialog": [
-        "Zaterdag en zondag"
-    ],
-    "/dialog/words/abbreviation_thursday.dialog": [
-        "THU"
-    ],
-    "/dialog/words/weekday.dialog": [
-        "Maandag t/m vrijdag"
-    ],
-    "/dialog/words/thursday.dialog": [
-        "Donderdag"
-    ],
-    "/dialog/words/day.dialog": [
-        "dag"
-    ],
-    "/dialog/words/saturday.dialog": [
-        "Zaterdag"
-    ],
-    "/dialog/words/wednesday.dialog": [
-        "Woensdag"
-    ],
-    "/dialog/words/tuesday.dialog": [
-        "Dinsdag"
-    ],
-    "/dialog/words/monday.dialog": [
-        "Maandag"
-    ],
-    "/dialog/words/sunday.dialog": [
-        "Zondag"
-    ],
-    "/dialog/words/timer.dialog": [
-        "timer"
-    ],
-    "/dialog/words/friday.dialog": [
-        "Vrijdag"
-    ],
-    "/dialog/words/once.dialog": [
-        "eenmaal"
-    ],
-    "/dialog/words/abbreviation_wednesday.dialog": [
-        "WED"
-    ]
+  "/dialog/list_alert_none_upcoming.dialog": [
+    "Je hebt geen aankomende {kind}."
+  ],
+  "/dialog/ocp_missing.dialog": [
+    "Er is geen mediaspeler actief"
+  ],
+  "/dialog/in_time.dialog": [
+    "over {remaining}"
+  ],
+  "/dialog/dav_service_cant_connect.dialog": [
+    "Ik kan geen verbinding maken met {service}"
+  ],
+  "/dialog/error_no_list_name.dialog": [
+    "Je moet een naam opgeven voor de lijst"
+  ],
+  "/dialog/alarm_ocp_request.dialog": [
+    "Welke muziek zal ik opzetten om je wakker te maken?"
+  ],
+  "/dialog/list_todo_items.dialog": [
+    "Op je todo-lijst staat {items}."
+  ],
+  "/dialog/ocp_request_retry.dialog": [
+    "Ik heb helaas niets gevonden dat overeenkomt. Herhaal de naam of probeer het met een andere titel."
+  ],
+  "/dialog/list_todo_subitems.dialog": [
+    "Op de lijst {name} staan {items}."
+  ],
+  "/dialog/error_nothing_to_cancel.dialog": [
+    "Ik kon geen melding vinden die overeenkomt."
+  ],
+  "/dialog/list_alert_none_missed.dialog": [
+    "Je hebt geen meldingen gemist."
+  ],
+  "/dialog/alert_rescheduled_all_day.dialog": [
+    "{kind} is nu de hele dag."
+  ],
+  "/dialog/confirm_snooze_alert.dialog": [
+    "Ik ben terug over {duration}."
+  ],
+  "/dialog/confirm_cancel_all.dialog": [
+    "Oké, ik annuleer alle {kind}, totaal {num} ."
+  ],
+  "/dialog/expired_timer.dialog": [
+    "De timer van je {name} is afgelopen."
+  ],
+  "/dialog/list_todo_add_ask.dialog": [
+    "Welke nieuwe items moet ik toevoegen aan de  lijst {name}?"
+  ],
+  "/dialog/alarm_ask_time.dialog": [
+    "Sorry. Ik kon de tijd niet goed verstaan. Wil je het alstublieft herhalen?"
+  ],
+  "/dialog/list_todo_subitems_added.dialog": [
+    "Ik heb {num} items toegevoegd."
+  ],
+  "/dialog/confirm_alert_recurring_playback.dialog": [
+    "Jouw {name} wordt afgespeeld op {begin}, elke {repeat}."
+  ],
+  "/dialog/repeating_every.dialog": [
+    "elke {repeat}"
+  ],
+  "/dialog/list_alert_timeframe_intro.dialog": [
+    "In dit tijdsblok heb je {num} {type}s:"
+  ],
+  "/dialog/confirm_alert_script.dialog": [
+    "Je {name} script wordt uitgevoerd op {begin}, over {remaining}."
+  ],
+  "/dialog/alert_prenotification_ask.dialog": [
+    "Wil je voorafgaand aan dit evenement een melding ontvangen?"
+  ],
+  "/dialog/error_no_time.dialog": [
+    "Ik heb geen tijd verstaan om je {kind} in te stellen. Probeer het opnieuw."
+  ],
+  "/dialog/alert_prenotification.dialog": [
+    "Ik wil je eraan herinneren dat {remimder} over {time_until} plaatsvindt"
+  ],
+  "/dialog/timer_status.dialog": [
+    "De timer {name} duurt nog {remain}."
+  ],
+  "/dialog/confirm_todo_set.dialog": [
+    "Het item is vastgelegd"
+  ],
+  "/dialog/list_alert_missed.dialog": [
+    "{naam} {soort}, verlopen {begin}"
+  ],
+  "/dialog/confirm_alert_recurring_script.dialog": [
+    "Je {name} wordt uitgevoerd op {begin}, elke {repeat}."
+  ],
+  "/dialog/list_alert_intro.dialog": [
+    "Je hebt de volgende {kind}:"
+  ],
+  "/dialog/list_alert_timeframe_none.dialog": [
+    "Er er zijn geen acties bekend in dit tijdsblok.",
+    "Ik heb op dit moment niets opgeslagen."
+  ],
+  "/dialog/at_time.dialog": [
+    "{begin}"
+  ],
+  "/dialog/list_todo_reminder.dialog": [
+    "Ik herinner je graag aan het volgende: {reminders}"
+  ],
+  "/dialog/dav_calendar_list.dialog": [
+    "Op de {service} staan {calendars}.",
+    "{calendars} op {service}."
+  ],
+  "/dialog/next_alert.dialog": [
+    "Je volgende item is {name} op {begin}."
+  ],
+  "/dialog/list_todo_already_exist.dialog": [
+    "Het item {name} bestaat al op de todo-lijst"
+  ],
+  "/dialog/list_todo_no_reminder.dialog": [
+    "Er is geen todo-herinnering opgeslagen."
+  ],
+  "/dialog/selection_dav_calendar.dialog": [
+    "Met welke agenda moet ik synchroniseren?"
+  ],
+  "/dialog/pick_multiple_entries.dialog": [
+    "Er zijn meerdere vergelijkbare items. Welke zal ik kiezen?"
+  ],
+  "/dialog/alert_rescheduled_repeat.dialog": [
+    "De herhaling is gewijzigd in {repeat}."
+  ],
+  "/dialog/list_deleted.dialog": [
+    "Lijst {name} is verwijderd"
+  ],
+  "/dialog/next_alert_timer.dialog": [
+    "Je volgende item is {name}, over {remaining}."
+  ],
+  "/dialog/confirm_cancel_alert.dialog": [
+    "{kind} {name} annuleren."
+  ],
+  "/dialog/list_todo_exist_confirm.dialog": [
+    "Het item {existing} bestaat al. Wil je nog steeds opslaan?"
+  ],
+  "/dialog/dav_credentials_missing.dialog": [
+    "De DAV-referenties ontbreken. Voeg ze toe aan het bestand in de skill-map."
+  ],
+  "/dialog/error_no_repeat.dialog": [
+    "Je moet me een tijdsinterval geven. Dat kunnen enkele dagen zijn of kortere tijdsperiodes."
+  ],
+  "/dialog/list_todo_no_lists.dialog": [
+    "Er zijn geen bestaande lijsten."
+  ],
+  "/dialog/error_audio_reminder_too_far.dialog": [
+    "Ik kan alleen audioherinneringen tot 24 uur van tevoren instellen. In plaats daarvan maak ik een agenda-afspraak."
+  ],
+  "/dialog/list_todo_dont_exist.dialog": [
+    "Er is geen invoer opgeslagen voor {name}"
+  ],
+  "/dialog/list_todo_no_subitems.dialog": [
+    "de lijst is leeg."
+  ],
+  "/dialog/confirm_alert_playback.dialog": [
+    "Je {name}-opname wordt afgespeeld op {begin}, over {resterend}."
+  ],
+  "/dialog/list_alert_missed_intro.dialog": [
+    "Dit is wat je gemist hebt:"
+  ],
+  "/dialog/ocp_breaking_up.dialog": [
+    "Ik kon helaas geen muziek toevoegen. Ik breek het af."
+  ],
+  "/dialog/todo_item_delete_selection_intro.dialog": [
+    "welke moet ik verwijderen?"
+  ],
+  "/dialog/reminder_ask_time.dialog": [
+    "Moet ik je er op een specifiek tijdstip aan herinneren?"
+  ],
+  "/dialog/ocp_searching.dialog": [
+    "Ik check de media titel"
+  ],
+  "/dialog/list_alert_w_duration.dialog": [
+    "{name} tussen {begin} en {end}."
+  ],
+  "/dialog/error_no_scheduled_kind.dialog": [
+    "Je hebt geen geplande {kind}."
+  ],
+  "/dialog/alert_rescheduled_prenotification.dialog": [
+    "De vooraankondiging is ook gewijzigd naar {prenotification}. Moet ik de tijd vooraf aanpassen?"
+  ],
+  "/dialog/expired_alert.dialog": [
+    "Uw {name}-melding is actief."
+  ],
+  "/dialog/timer_status_none_active.dialog": [
+    "Er zijn geen actieve timers."
+  ],
+  "/dialog/alert_rescheduled.dialog": [
+    "{name} {type} aangepast"
+  ],
+  "/dialog/remove_list_items_ask.dialog": [
+    "Maak een lijst van de items die verwijderd moeten worden."
+  ],
+  "/dialog/confirm_timer_started.dialog": [
+    "Timer voor {remaining}, begint nu."
+  ],
+  "/dialog/stopwatch_delta.dialog": [
+    "De verstreken tijd is {delta}"
+  ],
+  "/dialog/list_item_delete_selection_intro.dialog": [
+    "Uit welke lijst?"
+  ],
+  "/dialog/alert_overlapping_ask.dialog": [
+    "Op dit moment heb je al {event} bij {begin}. Toch opslaan?"
+  ],
+  "/dialog/expired_audio_alert_intro.dialog": [
+    "Je hebt een audioherinnering."
+  ],
+  "/dialog/alert_rescheduled_end.dialog": [
+    "Het einde van {kind} is gewijzigd naar {end}."
+  ],
+  "/dialog/reschedule_recurring_ask.dialog": [
+    "Dit is een herhalend {type}. Wil je ze allemaal opnieuw plannen?"
+  ],
+  "/dialog/list_todo_num_deleted.dialog": [
+    "Ik heb {num} todo-items verwijderd."
+  ],
+  "/dialog/confirm_alert_recurring.dialog": [
+    "Uw {kind} is ingesteld voor {begin}, elke {repeat}."
+  ],
+  "/dialog/expired_reminder.dialog": [
+    "Dit is je herinnering: {name}."
+  ],
+  "/dialog/confirm_dismiss_alert.dialog": [
+    "{kind} opgelost"
+  ],
+  "/dialog/selection_dav_service.dialog": [
+    "Met welke service zal ik synchroniseren?"
+  ],
+  "/dialog/dav_sync_ask.dialog": [
+    "Moet ik {type} synchroniseren met DAV?"
+  ],
+  "/dialog/alert_expiration_past.dialog": [
+    "Misschien heb ik me verkeken, maar de opgegeven tijd ligt in het verleden."
+  ],
+  "/dialog/confirm_alert_set.dialog": [
+    "Uw {kind} is ingesteld voor {begin}, over {remaining}."
+  ],
+  "/dialog/error_no_duration.dialog": [
+    "Ik weet niet hoe lang het heeft geduurd. Probeer het opnieuw."
+  ],
+  "/dialog/dav_inactive.dialog": [
+    "DAV is op dit moment inactief."
+  ],
+  "/dialog/alert_overlapping_duration_ask.dialog": [
+    "Op dit moment heb je {event} tussen {begin} en {end}. Toch opslaan?"
+  ],
+  "/dialog/list_alert_wo_duration.dialog": [
+    "{name} {begin}."
+  ],
+  "/dialog/confirm_cancel_timeframe.dialog": [
+    "Oké, ik annuleer alle {kind} in dit tijdsblok, totaal {num}"
+  ],
+  "/dialog/list_todo_lists.dialog": [
+    "Ik heb {num} {lists} opgeslagen"
+  ],
+  "/dialog/selection_not_understood.dialog": [
+    "Ik heb niet goed verstaan wat je zei. Kies alstublieft een nummer 1 tot {max}"
+  ],
+  "/dialog/words/abbreviation_monday.dialog": [
+    "maandag"
+  ],
+  "/dialog/words/abbreviation_friday.dialog": [
+    "vrijdag"
+  ],
+  "/dialog/words/music.dialog": [
+    "muziek"
+  ],
+  "/dialog/words/until.dialog": [
+    "tot"
+  ],
+  "/dialog/words/alarm.dialog": [
+    "wekker"
+  ],
+  "/dialog/words/whole_day.dialog": [
+    "hele dag"
+  ],
+  "/dialog/words/alert.dialog": [
+    "waarschuwing"
+  ],
+  "/dialog/words/abbreviation_tuesday.dialog": [
+    "dinsdag"
+  ],
+  "/dialog/words/reminder.dialog": [
+    "herinnering"
+  ],
+  "/dialog/words/audio.dialog": [
+    "audio"
+  ],
+  "/dialog/words/video.dialog": [
+    "video"
+  ],
+  "/dialog/words/event.dialog": [
+    "evenement"
+  ],
+  "/dialog/words/audiobook.dialog": [
+    "luisterboek"
+  ],
+  "/dialog/words/podcast.dialog": [
+    "podcast"
+  ],
+  "/dialog/words/abbreviation_saturday.dialog": [
+    "zaterdag"
+  ],
+  "/dialog/words/abbreviation_sunday.dialog": [
+    "zondag"
+  ],
+  "/dialog/words/todo.dialog": [
+    "te doen"
+  ],
+  "/dialog/words/weekend.dialog": [
+    "Zaterdag en zondag"
+  ],
+  "/dialog/words/abbreviation_thursday.dialog": [
+    "donderdag"
+  ],
+  "/dialog/words/weekday.dialog": [
+    "Maandag tot en met vrijdag"
+  ],
+  "/dialog/words/thursday.dialog": [
+    "Donderdag"
+  ],
+  "/dialog/words/day.dialog": [
+    "dag"
+  ],
+  "/dialog/words/saturday.dialog": [
+    "Zaterdag"
+  ],
+  "/dialog/words/wednesday.dialog": [
+    "Woensdag"
+  ],
+  "/dialog/words/tuesday.dialog": [
+    "Dinsdag"
+  ],
+  "/dialog/words/monday.dialog": [
+    "Maandag"
+  ],
+  "/dialog/words/sunday.dialog": [
+    "Zondag"
+  ],
+  "/dialog/words/timer.dialog": [
+    "timer"
+  ],
+  "/dialog/words/friday.dialog": [
+    "Vrijdag"
+  ],
+  "/dialog/words/once.dialog": [
+    "eenmalig"
+  ],
+  "/dialog/words/abbreviation_wednesday.dialog": [
+    "woensdag"
+  ]
 }
