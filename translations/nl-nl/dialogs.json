@@ -179,7 +179,7 @@
     "De vooraankondiging is ook gewijzigd naar {prenotification}. Moet ik de tijd vooraf aanpassen?"
   ],
   "/dialog/expired_alert.dialog": [
-    "Uw {name}-melding is actief."
+    "Je {name}-melding is actief."
   ],
   "/dialog/timer_status_none_active.dialog": [
     "Er zijn geen actieve timers."
@@ -215,13 +215,13 @@
     "Ik heb {num} todo-items verwijderd."
   ],
   "/dialog/confirm_alert_recurring.dialog": [
-    "Uw {kind} is ingesteld voor {begin}, elke {repeat}."
+    "Je {kind} is ingesteld op {begin}, elke {repeat}."
   ],
   "/dialog/expired_reminder.dialog": [
     "Dit is je herinnering: {name}."
   ],
   "/dialog/confirm_dismiss_alert.dialog": [
-    "{kind} opgelost"
+    "{kind} gestopt"
   ],
   "/dialog/selection_dav_service.dialog": [
     "Met welke service zal ik synchroniseren?"
@@ -233,7 +233,7 @@
     "Misschien heb ik me verkeken, maar de opgegeven tijd ligt in het verleden."
   ],
   "/dialog/confirm_alert_set.dialog": [
-    "Uw {kind} is ingesteld voor {begin}, over {remaining}."
+    "Je {kind} is ingesteld op {begin}, over {remaining}."
   ],
   "/dialog/error_no_duration.dialog": [
     "Ik weet niet hoe lang het heeft geduurd. Probeer het opnieuw."
