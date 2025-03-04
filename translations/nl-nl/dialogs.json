@@ -18,7 +18,7 @@
     "Welke muziek zal ik opzetten om je wakker te maken?"
   ],
   "/dialog/list_todo_items.dialog": [
-    "Op je todo-lijst staat {items}."
+    "Op je to do-lijst staat {items}."
   ],
   "/dialog/ocp_request_retry.dialog": [
     "Ik heb helaas niets gevonden dat overeenkomt. Herhaal de naam of probeer het met een andere titel."
@@ -45,7 +45,7 @@
     "De timer van je {name} is afgelopen."
   ],
   "/dialog/list_todo_add_ask.dialog": [
-    "Welke nieuwe items moet ik toevoegen aan de  lijst {name}?"
+    "Welke nieuwe items moet ik toevoegen aan de lijst {name}?"
   ],
   "/dialog/alarm_ask_time.dialog": [
     "Sorry. Ik kon de tijd niet goed verstaan. Wil je het alstublieft herhalen?"
@@ -107,10 +107,10 @@
     "Je volgende item is {name} op {begin}."
   ],
   "/dialog/list_todo_already_exist.dialog": [
-    "Het item {name} bestaat al op de todo-lijst"
+    "Het item {name} bestaat al op de to do-lijst"
   ],
   "/dialog/list_todo_no_reminder.dialog": [
-    "Er is geen todo-herinnering opgeslagen."
+    "Er is geen to do-herinnering opgeslagen."
   ],
   "/dialog/selection_dav_calendar.dialog": [
     "Met welke agenda moet ik synchroniseren?"
