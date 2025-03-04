@@ -18,7 +18,7 @@
     "Welke muziek zal ik opzetten om je wakker te maken?"
   ],
   "/dialog/list_todo_items.dialog": [
-    "Op je todo-lijst staat {items}."
+    "Op je to do-lijst staat {items}."
   ],
   "/dialog/ocp_request_retry.dialog": [
     "Ik heb helaas niets gevonden dat overeenkomt. Herhaal de naam of probeer het met een andere titel."
@@ -45,7 +45,7 @@
     "De timer van je {name} is afgelopen."
   ],
   "/dialog/list_todo_add_ask.dialog": [
-    "Welke nieuwe items moet ik toevoegen aan de  lijst {name}?"
+    "Welke nieuwe items moet ik toevoegen aan de lijst {name}?"
   ],
   "/dialog/alarm_ask_time.dialog": [
     "Sorry. Ik kon de tijd niet goed verstaan. Wil je het alstublieft herhalen?"
@@ -107,10 +107,10 @@
     "Je volgende item is {name} op {begin}."
   ],
   "/dialog/list_todo_already_exist.dialog": [
-    "Het item {name} bestaat al op de todo-lijst"
+    "Het item {name} bestaat al op de to do-lijst"
   ],
   "/dialog/list_todo_no_reminder.dialog": [
-    "Er is geen todo-herinnering opgeslagen."
+    "Er is geen to do-herinnering opgeslagen."
   ],
   "/dialog/selection_dav_calendar.dialog": [
     "Met welke agenda moet ik synchroniseren?"
@@ -179,7 +179,7 @@
     "De vooraankondiging is ook gewijzigd naar {prenotification}. Moet ik de tijd vooraf aanpassen?"
   ],
   "/dialog/expired_alert.dialog": [
-    "Uw {name}-melding is actief."
+    "Je {name}-melding is actief."
   ],
   "/dialog/timer_status_none_active.dialog": [
     "Er zijn geen actieve timers."
@@ -215,13 +215,13 @@
     "Ik heb {num} todo-items verwijderd."
   ],
   "/dialog/confirm_alert_recurring.dialog": [
-    "Uw {kind} is ingesteld voor {begin}, elke {repeat}."
+    "Je {kind} is ingesteld op {begin}, elke {repeat}."
   ],
   "/dialog/expired_reminder.dialog": [
     "Dit is je herinnering: {name}."
   ],
   "/dialog/confirm_dismiss_alert.dialog": [
-    "{kind} opgelost"
+    "{kind} gestopt"
   ],
   "/dialog/selection_dav_service.dialog": [
     "Met welke service zal ik synchroniseren?"
@@ -233,7 +233,7 @@
     "Misschien heb ik me verkeken, maar de opgegeven tijd ligt in het verleden."
   ],
   "/dialog/confirm_alert_set.dialog": [
-    "Uw {kind} is ingesteld voor {begin}, over {remaining}."
+    "Je {kind} is ingesteld op {begin}, over {remaining}."
   ],
   "/dialog/error_no_duration.dialog": [
     "Ik weet niet hoe lang het heeft geduurd. Probeer het opnieuw."
