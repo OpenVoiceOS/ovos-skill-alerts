@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.1.21a2](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.1.21a2) (2025-03-04)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.1.21a1...0.1.21a2)
+
+**Merged pull requests:**
+
+- small NL-NL improvements [\#64](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/64) ([gitlocalize-app[bot]](https://github.com/apps/gitlocalize-app))
+- small NL-NL improvements [\#61](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/61) ([gitlocalize-app[bot]](https://github.com/apps/gitlocalize-app))
+
 ## [0.1.21a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.1.21a1) (2025-03-04)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.1.20...0.1.21a1)
