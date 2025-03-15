@@ -1,7 +1,2 @@
-benachrichtigung
-benachrichtigungen
-erinnerung
-erinnerungen
-nachricht
-nachrichten
-reminder
+(benachrichtigungen|erinnerungen)
+(benachrichtigung|erinnerung)

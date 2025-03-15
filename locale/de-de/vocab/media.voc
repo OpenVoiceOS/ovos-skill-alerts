@@ -1,6 +1,7 @@
-audiobook
-film
-musik
-news
-podcast
-radio
+(Hörbuch|audiobook)
+(Hörspiel|Sendung)
+(Nachrichten|Nachrichtensendung|Nachrichtensender)
+(Radiosendung|Radioprogramm|stream|internetstream)
+(Radio|Radioprogramm|Radiosendung)
+(Video|Fernsehen|Fernsehprogramm|Fernsehsendung)
+Podcast
