@@ -17,11 +17,11 @@
   ],
   "/vocab/alert.voc": [
     "(Alarm|Wecker)",
-    null
+    "Alarme"
   ],
   "/vocab/calendar.voc": [
     "kalender",
-    null
+    "Kalender"
   ],
   "/vocab/no.voc": [
     "nein",
@@ -72,7 +72,7 @@
   "/vocab/choice.voc": [
     "auswahl",
     "wähle",
-    null
+    "verfügbar "
   ],
   "/vocab/change.voc": [
     "(änder|ändere)",
