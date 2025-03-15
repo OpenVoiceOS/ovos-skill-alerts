@@ -1,12 +1,15 @@
-(alle|jeden|) geschriebenen
-(alle|jeden|) gespeicherten
-(alle|jedes|jede|) geschriebene
-(alle|jedes|jede|) gespeicherte
+(alle|alles)
+(alle|alles|jedes|jede)
+(bevorstehend|demnächst|zukünftig)
+(ganz|ganze|ganzes)
+(gesetzt|eingerichtet|geplant)
+(gespeichert|gesichert|angelegt|gesetzt)
+(speicher|speichere)
+(speicher|speichere|sicher|sichere)
+Auswahl
 alle
+anhängig
+ausstehend
 geschrieben
 gespeichert
 jede
-jeden
-jeder
-jedes
-speicher

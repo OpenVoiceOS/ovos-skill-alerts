@@ -1,5 +1,2 @@
-count down
-countdown
-heimer
-stoppuhr
-timer
+(timer|wecker)
+(timer|weckzeiten|erinnerungen)
