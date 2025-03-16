@@ -1,9 +1,7 @@
 {
-    "/intent/missed_alerts.intent": [
-        "(hab ich|habe ich|haben wir) (einen|eine|ein|) (termin|erinnerung|alarm|ereignis|ereignisse|termine|erinnerungen|alarme|ereignisse) (verpasst|vers\u00e4umt)",
-        "welche (termine|erinnerungen|erinnerung|alarme|ereignisse) (habe ich|hab ich|haben wir) (verpasst|vers\u00e4umt)",
-        "welchen (termin|alarm) (habe ich|hab ich|haben wir) (verpasst|vers\u00e4umt)",
-        "welches ereignis (habe ich|hab ich|haben wir) (verpasst|vers\u00e4umt)",
-        "liste (verpasster|verpasste|vers\u00e4umter|vers\u00e4umte) (termine|erinnerungen|alarme|ereignisse) (auf|)"
-    ]
+  "/intent/missed_alerts.intent": [
+    "(hab ich|habe ich|haben wir) (einen|eine|ein|) (termin|erinnerung|alarm|ereignis|ereignisse|termine|erinnerungen|alarme|ereignisse) (verpasst|versäumt)",
+    "welche (termine|erinnerungen|erinnerung|alarme|ereignisse) (habe ich|hab ich|haben wir) (verpasst|versäumt)",
+    "welchen (termin|alarm) (habe ich|hab ich|haben wir) (verpasst|versäumt)"
+  ]
 }
