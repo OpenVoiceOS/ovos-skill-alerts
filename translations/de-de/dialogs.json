@@ -275,13 +275,13 @@
     "ganztägig"
   ],
   "/dialog/words/alert.dialog": [
-    "reminder"
+    "Alarm"
   ],
   "/dialog/words/abbreviation_tuesday.dialog": [
     "DI"
   ],
   "/dialog/words/reminder.dialog": [
-    "reminder"
+    "Erinnerung"
   ],
   "/dialog/words/audio.dialog": [
     "Audio"
