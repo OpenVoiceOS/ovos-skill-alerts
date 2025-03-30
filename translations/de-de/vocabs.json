@@ -7,11 +7,11 @@
     "(leeren|leere)"
   ],
   "/vocab/todo.voc": [
-    "(erledigen|todo)",
-    "(to do|erledigen)",
-    "Erinnerungen",
-    "Erinnerung",
-    "Erinnerungen",
+    "Aufgabe",
+    "Aufgabe",
+    "Aufgaben",
+    "Memo",
+    "Memos",
     "Notiz",
     "Notizen"
   ],
@@ -227,10 +227,10 @@
     "(laden|herunterladen|lade herunter|download)"
   ],
   "/vocab/items.voc": [
-    "(eintrag|Betreff|Termin)",
+    "(Eintrag|Termin)",
     "(einträge|Termine)",
-    "Aufgabe",
-    "Aufgaben",
+    "Eintrag",
+    "Einträge",
     "Planungen",
     "Vorhaben",
     "(Sache|Zeug|Zeugs)",
