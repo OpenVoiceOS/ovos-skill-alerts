@@ -1,0 +1,29 @@
+{
+  "title": "Alertas",
+  "description": "Una skill para gestionar alarmas, temporizadores, recordatorios, eventos, tareas pendientes y, opcionalmente, sincronizarlos con un servicio CalDAV.",
+  "examples": [
+	"Pon una alarma a las 8 a.m.",
+	"Inicia un temporizador de pandurante 30 minutos.",
+	"Programa un evento de tenis para las 14:00 del viernes con una duración de 2 horas.",
+	"Establece una alarma diaria para las 8 de la mañana.",
+	"Establece una alarma para las 8 de la mañana todos los sábados.",
+	"recuerda sacar la basura cada jueves y domingo a las 19h.",
+	"despiértame a las 8 de la mañana con música.",
+	"¿Cuándo es mi próxima alarma?",
+	"¿Cuáles son mis recordatorios?",
+	"Cancela todas las alarmas.",
+	"Cancela todos los temporizadores.",
+	"Cancela todos los recordatorios.",
+	"¿Qué me he perdido?",
+	"¿Me he perdido algo?"
+  ],
+  "tags": [
+	"productividad",
+	"día a día",
+	"alerta",
+	"alarma",
+	"temporizador",
+	"recordatorio",
+	"programación"
+  ]
+}
