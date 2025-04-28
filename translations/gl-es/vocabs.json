@@ -1,387 +1,387 @@
 {
-    "/vocab/cancel.voc": [
-        "cancelar",
-        "limpar",
-        "suprimir",
-        "rexeitar",
-        "eliminar"
-    ],
-    "/vocab/todo.voc": [
-        "nota",
-        "notas",
-        "nota",
-        "notas",
-        "pendente",
-        "tarefas",
-        "tarefas"
-    ],
-    "/vocab/alert.voc": [
-        "alerta",
-        "alertas"
-    ],
-    "/vocab/calendar.voc": [
-        "calendario",
-        "calendarios"
-    ],
-    "/vocab/no.voc": [
-        "non",
-        "negativo",
-        "non",
-        "nada"
-    ],
-    "/vocab/days.voc": [
-        "venres",
-        "venres",
-        "luns",
-        "luns",
-        "sábado",
-        "sábados",
-        "domingo",
-        "domingos",
-        "xoves",
-        "xoves",
-        "martes",
-        "martes",
-        "mércores",
-        "mércores"
-    ],
-    "/vocab/create.voc": [
-        "engadir",
-        "crear",
-        "teño",
-        "facer",
-        "novo",
-        "programar",
-        "definir",
-        "iniciar"
-    ],
-    "/vocab/everyday.voc": [
-        "diariamente",
-        "todas as tardes",
-        "todos os días",
-        "todos os seráns",
-        "todas as mañás",
-        "todas as noites",
-        "acotío",
-        "cada noite"
-    ],
-    "/vocab/timer.voc": [
-        "temporizador",
-        "temporizadores"
-    ],
-    "/vocab/choice.voc": [
-        "dispoñible",
-        "escolla",
-        "escoller"
-    ],
-    "/vocab/change.voc": [
-        "adiar",
-        "axustar",
-        "mudar",
-        "prolongar",
-        "mover",
-        "pospor",
-        "reenviar",
-        "reprogramar",
-        "desprazar",
-        "suspender"
-    ],
-    "/vocab/and.voc": [
-        "e"
-    ],
-    "/vocab/snooze.voc": [
-        "engadir (outro|)",
-        "manter",
-        "máis tarde",
-        "déixame (durmir|toquear) (durante|ata|outros|)",
-        "lémbramo (dentro de|ás|)",
-        "durmir (durante|ata|)",
-        "esperar"
-    ],
-    "/vocab/weekdays.voc": [
-        "día da semana",
-        "días da semana",
-        "día da semana",
-        "días da semana"
-    ],
-    "/vocab/reminder.voc": [
-        "lembrete",
-        "lembretes"
-    ],
-    "/vocab/priority.voc": [
-        "prioridade",
-        "nivel de prioridade"
-    ],
-    "/vocab/wake.voc": [
-        "(espértame|espértanos|)"
-    ],
-    "/vocab/stored.voc": [
-        "todo",
-        "escolla",
-        "cada",
-        "enteiro",
-        "cada",
-        "pendente",
-        "gardar",
-        "gardado",
-        "definir",
-        "almacenar",
-        "almacenado",
-        "próximo",
-        "enteiro",
-        "escrito"
-    ],
-    "/vocab/query.voc": [
-        "algo",
-        "hai",
-        "fixen",
-        "fixemos",
-        "fixeches",
-        "fago",
-        "teño",
-        "facemos",
-        "temos",
-        "fas",
-        "tes",
-        "de que",
-        "de cando",
-        "de cal",
-        "teño",
-        "teño",
-        "tes",
-        "como",
-        "canto",
-        "hai",
-        "lista",
-        "ler",
-        "actualizar",
-        "actualizar",
-        "mostrar",
-        "algo",
-        "dime",
-        "dinos",
-        "que",
-        "que son",
-        "que é",
-        "que é",
-        "cando",
-        "cal"
-    ],
-    "/vocab/later.voc": [
-        "adicional",
-        "expandir",
-        "prolongar",
-        "aumentar",
-        "máis tempo",
-        "máis"
-    ],
-    "/vocab/miss.voc": [
-        "perder",
-        "que perdín"
-    ],
-    "/vocab/list.voc": [
-        "tarxeta",
-        "tarxetas",
-        "lista",
-        "listas"
-    ],
-    "/vocab/media.voc": [
-        "audio",
-        "audiolibro",
-        "música",
-        "novas",
-        "podcast",
-        "radio",
-        "vídeo"
-    ],
-    "/vocab/all_day.voc": [
-        "todo o día",
-        "todo o día",
-        "o día enteiro",
-        "o día enteiro"
-    ],
-    "/vocab/remind.voc": [
-        "memoria",
-        "lembrar",
-        "dicir"
-    ],
-    "/vocab/delete.voc": [
-        "suprimir",
-        "rexeitar",
-        "soltar",
-        "borrar",
-        "estoupar",
-        "eliminar",
-        "riscar"
-    ],
-    "/vocab/time.voc": [
-        "hora"
-    ],
-    "/vocab/synchronize.voc": [
-        "descargar",
-        "cargar",
-        "sincronizar",
-        "sincronizar",
-        "sincronizar",
-        "sincronizado",
-        "subir"
-    ],
-    "/vocab/items.voc": [
-        "entradas",
-        "entrada",
-        "elemento",
-        "elementos",
-        "obxecto",
-        "obxectos",
-        "contidos",
-        "cousa",
-        "cousas"
-    ],
-    "/vocab/remaining.voc": [
-        "feito",
-        "rematar",
-        "remata",
-        "queda",
-        "longo",
-        "listo",
-        "estado"
-    ],
-    "/vocab/event.voc": [
-        "cita",
-        "citas",
-        "evento",
-        "eventos"
-    ],
-    "/vocab/until.voc": [
-        "duración",
-        "duración do evento",
-        "duración do evento",
-        "durante as próximas",
-        "duración",
-        "que abranga",
-        "até",
-        "ata",
-        "cunha duración de",
-        "que dura ",
-        "que vai durar",
-        "con duración de"
-    ],
-    "/vocab/question.voc": [
-        "poderías",
-        "deberías",
-        "farías"
-    ],
-    "/vocab/earlier.voc": [
-        "diminuír",
-        "máis cedo",
-        "menos",
-        "acurtar",
-        "abreviar",
-        "antes"
-    ],
-    "/vocab/repeat.voc": [
-        "cada",
-        "frecuencia (ata|) (cada|)",
-        "repetición (ata|) (cada|)",
-        "recorrente (cada|)",
-        "repetir (ata|) (cada|)",
-        "a repetir (cada|)",
-        "repetición (ata|) (cada|)"
-    ],
-    "/vocab/noise_words.voc": [
-        "un",
-        "tamén",
-        "son",
-        "un",
-        "e",
-        "son",
-        "pero",
-        "por",
-        "foi",
-        "é",
-        "para",
-        "desde",
-        "como",
-        "en",
-        "é",
-        "iso",
-        "min",
-        "meu",
-        "nome",
-        "chamado",
-        "neon",
-        "de",
-        "en",
-        "ou",
-        "que",
-        "que",
-        "el",
-        "eles",
-        "eles",
-        "a",
-        "tamén",
-        "que",
-        "que é",
-        "cando",
-        "onde",
-        "onde",
-        "cal",
-        "quen",
-        "por que",
-        "será",
-        "con"
-    ],
-    "/vocab/put.voc": [
-        "non",
-        "non",
-        "non",
-        "pór",
-        "iniciar",
-        "converter"
-    ],
-    "/vocab/next.voc": [
-        "seguinte"
-    ],
-    "/vocab/playable.voc": [
-        "audible",
-        "audio",
-        "reproducible",
-        "reprodución",
-        "gravado",
-        "gravación",
-        "repetir",
-        "pronunciable",
-        "voz"
-    ],
-    "/vocab/weekends.voc": [
-        "fin de semana",
-        "fins de semana",
-        "fin de semana",
-        "fins de semana"
-    ],
-    "/vocab/dismiss.voc": [
-        "cancelar (alerta|temporizador|lembrete|alarma|notificación|)",
-        "limpar (alerta|temporizador|lembrete|alarma|notificación|)",
-        "ignorar (alerta|temporizador|lembrete|alarma|notificación|)",
-        "rematar",
-        "saír",
-        "entendido",
-        "vale",
-        "silencio",
-        "cala",
-        "silenciar (alerta|temporizador|lembrete|alarma|notificación|)",
-        "parar (alerta|temporizador|lembrete|alarma|notificación|)"
-    ],
-    "/vocab/alarm.voc": [
-        "alarma",
-        "alarmas",
-        "acordarme",
-        "espertarme"
-    ],
-    "/vocab/script.voc": [
-        "ficheiro",
-        "rutina",
-        "script",
-        "arquivo de competencias"
-    ]
+  "/vocab/cancel.voc": [
+    "cancelar",
+    "suprimir",
+    "eliminar",
+    "descartar",
+    "limpar"
+  ],
+  "/vocab/todo.voc": [
+    "tarefa",
+    "tarefa",
+    "tarefas",
+    "nota",
+    "notas",
+    "nota",
+    "notas"
+  ],
+  "/vocab/alert.voc": [
+    "alerta",
+    "alertas"
+  ],
+  "/vocab/calendar.voc": [
+    "calendario",
+    "calendarios"
+  ],
+  "/vocab/no.voc": [
+    "non",
+    "nop",
+    "non",
+    "negativo"
+  ],
+  "/vocab/days.voc": [
+    "luns",
+    "os luns",
+    "martes",
+    "os martes",
+    "mércores",
+    "os mércores",
+    "xoves",
+    "os xoves",
+    "venres",
+    "os venres",
+    "sábado",
+    "os sábados",
+    "domingo",
+    "os domingos"
+  ],
+  "/vocab/create.voc": [
+    "definir",
+    "novo",
+    "crear",
+    "facer",
+    "comezar",
+    "teño",
+    "horario",
+    "engadir"
+  ],
+  "/vocab/everyday.voc": [
+    "todos os días",
+    "todos os días",
+    "diariamente",
+    "todas as noites",
+    "todas as mañás",
+    "todas as tardes",
+    "todos os seráns",
+    "cada noite"
+  ],
+  "/vocab/timer.voc": [
+    "temporizador",
+    "temporizadores"
+  ],
+  "/vocab/choice.voc": [
+    "escolla",
+    "escoller",
+    "dispoñible"
+  ],
+  "/vocab/change.voc": [
+    "reprogramar",
+    "cambiar",
+    "pospoñer",
+    "mover",
+    "suspender",
+    "desprazar",
+    "adiar",
+    "axustar",
+    "cambiar",
+    "estender"
+  ],
+  "/vocab/and.voc": [
+    "e"
+  ],
+  "/vocab/snooze.voc": [
+    "silenciar (durante|ata|)",
+    "déixame (durmir|toquear) (durante|ata|outros|)",
+    "máis tarde",
+    "agardar",
+    "manter",
+    "engadir (outro|)",
+    "lémbramo (dentro de|ás|)"
+  ],
+  "/vocab/weekdays.voc": [
+    "día da semana",
+    "días da semana",
+    "día da semana",
+    "días da semana"
+  ],
+  "/vocab/reminder.voc": [
+    "lembrete",
+    "lembretes"
+  ],
+  "/vocab/priority.voc": [
+    "prioridade",
+    "nivel de prioridade"
+  ],
+  "/vocab/wake.voc": [
+    "(espértame|espértanos|)"
+  ],
+  "/vocab/stored.voc": [
+    "gardar",
+    "gardado",
+    "escolla",
+    "almacenar",
+    "almacenado",
+    "escrito",
+    "todo",
+    "gardado",
+    "cada",
+    "enteiro",
+    "completo",
+    "próximo",
+    "pendente",
+    "configurar"
+  ],
+  "/vocab/query.voc": [
+    "enumerar",
+    "ler",
+    "mostrar",
+    "que",
+    "cando",
+    "como",
+    "teño",
+    "canto",
+    "que é",
+    "que son",
+    "que é",
+    "cal",
+    "hai",
+    "hai",
+    "eu",
+    "nós",
+    "(ti|vós)",
+    "teño",
+    "temos",
+    "tes",
+    "fixen",
+    "fixemos",
+    "fixeches",
+    "teño",
+    "tes",
+    "actualizar",
+    "dime",
+    "dinos",
+    "actualizar",
+    "algo",
+    "algo",
+    "dende que",
+    "dende cal",
+    "dende cando"
+  ],
+  "/vocab/later.voc": [
+    "máis tempo",
+    "adicional",
+    "prolongar",
+    "expandir",
+    "aumentar",
+    "máis"
+  ],
+  "/vocab/miss.voc": [
+    "perder",
+    "perdidos"
+  ],
+  "/vocab/list.voc": [
+    "lista",
+    "listas",
+    "tarxeta",
+    "tarxetas"
+  ],
+  "/vocab/media.voc": [
+    "audio",
+    "música",
+    "vídeo",
+    "audiolibro",
+    "podcast",
+    "radio",
+    "noticias"
+  ],
+  "/vocab/all_day.voc": [
+    "todo o día",
+    "o día enteiro",
+    "todo o día",
+    "o día enteiro"
+  ],
+  "/vocab/remind.voc": [
+    "lembrar",
+    "memoria",
+    "dicir"
+  ],
+  "/vocab/delete.voc": [
+    "suprimir",
+    "eliminar",
+    "riscar",
+    "soltar",
+    "descartar",
+    "borrar",
+    "estoupar"
+  ],
+  "/vocab/time.voc": [
+    "hora"
+  ],
+  "/vocab/synchronize.voc": [
+    "sincronizar",
+    "sincronizar",
+    "sincronizar",
+    "sincronizado",
+    "cargar",
+    "subir",
+    "descargar"
+  ],
+  "/vocab/items.voc": [
+    "elemento",
+    "elementos",
+    "entrada",
+    "entradas",
+    "obxectos",
+    "obxecto",
+    "contidos",
+    "cousas",
+    "cousa"
+  ],
+  "/vocab/remaining.voc": [
+    "queda",
+    "estado",
+    "remata",
+    "rematan",
+    "listo",
+    "listo",
+    "longo"
+  ],
+  "/vocab/event.voc": [
+    "evento",
+    "eventos",
+    "cita",
+    "citas"
+  ],
+  "/vocab/until.voc": [
+    "ata",
+    "até",
+    "durante as próximas",
+    "con duración de",
+    "duración",
+    "duración",
+    "que dura",
+    "que vai durar",
+    "cunha duración de",
+    "duración do evento",
+    "duración do evento",
+    "abranguendo"
+  ],
+  "/vocab/question.voc": [
+    "poderías",
+    "deberías",
+    "queres"
+  ],
+  "/vocab/earlier.voc": [
+    "máis cedo",
+    "antes",
+    "abreviar",
+    "curto",
+    "diminuír",
+    "menos"
+  ],
+  "/vocab/repeat.voc": [
+    "cada",
+    "a repetir (cada|)",
+    "recorrente (cada|)",
+    "recorrente (cada|)",
+    "repetir (ata|) (cada|)",
+    "frecuencia (ata|) (cada|)",
+    "repetición (ata|) (cada|)"
+  ],
+  "/vocab/noise_words.voc": [
+    "chamado",
+    "nome",
+    "onde está",
+    "onde",
+    "que é",
+    "cal",
+    "eles",
+    "eles",
+    "cando",
+    "que",
+    "neón",
+    "que",
+    "vai",
+    "con",
+    "dende",
+    "iso",
+    "tamén",
+    "quen",
+    "como",
+    " ",
+    "e",
+    "pero",
+    "o\na",
+    "tamén",
+    "por que",
+    "para",
+    "son",
+    "por",
+    "é",
+    "son",
+    "iso",
+    " ",
+    "en",
+    "en",
+    "un\nunha",
+    "meu\nmiña",
+    "min",
+    "ou",
+    "a",
+    "de",
+    "un\nunha"
+  ],
+  "/vocab/put.voc": [
+    "quenda",
+    "poñer",
+    "non",
+    "non",
+    "non",
+    "iniciar"
+  ],
+  "/vocab/next.voc": [
+    "seguinte"
+  ],
+  "/vocab/playable.voc": [
+    "reproducible",
+    "reprodución",
+    "audible",
+    "audio",
+    "pronunciable",
+    "voz",
+    "gravación",
+    "gravado",
+    "repetir"
+  ],
+  "/vocab/weekends.voc": [
+    "fin de semana",
+    "fins de semana",
+    "fin de semana",
+    "fins de semana"
+  ],
+  "/vocab/dismiss.voc": [
+    "ignorar(alerta|temporizador|lembrete|alarma|notificación|)",
+    "entendido",
+    "vale",
+    "cancelar(alerta|temporizador|lembrete|alarma|notificación|)",
+    "silencio",
+    "parar (alerta|temporizador|lembrete|alarma|notificación|)",
+    "silenciar (alerta|temporizador|lembrete|alarma|notificación|)",
+    "cala",
+    "limpar (alerta|temporizador|lembrete|alarma|notificación|)",
+    "rematar",
+    "saír"
+  ],
+  "/vocab/alarm.voc": [
+    "alarma",
+    "alarmas",
+    "acordarme",
+    "espertarme"
+  ],
+  "/vocab/script.voc": [
+    "rutina",
+    "script",
+    "ficheiro de habilidades",
+    "ficheiro"
+  ]
 }
