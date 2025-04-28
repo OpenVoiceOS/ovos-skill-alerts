@@ -1,7 +1,7 @@
 cala
-cancelar (alerta|temporizador|lembrete|alarma|notificación|)
+cancelar(alerta|temporizador|lembrete|alarma|notificación|)
 entendido
-ignorar (alerta|temporizador|lembrete|alarma|notificación|)
+ignorar(alerta|temporizador|lembrete|alarma|notificación|)
 limpar (alerta|temporizador|lembrete|alarma|notificación|)
 parar (alerta|temporizador|lembrete|alarma|notificación|)
 rematar
