@@ -1,6 +1,7 @@
 import datetime as dt
 import re
-from os import walk
+from langcodes import closest_match
+import os
 from os.path import join, dirname
 from typing import Optional, List, Union, Tuple
 
@@ -117,17 +118,21 @@ def find_resource(res_name, lang=None):
     :param res_name: filename of the resource
     :returns Path object of the file location or None
     """
+
     base_dir = dirname(dirname(__file__))
+    root_path = join(base_dir, "locale")
+
     lang = lang or get_default_lang()
-    root_path = join(base_dir, "locale", lang)
-    for path, _, files in walk(root_path):
-        if res_name in files:
-            return join(path, res_name)
-    root_path = join(base_dir, "locale", "en-us")
-    for path, _, files in walk(root_path):
-        if res_name in files:
-            return join(path, res_name)
-    return None
+    langs = os.listdir(root_path)
+    closest, sore = closest_match(lang, langs, max_distance=10)
+    if closest == "und":
+        return None  # unsupported lang
+
+    path = join(root_path, closest, res_name)
+    if os.path.exists(path):
+        return path
+
+    return None  # missing translation
 
 
 def spoken_duration(alert_time: Union[dt.timedelta, dt.datetime],
@@ -189,18 +194,27 @@ def get_alert_type_from_intent(message: Message) \
     :param message: Message associated with intent match
     :returns: tuple of AlertType requested and spoken_type 
     """
+    # NOTE: voc_match is used in case intent was invoked without using adapt
+    utt = message.data.get("utterance", "")
+
     lang = get_message_lang(message)
-    if message.data.get("alarm") or message.data.get("wake"):
+
+    if message.data.get("alarm") or \
+            message.data.get("wake") or \
+            voc_match("alarm", utt) or \
+            voc_match("wake", utt):
         return AlertType.ALARM, translate("alarm", lang)
-    elif message.data.get('timer'):
+    elif message.data.get('timer') or voc_match("timer", utt):
         return AlertType.TIMER, translate("timer", lang)
     elif message.data.get('event') or \
-            voc_match(message.data.get("utterance"), "event", lang):
+            voc_match(utt, "event", lang):
         return AlertType.EVENT, translate("event", lang)
     elif message.data.get('reminder') or \
-            message.data.get('remind'):
+            message.data.get('remind') or \
+            voc_match("reminder", utt) or \
+            voc_match("remind", utt):
         return AlertType.REMINDER, translate("reminder", lang)
-    elif message.data.get('alert'):
+    elif message.data.get('alert') or voc_match("alert", utt):
         return AlertType.ALL, translate("alert", lang)
     return AlertType.ALL, translate("alert", lang)
 
