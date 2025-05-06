@@ -263,7 +263,7 @@ def build_alert_from_intent(message: Message) -> Optional[Alert]:
         elif until:
             alert_time = until
 
-    if ((message.data.get("all_day") or voc_match(message.data["utterance"], "all_day"))
+    if ((message.data.get("all_day") or voc_match(message.data["utterance"], "all_day", lang=lang))
             and alert_time is not None):
         alert_time = alert_time.date()
 
@@ -303,11 +303,11 @@ def parse_repeat_from_message(message: Message,
     lang = get_message_lang(message)
     # NOTE: voc_match is used in case intent was invoked without using adapt
     utt = message.data.get("utterance", "")
-    if message.data.get("everyday") or voc_match(utt, "everyday"):
+    if message.data.get("everyday") or voc_match(utt, "everyday", lang=lang):
         repeat_days = [Weekdays(i) for i in range(0, 7)]
-    elif message.data.get("weekends") or voc_match(utt, "weekends"):
+    elif message.data.get("weekends") or voc_match(utt, "weekends", lang=lang):
         repeat_days = [Weekdays(i) for i in (5, 6)]
-    elif message.data.get("weekdays") or voc_match(utt, "weekdays"):
+    elif message.data.get("weekdays") or voc_match(utt, "weekdays", lang=lang):
         repeat_days = [Weekdays(i) for i in range(0, 5)]
     elif message.data.get("repeat"):
         tokens = tokens or tokenize_utterance(message)
@@ -409,7 +409,7 @@ def parse_end_condition_from_message(message: Message,
 
         LOG.debug(f"Parsed end time from message: {end_time}")
         return end_time
-    elif message.data.get("all_day") or voc_match(message.data.get("utterance", ""), "all_day"):
+    elif message.data.get("all_day") or voc_match(message.data.get("utterance", ""), "all_day", lang=lang):
         return anchor_date.replace(hour=23, minute=59, second=59)
 
     return None
@@ -509,7 +509,7 @@ def parse_alert_priority_from_message(message: Message,
     lang = get_message_lang(message)
 
     priority = AlertPriority.AVERAGE.value
-    if message.data.get("priority") or voc_match(message.data.get("utterance", ""), "priority"):
+    if message.data.get("priority") or voc_match(message.data.get("utterance", ""), "priority", lang=lang):
         num = extract_number(" ".join(tokens.unmatched()), lang=lang)
         priority = num if num and num in range(1, 11) else priority
     return priority

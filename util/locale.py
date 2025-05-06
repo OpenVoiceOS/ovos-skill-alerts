@@ -220,20 +220,20 @@ def get_alert_type_from_intent(message: Message) \
 
     if message.data.get("alarm") or \
             message.data.get("wake") or \
-            voc_match(utt, "alarm") or \
-            voc_match(utt, "wake"):
+            voc_match(utt, "alarm", lang=lang) or \
+            voc_match(utt, "wake", lang=lang):
         return AlertType.ALARM, translate("alarm", lang)
-    elif message.data.get('timer') or voc_match(utt, "timer"):
+    elif message.data.get('timer') or voc_match(utt, "timer", lang=lang):
         return AlertType.TIMER, translate("timer", lang)
     elif message.data.get('event') or \
             voc_match(utt, "event", lang):
         return AlertType.EVENT, translate("event", lang)
     elif message.data.get('reminder') or \
             message.data.get('remind') or \
-            voc_match( utt, "reminder") or \
-            voc_match( utt, "remind"):
+            voc_match( utt, "reminder", lang=lang) or \
+            voc_match( utt, "remind", lang=lang):
         return AlertType.REMINDER, translate("reminder", lang)
-    elif message.data.get('alert') or voc_match( utt, "alert"):
+    elif message.data.get('alert') or voc_match( utt, "alert", lang=lang):
         return AlertType.ALL, translate("alert", lang)
     return AlertType.ALL, translate("alert", lang)
 

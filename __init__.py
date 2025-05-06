@@ -617,12 +617,12 @@ class AlertSkill(OVOSSkill):
         begin, end = parse_timeframe_from_message(message)
 
         # week range
-        if self.voc_match("week", utterance):
+        if self.voc_match("week", utterance, lang=self.lang):
             now = datetime.now(get_default_tz())
             # hack bc LF return None on "this week"
             begin, end = get_week_range(begin or now)
         elif not begin and not end:
-            if self.voc_match("next", utterance):
+            if self.voc_match("next", utterance, lang=self.lang):
                 return self.handle_next_alert(message)
             return self.handle_list_all_alerts(message)
 
