@@ -145,19 +145,19 @@ def spoken_duration(alert_time: Union[dt.timedelta, dt.datetime],
                     anchor_time: Optional[dt.datetime] = None,
                     lang=None) -> str:
     """
-                    Returns a localized, human-readable string for the duration until a specified time.
-                    
-                    If `alert_time` is a `datetime`, calculates the duration from `anchor_time` (or now).
-                    Adjusts the resolution of the output (days, hours, minutes, or seconds) based on the length of the duration.
-                    
-                    Args:
-                        alert_time: The target time as a `datetime` or a duration as a `timedelta`.
-                        anchor_time: The reference time to count from if `alert_time` is a `datetime`.
-                        lang: Optional language code for localization.
-                    
-                    Returns:
-                        A localized string describing the duration until `alert_time`.
-                    """
+    Returns a localized, human-readable string for the duration until a specified time.
+    
+    If `alert_time` is a `datetime`, calculates the duration from `anchor_time` (or now).
+    Adjusts the resolution of the output (days, hours, minutes, or seconds) based on the length of the duration.
+    
+    Args:
+        alert_time: The target time as a `datetime` or a duration as a `timedelta`.
+        anchor_time: The reference time to count from if `alert_time` is a `datetime`.
+        lang: Optional language code for localization.
+    
+    Returns:
+        A localized string describing the duration until `alert_time`.
+    """
     lang = lang or get_default_lang()
     if isinstance(alert_time, dt.datetime):
         anchor_time = anchor_time or \
@@ -203,16 +203,16 @@ def get_abbreviation(wd: Weekdays, lang=None) -> str:
 def get_alert_type_from_intent(message: Message) \
         -> Tuple[AlertType, str]:
     """
-        Determines the alert type from an intent message using data flags and keyword matching.
-        
-        Examines the message data and utterance to identify if the intent refers to an alarm, timer, event, reminder, or generic alert. Returns a tuple containing the detected AlertType and its localized spoken string.
-         
-        Args:
-            message: The intent message containing data and utterance.
-        
-        Returns:
-            A tuple of (AlertType, spoken_type), where spoken_type is the localized string for the detected alert type.
-        """
+    Determines the alert type from an intent message using data flags and keyword matching.
+    
+    Examines the message data and utterance to identify if the intent refers to an alarm, timer, event, reminder, or generic alert. Returns a tuple containing the detected AlertType and its localized spoken string.
+     
+    Args:
+        message: The intent message containing data and utterance.
+    
+    Returns:
+        A tuple of (AlertType, spoken_type), where spoken_type is the localized string for the detected alert type.
+    """
     # NOTE: voc_match is used in case intent was invoked without using adapt
     utt = message.data.get("utterance", "")
 
