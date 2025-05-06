@@ -1,6 +1,7 @@
 import datetime as dt
 import re
-from os import walk
+from langcodes import closest_match
+import os
 from os.path import join, dirname
 from typing import Optional, List, Union, Tuple
 
@@ -113,32 +114,49 @@ def get_words_list(res_name, lang: str = None) -> List[str]:
 
 def find_resource(res_name, lang=None):
     """
-    Helper function to locate the skill ressource on the file system
-    :param res_name: filename of the resource
-    :returns Path object of the file location or None
+    Finds the path to a localized resource file for the closest supported language.
+    
+    Searches the locale directory for the resource file under the language closest to the requested one. Returns the file path if found, otherwise returns None.
+    
+    Args:
+        res_name: The name of the resource file to locate.
+    
+    Returns:
+        The path to the resource file as a string if found, or None if not found.
     """
+
     base_dir = dirname(dirname(__file__))
+    root_path = join(base_dir, "locale")
+
     lang = lang or get_default_lang()
-    root_path = join(base_dir, "locale", lang)
-    for path, _, files in walk(root_path):
-        if res_name in files:
-            return join(path, res_name)
-    root_path = join(base_dir, "locale", "en-us")
-    for path, _, files in walk(root_path):
-        if res_name in files:
-            return join(path, res_name)
-    return None
+    langs = os.listdir(root_path)
+    closest, sore = closest_match(lang, langs, max_distance=10)
+    if closest == "und":
+        return None  # unsupported lang
+
+    path = join(root_path, closest, res_name)
+    if os.path.exists(path):
+        return path
+
+    return None  # missing translation
 
 
 def spoken_duration(alert_time: Union[dt.timedelta, dt.datetime],
                     anchor_time: Optional[dt.datetime] = None,
                     lang=None) -> str:
     """
-    Gets a speakable string representing time until alert_time
-    :param alert_time: Datetime or timedelta to get duration until
-    :param anchor_time: Datetime to count duration from
-    :param lang: Language to format response in
-    :return: speakable duration string
+    Returns a localized, human-readable string for the duration until a specified time.
+    
+    If `alert_time` is a `datetime`, calculates the duration from `anchor_time` (or now).
+    Adjusts the resolution of the output (days, hours, minutes, or seconds) based on the length of the duration.
+    
+    Args:
+        alert_time: The target time as a `datetime` or a duration as a `timedelta`.
+        anchor_time: The reference time to count from if `alert_time` is a `datetime`.
+        lang: Optional language code for localization.
+    
+    Returns:
+        A localized string describing the duration until `alert_time`.
     """
     lang = lang or get_default_lang()
     if isinstance(alert_time, dt.datetime):
@@ -185,22 +203,37 @@ def get_abbreviation(wd: Weekdays, lang=None) -> str:
 def get_alert_type_from_intent(message: Message) \
         -> Tuple[AlertType, str]:
     """
-    Parse the requested alert type based on intent vocab
-    :param message: Message associated with intent match
-    :returns: tuple of AlertType requested and spoken_type 
+    Determines the alert type from an intent message using data flags and keyword matching.
+    
+    Examines the message data and utterance to identify if the intent refers to an alarm, timer, event, reminder, or generic alert. Returns a tuple containing the detected AlertType and its localized spoken string.
+     
+    Args:
+        message: The intent message containing data and utterance.
+    
+    Returns:
+        A tuple of (AlertType, spoken_type), where spoken_type is the localized string for the detected alert type.
     """
+    # NOTE: voc_match is used in case intent was invoked without using adapt
+    utt = message.data.get("utterance", "")
+
     lang = get_message_lang(message)
-    if message.data.get("alarm") or message.data.get("wake"):
+
+    if message.data.get("alarm") or \
+            message.data.get("wake") or \
+            voc_match(utt, "alarm", lang=lang) or \
+            voc_match(utt, "wake", lang=lang):
         return AlertType.ALARM, translate("alarm", lang)
-    elif message.data.get('timer'):
+    elif message.data.get('timer') or voc_match(utt, "timer", lang=lang):
         return AlertType.TIMER, translate("timer", lang)
     elif message.data.get('event') or \
-            voc_match(message.data.get("utterance"), "event", lang):
+            voc_match(utt, "event", lang):
         return AlertType.EVENT, translate("event", lang)
     elif message.data.get('reminder') or \
-            message.data.get('remind'):
+            message.data.get('remind') or \
+            voc_match( utt, "reminder", lang=lang) or \
+            voc_match( utt, "remind", lang=lang):
         return AlertType.REMINDER, translate("reminder", lang)
-    elif message.data.get('alert'):
+    elif message.data.get('alert') or voc_match( utt, "alert", lang=lang):
         return AlertType.ALL, translate("alert", lang)
     return AlertType.ALL, translate("alert", lang)
 

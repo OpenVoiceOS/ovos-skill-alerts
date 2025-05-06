@@ -8,3 +8,4 @@ icalendar~=5.0
 ovos-utterance-normalizer>=0.0.1,<1.0.0
 ovos-number-parser>=0.0.1,<1.0.0
 ovos-date-parser>=0.0.3,<1.0.0
+langcodes
