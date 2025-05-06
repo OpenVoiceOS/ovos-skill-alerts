@@ -114,9 +114,15 @@ def get_words_list(res_name, lang: str = None) -> List[str]:
 
 def find_resource(res_name, lang=None):
     """
-    Helper function to locate the skill ressource on the file system
-    :param res_name: filename of the resource
-    :returns Path object of the file location or None
+    Finds the path to a localized resource file for the closest supported language.
+    
+    Searches the locale directory for the resource file under the language closest to the requested one. Returns the file path if found, otherwise returns None.
+    
+    Args:
+        res_name: The name of the resource file to locate.
+    
+    Returns:
+        The path to the resource file as a string if found, or None if not found.
     """
 
     base_dir = dirname(dirname(__file__))
@@ -139,12 +145,19 @@ def spoken_duration(alert_time: Union[dt.timedelta, dt.datetime],
                     anchor_time: Optional[dt.datetime] = None,
                     lang=None) -> str:
     """
-    Gets a speakable string representing time until alert_time
-    :param alert_time: Datetime or timedelta to get duration until
-    :param anchor_time: Datetime to count duration from
-    :param lang: Language to format response in
-    :return: speakable duration string
-    """
+                    Returns a localized, human-readable string for the duration until a specified time.
+                    
+                    If `alert_time` is a `datetime`, calculates the duration from `anchor_time` (or now).
+                    Adjusts the resolution of the output (days, hours, minutes, or seconds) based on the length of the duration.
+                    
+                    Args:
+                        alert_time: The target time as a `datetime` or a duration as a `timedelta`.
+                        anchor_time: The reference time to count from if `alert_time` is a `datetime`.
+                        lang: Optional language code for localization.
+                    
+                    Returns:
+                        A localized string describing the duration until `alert_time`.
+                    """
     lang = lang or get_default_lang()
     if isinstance(alert_time, dt.datetime):
         anchor_time = anchor_time or \
@@ -190,10 +203,16 @@ def get_abbreviation(wd: Weekdays, lang=None) -> str:
 def get_alert_type_from_intent(message: Message) \
         -> Tuple[AlertType, str]:
     """
-    Parse the requested alert type based on intent vocab
-    :param message: Message associated with intent match
-    :returns: tuple of AlertType requested and spoken_type 
-    """
+        Determines the alert type from an intent message using data flags and keyword matching.
+        
+        Examines the message data and utterance to identify if the intent refers to an alarm, timer, event, reminder, or generic alert. Returns a tuple containing the detected AlertType and its localized spoken string.
+         
+        Args:
+            message: The intent message containing data and utterance.
+        
+        Returns:
+            A tuple of (AlertType, spoken_type), where spoken_type is the localized string for the detected alert type.
+        """
     # NOTE: voc_match is used in case intent was invoked without using adapt
     utt = message.data.get("utterance", "")
 
