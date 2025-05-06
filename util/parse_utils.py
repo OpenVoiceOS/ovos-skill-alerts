@@ -213,10 +213,15 @@ def has_default_name(alert: Alert, lang: str = None) -> bool:
 
 def build_alert_from_intent(message: Message) -> Optional[Alert]:
     """
-    Parse alert parameters from a matched intent into an Alert object
-    :param message: Message associated with request
-    :param timezone: Timezone for user associated with request
-    :returns: Alert extracted from utterance or None if missing required params
+    Parses alert parameters from an intent message and constructs an Alert object.
+    
+    Extracts relevant alert information such as context, timezone, anchor time, tokens, alert type, repeat schedule, priority, alert time, end condition, audio file, and alert name from the provided message. Handles special cases for timers and all-day alerts. Returns an Alert instance if all required parameters are present, or None otherwise.
+    
+    Args:
+        message: The message containing the intent and alert details.
+    
+    Returns:
+        An Alert object constructed from the parsed parameters, or None if required parameters are missing.
     """
     lang = get_message_lang(message)
     LOG.debug(f"{lang}, {type(lang)}")
@@ -281,14 +286,18 @@ def build_alert_from_intent(message: Message) -> Optional[Alert]:
 
 
 def parse_repeat_from_message(message: Message,
-                              tokens: Optional[list] = None) -> \
-        Union[List[Weekdays], dt.timedelta]:
+                              tokens: Optional[list] = None) -> Union[List[Weekdays], dt.timedelta]:
     """
-    Parses a repeat clause from the utterance. If tokens are provided, handled
-    tokens are removed.
-    :param message: Message associated with intent match
-    :param tokens: optional tokens parsed from message by `tokenize_utterances`
-    :returns: list of parsed repeat Weekdays or timedelta between occurrences
+    Parses the repeat schedule from a message, returning repeat weekdays or an interval.
+      
+    If the message or utterance indicates "everyday", "weekends", or "weekdays", returns the corresponding list of `Weekdays`. If a repeat interval or specific days are provided, parses and returns either a list of `Weekdays` or a `timedelta` representing the repeat interval. Removes handled tokens from the provided token list if applicable.
+     
+    Args:
+        message: The message containing the utterance and intent data.
+        tokens: Optional list of tokens to update as repeat information is parsed.
+    
+    Returns:
+        A list of `Weekdays` if repeating on specific days, or a `timedelta` if repeating at a fixed interval.
     """
     repeat_days = list()
     lang = get_message_lang(message)
@@ -358,12 +367,18 @@ def parse_end_condition_from_message(message: Message,
                                      anchor_time: dt.datetime = None) \
         -> Union[dt.datetime, dt.timedelta, None]:
     """
-    Parses an end condition from the utterance. If tokens are provided, handled
-    tokens are removed.
-    :param message: Message associated with intent match
-    :param tokens: optional tokens parsed from message by `tokenize_utterances`
-    :param timezone: timezone of request, defaults to mycroft location
-    :returns: extracted datetime of end condition, else None
+    Parses an end condition (such as "until" or "all day") from a message and optional tokens.
+     
+    If an "until" clause is present, extracts a datetime or duration for the end condition and updates the tokens accordingly. If an "all day" condition is detected, returns the end of the current day. Returns None if no end condition is found.
+     
+    Args:
+        message: The message containing the utterance and intent data.
+        tokens: Optional list of tokens parsed from the message.
+        timezone: The timezone to use for datetime calculations.
+        anchor_time: The reference datetime for relative parsing.
+     
+    Returns:
+        A datetime or timedelta representing the end condition, or None if not found.
     """
     lang = get_message_lang(message)
 
@@ -469,14 +484,11 @@ def parse_timedelta_from_message(message: Message,
 
 # TODO: Toss - should be handled via OCP
 def parse_audio_file_from_message(message: Message,
-                                  tokens: Optional[list] = None) -> \
-        Optional[str]:
+                                  tokens: Optional[list] = None) -> Optional[str]:
     """
-    Parses a requested audiofile from the utterance. If tokens are provided,
-    handled tokens are removed.
-    :param message: Message associated with intent match
-    :param tokens: optional tokens parsed from message by `tokenize_utterances`
-    :returns: extracted audio file path, else None
+    Parses the requested audio file name from the message, returning its file path if found.
+  
+    If the message indicates a playable alert, attempts to locate a resource file matching the alert name with supported audio extensions. Returns the file path if found, otherwise None.
     """
     tokens = tokens or tokenize_utterance(message)
     file = None
@@ -487,13 +499,11 @@ def parse_audio_file_from_message(message: Message,
 
 
 def parse_alert_priority_from_message(message: Message,
-                                      tokens: Optional[list] = None) -> \
-        AlertPriority:
+                                      tokens: Optional[list] = None) -> AlertPriority:
     """
-    Extract the requested alert priority from intent message.
-    If tokens are provided, handled tokens are removed.
-    :param message: Message associated with request
-    :param tokens: optional tokens parsed from message by `tokenize_utterances`
+    Extracts the alert priority from a message or tokens.
+  
+    If a priority is specified in the message data or detected in the utterance, attempts to extract a numeric priority value from unmatched tokens. Returns the extracted priority if valid (1–10), otherwise returns the default average priority.
     """
     tokens = tokens or tokenize_utterance(message)
     lang = get_message_lang(message)
@@ -636,6 +646,19 @@ def parse_relative_time_from_message(message: Message,
 def parse_timeframe_from_message(message: Message,
                                  tokens: Optional[Tokens] = None,
                                  timezone: Optional[dt.tzinfo] = None):
+    """
+    Parses a time frame with a start and optional end time from a message.
+     
+    If a conjunction like "and" is detected, attempts to extract an end time relative to the start. If the end time is midnight, adjusts it to cover the entire following day. If only a start time is found and it is at midnight, sets the end time to the end of that day.
+     
+    Args:
+        message: The message containing the utterance to parse.
+        tokens: Optional pre-tokenized representation of the utterance.
+        timezone: Optional timezone information for interpreting times.
+     
+    Returns:
+        A tuple (begin, end) where both are datetime objects or None if not found.
+    """
     end = None
     tokens = tokens or tokenize_utterance(message)
     begin = parse_alert_time_from_message(message, tokens, timezone)
