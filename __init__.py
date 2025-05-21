@@ -1695,6 +1695,11 @@ class AlertSkill(OVOSSkill):
                               wait=True)
 
     def _gui_dismiss_notification(self, message):
+        """
+        Handles GUI notification dismissal for an alert.
+        
+        If the alert is active, removes it and confirms dismissal via dialog. If the alert is missed, removes it without confirmation. Always deletes the corresponding homescreen notification.
+        """
         if not message.data.get('alert'):
             LOG.error("Outdated Notification, unable to dismiss")
             return
@@ -1709,13 +1714,14 @@ class AlertSkill(OVOSSkill):
             self.alert_manager.rm_alert(alert_id)
         # the notification has to be explicitly removed to not force the user to
         # additionally push the trashbin button
-        # TODO: remove with https://github.com/OpenVoiceOS/skill-ovos-homescreen/pull/92
+        # TODO: remove with https://github.com/OpenVoiceOS/ovos-skill-homescreen/pull/92
         self._delete_homescreen_notification(alert)
 
     def _display_expiration(self, alert: Alert):
         """
-        Handles gui display on alert expiration
-        :param alert: expired alert
+        Displays the expiration notification for a given alert in the GUI.
+        
+        If the alert is a reminder or event, creates a homescreen notification with a timeout; otherwise, displays the alert without a notification timeout.
         """
         should_display = alert.alert_type in (AlertType.REMINDER, AlertType.EVENT)
         # This is solely due to reminder/event not having a proper ui element
@@ -2004,11 +2010,24 @@ class AlertSkill(OVOSSkill):
         self.handle_active_state(message)
 
     def shutdown(self):
+        """
+        Shuts down the skill, marking all active alerts as missed and clearing the GUI.
+        """
         LOG.debug(f"Shutdown, all active alerts are now missed")
         self.alert_manager.shutdown()
         self.gui.clear()
 
     def stop(self):
+        # TODO - session support, timer per user
+        """
+        Stops all active alerts and returns whether any were stopped.
+        
+        Returns:
+            bool: True if any active alerts were dismissed, False otherwise.
+        """
         LOG.debug(f"skill-stop called, all active alerts will be removed")
+        stopped = False
         for alert in self.alert_manager.get_active_alerts():
             self._dismiss_alert(alert.ident, speak=True)
+            stopped = True
+        return stopped
