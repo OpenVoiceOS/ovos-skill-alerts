@@ -1709,7 +1709,7 @@ class AlertSkill(OVOSSkill):
             self.alert_manager.rm_alert(alert_id)
         # the notification has to be explicitly removed to not force the user to
         # additionally push the trashbin button
-        # TODO: remove with https://github.com/OpenVoiceOS/skill-ovos-homescreen/pull/92
+        # TODO: remove with https://github.com/OpenVoiceOS/ovos-skill-homescreen/pull/92
         self._delete_homescreen_notification(alert)
 
     def _display_expiration(self, alert: Alert):
@@ -2009,6 +2009,10 @@ class AlertSkill(OVOSSkill):
         self.gui.clear()
 
     def stop(self):
+        # TODO - session support, timer per user
         LOG.debug(f"skill-stop called, all active alerts will be removed")
+        stopped = False
         for alert in self.alert_manager.get_active_alerts():
             self._dismiss_alert(alert.ident, speak=True)
+            stopped = True
+        return stopped
