@@ -1,10 +1,10 @@
 import datetime as dt
-import re
-from langcodes import closest_match
 import os
+import re
 from os.path import join, dirname
 from typing import Optional, List, Union, Tuple
 
+from langcodes import closest_match
 from ovos_bus_client.message import Message
 from ovos_bus_client.util import get_message_lang
 from ovos_config.locale import get_default_lang
@@ -62,6 +62,7 @@ def date_display(dt_obj: dt.datetime,
     return display
 
 
+# TODO - get rid of this and use the skill methods, dont reimplement... pass skill object around if needed
 def translate(word, lang=None):
     lang = lang or get_default_lang()
     lang = lang.lower()
@@ -92,6 +93,7 @@ def spoken_alert_type(alert_type: AlertType, lang: str = None) -> str:
     return translate("alert", lang)
 
 
+# TODO - get rid of this and use the skill methods, dont reimplement... pass skill object around if needed
 def get_words_list(res_name, lang: str = None) -> List[str]:
     """
     Returns a list of localized words from a skill resource
@@ -112,6 +114,7 @@ def get_words_list(res_name, lang: str = None) -> List[str]:
     return list()
 
 
+# TODO - get rid of this and use the skill methods, dont reimplement... pass skill object around if needed
 def find_resource(res_name, lang=None):
     """
     Finds the path to a localized resource file for the closest supported language.
@@ -124,19 +127,20 @@ def find_resource(res_name, lang=None):
     Returns:
         The path to the resource file as a string if found, or None if not found.
     """
-
     base_dir = dirname(dirname(__file__))
     root_path = join(base_dir, "locale")
 
     lang = lang or get_default_lang()
     langs = os.listdir(root_path)
-    closest, sore = closest_match(lang, langs, max_distance=10)
+    closest, score = closest_match(lang, langs, max_distance=10)
     if closest == "und":
         return None  # unsupported lang
 
-    path = join(root_path, closest, res_name)
-    if os.path.exists(path):
-        return path
+    path = join(root_path, closest)
+    for root, dirs, files in os.walk(path):
+        for f in files:
+            if f == res_name:
+                return join(root, f)
 
     return None  # missing translation
 
@@ -212,6 +216,7 @@ def _migrate_adapt(message: Message):
             if word:
                 message.data[k] = word
     return message
+
 
 def get_alert_type_from_intent(message: Message) \
         -> Tuple[AlertType, str]:
@@ -354,6 +359,7 @@ def get_alert_dialog_data(alert: Alert,
     return data
 
 
+# TODO - get rid of this and use the skill methods, dont reimplement... pass skill object around if needed
 def voc_match(utterance: str,
               resource: str,
               lang: str = None,
@@ -373,10 +379,12 @@ def voc_match(utterance: str,
         else:
             return any([re.match(r".*\b" + i + r"\b.*", utterance.lower()) for i in words])
 
+
+# TODO - get rid of this and use the skill methods, dont reimplement... pass skill object around if needed
 def kw_match(utterance: str,
-              resource: str,
-              lang: str = None,
-              exact: bool = False) -> Optional[str]:
+             resource: str,
+             lang: str = None,
+             exact: bool = False) -> Optional[str]:
     if not resource or not utterance:
         return None
 
@@ -390,4 +398,3 @@ def kw_match(utterance: str,
                 return w
         elif re.match(r".*\b" + w + r"\b.*", utterance.lower()):
             return w
-
