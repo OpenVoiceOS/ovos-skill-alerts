@@ -375,9 +375,9 @@ def voc_match(utterance: str,
             resource = f"{resource}.voc"
         words = get_words_list(resource, lang)
         if exact:
-            return any(i.strip() == utterance.lower() for i in words)
+            return any(w.strip().lower() == utterance.lower() for w in words)
         else:
-            return any([re.match(r".*\b" + i + r"\b.*", utterance.lower()) for i in words])
+            return any([re.match(r".*\b" + re.escape(w.lower()) + r"\b.*", utterance.lower()) for w in words])
 
 
 # TODO - get rid of this and use the skill methods, dont reimplement... pass skill object around if needed
@@ -396,5 +396,5 @@ def kw_match(utterance: str,
         if exact:
             if w.strip() == utterance.lower():
                 return w
-        elif re.match(r".*\b" + w + r"\b.*", utterance.lower()):
+        elif re.match(r".*\b" + re.escape(w.lower()) + r"\b.*", utterance.lower()):
             return w
