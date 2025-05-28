@@ -184,6 +184,16 @@ def spoken_duration(alert_time: Union[dt.timedelta, dt.datetime],
 
 
 def get_abbreviation(wd: Weekdays, lang=None) -> str:
+    """
+    Returns the localized abbreviation for a given weekday.
+    
+    Args:
+        wd: The weekday as a Weekdays enum value.
+        lang: Optional language code for localization.
+    
+    Returns:
+        The localized abbreviation string for the specified weekday.
+    """
     if wd == Weekdays.MON:
         return translate("abbreviation_monday", lang=lang)
     elif wd == Weekdays.TUE:
@@ -201,9 +211,11 @@ def get_abbreviation(wd: Weekdays, lang=None) -> str:
 
 
 def _migrate_adapt(message: Message):
-    """if intent is not triggered via adapt (other intent plugins exist) the keyword matches won't be present in message.data
-
-    This util method is here as a compatibility layer since this skill was designed to depend heavily on adapt particularities"""
+    """
+    Ensures alert-related keyword matches are present in the message data for non-Adapt intent messages.
+    
+    If the message was not triggered via the Adapt intent parser, this function extracts relevant alert keywords from the utterance and populates them into `message.data` for compatibility with downstream processing.
+    """
     utterance = message.data.get("utterance")
     if utterance:
         lang = get_message_lang(message)
@@ -216,16 +228,16 @@ def _migrate_adapt(message: Message):
 def get_alert_type_from_intent(message: Message) \
         -> Tuple[AlertType, str]:
     """
-    Determines the alert type from an intent message using data flags and keyword matching.
-    
-    Examines the message data and utterance to identify if the intent refers to an alarm, timer, event, reminder, or generic alert. Returns a tuple containing the detected AlertType and its localized spoken string.
-     
-    Args:
-        message: The intent message containing data and utterance.
-    
-    Returns:
-        A tuple of (AlertType, spoken_type), where spoken_type is the localized string for the detected alert type.
-    """
+        Determines the alert type from an intent message and returns its localized spoken name.
+        
+        Inspects the message data for keywords indicating specific alert types such as alarm, timer, event, or reminder. Returns a tuple containing the detected AlertType enum and its localized spoken string.
+            
+        Args:
+            message: The intent message containing data and utterance.
+        
+        Returns:
+            A tuple of (AlertType, spoken_type), where spoken_type is the localized string for the detected alert type.
+        """
     message = _migrate_adapt(message)
     lang = get_message_lang(message)
     if message.data.get("alarm") or message.data.get("wake"):
@@ -359,9 +371,19 @@ def voc_match(utterance: str,
               lang: str = None,
               exact: bool = False) -> bool:
     """
-    Compares a string against a given words list
-    If exact the utterance must be identical, otherwise a part of the sentence
-    """
+              Checks if an utterance matches any word in a localized vocabulary resource.
+              
+              If `exact` is True, returns True only if the utterance exactly matches a word in the resource. Otherwise, returns True if any word from the resource appears as a whole word within the utterance.
+              
+              Args:
+                  utterance: The input string to check.
+                  resource: The name of the vocabulary resource file (with or without ".voc" extension).
+                  lang: Optional language code for localization.
+                  exact: If True, requires an exact match; otherwise, allows partial matches.
+              
+              Returns:
+                  True if a match is found; otherwise, False.
+              """
     if not resource or not utterance:
         return False
     else:
@@ -377,7 +399,21 @@ def kw_match(utterance: str,
               resource: str,
               lang: str = None,
               exact: bool = False) -> Optional[str]:
-    if not resource or not utterance:
+    """
+              Returns the first word from a localized vocabulary resource that matches the utterance.
+              
+              If `exact` is True, only exact matches are considered. Otherwise, matches if the word appears as a whole word within the utterance.
+              
+              Args:
+                  utterance: The input string to check for matches.
+                  resource: The name of the vocabulary resource file (with or without ".voc" extension).
+                  lang: Optional language code for localization.
+                  exact: If True, requires an exact match; otherwise, allows partial whole-word matches.
+              
+              Returns:
+                  The matched word string if found, otherwise None.
+              """
+              if not resource or not utterance:
         return None
 
     if not resource.endswith(".voc"):
