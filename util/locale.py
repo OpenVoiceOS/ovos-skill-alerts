@@ -1,10 +1,10 @@
 import datetime as dt
-import re
-from langcodes import closest_match
 import os
+import re
 from os.path import join, dirname
 from typing import Optional, List, Union, Tuple
 
+from langcodes import closest_match
 from ovos_bus_client.message import Message
 from ovos_bus_client.util import get_message_lang
 from ovos_config.locale import get_default_lang
@@ -62,6 +62,7 @@ def date_display(dt_obj: dt.datetime,
     return display
 
 
+# TODO - get rid of this and use the skill methods, dont reimplement... pass skill object around if needed
 def translate(word, lang=None):
     lang = lang or get_default_lang()
     lang = lang.lower()
@@ -92,6 +93,7 @@ def spoken_alert_type(alert_type: AlertType, lang: str = None) -> str:
     return translate("alert", lang)
 
 
+# TODO - get rid of this and use the skill methods, dont reimplement... pass skill object around if needed
 def get_words_list(res_name, lang: str = None) -> List[str]:
     """
     Returns a list of localized words from a skill resource
@@ -112,6 +114,7 @@ def get_words_list(res_name, lang: str = None) -> List[str]:
     return list()
 
 
+# TODO - get rid of this and use the skill methods, dont reimplement... pass skill object around if needed
 def find_resource(res_name, lang=None):
     """
     Finds the path to a localized resource file for the closest supported language.
@@ -124,19 +127,20 @@ def find_resource(res_name, lang=None):
     Returns:
         The path to the resource file as a string if found, or None if not found.
     """
-
     base_dir = dirname(dirname(__file__))
     root_path = join(base_dir, "locale")
 
     lang = lang or get_default_lang()
     langs = os.listdir(root_path)
-    closest, sore = closest_match(lang, langs, max_distance=10)
+    closest, score = closest_match(lang, langs, max_distance=10)
     if closest == "und":
         return None  # unsupported lang
 
-    path = join(root_path, closest, res_name)
-    if os.path.exists(path):
-        return path
+    path = join(root_path, closest)
+    for root, dirs, files in os.walk(path):
+        for f in files:
+            if f == res_name:
+                return join(root, f)
 
     return None  # missing translation
 
@@ -200,6 +204,20 @@ def get_abbreviation(wd: Weekdays, lang=None) -> str:
         return translate("abbreviation_sunday", lang=lang)
 
 
+def _migrate_adapt(message: Message):
+    """if intent is not triggered via adapt (other intent plugins exist) the keyword matches won't be present in message.data
+
+    This util method is here as a compatibility layer since this skill was designed to depend heavily on adapt particularities"""
+    utterance = message.data.get("utterance")
+    if utterance:
+        lang = get_message_lang(message)
+        for k in ["event", "alarm", "wake", "timer", "reminder", "remind", "alert"]:
+            word = message.data.get(k) or kw_match(utterance, k, lang)
+            if word:
+                message.data[k] = word
+    return message
+
+
 def get_alert_type_from_intent(message: Message) \
         -> Tuple[AlertType, str]:
     """
@@ -213,27 +231,18 @@ def get_alert_type_from_intent(message: Message) \
     Returns:
         A tuple of (AlertType, spoken_type), where spoken_type is the localized string for the detected alert type.
     """
-    # NOTE: voc_match is used in case intent was invoked without using adapt
-    utt = message.data.get("utterance", "")
-
+    message = _migrate_adapt(message)
     lang = get_message_lang(message)
-
-    if message.data.get("alarm") or \
-            message.data.get("wake") or \
-            voc_match(utt, "alarm", lang=lang) or \
-            voc_match(utt, "wake", lang=lang):
+    if message.data.get("alarm") or message.data.get("wake"):
         return AlertType.ALARM, translate("alarm", lang)
-    elif message.data.get('timer') or voc_match(utt, "timer", lang=lang):
+    elif message.data.get('timer'):
         return AlertType.TIMER, translate("timer", lang)
-    elif message.data.get('event') or \
-            voc_match(utt, "event", lang):
+    elif message.data.get('event'):
         return AlertType.EVENT, translate("event", lang)
     elif message.data.get('reminder') or \
-            message.data.get('remind') or \
-            voc_match( utt, "reminder", lang=lang) or \
-            voc_match( utt, "remind", lang=lang):
+            message.data.get('remind'):
         return AlertType.REMINDER, translate("reminder", lang)
-    elif message.data.get('alert') or voc_match( utt, "alert", lang=lang):
+    elif message.data.get('alert'):
         return AlertType.ALL, translate("alert", lang)
     return AlertType.ALL, translate("alert", lang)
 
@@ -350,6 +359,7 @@ def get_alert_dialog_data(alert: Alert,
     return data
 
 
+# TODO - get rid of this and use the skill methods, dont reimplement... pass skill object around if needed
 def voc_match(utterance: str,
               resource: str,
               lang: str = None,
@@ -365,6 +375,26 @@ def voc_match(utterance: str,
             resource = f"{resource}.voc"
         words = get_words_list(resource, lang)
         if exact:
-            return any(i.strip() == utterance.lower() for i in words)
+            return any(w.strip().lower() == utterance.lower() for w in words)
         else:
-            return any([re.match(r".*\b" + i + r"\b.*", utterance.lower()) for i in words])
+            return any([re.match(r".*\b" + re.escape(w.lower()) + r"\b.*", utterance.lower()) for w in words])
+
+
+# TODO - get rid of this and use the skill methods, dont reimplement... pass skill object around if needed
+def kw_match(utterance: str,
+             resource: str,
+             lang: str = None,
+             exact: bool = False) -> Optional[str]:
+    if not resource or not utterance:
+        return None
+
+    if not resource.endswith(".voc"):
+        resource = f"{resource}.voc"
+    words = get_words_list(resource, lang)
+
+    for w in words:
+        if exact:
+            if w.strip() == utterance.lower():
+                return w
+        elif re.match(r".*\b" + re.escape(w.lower()) + r"\b.*", utterance.lower()):
+            return w
