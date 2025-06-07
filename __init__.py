@@ -1264,7 +1264,7 @@ class AlertSkill(ConversationalSkill):
                 if voc_match(utterance, "dismiss", self.lang, exact=True):
                     for alert in active:
                         self._dismiss_alert(alert.ident, speak=True)
-                    return
+                    break
                 # snooze
                 else:
                     message.data["utterance"] = utterance
@@ -1274,16 +1274,17 @@ class AlertSkill(ConversationalSkill):
                                                      timezone=active[0].timezone)
                     duration = snooze_duration or self.snooze_duration
                     _utterance = " ".join(token)
-                    LOG.debug(f"cleared utteance: ({_utterance})")
+                    LOG.debug(f"cleared utterance: ({_utterance})")
                     if voc_match(_utterance, "snooze", self.lang, exact=True):
                         for alert in active:
                             self._snooze_alert(alert, snooze_duration)
                         self.speak_dialog("confirm_snooze_alert",
                                           {"duration": nice_duration(round(duration.total_seconds()),
                                                                      lang=self.lang)})
-                        return
-
-        self.speak_dialog("please.repeat", listen=True)
+                        break
+            else:
+                # failed to understand what alert we should snooze/dismiss, prompt user to ask again
+                self.speak_dialog("please.repeat", listen=True)
 
     def _get_response_cascade(self, dialog: str = "",
                               data: Optional[dict] = None,
