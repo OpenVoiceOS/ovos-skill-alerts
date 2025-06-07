@@ -1240,16 +1240,10 @@ class AlertSkill(ConversationalSkill):
 
         Override this method to implement custom logic for assessing whether the skill is capable of answering a query.
 
-        Args:
-            utterances: List of possible transcriptions to evaluate.
-            lang: BCP-47 language code for the utterances.
-
         Returns:
             True if the skill can handle the query during converse; otherwise, False.
         """
-        user_alerts = self.alert_manager.get_alerts()
-        active: List[Alert] = user_alerts["active"]
-        if active:
+        if self.can_stop(message):  # same logic
             sess = SessionManager.get(message)
             for utterance in message.data.get("utterances", []):
                 if (voc_match(utterance, "dismiss", lang=sess.lang, exact=True) or
@@ -1270,7 +1264,7 @@ class AlertSkill(ConversationalSkill):
                 if voc_match(utterance, "dismiss", self.lang, exact=True):
                     for alert in active:
                         self._dismiss_alert(alert.ident, speak=True)
-                    return True
+                    break
                 # snooze
                 else:
                     message.data["utterance"] = utterance
@@ -1280,15 +1274,17 @@ class AlertSkill(ConversationalSkill):
                                                      timezone=active[0].timezone)
                     duration = snooze_duration or self.snooze_duration
                     _utterance = " ".join(token)
-                    LOG.debug(f"cleared utteance: ({_utterance})")
+                    LOG.debug(f"cleared utterance: ({_utterance})")
                     if voc_match(_utterance, "snooze", self.lang, exact=True):
                         for alert in active:
                             self._snooze_alert(alert, snooze_duration)
                         self.speak_dialog("confirm_snooze_alert",
                                           {"duration": nice_duration(round(duration.total_seconds()),
                                                                      lang=self.lang)})
-                        return True
-        return False
+                        break
+            else:
+                # failed to understand what alert we should snooze/dismiss, prompt user to ask again
+                self.speak_dialog("please.repeat", listen=True)
 
     def _get_response_cascade(self, dialog: str = "",
                               data: Optional[dict] = None,
@@ -2041,14 +2037,19 @@ class AlertSkill(ConversationalSkill):
         self.alert_manager.shutdown()
         self.gui.clear()
 
+    def can_stop(self, message: Message) -> bool:
+        user_alerts = self.alert_manager.get_alerts()
+        active: List[Alert] = user_alerts["active"]
+        return bool(active)
+
     def stop(self):
-        # TODO - session support, timer per user
         """
         Stops all active alerts and returns whether any were stopped.
         
         Returns:
             bool: True if any active alerts were dismissed, False otherwise.
         """
+        # TODO - session support, timer per user
         LOG.debug(f"skill-stop called, all active alerts will be removed")
         stopped = False
         for alert in self.alert_manager.get_active_alerts():
