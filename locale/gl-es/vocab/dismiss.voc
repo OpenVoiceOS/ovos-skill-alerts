@@ -1,11 +1,36 @@
 cala
-cancelar(alerta|temporizador|lembrete|alarma|notificación|)
+cancelar
+cancelaralarma
+cancelaralerta
+cancelarlembrete
+cancelarnotificación
+cancelartemporizador
 entendido
-ignorar(alerta|temporizador|lembrete|alarma|notificación|)
-limpar (alerta|temporizador|lembrete|alarma|notificación|)
-parar (alerta|temporizador|lembrete|alarma|notificación|)
+ignorar
+ignoraralarma
+ignoraralerta
+ignorarlembrete
+ignorarnotificación
+ignorartemporizador
+limpar
+limpar alarma
+limpar alerta
+limpar lembrete
+limpar notificación
+limpar temporizador
+parar
+parar alarma
+parar alerta
+parar lembrete
+parar notificación
+parar temporizador
 rematar
 saír
-silenciar (alerta|temporizador|lembrete|alarma|notificación|)
+silenciar
+silenciar alarma
+silenciar alerta
+silenciar lembrete
+silenciar notificación
+silenciar temporizador
 silencio
 vale

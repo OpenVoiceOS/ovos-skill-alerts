@@ -1,7 +1,3 @@
-(llegeix|llig)
-(quant|quants|quanta|quantes)
-(quin|quina|quins|quines)
-(té|obté|tinc|tenc)
 a partir del qual
 des de quin
 de quin
@@ -26,11 +22,22 @@ hem
 heu
 hi ha
 hi han
+llegeix
+llig
 llista
 mostra
+obté
 qualsevol
 qualssevols
 quan
+quant
+quanta
+quantes
+quants
+quin
+quina
+quines
+quins
 què
 què són
 què és
@@ -39,12 +46,15 @@ actualitza
 res
 alguna cosa
 qualque
+tenc
 tenim
 que tenim
 tens
 tens
 que tens
 tinc
+tinc
 que tinc
 tinc
 tenc
+té

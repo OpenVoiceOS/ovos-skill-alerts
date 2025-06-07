@@ -1,11 +1,36 @@
-cancel (alert|timer|reminder|alarm|notification|)
-clear (alert|timer|reminder|alarm|notification|)
-dismiss (alert|timer|reminder|alarm|notification|)
+cancel
+cancel alarm
+cancel alert
+cancel notification
+cancel reminder
+cancel timer
+clear
+clear alarm
+clear alert
+clear notification
+clear reminder
+clear timer
+dismiss
+dismiss alarm
+dismiss alert
+dismiss notification
+dismiss reminder
+dismiss timer
 end
 exit
 got it
 okay
 quiet
 shut up
-silence (alert|timer|reminder|alarm|notification|)
-stop (alert|timer|reminder|alarm|notification|)
+silence
+silence alarm
+silence alert
+silence notification
+silence reminder
+silence timer
+stop
+stop alarm
+stop alert
+stop notification
+stop reminder
+stop timer

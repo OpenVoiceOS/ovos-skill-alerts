@@ -1,11 +1,31 @@
-afvis (alarm|timer|påmindelse|alarm|meddelelse|)
-annuller (alarm|timer|påmindelse|alarm|meddelelse|)
+afvis
+afvis alarm
+afvis meddelelse
+afvis påmindelse
+afvis timer
+annuller
+annuller alarm
+annuller meddelelse
+annuller påmindelse
+annuller timer
 ende
 fik det
 hold kæft
 okay
-ryd (alarm|timer|påmindelse|alarm|meddelelse|)
-stilhed (alarm|timer|påmindelse|alarm|meddelelse|)
+ryd
+ryd alarm
+ryd meddelelse
+ryd påmindelse
+ryd timer
+stilhed
+stilhed alarm
+stilhed meddelelse
+stilhed påmindelse
+stilhed timer
 stille
-stop (alarm|timer|påmindelse|alarm|meddelelse|)
+stop
+stop alarm
+stop meddelelse
+stop påmindelse
+stop timer
 udgang

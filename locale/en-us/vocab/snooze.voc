@@ -1,7 +1,19 @@
-add (another|)
+add
+add another
 hold
 later
-let me (sleep|snooze) (for|until|another|)
-remind me (in|at|)
-snooze (for|until|)
+let me sleep
+let me sleep another
+let me sleep for
+let me sleep until
+let me snooze
+let me snooze another
+let me snooze for
+let me snooze until
+remind me
+remind me at
+remind me in
+snooze
+snooze for
+snooze until
 wait

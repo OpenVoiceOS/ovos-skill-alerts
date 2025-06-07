@@ -1,10 +1,29 @@
 Oké
-annuleer (wekker|timer|herinnering|alarm|melding|)
+annuleer
+annuleer alarm
+annuleer herinnering
+annuleer melding
+annuleer timer
+annuleer wekker
 beëindig
 hou op
 ik snap het
 stil
-stop (alarm|timer|herinnering|wekker|melding|)
-stop (wekker|timer|herinnering|alarm|melding|)
-wis (wekker|timer|herinnering|alarm|melding|)
-zet (wekker|timer|herinnering|alarm|melding|) uit
+stop
+stop alarm
+stop herinnering
+stop melding
+stop timer
+stop wekker
+wis
+wis alarm
+wis herinnering
+wis melding
+wis timer
+wis wekker
+zet alarm uit
+zet herinnering uit
+zet melding uit
+zet timer uit
+zet uit
+zet wekker uit
