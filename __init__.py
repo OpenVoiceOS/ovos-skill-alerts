@@ -34,6 +34,7 @@ from typing import List, Optional
 
 from dateutil.relativedelta import relativedelta
 from ovos_bus_client.message import Message
+from ovos_bus_client.session import SessionManager
 from ovos_date_parser import nice_date_time, nice_time, nice_duration
 from ovos_number_parser import pronounce_number
 from ovos_skill_alerts.util import AlertState, MatchLevel, AlertPriority, WEEKDAYS
@@ -82,11 +83,11 @@ from ovos_utils.sound import play_audio
 from ovos_utterance_normalizer import UtteranceNormalizerPlugin
 from ovos_workshop.decorators import intent_handler
 from ovos_workshop.intents import IntentBuilder
-from ovos_workshop.skills import OVOSSkill
+from ovos_workshop.skills.converse import ConversationalSkill
 from ovos_workshop.skills.ovos import join_word_list
 
 
-class AlertSkill(OVOSSkill):
+class AlertSkill(ConversationalSkill):
     def __init__(self, *args, **kwargs):
         # kwarg only used for unittests
         if "alerts_path" in kwargs:
@@ -617,12 +618,12 @@ class AlertSkill(OVOSSkill):
         begin, end = parse_timeframe_from_message(message)
 
         # week range
-        if self.voc_match("week", utterance):
+        if self.voc_match("week", utterance, lang=self.lang):
             now = datetime.now(get_default_tz())
             # hack bc LF return None on "this week"
             begin, end = get_week_range(begin or now)
         elif not begin and not end:
-            if self.voc_match("next", utterance):
+            if self.voc_match("next", utterance, lang=self.lang):
                 return self.handle_next_alert(message)
             return self.handle_list_all_alerts(message)
 
@@ -1233,6 +1234,29 @@ class AlertSkill(OVOSSkill):
             else self.ask_selection(calendars, followup_dialog)
         )
 
+    def can_answer(self, message: Message) -> bool:
+        """
+        Determines if the skill can handle the given utterances in the specified language in the converse method.
+
+        Override this method to implement custom logic for assessing whether the skill is capable of answering a query.
+
+        Args:
+            utterances: List of possible transcriptions to evaluate.
+            lang: BCP-47 language code for the utterances.
+
+        Returns:
+            True if the skill can handle the query during converse; otherwise, False.
+        """
+        user_alerts = self.alert_manager.get_alerts()
+        active: List[Alert] = user_alerts["active"]
+        if active:
+            sess = SessionManager.get(message)
+            for utterance in message.data.get("utterances", []):
+                if (voc_match(utterance, "dismiss", lang=sess.lang, exact=True) or
+                        voc_match(utterance, "snooze", lang=sess.lang)):
+                    return True
+        return False
+
     def converse(self, message: Message):
         """
         If there is an active alert, see if the user is trying to dismiss it
@@ -1695,6 +1719,11 @@ class AlertSkill(OVOSSkill):
                               wait=True)
 
     def _gui_dismiss_notification(self, message):
+        """
+        Handles GUI notification dismissal for an alert.
+        
+        If the alert is active, removes it and confirms dismissal via dialog. If the alert is missed, removes it without confirmation. Always deletes the corresponding homescreen notification.
+        """
         if not message.data.get('alert'):
             LOG.error("Outdated Notification, unable to dismiss")
             return
@@ -1709,13 +1738,14 @@ class AlertSkill(OVOSSkill):
             self.alert_manager.rm_alert(alert_id)
         # the notification has to be explicitly removed to not force the user to
         # additionally push the trashbin button
-        # TODO: remove with https://github.com/OpenVoiceOS/skill-ovos-homescreen/pull/92
+        # TODO: remove with https://github.com/OpenVoiceOS/ovos-skill-homescreen/pull/92
         self._delete_homescreen_notification(alert)
 
     def _display_expiration(self, alert: Alert):
         """
-        Handles gui display on alert expiration
-        :param alert: expired alert
+        Displays the expiration notification for a given alert in the GUI.
+        
+        If the alert is a reminder or event, creates a homescreen notification with a timeout; otherwise, displays the alert without a notification timeout.
         """
         should_display = alert.alert_type in (AlertType.REMINDER, AlertType.EVENT)
         # This is solely due to reminder/event not having a proper ui element
@@ -2004,11 +2034,24 @@ class AlertSkill(OVOSSkill):
         self.handle_active_state(message)
 
     def shutdown(self):
+        """
+        Shuts down the skill, marking all active alerts as missed and clearing the GUI.
+        """
         LOG.debug(f"Shutdown, all active alerts are now missed")
         self.alert_manager.shutdown()
         self.gui.clear()
 
     def stop(self):
+        # TODO - session support, timer per user
+        """
+        Stops all active alerts and returns whether any were stopped.
+        
+        Returns:
+            bool: True if any active alerts were dismissed, False otherwise.
+        """
         LOG.debug(f"skill-stop called, all active alerts will be removed")
+        stopped = False
         for alert in self.alert_manager.get_active_alerts():
             self._dismiss_alert(alert.ident, speak=True)
+            stopped = True
+        return stopped

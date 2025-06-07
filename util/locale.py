@@ -1,9 +1,10 @@
 import datetime as dt
+import os
 import re
-from os import walk
 from os.path import join, dirname
 from typing import Optional, List, Union, Tuple
 
+from langcodes import closest_match
 from ovos_bus_client.message import Message
 from ovos_bus_client.util import get_message_lang
 from ovos_config.locale import get_default_lang
@@ -61,6 +62,7 @@ def date_display(dt_obj: dt.datetime,
     return display
 
 
+# TODO - get rid of this and use the skill methods, dont reimplement... pass skill object around if needed
 def translate(word, lang=None):
     lang = lang or get_default_lang()
     lang = lang.lower()
@@ -91,6 +93,7 @@ def spoken_alert_type(alert_type: AlertType, lang: str = None) -> str:
     return translate("alert", lang)
 
 
+# TODO - get rid of this and use the skill methods, dont reimplement... pass skill object around if needed
 def get_words_list(res_name, lang: str = None) -> List[str]:
     """
     Returns a list of localized words from a skill resource
@@ -111,34 +114,53 @@ def get_words_list(res_name, lang: str = None) -> List[str]:
     return list()
 
 
+# TODO - get rid of this and use the skill methods, dont reimplement... pass skill object around if needed
 def find_resource(res_name, lang=None):
     """
-    Helper function to locate the skill ressource on the file system
-    :param res_name: filename of the resource
-    :returns Path object of the file location or None
+    Finds the path to a localized resource file for the closest supported language.
+    
+    Searches the locale directory for the resource file under the language closest to the requested one. Returns the file path if found, otherwise returns None.
+    
+    Args:
+        res_name: The name of the resource file to locate.
+    
+    Returns:
+        The path to the resource file as a string if found, or None if not found.
     """
     base_dir = dirname(dirname(__file__))
+    root_path = join(base_dir, "locale")
+
     lang = lang or get_default_lang()
-    root_path = join(base_dir, "locale", lang)
-    for path, _, files in walk(root_path):
-        if res_name in files:
-            return join(path, res_name)
-    root_path = join(base_dir, "locale", "en-us")
-    for path, _, files in walk(root_path):
-        if res_name in files:
-            return join(path, res_name)
-    return None
+    langs = os.listdir(root_path)
+    closest, score = closest_match(lang, langs, max_distance=10)
+    if closest == "und":
+        return None  # unsupported lang
+
+    path = join(root_path, closest)
+    for root, dirs, files in os.walk(path):
+        for f in files:
+            if f == res_name:
+                return join(root, f)
+
+    return None  # missing translation
 
 
 def spoken_duration(alert_time: Union[dt.timedelta, dt.datetime],
                     anchor_time: Optional[dt.datetime] = None,
                     lang=None) -> str:
     """
-    Gets a speakable string representing time until alert_time
-    :param alert_time: Datetime or timedelta to get duration until
-    :param anchor_time: Datetime to count duration from
-    :param lang: Language to format response in
-    :return: speakable duration string
+    Returns a localized, human-readable string for the duration until a specified time.
+    
+    If `alert_time` is a `datetime`, calculates the duration from `anchor_time` (or now).
+    Adjusts the resolution of the output (days, hours, minutes, or seconds) based on the length of the duration.
+    
+    Args:
+        alert_time: The target time as a `datetime` or a duration as a `timedelta`.
+        anchor_time: The reference time to count from if `alert_time` is a `datetime`.
+        lang: Optional language code for localization.
+    
+    Returns:
+        A localized string describing the duration until `alert_time`.
     """
     lang = lang or get_default_lang()
     if isinstance(alert_time, dt.datetime):
@@ -182,20 +204,40 @@ def get_abbreviation(wd: Weekdays, lang=None) -> str:
         return translate("abbreviation_sunday", lang=lang)
 
 
+def _migrate_adapt(message: Message):
+    """if intent is not triggered via adapt (other intent plugins exist) the keyword matches won't be present in message.data
+
+    This util method is here as a compatibility layer since this skill was designed to depend heavily on adapt particularities"""
+    utterance = message.data.get("utterance")
+    if utterance:
+        lang = get_message_lang(message)
+        for k in ["event", "alarm", "wake", "timer", "reminder", "remind", "alert"]:
+            word = message.data.get(k) or kw_match(utterance, k, lang)
+            if word:
+                message.data[k] = word
+    return message
+
+
 def get_alert_type_from_intent(message: Message) \
         -> Tuple[AlertType, str]:
     """
-    Parse the requested alert type based on intent vocab
-    :param message: Message associated with intent match
-    :returns: tuple of AlertType requested and spoken_type 
+    Determines the alert type from an intent message using data flags and keyword matching.
+    
+    Examines the message data and utterance to identify if the intent refers to an alarm, timer, event, reminder, or generic alert. Returns a tuple containing the detected AlertType and its localized spoken string.
+     
+    Args:
+        message: The intent message containing data and utterance.
+    
+    Returns:
+        A tuple of (AlertType, spoken_type), where spoken_type is the localized string for the detected alert type.
     """
+    message = _migrate_adapt(message)
     lang = get_message_lang(message)
     if message.data.get("alarm") or message.data.get("wake"):
         return AlertType.ALARM, translate("alarm", lang)
     elif message.data.get('timer'):
         return AlertType.TIMER, translate("timer", lang)
-    elif message.data.get('event') or \
-            voc_match(message.data.get("utterance"), "event", lang):
+    elif message.data.get('event'):
         return AlertType.EVENT, translate("event", lang)
     elif message.data.get('reminder') or \
             message.data.get('remind'):
@@ -317,6 +359,7 @@ def get_alert_dialog_data(alert: Alert,
     return data
 
 
+# TODO - get rid of this and use the skill methods, dont reimplement... pass skill object around if needed
 def voc_match(utterance: str,
               resource: str,
               lang: str = None,
@@ -332,6 +375,26 @@ def voc_match(utterance: str,
             resource = f"{resource}.voc"
         words = get_words_list(resource, lang)
         if exact:
-            return any(i.strip() == utterance.lower() for i in words)
+            return any(w.strip().lower() == utterance.lower() for w in words)
         else:
-            return any([re.match(r".*\b" + i + r"\b.*", utterance.lower()) for i in words])
+            return any([re.match(r".*\b" + re.escape(w.lower()) + r"\b.*", utterance.lower()) for w in words])
+
+
+# TODO - get rid of this and use the skill methods, dont reimplement... pass skill object around if needed
+def kw_match(utterance: str,
+             resource: str,
+             lang: str = None,
+             exact: bool = False) -> Optional[str]:
+    if not resource or not utterance:
+        return None
+
+    if not resource.endswith(".voc"):
+        resource = f"{resource}.voc"
+    words = get_words_list(resource, lang)
+
+    for w in words:
+        if exact:
+            if w.strip() == utterance.lower():
+                return w
+        elif re.match(r".*\b" + re.escape(w.lower()) + r"\b.*", utterance.lower()):
+            return w

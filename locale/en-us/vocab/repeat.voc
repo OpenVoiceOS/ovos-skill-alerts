@@ -1,7 +1,21 @@
 every
-frequency (to|) (every|)
-recurrance (to|) (every|)
-recurring (every|)
-repeat (to|) (every|)
-repeating (every|)
-repetition (to|) (every|)
+frequency
+frequency every
+frequency to
+frequency to every
+recurrance
+recurrance every
+recurrance to
+recurrance to every
+recurring
+recurring every
+repeat
+repeat every
+repeat to
+repeat to every
+repeating
+repeating every
+repetition
+repetition every
+repetition to
+repetition to every

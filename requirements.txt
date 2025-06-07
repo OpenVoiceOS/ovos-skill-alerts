@@ -2,9 +2,10 @@ json_database>=0.5
 combo_lock>=0.2
 ovos-utils>=0.0.32
 ovos-bus-client>=0.0.3,<2.0.0
-ovos-workshop>=2.2.0,<4.0.0
+ovos-workshop>=5.0.0,<6.0.0
 caldav~=1.2
 icalendar~=5.0
 ovos-utterance-normalizer>=0.0.1,<1.0.0
 ovos-number-parser>=0.0.1,<1.0.0
 ovos-date-parser>=0.0.3,<1.0.0
+langcodes

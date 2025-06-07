@@ -1,21 +1,28 @@
-(Bada|Badago)
-(Badira|Badaude)
-(al dut|al naiz)
-(al duzu|al zara)
-(edo|e)zer
 Ba al dugu
 Ba al dut
 Ba al duzu
-al (dugu|gara)
-al (dut|naiz)
-al (duzu|zara)
-al (genuen|ginen)
-al (nuen|nintzen)
-al (zenuen|zinen)
+Bada
+Badago
+Badaude
+Badira
+al dugu
+al dut
+al duzu
+al gara
+al genuen
+al ginen
+al naiz
+al nintzen
+al nuen
+al zara
+al zenuen
+al zinen
+edozer
 eguneratu
 erakutsi
 esadazu
 esaguzu
+ezer
 irakurri
 lortuta
 noiz
@@ -25,8 +32,15 @@ zein
 zeinetatik
 zenbat
 zer
-zer (ari|) (zara|gara|zarete|dira)
+zer ari dira
+zer ari gara
+zer ari zara
+zer ari zarete
 zer da
+zer dira
+zer gara
+zer zara
+zer zarete
 zerbait
 zerrenda
 zertatik

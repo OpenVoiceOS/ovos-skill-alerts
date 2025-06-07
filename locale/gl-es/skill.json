@@ -1,0 +1,29 @@
+{
+  "title": "Alertas",
+  "description": "Unha habilidade para xestionar alarmas, temporizadores, recordatorios, eventos e tarefas pendentes, e opcionalmente sincronizalos cun servizo CalDAV.",
+  "examples": [
+    "Configura unha alarma para as 8 da mañá.",
+    "Inicia un temporizador para o pan de 30 minutos.",
+    "Programa un evento de tenis para o venres ás 14:00 cunha duración de 2 horas.",
+    "Configura unha alarma diaria para as 8 da mañá.",
+    "Configura unha alarma para as 8 da mañá dos sábados.",
+    "Lémbrame sacar o lixo todos os xoves e domingos ás 19:00.",
+    "Éspertarme ás 8 da mañá con música.",
+    "Cando soa a miña próxima alarma?",
+    "Cales son os meus recordatorios?",
+    "Cancela todas as alarmas.",
+    "Cancela todos os temporizadores.",
+    "Cancela todos os recordatorios.",
+    "Que perdín?",
+    "Perdín algo?"
+  ],
+  "tags": [
+    "Productividade",
+    "Diariamente",
+    "alerta",
+    "alarma",
+    "temporizador",
+    "recordatorio",
+    "horario"
+  ]
+}
