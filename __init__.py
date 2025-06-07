@@ -1234,7 +1234,7 @@ class AlertSkill(ConversationalSkill):
             else self.ask_selection(calendars, followup_dialog)
         )
 
-    def can_answer(self, message: Message) -> bool:
+    def can_converse(self, message: Message) -> bool:
         """
         Determines if the skill can handle the given utterances in the specified language in the converse method.
 
