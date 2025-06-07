@@ -34,6 +34,7 @@ from typing import List, Optional
 
 from dateutil.relativedelta import relativedelta
 from ovos_bus_client.message import Message
+from ovos_bus_client.session import SessionManager
 from ovos_date_parser import nice_date_time, nice_time, nice_duration
 from ovos_number_parser import pronounce_number
 from ovos_skill_alerts.util import AlertState, MatchLevel, AlertPriority, WEEKDAYS
@@ -82,11 +83,11 @@ from ovos_utils.sound import play_audio
 from ovos_utterance_normalizer import UtteranceNormalizerPlugin
 from ovos_workshop.decorators import intent_handler
 from ovos_workshop.intents import IntentBuilder
-from ovos_workshop.skills import OVOSSkill
+from ovos_workshop.skills.converse import ConversationalSkill
 from ovos_workshop.skills.ovos import join_word_list
 
 
-class AlertSkill(OVOSSkill):
+class AlertSkill(ConversationalSkill):
     def __init__(self, *args, **kwargs):
         # kwarg only used for unittests
         if "alerts_path" in kwargs:
@@ -1232,6 +1233,29 @@ class AlertSkill(OVOSSkill):
             if len(calendars) == 1
             else self.ask_selection(calendars, followup_dialog)
         )
+
+    def can_answer(self, message: Message) -> bool:
+        """
+        Determines if the skill can handle the given utterances in the specified language in the converse method.
+
+        Override this method to implement custom logic for assessing whether the skill is capable of answering a query.
+
+        Args:
+            utterances: List of possible transcriptions to evaluate.
+            lang: BCP-47 language code for the utterances.
+
+        Returns:
+            True if the skill can handle the query during converse; otherwise, False.
+        """
+        user_alerts = self.alert_manager.get_alerts()
+        active: List[Alert] = user_alerts["active"]
+        if active:
+            sess = SessionManager.get(message)
+            for utterance in message.data.get("utterances", []):
+                if (voc_match(utterance, "dismiss", lang=sess.lang, exact=True) or
+                        voc_match(utterance, "snooze", lang=sess.lang)):
+                    return True
+        return False
 
     def converse(self, message: Message):
         """
