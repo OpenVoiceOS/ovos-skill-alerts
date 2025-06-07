@@ -50,6 +50,9 @@
     "/dialog/alarm_ask_time.dialog": [
         "Sorry. i couldn't catch the time. Please repeat."
     ],
+    "/dialog/please.repeat.dialog": [
+        "Sorry. i couldn't catch that. Please repeat."
+    ],
     "/dialog/list_todo_subitems_added.dialog": [
         "i have added {num} entries."
     ],

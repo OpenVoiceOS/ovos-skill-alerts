@@ -1,42 +1,12 @@
 # Changelog
 
-## [0.1.25a3](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.1.25a3) (2025-06-07)
+## [0.1.26a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.1.26a1) (2025-06-07)
 
-[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.1.25a2...0.1.25a3)
-
-**Fixed bugs:**
-
-- intents not matching [\#47](https://github.com/OpenVoiceOS/ovos-skill-alerts/issues/47)
-
-**Closed issues:**
-
-- alert skill intents not working when matched from m2v [\#86](https://github.com/OpenVoiceOS/ovos-skill-alerts/issues/86)
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.1.25...0.1.26a1)
 
 **Merged pull requests:**
 
-- Autos [\#90](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/90) ([JarbasAl](https://github.com/JarbasAl))
-- fix: support latest ovos-workshop [\#89](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/89) ([JarbasAl](https://github.com/JarbasAl))
-- fix: improve adapt backwards compat [\#87](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/87) ([JarbasAl](https://github.com/JarbasAl))
-- Fixstop [\#84](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/84) ([JarbasAl](https://github.com/JarbasAl))
-- gl/translate [\#83](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/83) ([gitlocalize-app[bot]](https://github.com/apps/gitlocalize-app))
-- fix: improve keyword matching [\#81](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/81) ([JarbasAl](https://github.com/JarbasAl))
-
-## [0.1.25a2](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.1.25a2) (2025-04-28)
-
-[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.1.25a1...0.1.25a2)
-
-**Merged pull requests:**
-
-- gl/translate [\#79](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/79) ([gitlocalize-app[bot]](https://github.com/apps/gitlocalize-app))
-
-## [0.1.25a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.1.25a1) (2025-04-16)
-
-[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.1.24...0.1.25a1)
-
-**Merged pull requests:**
-
-- optimizing German translation for better usage [\#77](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/77) ([gitlocalize-app[bot]](https://github.com/apps/gitlocalize-app))
-- Create skill.json [\#76](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/76) ([c-armentano](https://github.com/c-armentano))
+- fix: workshop 6.0.0 compat [\#92](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/92) ([JarbasAl](https://github.com/JarbasAl))
 
 
 
