@@ -2051,5 +2051,8 @@ class AlertSkill(ConversationalSkill):
         """
         # TODO - session support, timer per user
         LOG.debug(f"skill-stop called, all active alerts will be removed")
+        stopped = False
         for alert in self.alert_manager.get_active_alerts():
             self._dismiss_alert(alert.ident, speak=True)
+            stopped = True
+        return stopped
