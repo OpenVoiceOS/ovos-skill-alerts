@@ -1,12 +1,12 @@
 # Changelog
 
-## [0.1.26a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.1.26a1) (2025-06-07)
+## [0.1.27a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.1.27a1) (2025-06-07)
 
-[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.1.25...0.1.26a1)
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.1.26...0.1.27a1)
 
 **Merged pull requests:**
 
-- fix: workshop 6.0.0 compat [\#92](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/92) ([JarbasAl](https://github.com/JarbasAl))
+- fix:workshop 7.0.0 compat [\#94](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/94) ([JarbasAl](https://github.com/JarbasAl))
 
 
 
