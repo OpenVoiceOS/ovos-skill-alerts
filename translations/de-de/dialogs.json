@@ -50,6 +50,9 @@
   "/dialog/alarm_ask_time.dialog": [
     "Tschuldige. ich habe die Zeit nicht verstanden. Wiederhole bitte noch einmal."
   ],
+  "/dialog/please.repeat.dialog": [
+    "Entschuldigung. Das habe ich nicht verstanden. Bitte wiederholen."
+  ],
   "/dialog/list_todo_subitems_added.dialog": [
     "ich habe {num} einträge hinzugefügt."
   ],
