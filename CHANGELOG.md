@@ -1,12 +1,12 @@
 # Changelog
 
-## [0.1.27a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.1.27a1) (2025-06-07)
+## [0.1.28a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.1.28a1) (2025-07-12)
 
-[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.1.26...0.1.27a1)
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.1.27...0.1.28a1)
 
 **Merged pull requests:**
 
-- fix:workshop 7.0.0 compat [\#94](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/94) ([JarbasAl](https://github.com/JarbasAl))
+- adding missing German translations [\#96](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/96) ([gitlocalize-app[bot]](https://github.com/apps/gitlocalize-app))
 
 
 
