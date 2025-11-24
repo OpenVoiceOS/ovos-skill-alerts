@@ -1,352 +1,355 @@
 {
-    "/dialog/list_alert_none_upcoming.dialog": [
-        "No tienes pr\u00f3ximos {kind}s."
-    ],
-    "/dialog/ocp_missing.dialog": [
-        "El reproductor multimedia no funciona."
-    ],
-    "/dialog/in_time.dialog": [
-        "en {remaining}"
-    ],
-    "/dialog/dav_service_cant_connect.dialog": [
-        "No se puede conectar con el servicio {service}"
-    ],
-    "/dialog/error_no_list_name.dialog": [
-        "Debe especificar un nombre de lista."
-    ],
-    "/dialog/alarm_ocp_request.dialog": [
-        "\u00bfQu\u00e9 m\u00fasica pongo para despertarte?"
-    ],
-    "/dialog/list_todo_items.dialog": [
-        "En la lista de tareas pendientes est\u00e1 {items}."
-    ],
-    "/dialog/ocp_request_retry.dialog": [
-        "no ha encontrado nada que coincida. Repite el nombre o prueba con otro."
-    ],
-    "/dialog/list_todo_subitems.dialog": [
-        "En la lista {name} est\u00e1 {items}."
-    ],
-    "/dialog/error_nothing_to_cancel.dialog": [
-        "No he podido encontrar una alerta coincidente para cancelar."
-    ],
-    "/dialog/list_alert_none_missed.dialog": [
-        "No te has perdido ninguna alerta."
-    ],
-    "/dialog/alert_rescheduled_all_day.dialog": [
-        "{kind} es ahora todo el d\u00eda."
-    ],
-    "/dialog/confirm_snooze_alert.dialog": [
-        "Vuelvo en {duration}."
-    ],
-    "/dialog/confirm_cancel_all.dialog": [
-        "Bien, cancelando todo {kind}, {num} en total."
-    ],
-    "/dialog/expired_timer.dialog": [
-        "Tu temporizador {name} ha terminado."
-    ],
-    "/dialog/list_todo_add_ask.dialog": [
-        "\u00bfqu\u00e9 nuevas entradas debo a\u00f1adir a la lista {name}?"
-    ],
-    "/dialog/alarm_ask_time.dialog": [
-        "Lo siento. No pude captar la hora. Por favor, repita."
-    ],
-    "/dialog/list_todo_subitems_added.dialog": [
-        "He a\u00f1adido {num} entradas."
-    ],
-    "/dialog/confirm_alert_recurring_playback.dialog": [
-        "Su {name} se reproducir\u00e1 en {begin}, cada {repeat}."
-    ],
-    "/dialog/repeating_every.dialog": [
-        "cada {repeat}"
-    ],
-    "/dialog/list_alert_timeframe_intro.dialog": [
-        "En este marco temporal tienes {num} {type}s:"
-    ],
-    "/dialog/confirm_alert_script.dialog": [
-        "Tu script {name} se ejecutar\u00e1 en {begin}, en {remaining}."
-    ],
-    "/dialog/alert_prenotification_ask.dialog": [
-        "\u00bfDesea una breve notificaci\u00f3n previa a este acto?"
-    ],
-    "/dialog/error_no_time.dialog": [
-        "No escuch\u00e9 una hora para fijar tu {kind}. Por favor, int\u00e9ntalo de nuevo."
-    ],
-    "/dialog/alert_prenotification.dialog": [
-        "Quiero recordarte sobre {remimder} en {time_until}"
-    ],
-    "/dialog/timer_status.dialog": [
-        "Al temporizador {name} le queda {remaining}."
-    ],
-    "/dialog/confirm_todo_set.dialog": [
-        "La entrada ha sido colocada."
-    ],
-    "/dialog/list_alert_missed.dialog": [
-        "{name} {kind}, caducado {begin}"
-    ],
-    "/dialog/confirm_alert_recurring_script.dialog": [
-        "Su {name} se ejecutar\u00e1 en {begin}, cada {repeat}."
-    ],
-    "/dialog/list_alert_intro.dialog": [
-        "Tienes los siguientes {kind}s:"
-    ],
-    "/dialog/list_alert_timeframe_none.dialog": [
-        "no tengo nada almacenado en este momento.",
-        "No hay nada almacenado en este plazo."
-    ],
-    "/dialog/at_time.dialog": [
-        "{begin}"
-    ],
-    "/dialog/list_todo_reminder.dialog": [
-        "debo recordarte a {reminders}"
-    ],
-    "/dialog/dav_calendar_list.dialog": [
-        "{calendars} en {service}.",
-        "En el servicio {service} hay {calendars}."
-    ],
-    "/dialog/next_alert.dialog": [
-        "Tu siguiente es {name} en {begin}."
-    ],
-    "/dialog/list_todo_already_exist.dialog": [
-        "La entrada {name} ya existe en la lista de tareas pendientes"
-    ],
-    "/dialog/list_todo_no_reminder.dialog": [
-        "No tienes ning\u00fan recordatorio de tareas guardado."
-    ],
-    "/dialog/selection_dav_calendar.dialog": [
-        "\u00bfCon qu\u00e9 calendario debo sincronizar?"
-    ],
-    "/dialog/pick_multiple_entries.dialog": [
-        "Hay varias entradas similares. \u00bfCu\u00e1l elegir?"
-    ],
-    "/dialog/alert_rescheduled_repeat.dialog": [
-        "Cambiada la repetici\u00f3n a {repeat}."
-    ],
-    "/dialog/list_deleted.dialog": [
-        "Lista {name} borrada"
-    ],
-    "/dialog/next_alert_timer.dialog": [
-        "Tu siguiente es {name} en {remaining}."
-    ],
-    "/dialog/confirm_cancel_alert.dialog": [
-        "Cancelando {kind} {name}."
-    ],
-    "/dialog/list_todo_exist_confirm.dialog": [
-        "Ya existe una entrada {existing}. \u00bfTodav\u00eda quieres guardar?"
-    ],
-    "/dialog/dav_credentials_missing.dialog": [
-        "Faltan las credenciales DAV. Por favor, a\u00f1\u00e1delas al archivo esqueleto en la carpeta skill filesystem."
-    ],
-    "/dialog/error_no_repeat.dialog": [
-        "Tienes que darme un intervalo de tiempo. Pueden ser d\u00edas sueltos o periodos m\u00e1s cortos."
-    ],
-    "/dialog/list_todo_no_lists.dialog": [
-        "No tiene listas abiertas."
-    ],
-    "/dialog/error_audio_reminder_too_far.dialog": [
-        "S\u00f3lo puedo establecer recordatorios de audio con 24 horas de antelaci\u00f3n, en su lugar crear\u00e9 un evento de calendario."
-    ],
-    "/dialog/list_todo_dont_exist.dialog": [
-        "No hay ninguna entrada {name} almacenada."
-    ],
-    "/dialog/list_todo_no_subitems.dialog": [
-        "la lista est\u00e1 vac\u00eda."
-    ],
-    "/dialog/confirm_alert_playback.dialog": [
-        "Tu grabaci\u00f3n {name} se reproducir\u00e1 en {begin}, en {remaining}."
-    ],
-    "/dialog/list_alert_missed_intro.dialog": [
-        "Esto es lo que te has perdido:"
-    ],
-    "/dialog/ocp_breaking_up.dialog": [
-        "No pod\u00eda asignar m\u00fasica. Rompiendo."
-    ],
-    "/dialog/todo_item_delete_selection_intro.dialog": [
-        "\u00bfcu\u00e1l debo borrar?"
-    ],
-    "/dialog/reminder_ask_time.dialog": [
-        "\u00bfdebo record\u00e1rselo a una hora determinada?"
-    ],
-    "/dialog/ocp_searching.dialog": [
-        "Comprobaci\u00f3n del t\u00edtulo multimedia."
-    ],
-    "/dialog/list_alert_w_duration.dialog": [
-        "{name} entre {begin} y {end}."
-    ],
-    "/dialog/error_no_scheduled_kind.dialog": [
-        "No tienes programado {kind}."
-    ],
-    "/dialog/alert_rescheduled_prenotification.dialog": [
-        "La prenotificaci\u00f3n tambi\u00e9n ha cambiado a {prenotification}. \u00bfDebo ajustar el intervalo de tiempo por adelantado?"
-    ],
-    "/dialog/expired_alert.dialog": [
-        "Tu alerta {name} est\u00e1 activada."
-    ],
-    "/dialog/timer_status_none_active.dialog": [
-        "No hay temporizadores activos."
-    ],
-    "/dialog/alert_rescheduled.dialog": [
-        "{name} {type} ajustado"
-    ],
-    "/dialog/remove_list_items_ask.dialog": [
-        "Enumere uno a uno los elementos que deben eliminarse."
-    ],
-    "/dialog/confirm_timer_started.dialog": [
-        "Temporizador para {remaining}, comenzando ahora."
-    ],
-    "/dialog/stopwatch_delta.dialog": [
-        "El tiempo transcurrido es {delta}"
-    ],
-    "/dialog/list_item_delete_selection_intro.dialog": [
-        "\u00bfDe qu\u00e9 lista?"
-    ],
-    "/dialog/alert_overlapping_ask.dialog": [
-        "En este momento tienes {event} en {begin}. \u00bfGuardar de todos modos?"
-    ],
-    "/dialog/expired_audio_alert_intro.dialog": [
-        "Tienes un recordatorio de audio."
-    ],
-    "/dialog/alert_rescheduled_end.dialog": [
-        "Cambiado el final de {kind} a {end}."
-    ],
-    "/dialog/reschedule_recurring_ask.dialog": [
-        "Este es un {type} que se repite. \u00bfQuiere reprogramarlos todos?"
-    ],
-    "/dialog/list_todo_num_deleted.dialog": [
-        "He borrado {num} tareas pendientes."
-    ],
-    "/dialog/confirm_alert_recurring.dialog": [
-        "Su {kind} est\u00e1 fijado para {begin}, cada {repeat}."
-    ],
-    "/dialog/expired_reminder.dialog": [
-        "Este es tu recordatorio: {name}."
-    ],
-    "/dialog/confirm_dismiss_alert.dialog": [
-        "{kind} despedido."
-    ],
-    "/dialog/selection_dav_service.dialog": [
-        "\u00bfCon qu\u00e9 servicio debo sincronizarme?"
-    ],
-    "/dialog/dav_sync_ask.dialog": [
-        "\u00bfDebo sincronizar el {type} con DAV?"
-    ],
-    "/dialog/alert_expiration_past.dialog": [
-        "Tal vez calcul\u00e9 mal, pero el tiempo dado est\u00e1 en el pasado."
-    ],
-    "/dialog/confirm_alert_set.dialog": [
-        "Tu {kind} est\u00e1 puesto para {begin}, en {remaining}."
-    ],
-    "/dialog/error_no_duration.dialog": [
-        "No he o\u00eddo cu\u00e1nto tiempo, por favor int\u00e9ntelo de nuevo."
-    ],
-    "/dialog/dav_inactive.dialog": [
-        "La DAV est\u00e1 inactiva en este momento."
-    ],
-    "/dialog/alert_overlapping_duration_ask.dialog": [
-        "En este momento tienes {event} entre {begin} y {end}. \u00bfGuardas de todos modos?"
-    ],
-    "/dialog/list_alert_wo_duration.dialog": [
-        "{name} {begin}."
-    ],
-    "/dialog/confirm_cancel_timeframe.dialog": [
-        "Bien, cancelando todo {kind} en el marco de tiempo, {num} en total."
-    ],
-    "/dialog/list_todo_lists.dialog": [
-        "Tengo almacenada la lista {num}: {lists}"
-    ],
-    "/dialog/selection_not_understood.dialog": [
-        "No he entendido lo que has dicho. Por favor, elija por el n\u00famero 1 a {max}"
-    ],
-    "/dialog/words/abbreviation_monday.dialog": [
-        "LUN"
-    ],
-    "/dialog/words/abbreviation_friday.dialog": [
-        "FRI"
-    ],
-    "/dialog/words/music.dialog": [
-        "m\u00fasica"
-    ],
-    "/dialog/words/until.dialog": [
-        "hasta"
-    ],
-    "/dialog/words/alarm.dialog": [
-        "alarma"
-    ],
-    "/dialog/words/whole_day.dialog": [
-        "todo el d\u00eda"
-    ],
-    "/dialog/words/alert.dialog": [
-        "alerta"
-    ],
-    "/dialog/words/abbreviation_tuesday.dialog": [
-        "TUE"
-    ],
-    "/dialog/words/reminder.dialog": [
-        "recordatorio"
-    ],
-    "/dialog/words/audio.dialog": [
-        "audio"
-    ],
-    "/dialog/words/video.dialog": [
-        "v\u00eddeo"
-    ],
-    "/dialog/words/event.dialog": [
-        "evento"
-    ],
-    "/dialog/words/audiobook.dialog": [
-        "audiolibro"
-    ],
-    "/dialog/words/podcast.dialog": [
-        "podcast"
-    ],
-    "/dialog/words/abbreviation_saturday.dialog": [
-        "SAT"
-    ],
-    "/dialog/words/abbreviation_sunday.dialog": [
-        "SOL"
-    ],
-    "/dialog/words/todo.dialog": [
-        "todo"
-    ],
-    "/dialog/words/weekend.dialog": [
-        "S\u00e1bado y domingo"
-    ],
-    "/dialog/words/abbreviation_thursday.dialog": [
-        "JUE"
-    ],
-    "/dialog/words/weekday.dialog": [
-        "De lunes a viernes"
-    ],
-    "/dialog/words/thursday.dialog": [
-        "Jueves"
-    ],
-    "/dialog/words/day.dialog": [
-        "d\u00eda"
-    ],
-    "/dialog/words/saturday.dialog": [
-        "S\u00e1bado"
-    ],
-    "/dialog/words/wednesday.dialog": [
-        "Mi\u00e9rcoles"
-    ],
-    "/dialog/words/tuesday.dialog": [
-        "Martes"
-    ],
-    "/dialog/words/monday.dialog": [
-        "Lunes"
-    ],
-    "/dialog/words/sunday.dialog": [
-        "Domingo"
-    ],
-    "/dialog/words/timer.dialog": [
-        "temporizador"
-    ],
-    "/dialog/words/friday.dialog": [
-        "Viernes"
-    ],
-    "/dialog/words/once.dialog": [
-        "una vez"
-    ],
-    "/dialog/words/abbreviation_wednesday.dialog": [
-        "WED"
-    ]
+  "/dialog/list_alert_none_upcoming.dialog": [
+    "No tienes próximos {kind}s."
+  ],
+  "/dialog/ocp_missing.dialog": [
+    "El reproductor multimedia no funciona."
+  ],
+  "/dialog/in_time.dialog": [
+    "en {remaining}"
+  ],
+  "/dialog/dav_service_cant_connect.dialog": [
+    "No se puede conectar con el servicio {service}"
+  ],
+  "/dialog/error_no_list_name.dialog": [
+    "Debe especificar un nombre de lista."
+  ],
+  "/dialog/alarm_ocp_request.dialog": [
+    "¿Qué música pongo para despertarte?"
+  ],
+  "/dialog/list_todo_items.dialog": [
+    "En la lista de tareas pendientes está {items}."
+  ],
+  "/dialog/ocp_request_retry.dialog": [
+    "no se ha encontrado nada que coincida. Repita el nombre o prueba con otro."
+  ],
+  "/dialog/list_todo_subitems.dialog": [
+    "En la lista {name} está {items}."
+  ],
+  "/dialog/error_nothing_to_cancel.dialog": [
+    "No he podido encontrar una alerta coincidente para cancelar."
+  ],
+  "/dialog/list_alert_none_missed.dialog": [
+    "No te has perdido ninguna alerta."
+  ],
+  "/dialog/alert_rescheduled_all_day.dialog": [
+    "{kind} es ahora todo el día."
+  ],
+  "/dialog/confirm_snooze_alert.dialog": [
+    "Vuelvo en {duration}."
+  ],
+  "/dialog/confirm_cancel_all.dialog": [
+    "Bien, cancelando todo {kind}, {num} en total."
+  ],
+  "/dialog/expired_timer.dialog": [
+    "Tu temporizador {name} ha terminado."
+  ],
+  "/dialog/list_todo_add_ask.dialog": [
+    "¿qué nuevas entradas debo añadir a la lista {name}?"
+  ],
+  "/dialog/alarm_ask_time.dialog": [
+    "Lo siento. No pude captar la hora. Por favor, repita."
+  ],
+  "/dialog/please.repeat.dialog": [
+    "Lo siento, no te entendí. Por favor, repita. "
+  ],
+  "/dialog/list_todo_subitems_added.dialog": [
+    "He añadido {num} entradas."
+  ],
+  "/dialog/confirm_alert_recurring_playback.dialog": [
+    "Su {name} se reproducirá en {begin}, cada {repeat}."
+  ],
+  "/dialog/repeating_every.dialog": [
+    "cada {repeat}"
+  ],
+  "/dialog/list_alert_timeframe_intro.dialog": [
+    "En este marco temporal tienes {num} {type}s:"
+  ],
+  "/dialog/confirm_alert_script.dialog": [
+    "Tu script {name} se ejecutará en {begin}, en {remaining}."
+  ],
+  "/dialog/alert_prenotification_ask.dialog": [
+    "¿Desea una breve notificación previa a este acto?"
+  ],
+  "/dialog/error_no_time.dialog": [
+    "No escuché una hora para fijar tu {kind}. Por favor, inténtalo de nuevo."
+  ],
+  "/dialog/alert_prenotification.dialog": [
+    "Quiero recordarte sobre {remimder} en {time_until}"
+  ],
+  "/dialog/timer_status.dialog": [
+    "Al temporizador {name} le queda {remaining}."
+  ],
+  "/dialog/confirm_todo_set.dialog": [
+    "La entrada ha sido colocada."
+  ],
+  "/dialog/list_alert_missed.dialog": [
+    "{name} {kind}, caducado {begin}"
+  ],
+  "/dialog/confirm_alert_recurring_script.dialog": [
+    "Su {name} se ejecutará en {begin}, cada {repeat}."
+  ],
+  "/dialog/list_alert_intro.dialog": [
+    "Tienes los siguientes {kind}s:"
+  ],
+  "/dialog/list_alert_timeframe_none.dialog": [
+    "No tengo nada almacenado en este momento.",
+    "No hay nada almacenado en este plazo."
+  ],
+  "/dialog/at_time.dialog": [
+    "{begin}"
+  ],
+  "/dialog/list_todo_reminder.dialog": [
+    "debo recordarte a {reminders}"
+  ],
+  "/dialog/dav_calendar_list.dialog": [
+    "{calendars} en {service}.",
+    "En el servicio {service} hay {calendars}."
+  ],
+  "/dialog/next_alert.dialog": [
+    "Tu siguiente es {name} en {begin}."
+  ],
+  "/dialog/list_todo_already_exist.dialog": [
+    "La entrada {name} ya existe en la lista de tareas pendientes"
+  ],
+  "/dialog/list_todo_no_reminder.dialog": [
+    "No tienes ningún recordatorio de tareas guardado."
+  ],
+  "/dialog/selection_dav_calendar.dialog": [
+    "¿Con qué calendario debo sincronizar?"
+  ],
+  "/dialog/pick_multiple_entries.dialog": [
+    "Hay varias entradas similares. ¿Cuál elegir?"
+  ],
+  "/dialog/alert_rescheduled_repeat.dialog": [
+    "Cambiada la repetición a {repeat}."
+  ],
+  "/dialog/list_deleted.dialog": [
+    "Lista {name} borrada"
+  ],
+  "/dialog/next_alert_timer.dialog": [
+    "Tu siguiente es {name} en {remaining}."
+  ],
+  "/dialog/confirm_cancel_alert.dialog": [
+    "Cancelando {kind} {name}."
+  ],
+  "/dialog/list_todo_exist_confirm.dialog": [
+    "Ya existe una entrada {existing}. ¿Todavía quieres guardar?"
+  ],
+  "/dialog/dav_credentials_missing.dialog": [
+    "Faltan las credenciales DAV. Por favor, añádelas al archivo esqueleto en la carpeta skill filesystem."
+  ],
+  "/dialog/error_no_repeat.dialog": [
+    "Tienes que darme un intervalo de tiempo. Pueden ser días sueltos o periodos más cortos."
+  ],
+  "/dialog/list_todo_no_lists.dialog": [
+    "No tiene listas abiertas."
+  ],
+  "/dialog/error_audio_reminder_too_far.dialog": [
+    "Sólo puedo establecer recordatorios de audio con 24 horas de antelación, en su lugar crearé un evento de calendario."
+  ],
+  "/dialog/list_todo_dont_exist.dialog": [
+    "No hay ninguna entrada {name} almacenada."
+  ],
+  "/dialog/list_todo_no_subitems.dialog": [
+    "la lista está vacía."
+  ],
+  "/dialog/confirm_alert_playback.dialog": [
+    "Tu grabación {name} se reproducirá en {begin}, en {remaining}."
+  ],
+  "/dialog/list_alert_missed_intro.dialog": [
+    "Esto es lo que te has perdido:"
+  ],
+  "/dialog/ocp_breaking_up.dialog": [
+    "No podía asignar música. Rompiendo."
+  ],
+  "/dialog/todo_item_delete_selection_intro.dialog": [
+    "¿cuál debo borrar?"
+  ],
+  "/dialog/reminder_ask_time.dialog": [
+    "¿debo recordárselo a una hora determinada?"
+  ],
+  "/dialog/ocp_searching.dialog": [
+    "Comprobación del título multimedia."
+  ],
+  "/dialog/list_alert_w_duration.dialog": [
+    "{name} entre {begin} y {end}."
+  ],
+  "/dialog/error_no_scheduled_kind.dialog": [
+    "No tienes programado {kind}."
+  ],
+  "/dialog/alert_rescheduled_prenotification.dialog": [
+    "La prenotificación también ha cambiado a {prenotification}. ¿Debo ajustar el intervalo de tiempo por adelantado?"
+  ],
+  "/dialog/expired_alert.dialog": [
+    "Tu alerta {name} está activada."
+  ],
+  "/dialog/timer_status_none_active.dialog": [
+    "No hay temporizadores activos."
+  ],
+  "/dialog/alert_rescheduled.dialog": [
+    "{name} {type} ajustado"
+  ],
+  "/dialog/remove_list_items_ask.dialog": [
+    "Enumere uno a uno los elementos que deben eliminarse."
+  ],
+  "/dialog/confirm_timer_started.dialog": [
+    "Temporizador para {remaining}, comenzando ahora."
+  ],
+  "/dialog/stopwatch_delta.dialog": [
+    "El tiempo transcurrido es {delta}"
+  ],
+  "/dialog/list_item_delete_selection_intro.dialog": [
+    "¿De qué lista?"
+  ],
+  "/dialog/alert_overlapping_ask.dialog": [
+    "En este momento tienes {event} en {begin}. ¿Guardar de todos modos?"
+  ],
+  "/dialog/expired_audio_alert_intro.dialog": [
+    "Tienes un recordatorio de audio."
+  ],
+  "/dialog/alert_rescheduled_end.dialog": [
+    "Cambiado el final de {kind} a {end}."
+  ],
+  "/dialog/reschedule_recurring_ask.dialog": [
+    "Este es un {type} que se repite. ¿Quiere reprogramarlos todos?"
+  ],
+  "/dialog/list_todo_num_deleted.dialog": [
+    "He borrado {num} tareas pendientes."
+  ],
+  "/dialog/confirm_alert_recurring.dialog": [
+    "Su {kind} está fijado para {begin}, cada {repeat}."
+  ],
+  "/dialog/expired_reminder.dialog": [
+    "Este es tu recordatorio: {name}."
+  ],
+  "/dialog/confirm_dismiss_alert.dialog": [
+    "{kind} despedido."
+  ],
+  "/dialog/selection_dav_service.dialog": [
+    "¿Con qué servicio debo sincronizarme?"
+  ],
+  "/dialog/dav_sync_ask.dialog": [
+    "¿Debo sincronizar el {type} con DAV?"
+  ],
+  "/dialog/alert_expiration_past.dialog": [
+    "Tal vez calculé mal, pero el tiempo dado está en el pasado."
+  ],
+  "/dialog/confirm_alert_set.dialog": [
+    "Tu {kind} está puesto para {begin}, en {remaining}."
+  ],
+  "/dialog/error_no_duration.dialog": [
+    "No he oído cuánto tiempo, por favor inténtelo de nuevo."
+  ],
+  "/dialog/dav_inactive.dialog": [
+    "La DAV está inactiva en este momento."
+  ],
+  "/dialog/alert_overlapping_duration_ask.dialog": [
+    "En este momento tienes {event} entre {begin} y {end}. ¿Guardas de todos modos?"
+  ],
+  "/dialog/list_alert_wo_duration.dialog": [
+    "{name} {begin}."
+  ],
+  "/dialog/confirm_cancel_timeframe.dialog": [
+    "Bien, cancelando todo {kind} en el marco de tiempo, {num} en total."
+  ],
+  "/dialog/list_todo_lists.dialog": [
+    "Tengo almacenada la lista {num}: {lists}"
+  ],
+  "/dialog/selection_not_understood.dialog": [
+    "No he entendido lo que has dicho. Por favor, elija por el número 1 a {max}"
+  ],
+  "/dialog/words/abbreviation_monday.dialog": [
+    "LUN"
+  ],
+  "/dialog/words/abbreviation_friday.dialog": [
+    "VIE"
+  ],
+  "/dialog/words/music.dialog": [
+    "música"
+  ],
+  "/dialog/words/until.dialog": [
+    "hasta"
+  ],
+  "/dialog/words/alarm.dialog": [
+    "alarma"
+  ],
+  "/dialog/words/whole_day.dialog": [
+    "todo el día"
+  ],
+  "/dialog/words/alert.dialog": [
+    "alerta"
+  ],
+  "/dialog/words/abbreviation_tuesday.dialog": [
+    "MAR"
+  ],
+  "/dialog/words/reminder.dialog": [
+    "recordatorio"
+  ],
+  "/dialog/words/audio.dialog": [
+    "audio"
+  ],
+  "/dialog/words/video.dialog": [
+    "vídeo"
+  ],
+  "/dialog/words/event.dialog": [
+    "evento"
+  ],
+  "/dialog/words/audiobook.dialog": [
+    "audiolibro"
+  ],
+  "/dialog/words/podcast.dialog": [
+    "podcast"
+  ],
+  "/dialog/words/abbreviation_saturday.dialog": [
+    "SAB"
+  ],
+  "/dialog/words/abbreviation_sunday.dialog": [
+    "DOM"
+  ],
+  "/dialog/words/todo.dialog": [
+    "todo"
+  ],
+  "/dialog/words/weekend.dialog": [
+    "Sábado y domingo"
+  ],
+  "/dialog/words/abbreviation_thursday.dialog": [
+    "JUE"
+  ],
+  "/dialog/words/weekday.dialog": [
+    "De lunes a viernes"
+  ],
+  "/dialog/words/thursday.dialog": [
+    "Jueves"
+  ],
+  "/dialog/words/day.dialog": [
+    "día"
+  ],
+  "/dialog/words/saturday.dialog": [
+    "Sábado"
+  ],
+  "/dialog/words/wednesday.dialog": [
+    "Miércoles"
+  ],
+  "/dialog/words/tuesday.dialog": [
+    "Martes"
+  ],
+  "/dialog/words/monday.dialog": [
+    "Lunes"
+  ],
+  "/dialog/words/sunday.dialog": [
+    "Domingo"
+  ],
+  "/dialog/words/timer.dialog": [
+    "temporizador"
+  ],
+  "/dialog/words/friday.dialog": [
+    "Viernes"
+  ],
+  "/dialog/words/once.dialog": [
+    "una vez"
+  ],
+  "/dialog/words/abbreviation_wednesday.dialog": [
+    "MIE"
+  ]
 }
