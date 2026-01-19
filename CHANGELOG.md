@@ -1,20 +1,12 @@
 # Changelog
 
-## [0.1.28a2](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.1.28a2) (2025-11-24)
+## [0.1.29a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.1.29a1) (2026-01-19)
 
-[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.1.28a1...0.1.28a2)
-
-**Merged pull requests:**
-
-- es-es/translate [\#98](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/98) ([gitlocalize-app[bot]](https://github.com/apps/gitlocalize-app))
-
-## [0.1.28a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.1.28a1) (2025-07-12)
-
-[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.1.27...0.1.28a1)
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.1.28...0.1.29a1)
 
 **Merged pull requests:**
 
-- adding missing German translations [\#96](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/96) ([gitlocalize-app[bot]](https://github.com/apps/gitlocalize-app))
+- ca-es/translate [\#100](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/100) ([gitlocalize-app[bot]](https://github.com/apps/gitlocalize-app))
 
 
 
