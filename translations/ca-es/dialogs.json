@@ -50,6 +50,9 @@
   "/dialog/alarm_ask_time.dialog": [
     "No he entès l'hora. Repetiu-la."
   ],
+  "/dialog/please.repeat.dialog": [
+    "Ho sento. No t'he entès. Repeteix, si us plau."
+  ],
   "/dialog/list_todo_subitems_added.dialog": [
     "Hi he afegit {num} entrades."
   ],
