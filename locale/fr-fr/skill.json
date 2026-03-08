@@ -1,0 +1,29 @@
+{
+    "title": "Alertes",
+    "description": "Une skill pour gérer les alarmes, minuteurs, rappels, événements et listes de tâches, avec une synchronisation CalDAV en option.",
+    "examples": [
+        "Règle une alarme à 8 heures.",
+        "Lance un minuteur de 30 minutes pour le pain.",
+        "Programme un événement de tennis vendredi à 14 heures pendant 2 heures.",
+        "Règle une alarme quotidienne à 8 heures.",
+        "Règle une alarme à 8 heures le samedi.",
+        "Rappelle-moi de sortir les poubelles tous les jeudis et dimanches à 19 heures.",
+        "Réveille-moi à 8 heures avec de la musique.",
+        "Quelle est ma prochaine alarme ?",
+        "Quels sont mes rappels ?",
+        "Annule toutes les alarmes.",
+        "Annule tous les minuteurs.",
+        "Annule tous les rappels.",
+        "Qu'est-ce que j'ai manqué ?",
+        "Ai-je manqué quelque chose ?"
+    ],
+    "tags": [
+        "Productivité",
+        "Quotidien",
+        "alerte",
+        "alarme",
+        "minuteur",
+        "rappel",
+        "planning"
+    ]
+}
