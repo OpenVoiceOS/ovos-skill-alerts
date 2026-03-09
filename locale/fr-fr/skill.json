@@ -1,6 +1,6 @@
 {
     "title": "Alertes",
-    "description": "Une skill pour gérer les alarmes, minuteurs, rappels, événements et listes de tâches, avec une synchronisation CalDAV en option.",
+    "description": "Gérez vos alarmes, minuteurs, rappels, événements et listes de tâches, avec une synchronisation CalDAV en option.",
     "examples": [
         "Règle une alarme à 8 heures.",
         "Lance un minuteur de 30 minutes pour le pain.",
