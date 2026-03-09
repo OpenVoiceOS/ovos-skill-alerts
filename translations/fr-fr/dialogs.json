@@ -48,7 +48,7 @@
         "Quelles sont les nouvelles entr\u00e9es \u00e0 ajouter \u00e0 la liste {name} ?"
     ],
     "/dialog/alarm_ask_time.dialog": [
-        "D\u00e9sol\u00e9, je n'ai pas pu saisir l'heure. Veuillez r\u00e9p\u00e9ter."
+        "Je n'ai pas compris l'heure. R\u00e9p\u00e9tez-la, s'il vous pla\u00eet."
     ],
     "/dialog/list_todo_subitems_added.dialog": [
         "J'ai ajout\u00e9 {num} entr\u00e9es."
@@ -69,13 +69,13 @@
         "Souhaitez-vous recevoir une br\u00e8ve notification avant l'\u00e9v\u00e9nement ?"
     ],
     "/dialog/error_no_time.dialog": [
-        "Je n'ai pas entendu d'heure \u00e0 laquelle fixer votre {kind}. Veuillez r\u00e9essayer."
+        "Je n'ai pas entendu l'heure pour votre {kind}. R\u00e9essayez."
     ],
     "/dialog/alert_prenotification.dialog": [
         "Je voudrais vous rappeler ce qu'est {remimder} dans {time_until}"
     ],
     "/dialog/timer_status.dialog": [
-        "Le minuteur {name} a {remaining} restant."
+        "Il reste {remaining} au minuteur {name}."
     ],
     "/dialog/confirm_todo_set.dialog": [
         "L'entr\u00e9e a \u00e9t\u00e9 plac\u00e9e."
@@ -134,7 +134,7 @@
         "Une entr\u00e9e {existing} existe d\u00e9j\u00e0. Vous voulez toujours sauvegarder ?"
     ],
     "/dialog/dav_credentials_missing.dialog": [
-        "Les informations d'identification DAV sont manquantes. Veuillez les ajouter au fichier squelette dans le dossier du syst\u00e8me de fichiers skill."
+        "Les identifiants DAV sont manquants. Ajoutez-les au fichier mod\u00e8le dans le dossier de configuration."
     ],
     "/dialog/error_no_repeat.dialog": [
         "Vous devez me donner un intervalle de temps. Il peut s'agir d'un seul jour ou de p\u00e9riodes plus courtes."
@@ -182,7 +182,7 @@
         "Votre alerte {name} est lev\u00e9e."
     ],
     "/dialog/timer_status_none_active.dialog": [
-        "Il n'y a pas de minuterie active."
+        "Il n'y a aucun minuteur en cours."
     ],
     "/dialog/alert_rescheduled.dialog": [
         "{name} {type} ajust\u00e9"
@@ -191,7 +191,7 @@
         "Dressez la liste, un par un, des \u00e9l\u00e9ments qui doivent \u00eatre retir\u00e9s."
     ],
     "/dialog/confirm_timer_started.dialog": [
-        "Minuterie pour {remaining}, \u00e0 partir de maintenant."
+        "Minuteur lanc\u00e9 pour {remaining}."
     ],
     "/dialog/stopwatch_delta.dialog": [
         "Le temps \u00e9coul\u00e9 est {delta}"
@@ -233,10 +233,10 @@
         "J'ai peut-\u00eatre mal calcul\u00e9, mais le temps donn\u00e9 appartient au pass\u00e9."
     ],
     "/dialog/confirm_alert_set.dialog": [
-        "Votre {kind} est d\u00e9fini pour {begin}, dans {remaining}."
+        "C'est not\u00e9, votre {kind} est pr\u00e9vu pour {begin}, dans {remaining}."
     ],
     "/dialog/error_no_duration.dialog": [
-        "Je n'ai pas entendu combien de temps, veuillez r\u00e9essayer."
+        "Je n'ai pas compris la dur\u00e9e. R\u00e9essayez."
     ],
     "/dialog/dav_inactive.dialog": [
         "DAV est actuellement inactif."
@@ -254,7 +254,7 @@
         "J'ai stock\u00e9 la liste {num} : {lists}"
     ],
     "/dialog/selection_not_understood.dialog": [
-        "Je n'ai pas compris ce que vous avez dit. Veuillez choisir le num\u00e9ro 1 \u00e0 {max}"
+        "Je n'ai pas compris. Dites un nombre entre 1 et {max}."
     ],
     "/dialog/words/abbreviation_monday.dialog": [
         "MON"
@@ -338,7 +338,7 @@
         "Dimanche"
     ],
     "/dialog/words/timer.dialog": [
-        "minuterie"
+        "minuteur"
     ],
     "/dialog/words/friday.dialog": [
         "Vendredi"
