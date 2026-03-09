@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.1.29a2](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.1.29a2) (2026-03-09)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.1.29a1...0.1.29a2)
+
+**Merged pull requests:**
+
+- Add missing French locale coverage [\#102](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/102) ([goldyfruit](https://github.com/goldyfruit))
+
 ## [0.1.29a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.1.29a1) (2026-01-19)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.1.28...0.1.29a1)
