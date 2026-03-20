@@ -1,5 +1,25 @@
 # Changelog
 
+## [0.1.29a3](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.1.29a3) (2026-03-20)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.1.29a3...0.1.29a3)
+
+**Merged pull requests:**
+
+- translate\(nl-NL\): update abbreviation\_thursday.dialog [\#109](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/109) ([ovos-localize[bot]](https://github.com/apps/ovos-localize))
+
+## [0.1.29a3](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.1.29a3) (2026-03-20)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.1.29a2...0.1.29a3)
+
+**Merged pull requests:**
+
+- translate\(nl-NL\): update abbreviation\_wednesday.dialog [\#111](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/111) ([ovos-localize[bot]](https://github.com/apps/ovos-localize))
+- translate\(nl-NL\): update abbreviation\_tuesday.dialog [\#110](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/110) ([ovos-localize[bot]](https://github.com/apps/ovos-localize))
+- translate\(nl-NL\): update abbreviation\_sunday.dialog [\#108](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/108) ([ovos-localize[bot]](https://github.com/apps/ovos-localize))
+- translate\(nl-NL\): update abbreviation\_saturday.dialog [\#107](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/107) ([ovos-localize[bot]](https://github.com/apps/ovos-localize))
+- translate\(nl-NL\): update abbreviation\_monday.dialog [\#106](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/106) ([ovos-localize[bot]](https://github.com/apps/ovos-localize))
+
 ## [0.1.29a2](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.1.29a2) (2026-03-09)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.1.29a1...0.1.29a2)
