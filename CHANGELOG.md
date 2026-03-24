@@ -1,11 +1,12 @@
 # Changelog
 
-## [0.1.29a3](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.1.29a3) (2026-03-20)
+## [0.1.30a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.1.30a1) (2026-03-24)
 
-[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.1.29a3...0.1.29a3)
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.1.29a3...0.1.30a1)
 
 **Merged pull requests:**
 
+- fix: rename bare lang code locale directories [\#112](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/112) ([ovos-localize[bot]](https://github.com/apps/ovos-localize))
 - translate\(nl-NL\): update abbreviation\_thursday.dialog [\#109](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/109) ([ovos-localize[bot]](https://github.com/apps/ovos-localize))
 
 ## [0.1.29a3](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.1.29a3) (2026-03-20)
