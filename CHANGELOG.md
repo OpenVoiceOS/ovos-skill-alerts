@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.1.31a4](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.1.31a4) (2026-04-09)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.1.31a3...0.1.31a4)
+
+**Merged pull requests:**
+
+- chore\(ovos-skill-alerts\): allow ovos-workshop\<9.0.0 [\#121](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/121) ([JarbasAl](https://github.com/JarbasAl))
+
 ## [0.1.31a3](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.1.31a3) (2026-04-04)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.1.31a2...0.1.31a3)
