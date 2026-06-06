@@ -10,4 +10,4 @@ jobs:
     uses: OpenVoiceOS/gh-automations/.github/workflows/license-check.yml@dev
     secrets: inherit
     with:
-      exclude_packages: 'caldav recurring-ical-events x-wr-timezone'
+      exclude_packages: '^(caldav|recurring-ical-events|x-wr-timezone)$'
