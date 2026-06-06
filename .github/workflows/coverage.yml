@@ -13,5 +13,5 @@ jobs:
       python_version: '3.11'
       coverage_source: 'ovos_skill_alerts'
       test_path: 'test/'
-      install_extras: ''
+      install_extras: 'dev'
       min_coverage: 0
