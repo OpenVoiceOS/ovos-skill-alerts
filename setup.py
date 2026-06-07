@@ -112,6 +112,10 @@ setup(
     url=URL,
     license='BSD-3-Clause',
     install_requires=get_requirements("requirements.txt"),
+    extras_require={
+        "test": ["mock", "ovoscope>=0.7.0", "ovos-adapt-parser"],
+        "dev": ["mock", "ovoscope>=0.7.0", "ovos-adapt-parser"],
+    },
     author=",".join(AUTHORS),
     author_email='',
     long_description=long_description,
