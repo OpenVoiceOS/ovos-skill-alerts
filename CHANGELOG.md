@@ -1,12 +1,16 @@
 # Changelog
 
-## [0.1.31a4](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.1.31a4) (2026-04-09)
+## [0.1.32a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.1.32a1) (2026-06-07)
 
-[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.1.31a3...0.1.31a4)
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.1.31a4...0.1.32a1)
 
 **Merged pull requests:**
 
-- chore\(ovos-skill-alerts\): allow ovos-workshop\<9.0.0 [\#121](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/121) ([JarbasAl](https://github.com/JarbasAl))
+- fix\(deps\): allow ovos-bus-client 2.x \(widen cap to \<3.0.0\) [\#124](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/124) ([JarbasAl](https://github.com/JarbasAl))
+
+## [0.1.31a4](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.1.31a4) (2026-04-09)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.1.31a3...0.1.31a4)
 
 ## [0.1.31a3](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.1.31a3) (2026-04-04)
 
