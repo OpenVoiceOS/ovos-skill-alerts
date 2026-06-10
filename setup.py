@@ -114,8 +114,9 @@ setup(
     install_requires=get_requirements("requirements.txt"),
     extras_require={
         "test": ["mock", "ovoscope>=0.13.1", "ovos-adapt-parser",
-                 "ovos-spec-tools>=1.5.0a1", "pytest>=7.0.0", "pytest-timeout>=2.0.0"],
-        "dev": ["mock", "ovoscope>=0.13.1", "ovos-adapt-parser"],
+                 "ovos-spec-tools>=1.5.0a1", "pytest>=7.0.0", "pytest-timeout>=2.0.0",
+                 "ovos-padatious-pipeline-plugin"],
+        "dev": ["mock", "ovoscope>=0.13.1", "ovos-adapt-parser", "ovos-padatious-pipeline-plugin"],
     },
     author=",".join(AUTHORS),
     author_email='',
