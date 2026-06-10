@@ -15,3 +15,4 @@ jobs:
       test_path: 'test/end2end/'
       system_deps: 'swig'
       require_padatious: true
+      require_adapt: true
