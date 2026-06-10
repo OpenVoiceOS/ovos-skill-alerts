@@ -48,6 +48,8 @@ class _IntentRoutingMixin:
             source_message=message,
             activation_points=[intent_msg_type],
             test_msg_context=False,
+            test_message_number=False,
+            ignore_messages=["speak", "mycroft.audio.play_sound"],
             expected_messages=[
                 message,
                 Message(f"{SKILL_ID}.activate", {}, {"skill_id": SKILL_ID}),
