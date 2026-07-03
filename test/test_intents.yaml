@@ -51,6 +51,9 @@ en-us:
     - start a timer
     - create a baking timer
     - make a 5 hour timer
+    - start a 10 minute countdown:
+      - create
+      - timer
   CreateReminder:
     - set a playback reminder to take out the trash daily at 5 pm until november:
       - create
@@ -77,6 +80,8 @@ en-us:
       - remind
       - everyday
       - until
+    - tell me to take out the trash at 5 pm:
+      - remind
   CreateEvent:
     - I have a work event next tuesday at 7 PM:
       - event
