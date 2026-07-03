@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.2.0a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.2.0a1) (2026-07-03)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.1.33a1...0.2.0a1)
+
+**Merged pull requests:**
+
+- feat\(en-US\): tighten and consolidate en-US intent vocab [\#128](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/128) ([JarbasAl](https://github.com/JarbasAl))
+
 ## [0.1.33a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.1.33a1) (2026-06-28)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.1.32a1...0.1.33a1)
