@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.2.1a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.2.1a1) (2026-07-16)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.2.0a1...0.2.1a1)
+
+**Merged pull requests:**
+
+- fix: repair malformed locale dialog and vocab templates [\#130](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/130) ([JarbasAl](https://github.com/JarbasAl))
+
 ## [0.2.0a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.2.0a1) (2026-07-03)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.1.33a1...0.2.0a1)
@@ -27,6 +35,10 @@
 ## [0.1.31a4](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.1.31a4) (2026-04-09)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.1.31a3...0.1.31a4)
+
+**Merged pull requests:**
+
+- chore\(ovos-skill-alerts\): allow ovos-workshop\<9.0.0 [\#121](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/121) ([JarbasAl](https://github.com/JarbasAl))
 
 ## [0.1.31a3](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.1.31a3) (2026-04-04)
 
