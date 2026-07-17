@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.2.2a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.2.2a1) (2026-07-17)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.2.1a1...0.2.2a1)
+
+**Merged pull requests:**
+
+- fix: rename entry-point group to opm.skill [\#132](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/132) ([JarbasAl](https://github.com/JarbasAl))
+
 ## [0.2.1a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.2.1a1) (2026-07-16)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.2.0a1...0.2.1a1)
