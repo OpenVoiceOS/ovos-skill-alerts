@@ -12,18 +12,35 @@ from ovoscope import End2EndTest, get_minicroft
 SKILL_ID = "ovos-skill-alerts.openvoiceos"
 LANG = "en-US"
 
+# A single MiniCroft is booted once for the whole module and shared across
+# every TestCase below. Booting one per class (the original generated
+# pattern) meant ~30 separate MiniCroft boots per CI run, which is what made
+# this suite time out / get killed in CI even with parallel workers disabled.
+_MODULE_MINICROFT = None
+
+
+def setUpModule():
+    global _MODULE_MINICROFT
+    _MODULE_MINICROFT = get_minicroft([SKILL_ID])
+
+
+def tearDownModule():
+    global _MODULE_MINICROFT
+    if _MODULE_MINICROFT is not None:
+        _MODULE_MINICROFT.stop()
+        _MODULE_MINICROFT = None
+
 
 class _IntentRoutingMixin:
     """Shared MiniCroft setup."""
 
     @classmethod
     def setUpClass(cls):
-        cls.minicroft = get_minicroft([SKILL_ID])
+        cls.minicroft = _MODULE_MINICROFT
 
     @classmethod
     def tearDownClass(cls):
-        if getattr(cls, 'minicroft', None):
-            cls.minicroft.stop()
+        pass
 
 
     def _assert_padatious(self, utterance: str, intent_file: str):
