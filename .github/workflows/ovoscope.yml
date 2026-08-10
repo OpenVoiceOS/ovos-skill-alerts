@@ -16,3 +16,4 @@ jobs:
       system_deps: 'swig'
       require_padatious: true
       require_adapt: true
+      pytest_workers: '0'
