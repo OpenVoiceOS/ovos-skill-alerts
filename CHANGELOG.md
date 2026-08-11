@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.3.0a2](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.3.0a2) (2026-08-11)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.3.0a1...0.3.0a2)
+
+**Merged pull requests:**
+
+- translate\(nl-NL\): update abbreviation\_friday.dialog [\#105](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/105) ([ovos-localize[bot]](https://github.com/apps/ovos-localize))
+- translate\(nl-NL\): update alarm.voc [\#104](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/104) ([ovos-localize[bot]](https://github.com/apps/ovos-localize))
+
 ## [0.3.0a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.3.0a1) (2026-08-11)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.2.2a2...0.3.0a1)
