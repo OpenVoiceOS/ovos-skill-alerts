@@ -1010,11 +1010,12 @@ class AlertSkill(ConversationalSkill):
         .require("delete").require("list")
     )
     def handle_delete_todo_list(self, message: Message):
+        name = parse_alert_name_from_message(message)
         todo = self._resolve_requested_alert(message,
                                              AlertType.TODO)
 
         if todo is None:
-            return
+            return self.speak_dialog("list_todo_dont_exist", {"name": name})
 
         children = self.alert_manager.get_children(todo.ident)
         for child in children:
