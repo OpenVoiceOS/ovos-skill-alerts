@@ -369,6 +369,22 @@ class TestAdapt16_Cancelalert(_IntentRoutingMixin, TestCase):
 
 class TestAdapt17_Createlist(_IntentRoutingMixin, TestCase):
     """Adapt intent: CreateList"""
+    @unittest.skip("TODO(https://github.com/OpenVoiceOS/ovos-skill-alerts/issues/138): "
+                    "'create a shopping list' routes through handle_create_todo -> "
+                    "handle_add_subitem_to_todo -> _get_response_cascade, which calls "
+                    "speak_dialog(..., wait=True). That blocks in "
+                    "SessionManager.wait_while_speaking() (ovos_bus_client/session.py) "
+                    "on a plain threading.Event.wait() with NO timeout, on the SAME "
+                    "thread running the test - ovoscope's synchronous FakeBus never "
+                    "delivers the 'speaking finished' signal for this nested/cascading "
+                    "speak call, so the wait never returns. pytest-timeout's SIGALRM "
+                    "catches it while this test item is running (confirmed via "
+                    "py-spy/faulthandler dump), but the same call shape reached from "
+                    "setUpModule/tearDownModule fixtures has no such coverage - that is "
+                    "the real cause of the CI jobs hanging to the 30min kill on all "
+                    "Python versions. See linked issue for root cause; re-enable once "
+                    "ovoscope's mock-TTS wiring (or wait_while_speaking's missing "
+                    "timeout) is fixed upstream.")
     def test_create_a_shopping_list(self):
         self._assert_adapt(r"create a shopping list", r"CreateList")
 
