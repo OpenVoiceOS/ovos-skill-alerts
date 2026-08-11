@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.3.0a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.3.0a1) (2026-08-11)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.2.2a2...0.3.0a1)
+
+**Merged pull requests:**
+
+- feat: add ovoscope end2end intent-routing tests [\#123](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/123) ([JarbasAl](https://github.com/JarbasAl))
+
 ## [0.2.2a2](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.2.2a2) (2026-08-01)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.2.2a1...0.2.2a2)
