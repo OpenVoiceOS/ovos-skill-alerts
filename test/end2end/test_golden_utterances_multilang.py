@@ -118,7 +118,12 @@ def minicroft():
     # many secondary_langs (16) reliably needs more than 60s. Bump it well
     # past the coverage-job boot time observed in CI rather than trim
     # locales or add extra instances.
-    mc = get_minicroft([SKILL_ID], secondary_langs=LANGS, max_wait=300)
+    # Must stay BELOW the consuming tests' @pytest.mark.timeout(300) so
+    # ovoscope's own TimeoutError fires first and get_minicroft's
+    # `except Exception: croft.stop()` runs cleanup, instead of
+    # pytest-timeout's Failed (a BaseException) winning the race and
+    # leaking the MiniCroft process.
+    mc = get_minicroft([SKILL_ID], secondary_langs=LANGS, max_wait=240)
     yield mc
     mc.stop()
 
