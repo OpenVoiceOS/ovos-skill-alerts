@@ -123,9 +123,16 @@ setup(
         # the extra ocp/m2v test deps needed for that variant pushed the
         # shared CI job's total runtime past what other, pre-existing tests
         # in the same session tolerate).
-        "test": ["mock", "ovoscope>=0.13.1", "ovos-adapt-parser",
+        # ovos-padatious ships the 'ovos-padatious-pipeline-plugin' entry point
+        # and ovos-skill-date-time is the second skill in the cross-skill
+        # arbitration test. Without BOTH, test/end2end/test_fleet_arbitration.py
+        # silently degrades: the padatious pipeline stage does not exist
+        # ("Unknown pipeline matcher"), date-time never loads, and the
+        # utterance comes back as ovos.intent.unmatched.
+        "test": ["mock", "ovoscope>=1.6.6a1", "ovos-adapt-parser",
                  "ovos-spec-tools>=1.5.0a1", "pytest>=7.0.0", "pytest-timeout>=2.0.0",
-                 "ovos-skill-naptime>=0.4.0a5"],
+                 "ovos-skill-naptime>=0.4.0a5", "ovos-padatious>=1.6.2a1",
+                 "ovos-skill-date-time"],
         "dev": ["mock", "ovoscope>=0.13.1", "ovos-adapt-parser"],
     },
     author=",".join(AUTHORS),
