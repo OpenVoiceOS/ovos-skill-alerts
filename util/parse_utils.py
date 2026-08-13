@@ -27,6 +27,7 @@
 # SOFTWARE,  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import datetime as dt
+import re
 from time import time
 from typing import Optional, List, Union, Tuple, Any
 from uuid import uuid4
@@ -285,6 +286,36 @@ def build_alert_from_intent(message: Message) -> Optional[Alert]:
     return Alert.create(**data)
 
 
+def _strip_voc_phrase(tokens: Optional[Tokens], resource: str, lang: str = None) -> None:
+    """
+    Remove the vocab phrase (eg. "weekday") that matched ``resource`` from
+    every token string in-place, so it doesn't pollute a later
+    extract_datetime() call on the same token.
+
+    This mirrors what adapt already does for tagged keywords (they are
+    split out of the token stream before time parsing runs); it's only
+    needed for the voc_match() fallback path used by intents that don't tag
+    entities (eg. padatious template intents).
+    :param tokens: mutable Tokens list to strip the phrase from, or None
+    :param resource: vocab resource name (without ".voc") to match against
+    :param lang: language of the vocab resource
+    """
+    if not tokens:
+        return
+    if not resource.endswith(".voc"):
+        resource = f"{resource}.voc"
+    words = sorted(get_words_list(resource, lang), key=len, reverse=True)
+    for i, token in enumerate(tokens):
+        if not isinstance(token, str):
+            continue
+        new_token = token
+        for word in words:
+            new_token = re.sub(r"(?i)\b" + re.escape(word) + r"\b", " ", new_token)
+        new_token = re.sub(r"\s+", " ", new_token).strip()
+        if new_token != token:
+            tokens[i] = new_token
+
+
 def parse_repeat_from_message(message: Message,
                               tokens: Optional[list] = None) -> Union[List[Weekdays], dt.timedelta]:
     """
@@ -302,13 +333,26 @@ def parse_repeat_from_message(message: Message,
     repeat_days = list()
     lang = get_message_lang(message)
     # NOTE: voc_match is used in case intent was invoked without using adapt
+    # (eg. a padatious template intent, which does not populate __tags__ /
+    # message.data["weekdays"]/["weekends"]/["everyday"] the way adapt does).
+    # In that case the recurrence phrase (eg. "weekday") is still sitting
+    # inside the token(s) that will later be handed to extract_datetime() for
+    # time parsing, and needs to be stripped here just like adapt already
+    # strips its tagged keywords, or the date parser chokes on the mixed
+    # recurrence+time phrase and returns garbage.
     utt = message.data.get("utterance", "")
     if message.data.get("everyday") or voc_match(utt, "everyday", lang=lang):
         repeat_days = [Weekdays(i) for i in range(0, 7)]
+        if not message.data.get("everyday"):
+            _strip_voc_phrase(tokens, "everyday", lang)
     elif message.data.get("weekends") or voc_match(utt, "weekends", lang=lang):
         repeat_days = [Weekdays(i) for i in (5, 6)]
+        if not message.data.get("weekends"):
+            _strip_voc_phrase(tokens, "weekends", lang)
     elif message.data.get("weekdays") or voc_match(utt, "weekdays", lang=lang):
         repeat_days = [Weekdays(i) for i in range(0, 5)]
+        if not message.data.get("weekdays"):
+            _strip_voc_phrase(tokens, "weekdays", lang)
     elif message.data.get("repeat"):
         tokens = tokens or tokenize_utterance(message)
         repeat_index = tokens.index(message.data["repeat"]) + 1

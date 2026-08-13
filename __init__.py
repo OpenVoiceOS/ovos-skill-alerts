@@ -447,6 +447,25 @@ class AlertSkill(ConversationalSkill):
         self.handle_create_reminder(message)
 
     #@killable_intent()
+    @intent_handler("create_reminder_recurring.intent")
+    def handle_create_reminder_recurring(self, message: Message):
+        """
+        Padatious intent handler for recurring reminders phrased as a long
+        sentence (e.g. "remind me to go to work weekday mornings at 8").
+
+        ``CreateReminderAlt`` (adapt, single ``remind`` keyword) scores too
+        low a confidence on long utterances like this one -- adapt's
+        confidence is roughly matched-keywords/total-words, and one matched
+        keyword out of ten falls under every adapt confidence tier -- so the
+        utterance fell through to OTHER skills' low-confidence fuzzy
+        matchers. A padatious template intent, trained on this phrasing
+        directly, matches at padatious-high/medium instead, which run
+        earlier in the pipeline than any low-confidence fallback.
+        :param message: Message associated with request
+        """
+        self.handle_create_reminder(message)
+
+    #@killable_intent()
     @intent_handler(IntentBuilder("CreateEvent")
                     .require("create").require("event")
                     .optionally("question").optionally("playable")
