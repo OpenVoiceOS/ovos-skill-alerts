@@ -82,7 +82,12 @@ class _IntentRoutingMixin:
         )
 
     def _assert_padatious(self, utterance: str, intent_file: str):
-        intent_msg_type = f"{SKILL_ID}:{intent_file}"
+        # The bus intent-matched message type is the padatious intent name
+        # WITHOUT its file extension (e.g. "missed_alerts", not
+        # "missed_alerts.intent") -- OVOS strips it when emitting
+        # "<skill_id>:<intent_name>". Accept callers passing either form.
+        intent_name = intent_file[:-len(".intent")] if intent_file.endswith(".intent") else intent_file
+        intent_msg_type = f"{SKILL_ID}:{intent_name}"
         self._assert_intent(utterance, intent_msg_type, [
             "ovos-padatious-pipeline-plugin-high",
             "ovos-padatious-pipeline-plugin-medium",
@@ -119,23 +124,18 @@ class _IntentRoutingMixin:
 
 class TestPadatious1_Missed_alerts_intent(_IntentRoutingMixin, TestCase):
     """Padatious intent: missed_alerts.intent"""
-    @pytest.mark.xfail(strict=True, reason="issue #138: TestPadatious1_Missed_alerts_intent is unstable -- confirmed locally (not just a CI-only report as originally suspected): 3/5 tests in this class hit pytest-timeout (>90s) inside capture.capture()/handle_utterance, and the other 2 return the wrong intent match. Root cause not yet isolated (padatious model training/first-match latency vs a real hang); re-enable once triaged upstream per the linked issue.")
     def test_did_i_miss_any_alarms(self):
         self._assert_padatious(r"did i miss any alarms", r"missed_alerts.intent")
 
-    @pytest.mark.xfail(strict=True, reason="issue #138: TestPadatious1_Missed_alerts_intent is unstable -- confirmed locally (not just a CI-only report as originally suspected): 3/5 tests in this class hit pytest-timeout (>90s) inside capture.capture()/handle_utterance, and the other 2 return the wrong intent match. Root cause not yet isolated (padatious model training/first-match latency vs a real hang); re-enable once triaged upstream per the linked issue.")
     def test_missed_any_reminder(self):
         self._assert_padatious(r"missed any reminder", r"missed_alerts.intent")
 
-    @pytest.mark.xfail(strict=True, reason="issue #138: TestPadatious1_Missed_alerts_intent is unstable -- confirmed locally (not just a CI-only report as originally suspected): 3/5 tests in this class hit pytest-timeout (>90s) inside capture.capture()/handle_utterance, and the other 2 return the wrong intent match. Root cause not yet isolated (padatious model training/first-match latency vs a real hang); re-enable once triaged upstream per the linked issue.")
     def test_have_i_missed_any_timers(self):
         self._assert_padatious(r"have i missed any timers", r"missed_alerts.intent")
 
-    @pytest.mark.xfail(strict=True, reason="issue #138: TestPadatious1_Missed_alerts_intent is unstable -- confirmed locally (not just a CI-only report as originally suspected): 3/5 tests in this class hit pytest-timeout (>90s) inside capture.capture()/handle_utterance, and the other 2 return the wrong intent match. Root cause not yet isolated (padatious model training/first-match latency vs a real hang); re-enable once triaged upstream per the linked issue.")
     def test_miss_any_events(self):
         self._assert_padatious(r"miss any events", r"missed_alerts.intent")
 
-    @pytest.mark.xfail(strict=True, reason="issue #138: TestPadatious1_Missed_alerts_intent is unstable -- confirmed locally (not just a CI-only report as originally suspected): 3/5 tests in this class hit pytest-timeout (>90s) inside capture.capture()/handle_utterance, and the other 2 return the wrong intent match. Root cause not yet isolated (padatious model training/first-match latency vs a real hang); re-enable once triaged upstream per the linked issue.")
     def test_did_i_miss_a_alarm(self):
         self._assert_padatious(r"did i miss a alarm", r"missed_alerts.intent")
 
