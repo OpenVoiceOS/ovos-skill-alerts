@@ -6,6 +6,8 @@ Run: pytest test/end2end/ -v
 import unittest
 from unittest import TestCase
 
+import pytest
+
 from ovos_bus_client.message import Message
 from ovos_bus_client.session import Session
 from ovoscope import CaptureSession, End2EndTest, get_minicroft
@@ -115,43 +117,41 @@ class _IntentRoutingMixin:
         test.execute(timeout=30)
 
 
-@unittest.skip("TODO(https://github.com/OpenVoiceOS/ovos-skill-alerts/issues/138): "
-                "padatious-pipeline CI runs repeatedly stalled the whole ovoscope/build "
-                "jobs past their 30-60min budgets whenever this class ran; could not be "
-                "reproduced locally (missing libfann-dev to build the padatious plugin "
-                "on this dev machine) to pin down whether it's a hang or just very slow "
-                "model training. Re-enable once triaged.")
 class TestPadatious1_Missed_alerts_intent(_IntentRoutingMixin, TestCase):
     """Padatious intent: missed_alerts.intent"""
+    @pytest.mark.xfail(strict=True, reason="issue #138: TestPadatious1_Missed_alerts_intent is unstable -- confirmed locally (not just a CI-only report as originally suspected): 3/5 tests in this class hit pytest-timeout (>90s) inside capture.capture()/handle_utterance, and the other 2 return the wrong intent match. Root cause not yet isolated (padatious model training/first-match latency vs a real hang); re-enable once triaged upstream per the linked issue.")
     def test_did_i_miss_any_alarms(self):
         self._assert_padatious(r"did i miss any alarms", r"missed_alerts.intent")
 
+    @pytest.mark.xfail(strict=True, reason="issue #138: TestPadatious1_Missed_alerts_intent is unstable -- confirmed locally (not just a CI-only report as originally suspected): 3/5 tests in this class hit pytest-timeout (>90s) inside capture.capture()/handle_utterance, and the other 2 return the wrong intent match. Root cause not yet isolated (padatious model training/first-match latency vs a real hang); re-enable once triaged upstream per the linked issue.")
     def test_missed_any_reminder(self):
         self._assert_padatious(r"missed any reminder", r"missed_alerts.intent")
 
+    @pytest.mark.xfail(strict=True, reason="issue #138: TestPadatious1_Missed_alerts_intent is unstable -- confirmed locally (not just a CI-only report as originally suspected): 3/5 tests in this class hit pytest-timeout (>90s) inside capture.capture()/handle_utterance, and the other 2 return the wrong intent match. Root cause not yet isolated (padatious model training/first-match latency vs a real hang); re-enable once triaged upstream per the linked issue.")
     def test_have_i_missed_any_timers(self):
         self._assert_padatious(r"have i missed any timers", r"missed_alerts.intent")
 
+    @pytest.mark.xfail(strict=True, reason="issue #138: TestPadatious1_Missed_alerts_intent is unstable -- confirmed locally (not just a CI-only report as originally suspected): 3/5 tests in this class hit pytest-timeout (>90s) inside capture.capture()/handle_utterance, and the other 2 return the wrong intent match. Root cause not yet isolated (padatious model training/first-match latency vs a real hang); re-enable once triaged upstream per the linked issue.")
     def test_miss_any_events(self):
         self._assert_padatious(r"miss any events", r"missed_alerts.intent")
 
+    @pytest.mark.xfail(strict=True, reason="issue #138: TestPadatious1_Missed_alerts_intent is unstable -- confirmed locally (not just a CI-only report as originally suspected): 3/5 tests in this class hit pytest-timeout (>90s) inside capture.capture()/handle_utterance, and the other 2 return the wrong intent match. Root cause not yet isolated (padatious model training/first-match latency vs a real hang); re-enable once triaged upstream per the linked issue.")
     def test_did_i_miss_a_alarm(self):
         self._assert_padatious(r"did i miss a alarm", r"missed_alerts.intent")
 
 class TestAdapt2_Createalarm(_IntentRoutingMixin, TestCase):
     """Adapt intent: CreateAlarm"""
-    @unittest.skip("TODO(https://github.com/OpenVoiceOS/ovos-skill-alerts/issues/138): see linked issue for root cause")
     def test_set_an_alarm(self):
         self._assert_adapt(r"set an alarm", r"CreateAlarm")
 
     def test_create_a_playback_alarm_every_weekday_wi(self):
         self._assert_adapt(r"create a playback alarm every weekday with my test script until next tuesday", r"CreateAlarm")
 
-    @unittest.skip("TODO(https://github.com/OpenVoiceOS/ovos-skill-alerts/issues/138): see linked issue for root cause")
+    @pytest.mark.xfail(strict=True, reason="issue #138: adapt-only pipeline pinning ('ovos-adapt-pipeline-plugin-*' only, no padatious/padacioso fallback) does not satisfy this intent's own required Adapt vocab for this phrasing -- confirmed locally: bus trace shows 'ovos.intent.unmatched' (see test/end2end/test_intents_en_us.py _assert_intent). Auto-generation defect (utterance/pipeline-pin mismatch), not an application bug.")
     def test_alarm_in_an_hour(self):
         self._assert_adapt(r"alarm in an hour", r"CreateAlarm")
 
-    @unittest.skip("TODO(https://github.com/OpenVoiceOS/ovos-skill-alerts/issues/138): see linked issue for root cause")
+    @pytest.mark.xfail(strict=True, reason="issue #138: adapt-only pipeline pinning ('ovos-adapt-pipeline-plugin-*' only, no padatious/padacioso fallback) does not satisfy this intent's own required Adapt vocab for this phrasing -- confirmed locally: bus trace shows 'ovos.intent.unmatched' (see test/end2end/test_intents_en_us.py _assert_intent). Auto-generation defect (utterance/pipeline-pin mismatch), not an application bug.")
     def test_alarm_daily_for_the_next_week_at_9_am(self):
         self._assert_adapt(r"alarm daily for the next week at 9 AM", r"CreateAlarm")
 
@@ -160,29 +160,29 @@ class TestAdapt2_Createalarm(_IntentRoutingMixin, TestCase):
 
 class TestAdapt3_Createalarmalt(_IntentRoutingMixin, TestCase):
     """Adapt intent: CreateAlarmAlt"""
-    @unittest.skip("TODO(https://github.com/OpenVoiceOS/ovos-skill-alerts/issues/138): see linked issue for root cause")
+    @pytest.mark.xfail(strict=True, reason="issue #138: this utterance is ambiguous between two overlapping/near-duplicate Adapt intents in this skill (this class's target and its sibling) -- confirmed locally: the sibling intent fires instead of the one this auto-generated test pins to. Auto-generation defect (picked an ambiguous utterance for a pinned intent), not an application bug.")
     def test_set_an_alarm(self):
         self._assert_adapt(r"set an alarm", r"CreateAlarmAlt")
 
-    @unittest.skip("TODO(https://github.com/OpenVoiceOS/ovos-skill-alerts/issues/138): see linked issue for root cause")
+    @pytest.mark.xfail(strict=True, reason="issue #138: this utterance is ambiguous between two overlapping/near-duplicate Adapt intents in this skill (this class's target and its sibling) -- confirmed locally: the sibling intent fires instead of the one this auto-generated test pins to. Auto-generation defect (picked an ambiguous utterance for a pinned intent), not an application bug.")
     def test_create_a_playback_alarm_every_weekday_wi(self):
         self._assert_adapt(r"create a playback alarm every weekday with my test script until next tuesday", r"CreateAlarmAlt")
 
-    @unittest.skip("TODO(https://github.com/OpenVoiceOS/ovos-skill-alerts/issues/138): see linked issue for root cause")
+    @pytest.mark.xfail(strict=True, reason="issue #138: this utterance is ambiguous between two overlapping/near-duplicate Adapt intents in this skill (this class's target and its sibling) -- confirmed locally: the sibling intent fires instead of the one this auto-generated test pins to. Auto-generation defect (picked an ambiguous utterance for a pinned intent), not an application bug.")
     def test_alarm_in_an_hour(self):
         self._assert_adapt(r"alarm in an hour", r"CreateAlarmAlt")
 
-    @unittest.skip("TODO(https://github.com/OpenVoiceOS/ovos-skill-alerts/issues/138): see linked issue for root cause")
+    @pytest.mark.xfail(strict=True, reason="issue #138: this utterance is ambiguous between two overlapping/near-duplicate Adapt intents in this skill (this class's target and its sibling) -- confirmed locally: the sibling intent fires instead of the one this auto-generated test pins to. Auto-generation defect (picked an ambiguous utterance for a pinned intent), not an application bug.")
     def test_alarm_daily_for_the_next_week_at_9_am(self):
         self._assert_adapt(r"alarm daily for the next week at 9 AM", r"CreateAlarmAlt")
 
-    @unittest.skip("TODO(https://github.com/OpenVoiceOS/ovos-skill-alerts/issues/138): see linked issue for root cause")
+    @pytest.mark.xfail(strict=True, reason="issue #138: this utterance is ambiguous between two overlapping/near-duplicate Adapt intents in this skill (this class's target and its sibling) -- confirmed locally: the sibling intent fires instead of the one this auto-generated test pins to. Auto-generation defect (picked an ambiguous utterance for a pinned intent), not an application bug.")
     def test_make_a_10_am_weekend_alarm(self):
         self._assert_adapt(r"make a 10 am weekend alarm", r"CreateAlarmAlt")
 
 class TestAdapt4_Createocpalarm(_IntentRoutingMixin, TestCase):
     """Adapt intent: CreateOcpAlarm"""
-    @unittest.skip("TODO(https://github.com/OpenVoiceOS/ovos-skill-alerts/issues/138): see linked issue for root cause")
+    @pytest.mark.xfail(strict=True, reason="issue #138: adapt-only pipeline pinning ('ovos-adapt-pipeline-plugin-*' only, no padatious/padacioso fallback) does not satisfy this intent's own required Adapt vocab for this phrasing -- confirmed locally: bus trace shows 'ovos.intent.unmatched' (see test/end2end/test_intents_en_us.py _assert_intent). Auto-generation defect (utterance/pipeline-pin mismatch), not an application bug.")
     def test_wake_me_up_with_music(self):
         self._assert_adapt(r"wake me up with music", r"CreateOcpAlarm")
 
@@ -216,88 +216,86 @@ class TestAdapt7_Createreminder(_IntentRoutingMixin, TestCase):
     def test_create_a_reminder_to_go_to_work_at_9_am_(self):
         self._assert_adapt(r"create a reminder to go to work at 9 am daily for the next month", r"CreateReminder")
 
-    @unittest.skip("TODO(https://github.com/OpenVoiceOS/ovos-skill-alerts/issues/138): see linked issue for root cause")
+    @pytest.mark.xfail(strict=True, reason="issue #138: adapt-only pipeline pinning ('ovos-adapt-pipeline-plugin-*' only, no padatious/padacioso fallback) does not satisfy this intent's own required Adapt vocab for this phrasing -- confirmed locally: bus trace shows 'ovos.intent.unmatched' (see test/end2end/test_intents_en_us.py _assert_intent). Auto-generation defect (utterance/pipeline-pin mismatch), not an application bug.")
     def test_remind_me_to_go_to_work_weekday_mornings(self):
         self._assert_adapt(r"remind me to go to work weekday mornings at 8", r"CreateReminder")
 
-    @unittest.skip("TODO(https://github.com/OpenVoiceOS/ovos-skill-alerts/issues/138): see linked issue for root cause")
+    @pytest.mark.xfail(strict=True, reason="issue #138: adapt-only pipeline pinning ('ovos-adapt-pipeline-plugin-*' only, no padatious/padacioso fallback) does not satisfy this intent's own required Adapt vocab for this phrasing -- confirmed locally: bus trace shows 'ovos.intent.unmatched' (see test/end2end/test_intents_en_us.py _assert_intent). Auto-generation defect (utterance/pipeline-pin mismatch), not an application bug.")
     def test_remind_me_every_day_to_check_for_test_fa(self):
         self._assert_adapt(r"remind me every day to check for test failures until 2024", r"CreateReminder")
 
 class TestAdapt8_Createreminderalt(_IntentRoutingMixin, TestCase):
     """Adapt intent: CreateReminderAlt"""
-    @unittest.skip("TODO(https://github.com/OpenVoiceOS/ovos-skill-alerts/issues/138): see linked issue for root cause")
+    @pytest.mark.xfail(strict=True, reason="issue #138: this utterance is ambiguous between two overlapping/near-duplicate Adapt intents in this skill (this class's target and its sibling) -- confirmed locally: the sibling intent fires instead of the one this auto-generated test pins to. Auto-generation defect (picked an ambiguous utterance for a pinned intent), not an application bug.")
     def test_set_a_playback_reminder_to_take_out_the_(self):
         self._assert_adapt(r"set a playback reminder to take out the trash daily at 5 pm until november", r"CreateReminderAlt")
 
-    @unittest.skip("TODO(https://github.com/OpenVoiceOS/ovos-skill-alerts/issues/138): see linked issue for root cause")
+    @pytest.mark.xfail(strict=True, reason="issue #138: this utterance is ambiguous between two overlapping/near-duplicate Adapt intents in this skill (this class's target and its sibling) -- confirmed locally: the sibling intent fires instead of the one this auto-generated test pins to. Auto-generation defect (picked an ambiguous utterance for a pinned intent), not an application bug.")
     def test_set_a_script_reminder_for_weekends_at_5_(self):
         self._assert_adapt(r"set a script reminder for weekends at 5 till next week", r"CreateReminderAlt")
 
-    @unittest.skip("TODO(https://github.com/OpenVoiceOS/ovos-skill-alerts/issues/138): see linked issue for root cause")
+    @pytest.mark.xfail(strict=True, reason="issue #138: this utterance is ambiguous between two overlapping/near-duplicate Adapt intents in this skill (this class's target and its sibling) -- confirmed locally: the sibling intent fires instead of the one this auto-generated test pins to. Auto-generation defect (picked an ambiguous utterance for a pinned intent), not an application bug.")
     def test_create_a_reminder_to_go_to_work_at_9_am_(self):
         self._assert_adapt(r"create a reminder to go to work at 9 am daily for the next month", r"CreateReminderAlt")
 
-    @unittest.skip("TODO(https://github.com/OpenVoiceOS/ovos-skill-alerts/issues/138): see linked issue for root cause")
+    @pytest.mark.xfail(strict=True, reason="issue #138: this utterance is ambiguous between two overlapping/near-duplicate Adapt intents in this skill (this class's target and its sibling) -- confirmed locally: the sibling intent fires instead of the one this auto-generated test pins to. Auto-generation defect (picked an ambiguous utterance for a pinned intent), not an application bug.")
     def test_remind_me_to_go_to_work_weekday_mornings(self):
         self._assert_adapt(r"remind me to go to work weekday mornings at 8", r"CreateReminderAlt")
 
-    @unittest.skip("TODO(https://github.com/OpenVoiceOS/ovos-skill-alerts/issues/138): see linked issue for root cause")
+    @pytest.mark.xfail(strict=True, reason="issue #138: this utterance is ambiguous between two overlapping/near-duplicate Adapt intents in this skill (this class's target and its sibling) -- confirmed locally: the sibling intent fires instead of the one this auto-generated test pins to. Auto-generation defect (picked an ambiguous utterance for a pinned intent), not an application bug.")
     def test_remind_me_every_day_to_check_for_test_fa(self):
         self._assert_adapt(r"remind me every day to check for test failures until 2024", r"CreateReminderAlt")
 
 class TestAdapt9_Createevent(_IntentRoutingMixin, TestCase):
     """Adapt intent: CreateEvent"""
-    @unittest.skip("TODO(https://github.com/OpenVoiceOS/ovos-skill-alerts/issues/138): see linked issue for root cause")
+    @pytest.mark.xfail(strict=True, reason="issue #138: adapt-only pipeline pinning ('ovos-adapt-pipeline-plugin-*' only, no padatious/padacioso fallback) does not satisfy this intent's own required Adapt vocab for this phrasing -- confirmed locally: bus trace shows 'ovos.intent.unmatched' (see test/end2end/test_intents_en_us.py _assert_intent). Auto-generation defect (utterance/pipeline-pin mismatch), not an application bug.")
     def test_i_have_a_work_event_next_tuesday_at_7_pm(self):
         self._assert_adapt(r"I have a work event next tuesday at 7 PM", r"CreateEvent")
 
-    @unittest.skip("TODO(https://github.com/OpenVoiceOS/ovos-skill-alerts/issues/138): see linked issue for root cause")
     def test_i_have_an_appointment_at_9_pm_every_week(self):
         self._assert_adapt(r"I have an appointment at 9 PM every weekend night until next year", r"CreateEvent")
 
-    @unittest.skip("TODO(https://github.com/OpenVoiceOS/ovos-skill-alerts/issues/138): see linked issue for root cause")
+    @pytest.mark.xfail(strict=False, reason="issue #138 Update 3: this test is stable (3x confirmed green) when test_intents_en_us.py runs in isolation, but hits pytest-timeout (>90s) when run as part of the full module-shared-MiniCroft suite -- consistent with the documented get_response()/wait_while_speaking() unbounded-wait pattern surfacing under accumulated shared state, not this utterance's own vocab/routing. strict=False because outcome depends on suite composition/load, not a deterministic defect in this test.")
     def test_create_a_daily_event_to_join_zoom_at_1_p(self):
         self._assert_adapt(r"create a daily event to join zoom at 1 PM for the next year", r"CreateEvent")
 
 class TestAdapt10_Reschedulealert(_IntentRoutingMixin, TestCase):
     """Adapt intent: RescheduleAlert"""
-    @unittest.skip("TODO(https://github.com/OpenVoiceOS/ovos-skill-alerts/issues/138): see linked issue for root cause")
+    @pytest.mark.xfail(strict=True, reason="issue #138: adapt-only pipeline pinning ('ovos-adapt-pipeline-plugin-*' only, no padatious/padacioso fallback) does not satisfy this intent's own required Adapt vocab for this phrasing -- confirmed locally: bus trace shows 'ovos.intent.unmatched' (see test/end2end/test_intents_en_us.py _assert_intent). Auto-generation defect (utterance/pipeline-pin mismatch), not an application bug.")
     def test_move_the_baseball_event_to_08_00_pm(self):
         self._assert_adapt(r"move the baseball event to 08:00 pm", r"RescheduleAlert")
 
     def test_reschedule_the_next_event_two_hours_earl(self):
         self._assert_adapt(r"reschedule the next event two hours earlier", r"RescheduleAlert")
 
-    @unittest.skip("TODO(https://github.com/OpenVoiceOS/ovos-skill-alerts/issues/138): see linked issue for root cause")
+    @pytest.mark.xfail(strict=True, reason="issue #138: adapt-only pipeline pinning ('ovos-adapt-pipeline-plugin-*' only, no padatious/padacioso fallback) does not satisfy this intent's own required Adapt vocab for this phrasing -- confirmed locally: bus trace shows 'ovos.intent.unmatched' (see test/end2end/test_intents_en_us.py _assert_intent). Auto-generation defect (utterance/pipeline-pin mismatch), not an application bug.")
     def test_extend_the_pizza_timer_by_2_minutes(self):
         self._assert_adapt(r"extend the pizza timer by 2 minutes", r"RescheduleAlert")
 
-    @unittest.skip("TODO(https://github.com/OpenVoiceOS/ovos-skill-alerts/issues/138): see linked issue for root cause")
+    @pytest.mark.xfail(strict=True, reason="issue #138: adapt-only pipeline pinning ('ovos-adapt-pipeline-plugin-*' only, no padatious/padacioso fallback) does not satisfy this intent's own required Adapt vocab for this phrasing -- confirmed locally: bus trace shows 'ovos.intent.unmatched' (see test/end2end/test_intents_en_us.py _assert_intent). Auto-generation defect (utterance/pipeline-pin mismatch), not an application bug.")
     def test_decrease_the_bread_timer_by_5_minutes(self):
         self._assert_adapt(r"decrease the bread timer by 5 minutes", r"RescheduleAlert")
 
 class TestAdapt11_Reschedulealertalt(_IntentRoutingMixin, TestCase):
     """Adapt intent: RescheduleAlertAlt"""
-    @unittest.skip("TODO(https://github.com/OpenVoiceOS/ovos-skill-alerts/issues/138): see linked issue for root cause")
+    @pytest.mark.xfail(strict=True, reason="issue #138: this utterance is ambiguous between two overlapping/near-duplicate Adapt intents in this skill (this class's target and its sibling) -- confirmed locally: the sibling intent fires instead of the one this auto-generated test pins to. Auto-generation defect (picked an ambiguous utterance for a pinned intent), not an application bug.")
     def test_move_the_baseball_event_to_08_00_pm(self):
         self._assert_adapt(r"move the baseball event to 08:00 pm", r"RescheduleAlertAlt")
 
-    @unittest.skip("TODO(https://github.com/OpenVoiceOS/ovos-skill-alerts/issues/138): see linked issue for root cause")
+    @pytest.mark.xfail(strict=True, reason="issue #138: this utterance is ambiguous between two overlapping/near-duplicate Adapt intents in this skill (this class's target and its sibling) -- confirmed locally: the sibling intent fires instead of the one this auto-generated test pins to. Auto-generation defect (picked an ambiguous utterance for a pinned intent), not an application bug.")
     def test_reschedule_the_next_event_two_hours_earl(self):
         self._assert_adapt(r"reschedule the next event two hours earlier", r"RescheduleAlertAlt")
 
-    @unittest.skip("TODO(https://github.com/OpenVoiceOS/ovos-skill-alerts/issues/138): see linked issue for root cause")
+    @pytest.mark.xfail(strict=True, reason="issue #138: this utterance is ambiguous between two overlapping/near-duplicate Adapt intents in this skill (this class's target and its sibling) -- confirmed locally: the sibling intent fires instead of the one this auto-generated test pins to. Auto-generation defect (picked an ambiguous utterance for a pinned intent), not an application bug.")
     def test_extend_the_pizza_timer_by_2_minutes(self):
         self._assert_adapt(r"extend the pizza timer by 2 minutes", r"RescheduleAlertAlt")
 
-    @unittest.skip("TODO(https://github.com/OpenVoiceOS/ovos-skill-alerts/issues/138): see linked issue for root cause")
+    @pytest.mark.xfail(strict=True, reason="issue #138: this utterance is ambiguous between two overlapping/near-duplicate Adapt intents in this skill (this class's target and its sibling) -- confirmed locally: the sibling intent fires instead of the one this auto-generated test pins to. Auto-generation defect (picked an ambiguous utterance for a pinned intent), not an application bug.")
     def test_decrease_the_bread_timer_by_5_minutes(self):
         self._assert_adapt(r"decrease the bread timer by 5 minutes", r"RescheduleAlertAlt")
 
 class TestAdapt12_Changeproperties(_IntentRoutingMixin, TestCase):
     """Adapt intent: ChangeProperties"""
-    @unittest.skip("TODO(https://github.com/OpenVoiceOS/ovos-skill-alerts/issues/138): see linked issue for root cause")
     def test_reschedule_the_wake_alarm_to_every_monda(self):
         self._assert_adapt(r"reschedule the wake alarm to every Monday and Tuesday", r"ChangeProperties")
 
@@ -309,11 +307,11 @@ class TestAdapt12_Changeproperties(_IntentRoutingMixin, TestCase):
 
 class TestAdapt13_Changemediaproperties(_IntentRoutingMixin, TestCase):
     """Adapt intent: ChangeMediaProperties"""
-    @unittest.skip("TODO(https://github.com/OpenVoiceOS/ovos-skill-alerts/issues/138): see linked issue for root cause")
+    @pytest.mark.xfail(strict=True, reason="issue #138: adapt-only pipeline pinning ('ovos-adapt-pipeline-plugin-*' only, no padatious/padacioso fallback) does not satisfy this intent's own required Adapt vocab for this phrasing -- confirmed locally: bus trace shows 'ovos.intent.unmatched' (see test/end2end/test_intents_en_us.py _assert_intent). Auto-generation defect (utterance/pipeline-pin mismatch), not an application bug.")
     def test_audible_adjourn(self):
         self._assert_adapt(r"audible adjourn", r"ChangeMediaProperties")
 
-    @unittest.skip("TODO(https://github.com/OpenVoiceOS/ovos-skill-alerts/issues/138): see linked issue for root cause")
+    @pytest.mark.xfail(strict=True, reason="issue #138: adapt-only pipeline pinning ('ovos-adapt-pipeline-plugin-*' only, no padatious/padacioso fallback) does not satisfy this intent's own required Adapt vocab for this phrasing -- confirmed locally: bus trace shows 'ovos.intent.unmatched' (see test/end2end/test_intents_en_us.py _assert_intent). Auto-generation defect (utterance/pipeline-pin mismatch), not an application bug.")
     def test_audible_adjourn_next(self):
         self._assert_adapt(r"audible adjourn next", r"ChangeMediaProperties")
 
@@ -347,50 +345,28 @@ class TestAdapt15_Timerstatus(_IntentRoutingMixin, TestCase):
 
 class TestAdapt16_Cancelalert(_IntentRoutingMixin, TestCase):
     """Adapt intent: CancelAlert"""
-    @unittest.skip("TODO(https://github.com/OpenVoiceOS/ovos-skill-alerts/issues/138): see linked issue for root cause")
     def test_cancel_my_next_alarm(self):
         self._assert_adapt(r"cancel my next alarm", r"CancelAlert")
 
-    @unittest.skip("TODO(https://github.com/OpenVoiceOS/ovos-skill-alerts/issues/138): see linked issue for root cause")
     def test_cancel_all_reminders(self):
         self._assert_adapt(r"cancel all reminders", r"CancelAlert")
 
-    @unittest.skip("TODO(https://github.com/OpenVoiceOS/ovos-skill-alerts/issues/138): see linked issue for root cause")
     def test_clear_all_timers(self):
         self._assert_adapt(r"clear all timers", r"CancelAlert")
 
-    @unittest.skip("TODO(https://github.com/OpenVoiceOS/ovos-skill-alerts/issues/138): see linked issue for root cause")
     def test_delete_my_next_event(self):
         self._assert_adapt(r"delete my next event", r"CancelAlert")
 
-    @unittest.skip("TODO(https://github.com/OpenVoiceOS/ovos-skill-alerts/issues/138): see linked issue for root cause")
     def test_remove_my_next_alert(self):
         self._assert_adapt(r"remove my next alert", r"CancelAlert")
 
 class TestAdapt17_Createlist(_IntentRoutingMixin, TestCase):
     """Adapt intent: CreateList"""
-    @unittest.skip("TODO(https://github.com/OpenVoiceOS/ovos-skill-alerts/issues/138): "
-                    "'create a shopping list' routes through handle_create_todo -> "
-                    "handle_add_subitem_to_todo -> _get_response_cascade, which calls "
-                    "speak_dialog(..., wait=True). That blocks in "
-                    "SessionManager.wait_while_speaking() (ovos_bus_client/session.py) "
-                    "on a plain threading.Event.wait() with NO timeout, on the SAME "
-                    "thread running the test - ovoscope's synchronous FakeBus never "
-                    "delivers the 'speaking finished' signal for this nested/cascading "
-                    "speak call, so the wait never returns. pytest-timeout's SIGALRM "
-                    "catches it while this test item is running (confirmed via "
-                    "py-spy/faulthandler dump), but the same call shape reached from "
-                    "setUpModule/tearDownModule fixtures has no such coverage - that is "
-                    "the real cause of the CI jobs hanging to the 30min kill on all "
-                    "Python versions. See linked issue for root cause; re-enable once "
-                    "ovoscope's mock-TTS wiring (or wait_while_speaking's missing "
-                    "timeout) is fixed upstream.")
     def test_create_a_shopping_list(self):
         self._assert_adapt(r"create a shopping list", r"CreateList")
 
 class TestAdapt18_Addlistsubitems(_IntentRoutingMixin, TestCase):
     """Adapt intent: AddListSubitems"""
-    @unittest.skip("TODO(https://github.com/OpenVoiceOS/ovos-skill-alerts/issues/138): see linked issue for root cause")
     def test_add_things_to_the_shopping_list(self):
         self._assert_adapt(r"add things to the shopping list", r"AddListSubitems")
 
@@ -414,29 +390,27 @@ class TestAdapt21_Querylistentries(_IntentRoutingMixin, TestCase):
 
 class TestAdapt22_Deletelistentries(_IntentRoutingMixin, TestCase):
     """Adapt intent: DeleteListEntries"""
-    @unittest.skip("TODO(https://github.com/OpenVoiceOS/ovos-skill-alerts/issues/138): see linked issue for root cause")
-    @unittest.skip("TODO(https://github.com/OpenVoiceOS/ovos-skill-alerts/issues/138): see linked issue for root cause")
+    @pytest.mark.xfail(strict=False, reason="issue #138: 'drop items from the shopping list' vs DeleteList/DeleteListEntries adapt-intent ambiguity is ORDER-DEPENDENT on the module-shared MiniCroft's list state, confirmed locally -- fails (wrong sibling intent fires) in isolation but XPASSed when run after other list-mutating tests populate state. strict=False because the outcome flips run-to-run; not a flake in the harness, a real ambiguous-utterance auto-generation defect whose result depends on suite state.")
     def test_drop_items_from_the_shopping_list(self):
         self._assert_adapt(r"drop items from the shopping list", r"DeleteListEntries")
 
-    @unittest.skip("TODO(https://github.com/OpenVoiceOS/ovos-skill-alerts/issues/138): see linked issue for root cause")
+    @pytest.mark.xfail(strict=True, reason="issue #138: this utterance is ambiguous between two overlapping/near-duplicate Adapt intents in this skill (this class's target and its sibling) -- confirmed locally: the sibling intent fires instead of the one this auto-generated test pins to. Auto-generation defect (picked an ambiguous utterance for a pinned intent), not an application bug.")
     def test_drop_the_shopping_list(self):
         self._assert_adapt(r"drop the shopping list", r"DeleteListEntries")
 
-    @unittest.skip("TODO(https://github.com/OpenVoiceOS/ovos-skill-alerts/issues/138): see linked issue for root cause")
+    @pytest.mark.xfail(strict=True, reason="issue #138: this utterance is ambiguous between two overlapping/near-duplicate Adapt intents in this skill (this class's target and its sibling) -- confirmed locally: the sibling intent fires instead of the one this auto-generated test pins to. Auto-generation defect (picked an ambiguous utterance for a pinned intent), not an application bug.")
     def test_delete_list(self):
         self._assert_adapt(r"delete list", r"DeleteListEntries")
 
 class TestAdapt23_Deletelist(_IntentRoutingMixin, TestCase):
     """Adapt intent: DeleteList"""
-    @unittest.skip("TODO(https://github.com/OpenVoiceOS/ovos-skill-alerts/issues/138): see linked issue for root cause")
+    @pytest.mark.xfail(strict=False, reason="issue #138: 'drop items from the shopping list' vs DeleteList/DeleteListEntries adapt-intent ambiguity is ORDER-DEPENDENT on the module-shared MiniCroft's list state, confirmed locally (see the mirrored xfail in TestAdapt22_Deletelistentries) -- strict=False because the outcome flips run-to-run; not a flake in the harness, a real ambiguous-utterance auto-generation defect whose result depends on suite state.")
     def test_drop_items_from_the_shopping_list(self):
         self._assert_adapt(r"drop items from the shopping list", r"DeleteList")
 
     def test_drop_the_shopping_list(self):
         self._assert_adapt(r"drop the shopping list", r"DeleteList")
 
-    @unittest.skip("TODO(https://github.com/OpenVoiceOS/ovos-skill-alerts/issues/138): see linked issue for root cause")
     def test_delete_list(self):
         self._assert_adapt(r"delete list", r"DeleteList")
 
@@ -458,28 +432,28 @@ class TestAdapt25_Calendarlist(_IntentRoutingMixin, TestCase):
 
 class TestAdapt26_Davsync(_IntentRoutingMixin, TestCase):
     """Adapt intent: DAVSync"""
-    @unittest.skip("TODO(https://github.com/OpenVoiceOS/ovos-skill-alerts/issues/138): see linked issue for root cause")
+    @pytest.mark.xfail(strict=True, reason="issue #138: adapt-only pipeline pinning ('ovos-adapt-pipeline-plugin-*' only, no padatious/padacioso fallback) does not satisfy this intent's own required Adapt vocab for this phrasing -- confirmed locally: bus trace shows 'ovos.intent.unmatched' (see test/end2end/test_intents_en_us.py _assert_intent). Auto-generation defect (utterance/pipeline-pin mismatch), not an application bug.")
     def test_download(self):
         self._assert_adapt(r"download", r"DAVSync")
 
 class TestSimple27_Example_messages(_IntentRoutingMixin, TestCase):
     """Simple intent: example_messages"""
-    @unittest.skip("TODO(https://github.com/OpenVoiceOS/ovos-skill-alerts/issues/138): see linked issue for root cause")
+    @pytest.mark.xfail(strict=True, reason="issue #138: ovoscope==1.6.6a1 End2EndTest.execute() raises AttributeError: 'str' object has no attribute 'msg_type' internally (ovoscope/__init__.py:1317) for every test using _assert_simple's expected_messages=['speak'] shape -- confirmed locally, reproduces on all 5 tests in this class. This is an ovoscope regression, not a skill or test-assertion bug; re-enable once fixed upstream in ovoscope.")
     def test_alarm_in_30_minutes(self):
         self._assert_simple(r"Alarm in 30 minutes")
 
-    @unittest.skip("TODO(https://github.com/OpenVoiceOS/ovos-skill-alerts/issues/138): see linked issue for root cause")
+    @pytest.mark.xfail(strict=True, reason="issue #138: ovoscope==1.6.6a1 End2EndTest.execute() raises AttributeError: 'str' object has no attribute 'msg_type' internally (ovoscope/__init__.py:1317) for every test using _assert_simple's expected_messages=['speak'] shape -- confirmed locally, reproduces on all 5 tests in this class. This is an ovoscope regression, not a skill or test-assertion bug; re-enable once fixed upstream in ovoscope.")
     def test_wake_me_up_every_monday_and_thursday_at_(self):
         self._assert_simple(r"wake me up every monday and thursday at 9 AM.")
 
-    @unittest.skip("TODO(https://github.com/OpenVoiceOS/ovos-skill-alerts/issues/138): see linked issue for root cause")
+    @pytest.mark.xfail(strict=True, reason="issue #138: ovoscope==1.6.6a1 End2EndTest.execute() raises AttributeError: 'str' object has no attribute 'msg_type' internally (ovoscope/__init__.py:1317) for every test using _assert_simple's expected_messages=['speak'] shape -- confirmed locally, reproduces on all 5 tests in this class. This is an ovoscope regression, not a skill or test-assertion bug; re-enable once fixed upstream in ovoscope.")
     def test_create_an_alarm_for_10_daily(self):
         self._assert_simple(r"create an alarm for 10 daily")
 
-    @unittest.skip("TODO(https://github.com/OpenVoiceOS/ovos-skill-alerts/issues/138): see linked issue for root cause")
+    @pytest.mark.xfail(strict=True, reason="issue #138: ovoscope==1.6.6a1 End2EndTest.execute() raises AttributeError: 'str' object has no attribute 'msg_type' internally (ovoscope/__init__.py:1317) for every test using _assert_simple's expected_messages=['speak'] shape -- confirmed locally, reproduces on all 5 tests in this class. This is an ovoscope regression, not a skill or test-assertion bug; re-enable once fixed upstream in ovoscope.")
     def test_set_an_alarm_for_9_am_every_tuesday(self):
         self._assert_simple(r"set an alarm for 9 AM every tuesday")
 
-    @unittest.skip("TODO(https://github.com/OpenVoiceOS/ovos-skill-alerts/issues/138): see linked issue for root cause")
+    @pytest.mark.xfail(strict=True, reason="issue #138: ovoscope==1.6.6a1 End2EndTest.execute() raises AttributeError: 'str' object has no attribute 'msg_type' internally (ovoscope/__init__.py:1317) for every test using _assert_simple's expected_messages=['speak'] shape -- confirmed locally, reproduces on all 5 tests in this class. This is an ovoscope regression, not a skill or test-assertion bug; re-enable once fixed upstream in ovoscope.")
     def test_set_an_alarm_for_8_am_on_weekdays(self):
         self._assert_simple(r"set an alarm for 8 AM on weekdays")
