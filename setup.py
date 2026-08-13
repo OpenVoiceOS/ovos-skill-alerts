@@ -113,8 +113,19 @@ setup(
     license='BSD-3-Clause',
     install_requires=get_requirements("requirements.txt"),
     extras_require={
+        # ovos-skill-naptime is a TEST dependency only: test/end2end/
+        # test_wake_arbitration.py boots it alongside this skill to assert the
+        # "wake" vocabulary arbitrates correctly between the two, on
+        # ADAPT_ONLY_PIPELINE (see that module's docstring for why a
+        # real-device-default variant is not committed as a CI-enforced test
+        # here: this CI workflow's own missing libfann-dev system dep makes
+        # padatious unavailable, forcing slow padacioso fallback, and adding
+        # the extra ocp/m2v test deps needed for that variant pushed the
+        # shared CI job's total runtime past what other, pre-existing tests
+        # in the same session tolerate).
         "test": ["mock", "ovoscope>=0.13.1", "ovos-adapt-parser",
-                 "ovos-spec-tools>=1.5.0a1", "pytest>=7.0.0", "pytest-timeout>=2.0.0"],
+                 "ovos-spec-tools>=1.5.0a1", "pytest>=7.0.0", "pytest-timeout>=2.0.0",
+                 "ovos-skill-naptime>=0.4.0a5"],
         "dev": ["mock", "ovoscope>=0.13.1", "ovos-adapt-parser"],
     },
     author=",".join(AUTHORS),
