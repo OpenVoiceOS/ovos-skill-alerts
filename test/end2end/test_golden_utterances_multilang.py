@@ -113,7 +113,12 @@ GOLDEN_ROWS = [_as_param(r) for r in ALL_ROWS]
 
 @pytest.fixture(scope="module")
 def minicroft():
-    mc = get_minicroft([SKILL_ID], secondary_langs=LANGS)
+    # get_minicroft's default max_wait (60s) is tuned for the plain test
+    # job; under coverage instrumentation, booting one MiniCroft with this
+    # many secondary_langs (16) reliably needs more than 60s. Bump it well
+    # past the coverage-job boot time observed in CI rather than trim
+    # locales or add extra instances.
+    mc = get_minicroft([SKILL_ID], secondary_langs=LANGS, max_wait=300)
     yield mc
     mc.stop()
 
