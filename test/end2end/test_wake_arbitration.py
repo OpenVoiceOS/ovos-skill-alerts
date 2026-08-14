@@ -136,6 +136,7 @@ def _claimant(types):
 
 
 @pytest.mark.timeout(300)
+@pytest.mark.xfail(strict=True, reason="upstream-blocked: a bare wake request should be claimed by ovos-skill-naptime, not left unmatched. ovos-core#857 (merged, released as ovos-core==2.6.4a1) was expected to fix this via session-scoped context, but confirmed this session that installing 2.6.4a1 does NOT clear it -- the utterance now comes back fully unmatched ('claimed by None') rather than mis-attributed, across every supported Python version. The underlying fix (likely a companion change delegating set_context from ovos-workshop, per the naptime/context-gate work in flight) has not landed yet. strict=True so this XPASSes loudly (and the alarm to re-check is the point) the moment the real upstream fix releases.")
 @pytest.mark.parametrize("utterance", ["wake up", "wake"])
 def test_bare_wake_belongs_to_naptime(minicroft, utterance):
     """A bare wake request with no time attached is not an alarm."""
