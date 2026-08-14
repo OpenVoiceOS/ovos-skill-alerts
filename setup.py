@@ -129,7 +129,7 @@ setup(
         # silently degrades: the padatious pipeline stage does not exist
         # ("Unknown pipeline matcher"), date-time never loads, and the
         # utterance comes back as ovos.intent.unmatched.
-        "test": ["mock", "ovoscope>=1.6.6a1", "ovos-adapt-parser",
+        "test": ["mock", "ovoscope>=1.6.8a1", "ovos-adapt-parser",
                  "ovos-spec-tools>=1.5.0a1", "pytest>=7.0.0", "pytest-timeout>=2.0.0",
                  "ovos-skill-naptime>=0.4.0a5", "ovos-padatious>=1.6.2a1",
                  "ovos-skill-date-time"],
