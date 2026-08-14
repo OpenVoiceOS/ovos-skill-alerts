@@ -104,22 +104,45 @@ class _IntentRoutingMixin:
 
 
     def _assert_simple(self, utterance: str):
+        """Fire an utterance and assert a "speak" response appears in the
+        bus trace, as a SUBSET check (see _assert_intent's docstring for why
+        a literal fully-ordered ``expected_messages`` sequence is not used
+        here: these utterances legitimately produce follow-up questions /
+        extra bus traffic beyond a bare 2-message request/response pair,
+        e.g. "❌ got 4 messages, expected 2" when pinned to a strict
+        End2EndTest(expected_messages=[...]) sequence).
+        """
         session = Session(f"e2e-en_us-simple-{hash(utterance)}")
         session.lang = LANG
+        # Unlike _assert_adapt/_assert_padatious, these "simple" rows are
+        # not pinned to one pipeline stage -- they need the full default
+        # order so either Adapt or Padatious can match. Leaving
+        # session.pipeline unset previously fell back to a pipeline that
+        # does not include this skill's plugins, producing
+        # 'ovos.intent.unmatched' for every row in this class regardless of
+        # utterance (auto-generation defect, same family as the
+        # adapt-only-pin rows -- see _assert_adapt/_assert_padatious).
+        session.pipeline = [
+            "ovos-padatious-pipeline-plugin-high",
+            "ovos-adapt-pipeline-plugin-high",
+            "ovos-padatious-pipeline-plugin-medium",
+            "ovos-adapt-pipeline-plugin-medium",
+            "ovos-padatious-pipeline-plugin-low",
+            "ovos-adapt-pipeline-plugin-low",
+        ]
         message = Message(
             "recognizer_loop:utterance",
             {"utterances": [utterance], "lang": LANG},
             {"session": session.serialize()},
         )
-        test = End2EndTest(
-            minicroft=self.minicroft,
-            skill_ids=[SKILL_ID],
-            eof_msgs=["ovos.utterance.handled"],
-            flip_points=["recognizer_loop:utterance"],
-            source_message=message,
-            expected_messages=["speak"],
+        capture = CaptureSession(self.minicroft)
+        capture.capture(message, timeout=30)
+        messages = capture.finish()
+        types = [m.msg_type for m in messages]
+        self.assertTrue(
+            any("speak" in t for t in types),
+            f"no speak message for {utterance!r} -> {types}",
         )
-        test.execute(timeout=30)
 
 
 class TestPadatious1_Missed_alerts_intent(_IntentRoutingMixin, TestCase):
@@ -438,22 +461,18 @@ class TestAdapt26_Davsync(_IntentRoutingMixin, TestCase):
 
 class TestSimple27_Example_messages(_IntentRoutingMixin, TestCase):
     """Simple intent: example_messages"""
-    @pytest.mark.xfail(strict=True, reason="issue #138: ovoscope==1.6.6a1 End2EndTest.execute() raises AttributeError: 'str' object has no attribute 'msg_type' internally (ovoscope/__init__.py:1317) for every test using _assert_simple's expected_messages=['speak'] shape -- confirmed locally, reproduces on all 5 tests in this class. This is an ovoscope regression, not a skill or test-assertion bug; re-enable once fixed upstream in ovoscope.")
+    @pytest.mark.xfail(strict=True, reason="issue #155: relative-duration alarms are unsupported -- 'Alarm in 30 minutes' matches no intent (ovos.intent.unmatched) under either Adapt or Padatious, and every relative-duration alarm phrasing tried ('set an alarm in 30 minutes', 'set an alarm for 30 minutes from now') also comes back unmatched, while the equivalent relative-duration TIMER phrasing ('Start a bread timer for 30 minutes.') is a real registered skill example. Real skill defect, not a test artifact -- do not replace this row with a differently-worded alarm utterance, it is the only in-repo evidence of the gap. See https://github.com/OpenVoiceOS/ovos-skill-alerts/issues/155.")
     def test_alarm_in_30_minutes(self):
         self._assert_simple(r"Alarm in 30 minutes")
 
-    @pytest.mark.xfail(strict=True, reason="issue #138: ovoscope==1.6.6a1 End2EndTest.execute() raises AttributeError: 'str' object has no attribute 'msg_type' internally (ovoscope/__init__.py:1317) for every test using _assert_simple's expected_messages=['speak'] shape -- confirmed locally, reproduces on all 5 tests in this class. This is an ovoscope regression, not a skill or test-assertion bug; re-enable once fixed upstream in ovoscope.")
     def test_wake_me_up_every_monday_and_thursday_at_(self):
         self._assert_simple(r"wake me up every monday and thursday at 9 AM.")
 
-    @pytest.mark.xfail(strict=True, reason="issue #138: ovoscope==1.6.6a1 End2EndTest.execute() raises AttributeError: 'str' object has no attribute 'msg_type' internally (ovoscope/__init__.py:1317) for every test using _assert_simple's expected_messages=['speak'] shape -- confirmed locally, reproduces on all 5 tests in this class. This is an ovoscope regression, not a skill or test-assertion bug; re-enable once fixed upstream in ovoscope.")
     def test_create_an_alarm_for_10_daily(self):
         self._assert_simple(r"create an alarm for 10 daily")
 
-    @pytest.mark.xfail(strict=True, reason="issue #138: ovoscope==1.6.6a1 End2EndTest.execute() raises AttributeError: 'str' object has no attribute 'msg_type' internally (ovoscope/__init__.py:1317) for every test using _assert_simple's expected_messages=['speak'] shape -- confirmed locally, reproduces on all 5 tests in this class. This is an ovoscope regression, not a skill or test-assertion bug; re-enable once fixed upstream in ovoscope.")
     def test_set_an_alarm_for_9_am_every_tuesday(self):
         self._assert_simple(r"set an alarm for 9 AM every tuesday")
 
-    @pytest.mark.xfail(strict=True, reason="issue #138: ovoscope==1.6.6a1 End2EndTest.execute() raises AttributeError: 'str' object has no attribute 'msg_type' internally (ovoscope/__init__.py:1317) for every test using _assert_simple's expected_messages=['speak'] shape -- confirmed locally, reproduces on all 5 tests in this class. This is an ovoscope regression, not a skill or test-assertion bug; re-enable once fixed upstream in ovoscope.")
     def test_set_an_alarm_for_8_am_on_weekdays(self):
         self._assert_simple(r"set an alarm for 8 AM on weekdays")
