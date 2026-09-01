@@ -129,6 +129,29 @@ class TestRecurringReminderOutcome(unittest.TestCase):
                     f"wrong/missing weekday recurrence for {utterance!r}: "
                     f"got {alert.repeat_days}")
 
+    def test_day_of_week_recurrence_parsed_without_adapt_tag(self):
+        """An explicit day list, matched by padatious (no adapt "repeat"
+        tag), must still book those days and that time."""
+        cases = [
+            ("remind me to take out the trash every thursday and sunday at 7 pm",
+             {Weekdays.THU, Weekdays.SUN}, 19, 0),
+            ("remind me to call grandma every tuesday at 6 30 pm",
+             {Weekdays.TUE}, 18, 30),
+        ]
+        for utterance, days, hour, minute in cases:
+            with self.subTest(utterance=utterance):
+                msg = Message("intent", {"utterance": utterance, "lang": "en-US"})
+                alert = build_alert_from_intent(msg)
+                self.assertIsNotNone(alert, f"no alert parsed for {utterance!r}")
+                self.assertEqual(set(alert.repeat_days or []), days,
+                                 f"wrong/missing day recurrence for {utterance!r}: "
+                                 f"got {alert.repeat_days}")
+                self.assertIsNotNone(alert.expiration,
+                                     f"no time extracted for {utterance!r}")
+                self.assertEqual((alert.expiration.hour, alert.expiration.minute),
+                                 (hour, minute),
+                                 f"wrong time for {utterance!r}: got {alert.expiration}")
+
     def test_simple_one_off_reminder_unaffected(self):
         """Soundness check: a plain one-off reminder with no recurrence
         phrase must not be broken by the recurrence-stripping fix."""
