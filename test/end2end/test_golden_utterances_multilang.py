@@ -40,6 +40,8 @@ from ovos_bus_client.message import Message
 from ovos_bus_client.session import Session
 from ovoscope import CaptureSession, get_minicroft
 
+from ._wait_trained import wait_for_minicroft_ready
+
 SKILL_ID = "ovos-skill-alerts.openvoiceos"
 
 _PIPELINE = [
@@ -119,6 +121,16 @@ def minicroft():
     # past the coverage-job boot time observed in CI rather than trim
     # locales or add extra instances.
     mc = get_minicroft([SKILL_ID], secondary_langs=LANGS, max_wait=300)
+    # See end2end._wait_trained: with 16 secondary_langs this boot makes far
+    # more padatious registrations than any other module here, so the
+    # post-registration debounce+compile race is, if anything, more likely
+    # to bite -- wait for the real completion signal rather than assume
+    # max_wait already covered it.
+    wait_for_minicroft_ready(mc)
+    # 16 independent per-language containers can settle in separate
+    # debounce/compile passes rather than one; a second pass catches a
+    # straggler the first one's short post-trained grace window missed.
+    wait_for_minicroft_ready(mc)
     yield mc
     mc.stop()
 

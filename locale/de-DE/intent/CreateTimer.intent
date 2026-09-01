@@ -1,0 +1,5 @@
+(stelle|starte|erzeuge) einen (Timer|Wecker) [für {duration}]
+neuer (Timer|Wecker) [für {duration}]
+(stelle|starte|erzeuge) einen {duration} Timer
+plane weckzeiten
+erzeuge timer

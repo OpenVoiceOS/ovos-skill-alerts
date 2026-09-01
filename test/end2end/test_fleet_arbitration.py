@@ -57,9 +57,9 @@ import pytest
 from ovos_bus_client.message import Message
 from ovos_bus_client.session import Session
 from ovos_utils.log import LOG
-from ovos_utils.process_utils import ProcessState
 from ovoscope import get_minicroft, is_pipeline_available
 
+from ._wait_trained import wait_for_minicroft_ready
 from util.parse_utils import build_alert_from_intent
 from util import Weekdays
 
@@ -166,15 +166,7 @@ class TestReminderVsDateTimeArbitration(unittest.TestCase):
         assert {ALERTS_ID, DATE_TIME_ID} <= loaded, (
             f"arbitration needs BOTH skills loaded, got {sorted(loaded)} -- "
             f"install the `test` extra (needs ovos-skill-date-time)")
-        deadline = time.monotonic() + 60
-        state = getattr(getattr(cls.mc, "status", None), "state", None)
-        while state != ProcessState.READY:
-            if time.monotonic() > deadline:
-                raise TimeoutError(
-                    "fleet-arbitration MiniCroft not READY within 60s")
-            time.sleep(0.2)
-            state = getattr(getattr(cls.mc, "status", None), "state", None)
-        time.sleep(3.0)
+        wait_for_minicroft_ready(cls.mc)
 
     @classmethod
     def tearDownClass(cls):

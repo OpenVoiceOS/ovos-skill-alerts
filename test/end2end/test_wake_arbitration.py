@@ -52,8 +52,9 @@ import time
 import pytest
 from ovos_bus_client.message import Message
 from ovos_bus_client.session import Session
-from ovos_utils.process_utils import ProcessState
 from ovoscope import get_minicroft
+
+from ._wait_trained import wait_for_minicroft_ready
 
 ADAPT_ONLY_PIPELINE = [
     "ovos-adapt-pipeline-plugin-high",
@@ -78,13 +79,7 @@ CAPTURE_SETTLE = 0.4
 @pytest.fixture(scope="module")
 def minicroft():
     mc = get_minicroft([ALERTS_ID, NAPTIME_ID], max_wait=300)
-    deadline = time.monotonic() + 60
-    while getattr(getattr(mc, "status", None), "state", None) != ProcessState.READY:
-        if time.monotonic() > deadline:
-            mc.stop()
-            raise TimeoutError("MiniCroft did not reach READY")
-        time.sleep(0.2)
-    time.sleep(3.0)
+    wait_for_minicroft_ready(mc)
     yield mc
     mc.stop()
 

@@ -1,0 +1,3 @@
+remind (me|us) [to {reminder}] [at {time}]
+tell me to {reminder} [at {time}]
+remind me in {duration} [to {reminder}]

@@ -283,12 +283,7 @@ class AlertSkill(ConversationalSkill):
 
     # Intent Handlers
     #@killable_intent()
-    @intent_handler(IntentBuilder("CreateAlarm").require("alarm")
-                    .require("create").optionally("question")
-                    .optionally("playable").optionally("weekdays")
-                    .optionally("weekends").optionally("everyday")
-                    .optionally("repeat").optionally("until")
-                    .optionally("priority"))
+    @intent_handler("CreateAlarm.intent")
     def handle_create_alarm(self, message: Message):
         """
         Intent handler for creating an alarm
@@ -309,15 +304,20 @@ class AlertSkill(ConversationalSkill):
 
         self.confirm_alert(alarm, message)
 
-    @intent_handler(IntentBuilder("CreateAlarmAlt").require("wake")
-                    .optionally("question").optionally("playable")
-                    .optionally("weekdays").optionally("weekends")
-                    .optionally("everyday").optionally("repeat")
-                    .optionally("until").optionally("priority"))
+    @intent_handler("CreateAlarmAlt.intent")
+    @intent_handler(IntentBuilder("CreateAlarmAlt").require("wake").optionally("repeat"))
     def handle_create_alarm_alt(self, message: Message):
         """
         Alternate intent handler for creating an alarm
         :param message: Message associated with request
+
+        Registered against BOTH padacioso (rich phrasing, see
+        CreateAlarmAlt.intent) and a bare Adapt fallback: wake.voc only
+        lists "wake me"/"wake us" (with pronoun), never bare "wake"/"wake
+        up", so this cannot re-claim the naptime-owned bare wake request
+        (test/end2end/test_wake_arbitration.py) -- it exists so a
+        scheduled "wake me/us up ..." still resolves to an alarm on the
+        adapt-only pipeline tier, where padacioso does not run.
         """
         return self.handle_create_alarm(message)
 
@@ -352,9 +352,7 @@ class AlertSkill(ConversationalSkill):
         return self.handle_ocp_alarm(message)
 
     #@killable_intent()
-    @intent_handler(IntentBuilder("CreateTimer").require("create")
-                    .require("timer").optionally("question")
-                    .optionally("until"))
+    @intent_handler("CreateTimer.intent")
     def handle_create_timer(self, message: Message):
         """
         Intent handler for creating a timer
@@ -373,12 +371,7 @@ class AlertSkill(ConversationalSkill):
         self.confirm_alert(alert, message)
 
     #@killable_intent()
-    @intent_handler(IntentBuilder("CreateReminder").require("create")
-                    .require("reminder").optionally("question")
-                    .optionally("playable").optionally("weekdays")
-                    .optionally("weekends").optionally("everyday")
-                    .optionally("repeat").optionally("until")
-                    .optionally("priority"))
+    @intent_handler("CreateReminder.intent")
     def handle_create_reminder(self, message: Message):
         """
         Intent handler for creating a reminder
@@ -434,11 +427,7 @@ class AlertSkill(ConversationalSkill):
         self.confirm_alert(alert, message)
 
     #@killable_intent()
-    @intent_handler(IntentBuilder("CreateReminderAlt").require("remind")
-                    .optionally("question").optionally("playable")
-                    .optionally("weekdays").optionally("weekends")
-                    .optionally("everyday").optionally("repeat")
-                    .optionally("until"))
+    @intent_handler("CreateReminderAlt.intent")
     def handle_create_reminder_alt(self, message: Message):
         """
         Alternate intent handler for creating a reminder
@@ -466,13 +455,7 @@ class AlertSkill(ConversationalSkill):
         self.handle_create_reminder(message)
 
     #@killable_intent()
-    @intent_handler(IntentBuilder("CreateEvent")
-                    .require("create").require("event")
-                    .optionally("question").optionally("playable")
-                    .optionally("everyday").optionally("weekdays")
-                    .optionally("weekends").optionally("repeat")
-                    .optionally("until").optionally("priority")
-                    .optionally("remind").optionally("all_day"))
+    @intent_handler("CreateEvent.intent")
     def handle_create_event(self, message: Message):
         """
         Intent handler for creating an event. Wraps handle_create_reminder
@@ -829,12 +812,20 @@ class AlertSkill(ConversationalSkill):
 
     # Todo Lists
     #@killable_intent()
-    @intent_handler(IntentBuilder("CreateList").require("create").require("list"))
+    @intent_handler("CreateList.intent")
     def handle_create_todo(self, message: Message, alert: Optional[Alert] = None):
         """
         Intent to create a todo list
         :param message: Message associated with request
         """
+        # NOTE: `alert` is only ever passed by the internal redirect from
+        # handle_create_reminder (an under-specified reminder that turned
+        # out to be a todo). A direct CreateList.intent match never passes
+        # it. This distinguishes the two cases below; previously this was
+        # inferred from `"list" in message.data`, an Adapt-only artifact
+        # (the required "list" keyword tag) that padacioso's CreateList.intent
+        # does not set.
+        direct_call = alert is None
         if alert:
             name = alert.alert_name
         else:
@@ -855,16 +846,13 @@ class AlertSkill(ConversationalSkill):
                                         spoken_alert_type(AlertType.TODO, self.lang))
         self.alert_manager.add_alert(alert)
         # NOTE: the alert might be a redirected reminder
-        if "list" in message.data:
+        if direct_call:
             return self.handle_add_subitem_to_todo(message)
 
         self.speak_dialog("confirm_todo_set", wait=True)
 
     #@killable_intent()
-    @intent_handler(
-        IntentBuilder("AddListSubitems")
-        .require("create").require("list").require("items")
-    )
+    @intent_handler("AddListSubitems.intent")
     def handle_add_subitem_to_todo(self, message: Message):
         """
         Intent to add a/multiple subitems to an existing todo list (eg shopping)
@@ -901,10 +889,7 @@ class AlertSkill(ConversationalSkill):
             {"num": pronounce_number(len(items))},
         )
 
-    @intent_handler(
-        IntentBuilder("QueryListNames")
-        .require("query").require("list").optionally("stored")
-    )
+    @intent_handler("QueryListNames.intent")
     def handle_query_todo_list_names(self, message: Message):
         """
         Intent to get a list of todos (todos WITH subitems)
@@ -925,11 +910,7 @@ class AlertSkill(ConversationalSkill):
         else:
             self.speak_dialog("list_todo_no_lists")
 
-    @intent_handler(
-        IntentBuilder("QueryTodoEntries")
-        .require("query").require("todo").optionally("items")
-        .optionally("stored")
-    )
+    @intent_handler("QueryTodoEntries.intent")
     def handle_query_todo_reminder_names(self, message: Message):
         """
         Intent to get a list of todos (todos WITHOUT subitems)
@@ -948,10 +929,7 @@ class AlertSkill(ConversationalSkill):
         else:
             self.speak_dialog("list_todo_no_reminder")
 
-    @intent_handler(
-        IntentBuilder("QueryListEntries")
-        .require("query").require("list").require("items")
-    )
+    @intent_handler("QueryListEntries.intent")
     def handle_todo_list_entries(self, message: Optional[Message] = None, alert: Optional[Alert] = None):
         """
         Intent to get the items from a specific todo list
@@ -981,10 +959,7 @@ class AlertSkill(ConversationalSkill):
             time.sleep(2)
 
     #@killable_intent()
-    @intent_handler(
-        IntentBuilder("DeleteListEntries")
-        .require("delete").require("items").require("list").optionally("stored")
-    )
+    @intent_handler("DeleteListEntries.intent")
     def handle_delete_todo_list_entries(self, message: Message):
         """
         Intent to delete one or more todo items
@@ -997,7 +972,8 @@ class AlertSkill(ConversationalSkill):
         if todo is None:
             return
 
-        if message.data.get("stored"):
+        if message.data.get("stored") or voc_match(message.data.get("utterance", ""),
+                                                    "stored", lang=self.lang):
             to_delete = [todo.alert_name for todo in
                          self.alert_manager.get_children(todo.ident)]
         else:
@@ -1024,10 +1000,7 @@ class AlertSkill(ConversationalSkill):
                           {"num": pronounce_number(len(deleted))})
 
     #@killable_intent()
-    @intent_handler(
-        IntentBuilder("DeleteList")
-        .require("delete").require("list")
-    )
+    @intent_handler("DeleteList.intent")
     def handle_delete_todo_list(self, message: Message):
         name = parse_alert_name_from_message(message)
         todo = self._resolve_requested_alert(message,
@@ -1043,10 +1016,7 @@ class AlertSkill(ConversationalSkill):
         self.speak_dialog("list_deleted", {"name": todo.alert_name})
 
     #@killable_intent()
-    @intent_handler(
-        IntentBuilder("DeleteTodoEntries")
-        .require("delete").require("todo").optionally("items").optionally("stored")
-    )
+    @intent_handler("DeleteTodoEntries.intent")
     def handle_delete_todo_entries(self, message: Message):
 
         name = parse_alert_name_from_message(message)
@@ -1055,7 +1025,8 @@ class AlertSkill(ConversationalSkill):
         if not todos:
             return self.speak_dialog("list_todo_no_reminder")
 
-        if message.data.get("stored"):
+        if message.data.get("stored") or voc_match(message.data.get("utterance", ""),
+                                                    "stored", lang=self.lang):
             to_delete = [todo.alert_name for todo in todos]
         elif name:
             to_delete = [name]
@@ -1084,12 +1055,7 @@ class AlertSkill(ConversationalSkill):
                           {"num": pronounce_number(len(deleted), lang=self.lang)})
 
     # Query DAV
-    @intent_handler(
-        IntentBuilder("CalendarList")
-        .require("query")
-        .require("calendar")
-        .require("choice")
-    )
+    @intent_handler("CalendarList.intent")
     def handle_speak_calendar_list(self, message: Message):
         """
         Intent to get a list of DAV calendars accessable
@@ -1345,8 +1311,10 @@ class AlertSkill(ConversationalSkill):
             return None
 
         # List handling (except lists in the process of creation)
-        if alert_type == AlertType.TODO and message.data.get("list") and \
-                not message.data.get("create"):
+        utterance = message.data.get("utterance", "")
+        has_list = message.data.get("list") or voc_match(utterance, "list", lang=self.lang)
+        has_create = message.data.get("create") or voc_match(utterance, "create", lang=self.lang)
+        if alert_type == AlertType.TODO and has_list and not has_create:
             alerts = list(filter(lambda alert: alert.children, alerts))
 
         if message.data.get("next") or len(alerts) == 1:

@@ -1,0 +1,2 @@
+(set|create|add|schedule) a [new] reminder [to {reminder}] [at {time}]
+new reminder [{reminder}]
