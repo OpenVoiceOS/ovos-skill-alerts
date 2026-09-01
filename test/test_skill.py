@@ -39,7 +39,6 @@ from mock.mock import call
 from ovos_date_parser import nice_time, nice_date_time, nice_duration
 from ovos_number_parser import pronounce_number
 from ovos_bus_client.message import Message
-from ovos_utils.events import EventSchedulerInterface
 from ovos_utils.messagebus import FakeBus
 from ovos_workshop.skills import OVOSSkill
 
@@ -2147,10 +2146,10 @@ class TestAlertManager(unittest.TestCase):
             if isfile(test_file):
                 remove(test_file)
         
-        scheduler = EventSchedulerInterface("test", bus=self.bus)
+        skill = OVOSSkill(skill_id="ovos-skill-alerts", bus=self.bus)
         alert_manager = AlertManager(
             self.manager_path,
-            scheduler,
+            skill,
             (
                 alert_prenotification,
                 alert_expired,
@@ -2189,10 +2188,10 @@ class TestAlertManager(unittest.TestCase):
         test_file = join(self.manager_path, "alerts.json")
         if isfile(test_file):
             remove(test_file)
-        scheduler = EventSchedulerInterface("test", bus=self.bus)
+        skill = OVOSSkill(skill_id="ovos-skill-alerts", bus=self.bus)
         alert_manager = AlertManager(
             self.manager_path,
-            scheduler,
+            skill,
             (
                 alert_prenotification,
                 alert_expired,
@@ -2290,7 +2289,7 @@ class TestAlertManager(unittest.TestCase):
         # no errors to report
         self.assertEqual(errors["dav.credentials.missing"], [])
         self.assertEqual(errors["dav.service.cant.connect"], [])
-        self.assertEqual(len(alert_manager._scheduler.events.events), 0)
+        self.assertEqual(len(alert_manager._skill.event_scheduler.events.events), 0)
         remove(credentials_file)
 
     def test_alert_manager_dav_init_conncheck(self):
@@ -2307,7 +2306,7 @@ class TestAlertManager(unittest.TestCase):
         alert_manager = self._init_alert_manager()
         errors = alert_manager.init_dav_clients(dav_services, 15)
         self.assertEqual(alert_manager.dav_active, False)
-        self.assertEqual(len(alert_manager._scheduler.events.events), 0)
+        self.assertEqual(len(alert_manager._skill.event_scheduler.events.events), 0)
         self.assertIn("testservice", errors["dav.service.cant.connect"])
         remove(credentials_file)
 
@@ -2330,7 +2329,7 @@ class TestAlertManager(unittest.TestCase):
         self.assertIn("testservice", alert_manager._dav_clients)
         self.assertEqual(errors["dav.credentials.missing"], [])
         self.assertEqual(errors["dav.service.cant.connect"], [])
-        self.assertEqual(len(alert_manager._scheduler.events.events), 1)
+        self.assertEqual(len(alert_manager._skill.event_scheduler.events.events), 1)
         remove(credentials_file)
     
     def test_alert_manager_cache_file(self):
@@ -2388,10 +2387,10 @@ class TestAlertManager(unittest.TestCase):
         self.assertEqual(len(alert_manager.active_alerts), 1)
         self.assertEqual(alert_manager.missed_alerts, dict())
         # Check scheduled events
-        self.assertEqual(len(alert_manager._scheduler.events.events), 2)
+        self.assertEqual(len(alert_manager._skill.event_scheduler.events.events), 2)
         # Shutdown manager
         alert_manager.shutdown()
-        self.assertFalse(alert_manager._scheduler.events.events)
+        self.assertFalse(alert_manager._skill.event_scheduler.events.events)
         # Create new manager
         new_manager = self._init_alert_manager(wipe=False)
         self.assertEqual(len(new_manager.pending_alerts), 2)
@@ -2400,7 +2399,7 @@ class TestAlertManager(unittest.TestCase):
         self.assertEqual(alert_manager.pending_alerts.keys(),
                          new_manager.pending_alerts.keys())
         # Check scheduled events
-        self.assertEqual(len(new_manager._scheduler.events.events), 2)
+        self.assertEqual(len(new_manager._skill.event_scheduler.events.events), 2)
 
     def test_get_user_alerts(self):
 

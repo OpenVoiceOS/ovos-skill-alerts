@@ -214,7 +214,7 @@ class AlertSkill(ConversationalSkill):
         # Initialize manager with any cached alerts
         self._alert_manager = AlertManager(
             self.alerts_path or self.file_system.path,
-            self.event_scheduler,
+            self,
             (
                 self._alert_prenotification,
                 self._alert_expired,

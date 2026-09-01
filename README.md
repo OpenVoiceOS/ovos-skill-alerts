@@ -198,6 +198,34 @@ Connection errors are voiced; check the skill log for details.
 Only events, reminders, and todos sync. Alarms and timers do not sync.
 Check the timezone on your server and events, because the skill sometimes reads the timezone wrong and schedules the alert incorrectly.
 
+## How alerts are timed
+
+The skill does not keep its own clock. Every alert becomes one schedule in the
+scheduled-events service, named by the alert's own uuid, and a prenotification
+becomes a second schedule under that uuid with a `.pre` suffix. Scheduling the
+same name again replaces what is there, so an alert offered twice is still one
+alert.
+
+A one-shot alert is scheduled for a time-zone-aware instant, and an alert that
+repeats on a fixed interval is handed over as a period anchored on its first
+occurrence, so a late firing does not push the rest of the series along. An
+alarm that repeats on weekdays, and an alert that carries only an end date, are
+walked by the skill: a wall clock is what has to survive a daylight-saving
+change, so the alert works out its next occurrence in its own zone each time it
+rings and the schedule is moved on to it.
+
+Schedules outlive both the skill and the service, and the service replays its
+store when it comes back. What does not outlive the skill is the handler the
+schedule calls, so on start the skill offers its pending alerts again under the
+names they already have.
+
+An occurrence that arrives more than a minute after it was due is one the
+assistant was not there to ring: it goes on the missed list instead of going off
+out of the blue, as do the occurrences the service reports it could not deliver
+at all.
+
+This needs `ovos-bus-client >= 2.11.0a1` and `ovos-workshop >= 9.6.4a1`.
+
 ## Known Bugs / Troubleshooting
 
 _This skill targets ovos-core >= 0.0.8 and its dependencies. On an older version, you might run into major problems; please update.
