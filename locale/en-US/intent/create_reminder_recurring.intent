@@ -10,3 +10,5 @@ remind me to take out the trash weekday mornings at 8
 remind me to feed the cat every weekday morning at 7
 remind me to leave for work weekday mornings at 8
 remind me to take a break weekday afternoons at 3
+remind me to take out the trash every (monday|tuesday|wednesday|thursday|friday|saturday|sunday) [and (monday|tuesday|wednesday|thursday|friday|saturday|sunday)] [at (7 am|7 pm|8 am|9 am)]
+(set|create) a [recurring] reminder to water the plants every (monday|tuesday|wednesday|thursday|friday|saturday|sunday) [and (monday|tuesday|wednesday|thursday|friday|saturday|sunday)] [at (7 am|7 pm|8 am|9 am)]
