@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.3.6a5](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.3.6a5) (2026-09-02)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.3.6a4...0.3.6a5)
+
+**Merged pull requests:**
+
+- Migrate 15 class-C Adapt intents to intent files [\#172](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/172) ([JarbasAl](https://github.com/JarbasAl))
+
 ## [0.3.6a4](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.3.6a4) (2026-08-26)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.3.6a3...0.3.6a4)
