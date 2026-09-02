@@ -1,0 +1,10 @@
+(do|did) (i|we) have (anything|something) (scheduled|stored|saved|set|pending) (for|at|on|tomorrow|today) {timeframe}
+(list|show|read) (my|all my|the) (alarms|timers|reminders|events|appointments|alerts) (for|at|on) {timeframe}
+(what|which) {alertkind} (are|is) (stored|saved|set|pending|upcoming|scheduled|there) (for|at|on|tomorrow|today) {timeframe}
+(list|show|read) (my|all my|the) (alarm|alarms|alarm clock|timer|timers|countdown|reminder|reminders|event|events|appointment|appointments|alert|alerts)
+(do|did) (i|we) have (any|some|a|an) {alertkind} (for|at|on|between|tomorrow|today|this week) {timeframe}
+what (did|have) (i|we) (set|schedule|store|scheduled|stored) (for|on|at|tomorrow|today) {timeframe}
+(what|which|how many) {alertkind} (do|did) (i|we) have (for|at|on|tomorrow|today|this week) {timeframe}
+(do|did) (i|we) have (any|some) (stored|saved|pending|upcoming|set|scheduled) {alertkind}
+(do|did) (i|we) have (anything|something) (scheduled|stored|saved|set|pending)
+(what|which) {alertkind} (are|is) (stored|saved|set|pending|upcoming|scheduled|there)

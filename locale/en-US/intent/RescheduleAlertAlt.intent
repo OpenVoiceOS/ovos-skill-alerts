@@ -1,0 +1,12 @@
+(move|push|shift) (my|the) (next|upcoming) {schedkind} (earlier|sooner|later|forward|back)
+(could|would|can) you (make|set) (my|the) {schedkind} (earlier|sooner|later|longer|shorter)
+(my|the) (next|upcoming) {schedkind} (earlier|sooner|later|longer|shorter) [please]
+(make|set) (my|the) (next|upcoming) {schedkind} (earlier|sooner|later|longer|shorter)
+(move|push|shift) (my|the) {schedkind} (earlier|sooner|later|forward|back)
+(shorten|lengthen|extend|expand|increase|decrease) (my|the) (next|upcoming) {schedkind}
+(my|the) {schedkind} (earlier|sooner|later|longer|shorter) [please]
+(make|set) (my|the) {schedkind} (earlier|sooner|later|longer|shorter)
+(shorten|lengthen|extend|expand|increase|decrease) (my|the) {schedkind}
+{schedkind} (earlier|sooner|later|longer|shorter) [please]
+(earlier|sooner|later|longer|shorter) {schedkind} [please]
+(earlier|sooner|later|longer|shorter) {schedkind}

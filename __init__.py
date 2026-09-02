@@ -82,7 +82,6 @@ from ovos_utils.process_utils import RuntimeRequirements
 from ovos_utils.sound import play_audio
 from ovos_utterance_normalizer import UtteranceNormalizerPlugin
 from ovos_workshop.decorators import intent_handler
-from ovos_workshop.intents import IntentBuilder
 from ovos_workshop.skills.converse import ConversationalSkill
 from ovos_workshop.skills.ovos import join_word_list
 
@@ -305,25 +304,19 @@ class AlertSkill(ConversationalSkill):
         self.confirm_alert(alarm, message)
 
     @intent_handler("CreateAlarmAlt.intent")
-    @intent_handler(IntentBuilder("CreateAlarmAlt").require("wake").optionally("repeat"))
     def handle_create_alarm_alt(self, message: Message):
         """
         Alternate intent handler for creating an alarm
         :param message: Message associated with request
-
-        Registered against BOTH padacioso (rich phrasing, see
-        CreateAlarmAlt.intent) and a bare Adapt fallback: wake.voc only
-        lists "wake me"/"wake us" (with pronoun), never bare "wake"/"wake
-        up", so this cannot re-claim the naptime-owned bare wake request
-        (test/end2end/test_wake_arbitration.py) -- it exists so a
-        scheduled "wake me/us up ..." still resolves to an alarm on the
-        adapt-only pipeline tier, where padacioso does not run.
         """
         return self.handle_create_alarm(message)
 
-    @intent_handler(IntentBuilder("CreateOcpAlarm").require("alarm")
-                    .require("media").require("create").optionally("question"))
+    @intent_handler("CreateOcpAlarm.intent")
     def handle_ocp_alarm(self, message: Message):
+        """
+        Intent handler for creating an alarm that plays media via OCP
+        :param message: Message associated with request
+        """
         if not self.bus.wait_for_response(Message("ovos.common_play.ping"),
                                           "ovos.common_play.pong"):
             return self.speak_dialog("ocp_missing")
@@ -346,9 +339,12 @@ class AlertSkill(ConversationalSkill):
             assert alarm.media_type == "ocp"
             self.confirm_alert(alarm, message)
 
-    @intent_handler(IntentBuilder("CreateOcpAlarmAlt").require("wake")
-                    .require("media").optionally("question"))
+    @intent_handler("CreateOcpAlarmAlt.intent")
     def handle_ocp_alarm_alt(self, message: Message):
+        """
+        Alternate intent handler for creating an OCP media alarm
+        :param message: Message associated with request
+        """
         return self.handle_ocp_alarm(message)
 
     #@killable_intent()
@@ -464,11 +460,8 @@ class AlertSkill(ConversationalSkill):
         LOG.debug("Create Event calling Reminder")
         self.handle_create_reminder(message)
 
-    @intent_handler(IntentBuilder("RescheduleAlert")
-                    .require("change").optionally("next")
-                    .one_of("alarm", "reminder", "event", "timer")
-                    .optionally("question").optionally("earlier")
-                    .optionally("all_day"))
+    @intent_handler("RescheduleAlert.intent")
+    @intent_handler("RescheduleAlert2.intent")
     def handle_reschedule_alert(self, message: Message):
         """
         Intent to reschedule an alarm, reminder, event or timer
@@ -515,23 +508,49 @@ class AlertSkill(ConversationalSkill):
                                          "alert_rescheduled_prenotification",
                                          dialog_data)
 
-    @intent_handler(IntentBuilder("RescheduleAlertAlt")
-                    .one_of("earlier", "later").optionally("next")
-                    .one_of("alarm", "reminder", "event", "timer")
-                    .optionally("question"))
+    @intent_handler("RescheduleAlertAlt.intent")
     def handle_reschedule_alert_alt(self, message: Message):
+        """
+        Alternate intent handler for rescheduling an existing alert
+        :param message: Message associated with request
+        """
         LOG.debug("alt schedule")
         return self.handle_reschedule_alert(message)
 
-    @intent_handler(IntentBuilder("ChangeProperties")
-                    .require("change").optionally("next")
-                    .one_of("alarm", "reminder", "event", "timer")
-                    .one_of("until", "repeat", "priority")
-                    .optionally("weekdays").optionally("weekends")
-                    .optionally("everyday").optionally("question"))
+    @intent_handler("ChangePriority.intent")
+    @intent_handler("ChangePriority2.intent")
+    def handle_change_priority(self, message: Message):
+        """
+        padacioso/padatious entry point for the priority branch of
+        `handle_change_properties`. ChangePriority.intent/ChangePriority2.intent
+        carry no "priority" Adapt flag, so it is forced here before
+        delegating -- the voc_match fallback inside handle_change_properties
+        would also catch it, but doing it explicitly keeps the split
+        unambiguous regardless of phrasing.
+        """
+        message.data["priority"] = True
+        return self.handle_change_properties(message)
+
+    @intent_handler("ChangeRepeat.intent")
+    def handle_change_repeat(self, message: Message):
+        """padacioso/padatious entry point for the repeat branch."""
+        message.data["repeat"] = True
+        return self.handle_change_properties(message)
+
+    @intent_handler("ChangeUntil.intent")
+    def handle_change_until(self, message: Message):
+        """padacioso/padatious entry point for the until/duration branch."""
+        message.data["until"] = True
+        return self.handle_change_properties(message)
+
     def handle_change_properties(self, message: Message):
         """
-        Intent to reschedule an alarm, reminder, event or timer
+        Reschedule an alarm, reminder, event or timer.
+
+        Reached only via handle_change_priority/handle_change_repeat/
+        handle_change_until (the padacioso/padatious file-intent entry
+        points, split by branch since a single .intent template can't
+        express a `one_of("until", "repeat", "priority")` constraint).
         :param message: Message associated with request
         """
         alert_type, spoken_type = get_alert_type_from_intent(message)
@@ -541,7 +560,15 @@ class AlertSkill(ConversationalSkill):
             return self.speak_dialog("error_no_scheduled_kind",
                                      {"kind": spoken_type}, wait=True)
 
-        if message.data.get("priority"):
+        utterance = message.data.get("utterance", "")
+        is_priority = message.data.get("priority") or \
+            voc_match(utterance, "priority", lang=self.lang)
+        is_until = message.data.get("until") or \
+            voc_match(utterance, "until", lang=self.lang)
+        is_repeat = message.data.get("repeat") or \
+            voc_match(utterance, "repeat", lang=self.lang)
+
+        if is_priority:
             old_priority = alert.priority
             priority = parse_alert_priority_from_message(message)
             if old_priority != priority:
@@ -550,7 +577,7 @@ class AlertSkill(ConversationalSkill):
                                   {"num": priority})
             else:
                 return self.speak_dialog("error_same_priority")
-        elif message.data.get("until"):
+        elif is_until:
             end = parse_end_condition_from_message(message)
             if end:
                 alert.until = end
@@ -558,7 +585,7 @@ class AlertSkill(ConversationalSkill):
                 self.speak_dialog("alert_rescheduled_end", dialog_data)
             else:
                 return self.speak_dialog("error_no_time", {"kind": spoken_type})
-        elif message.data.get("repeat"):
+        elif is_repeat:
             repeat = parse_repeat_from_message(message)
             if repeat:
                 if self.alert_manager.reschedule_repeat(alert, repeat):
@@ -574,12 +601,12 @@ class AlertSkill(ConversationalSkill):
         self._display_alert(alert)
         self.alert_manager.sync_dav_item(alert)
 
-    @intent_handler(IntentBuilder("ChangeMediaProperties")
-                    .require("change").optionally("next")
-                    .one_of("alarm", "reminder", "event", "timer")
-                    .require("playable"))
+    @intent_handler("ChangeMediaProperties.intent")
     def handle_change_media_properties(self, message: Message):
-
+        """
+        Intent handler for changing the media/sound played by an alert
+        :param message: Message associated with request
+        """
         alert_type, spoken_type = get_alert_type_from_intent(message)
         alert: Alert = self._resolve_requested_alert(message, alert_type)
 
@@ -601,9 +628,9 @@ class AlertSkill(ConversationalSkill):
                               {"new": translate(new_media, lang=self.lang)})
 
     # Query Alerts
-    @intent_handler(IntentBuilder("ListAlerts").require("query")
-                    .one_of("alarm", "reminder", "event", "alert", "remind")
-                    .optionally("and").optionally("stored"))
+    @intent_handler("ListAlerts.intent")
+    @intent_handler("ListAlerts2.intent")
+    @intent_handler("ListAlerts3.intent")
     def handle_event_timeframe_check(self, message: Message):
         """
         Intent to check if there are events stored at a given datetime /
@@ -718,7 +745,8 @@ class AlertSkill(ConversationalSkill):
 
         self.speak_dialog(dialog, data, wait=True)
 
-    @intent_handler(IntentBuilder("TimerStatus").one_of("time", "timer").require("remaining").optionally("query"))
+    @intent_handler("TimerStatus.intent")
+    @intent_handler("TimerStatus2.intent")
     def handle_timer_status(self, message: Message):
         """
         Intent handler to handle request for timer status (name optional)
@@ -757,9 +785,8 @@ class AlertSkill(ConversationalSkill):
         else:
             self.speak_dialog("list_alert_none_missed", wait=True)
 
-    @intent_handler(IntentBuilder("CancelAlert").require("cancel")
-                    .optionally("stored").optionally("next").optionally("and")
-                    .one_of("alarm", "timer", "reminder", "event", "alert"))
+    @intent_handler("CancelAlert.intent")
+    @intent_handler("CancelAlert2.intent")
     def handle_cancel_alert(self, message: Message):
         """
         Intent handler to handle request to cancel alerts
@@ -1002,6 +1029,10 @@ class AlertSkill(ConversationalSkill):
     #@killable_intent()
     @intent_handler("DeleteList.intent")
     def handle_delete_todo_list(self, message: Message):
+        """
+        Intent handler for deleting a named todo list and its entries
+        :param message: Message associated with request
+        """
         name = parse_alert_name_from_message(message)
         todo = self._resolve_requested_alert(message,
                                              AlertType.TODO)
@@ -1018,7 +1049,10 @@ class AlertSkill(ConversationalSkill):
     #@killable_intent()
     @intent_handler("DeleteTodoEntries.intent")
     def handle_delete_todo_entries(self, message: Message):
-
+        """
+        Intent handler for deleting one or more entries from a todo list
+        :param message: Message associated with request
+        """
         name = parse_alert_name_from_message(message)
         todos = self.alert_manager.get_unconnected_alerts(type=AlertType.TODO)
 
@@ -1073,10 +1107,7 @@ class AlertSkill(ConversationalSkill):
                                                                       connector="and", sep=",", lang=self.lang)},
             )
 
-    @intent_handler(
-        IntentBuilder("DAVSync")
-        .require("synchronize").one_of("calendar", "event", "reminder")
-    )
+    @intent_handler("DAVSync.intent")
     def handle_dav_sync(self, message: Message):
         """
         Handler to synchronize with DAV services on demand
