@@ -604,7 +604,7 @@ class TestSkill(unittest.TestCase):
         self.skill.speak_dialog.reset_mock()
 
         # list of todos (todos WITHOUT subitems)
-        self.skill.handle_query_todo_reminder_names(message)
+        self.skill._speak_todo_reminder_names()
         self.skill.speak_dialog.assert_called_once()
         self.skill.speak_dialog.assert_called_with(
             "list_todo_reminder", {"reminders": "flowers"}
@@ -628,7 +628,7 @@ class TestSkill(unittest.TestCase):
         # with list name
         list_delete_entry = _get_message_from_file("todo_entry_delete.json")
         self.skill._get_response_cascade.return_value=["butter"]
-        self.skill.handle_delete_todo_list_entries(list_delete_entry)
+        self.skill._delete_list_entries(list_delete_entry)
         self.skill.speak_dialog.assert_called_once()
         self.skill.speak_dialog.assert_called_with("list_todo_num_deleted", {"num": "one"})
         entries = self.skill.alert_manager.get_children(self.shopping_list.ident)
@@ -641,7 +641,7 @@ class TestSkill(unittest.TestCase):
         list_delete_entry = _get_message_from_file("todo_entry_delete_wo_listname.json")
         self.skill._get_response_cascade.return_value=["mango"]
         self.skill.ask_selection.return_value="shopping"
-        self.skill.handle_delete_todo_list_entries(list_delete_entry)
+        self.skill._delete_list_entries(list_delete_entry)
         self.assertEqual(self.skill.speak_dialog.call_count, 2)
         self.skill.speak_dialog.assert_called_with("list_todo_num_deleted", {"num": "one"})
         entries = self.skill.alert_manager.get_children(self.shopping_list.ident)
@@ -652,7 +652,7 @@ class TestSkill(unittest.TestCase):
         self.populate_alerts([self.shopping_subitem1])
         # item not stored
         self.skill._get_response_cascade.return_value=["not there"]
-        self.skill.handle_delete_todo_list_entries(list_delete_entry)
+        self.skill._delete_list_entries(list_delete_entry)
         self.assertEqual(self.skill.speak_dialog.call_count, 3)
         self.skill.speak_dialog.assert_called_with("list_todo_num_deleted", {"num": "zero"})
         self.skill.speak_dialog.reset_mock()
@@ -661,7 +661,7 @@ class TestSkill(unittest.TestCase):
         todo_list_delete_all = _get_message_from_file("todo_entry_delete_all.json")
         shopping_items = len(self.skill.alert_manager.get_children(self.shopping_list.ident))
         assert shopping_items > 0
-        self.skill.handle_delete_todo_list_entries(todo_list_delete_all)
+        self.skill._delete_list_entries(todo_list_delete_all)
         self.skill.speak_dialog.assert_called_once()
         self.skill.speak_dialog.assert_called_with("list_todo_num_deleted",
                                                    {"num": pronounce_number(shopping_items)})
@@ -3894,9 +3894,9 @@ class TestSkillLoading(unittest.TestCase):
                      'RescheduleAlert', 'RescheduleAlertAlt', 'ListAlerts',
                      'ChangeProperties', 'ChangeMediaProperties',
                      'TimerStatus', 'CancelAlert', 'CreateList',
-                     'AddListSubitems', 'QueryListNames', 'QueryTodoEntries',
+                     'AddListSubitems', 'QueryListNames',
                      'QueryListEntries', 'DeleteListEntries', 'DeleteList',
-                     'DeleteTodoEntries', 'CalendarList'}
+                     'CalendarList'}
     padatious_intents = {'missed_alerts.intent'}
 
     # regex entities, not necessarily filenames

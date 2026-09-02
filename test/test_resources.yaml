@@ -168,8 +168,6 @@ intents:
     - 'CreateList'
     - 'AddListSubitems'
     - 'QueryListNames'
-    - 'QueryTodoEntries'
     - 'QueryListEntries'
     - 'DeleteListEntries'
-    - 'DeleteTodoEntries'
     - 'CalendarList'

@@ -693,14 +693,6 @@ class TestAdapt19_Querylistnames(_IntentRoutingMixin, TestCase):
     def test_which_lists_are_stored(self):
         self._assert_padatious(r"which lists are stored", r"QueryListNames.intent")
 
-class TestAdapt20_Querytodoentries(_IntentRoutingMixin, TestCase):
-    """Padatious (intent file) intent: QueryTodoEntries.intent"""
-    def test_whats_on_my_todo(self):
-        self._assert_padatious(r"what's on my todo", r"QueryTodoEntries.intent")
-
-    def test_what_do_i_have_to_do(self):
-        self._assert_padatious(r"what do i have to do", r"QueryTodoEntries.intent")
-
 class TestAdapt21_Querylistentries(_IntentRoutingMixin, TestCase):
     """Padatious (intent file) intent: QueryListEntries.intent"""
     def test_what_items_are_on_my_list(self):
@@ -715,6 +707,12 @@ class TestAdapt21_Querylistentries(_IntentRoutingMixin, TestCase):
         # QueryListEntries.intent now has "(what|which) (items|entries|
         # things) are (on|in) (my|the) {name} list".
         self._assert_padatious(r"what items are on my shopping list", r"QueryListEntries.intent")
+
+    def test_whats_on_my_todo(self):
+        self._assert_padatious(r"what's on my todo", r"QueryListEntries.intent")
+
+    def test_what_do_i_have_to_do(self):
+        self._assert_padatious(r"what do i have to do", r"QueryListEntries.intent")
 
 class TestAdapt22_Deletelistentries(_IntentRoutingMixin, TestCase):
     """Padatious (intent file) intent: DeleteListEntries.intent
@@ -744,6 +742,12 @@ class TestAdapt22_Deletelistentries(_IntentRoutingMixin, TestCase):
         self._seed_list_with_item("groceries", "bread")
         self._assert_padatious(r"remove all items from the groceries list", r"DeleteListEntries.intent")
 
+    def test_delete_my_todo_list(self):
+        self._assert_padatious(r"delete my todo list", r"DeleteListEntries.intent")
+
+    def test_delete_everything_from_my_todo(self):
+        self._assert_padatious(r"delete everything from my todo", r"DeleteListEntries.intent")
+
 class TestAdapt23_Deletelist(_IntentRoutingMixin, TestCase):
     """Padatious (intent file) intent: DeleteList.intent"""
     def test_delete_my_list_name(self):
@@ -759,14 +763,6 @@ class TestAdapt23_Deletelist(_IntentRoutingMixin, TestCase):
         # "(delete|remove|erase|drop) (my|the) {name} list".
         self._seed_list_with_item("hardware", "nails")
         self._assert_padatious(r"drop the hardware list", r"DeleteList.intent")
-
-class TestAdapt24_Deletetodoentries(_IntentRoutingMixin, TestCase):
-    """Padatious (intent file) intent: DeleteTodoEntries.intent"""
-    def test_delete_my_todo_list(self):
-        self._assert_padatious(r"delete my todo list", r"DeleteTodoEntries.intent")
-
-    def test_delete_everything_from_my_todo(self):
-        self._assert_padatious(r"delete everything from my todo", r"DeleteTodoEntries.intent")
 
 class TestAdapt25_Calendarlist(_IntentRoutingMixin, TestCase):
     """Padatious (intent file) intent: CalendarList.intent"""

@@ -1,3 +1,6 @@
 (qué elementos|qué entradas) hay en (mi|la) lista [{name}]
 (lee|muestra) [me] las entradas de (mi|la) lista [{name}]
 qué hay en (mi|la) lista {name}
+qué hay en mi lista de (tareas|por hacer)
+(lee|muestra) [me] mis (notas|tareas) [pendientes]
+qué tengo que hacer
