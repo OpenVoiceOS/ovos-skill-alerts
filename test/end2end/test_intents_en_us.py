@@ -134,6 +134,21 @@ class _IntentRoutingMixin:
             "ovos-padatious-pipeline-plugin-low",
         ])
 
+    def _assert_padatious_high(self, utterance: str, intent_file: str):
+        # Pins the match to the padatious-HIGH tier specifically (unlike
+        # _assert_padatious, which also accepts a medium/low-tier match).
+        # A phrase that only clears low-tier NN generalization is one a
+        # competing skill/fallback registered at a higher pipeline stage
+        # would steal in the real default pipeline (see issue #175's
+        # "wake the kids up at {time}" live finding) -- pinning it to
+        # padatious-high is what proves the .intent template itself, not
+        # a fuzzy neural guess, is what resolves the utterance.
+        intent_name = intent_file[:-len(".intent")] if intent_file.endswith(".intent") else intent_file
+        intent_msg_type = f"{SKILL_ID}:{intent_name}"
+        self._assert_intent(utterance, intent_msg_type, [
+            "ovos-padatious-pipeline-plugin-high",
+        ])
+
     def _assert_adapt(self, utterance: str, intent_label: str = ''):
         intent_msg_type = f"{SKILL_ID}:{intent_label}"
         self._assert_intent(utterance, intent_msg_type, [
@@ -313,6 +328,37 @@ class TestAdapt3_Createalarmalt(_IntentRoutingMixin, TestCase):
     def test_wake_us_up_every_weekday_at_time(self):
         self._assert_padatious(r"wake us up every weekday at 6 am", r"CreateAlarmAlt.intent")
 
+    def test_wake_the_kids_up(self):
+        # issue #175: third-person wake phrasings. wake.voc only had
+        # "wake me/us [up]" before this, so "wake the kids" fell through.
+        self._assert_adapt(r"wake the kids up", r"CreateAlarmAlt")
+
+    def test_wake_the_kids(self):
+        self._assert_adapt(r"wake the kids", r"CreateAlarmAlt")
+
+    def test_wake_up_the_kids(self):
+        self._assert_adapt(r"wake up the kids", r"CreateAlarmAlt")
+
+    def test_wake_everyone_up(self):
+        self._assert_adapt(r"wake everyone up", r"CreateAlarmAlt")
+
+    def test_wake_everyone(self):
+        self._assert_adapt(r"wake everyone", r"CreateAlarmAlt")
+
+    def test_wake_the_kids_up_at_time(self):
+        # issue #175 live validation: the default pipeline serves
+        # CreateAlarmAlt from CreateAlarmAlt.intent (padatious/padacioso),
+        # which only had "wake (me|us)" forms -- "wake the kids up at 7"
+        # never reached the padatious-tier template that carries {time}
+        # and fell through to fallback.
+        self._assert_padatious_high(r"wake the kids up at 7", r"CreateAlarmAlt.intent")
+
+    def test_wake_up_the_kids_at_time(self):
+        self._assert_padatious_high(r"wake up the kids at 7", r"CreateAlarmAlt.intent")
+
+    def test_wake_everyone_up_every_weekday_at_time(self):
+        self._assert_padatious_high(r"wake everyone up every weekday at 7", r"CreateAlarmAlt.intent")
+
 class TestAdapt4_Createocpalarm(_IntentRoutingMixin, TestCase):
     """Adapt intent: CreateOcpAlarm"""
     def test_wake_me_up_with_music(self):
@@ -363,6 +409,13 @@ class TestAdapt6_Createtimer(_IntentRoutingMixin, TestCase):
 
     def test_start_a_5_minute_timer(self):
         self._assert_padatious(r"start a 5 minute timer", r"CreateTimer.intent")
+
+    def test_put_timer_10_minutes(self):
+        # issue #175: ESL verb gap. "put" is added to CreateTimer.intent's
+        # "set timer [for] {duration}" line (create.voc's "put" entry alone
+        # has no effect here -- CreateTimer is a padacioso template, not an
+        # Adapt intent driven by create.voc).
+        self._assert_padatious(r"put timer 10 minutes", r"CreateTimer.intent")
 
 class TestAdapt7_Createreminder(_IntentRoutingMixin, TestCase):
     """Padatious (intent file) intent: CreateReminder.intent"""
@@ -551,6 +604,18 @@ class TestAdapt14_Listalerts(_IntentRoutingMixin, TestCase):
 
     def test_are_there_any_alerts_between_4_pm_and_5_(self):
         self._assert_adapt(r"are there any alerts between 4 pm and 5 pm", r"ListAlerts")
+
+    def test_could_you_tell_me_what_reminders_i_have(self):
+        # issue #175: create.voc's "i have" entry used to sit alongside
+        # CreateReminder's Adapt registration and outscored ListAlerts on
+        # this phrasing. CreateReminder moved to a padacioso .intent file
+        # in PR #172, and "i have" was removed from create.voc here since
+        # nothing else it fed (CreateOcpAlarm, the has_create list filter)
+        # needs it -- this pins the query routing regardless.
+        self._assert_adapt(r"could you tell me what reminders i have", r"ListAlerts")
+
+    def test_what_reminders_do_i_have(self):
+        self._assert_adapt(r"what reminders do i have", r"ListAlerts")
 
 class TestAdapt15_Timerstatus(_IntentRoutingMixin, TestCase):
     """Adapt intent: TimerStatus"""

@@ -1,5 +1,5 @@
 (set|create|start|add) a (timer|countdown) [for {duration}]
 new timer [for {duration}]
 (set|start|make) a {duration} timer
-set timer [for] {duration}
+(set|put) timer [for] {duration}
 timer [for] {duration}

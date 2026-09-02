@@ -155,3 +155,23 @@ def test_scheduled_wake_requests_still_belong_to_alerts(minicroft, utterance):
     assert _claimant(types) == ALERTS_ID, (
         f"{utterance!r} was claimed by {_claimant(types)!r}, "
         f"expected {ALERTS_ID!r}. pipeline=adapt_only. messages: {types!r}")
+
+
+@pytest.mark.timeout(300)
+@pytest.mark.parametrize("utterance", [
+    "wake the kids up",
+    "wake the kids",
+    "wake up the kids",
+    "wake everyone up",
+    "wake everyone",
+])
+def test_third_person_wake_belongs_to_alerts(minicroft, utterance):
+    """Third-person wake phrasings (issue #175) are new wake.voc lines
+    naming someone other than "me"/"us"; they must resolve to alerts and
+    must not widen the bare "wake"/"wake up" naptime-theft gap above --
+    every line here still names a target ("the kids", "everyone").
+    """
+    types = _capture(minicroft, utterance, ADAPT_ONLY_PIPELINE)
+    assert _claimant(types) == ALERTS_ID, (
+        f"{utterance!r} was claimed by {_claimant(types)!r}, "
+        f"expected {ALERTS_ID!r}. pipeline=adapt_only. messages: {types!r}")
