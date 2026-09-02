@@ -316,6 +316,44 @@ def _strip_voc_phrase(tokens: Optional[Tokens], resource: str, lang: str = None)
             tokens[i] = new_token
 
 
+def _voc_match_index(tokens: Tokens, resource: str, lang: str = None) -> Optional[int]:
+    """
+    Fallback for the adapt ``tokens.index(message.data["<resource>"]) + 1``
+    pattern used to locate a clause that follows a tagged keyword (eg.
+    "until" or "repeat"), for matches that never populate that adapt data
+    (eg. padatious template intents). Finds the longest vocab phrase for
+    ``resource`` present in the utterance, splits the token that contains it
+    into a "before" token and an "after" token (mirroring how
+    ``tokenize_utterance`` already splits on adapt-tagged keywords), and
+    returns the index of the "after" token -- the same index a caller would
+    get from the adapt branch, pointing at the clause to pop and parse.
+
+    :param tokens: mutable Tokens list to search/split, or None
+    :param resource: vocab resource name (without ".voc") to match against
+    :param lang: language of the vocab resource
+    :returns: index of the clause following the matched phrase, or None
+    """
+    if not tokens:
+        return None
+    if not resource.endswith(".voc"):
+        resource = f"{resource}.voc"
+    words = sorted(get_words_list(resource, lang), key=len, reverse=True)
+    for i, token in enumerate(tokens):
+        if not isinstance(token, str):
+            continue
+        for word in words:
+            match = re.search(r"(?i)\b" + re.escape(word) + r"\b", token)
+            if match:
+                before = token[:match.start()].strip()
+                after = token[match.end():].strip()
+                if not after:
+                    return None
+                tokens[i] = before
+                tokens.insert(i + 1, after)
+                return i + 1
+    return None
+
+
 def parse_repeat_from_message(message: Message,
                               tokens: Optional[list] = None) -> Union[List[Weekdays], dt.timedelta]:
     """
@@ -353,9 +391,14 @@ def parse_repeat_from_message(message: Message,
         repeat_days = [Weekdays(i) for i in range(0, 5)]
         if not message.data.get("weekdays"):
             _strip_voc_phrase(tokens, "weekdays", lang)
-    elif message.data.get("repeat"):
+    elif message.data.get("repeat") or voc_match(utt, "repeat", lang=lang):
         tokens = tokens or tokenize_utterance(message)
-        repeat_index = tokens.index(message.data["repeat"]) + 1
+        if message.data.get("repeat"):
+            repeat_index = tokens.index(message.data["repeat"]) + 1
+        else:
+            repeat_index = _voc_match_index(tokens, "repeat", lang)
+            if repeat_index is None:
+                return []
         if repeat_index > len(tokens) - 1:
             return []
 
@@ -429,8 +472,14 @@ def parse_end_condition_from_message(message: Message,
     tokens = tokens or tokenize_utterance(message)
     timezone = timezone or get_default_tz()
     anchor_date = anchor_time or dt.datetime.now(timezone)
-    if message.data.get("until"):
-        idx = tokens.index(message.data["until"]) + 1
+    utt = message.data.get("utterance", "")
+    if message.data.get("until") or voc_match(utt, "until", lang=lang):
+        if message.data.get("until"):
+            idx = tokens.index(message.data["until"]) + 1
+        else:
+            idx = _voc_match_index(tokens, "until", lang)
+            if idx is None:
+                return None
         if idx > len(tokens) - 1:
             return None
         end_clause = tokens.pop(idx)

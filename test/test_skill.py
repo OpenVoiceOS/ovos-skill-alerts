@@ -3126,6 +3126,43 @@ class TestParseUtils(unittest.TestCase):
         self.assertEqual(next_sunday.weekday(), Weekdays.SUN)
         self.assertGreaterEqual(next_sunday, now_time)
 
+    def test_parse_end_condition_from_message_no_adapt_tags(self):
+        # PR #172 adversarial review: intents migrated from Adapt to
+        # padacioso .intent files never populate message.data["until"] (no
+        # __tags__ at all), so the "until"/duration end-condition clause was
+        # silently dropped for every migrated intent that can take one (eg.
+        # CreateReminder "... until november"). Message here has no
+        # "__tags__"/"until" key, mirroring an actual padatious match.
+        from ovos_skill_alerts.util.parse_utils import parse_end_condition_from_message
+
+        now_time = dt.datetime.now(dt.timezone.utc)
+        message = Message(
+            "recognizer_loop:utterance",
+            {"utterance": "create a reminder to go to work at 9 am daily until november",
+             "lang": "en-US"},
+        )
+        end = parse_end_condition_from_message(message, anchor_time=now_time)
+        self.assertIsNotNone(end)
+        if isinstance(end, dt.timedelta):
+            end = now_time + end
+        self.assertEqual(end.month, 11)
+
+    def test_parse_repeat_from_message_no_adapt_tags(self):
+        # Same gap as above for the arbitrary "every <interval>" branch of
+        # parse_repeat_from_message (the "everyday"/"weekends"/"weekdays"
+        # short-circuits already had a voc_match fallback; the generic
+        # "repeat" clause used for "every 3 days" etc. did not).
+        from ovos_skill_alerts.util.parse_utils import parse_repeat_from_message
+
+        message = Message(
+            "recognizer_loop:utterance",
+            {"utterance": "set a reminder every 3 days to check for test failures",
+             "lang": "en-US"},
+        )
+        repeat = parse_repeat_from_message(message)
+        self.assertIsInstance(repeat, dt.timedelta)
+        self.assertEqual(repeat, dt.timedelta(days=3))
+
     def test_parse_alert_time_from_message_alarm(self):
         from ovos_skill_alerts.util.parse_utils import parse_alert_time_from_message, tokenize_utterance
 

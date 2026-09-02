@@ -1,0 +1,7 @@
+(set|create|add|schedule|start) [an] alarm [for {time}]
+new alarm [for {time}]
+i have a new alarm [for {time}]
+(set|create) [an] alarm (at|for) {time}
+alarm (at|for) {time}
+(set|create) [an] alarm every (weekday|weekend|day|morning|night) [at {time}]
+(set|make) a {time} [weekday|weekend] alarm

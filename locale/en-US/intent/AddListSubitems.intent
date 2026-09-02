@@ -1,0 +1,4 @@
+add (items|entries|things) to [my|the] list [{name}]
+(create|add) list (items|entries) [{items}]
+add (items|entries|things) to (my|the) {name} list
+add {items} to (my|the) {name} list
