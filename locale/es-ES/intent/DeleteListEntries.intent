@@ -1,2 +1,4 @@
 (elimina|borra|quita) (los elementos|las entradas) de (mi|la) lista [{name}]
 (elimina|borra) todo de (mi|la) lista [{name}]
+(elimina|borra) mi lista de (tareas|por hacer)
+(elimina|borra) todo de mi lista de (tareas|por hacer)

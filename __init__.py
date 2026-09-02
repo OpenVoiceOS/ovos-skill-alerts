@@ -910,11 +910,20 @@ class AlertSkill(ConversationalSkill):
         else:
             self.speak_dialog("list_todo_no_lists")
 
-    @intent_handler("QueryTodoEntries.intent")
-    def handle_query_todo_reminder_names(self, message: Message):
+    @intent_handler("QueryListEntries.intent")
+    def handle_query_list_entries(self, message: Message):
         """
-        Intent to get a list of todos (todos WITHOUT subitems)
+        Intent to read out list contents, dispatching on the kind of list asked
+        for: the todo list as a whole, or the entries of one named list
         :param message: Message associated with request
+        """
+        if voc_match(message.data.get("utterance", ""), "todo", lang=self.lang):
+            return self._speak_todo_reminder_names()
+        return self.handle_todo_list_entries(message)
+
+    def _speak_todo_reminder_names(self):
+        """
+        Speak the list of todos (todos WITHOUT subitems)
         """
         # only todos without children (and parents)
         todos = self.alert_manager.get_unconnected_alerts(type=AlertType.TODO)
@@ -929,7 +938,6 @@ class AlertSkill(ConversationalSkill):
         else:
             self.speak_dialog("list_todo_no_reminder")
 
-    @intent_handler("QueryListEntries.intent")
     def handle_todo_list_entries(self, message: Optional[Message] = None, alert: Optional[Alert] = None):
         """
         Intent to get the items from a specific todo list
@@ -960,9 +968,19 @@ class AlertSkill(ConversationalSkill):
 
     #@killable_intent()
     @intent_handler("DeleteListEntries.intent")
-    def handle_delete_todo_list_entries(self, message: Message):
+    def handle_delete_list_entries(self, message: Message):
         """
-        Intent to delete one or more todo items
+        Intent to delete list items, dispatching on the kind of list asked for:
+        the todo list as a whole, or the entries of one named list
+        :param message: Message associated with request
+        """
+        if voc_match(message.data.get("utterance", ""), "todo", lang=self.lang):
+            return self._delete_todo_entries(message)
+        return self._delete_list_entries(message)
+
+    def _delete_list_entries(self, message: Message):
+        """
+        Delete one or more items from a named list
         :param message: Message associated with request
         """
         todo = self._resolve_requested_alert(message,
@@ -1015,9 +1033,7 @@ class AlertSkill(ConversationalSkill):
         self.alert_manager.mark_todo_complete(todo)
         self.speak_dialog("list_deleted", {"name": todo.alert_name})
 
-    #@killable_intent()
-    @intent_handler("DeleteTodoEntries.intent")
-    def handle_delete_todo_entries(self, message: Message):
+    def _delete_todo_entries(self, message: Message):
 
         name = parse_alert_name_from_message(message)
         todos = self.alert_manager.get_unconnected_alerts(type=AlertType.TODO)

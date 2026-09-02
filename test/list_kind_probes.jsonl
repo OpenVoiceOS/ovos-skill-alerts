@@ -1,0 +1,157 @@
+{"lang": "ca-ES", "utterance": "què hi ha a la meva llista de pendents", "kind": "todo", "intent": "QueryListEntries", "source_template": "què hi ha a la meva llista de (pendents|tasques)"}
+{"lang": "ca-ES", "utterance": "llegeix em les meves notes pendents", "kind": "todo", "intent": "QueryListEntries", "source_template": "(llegeix|mostra) [em] les meves (notes|tasques) pendents"}
+{"lang": "ca-ES", "utterance": "què tinc per fer", "kind": "todo", "intent": "QueryListEntries", "source_template": "què tinc per fer"}
+{"lang": "ca-ES", "utterance": "quins elements hi ha a la meva llista shopping", "kind": "list", "intent": "QueryListEntries", "source_template": "(quins elements|quines entrades) hi ha a la [meva] llista [{name}]"}
+{"lang": "ca-ES", "utterance": "llegeix em les entrades de la llista shopping", "kind": "list", "intent": "QueryListEntries", "source_template": "(llegeix|mostra) [em] les entrades de la llista [{name}]"}
+{"lang": "ca-ES", "utterance": "què hi ha a la meva llista shopping", "kind": "list", "intent": "QueryListEntries", "source_template": "què hi ha a la [meva] llista {name}"}
+{"lang": "ca-ES", "utterance": "elimina la meva llista de pendents", "kind": "todo", "intent": "DeleteListEntries", "source_template": "(elimina|esborra) (la meva llista de pendents|les meves tasques pendents)"}
+{"lang": "ca-ES", "utterance": "elimina tot de la meva llista de pendents", "kind": "todo", "intent": "DeleteListEntries", "source_template": "(elimina|esborra) tot de la meva llista de (pendents|tasques)"}
+{"lang": "ca-ES", "utterance": "elimina els elements de la meva llista shopping", "kind": "list", "intent": "DeleteListEntries", "source_template": "(elimina|esborra|treu) (els elements|les entrades) de la [meva] llista [{name}]"}
+{"lang": "ca-ES", "utterance": "elimina tot de la meva llista shopping", "kind": "list", "intent": "DeleteListEntries", "source_template": "(elimina|esborra) (tot|totes les entrades) de la [meva] llista [{name}]"}
+{"lang": "cs-CZ", "utterance": "co je na mém todo seznamu", "kind": "todo", "intent": "QueryListEntries", "source_template": "co (je|mám) na [mém] (todo|úkolovém) seznamu"}
+{"lang": "cs-CZ", "utterance": "co mám dělat", "kind": "todo", "intent": "QueryListEntries", "source_template": "co mám (dělat|udělat)"}
+{"lang": "cs-CZ", "utterance": "jaké položky je na mém seznamu shopping", "kind": "list", "intent": "QueryListEntries", "source_template": "(jaké položky|co) (je|jsou) na [mém] seznamu [{name}]"}
+{"lang": "cs-CZ", "utterance": "přečti mi položky na seznamu shopping", "kind": "list", "intent": "QueryListEntries", "source_template": "(přečti|ukaž) [mi] položky na seznamu [{name}]"}
+{"lang": "cs-CZ", "utterance": "smaž můj todo seznam", "kind": "todo", "intent": "DeleteListEntries", "source_template": "(smaž|vymaž) [můj] (todo|úkolový) seznam"}
+{"lang": "cs-CZ", "utterance": "smaž všechno z mého todo seznamu", "kind": "todo", "intent": "DeleteListEntries", "source_template": "(smaž|odstraň) všechno z [mého] (todo|úkolového) seznamu"}
+{"lang": "cs-CZ", "utterance": "smaž položky z mého seznamu shopping", "kind": "list", "intent": "DeleteListEntries", "source_template": "(smaž|odstraň) (položky|všechno) (z|ze) [mého] seznamu [{name}]"}
+{"lang": "da-DK", "utterance": "hvad står på min todo-liste", "kind": "todo", "intent": "QueryListEntries", "source_template": "hvad (står|er) på min (todo|huskeliste)[-liste]"}
+{"lang": "da-DK", "utterance": "hvad skal jeg gøre", "kind": "todo", "intent": "QueryListEntries", "source_template": "hvad skal jeg (gøre|lave)"}
+{"lang": "da-DK", "utterance": "hvilke punkter står på min listen shopping", "kind": "list", "intent": "QueryListEntries", "source_template": "(hvilke punkter|hvad) (står|er) på [min|] liste[n] [{name}]"}
+{"lang": "da-DK", "utterance": "læs mig punkterne på listen shopping", "kind": "list", "intent": "QueryListEntries", "source_template": "(læs|vis) [mig] (punkterne|posterne) på liste[n] [{name}]"}
+{"lang": "da-DK", "utterance": "hvilke punkter står på shopping listen", "kind": "list", "intent": "QueryListEntries", "source_template": "(hvilke punkter|hvad) (står|er) på {name} liste[n]"}
+{"lang": "da-DK", "utterance": "læs mig punkterne på shopping listen", "kind": "list", "intent": "QueryListEntries", "source_template": "(læs|vis) [mig] (punkterne|posterne) på {name} liste[n]"}
+{"lang": "da-DK", "utterance": "slet min todo-liste", "kind": "todo", "intent": "DeleteListEntries", "source_template": "(slet|ryd) min (todo|huskeliste)[-liste]"}
+{"lang": "da-DK", "utterance": "slet alt fra min todo", "kind": "todo", "intent": "DeleteListEntries", "source_template": "(slet|fjern) alt (fra|på) min (todo|huskeliste)"}
+{"lang": "da-DK", "utterance": "slet punkterne fra min listen shopping", "kind": "list", "intent": "DeleteListEntries", "source_template": "(slet|fjern) (punkterne|posterne|alt) (fra|på) [min|] liste[n] [{name}]"}
+{"lang": "da-DK", "utterance": "slet punkterne fra shopping listen", "kind": "list", "intent": "DeleteListEntries", "source_template": "(slet|fjern) (punkterne|posterne|alt) (fra|på) {name} liste[n]"}
+{"lang": "de-DE", "utterance": "was steht auf meiner Aufgaben-liste", "kind": "todo", "intent": "QueryListEntries", "source_template": "was (steht|ist) auf meiner (Aufgaben|To-do)[-liste]"}
+{"lang": "de-DE", "utterance": "lies mir meine Aufgaben vor", "kind": "todo", "intent": "QueryListEntries", "source_template": "(lies|zeige) [mir] meine (Aufgaben|Notizen) [vor]"}
+{"lang": "de-DE", "utterance": "was habe ich zu tun", "kind": "todo", "intent": "QueryListEntries", "source_template": "was habe ich zu tun"}
+{"lang": "de-DE", "utterance": "welche Einträge steht auf meiner Liste shopping", "kind": "list", "intent": "QueryListEntries", "source_template": "(welche Einträge|was) (steht|stehen) auf (meiner|der) Liste [{name}]"}
+{"lang": "de-DE", "utterance": "lies mir die Einträge auf meiner Liste shopping vor", "kind": "list", "intent": "QueryListEntries", "source_template": "(lies|zeige) [mir] die Einträge (auf|von) (meiner|der) Liste [{name}] [vor]"}
+{"lang": "de-DE", "utterance": "welche Einträge steht auf meiner shopping Liste", "kind": "list", "intent": "QueryListEntries", "source_template": "(welche Einträge|was) (steht|stehen) (auf|in) (meiner|der) {name} Liste"}
+{"lang": "de-DE", "utterance": "lies mir die Einträge auf meiner shopping Liste", "kind": "list", "intent": "QueryListEntries", "source_template": "(lies|zeige) [mir] die Einträge (auf|in) (meiner|der) {name} Liste"}
+{"lang": "de-DE", "utterance": "lösche meine Aufgabenliste", "kind": "todo", "intent": "DeleteListEntries", "source_template": "(lösche|entferne) meine (Aufgabenliste|Aufgaben|Notizen)"}
+{"lang": "de-DE", "utterance": "lösche alles von meiner Aufgaben-liste", "kind": "todo", "intent": "DeleteListEntries", "source_template": "(lösche|entferne) alles (von|aus) meiner (Aufgaben|To-do)[-liste]"}
+{"lang": "de-DE", "utterance": "lösche die Einträge von meiner Liste shopping", "kind": "list", "intent": "DeleteListEntries", "source_template": "(lösche|entferne) [die] Einträge (von|aus) (meiner|der) Liste [{name}]"}
+{"lang": "de-DE", "utterance": "lösche alles von meiner Liste shopping", "kind": "list", "intent": "DeleteListEntries", "source_template": "(lösche|entferne) alles (von|aus) (meiner|der) Liste [{name}]"}
+{"lang": "de-DE", "utterance": "lösche die Einträge von meiner shopping Liste", "kind": "list", "intent": "DeleteListEntries", "source_template": "(lösche|entferne) [die] Einträge (von|aus) (meiner|der) {name} Liste"}
+{"lang": "de-DE", "utterance": "lösche alles von meiner shopping Liste", "kind": "list", "intent": "DeleteListEntries", "source_template": "(lösche|entferne) alles (von|aus) (meiner|der) {name} Liste"}
+{"lang": "en-US", "utterance": "what is on my todo list", "kind": "todo", "intent": "QueryListEntries", "source_template": "(what is|what's) (on|in) my (todo|to do) [list]"}
+{"lang": "en-US", "utterance": "read me my todo items", "kind": "todo", "intent": "QueryListEntries", "source_template": "(read|show|list) [me] my (todo|to do) (items|entries|notes)"}
+{"lang": "en-US", "utterance": "what do i have to do", "kind": "todo", "intent": "QueryListEntries", "source_template": "what do i have to do"}
+{"lang": "en-US", "utterance": "what items are on my list shopping", "kind": "list", "intent": "QueryListEntries", "source_template": "(what|which) (items|entries|things) are (on|in) (my|the) list [{name}]"}
+{"lang": "en-US", "utterance": "read me the items on my list shopping", "kind": "list", "intent": "QueryListEntries", "source_template": "(read|show) [me] the (items|entries) (on|in) (my|the) list [{name}]"}
+{"lang": "en-US", "utterance": "what is on my shopping list", "kind": "list", "intent": "QueryListEntries", "source_template": "what is on (my|the) {name} list"}
+{"lang": "en-US", "utterance": "what items are on my shopping list", "kind": "list", "intent": "QueryListEntries", "source_template": "(what|which) (items|entries|things) are (on|in) (my|the) {name} list"}
+{"lang": "en-US", "utterance": "read me the items on my shopping list", "kind": "list", "intent": "QueryListEntries", "source_template": "(read|show) [me] [the] (items|entries) (on|in) (my|the) {name} list"}
+{"lang": "en-US", "utterance": "delete my todo list", "kind": "todo", "intent": "DeleteListEntries", "source_template": "(delete|remove|clear) my (todo|to do) (list|items|entries)"}
+{"lang": "en-US", "utterance": "delete everything from my todo list", "kind": "todo", "intent": "DeleteListEntries", "source_template": "(delete|remove) (everything|all) (from|on) my (todo|to do) [list]"}
+{"lang": "en-US", "utterance": "delete the items from my stored list shopping", "kind": "list", "intent": "DeleteListEntries", "source_template": "(delete|remove|erase) [the] (items|entries|things) (from|on) (my|the) [stored] list [{name}]"}
+{"lang": "en-US", "utterance": "delete everything from my list shopping", "kind": "list", "intent": "DeleteListEntries", "source_template": "(delete|remove) (everything|all [the] (items|entries)) (from|on) (my|the) list [{name}]"}
+{"lang": "en-US", "utterance": "delete the items from my shopping list", "kind": "list", "intent": "DeleteListEntries", "source_template": "(delete|remove|erase) [the] (items|entries|things) (from|on) (my|the) {name} list"}
+{"lang": "en-US", "utterance": "delete everything from my shopping list", "kind": "list", "intent": "DeleteListEntries", "source_template": "(delete|remove) (everything|all [the] (items|entries)) (from|on) (my|the) {name} list"}
+{"lang": "es-ES", "utterance": "qué hay en mi lista de tareas", "kind": "todo", "intent": "QueryListEntries", "source_template": "qué hay en mi lista de (tareas|por hacer)"}
+{"lang": "es-ES", "utterance": "lee me mis notas pendientes", "kind": "todo", "intent": "QueryListEntries", "source_template": "(lee|muestra) [me] mis (notas|tareas) [pendientes]"}
+{"lang": "es-ES", "utterance": "qué tengo que hacer", "kind": "todo", "intent": "QueryListEntries", "source_template": "qué tengo que hacer"}
+{"lang": "es-ES", "utterance": "qué elementos hay en mi lista shopping", "kind": "list", "intent": "QueryListEntries", "source_template": "(qué elementos|qué entradas) hay en (mi|la) lista [{name}]"}
+{"lang": "es-ES", "utterance": "lee me las entradas de mi lista shopping", "kind": "list", "intent": "QueryListEntries", "source_template": "(lee|muestra) [me] las entradas de (mi|la) lista [{name}]"}
+{"lang": "es-ES", "utterance": "qué hay en mi lista shopping", "kind": "list", "intent": "QueryListEntries", "source_template": "qué hay en (mi|la) lista {name}"}
+{"lang": "es-ES", "utterance": "elimina mi lista de tareas", "kind": "todo", "intent": "DeleteListEntries", "source_template": "(elimina|borra) mi lista de (tareas|por hacer)"}
+{"lang": "es-ES", "utterance": "elimina todo de mi lista de tareas", "kind": "todo", "intent": "DeleteListEntries", "source_template": "(elimina|borra) todo de mi lista de (tareas|por hacer)"}
+{"lang": "es-ES", "utterance": "elimina los elementos de mi lista shopping", "kind": "list", "intent": "DeleteListEntries", "source_template": "(elimina|borra|quita) (los elementos|las entradas) de (mi|la) lista [{name}]"}
+{"lang": "es-ES", "utterance": "elimina todo de mi lista shopping", "kind": "list", "intent": "DeleteListEntries", "source_template": "(elimina|borra) todo de (mi|la) lista [{name}]"}
+{"lang": "eu-ES", "utterance": "zer dago nire egitekoen zerrendan", "kind": "todo", "intent": "QueryListEntries", "source_template": "zer dago nire (egitekoen|oharren) zerrendan"}
+{"lang": "eu-ES", "utterance": "zer egin behar dut", "kind": "todo", "intent": "QueryListEntries", "source_template": "zer egin behar dut"}
+{"lang": "eu-ES", "utterance": "zein elementu daude shopping zerrendan", "kind": "list", "intent": "QueryListEntries", "source_template": "(zein elementu|zer) daude [{name}] zerrendan"}
+{"lang": "eu-ES", "utterance": "irakurri shopping zerrendako sarrerak", "kind": "list", "intent": "QueryListEntries", "source_template": "(irakurri|erakutsi) [{name}] zerrendako sarrerak"}
+{"lang": "eu-ES", "utterance": "ezabatu nire egitekoen zerrenda", "kind": "todo", "intent": "DeleteListEntries", "source_template": "(ezabatu|garbitu) nire (egitekoen|oharren) zerrenda"}
+{"lang": "eu-ES", "utterance": "ezabatu shopping zerrendako elementuak", "kind": "list", "intent": "DeleteListEntries", "source_template": "(ezabatu|kendu) [{name}] zerrendako (elementuak|sarrerak|dena)"}
+{"lang": "fr-FR", "utterance": "qu'y a-t-il sur ma liste de choses à faire", "kind": "todo", "intent": "QueryListEntries", "source_template": "(qu'y a-t-il|qu'est-ce qu'il y a) (sur|dans) ma liste (de choses à faire|todo)"}
+{"lang": "fr-FR", "utterance": "lis moi mes notes à faire", "kind": "todo", "intent": "QueryListEntries", "source_template": "(lis|montre) [moi] mes (notes|tâches) [à faire]"}
+{"lang": "fr-FR", "utterance": "qu'est-ce que j'ai à faire", "kind": "todo", "intent": "QueryListEntries", "source_template": "qu'est-ce que j'ai à faire"}
+{"lang": "fr-FR", "utterance": "quels articles sont sur ma liste shopping", "kind": "list", "intent": "QueryListEntries", "source_template": "(quels articles|quelles entrées) (sont|y a-t-il) (sur|dans) (ma|la) liste [{name}]"}
+{"lang": "fr-FR", "utterance": "lis moi les entrées de ma liste shopping", "kind": "list", "intent": "QueryListEntries", "source_template": "(lis|montre) [moi] les entrées de (ma|la) liste [{name}]"}
+{"lang": "fr-FR", "utterance": "qu'y a-t-il sur ma liste shopping", "kind": "list", "intent": "QueryListEntries", "source_template": "qu'y a-t-il (sur|dans) (ma|la) liste {name}"}
+{"lang": "fr-FR", "utterance": "supprime ma liste de choses à faire", "kind": "todo", "intent": "DeleteListEntries", "source_template": "(supprime|efface) ma liste (de choses à faire|todo)"}
+{"lang": "fr-FR", "utterance": "supprime tout de ma liste de choses à faire", "kind": "todo", "intent": "DeleteListEntries", "source_template": "(supprime|efface) tout de ma liste (de choses à faire|todo)"}
+{"lang": "fr-FR", "utterance": "supprime les articles de ma liste shopping", "kind": "list", "intent": "DeleteListEntries", "source_template": "(supprime|efface|enlève) les (articles|entrées) de (ma|la) liste [{name}]"}
+{"lang": "fr-FR", "utterance": "supprime tout de ma liste shopping", "kind": "list", "intent": "DeleteListEntries", "source_template": "(supprime|efface) tout de (ma|la) liste [{name}]"}
+{"lang": "gl-ES", "utterance": "que hai na miña lista de tarefas", "kind": "todo", "intent": "QueryListEntries", "source_template": "que hai na miña lista de (tarefas|notas)"}
+{"lang": "gl-ES", "utterance": "que teño que facer", "kind": "todo", "intent": "QueryListEntries", "source_template": "que teño que facer"}
+{"lang": "gl-ES", "utterance": "que elementos hai na miña lista shopping", "kind": "list", "intent": "QueryListEntries", "source_template": "(que elementos|que entradas) hai na [miña] lista [{name}]"}
+{"lang": "gl-ES", "utterance": "le me as entradas da miña lista shopping", "kind": "list", "intent": "QueryListEntries", "source_template": "(le|mostra) [me] as entradas da [miña] lista [{name}]"}
+{"lang": "gl-ES", "utterance": "elimina a miña lista de tarefas", "kind": "todo", "intent": "DeleteListEntries", "source_template": "(elimina|borra) a miña lista de (tarefas|notas)"}
+{"lang": "gl-ES", "utterance": "elimina todo da miña lista de tarefas", "kind": "todo", "intent": "DeleteListEntries", "source_template": "(elimina|borra) todo da miña lista de (tarefas|notas)"}
+{"lang": "gl-ES", "utterance": "elimina os elementos da miña lista shopping", "kind": "list", "intent": "DeleteListEntries", "source_template": "(elimina|borra) (os elementos|as entradas|todo) da [miña] lista [{name}]"}
+{"lang": "hu-HU", "utterance": "mi van a teendő listámon", "kind": "todo", "intent": "QueryListEntries", "source_template": "mi van a (teendő|todo) listámon"}
+{"lang": "hu-HU", "utterance": "mit kell tennem", "kind": "todo", "intent": "QueryListEntries", "source_template": "mit kell (tennem|csinálnom)"}
+{"lang": "hu-HU", "utterance": "milyen tételek van a shopping listán", "kind": "list", "intent": "QueryListEntries", "source_template": "(milyen tételek|mi) (van|vannak) a [{name}] listán"}
+{"lang": "hu-HU", "utterance": "olvasd fel a shopping lista tételeit", "kind": "list", "intent": "QueryListEntries", "source_template": "(olvasd fel|mutasd) a [{name}] lista tételeit"}
+{"lang": "hu-HU", "utterance": "töröld a teendő listámat", "kind": "todo", "intent": "DeleteListEntries", "source_template": "(töröld|ürítsd ki) a (teendő|todo) listámat"}
+{"lang": "hu-HU", "utterance": "töröld a shopping lista tételeit", "kind": "list", "intent": "DeleteListEntries", "source_template": "(töröld|távolítsd el) a [{name}] lista (tételeit|összes tételét)"}
+{"lang": "it-IT", "utterance": "cosa c'è nella mia lista delle cose da fare", "kind": "todo", "intent": "QueryListEntries", "source_template": "(cosa c'è|che c'è) nella mia lista (delle cose da fare|todo)"}
+{"lang": "it-IT", "utterance": "leggi mi le mie note", "kind": "todo", "intent": "QueryListEntries", "source_template": "(leggi|mostra) [mi] le mie (note|cose da fare)"}
+{"lang": "it-IT", "utterance": "cosa devo fare", "kind": "todo", "intent": "QueryListEntries", "source_template": "cosa devo fare"}
+{"lang": "it-IT", "utterance": "quali voci sono nella mia lista shopping", "kind": "list", "intent": "QueryListEntries", "source_template": "(quali voci|quali articoli) (sono|ci sono) (nella|sulla) [mia] lista [{name}]"}
+{"lang": "it-IT", "utterance": "leggi mi le voci della mia lista shopping", "kind": "list", "intent": "QueryListEntries", "source_template": "(leggi|mostra) [mi] le voci della [mia] lista [{name}]"}
+{"lang": "it-IT", "utterance": "cosa c'è nella mia lista shopping", "kind": "list", "intent": "QueryListEntries", "source_template": "cosa c'è nella [mia] lista {name}"}
+{"lang": "it-IT", "utterance": "elimina la mia lista delle cose da fare", "kind": "todo", "intent": "DeleteListEntries", "source_template": "(elimina|cancella) la mia lista (delle cose da fare|todo)"}
+{"lang": "it-IT", "utterance": "elimina tutto dalla mia lista delle cose da fare", "kind": "todo", "intent": "DeleteListEntries", "source_template": "(elimina|cancella) tutto dalla mia lista (delle cose da fare|todo)"}
+{"lang": "it-IT", "utterance": "elimina le voci dalla mia lista shopping", "kind": "list", "intent": "DeleteListEntries", "source_template": "(elimina|cancella|rimuovi) (le voci|gli articoli) (dalla|della) [mia] lista [{name}]"}
+{"lang": "it-IT", "utterance": "elimina tutto dalla mia lista shopping", "kind": "list", "intent": "DeleteListEntries", "source_template": "(elimina|cancella) tutto (dalla|della) [mia] lista [{name}]"}
+{"lang": "nl-NL", "utterance": "wat staat er op mijn to do-lijst", "kind": "todo", "intent": "QueryListEntries", "source_template": "wat staat er op mijn (to do|todo)[-lijst]"}
+{"lang": "nl-NL", "utterance": "wat moet ik nog doen", "kind": "todo", "intent": "QueryListEntries", "source_template": "wat moet ik [nog] doen"}
+{"lang": "nl-NL", "utterance": "welke items staat er op mijn lijst shopping", "kind": "list", "intent": "QueryListEntries", "source_template": "(welke items|wat) (staat|staan) er op (mijn|de) lijst [{name}]"}
+{"lang": "nl-NL", "utterance": "lees me de items op mijn lijst shopping", "kind": "list", "intent": "QueryListEntries", "source_template": "(lees|toon) [me] de items op (mijn|de) lijst [{name}]"}
+{"lang": "nl-NL", "utterance": "welke items staat er op mijn shopping lijst", "kind": "list", "intent": "QueryListEntries", "source_template": "(welke items|wat) (staat|staan) er op (mijn|de) {name} lijst"}
+{"lang": "nl-NL", "utterance": "lees me de items op mijn shopping lijst", "kind": "list", "intent": "QueryListEntries", "source_template": "(lees|toon) [me] de items op (mijn|de) {name} lijst"}
+{"lang": "nl-NL", "utterance": "wat staat er op mijn shopping lijst", "kind": "list", "intent": "QueryListEntries", "source_template": "wat staat er op (mijn|de) {name} lijst"}
+{"lang": "nl-NL", "utterance": "verwijder mijn to do-lijst", "kind": "todo", "intent": "DeleteListEntries", "source_template": "(verwijder|wis) mijn (to do|todo)[-lijst]"}
+{"lang": "nl-NL", "utterance": "verwijder alles van mijn to do-lijst", "kind": "todo", "intent": "DeleteListEntries", "source_template": "(verwijder|wis) alles (van|uit) mijn (to do|todo)[-lijst]"}
+{"lang": "nl-NL", "utterance": "verwijder de items van mijn lijst shopping", "kind": "list", "intent": "DeleteListEntries", "source_template": "(verwijder|wis) (de items|alles) (van|uit) (mijn|de) lijst [{name}]"}
+{"lang": "nl-NL", "utterance": "verwijder de items van mijn shopping lijst", "kind": "list", "intent": "DeleteListEntries", "source_template": "(verwijder|wis) (de items|alles) (van|uit) (mijn|de) {name} lijst"}
+{"lang": "pl-PL", "utterance": "co jest na mojej liście zadań", "kind": "todo", "intent": "QueryListEntries", "source_template": "co (jest|mam) na [mojej] liście (zadań|do zrobienia)"}
+{"lang": "pl-PL", "utterance": "co mam do zrobienia", "kind": "todo", "intent": "QueryListEntries", "source_template": "co mam do zrobienia"}
+{"lang": "pl-PL", "utterance": "jakie pozycje jest na mojej liście shopping", "kind": "list", "intent": "QueryListEntries", "source_template": "(jakie pozycje|co) (jest|są) na [mojej] liście [{name}]"}
+{"lang": "pl-PL", "utterance": "przeczytaj mi pozycje z mojej listy shopping", "kind": "list", "intent": "QueryListEntries", "source_template": "(przeczytaj|pokaż) [mi] pozycje z [mojej] listy [{name}]"}
+{"lang": "pl-PL", "utterance": "usuń moją listę zadań", "kind": "todo", "intent": "DeleteListEntries", "source_template": "(usuń|wyczyść) [moją] listę (zadań|do zrobienia)"}
+{"lang": "pl-PL", "utterance": "usuń wszystko z mojej listy zadań", "kind": "todo", "intent": "DeleteListEntries", "source_template": "(usuń|wykasuj) wszystko z [mojej] listy (zadań|do zrobienia)"}
+{"lang": "pl-PL", "utterance": "usuń pozycje z mojej listy shopping", "kind": "list", "intent": "DeleteListEntries", "source_template": "(usuń|wykasuj) (pozycje|wszystko) z [mojej] listy [{name}]"}
+{"lang": "pt-PT", "utterance": "o que há na minha lista de tarefas", "kind": "todo", "intent": "QueryListEntries", "source_template": "o que (há|está) na minha lista de (tarefas|afazeres)"}
+{"lang": "pt-PT", "utterance": "lê me as minhas notas pendentes", "kind": "todo", "intent": "QueryListEntries", "source_template": "(lê|mostra) [me] as minhas (notas|tarefas) [pendentes]"}
+{"lang": "pt-PT", "utterance": "o que tenho para fazer", "kind": "todo", "intent": "QueryListEntries", "source_template": "o que tenho para fazer"}
+{"lang": "pt-PT", "utterance": "que itens estão na minha lista shopping", "kind": "list", "intent": "QueryListEntries", "source_template": "(que itens|que entradas) (estão|há) na [minha] lista [{name}]"}
+{"lang": "pt-PT", "utterance": "lê me as entradas da minha lista shopping", "kind": "list", "intent": "QueryListEntries", "source_template": "(lê|mostra) [me] as entradas da [minha] lista [{name}]"}
+{"lang": "pt-PT", "utterance": "o que há na minha lista shopping", "kind": "list", "intent": "QueryListEntries", "source_template": "o que há na [minha] lista {name}"}
+{"lang": "pt-PT", "utterance": "elimina a minha lista de tarefas", "kind": "todo", "intent": "DeleteListEntries", "source_template": "(elimina|apaga) a minha lista de (tarefas|afazeres)"}
+{"lang": "pt-PT", "utterance": "elimina tudo da minha lista de tarefas", "kind": "todo", "intent": "DeleteListEntries", "source_template": "(elimina|apaga) tudo da minha lista de (tarefas|afazeres)"}
+{"lang": "pt-PT", "utterance": "elimina os itens da minha lista shopping", "kind": "list", "intent": "DeleteListEntries", "source_template": "(elimina|apaga|remove) (os itens|as entradas) da [minha] lista [{name}]"}
+{"lang": "pt-PT", "utterance": "elimina tudo da minha lista shopping", "kind": "list", "intent": "DeleteListEntries", "source_template": "(elimina|apaga) tudo da [minha] lista [{name}]"}
+{"lang": "ru-RU", "utterance": "что в моём списке дел", "kind": "todo", "intent": "QueryListEntries", "source_template": "что (в моём|у меня в) списке (дел|задач)"}
+{"lang": "ru-RU", "utterance": "что мне нужно сделать", "kind": "todo", "intent": "QueryListEntries", "source_template": "что мне (нужно|надо) сделать"}
+{"lang": "ru-RU", "utterance": "какие пункты в списке shopping", "kind": "list", "intent": "QueryListEntries", "source_template": "(какие пункты|что) (в списке|в моём списке) [{name}]"}
+{"lang": "ru-RU", "utterance": "прочитай мне пункты списка shopping", "kind": "list", "intent": "QueryListEntries", "source_template": "(прочитай|покажи) [мне] (пункты|записи) списка [{name}]"}
+{"lang": "ru-RU", "utterance": "удали мой список дел", "kind": "todo", "intent": "DeleteListEntries", "source_template": "(удали|очисти) [мой] список (дел|задач)"}
+{"lang": "ru-RU", "utterance": "удали всё из моего списка дел", "kind": "todo", "intent": "DeleteListEntries", "source_template": "(удали|сотри) всё из [моего] списка (дел|задач)"}
+{"lang": "ru-RU", "utterance": "удали пункты из моего списка shopping", "kind": "list", "intent": "DeleteListEntries", "source_template": "(удали|сотри) (пункты|всё) из [моего] списка [{name}]"}
+{"lang": "sv-FI", "utterance": "mitä on tehtävälistallani", "kind": "todo", "intent": "QueryListEntries", "source_template": "mitä on (tehtävälistallani|muistilistallani)"}
+{"lang": "sv-FI", "utterance": "mitä minun pitää tehdä", "kind": "todo", "intent": "QueryListEntries", "source_template": "mitä minun pitää tehdä"}
+{"lang": "sv-FI", "utterance": "mitä on listalla shopping", "kind": "list", "intent": "QueryListEntries", "source_template": "(mitä|mitkä kohteet) on listalla [{name}]"}
+{"lang": "sv-FI", "utterance": "lue listan shopping kohteet", "kind": "list", "intent": "QueryListEntries", "source_template": "(lue|näytä) listan [{name}] kohteet"}
+{"lang": "sv-FI", "utterance": "mitä on shopping listalla", "kind": "list", "intent": "QueryListEntries", "source_template": "(mitä|mitkä kohteet) on {name} listalla"}
+{"lang": "sv-FI", "utterance": "lue shopping listan kohteet", "kind": "list", "intent": "QueryListEntries", "source_template": "(lue|näytä) {name} listan kohteet"}
+{"lang": "sv-FI", "utterance": "poista tehtävälistani", "kind": "todo", "intent": "DeleteListEntries", "source_template": "(poista|tyhjennä) (tehtävälistani|muistilistani)"}
+{"lang": "sv-FI", "utterance": "poista listan shopping kohteet", "kind": "list", "intent": "DeleteListEntries", "source_template": "(poista|tyhjennä) listan [{name}] (kohteet|kaikki)"}
+{"lang": "sv-FI", "utterance": "poista shopping listan kohteet", "kind": "list", "intent": "DeleteListEntries", "source_template": "(poista|tyhjennä) {name} listan (kohteet|kaikki)"}
+{"lang": "sv-SE", "utterance": "vad står på min att göra-lista", "kind": "todo", "intent": "QueryListEntries", "source_template": "vad (står|finns) på min (att göra|todo)[-lista]"}
+{"lang": "sv-SE", "utterance": "vad ska jag göra", "kind": "todo", "intent": "QueryListEntries", "source_template": "vad ska jag göra"}
+{"lang": "sv-SE", "utterance": "vilka poster står på min listan shopping", "kind": "list", "intent": "QueryListEntries", "source_template": "(vilka poster|vad) (står|finns) på [min|] lista[n] [{name}]"}
+{"lang": "sv-SE", "utterance": "läs mig posterna på listan shopping", "kind": "list", "intent": "QueryListEntries", "source_template": "(läs|visa) [mig] posterna på lista[n] [{name}]"}
+{"lang": "sv-SE", "utterance": "vilka poster står på shopping listan", "kind": "list", "intent": "QueryListEntries", "source_template": "(vilka poster|vad) (står|finns) på {name} lista[n]"}
+{"lang": "sv-SE", "utterance": "läs mig posterna på shopping listan", "kind": "list", "intent": "QueryListEntries", "source_template": "(läs|visa) [mig] posterna på {name} lista[n]"}
+{"lang": "sv-SE", "utterance": "radera min att göra-lista", "kind": "todo", "intent": "DeleteListEntries", "source_template": "(radera|rensa) min (att göra|todo)[-lista]"}
+{"lang": "sv-SE", "utterance": "radera allt från min att göra-lista", "kind": "todo", "intent": "DeleteListEntries", "source_template": "(radera|ta bort) allt (från|på) min (att göra|todo)[-lista]"}
+{"lang": "sv-SE", "utterance": "radera posterna från min listan shopping", "kind": "list", "intent": "DeleteListEntries", "source_template": "(radera|ta bort) (posterna|allt) (från|på) [min|] lista[n] [{name}]"}
+{"lang": "sv-SE", "utterance": "radera posterna från shopping listan", "kind": "list", "intent": "DeleteListEntries", "source_template": "(radera|ta bort) (posterna|allt) (från|på) {name} lista[n]"}
