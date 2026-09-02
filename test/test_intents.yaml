@@ -175,22 +175,17 @@ en-us:
       - query
       - items
       - list
+    - anything todo?:
+      - query
+      - todo
+    - is there something todo?:
+      - query
+      - todo
   DeleteListEntries:
     - drop items from the shopping list:
       - delete
       - items
       - list
-  QueryListNames:
-    - which lists are stored:
-      - query
-      - list
-      - stored
-  QueryTodoEntries:
-    - anything todo?
-      - query
-      - todo
-    - is there something todo?
-  DeleteTodoEntries:
     - remove walk the dog note:
       - delete
       - todo
@@ -201,6 +196,11 @@ en-us:
     - remove all memos:
       - delete
       - todo
+      - stored
+  QueryListNames:
+    - which lists are stored:
+      - query
+      - list
       - stored
   DeleteList:
     - drop the shopping list:
