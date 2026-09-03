@@ -31,6 +31,7 @@ import json
 from time import time
 from typing import Set, Optional, Union, List
 from uuid import uuid4
+from zoneinfo import ZoneInfo
 
 import icalendar
 from dateutil.relativedelta import relativedelta
@@ -146,6 +147,17 @@ class Alert:
             else get_default_tz()
 
     @property
+    def timezone_name(self) -> str:
+        """
+        IANA name of the zone a wall-clock repeat of this alert is read in.
+        Unlike `timezone`, which only carries the fixed offset the expiration
+        was written with, this survives a daylight-saving transition.
+        """
+        return self._data.get("timezone") or \
+            Configuration().get("location", {}).get("timezone", {}).get("code") \
+            or "UTC"
+
+    @property
     def alert_type(self) -> AlertType:
         """
         :returns: the associated Alert type Enum
@@ -212,6 +224,15 @@ class Alert:
         Returns the contextual info of the alert
         """
         return self._data.get("context") or dict()
+
+    @property
+    def message_context(self) -> dict:
+        """
+        Returns the creating message's bus context (session, source,
+        destination, etc.), held verbatim since creation so a re-offer to
+        the scheduler does not strip a satellite's routing identity.
+        """
+        return self._data.get("message_context") or dict()
 
     @property
     def alert_name(self) -> str:
@@ -569,11 +590,26 @@ class Alert:
             while expiration <= now:
                 expiration += self.repeat_frequency
         elif self.repeat_days:
+            # walked on the wall clock of the alert's own zone: a 07:30 alarm
+            # rings at 07:30 on either side of a daylight-saving change, which
+            # adding 24 hours to a fixed offset would not do
+            zone = ZoneInfo(self.timezone_name)
+            local = expiration.astimezone(zone)
+            # the intended time-of-day is fixed at the alert's own creation
+            # and never re-derived from a later occurrence, so a DST gap that
+            # forces a one-day shift (e.g. a 01:30 alarm landing on 02:30 the
+            # day the clock jumps) does not stick on every following day
+            time_of_day = self._data.setdefault(
+                "repeat_time_of_day", local.time().isoformat())
+            intended = dt.time.fromisoformat(time_of_day)
             while (
-                    expiration <= now
-                    or Weekdays(expiration.weekday()) not in self.repeat_days
+                    local <= now
+                    or Weekdays(local.weekday()) not in self.repeat_days
             ):
-                expiration += dt.timedelta(days=1)
+                local = dt.datetime.combine(
+                    local.date() + dt.timedelta(days=1), intended
+                ).replace(tzinfo=zone)
+            expiration = local
         elif self.until is not None:
             while expiration <= now:
                 expiration += dt.timedelta(days=1)
@@ -607,7 +643,11 @@ class Alert:
         else:
             data = process_ical_event(event)
 
-        return Alert.create(**data)
+        # imported outside of any bus message, often on a background sync
+        # worker thread that may still be carrying a stale message from
+        # whatever it last handled; an explicit empty context keeps a CalDAV
+        # alert from inheriting the DAV-configurer's session
+        return Alert.create(message_context={}, **data)
 
     def to_ical(self) -> icalendar.Calendar:
         """
@@ -681,7 +721,9 @@ class Alert:
             dav_calendar: str = None,
             dav_service: str = None,
             context: dict = None,
-            lang: str = None
+            message_context: dict = None,
+            lang: str = None,
+            timezone: str = None
     ):
         """
         Object representing an arbitrary alert
@@ -695,6 +737,12 @@ class Alert:
         :param until: datetime of final repeat/end of event
         :param audio_file: audio_file to playback on alert expiration
         :param context: Message context associated with alert
+        :param message_context: the creating message's bus context (session,
+            source, destination, etc.), held verbatim and handed back to the
+            scheduler on every re-offer so a restart does not strip the
+            creating satellite's routing identity from the schedule.
+        :param timezone: IANA zone a weekday repeat is read in, defaulting
+            to the configured one
         """
         from .parse_utils import get_default_alert_name
 
@@ -762,11 +810,13 @@ class Alert:
             "alert_name": alert_name,
             "audio_file": audio_file,
             "context": context,
+            "message_context": message_context or dict(),
             "dav_calendar": dav_calendar,
             "dav_service": dav_service,
             "dav_synchron": False,
         })
         data["lang"] = lang or get_default_lang()
+        data["timezone"] = timezone or TZID
         return Alert(data)
 
 

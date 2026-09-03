@@ -229,6 +229,7 @@ def build_alert_from_intent(message: Message) -> Optional[Alert]:
 
     data = dict()
     data["context"] = parse_alert_context_from_message(message)
+    data["message_context"] = message.context
 
     timezone = get_default_tz()
     timestamp = data.get("context").get("created")

@@ -38,9 +38,7 @@ from caldav.lib.error import NotFoundError
 from combo_lock import NamedLock
 from json_database import JsonStorage
 from ovos_bus_client.message import Message
-from ovos_utils.time import to_system
 from ovos_utils.log import LOG
-from ovos_utils.events import EventSchedulerInterface
 
 from ovos_skill_alerts.util import AlertState, AlertType, DAVType, LOCAL_USER
 from ovos_skill_alerts.util.alert import Alert, alert_time_in_range, is_alert_type, properties_changed
@@ -51,6 +49,18 @@ SYNC_LOCK = NamedLock("alert_dav_sync")
 
 _ALERTFILE = "alerts.json"
 _SYNC_RESTRICTED = (AlertType.TIMER, AlertType.ALARM, AlertType.UNKNOWN, AlertType.ALL)
+#: schedules of this skill that do not belong to any one alert
+_HOUSEKEEPING_IDS = frozenset(("alerts.sync_dav", "check_active_state"))
+#: where the scheduler reports the occurrences it could not deliver on time
+SCHEDULER_MISSED = "ovos.scheduler.missed"
+#: an occurrence delivered later than this is an alert that was missed rather
+#: than one to ring, mirroring the scheduler's own default grace period
+MISSED_AFTER = dt.timedelta(seconds=60)
+#: the period a wall-clock repeat is carried by. Such an alert is moved to its
+#: real next occurrence every time it fires, and a recurrence is what it is
+#: held as because a spent single occurrence is retired by the scheduler once
+#: the handler it called returns, which would take the replacement with it.
+_CARRIER_PERIOD = 24 * 60 * 60
 
 
 
@@ -87,13 +97,18 @@ def get_alerts_by_type(alerts: List[Alert]) -> dict:
 
 
 class AlertManager:
-    def __init__(self, 
+    def __init__(self,
                  home_path: str,
-                 event_scheduler: EventSchedulerInterface,
+                 skill,
                  skill_callbacks: Tuple[callable]):
+        """
+        :param skill: the skill this manager belongs to. Alert timing is asked
+            for through the skill's scheduling methods; the manager never
+            speaks to the scheduler itself.
+        """
         self._home = home_path
         self._alerts_store = JsonStorage(os.path.join(home_path, _ALERTFILE))
-        self._scheduler = event_scheduler
+        self._skill = skill
         self._callback_prenotify, self._callback_expiration = skill_callbacks
         self._pending_alerts = dict()
         self._missed_alerts = dict()
@@ -104,6 +119,9 @@ class AlertManager:
         self._dav_clients = dict()
 
         self._load_cache()
+        if self._skill.bus:
+            self._skill.bus.on(SCHEDULER_MISSED, self._handle_missed_occurrence)
+        self.reschedule_pending_alerts()
 
     @property
     def active_gui_timers(self) -> List[Alert]:
@@ -222,9 +240,9 @@ class AlertManager:
             self._dav_clients[service] = client
 
         if self.dav_active:
-            self._scheduler.schedule_repeating_event(
-                self.sync_dav, None, frequency * 60, name="alerts.sync_dav"
-            )
+            self._skill.schedule_repeating_event(self.sync_dav, None,
+                                                 frequency * 60,
+                                                 name="alerts.sync_dav")
             LOG.debug("Sync event started")
 
         return errors
@@ -637,40 +655,81 @@ class AlertManager:
         return False
 
     # Alert Event Handlers
+    @staticmethod
+    def _schedule_name(ident: str, reason: str) -> str:
+        """
+        The name one alert's timing is known by. The name is the identity a
+        schedule is replaced and cancelled by, so it is the alert's own uuid,
+        with the prenotification hanging off it.
+        """
+        return ident if reason == "expiration" else f"{ident}.pre"
+
     def _schedule_alert(self, alrt: Alert, ident: str, reason: str = "expiration"):
         """
-        Schedule an event for the next expiration of the specified Alert
+        Ask for the next expiration of an alert to be called back on.
+
+        A fixed period is handed over whole and the scheduler walks it. A
+        weekday alarm and an alert with an end date are walked by the alert
+        itself, one occurrence at a time: a wall clock is what has to survive
+        a daylight-saving change, and a period of seconds is not one.
+
         :param alrt: Alert object to schedule
         :param ident: Unique identifier associated with the Alert
         """
+        name = self._schedule_name(ident, reason)
+        data = dict(alrt.data, alert_reason=reason)
+        # Re-offering an alert (eg on skill load) happens with no message in
+        # flight, so the scheduling methods would otherwise fall back to an
+        # empty context and replace the stored record's routing identity
+        # (session/source of the satellite that created it) with none at
+        # all. The creating message's context is held on the alert itself
+        # and handed back explicitly so a restart cannot strip it.
+        #
+        # A CalDAV import is the one alert with nothing to hand back: it
+        # was never created from a bus message, so a falsy context here
+        # would send the scheduling call looking for one on its own, via
+        # `dig_for_message`, which walks the call stack rather than a
+        # thread-local and so picks up whatever intent handler's `Message`
+        # a DAV sync happens to be running inside (e.g. the one that
+        # configured the calendar). The alert's own small, session-free
+        # context is handed over instead, which is non-empty and therefore
+        # blocks that fallback.
+        context = alrt.message_context or (
+            alrt.context if (alrt.calendar or alrt.service) else None)
         if reason == "prenotification":
-            expire_time = alrt.prenotification
+            LOG.debug(f"Scheduling alert {reason}: {ident} ({alrt.alert_name})"
+                      f" at {alrt.prenotification}")
+            self._skill.schedule_event(self._handle_alert_expiration,
+                                       alrt.prenotification, data, name=name,
+                                       context=context)
+        elif alrt.repeat_frequency:
+            LOG.debug(f"Scheduling alert {reason}: {ident} ({alrt.alert_name})"
+                      f" every {alrt.repeat_frequency}")
+            self._skill.schedule_repeating_event(
+                self._handle_alert_expiration, alrt.expiration,
+                round(alrt.repeat_frequency.total_seconds()), data, name=name,
+                context=context)
+        elif alrt.repeat_days or alrt.until:
+            LOG.debug(f"Scheduling alert {reason}: {ident} ({alrt.alert_name})"
+                      f" next at {alrt.expiration}")
+            self._skill.schedule_repeating_event(
+                self._handle_alert_expiration, alrt.expiration,
+                _CARRIER_PERIOD, data, name=name, context=context)
         else:
-            expire_time = alrt.expiration
-        data = alrt.data
-        context = deepcopy(alrt.data.get("context"))
-        context["alert_reason"] = reason
-        LOG.debug(
-            f"Scheduling alert {reason}: {ident} ({alrt.alert_name})"
-            f" at {to_system(expire_time)}"
-        )
-        self._scheduler.schedule_event(
-            self._handle_alert_expiration,
-            to_system(expire_time),
-            data,
-            f"{reason}:{ident}",
-            context=context,
-        )
+            LOG.debug(f"Scheduling alert {reason}: {ident} ({alrt.alert_name})"
+                      f" at {alrt.expiration}")
+            self._skill.schedule_event(self._handle_alert_expiration,
+                                       alrt.expiration, data, name=name,
+                                       context=context)
 
     def _cancel_scheduled_event(self, alert: Alert) -> None:
         """
         Remove the scheduler event(s) of a specific alert
         :param alert: Alert object to remove
         """
-        if alert.expiration:
-            self._scheduler.cancel_scheduled_event(f"expiration:{alert.ident}")
-        if alert.prenotification:
-            self._scheduler.cancel_scheduled_event(f"prenotification:{alert.ident}")
+        for reason in ("expiration", "prenotification"):
+            self._skill.cancel_scheduled_event(
+                self._schedule_name(alert.ident, reason))
 
     def _handle_alert_expiration(self, message: Message):
         """
@@ -678,40 +737,110 @@ class AlertManager:
         for repeat cases, and calls the specified callback.
         :param message: Message associated with expired alert
         """
-        alert_id = message.context.get("ident")
-        name = message.data.get("alert_name")
-        reason = message.context.get("alert_reason")
+        scheduler = message.context.get("scheduler") or dict()
+        name = scheduler.get("id") or message.context.get("ident") or \
+            message.data.get("context", {}).get("ident", "")
+        alert_id = name[:-len(".pre")] if name.endswith(".pre") else name
+        reason = message.data.get("alert_reason") or \
+            message.context.get("alert_reason")
+        alert_name = message.data.get("alert_name")
 
-        alert: Alert = self._pending_alerts.get(alert_id)
+        alert = self._pending_or_reported_missed(alert_id)
         if alert is None:
             LOG.error("No pending alert present to handle expiration")
             return
-        
+
         # sending a deepcopy to the subsequent handlers
         # deepcopy as early as possible to avoid alert.expiration calls
         alert_cpy = deepcopy(alert)
         alert_cpy.remove_repeat()
-        self._active_alerts[alert_id] = alert_cpy
 
-        LOG.debug(f'alert {reason}: {alert_id} ({name})')
+        LOG.debug(f'alert {reason}: {alert_id} ({alert_name})')
         if reason == "expiration":
-            self.rm_alert(alert_id, AlertState.PENDING)
-            # repeating alert
-            if alert.has_repeat:
-                # set a new ident and reset the synchro flag
-                # this is solely due to DAV, so it doesn't get overwritten there
-                # TODO consider tossing this
-                if not alert.until:
-                    new_ident = str(uuid4())
-                    LOG.debug(f"New ident for {alert.alert_name}: {new_ident}")
-                    alert.add_context({"ident": new_ident})
-                    alert.synchronized = False
-                self.add_alert(alert)
+            if not self._is_due(alert, scheduler):
+                # the recurrence carrying a wall-clock repeat came round
+                # before the alert did; there is nothing to ring yet
+                self._reschedule(alert, alert_id)
+                return
+            self._active_alerts[alert_id] = alert_cpy
+            self._advance_or_drop(alert, alert_id)
+            if self._delivered_late(scheduler):
+                # the assistant was not there to ring at the time, and an
+                # alarm going off long after it was due is worse than one that
+                # is reported as missed
+                LOG.info(f"Alert {alert_id} was delivered too late to ring")
+                self.mark_alert_missed(alert_id)
+                return
             self._callback_expiration(alert_cpy)
         elif reason == "prenotification":
+            self._active_alerts[alert_id] = alert_cpy
             self._callback_prenotify(alert)
         else:
             LOG.error(f"Couldn't handle context 'alert_reason': {reason}")
+
+    def _pending_or_reported_missed(self, alert_id: str) -> Optional[Alert]:
+        """
+        The pending alert an occurrence belongs to.
+
+        The scheduler reports what it is about to deliver late before it
+        delivers it, so an alert may already have been put on the missed list
+        by the time its occurrence arrives. The delivery settles it: the
+        report was only ever provisional.
+        """
+        with self._read_lock:
+            alert = self._pending_alerts.get(alert_id)
+            if alert is None and alert_id in self._missed_alerts:
+                alert = self._pending_alerts[alert_id] = \
+                    self._missed_alerts.pop(alert_id)
+            return alert
+
+    def _advance_or_drop(self, alert: Alert, alert_id: str):
+        """
+        Move an alert on to its next occurrence, or forget it when it has run
+        out of them. A fixed period is already held by the scheduler; a
+        wall-clock repeat is moved on here.
+        """
+        if alert.advance() is None:
+            self.rm_alert(alert_id, AlertState.PENDING)
+            return
+        # only relevant to DAV, so the alert isn't overwritten there
+        alert.synchronized = False
+        if not alert.repeat_frequency:
+            self._reschedule(alert, alert_id)
+        if alert.prenotification:
+            self._schedule_alert(alert, alert_id, "prenotification")
+        self._dump_cache()
+
+    def _reschedule(self, alert: Alert, alert_id: str):
+        """
+        Move the schedule carrying an alert to the alert's next occurrence.
+        """
+        self._skill.cancel_scheduled_event(
+            self._schedule_name(alert_id, "expiration"))
+        self._schedule_alert(alert, alert_id)
+
+    @staticmethod
+    def _is_due(alert: Alert, scheduler: dict) -> bool:
+        """
+        Whether an occurrence is the one the alert is waiting for, rather than
+        the recurrence that carries it coming round in between.
+        """
+        due = scheduler.get("due")
+        if not due or alert.expiration is None:
+            return True
+        return dt.datetime.fromisoformat(due) >= alert.expiration - MISSED_AFTER
+
+    @staticmethod
+    def _delivered_late(scheduler: dict) -> bool:
+        """
+        Whether an occurrence reached this skill so long after it was due that
+        it belongs on the missed list instead of ringing.
+        """
+        due, fired = scheduler.get("due"), scheduler.get("fired")
+        if not due or not fired:
+            return False
+        return dt.datetime.fromisoformat(fired) - \
+            dt.datetime.fromisoformat(due) > MISSED_AFTER
 
     # File Operations
     def _dump_cache(self):
@@ -761,14 +890,52 @@ class AlertManager:
                     self._pending_alerts[ident] = alert
                 if alert.synchronized:
                     self._synchron_ids.add(alert.ident)
-                if alert.expiration:
-                    self._schedule_alert(alert, ident)
-                if alert.prenotification:
-                    self._schedule_alert(alert, ident, "prenotification")
                 if alert.alert_type == AlertType.TIMER and \
                         alert.user == LOCAL_USER:
                     LOG.debug(f'Adding timer to GUI: {alert.alert_name}')
                     self._active_gui_timers.append(alert)
+
+    def reschedule_pending_alerts(self):
+        """
+        Hand this skill's timing back to the scheduler after a restart.
+
+        A schedule outlives the process that asked for it, but the handler it
+        calls does not, and a handler is attached by scheduling. Every pending
+        alert is therefore offered again under the name it already has, which
+        replaces the schedule the scheduler is holding rather than adding a
+        second one beside it. A single occurrence keeps the instant it was
+        always going to fire at.
+        """
+        for ident, alert in self.pending_alerts.items():
+            if alert.expiration:
+                self._schedule_alert(alert, ident)
+            if alert.prenotification:
+                self._schedule_alert(alert, ident, "prenotification")
+
+    def _handle_missed_occurrence(self, message: Message):
+        """
+        The scheduler names occurrences it could not deliver on time.
+
+        An alert whose last occurrence went by while nothing was listening is
+        one the user missed. A repeating alert keeps its place in the series
+        and only loses that occurrence, and an occurrence the scheduler goes
+        on to deliver late is settled by the delivery instead.
+        """
+        schedule_id = message.data.get("id", "")
+        if message.data.get("owner") != self._skill.skill_id or \
+                schedule_id in _HOUSEKEEPING_IDS or schedule_id.endswith(".pre"):
+            return
+        undelivered = set(message.data.get("missed") or ()) - \
+            set(message.data.get("fired_late") or ())
+        if not undelivered or message.data.get("next") is not None:
+            return
+        with self._read_lock:
+            if schedule_id not in self._pending_alerts:
+                return
+            LOG.info(f"Alert {schedule_id} was due while nothing was listening")
+            self._missed_alerts[schedule_id] = \
+                self._pending_alerts.pop(schedule_id)
+        self._dump_cache()
 
     def write_cache_now(self):
         """
@@ -995,12 +1162,10 @@ class AlertManager:
     # shutdown
     def shutdown(self):
         """
-        Shutdown the Alert Manager. Mark any active alerts as missed and update
-        the alerts cache on disk. Remove all events from the EventScheduler.
+        Shutdown the Alert Manager. Mark any active alerts as missed and
+        update the alerts cache on disk. Pending schedules are left with the
+        scheduler, which replays them when it comes back.
         """
-        for id, alert in self.active_alerts.items():
+        for id in list(self.active_alerts):
             self.mark_alert_missed(id)
-            self._cancel_scheduled_event(alert)
-        for alert in self.pending_alerts.values():
-            self._cancel_scheduled_event(alert)
         self._dump_cache()
