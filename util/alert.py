@@ -733,7 +733,8 @@ class Alert:
             dav_calendar: str = None,
             dav_service: str = None,
             context: dict = None,
-            lang: str = None
+            lang: str = None,
+            timezone: dt.tzinfo = None
     ):
         """
         Object representing an arbitrary alert
@@ -747,6 +748,8 @@ class Alert:
         :param until: datetime of final repeat/end of event
         :param audio_file: audio_file to playback on alert expiration
         :param context: Message context associated with alert
+        :param timezone: tzinfo to anchor an all-day `expiration` date to;
+            defaults to the global config timezone
         """
         from .parse_utils import get_default_alert_name
 
@@ -758,7 +761,7 @@ class Alert:
             elif expiration.__class__ == dt.date:
                 data["all_day"] = True
                 expiration = dt.datetime.combine(expiration, dt.time.min) \
-                    .replace(tzinfo=get_default_tz())
+                    .replace(tzinfo=timezone or get_default_tz())
             if not expiration.tzinfo:
                 raise ValueError("expiration missing tzinfo")
             # Round off any microseconds

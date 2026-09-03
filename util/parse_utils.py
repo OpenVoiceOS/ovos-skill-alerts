@@ -40,7 +40,7 @@ from ovos_date_parser import nice_time, nice_day, extract_datetime, extract_dura
 from ovos_number_parser import extract_number
 from ovos_skill_alerts.util import AlertPriority, Weekdays, AlertType, DAVType, LOCAL_USER
 from ovos_skill_alerts.util.alert import Alert
-from ovos_skill_alerts.util.config import use_24h_format, find_resource_file, get_date_format
+from ovos_skill_alerts.util.config import use_24h_format, find_resource_file, get_date_format, get_session_tz
 from ovos_skill_alerts.util.locale import (
     voc_match,
     spoken_alert_type,
@@ -230,7 +230,7 @@ def build_alert_from_intent(message: Message) -> Optional[Alert]:
     data = dict()
     data["context"] = parse_alert_context_from_message(message)
 
-    timezone = get_default_tz()
+    timezone = get_session_tz(message)
     timestamp = data.get("context").get("created")
     anchor_time = dt.datetime.fromtimestamp(timestamp).astimezone(timezone)
 
@@ -283,7 +283,7 @@ def build_alert_from_intent(message: Message) -> Optional[Alert]:
     if alert_type == AlertType.TODO:
         data["dav_type"] = DAVType.VTODO
     data["lang"] = lang
-    return Alert.create(**data)
+    return Alert.create(timezone=timezone, **data)
 
 
 def _strip_voc_phrase(tokens: Optional[Tokens], resource: str, lang: str = None) -> None:
