@@ -35,6 +35,8 @@ that.
 import json
 from pathlib import Path
 
+import os
+import time
 import pytest
 from ovos_bus_client.message import Message
 from ovos_bus_client.session import Session
@@ -120,7 +122,16 @@ def minicroft():
     # many secondary_langs (16) reliably needs more than 60s. Bump it well
     # past the coverage-job boot time observed in CI rather than trim
     # locales or add extra instances.
+    # 17-locale boot trains far more padatious containers than any other
+    # module; under coverage instrumentation on a 2-core CI runner the
+    # trained-quiet-window needs well above the 180s ovoscope default, so
+    # raise it explicitly here (the one place a per-suite override is
+    # warranted). pytest-timeout below is 600 = this ceiling + 120s margin.
+    os.environ["OVOSCOPE_TRAINED_TIMEOUT"] = "480"
+    _t0 = time.monotonic()
     mc = get_minicroft([SKILL_ID], secondary_langs=LANGS, max_wait=300)
+    print(f"[multilang-fixture] get_minicroft returned in "
+          f"{time.monotonic() - _t0:.1f}s (17 locales, calibration datum)")
     # See end2end._wait_trained: with 16 secondary_langs this boot makes far
     # more padatious registrations than any other module here, so the
     # post-registration debounce+compile race is, if anything, more likely
@@ -190,7 +201,7 @@ def _golden_id(row):
 KNOWN_BUGS = {}
 
 
-@pytest.mark.timeout(300)
+@pytest.mark.timeout(600)
 @pytest.mark.parametrize("row", GOLDEN_ROWS, ids=_golden_id)
 def test_golden_utterance_multilang(minicroft, row):
     candidates = _candidates(SKILL_ID, row["intent_label"])
@@ -209,7 +220,7 @@ def test_golden_utterance_multilang(minicroft, row):
 KNOWN_NEGATIVE_BUGS = {}
 
 
-@pytest.mark.timeout(300)
+@pytest.mark.timeout(600)
 @pytest.mark.parametrize("negative", CROSS_LANG_NEGATIVES, ids=lambda n: f"{n[1]}-{n[0]}")
 def test_cross_language_negative(minicroft, negative):
     text, lang, _why = negative
