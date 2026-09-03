@@ -83,10 +83,12 @@ def sleep_until_full_second():
     return dt.datetime.now(tzlocal()).replace(microsecond=0)
 
 
-def change_user_tz(message: Message, tz):
-    message.context["username"] = "test_user"
-    message.context["user_profiles"] = [{"user": {"username": "test_user"},
-                                        "location": {"tz": tz}}]
+# Note: the skill only reads the timezone from `Configuration()`
+# (location.timezone.code); it never consumes a per-session/user-profile
+# timezone from message context. A helper that stashed a "tz" into
+# `message.context["user_profiles"]` used to live here, but it was a no-op
+# that the skill code never read. Session-level timezone support is a
+# separate design question, not covered by these tests.
 
 def now_time(tz=None):
     tz = tz or get_default_tz()
@@ -3126,6 +3128,43 @@ class TestParseUtils(unittest.TestCase):
         self.assertEqual(next_sunday.weekday(), Weekdays.SUN)
         self.assertGreaterEqual(next_sunday, now_time)
 
+    def test_parse_end_condition_from_message_no_adapt_tags(self):
+        # PR #172 adversarial review: intents migrated from Adapt to
+        # padacioso .intent files never populate message.data["until"] (no
+        # __tags__ at all), so the "until"/duration end-condition clause was
+        # silently dropped for every migrated intent that can take one (eg.
+        # CreateReminder "... until november"). Message here has no
+        # "__tags__"/"until" key, mirroring an actual padatious match.
+        from ovos_skill_alerts.util.parse_utils import parse_end_condition_from_message
+
+        now_time = dt.datetime.now(dt.timezone.utc)
+        message = Message(
+            "recognizer_loop:utterance",
+            {"utterance": "create a reminder to go to work at 9 am daily until november",
+             "lang": "en-US"},
+        )
+        end = parse_end_condition_from_message(message, anchor_time=now_time)
+        self.assertIsNotNone(end)
+        if isinstance(end, dt.timedelta):
+            end = now_time + end
+        self.assertEqual(end.month, 11)
+
+    def test_parse_repeat_from_message_no_adapt_tags(self):
+        # Same gap as above for the arbitrary "every <interval>" branch of
+        # parse_repeat_from_message (the "everyday"/"weekends"/"weekdays"
+        # short-circuits already had a voc_match fallback; the generic
+        # "repeat" clause used for "every 3 days" etc. did not).
+        from ovos_skill_alerts.util.parse_utils import parse_repeat_from_message
+
+        message = Message(
+            "recognizer_loop:utterance",
+            {"utterance": "set a reminder every 3 days to check for test failures",
+             "lang": "en-US"},
+        )
+        repeat = parse_repeat_from_message(message)
+        self.assertIsInstance(repeat, dt.timedelta)
+        self.assertEqual(repeat, dt.timedelta(days=3))
+
     def test_parse_alert_time_from_message_alarm(self):
         from ovos_skill_alerts.util.parse_utils import parse_alert_time_from_message, tokenize_utterance
 
@@ -3388,8 +3427,6 @@ class TestParseUtils(unittest.TestCase):
         wakeup_in = _get_message_from_file("wake_me_up_in_time_alarm.json")
 
         daily_alert_local = build_alert_from_intent(daily)
-        # infuse utc timezone
-        change_user_tz(daily, "UTC")
         daily_alert_utc = build_alert_from_intent(daily)
 
         def _validate_daily(alert: Alert):
@@ -3413,8 +3450,6 @@ class TestParseUtils(unittest.TestCase):
         )
 
         wakeup_at_alert_local = build_alert_from_intent(wakeup_at)
-        # infuse utc timezone
-        change_user_tz(wakeup_at, "UTC")
         wakeup_at_alert_utc = build_alert_from_intent(wakeup_at)
 
         def _validate_wakeup_at(alert: Alert):
@@ -3442,8 +3477,6 @@ class TestParseUtils(unittest.TestCase):
         )
 
         wakeup_in_alert_local = build_alert_from_intent(wakeup_in)
-        # infuse utc timezone
-        change_user_tz(wakeup_in, "UTC")
         wakeup_in_alert_utc = build_alert_from_intent(wakeup_in)
 
         def _validate_wakeup_in(alert: Alert):
@@ -3491,8 +3524,6 @@ class TestParseUtils(unittest.TestCase):
             self.assertIsInstance(timer.expiration, dt.datetime)
 
         no_name_timer_local = build_alert_from_intent(no_name_10_minutes)
-        # infuse utc timezone
-        change_user_tz(no_name_10_minutes, "UTC")
         no_name_timer_utc = build_alert_from_intent(no_name_10_minutes)
 
         _validate_alert_default_params(no_name_timer_utc)
