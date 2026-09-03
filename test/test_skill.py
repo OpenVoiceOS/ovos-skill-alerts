@@ -83,10 +83,12 @@ def sleep_until_full_second():
     return dt.datetime.now(tzlocal()).replace(microsecond=0)
 
 
-def change_user_tz(message: Message, tz):
-    message.context["username"] = "test_user"
-    message.context["user_profiles"] = [{"user": {"username": "test_user"},
-                                        "location": {"tz": tz}}]
+# Note: the skill only reads the timezone from `Configuration()`
+# (location.timezone.code); it never consumes a per-session/user-profile
+# timezone from message context. A helper that stashed a "tz" into
+# `message.context["user_profiles"]` used to live here, but it was a no-op
+# that the skill code never read. Session-level timezone support is a
+# separate design question, not covered by these tests.
 
 def now_time(tz=None):
     tz = tz or get_default_tz()
@@ -3425,8 +3427,6 @@ class TestParseUtils(unittest.TestCase):
         wakeup_in = _get_message_from_file("wake_me_up_in_time_alarm.json")
 
         daily_alert_local = build_alert_from_intent(daily)
-        # infuse utc timezone
-        change_user_tz(daily, "UTC")
         daily_alert_utc = build_alert_from_intent(daily)
 
         def _validate_daily(alert: Alert):
@@ -3450,8 +3450,6 @@ class TestParseUtils(unittest.TestCase):
         )
 
         wakeup_at_alert_local = build_alert_from_intent(wakeup_at)
-        # infuse utc timezone
-        change_user_tz(wakeup_at, "UTC")
         wakeup_at_alert_utc = build_alert_from_intent(wakeup_at)
 
         def _validate_wakeup_at(alert: Alert):
@@ -3479,8 +3477,6 @@ class TestParseUtils(unittest.TestCase):
         )
 
         wakeup_in_alert_local = build_alert_from_intent(wakeup_in)
-        # infuse utc timezone
-        change_user_tz(wakeup_in, "UTC")
         wakeup_in_alert_utc = build_alert_from_intent(wakeup_in)
 
         def _validate_wakeup_in(alert: Alert):
@@ -3528,8 +3524,6 @@ class TestParseUtils(unittest.TestCase):
             self.assertIsInstance(timer.expiration, dt.datetime)
 
         no_name_timer_local = build_alert_from_intent(no_name_10_minutes)
-        # infuse utc timezone
-        change_user_tz(no_name_10_minutes, "UTC")
         no_name_timer_utc = build_alert_from_intent(no_name_10_minutes)
 
         _validate_alert_default_params(no_name_timer_utc)
