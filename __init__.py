@@ -40,7 +40,7 @@ from ovos_number_parser import pronounce_number
 from ovos_skill_alerts.util import AlertState, MatchLevel, AlertPriority, WEEKDAYS
 from ovos_skill_alerts.util.alert import Alert, AlertType, DAVType, LOCAL_USER
 from ovos_skill_alerts.util.alert_manager import AlertManager, SYNC_LOCK
-from ovos_skill_alerts.util.config import use_24h_format, get_default_tz, DEFAULT_SETTINGS
+from ovos_skill_alerts.util.config import use_24h_format, get_session_tz, DEFAULT_SETTINGS
 from ovos_skill_alerts.util.locale import (
     translate,
     voc_match,
@@ -621,7 +621,7 @@ class AlertSkill(ConversationalSkill):
 
         # week range
         if self.voc_match("week", utterance, lang=self.lang):
-            now = datetime.now(get_default_tz())
+            now = datetime.now(get_session_tz(message))
             # hack bc LF return None on "this week"
             begin, end = get_week_range(begin or now)
         elif not begin and not end:
