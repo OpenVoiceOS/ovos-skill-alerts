@@ -1,0 +1,14 @@
+(could|would|can) you (move|change|reschedule|shift|push|postpone) (my|the) {schedkind} (to|until|for) {time}
+(move|change|reschedule|shift|push|postpone|adjust) (my|the) (next|upcoming) {schedkind} (to|until|for) {time}
+(move|change|reschedule|shift|push|postpone|adjust) (my|the) (next|upcoming) {schedkind} (earlier|sooner|later)
+(move|change|reschedule|shift|push|postpone|adjust) (my|the) (next|upcoming) {schedkind} {duration} (earlier|sooner|later)
+(move|change|reschedule|shift|push|postpone|adjust|adjourn) (my|the) {schedkind} (to|until|for|back to|forward to) {time}
+(make|set|change) (my|the) (next|upcoming) {schedkind} (an all day event|all day|to an all day event|to all day)
+(move|change|reschedule|shift|push|postpone|adjust) the {schedkind} (for|about) {name} (to|until|for) {time}
+(move|change|reschedule|shift|push|postpone|adjust) (my|the) {schedkind} (earlier|sooner|later)
+the {schedkind} (for|at) {old} (move|change|reschedule|shift|push|postpone) it (to|until|for) {time}
+(my|the) {schedkind} (move|change|reschedule|shift|push|postpone) (to|until|for) {time}
+(move|change|reschedule|shift|push) (my|the) {schedkind} (to|until|for) {time} instead
+(make|set|change) (my|the) {schedkind} (an all day event|all day|a whole day event|to an all day event|to all day)
+(move|change|reschedule|shift|push|postpone|adjust) (my|the) {schedkind} from {old} to {time}
+from {old} to {time} (move|change|reschedule|shift|push|postpone) (my|the) {schedkind}

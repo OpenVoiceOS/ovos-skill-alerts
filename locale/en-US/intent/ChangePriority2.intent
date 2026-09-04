@@ -1,0 +1,6 @@
+(my|the) {schedkind} (change|set|adjust) (the|its) priority
+(my|the) {schedkind} priority (change|set|adjust|raise|lower) it
+(change|set|adjust|raise|lower) the priority level of (my|the) {schedkind}
+(change|set|adjust|raise|lower) (my|the) {schedkind} priority
+the {schedkind} priority (change|set|adjust) it (to|to level) {priority}
+the {schedkind} priority (change|set|adjust|raise|lower) it

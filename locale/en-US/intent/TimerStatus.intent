@@ -1,0 +1,28 @@
+how (long|much time|much longer) (do|does) (i|we|it) (have|has) (left|remaining)
+how (long|much time|much longer) on (that|this|it) (timer|countdown)
+how (long|much time|much longer) (is|are) (left|remaining) (on|for) the {name} (timer|countdown)
+how (long|much time|much longer) (is|are) (left|remaining) (on|for) (my|the) {timerkind}
+(tell|show|give) (me|us) the time (left|remaining) (on|for) (my|the) {timerkind}
+how (long|much time) (until|till) (my|the) {timerkind} (ends|is done|is ready|is up|is finished)
+(on|for) (my|the) {timerkind} how (long|much time) (is|are) (left|remaining)
+how (long|much time|much longer) (left|remaining) (on|for) (my|the) {timerkind}
+how (long|much time|much longer) (is|are) (left|remaining) on the {name} (timer|countdown)
+how (long|much time|much longer) (is|are) (left|remaining) on my {name} (timer|countdown)
+(what is|what's|whats) (left|remaining) (on|for) (my|the) {timerkind}
+(is|has) (my|the) {timerkind} (done|ready|ended|finished|up)
+when (does|will) (my|the) {timerkind} (end|finish|be done|be ready)
+(the|my) time (left|remaining) (on|for) (my|the) {timerkind}
+(my|the) {timerkind} how (long|much time) (is|are) (left|remaining)
+how (long|much time|much longer) (on|for) (my|the) {timerkind}
+how (long|much time|much longer) (is|are) (left|remaining)
+(tell|show|give) (me|us) the time (left|remaining)
+(tell|show|give) (me|us) (my|the) {timerkind} status
+time (left|remaining) (on|for) (my|the) {timerkind}
+how long (is|are) (left|remaining) on my {name} (timer|countdown)
+how (long|much|much longer|much time) (left|remaining)
+(tell|give) (me|us) the status of (my|the) {timerkind}
+how (long|much time|much longer) on the {name} (timer|countdown)
+(what is|what's|whats) the status of my {name} (timer|countdown)
+(what is|what's|whats) the status of (my|the) {timerkind}
+(what is|what's|whats) (the|my) {timerkind} status
+how long (is|are) (my|the) {timerkind}

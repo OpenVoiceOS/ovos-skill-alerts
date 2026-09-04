@@ -1,0 +1,9 @@
+(list|show|read|tell) (me|us) (my|the) (alarm|alarms|timer|timers|reminder|reminders|event|events|appointment|alert|alerts) (for|at|on) {timeframe}
+(list|show|read|tell) (me|us) (all|all my|my|the) (alarm|alarms|alarm clock|timer|timers|countdown|reminder|reminders|event|events|appointment|appointments|alert|alerts)
+(list|show|read|tell) (me|us) (all|all my) (alarms|timers|reminders|events|appointments|alerts) (for|at|on) {timeframe}
+(list|show|read|tell) (me|us) (my|the) (pending|upcoming|stored) {alertkind}
+(list|show|read|tell) (me|us) all of (my|the) {alertkind}
+what (are|is) (my|the) (pending|upcoming|stored) {alertkind}
+got (any|some) {alertkind}
+got (any|some) {alertkind} (for|at|on|between|next) {timeframe}
+(could|would|can) you tell (me|us) what {alertkind} (i|we) have

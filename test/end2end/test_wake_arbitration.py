@@ -62,6 +62,24 @@ ADAPT_ONLY_PIPELINE = [
     "ovos-adapt-pipeline-plugin-low",
 ]
 
+# This skill's wake templates (CreateAlarmAlt.intent / CreateOcpAlarmAlt.
+# intent) migrated off Adapt to padatious file-intents; naptime's WakeUp
+# intent is still Adapt. ADAPT_ONLY_PIPELINE alone can no longer see this
+# skill's side of the arbitration at all -- every wake phrasing this skill
+# is supposed to own would come back unmatched regardless of template
+# content, not because of a real routing defect. Mirrors the tier ORDER
+# from this module's own docstring for REAL_DEFAULT_PIPELINE (padatious
+# tiers ahead of adapt tiers) so the arbitration outcome reflects a real
+# device, not an artifact of which engine happens to run first in the list.
+MIXED_PIPELINE = [
+    "ovos-padatious-pipeline-plugin-high",
+    "ovos-adapt-pipeline-plugin-high",
+    "ovos-padatious-pipeline-plugin-medium",
+    "ovos-adapt-pipeline-plugin-medium",
+    "ovos-padatious-pipeline-plugin-low",
+    "ovos-adapt-pipeline-plugin-low",
+]
+
 ALERTS_ID = "ovos-skill-alerts.openvoiceos"
 NAPTIME_ID = "ovos-skill-naptime.openvoiceos"
 LANG = "en-US"
@@ -151,10 +169,10 @@ def test_bare_wake_belongs_to_naptime(minicroft, utterance):
 ])
 def test_scheduled_wake_requests_still_belong_to_alerts(minicroft, utterance):
     """Every "wake me/us ..." alarm phrasing keeps working."""
-    types = _capture(minicroft, utterance, ADAPT_ONLY_PIPELINE)
+    types = _capture(minicroft, utterance, MIXED_PIPELINE)
     assert _claimant(types) == ALERTS_ID, (
         f"{utterance!r} was claimed by {_claimant(types)!r}, "
-        f"expected {ALERTS_ID!r}. pipeline=adapt_only. messages: {types!r}")
+        f"expected {ALERTS_ID!r}. pipeline=mixed. messages: {types!r}")
 
 
 @pytest.mark.timeout(300)
@@ -171,7 +189,7 @@ def test_third_person_wake_belongs_to_alerts(minicroft, utterance):
     must not widen the bare "wake"/"wake up" naptime-theft gap above --
     every line here still names a target ("the kids", "everyone").
     """
-    types = _capture(minicroft, utterance, ADAPT_ONLY_PIPELINE)
+    types = _capture(minicroft, utterance, MIXED_PIPELINE)
     assert _claimant(types) == ALERTS_ID, (
         f"{utterance!r} was claimed by {_claimant(types)!r}, "
-        f"expected {ALERTS_ID!r}. pipeline=adapt_only. messages: {types!r}")
+        f"expected {ALERTS_ID!r}. pipeline=mixed. messages: {types!r}")

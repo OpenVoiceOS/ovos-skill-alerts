@@ -1,0 +1,4 @@
+(cancel|delete|remove|clear|discard) my {name} (alarm|timer|countdown|reminder|event|appointment|alert)
+please (cancel|delete|remove|clear|discard|turn off) (my|the|all|all my) {alertkind}
+(cancel|delete|remove|clear|discard) the {alertkind} (for|at|about|on) {name}
+(cancel|delete|clear|remove) my (whole|entire) {alertkind} list
