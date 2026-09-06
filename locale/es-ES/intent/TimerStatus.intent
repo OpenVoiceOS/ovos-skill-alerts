@@ -1,4 +1,0 @@
-(temporizador|temporizadores|tiempo) (estado|fin|hecho|izquierda|largo|listo|termina)
-(estado|fin|hecho|izquierda|largo|listo|termina) (temporizador|temporizadores|tiempo)
-(temporizador|temporizadores|tiempo) (de|en|la|no|el|a|por|hay|este|una|tu|un|mi|está|debo|que|es|las|se|he) (estado|fin|hecho|izquierda|largo|listo|termina)
-(algo|conseguido|cualquier cosa|cuando|cuánto|cuéntanos|cómo|de la cual|de qué|desde cuándo|dime|espectáculo|leer|lista|qué|refrescar) (temporizador|temporizadores|tiempo)
