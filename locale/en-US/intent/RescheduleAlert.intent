@@ -1,0 +1,4 @@
+(my|the) {old} (alarm|timer|countdown|reminder|event|appointment) (move|change|reschedule|shift|push|postpone) (it|that) (to|until|for) {time}
+(move|change|reschedule|shift|push|postpone|adjust) (my|the) {old} (alarm|timer|countdown|reminder|event|appointment) (to|until|for) {time}
+(could|would|can) you (move|change|reschedule|shift|push|postpone) (my|the) (next|upcoming) {schedkind} (to|until|for) {time}
+(my|the) {old} (alarm|timer|reminder|event|appointment) (move|change|reschedule|shift|push|postpone) (to|until|for) {time}

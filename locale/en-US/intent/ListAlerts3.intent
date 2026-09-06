@@ -1,0 +1,10 @@
+(are|is) there (any|some) {alertkind} (for|at|on|between|tomorrow|today|this week) {timeframe}
+(tell|show|read) (me|us) (what|which) {alertkind} (i|we) have
+(have|has) (i|we) (got|set|stored) (any|some) {alertkind}
+(do|did) (i|we) (set|schedule|store) (any|some) {alertkind}
+(are|is) there (any|some) (stored|saved|pending|upcoming|scheduled) {alertkind}
+(do|did) (i|we) have (any|some|a|an) {alertkind}
+(what|which|how many) {alertkind} (do|did) (i|we) have
+(what|which) {alertkind} and {alertkind2} (do|did) (i|we) have
+(when|what) is my (next|upcoming) {alertkind}
+(are|is) there (any|some) {alertkind}
