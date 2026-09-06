@@ -140,11 +140,18 @@ class TestRecurringReminderOutcome(unittest.TestCase):
             f"simple reminder should have no recurrence, got {alert.repeat_days}")
 
 
+@pytest.mark.skip(reason="Boots the padatious engine, which is being removed "
+                         "from the test suite (padatious trains on boot and "
+                         "stalls CI waiting for mycroft.skills.trained). The "
+                         "m2v replacement is blocked on the ovoscope harness "
+                         "not booting m2v/trained pipelines "
+                         "(OpenVoiceOS/ovoscope#179); re-enable as an m2v "
+                         "arbitration test once that is fixed.")
 @pytest.mark.timeout(480)
 class TestReminderVsDateTimeArbitration(unittest.TestCase):
     """Two-skill MiniCroft: alerts must claim the recurring-reminder
-    utterance under BOTH the real default pipeline and ovoscope's broader
-    test pipeline."""
+    utterance over ovos-skill-date-time, and the handler must extract the
+    correct time and weekday recurrence."""
 
     @classmethod
     def setUpClass(cls):
