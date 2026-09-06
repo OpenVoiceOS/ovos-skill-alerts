@@ -29,6 +29,34 @@ If you were away, or your device was off or napping, ask for a summary of what y
 
 -----------------------
 
+## Intents
+
+The skill matches utterances with file-based intents (padatious/padacioso), not Adapt keyword intents. Each `.intent` file under `locale/<lang>/intent/` is a set of phrase templates, optionally referencing a `.entity` file for a `{slot}` value list or a `.voc` file for an inline `<keyword>` alternation.
+
+- `CreateAlarm` / `CreateAlarmAlt` — set an alarm, optionally recurring on given weekdays.
+- `CreateOcpAlarm` / `CreateOcpAlarmAlt` — set an alarm that plays media through OCP when it fires.
+- `CreateTimer` — start a countdown timer.
+- `CreateReminder` / `CreateReminderAlt` / `create_reminder_recurring` — set a reminder, optionally recurring.
+- `CreateEvent` — schedule an event, with collision and prenotification handling.
+- `RescheduleAlert` / `RescheduleAlert2` / `RescheduleAlertAlt` — move an existing alert earlier or later.
+- `ChangePriority` / `ChangePriority2` — change an alert's priority.
+- `ChangeRepeat` — change an alert's recurrence.
+- `ChangeUntil` — change an alert's recurrence end date.
+- `ChangeMediaProperties` — change the media/sound an alert plays.
+- `ListAlerts` / `ListAlerts2` / `ListAlerts3` — list active alerts, optionally within a timeframe.
+- `TimerStatus` / `TimerStatus2` — report the status of active timers.
+- `missed_alerts` — report and clear missed alerts.
+- `CancelAlert` / `CancelAlert2` — cancel one or more alerts.
+- `CreateList` — create a todo list.
+- `AddListSubitems` — add items to a todo list.
+- `QueryListNames` — list the names of existing todo lists.
+- `QueryTodoEntries` / `QueryListEntries` — list the entries of a todo/reminder list.
+- `DeleteListEntries` — remove specific entries from a todo list.
+- `DeleteList` — delete a todo list and its entries.
+- `DeleteTodoEntries` — delete one or more todo entries.
+- `CalendarList` — list the CalDAV calendars available for sync.
+- `DAVSync` — sync with a configured CalDAV server.
+
 ## Scenarios
 
 <ins>Keywords</ins> are underlined, _alert names_ are italic.
@@ -225,19 +253,13 @@ Remove these skills before you install this one.
 
 ## Contributing Translations
 Most of the skill is autotranslated, except for English and German, and needs review.
-As the examples above show, the skill uses Adapt keywords to determine intent. The vocabulary keywords should include a variety of synonym nouns and verbs to cover a wide range of speech patterns.
+Intent matching is file-based (padatious/padacioso), not Adapt: each `.intent` file under `locale/<lang>/intent/` lists phrase templates, `{slot}` placeholders are optionally backed by a sibling `.entity` file, and a `<keyword>` reference inlines the matching alternation from a sibling `.voc` file.
 
-The skill parses dates and names either as a leftover (a non-keyword word) or as the word that follows a keyword (for example `until.voc` in "until 6 AM").
-`noise_words.voc` lists words to ignore when parsing a reminder name
-(for example "remind <ins>me</ins> <ins>to</ins> take out <ins>the</ins> trash" -> `take out trash`).
+A handful of `.voc` files (for example `until.voc`, `priority.voc`, `repeat.voc`, `days.voc`) are also read directly at runtime by the skill's own keyword-matching helpers, to recognize a concept anywhere in free text rather than through a fixed template slot.
 Dialogs are mostly straightforward and should include the correct mustache tags from the start.
 Keep these patterns in mind.
 
-To contribute a translation, check the `vocab` folder and add the files for your language.
-This needs a basic understanding of the intent structure and what it does.
-```python
-require("query").one_of("alarm", "reminder", "event", "alert", "remind").optionally("and").optionally("stored")  # <- vocab
-```
+To contribute a translation, check the `intent`, `entity`, `vocab`, and `dialog` folders and add the files for your language, mirroring the structure of an existing locale (`en-US` or `de-DE`).
 For questions, contact @sgee_ in Matrix chat.
 
 ## Contact Support

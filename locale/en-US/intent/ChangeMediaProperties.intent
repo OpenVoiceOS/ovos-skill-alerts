@@ -1,0 +1,18 @@
+(change|set|adjust|make) (my|the|my next|the next) {schedkind} to be (audible|playable|spoken|recorded)
+(change|set|adjust|make) (my|the|my next|the next) {schedkind} (audible|playable|spoken|recorded)
+(change|set|adjust|make|adjourn) (my|the|my next|the next) (audible|playable|spoken|recorded) {schedkind}
+(change|set|adjust) (my|the|my next|the next) {schedkind} alert to (audio|playback)
+(change|set|adjust|make) (my|the|my next|the next|my upcoming) {schedkind} to playback {mediakind}
+(change|set|adjust|make) (my|the|my next|the next|my upcoming) {schedkind} to play {mediakind}
+(change|set|adjust|make) (my|the|my next|the next) {schedkind} to {mediaform}
+(change|set|adjust|make) (my|the|my next|the next) {schedkind} to use {mediaform}
+(change|set|adjust|make) (my|the|my next|the next) {schedkind} to replay {mediaform}
+(change|set|adjust|make) (my|the|my next|the next) {schedkind} to playback {mediaform}
+(change|set|adjust|make) (my|the|my next|the next) {schedkind} to play {mediaform}
+(change|set|adjust|make) (my|the|my next|the next) {schedkind} to play the {mediakind}
+(change|set|adjust|make) (my|the|my next|the next) {schedkind} to play my {mediakind}
+(change|set|adjust|make) (my|the|my next|the next) {schedkind} to play a {mediakind}
+(change|set|adjust|make) (my|the|my next|the next) {schedkind} play {mediaform}
+(change|set|adjust) (my|the|my next|the next) {schedkind} sound to {mediakind}
+(change|set|adjust) (my|the|my next|the next) {schedkind} sound to {mediaform}
+(change|set|adjust) (my|the|my next|the next) {schedkind} alert to {mediaform}
