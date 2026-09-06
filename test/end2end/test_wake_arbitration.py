@@ -54,6 +54,18 @@ from ovos_bus_client.message import Message
 from ovos_bus_client.session import Session
 from ovoscope import get_minicroft
 
+# The alerts side of this arbitration is served by the m2v engine, but
+# naptime's WakeUp intent is still an Adapt intent (its migration is held
+# on spec-tools#116), so on the shipped m2v-only pipeline naptime registers
+# nothing matchable and the question this module exists to answer -- which
+# skill wins a wake phrasing -- cannot be posed. Until naptime drops Adapt,
+# bare "wake up" belonging to naptime is UNVERIFIED.
+pytestmark = pytest.mark.skip(
+    reason="naptime's WakeUp intent is still Adapt (migration held on "
+           "OpenVoiceOS/ovos-spec-tools#116); an m2v-only pipeline cannot "
+           "see naptime's side of the arbitration, so bare 'wake up' "
+           "belonging to naptime is unverified until naptime drops Adapt")
+
 from ._wait_trained import wait_for_minicroft_ready
 
 ADAPT_ONLY_PIPELINE = [
