@@ -1,0 +1,7 @@
+(cancel|delete|remove|clear|discard|get rid of|turn off) (my|the|all|all my|every|any) (next|upcoming|pending|stored|saved|scheduled) {alertkind}
+(my|the|all my) (next|upcoming|pending) {alertkind} (cancel|delete|remove|clear|discard) (it|them) [please]
+(my|the|all my|all|every) {alertkind} (cancel|delete|remove|clear|discard) (it|them) [please]
+(cancel|delete|remove|clear|discard|turn off) (alarm|alarms|alarm clock|timer|timers|countdown|reminder|reminders|event|events|appointment|appointments|alert|alerts)
+(cancel|delete|remove|clear|discard) (my|the|all|all my) {alertkind} and (my|the|all|all my) {alertkind2}
+(cancel|delete|remove|clear|discard|get rid of|turn off) (my|the|all|all my|all of my|every|any|all the) {alertkind}
+please (cancel|delete|remove|clear|discard) (my|the|all) {alertkind} and (my|the|all) {alertkind2}

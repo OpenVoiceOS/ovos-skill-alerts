@@ -3,3 +3,4 @@ new timer [for {duration}]
 (set|start|make) a {duration} timer
 (set|put) timer [for] {duration}
 timer [for] {duration}
+in {duration} let me know
