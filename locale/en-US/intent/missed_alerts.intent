@@ -1,3 +1,4 @@
 # Utterances asking which alerts, if any, were missed - optionally scoped to a kind.
-[(did|have) (i|we)] (miss|missed) [(a|an|any|some)] (alarm|alarms|alert|alerts|event|events|reminder|reminders|timer|timers)
-(what|which) (alarm|alarms|alert|alerts|event|events|reminder|reminders|timer|timers) (did|have) (i|we) (miss|missed)
+[(did|have) (i|we)] (miss|missed) [(a|an|any|some)] (alarm|alarms|alert|alerts|event|events|reminder|reminders|timer|timers|anything|something)
+(what|which) (alarm|alarms|alert|alerts|event|events|reminder|reminders|timer|timers|anything|something) (did|have) (i|we) (miss|missed)
+did (i|we) miss (anything|something)
