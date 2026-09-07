@@ -754,9 +754,22 @@ def parse_timeframe_from_message(message: Message,
     """
     end = None
     tokens = tokens or tokenize_utterance(message)
+    lang = get_message_lang(message)
+    utterance = message.data.get("utterance", "")
+    has_and = message.data.get("and") or voc_match(utterance, "and", lang=lang)
+
+    if has_and and not message.data.get("and"):
+        # NOTE: adapt already splits the token stream on a tagged "and",
+        # giving parse_alert_time_from_message a clean "before"/"after"
+        # token for each clock time. A padatious template intent never
+        # populates message.data["and"], so without this split a single
+        # extract_datetime() call across the whole "between X and Y" phrase
+        # only returns the last time and silently drops the first one.
+        _voc_match_index(tokens, "and", lang)
+
     begin = parse_alert_time_from_message(message, tokens, timezone)
 
-    if message.data.get("and") or voc_match(message.data.get("utterance", ""), "and"):
+    if has_and:
         end = parse_alert_time_from_message(message,
                                             tokens,
                                             timezone,
