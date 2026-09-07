@@ -3,3 +3,29 @@ new reminder [{reminder}]
 remind (me|us) [to {reminder}] [at {time}]
 tell me to {reminder} [at {time}]
 remind me in {duration} [to {reminder}]
+set a reminder
+set a reminder for me
+set a reminder to {reminder}
+please set a reminder to {reminder}
+can you set a reminder to {reminder}
+can you remind me to {reminder}
+could you remind me to {reminder}
+would you remind me to {reminder} at {time}
+i need a reminder to {reminder}
+i need to be reminded to {reminder}
+i want a reminder to {reminder}
+let's set a reminder to {reminder}
+put a reminder on to {reminder}
+add a reminder to {reminder} at {time}
+make a reminder for {reminder}
+give me a reminder to {reminder}
+i'd like a reminder to {reminder}
+remind me to {reminder}
+remind me about {reminder}
+remind me tomorrow to {reminder}
+remind me later to {reminder}
+set me a reminder to {reminder}
+set up a reminder to {reminder}
+schedule a reminder to {reminder} at {time}
+start a reminder to {reminder}
+don't let me forget to {reminder}

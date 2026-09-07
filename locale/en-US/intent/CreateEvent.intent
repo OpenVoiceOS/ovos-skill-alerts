@@ -1,3 +1,28 @@
 (create|add|schedule) (an|a) (event|appointment) [{event}]
 new (event|appointment) [{event}]
 i have (an|a) [work] (event|appointment) [{event}]
+create an event
+create an event for {event}
+schedule an appointment for {event}
+please schedule an appointment for {event}
+can you create an event for {event}
+can you schedule an appointment
+could you add an event for {event}
+would you set up an appointment for {event}
+i need to schedule an appointment for {event}
+i need to create an event for {event}
+i want to add an appointment for {event}
+let's create an event for {event}
+put an event on my calendar for {event}
+put an appointment on the calendar for {event}
+add an event to my calendar for {event}
+add an appointment for {event}
+make an appointment for {event}
+make an event for {event}
+give me an event for {event}
+set up an event for {event}
+set up an appointment for {event}
+book an appointment for {event}
+i'd like to schedule an appointment for {event}
+new appointment for {event}
+i have a new appointment for {event}
