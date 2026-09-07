@@ -423,8 +423,12 @@ class TestAdapt2_Createalarm(_IntentRoutingMixin, TestCase):
         # "(set|create) [an] alarm (at|for) {time}" line.
         self._assert_padatious(r"set an alarm at 7 am", r"CreateAlarm.intent")
 
-    @pytest.mark.xfail(strict=False, reason="ENGINE ISSUE (padacioso): 'make a 10 am weekend alarm' is a literal expansion of CreateAlarm.intent's '(set|make) a {time} [weekday|weekend] alarm' line and resolves correctly most runs, but ties non-deterministically against CreateOcpAlarm.intent (same class of run-to-run tie-break non-determinism as the other ENGINE ISSUE xfails in this file -- observed across several unrelated intent pairs, not an exhaustive list) -- flagged for the engine lane, not fixed here.")
     def test_make_a_10_am_weekend_alarm(self):
+        # this used to tie non-deterministically against a separate
+        # dedicated media-alarm intent file (a distinct padacioso
+        # registration racing the same template family). Its media lines
+        # are now part of this same CreateAlarm.intent template, so there
+        # is no sibling registration left to tie against.
         self._assert_padatious(r"make a 10 am weekend alarm", r"CreateAlarm.intent")
 
     def test_set_an_alarm_every_weekday_at_time(self):
@@ -485,21 +489,31 @@ class TestAdapt3_Createalarmalt(_IntentRoutingMixin, TestCase):
         self._assert_padatious_high(r"wake everyone up every weekday at 7", r"CreateAlarmAlt.intent")
 
 class TestAdapt4_Createocpalarm(_IntentRoutingMixin, TestCase):
-    """Padatious (intent file) intent: CreateOcpAlarm.intent"""
+    """Padatious (intent file) intent: CreateAlarm.intent (media branch).
+
+    The dedicated media-alarm intent file's non-wake phrasings were folded
+    into CreateAlarm.intent's template; a matched {mediakind} slot routes
+    handle_create_alarm to the OCP media-alarm branch (see __init__.py).
+    """
     def test_wake_me_up_with_music(self):
         # issue #138 triage: original auto-generated utterance did not
         # route to this intent under the adapt-only pipeline pin (verified
         # locally with a standalone probe against every candidate phrasing).
         # Replaced with a phrasing confirmed to route correctly, keeping
         # equivalent test intent/coverage rather than dropping the row.
-        # CreateOcpAlarm.intent's "(set|create|...) (a|an|my) alarm with
+        # CreateAlarm.intent's "(set|create|...) (a|an|my) alarm with
         # {mediakind}" line already covers this natively -- no Adapt needed.
-        self._assert_padatious(r"set an alarm with music", r"CreateOcpAlarm.intent")
+        self._assert_padatious(r"set an alarm with music", r"CreateAlarm.intent")
 
 class TestAdapt5_Createocpalarmalt(_IntentRoutingMixin, TestCase):
-    """Padatious (intent file) intent: CreateOcpAlarm.intent (wake-phrasing lines folded in)"""
+    """Padatious (intent file) intent: CreateAlarmAlt.intent (media branch).
+
+    The dedicated media-alarm intent file's wake-phrasing lines were folded
+    into CreateAlarmAlt.intent (the wake form); handle_create_alarm_alt
+    delegates to handle_create_alarm's {mediakind} branch.
+    """
     def test_wake_me_up_with_music(self):
-        self._assert_padatious(r"wake me up with music", r"CreateOcpAlarm.intent")
+        self._assert_padatious(r"wake me up with music", r"CreateAlarmAlt.intent")
 
 class TestAdapt6_Createtimer(_IntentRoutingMixin, TestCase):
     """Padatious (intent file) intent: CreateTimer.intent"""
@@ -769,27 +783,29 @@ class TestAdapt14_Listalerts(_IntentRoutingMixin, TestCase):
         self._assert_padatious(r"got any reminder next week", r"ListAlerts.intent")
 
     def test_are_there_any_alerts_between_4_pm_and_5_(self):
-        # Full-pipeline correction: this "are there any X between Y" shape
-        # is ListAlerts3.intent's own dedicated line ("(are|is) there (any|
-        # some) {alertkind} (for|at|on|between|...) {timeframe}"), a
-        # near-literal match; ListAlerts.intent has no "are there" line at
-        # all. ListAlerts/ListAlerts2/ListAlerts3 share the same handler
-        # (see __init__.py's stacked @intent_handler), so this only pins
-        # which sibling template correctly claims the phrasing.
-        self._assert_padatious(r"are there any alerts between 4 pm and 5 pm", r"ListAlerts3.intent")
+        # This "are there any X between Y" shape is matched by the
+        # "(are|is) there (any|some) {alertkind} (for|at|on|between|...)
+        # {timeframe}" line, folded in from a former sibling intent file
+        # (two sibling files used to carry their own copies of these lines
+        # and route to the same handler as this one -- see __init__.py's
+        # handle_event_timeframe_check -- so folding their templates into
+        # this one file changes only which file the phrasing lives in, not
+        # routing or dialog).
+        self._assert_padatious(r"are there any alerts between 4 pm and 5 pm", r"ListAlerts.intent")
 
     def test_could_you_tell_me_what_reminders_i_have(self):
         # issue #175: create.voc's "i have" entry used to sit alongside
         # CreateReminder's Adapt registration and outscored ListAlerts on
         # this phrasing. CreateReminder moved to a padacioso .intent file
         # in PR #172, and "i have" was removed from create.voc here since
-        # nothing else it fed (CreateOcpAlarm, the has_create list filter)
-        # needs it -- this pins the query routing regardless. Added
+        # nothing else it fed (the has_create list filter, and the media
+        # alarm's own line) needs it -- this pins the query routing
+        # regardless. Added
         # "(could|would|can) you tell (me|us) what {alertkind} (i|we) have".
         self._assert_padatious(r"could you tell me what reminders i have", r"ListAlerts.intent")
 
     def test_what_reminders_do_i_have(self):
-        self._assert_padatious(r"what reminders do i have", r"ListAlerts3.intent")
+        self._assert_padatious(r"what reminders do i have", r"ListAlerts.intent")
 
 class TestAdapt15_Timerstatus(_IntentRoutingMixin, TestCase):
     """Padatious (intent file) intent: TimerStatus.intent"""
@@ -998,7 +1014,7 @@ class TestAdaptMigration_Padatious_kw_split(_IntentRoutingMixin, TestCase):
         self._assert_padatious(r"cancel my next alarm", r"CancelAlert.intent")
 
     def test_list_alerts_padatious(self):
-        self._assert_padatious(r"what reminders do i have", r"ListAlerts3.intent")
+        self._assert_padatious(r"what reminders do i have", r"ListAlerts.intent")
 
     def test_timer_status_padatious(self):
         self._assert_padatious(r"what is the timer status", r"TimerStatus.intent")
@@ -1018,10 +1034,10 @@ class TestAdaptMigration_Padatious_kw_split(_IntentRoutingMixin, TestCase):
         self._assert_padatious(r"change the pill reminder frequency to 4 hours", r"ChangeRepeat.intent")
 
     def test_create_ocp_alarm_padatious(self):
-        self._assert_padatious(r"set an alarm with music", r"CreateOcpAlarm.intent")
+        self._assert_padatious(r"set an alarm with music", r"CreateAlarm.intent")
 
     def test_create_ocp_alarm_alt_padatious(self):
-        self._assert_padatious(r"wake me up with music", r"CreateOcpAlarm.intent")
+        self._assert_padatious(r"wake me up with music", r"CreateAlarmAlt.intent")
 
     def test_dav_sync_padatious(self):
         self._assert_padatious(r"synchronize my calendar", r"DAVSync.intent")

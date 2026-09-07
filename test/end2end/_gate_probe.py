@@ -25,9 +25,8 @@ LABEL_TO_FILES = {
     "ChangeMediaProperties": {"ChangeMediaProperties"},
     "ChangeProperties": {"ChangePriority", "ChangeRepeat", "ChangeUntil"},
     "CreateAlarmAlt": {"CreateAlarmAlt"},
-    "CreateOcpAlarm": {"CreateOcpAlarm"},
     "DAVSync": {"DAVSync"},
-    "ListAlerts": {"ListAlerts", "ListAlerts2", "ListAlerts3"},
+    "ListAlerts": {"ListAlerts"},
     "RescheduleAlert": {"RescheduleAlert"},
     "TimerStatus": {"TimerStatus"},
 }

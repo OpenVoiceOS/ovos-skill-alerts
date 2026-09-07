@@ -7,3 +7,23 @@ what (are|is) (my|the) (pending|upcoming|stored) {alertkind}
 got (any|some) {alertkind}
 got (any|some) {alertkind} (for|at|on|between|next) {timeframe}
 (could|would|can) you tell (me|us) what {alertkind} (i|we) have
+(do|did) (i|we) have (anything|something) (scheduled|stored|saved|set|pending) (for|at|on|tomorrow|today) {timeframe}
+(list|show|read) (my|all my|the) (alarms|timers|reminders|events|appointments|alerts) (for|at|on) {timeframe}
+(what|which) {alertkind} (are|is) (stored|saved|set|pending|upcoming|scheduled|there) (for|at|on|tomorrow|today) {timeframe}
+(list|show|read) (my|all my|the) (alarm|alarms|alarm clock|timer|timers|countdown|reminder|reminders|event|events|appointment|appointments|alert|alerts)
+(do|did) (i|we) have (any|some|a|an) {alertkind} (for|at|on|between|tomorrow|today|this week) {timeframe}
+what (did|have) (i|we) (set|schedule|store|scheduled|stored) (for|on|at|tomorrow|today) {timeframe}
+(what|which|how many) {alertkind} (do|did) (i|we) have (for|at|on|tomorrow|today|this week) {timeframe}
+(do|did) (i|we) have (any|some) (stored|saved|pending|upcoming|set|scheduled) {alertkind}
+(do|did) (i|we) have (anything|something) (scheduled|stored|saved|set|pending)
+(what|which) {alertkind} (are|is) (stored|saved|set|pending|upcoming|scheduled|there)
+(are|is) there (any|some) {alertkind} (for|at|on|between|tomorrow|today|this week) {timeframe}
+(tell|show|read) (me|us) (what|which) {alertkind} (i|we) have
+(have|has) (i|we) (got|set|stored) (any|some) {alertkind}
+(do|did) (i|we) (set|schedule|store) (any|some) {alertkind}
+(are|is) there (any|some) (stored|saved|pending|upcoming|scheduled) {alertkind}
+(do|did) (i|we) have (any|some|a|an) {alertkind}
+(what|which|how many) {alertkind} (do|did) (i|we) have
+(what|which) {alertkind} and {alertkind2} (do|did) (i|we) have
+(when|what) is my (next|upcoming) {alertkind}
+(are|is) there (any|some) {alertkind}

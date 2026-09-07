@@ -3870,7 +3870,7 @@ class TestSkillLoading(unittest.TestCase):
     supported_languages = ["en-us"]
 
     # Specify skill intents as sets
-    adapt_intents = {'CreateAlarm', 'CreateOcpAlarm', 'CreateTimer',
+    adapt_intents = {'CreateAlarm', 'CreateTimer',
                      'CreateReminder', 'CreateEvent',
                      'RescheduleAlert', 'ListAlerts',
                      'ChangeProperties', 'ChangeMediaProperties',

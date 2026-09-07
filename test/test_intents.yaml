@@ -42,7 +42,6 @@ en-us:
       - alarm
       - create
       - weekends
-  CreateOcpAlarm:
     - wake me up with music:
       - alarm
       - media
