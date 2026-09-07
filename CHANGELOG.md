@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.4.2a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.4.2a1) (2026-09-07)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.4.1a4...0.4.2a1)
+
+**Merged pull requests:**
+
+- fix: ship every en-US intent in all locales [\#202](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/202) ([JarbasAl](https://github.com/JarbasAl))
+
 ## [0.4.1a4](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.4.1a4) (2026-09-07)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.4.1a3...0.4.1a4)
@@ -367,17 +375,9 @@
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.1.26a1...0.1.26)
 
-**Merged pull requests:**
-
-- Release 0.1.26a1 [\#93](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/93) ([github-actions[bot]](https://github.com/apps/github-actions))
-
 ## [0.1.26a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.1.26a1) (2025-06-07)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.1.25...0.1.26a1)
-
-**Merged pull requests:**
-
-- fix: workshop 6.0.0 compat [\#92](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/92) ([JarbasAl](https://github.com/JarbasAl))
 
 ## [0.1.25](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.1.25) (2025-06-07)
 
