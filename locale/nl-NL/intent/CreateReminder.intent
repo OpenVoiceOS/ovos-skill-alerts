@@ -3,3 +3,6 @@ nieuwe herinnering [{reminder}]
 nieuwe Herinneringen
 start Herinneringen
 rooster herinnering
+herinner (me|mij) [aan {reminder}] [om {time}]
+vertel me dat ik moet {reminder}
+herinner (me|mij) over {duration} [aan {reminder}]

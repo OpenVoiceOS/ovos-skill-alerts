@@ -2,3 +2,5 @@
 nouveau rappel [{reminder}]
 créer rappels
 nouveau rappels
+rappelle(-moi|-nous) [de {reminder}] [à {time}]
+dis-moi de {reminder} [à {time}]

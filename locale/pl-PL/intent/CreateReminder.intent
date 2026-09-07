@@ -3,3 +3,5 @@ nowe przypomnienie [{reminder}]
 nowy przypomnienia
 marka przypomnienia
 tworzyć przypomnienia
+przypomnij (mi|nam) [o {reminder}] [o {time}]
+powiedz mi żebym {reminder}

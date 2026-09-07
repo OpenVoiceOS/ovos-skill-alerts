@@ -2,3 +2,6 @@
 ny påminnelse [{reminder}]
 schema påminnelse
 skapa påminnelse
+påminn (mig|oss) [om att {reminder}] [klockan {time}]
+berätta att jag ska {reminder}
+påminn (mig|oss) om {duration} [att {reminder}]
