@@ -5,3 +5,7 @@
 (cancel|delete|remove|clear|discard) (my|the|all|all my) {alertkind} and (my|the|all|all my) {alertkind2}
 (cancel|delete|remove|clear|discard|get rid of|turn off) (my|the|all|all my|all of my|every|any|all the) {alertkind}
 please (cancel|delete|remove|clear|discard) (my|the|all) {alertkind} and (my|the|all) {alertkind2}
+(cancel|delete|remove|clear|discard) my {name} (alarm|timer|countdown|reminder|event|appointment|alert)
+please (cancel|delete|remove|clear|discard|turn off) (my|the|all|all my) {alertkind}
+(cancel|delete|remove|clear|discard) the {alertkind} (for|at|about|on) {name}
+(cancel|delete|clear|remove) my (whole|entire) {alertkind} list

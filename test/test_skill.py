@@ -426,19 +426,6 @@ class TestSkill(unittest.TestCase):
         
         self.reset_alert_manager()
 
-    def test_handle_create_reminder_alt(self):
-        real_method = self.skill.handle_create_reminder
-        create_reminder = Mock()
-        self.skill.handle_create_reminder = create_reminder
-        test_message = Message("test", {"data": True}, {"context": "test"})
-        self.skill.handle_create_reminder_alt(test_message)
-        create_reminder.assert_called_once()
-        create_reminder.assert_called_with(test_message)
-
-        self.skill.handle_create_reminder = real_method
-        
-        self.reset_alert_manager()
-
     def test_handle_create_event(self):
         self.populate_alerts()
 
@@ -3883,9 +3870,9 @@ class TestSkillLoading(unittest.TestCase):
     supported_languages = ["en-us"]
 
     # Specify skill intents as sets
-    adapt_intents = {'CreateAlarm', 'CreateOcpAlarm', 'CreateTimer', 
-                     'CreateReminder', 'CreateReminderAlt', 'CreateEvent',
-                     'RescheduleAlert', 'RescheduleAlertAlt', 'ListAlerts',
+    adapt_intents = {'CreateAlarm', 'CreateOcpAlarm', 'CreateTimer',
+                     'CreateReminder', 'CreateEvent',
+                     'RescheduleAlert', 'ListAlerts',
                      'ChangeProperties', 'ChangeMediaProperties',
                      'TimerStatus', 'CancelAlert', 'CreateList',
                      'AddListSubitems', 'QueryListNames', 'QueryTodoEntries',

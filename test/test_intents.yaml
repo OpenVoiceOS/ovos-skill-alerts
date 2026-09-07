@@ -72,7 +72,6 @@ en-us:
       - reminder
       - everyday
       - until
-  CreateReminderAlt:
     - remind me to go to work weekday mornings at 8:
       - remind
       - weekdays
@@ -102,7 +101,6 @@ en-us:
       - next
       - event
       - earlier
-  RescheduleAlertAlt:
     - extend the pizza timer by 2 minutes:
       - later
       - timer

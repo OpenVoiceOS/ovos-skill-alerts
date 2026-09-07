@@ -497,9 +497,9 @@ class TestAdapt4_Createocpalarm(_IntentRoutingMixin, TestCase):
         self._assert_padatious(r"set an alarm with music", r"CreateOcpAlarm.intent")
 
 class TestAdapt5_Createocpalarmalt(_IntentRoutingMixin, TestCase):
-    """Padatious (intent file) intent: CreateOcpAlarmAlt.intent"""
+    """Padatious (intent file) intent: CreateOcpAlarm.intent (wake-phrasing lines folded in)"""
     def test_wake_me_up_with_music(self):
-        self._assert_padatious(r"wake me up with music", r"CreateOcpAlarmAlt.intent")
+        self._assert_padatious(r"wake me up with music", r"CreateOcpAlarm.intent")
 
 class TestAdapt6_Createtimer(_IntentRoutingMixin, TestCase):
     """Padatious (intent file) intent: CreateTimer.intent"""
@@ -580,33 +580,33 @@ class TestAdapt7_Createreminder(_IntentRoutingMixin, TestCase):
     # scope for this fix. See the PR description.
 
 class TestAdapt8_Createreminderalt(_IntentRoutingMixin, TestCase):
-    """Padatious (intent file) intent: CreateReminderAlt.intent"""
+    """Padatious (intent file) intent: CreateReminder.intent ("remind"/"tell me to" lines folded in)"""
     def test_remind_me(self):
-        self._assert_padatious(r"remind me", r"CreateReminderAlt.intent")
+        self._assert_padatious(r"remind me", r"CreateReminder.intent")
 
     def test_remind_me_to_reminder(self):
-        self._assert_padatious(r"remind me to call mom", r"CreateReminderAlt.intent")
+        self._assert_padatious(r"remind me to call mom", r"CreateReminder.intent")
 
     def test_tell_me_to_reminder(self):
-        self._assert_padatious(r"tell me to call mom", r"CreateReminderAlt.intent")
+        self._assert_padatious(r"tell me to call mom", r"CreateReminder.intent")
 
     def test_tell_me_to_walk_the_dog_every_weekday(self):
-        self._assert_padatious(r"tell me to walk the dog every weekday at 8", r"CreateReminderAlt.intent")
+        self._assert_padatious(r"tell me to walk the dog every weekday at 8", r"CreateReminder.intent")
 
     def test_tell_me_to_go_to_work_every_weekday_morning(self):
-        self._assert_padatious(r"tell me to go to work every weekday morning", r"CreateReminderAlt.intent")
+        self._assert_padatious(r"tell me to go to work every weekday morning", r"CreateReminder.intent")
 
     def test_tell_me_to_feed_the_cat_every_morning(self):
-        self._assert_padatious(r"tell me to feed the cat every morning at 7", r"CreateReminderAlt.intent")
+        self._assert_padatious(r"tell me to feed the cat every morning at 7", r"CreateReminder.intent")
 
     def test_tell_me_to_check_for_test_failures_every_day(self):
-        self._assert_padatious(r"tell me to check for test failures every day until 2024", r"CreateReminderAlt.intent")
+        self._assert_padatious(r"tell me to check for test failures every day until 2024", r"CreateReminder.intent")
 
     def test_remind_me_in_an_hour(self):
         # PR #172 adversarial review: "remind me in {duration}" had no
-        # matching line at all. CreateReminderAlt.intent now has
+        # matching line at all. CreateReminder.intent now has
         # "remind me in {duration} [to {reminder}]".
-        self._assert_padatious(r"remind me in an hour to call mom", r"CreateReminderAlt.intent")
+        self._assert_padatious(r"remind me in an hour to call mom", r"CreateReminder.intent")
 
 class TestAdapt9_Createevent(_IntentRoutingMixin, TestCase):
     """Padatious (intent file) intent: CreateEvent.intent"""
@@ -644,19 +644,15 @@ class TestAdapt10_Reschedulealert(_IntentRoutingMixin, TestCase):
         self._assert_padatious(r"move the baseball event to 08:00 pm", r"RescheduleAlert_kw")
 
     def test_reschedule_the_next_event_two_hours_earl(self):
-        # Full-pipeline correction: no RescheduleAlert.intent line accepts a
+        # Full-pipeline correction: no RescheduleAlert.intent line accepted a
         # bare duration + "earlier/later" (all of them require "(to|until|
-        # for) {time}"), while RescheduleAlert2.intent's "(move|change|
-        # reschedule|...) (my|the) (next|upcoming) {schedkind} {duration}
-        # (earlier|sooner|later)" line is a near-literal match for this
-        # exact phrasing family. Which sibling wins still flips between
-        # RescheduleAlert and RescheduleAlert2 depending on padatious's
-        # async training-compile timing (both are stacked on the SAME
-        # handler in __init__.py, so this is a wire-name coin flip, not a
-        # behavioral difference) -- accept either.
-        self._assert_padatious_any(
+        # for) {time}") until the "(move|change|reschedule|...) (my|the)
+        # (next|upcoming) {schedkind} {duration} (earlier|sooner|later)"
+        # line -- a near-literal match for this exact phrasing family --
+        # was folded into this file.
+        self._assert_padatious(
             r"reschedule the next event two hours earlier",
-            [r"RescheduleAlert.intent", r"RescheduleAlert2.intent"])
+            r"RescheduleAlert.intent")
 
     @pytest.mark.xfail(strict=True, reason="issue #155: relative/absolute time argument makes the utterance unmatched under the full default pipeline -- real skill defect (Adapt confidence dilution / unhandled duration vocab), confirmed via control-pair evidence ('adjust the pizza timer' matches RescheduleAlert, 'adjust the pizza timer by 2 minutes' matches nothing). See https://github.com/OpenVoiceOS/ovos-skill-alerts/issues/155.")
     def test_extend_the_pizza_timer_by_2_minutes(self):
@@ -667,23 +663,18 @@ class TestAdapt10_Reschedulealert(_IntentRoutingMixin, TestCase):
         self._assert_padatious(r"decrease the bread timer by 5 minutes", r"RescheduleAlert_kw")
 
 class TestAdapt11_Reschedulealertalt(_IntentRoutingMixin, TestCase):
-    """Padatious (intent file) intent: RescheduleAlertAlt.intent"""
+    """Padatious (intent file) intent: RescheduleAlert.intent (earlier/sooner/longer/shorter lines folded in)"""
     def test_move_the_baseball_event_to_08_00_pm(self):
         # issue #138 triage: original auto-generated utterance did not
         # route to this intent under the adapt-only pipeline pin (verified
         # locally with a standalone probe against every candidate phrasing).
         # Replaced with a phrasing confirmed to route correctly, keeping
         # equivalent test intent/coverage rather than dropping the row.
-        # RescheduleAlert2.intent used to carry a duplicate
-        # "(extend|shorten|lengthen) (my|the) {schedkind}" line that
-        # shadowed RescheduleAlertAlt's own line of the same shape, making
-        # padacioso resolve "shorten the timer" to RescheduleAlert instead
-        # -- removed the duplicate so this phrasing routes here.
-        self._assert_padatious(r"shorten the timer", r"RescheduleAlertAlt.intent")
+        self._assert_padatious(r"shorten the timer", r"RescheduleAlert.intent")
 
-    @pytest.mark.xfail(strict=True, reason="issue #155: relative/absolute time argument makes the utterance unmatched under the full default pipeline -- real skill defect (Adapt confidence dilution / unhandled duration vocab), confirmed via control-pair evidence ('reschedule the next event' matches a sibling intent, 'reschedule the next event two hours earlier' matches nothing at all under RescheduleAlertAlt). See https://github.com/OpenVoiceOS/ovos-skill-alerts/issues/155.")
+    @pytest.mark.xfail(strict=True, reason="issue #155: relative/absolute time argument makes the utterance unmatched under the full default pipeline -- real skill defect (Adapt confidence dilution / unhandled duration vocab), confirmed via control-pair evidence ('reschedule the next event' matches a sibling intent, 'reschedule the next event two hours earlier' matches nothing at all under RescheduleAlert). See https://github.com/OpenVoiceOS/ovos-skill-alerts/issues/155.")
     def test_reschedule_the_next_event_two_hours_earl(self):
-        self._assert_padatious(r"reschedule the next event two hours earlier", r"RescheduleAlertAlt_kw")
+        self._assert_padatious(r"reschedule the next event two hours earlier", r"RescheduleAlert_kw")
 
     def test_extend_the_pizza_timer_by_2_minutes(self):
         # issue #138 triage: original auto-generated utterance did not
@@ -691,7 +682,7 @@ class TestAdapt11_Reschedulealertalt(_IntentRoutingMixin, TestCase):
         # locally with a standalone probe against every candidate phrasing).
         # Replaced with a phrasing confirmed to route correctly, keeping
         # equivalent test intent/coverage rather than dropping the row.
-        self._assert_padatious(r"increase the pizza timer", r"RescheduleAlertAlt.intent")
+        self._assert_padatious(r"increase the pizza timer", r"RescheduleAlert.intent")
 
     def test_decrease_the_bread_timer_by_5_minutes(self):
         # issue #138 triage: original auto-generated utterance did not
@@ -712,11 +703,11 @@ class TestAdapt11_Reschedulealertalt(_IntentRoutingMixin, TestCase):
         # fully satisfies CreateTimer's own requirements), the same defect
         # class this PR is fixing elsewhere. "sooner the timer" avoids any
         # create-vocab word so it cannot satisfy CreateTimer.
-        self._assert_padatious(r"the bread timer sooner", r"RescheduleAlertAlt.intent")
+        self._assert_padatious(r"the bread timer sooner", r"RescheduleAlert.intent")
 
 class TestAdapt12_Changeproperties(_IntentRoutingMixin, TestCase):
     """Padatious (intent file) intents: ChangeRepeat.intent / ChangePriority.intent"""
-    @pytest.mark.xfail(strict=False, reason="ENGINE ISSUE (padacioso), not this skill's .intent files: 'reschedule the wake alarm to every Monday and Tuesday' is a literal expansion of ChangeRepeat.intent's '(...|reschedule) (my|the) {schedkind} to every {repeat}' line and padacioso resolves it correctly MOST runs, but the RescheduleAlert2/ChangeRepeat tie for this phrasing is not deterministic across runs (observed passing in one full-module run and failing, misrouted to RescheduleAlert2, in another with no source change) -- flagged for the engine lane as a tie-break non-determinism, not fixed here.")
+    @pytest.mark.xfail(strict=False, reason="ENGINE ISSUE (padacioso), not this skill's .intent files: 'reschedule the wake alarm to every Monday and Tuesday' is a literal expansion of ChangeRepeat.intent's '(...|reschedule) (my|the) {schedkind} to every {repeat}' line and padacioso resolves it correctly MOST runs, but the RescheduleAlert/ChangeRepeat tie for this phrasing is not deterministic across runs (observed passing in one full-module run and failing, misrouted to RescheduleAlert, in another with no source change) -- flagged for the engine lane as a tie-break non-determinism, not fixed here.")
     def test_reschedule_the_wake_alarm_to_every_monda(self):
         # ChangeRepeat.intent's "to every {repeat}" line only accepted
         # (change|set|adjust|make) as the leading verb; "reschedule" (the
@@ -725,7 +716,7 @@ class TestAdapt12_Changeproperties(_IntentRoutingMixin, TestCase):
         # verb alternative.
         self._assert_padatious(r"reschedule the wake alarm to every Monday and Tuesday", r"ChangeRepeat.intent")
 
-    @pytest.mark.xfail(strict=False, reason="ENGINE ISSUE (padacioso), not this skill's .intent files: 'change the pill reminder frequency to 4 hours' is a literal expansion of ChangeRepeat.intent's '(change|set|adjust) (my|the) {schedkind} (frequency|repetition|recurrance|repeat) to {repeat}' line -- a raw padacioso.IntentContainer probe outside the full pipeline correctly resolves it to ChangeRepeat, but inside the real registered-skill pipeline (typed {schedkind} entity correction + skill-namespaced intent names) it misroutes to RescheduleAlert2 with a duplicated/malformed slot key ('ovos-skill-alerts.openvoiceos:schedkind') in the match data, pointing at a namespacing bug in how padacioso applies entity-typed slot correction, not a coverage gap in this .intent file -- flagged for the engine lane, not fixed here.")
+    @pytest.mark.xfail(strict=False, reason="ENGINE ISSUE (padacioso), not this skill's .intent files: 'change the pill reminder frequency to 4 hours' is a literal expansion of ChangeRepeat.intent's '(change|set|adjust) (my|the) {schedkind} (frequency|repetition|recurrance|repeat) to {repeat}' line -- a raw padacioso.IntentContainer probe outside the full pipeline correctly resolves it to ChangeRepeat, but inside the real registered-skill pipeline (typed {schedkind} entity correction + skill-namespaced intent names) it misroutes to RescheduleAlert with a duplicated/malformed slot key ('ovos-skill-alerts.openvoiceos:schedkind') in the match data, pointing at a namespacing bug in how padacioso applies entity-typed slot correction, not a coverage gap in this .intent file -- flagged for the engine lane, not fixed here.")
     def test_change_the_pill_reminder_frequency_to_4_(self):
         self._assert_padatious(r"change the pill reminder frequency to 4 hours", r"ChangeRepeat.intent")
 
@@ -812,12 +803,7 @@ class TestAdapt15_Timerstatus(_IntentRoutingMixin, TestCase):
         self._assert_padatious(r"how long on that timer", r"TimerStatus.intent")
 
     def test_what_is_the_timer_status(self):
-        # TimerStatus/TimerStatus2 share the SAME handler (handle_timer_status
-        # carries both @intent_handler decorators in __init__.py); padacioso
-        # ties between the two for this phrasing, a wire-name difference
-        # only, not a behavioral one.
-        self._assert_padatious_any(r"what is the timer status",
-                                   [r"TimerStatus.intent", r"TimerStatus2.intent"])
+        self._assert_padatious(r"what is the timer status", r"TimerStatus.intent")
 
 class TestAdapt16_Cancelalert(_IntentRoutingMixin, TestCase):
     """Padatious (intent file) intent: CancelAlert.intent"""
@@ -1015,19 +1001,14 @@ class TestAdaptMigration_Padatious_kw_split(_IntentRoutingMixin, TestCase):
         self._assert_padatious(r"what reminders do i have", r"ListAlerts3.intent")
 
     def test_timer_status_padatious(self):
-        # TimerStatus/TimerStatus2 share handle_timer_status -- see
-        # test_what_is_the_timer_status's comment.
-        self._assert_padatious_any(r"what is the timer status",
-                                   [r"TimerStatus.intent", r"TimerStatus2.intent"])
+        self._assert_padatious(r"what is the timer status", r"TimerStatus.intent")
 
     def test_reschedule_alert_padatious(self):
-        # RescheduleAlert/RescheduleAlert2 share handle_reschedule_alert.
-        self._assert_padatious_any(r"move the baseball event to 08:00 pm",
-                                   [r"RescheduleAlert.intent", r"RescheduleAlert2.intent"])
+        self._assert_padatious(r"move the baseball event to 08:00 pm", r"RescheduleAlert.intent")
 
     def test_reschedule_alert_alt_padatious(self):
-        # "shorten the timer" is RescheduleAlertAlt.intent's own phrasing.
-        self._assert_padatious(r"shorten the timer", r"RescheduleAlertAlt.intent")
+        # "shorten the timer" is one of RescheduleAlert.intent's own phrasings.
+        self._assert_padatious(r"shorten the timer", r"RescheduleAlert.intent")
 
     def test_change_priority_padatious(self):
         self._assert_padatious(r"change the baseball event priority to 10", r"ChangePriority.intent")
@@ -1040,12 +1021,12 @@ class TestAdaptMigration_Padatious_kw_split(_IntentRoutingMixin, TestCase):
         self._assert_padatious(r"set an alarm with music", r"CreateOcpAlarm.intent")
 
     def test_create_ocp_alarm_alt_padatious(self):
-        self._assert_padatious(r"wake me up with music", r"CreateOcpAlarmAlt.intent")
+        self._assert_padatious(r"wake me up with music", r"CreateOcpAlarm.intent")
 
     def test_dav_sync_padatious(self):
         self._assert_padatious(r"synchronize my calendar", r"DAVSync.intent")
 
-    @pytest.mark.xfail(strict=False, reason="ENGINE ISSUE (padacioso): 'change my alarm sound to a recording' is a literal expansion of ChangeMediaProperties.intent's '(change|set|adjust) (my|the|my next|the next) {schedkind} sound to {mediakind}' line, and padacioso resolves it correctly most runs but the RescheduleAlert2/ChangeMediaProperties tie for this phrasing is not deterministic across runs (same class of non-determinism as test_reschedule_the_wake_alarm_to_every_monda) -- flagged for the engine lane, not fixed here.")
+    @pytest.mark.xfail(strict=False, reason="ENGINE ISSUE (padacioso): 'change my alarm sound to a recording' is a literal expansion of ChangeMediaProperties.intent's '(change|set|adjust) (my|the|my next|the next) {schedkind} sound to {mediakind}' line, and padacioso resolves it correctly most runs but the RescheduleAlert/ChangeMediaProperties tie for this phrasing is not deterministic across runs (same class of non-determinism as test_reschedule_the_wake_alarm_to_every_monda) -- flagged for the engine lane, not fixed here.")
     def test_change_media_properties_padatious(self):
         self._assert_padatious(r"change my alarm sound to a recording", r"ChangeMediaProperties.intent")
 
