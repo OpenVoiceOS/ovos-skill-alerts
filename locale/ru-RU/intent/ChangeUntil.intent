@@ -1,0 +1,6 @@
+измени продолжительность моего {schedkind} на {duration}
+продли мой {schedkind} до {duration}
+настрой длину следующего {schedkind} на {duration}
+сделай так, чтобы {schedkind} длился {duration}
+измени мой {schedkind}, чтобы он шёл до {duration}
+сократи продолжительность моего {schedkind} до {duration}
