@@ -1,2 +1,5 @@
 (set|create|add|schedule) a [new] reminder [to {reminder}] [at {time}]
 new reminder [{reminder}]
+remind (me|us) [to {reminder}] [at {time}]
+tell me to {reminder} [at {time}]
+remind me in {duration} [to {reminder}]

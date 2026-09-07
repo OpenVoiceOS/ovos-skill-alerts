@@ -339,14 +339,6 @@ class AlertSkill(ConversationalSkill):
             assert alarm.media_type == "ocp"
             self.confirm_alert(alarm, message)
 
-    @intent_handler("CreateOcpAlarmAlt.intent")
-    def handle_ocp_alarm_alt(self, message: Message):
-        """
-        Alternate intent handler for creating an OCP media alarm
-        :param message: Message associated with request
-        """
-        return self.handle_ocp_alarm(message)
-
     #@killable_intent()
     @intent_handler("CreateTimer.intent")
     def handle_create_timer(self, message: Message):
@@ -423,22 +415,13 @@ class AlertSkill(ConversationalSkill):
         self.confirm_alert(alert, message)
 
     #@killable_intent()
-    @intent_handler("CreateReminderAlt.intent")
-    def handle_create_reminder_alt(self, message: Message):
-        """
-        Alternate intent handler for creating a reminder
-        :param message: Message associated with request
-        """
-        self.handle_create_reminder(message)
-
-    #@killable_intent()
     @intent_handler("create_reminder_recurring.intent")
     def handle_create_reminder_recurring(self, message: Message):
         """
         Padatious intent handler for recurring reminders phrased as a long
         sentence (e.g. "remind me to go to work weekday mornings at 8").
 
-        ``CreateReminderAlt`` (adapt, single ``remind`` keyword) scores too
+        ``CreateReminder`` (adapt, single ``remind`` keyword) scores too
         low a confidence on long utterances like this one -- adapt's
         confidence is roughly matched-keywords/total-words, and one matched
         keyword out of ten falls under every adapt confidence tier -- so the
@@ -461,7 +444,6 @@ class AlertSkill(ConversationalSkill):
         self.handle_create_reminder(message)
 
     @intent_handler("RescheduleAlert.intent")
-    @intent_handler("RescheduleAlert2.intent")
     def handle_reschedule_alert(self, message: Message):
         """
         Intent to reschedule an alarm, reminder, event or timer
@@ -508,22 +490,12 @@ class AlertSkill(ConversationalSkill):
                                          "alert_rescheduled_prenotification",
                                          dialog_data)
 
-    @intent_handler("RescheduleAlertAlt.intent")
-    def handle_reschedule_alert_alt(self, message: Message):
-        """
-        Alternate intent handler for rescheduling an existing alert
-        :param message: Message associated with request
-        """
-        LOG.debug("alt schedule")
-        return self.handle_reschedule_alert(message)
-
     @intent_handler("ChangePriority.intent")
-    @intent_handler("ChangePriority2.intent")
     def handle_change_priority(self, message: Message):
         """
         padacioso/padatious entry point for the priority branch of
-        `handle_change_properties`. ChangePriority.intent/ChangePriority2.intent
-        carry no "priority" Adapt flag, so it is forced here before
+        `handle_change_properties`. ChangePriority.intent
+        carries no "priority" Adapt flag, so it is forced here before
         delegating -- the voc_match fallback inside handle_change_properties
         would also catch it, but doing it explicitly keeps the split
         unambiguous regardless of phrasing.
@@ -746,7 +718,6 @@ class AlertSkill(ConversationalSkill):
         self.speak_dialog(dialog, data, wait=True)
 
     @intent_handler("TimerStatus.intent")
-    @intent_handler("TimerStatus2.intent")
     def handle_timer_status(self, message: Message):
         """
         Intent handler to handle request for timer status (name optional)
@@ -786,7 +757,6 @@ class AlertSkill(ConversationalSkill):
             self.speak_dialog("list_alert_none_missed", wait=True)
 
     @intent_handler("CancelAlert.intent")
-    @intent_handler("CancelAlert2.intent")
     def handle_cancel_alert(self, message: Message):
         """
         Intent handler to handle request to cancel alerts

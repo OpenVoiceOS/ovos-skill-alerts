@@ -26,3 +26,5 @@ how (long|much time|much longer) on the {name} (timer|countdown)
 (what is|what's|whats) the status of (my|the) {timerkind}
 (what is|what's|whats) (the|my) {timerkind} status
 how long (is|are) (my|the) {timerkind}
+how (much|much time) (remaining|left)
+{timerkind} status

@@ -10,7 +10,7 @@ does not run):
 
 Under the REAL default pipeline, "remind me to go to work weekday mornings
 at 8" is a **coverage gap in ovos-skill-alerts**, not a theft: alerts' only
-matching intent (``CreateReminderAlt``, adapt, single ``remind`` keyword)
+matching intent (``CreateReminder``, adapt, single ``remind`` keyword)
 scores an adapt confidence around matched-keywords/total-words, and one
 matched keyword out of ten words falls under adapt's ``conf_low`` (0.25)
 threshold, so alerts never claims it. Under the real default pipeline (no
