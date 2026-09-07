@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.4.1a2](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.4.1a2) (2026-09-07)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.4.1a1...0.4.1a2)
+
+**Merged pull requests:**
+
+- refactor: fold alias intents into their base intents [\#197](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/197) ([JarbasAl](https://github.com/JarbasAl))
+
 ## [0.4.1a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.4.1a1) (2026-09-06)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.4.0a3...0.4.1a1)
@@ -151,19 +159,19 @@
 
 ## [0.3.0a4](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.3.0a4) (2026-08-12)
 
-[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.3.0a3...0.3.0a4)
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.3.0a2...0.3.0a4)
 
 **Merged pull requests:**
 
 - test: per-locale e2e golden coverage + fix 4 vocab shadowing defects [\#142](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/142) ([JarbasAl](https://github.com/JarbasAl))
 
-## [0.3.0a3](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.3.0a3) (2026-08-11)
-
-[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.3.0a2...0.3.0a3)
-
 ## [0.3.0a2](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.3.0a2) (2026-08-11)
 
-[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.3.0a1...0.3.0a2)
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.3.0a3...0.3.0a2)
+
+## [0.3.0a3](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.3.0a3) (2026-08-11)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.3.0a1...0.3.0a3)
 
 **Merged pull requests:**
 
@@ -371,7 +379,6 @@
 
 - Autos [\#90](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/90) ([JarbasAl](https://github.com/JarbasAl))
 - fix: support latest ovos-workshop [\#89](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/89) ([JarbasAl](https://github.com/JarbasAl))
-- fix: improve adapt backwards compat [\#87](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/87) ([JarbasAl](https://github.com/JarbasAl))
 
 ## [0.1.25a2](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.1.25a2) (2025-04-28)
 
@@ -411,15 +418,15 @@
 
 ## [0.1.21](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.1.21) (2025-03-04)
 
-[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.1.21a3...0.1.21)
-
-## [0.1.21a3](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.1.21a3) (2025-03-04)
-
-[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.1.21a4...0.1.21a3)
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.1.21a4...0.1.21)
 
 ## [0.1.21a4](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.1.21a4) (2025-03-04)
 
-[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.1.21a2...0.1.21a4)
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.1.21a3...0.1.21a4)
+
+## [0.1.21a3](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.1.21a3) (2025-03-04)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.1.21a2...0.1.21a3)
 
 ## [0.1.21a2](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.1.21a2) (2025-03-04)
 
