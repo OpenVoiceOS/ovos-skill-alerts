@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.5.1a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.5.1a1) (2026-09-07)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.5.0a1...0.5.1a1)
+
+**Merged pull requests:**
+
+- fix: parse both ends of a "between X and Y" timeframe [\#201](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/201) ([JarbasAl](https://github.com/JarbasAl))
+
 ## [0.5.0a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.5.0a1) (2026-09-07)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.4.2a1...0.5.0a1)
@@ -191,19 +199,19 @@
 
 ## [0.3.0a4](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.3.0a4) (2026-08-12)
 
-[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.3.0a3...0.3.0a4)
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.3.0a2...0.3.0a4)
 
 **Merged pull requests:**
 
 - test: per-locale e2e golden coverage + fix 4 vocab shadowing defects [\#142](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/142) ([JarbasAl](https://github.com/JarbasAl))
 
-## [0.3.0a3](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.3.0a3) (2026-08-11)
-
-[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.3.0a2...0.3.0a3)
-
 ## [0.3.0a2](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.3.0a2) (2026-08-11)
 
-[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.3.0a1...0.3.0a2)
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.3.0a3...0.3.0a2)
+
+## [0.3.0a3](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.3.0a3) (2026-08-11)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.3.0a1...0.3.0a3)
 
 **Merged pull requests:**
 
@@ -357,11 +365,6 @@
 ## [0.1.28a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.1.28a1) (2025-07-12)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.1.27...0.1.28a1)
-
-**Merged pull requests:**
-
-- Release 0.1.28a1 [\#97](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/97) ([github-actions[bot]](https://github.com/apps/github-actions))
-- adding missing German translations [\#96](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/96) ([gitlocalize-app[bot]](https://github.com/apps/gitlocalize-app))
 
 ## [0.1.27](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.1.27) (2025-06-07)
 
