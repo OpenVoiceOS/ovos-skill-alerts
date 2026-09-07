@@ -4,3 +4,6 @@ gogorarazpen berria [{reminder}]
 berri gogorarazpenak
 egin gogorarazpenak
 programatu gogorarazpen
+gogorarazi [iezadazu] [{reminder}]
+gogorarazi [iezadazu] [{time}(etan|tan)]
+esan iezadazu {reminder}

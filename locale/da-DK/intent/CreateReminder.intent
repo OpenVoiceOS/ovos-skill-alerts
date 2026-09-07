@@ -2,3 +2,6 @@
 ny påmindelse [{reminder}]
 start påmindelse
 jeg har påmindelse
+mind mig om [at {reminder}] [klokken {time}]
+fortæl mig at jeg skal {reminder}
+mind mig om {duration} [at {reminder}]

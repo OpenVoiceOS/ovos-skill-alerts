@@ -3,3 +3,6 @@
 új emlékeztető [{reminder}]
 ütemterv emlékeztető
 hozzon létre emlékeztető
+emlékeztess [arra hogy {reminder}]
+emlékeztess [{time}(-kor|kor)]
+mondd meg hogy {reminder}

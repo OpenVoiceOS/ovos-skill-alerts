@@ -3,3 +3,5 @@ lembrete novo [{reminder}]
 definir lembretes
 crear lembrete
 horario lembrete
+lémbrame [que {reminder}] [ás {time}]
+dime que {reminder} [ás {time}]

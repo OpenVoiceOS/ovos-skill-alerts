@@ -2,3 +2,5 @@
 nuovo promemoria [{reminder}]
 creare promemoria
 programma promemoria
+ricorda(mi|ci) [di {reminder}] [alle {time}]
+dimmi di {reminder} [alle {time}]

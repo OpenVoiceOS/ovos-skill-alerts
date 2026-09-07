@@ -3,3 +3,6 @@ uusi muistutus [{reminder}]
 aikataulu muistutukset
 luo muistutukset
 uusi muistutukset
+muistuta minua [{reminder}(:sta|sta)] [kello {time}]
+kerro minulle että {reminder}
+muistuta minua {duration}(:n|n) päästä [{reminder}(:sta|sta)]

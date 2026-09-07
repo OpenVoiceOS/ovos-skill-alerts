@@ -3,3 +3,5 @@ recordatorio nuevo [{reminder}]
 crear recordatorios
 iniciar recordatorios
 programar recordatorios
+recuérda(me|nos) [que {reminder}] [a las {time}]
+dime que {reminder} [a las {time}]
