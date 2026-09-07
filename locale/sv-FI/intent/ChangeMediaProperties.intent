@@ -1,0 +1,6 @@
+muuta {schedkind} niin että se on kuultavissa
+säädä seuraava {schedkind} soittamaan {mediakind}
+aseta {schedkind} toistamaan {mediaform}
+vaihda {schedkind} ääneksi {mediakind}
+vaihda {schedkind} hälytys muotoon {mediaform}
+haluan seuraavan {schedkind} soittavan {mediakind}

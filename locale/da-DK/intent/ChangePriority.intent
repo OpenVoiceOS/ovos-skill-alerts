@@ -1,0 +1,6 @@
+skift prioriteten på min {schedkind} til {priority}
+hæv prioriteten på {schedkind} til niveau {priority}
+tilpas prioriteten på min næste {schedkind}
+sæt {schedkind} til prioritet {priority}
+sænk prioriteten på min {schedkind}
+skift prioritetsniveauet på {schedkind} til {priority}

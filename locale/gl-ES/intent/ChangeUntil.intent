@@ -1,0 +1,6 @@
+cambia a duración do meu {schedkind} a {duration}
+estende o meu {schedkind} ata {duration}
+axusta a duración do próximo {schedkind} a {duration}
+fai que o {schedkind} dure {duration}
+cambia o meu {schedkind} para que vaia ata {duration}
+acurta a duración do meu {schedkind} a {duration}
