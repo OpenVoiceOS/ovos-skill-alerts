@@ -33,8 +33,7 @@ If you were away, or your device was off or napping, ask for a summary of what y
 
 The skill matches utterances with file-based intents (padatious/padacioso), not Adapt keyword intents. Each `.intent` file under `locale/<lang>/intent/` is a set of phrase templates, optionally referencing a `.entity` file for a `{slot}` value list or a `.voc` file for an inline `<keyword>` alternation.
 
-- `CreateAlarm` / `CreateAlarmAlt` — set an alarm, optionally recurring on given weekdays.
-- `CreateOcpAlarm` — set an alarm that plays media through OCP when it fires.
+- `CreateAlarm` / `CreateAlarmAlt` — set an alarm, optionally recurring on given weekdays, or (with a media word) playing media through OCP when it fires.
 - `CreateTimer` — start a countdown timer.
 - `CreateReminder` / `create_reminder_recurring` — set a reminder, optionally recurring.
 - `CreateEvent` — schedule an event, with collision and prenotification handling.
@@ -43,7 +42,7 @@ The skill matches utterances with file-based intents (padatious/padacioso), not 
 - `ChangeRepeat` — change an alert's recurrence.
 - `ChangeUntil` — change an alert's recurrence end date.
 - `ChangeMediaProperties` — change the media/sound an alert plays.
-- `ListAlerts` / `ListAlerts2` / `ListAlerts3` — list active alerts, optionally within a timeframe.
+- `ListAlerts` — list active alerts, optionally within a timeframe.
 - `TimerStatus` — report the status of active timers.
 - `missed_alerts` — report and clear missed alerts.
 - `CancelAlert` — cancel one or more alerts.

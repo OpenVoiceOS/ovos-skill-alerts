@@ -285,9 +285,18 @@ class AlertSkill(ConversationalSkill):
     @intent_handler("CreateAlarm.intent")
     def handle_create_alarm(self, message: Message):
         """
-        Intent handler for creating an alarm
+        Intent handler for creating an alarm. The dedicated media-alarm
+        template's phrasings ("set an alarm with music at 7 am", "wake me
+        up with music") were folded into this template and CreateAlarmAlt's
+        (the wake form reaches this method via handle_create_alarm_alt's
+        delegation), so a matched {mediakind} slot means this is a request
+        for a media alarm -- branch to the OCP path instead of building a
+        plain alarm.
         :param message: Message associated with request
         """
+        if message.data.get("mediakind"):
+            return self.handle_ocp_alarm(message)
+
         alarm = build_alert_from_intent(message)
         if alarm.expiration is None:
             time_ = self.get_response(
@@ -311,10 +320,12 @@ class AlertSkill(ConversationalSkill):
         """
         return self.handle_create_alarm(message)
 
-    @intent_handler("CreateOcpAlarm.intent")
     def handle_ocp_alarm(self, message: Message):
         """
-        Intent handler for creating an alarm that plays media via OCP
+        Handler for creating an alarm that plays media via OCP. Reached via
+        handle_create_alarm's and handle_create_alarm_alt's {mediakind}
+        branch (CreateAlarm.intent / CreateAlarmAlt.intent) -- this used to
+        be its own dedicated intent file/decorator, now folded in.
         :param message: Message associated with request
         """
         if not self.bus.wait_for_response(Message("ovos.common_play.ping"),
@@ -601,8 +612,6 @@ class AlertSkill(ConversationalSkill):
 
     # Query Alerts
     @intent_handler("ListAlerts.intent")
-    @intent_handler("ListAlerts2.intent")
-    @intent_handler("ListAlerts3.intent")
     def handle_event_timeframe_check(self, message: Message):
         """
         Intent to check if there are events stored at a given datetime /
@@ -611,6 +620,12 @@ class AlertSkill(ConversationalSkill):
             Are there any events pending between monday 10:00 am and 12:00 am
             Are there any events stored on tuesday
             Are there any events at 8 pm
+
+        Two sibling intent files used to carry their own copies of these
+        timeframe/plain-list phrasings and route here alongside this one --
+        all three names already resolved to this one handler, so folding
+        their template lines into this file changes only which file the
+        phrasings live in, not any dispatch or dialog behaviour.
         :param message: Message associated with request
         """
         normalizer = UtteranceNormalizerPlugin.get_normalizer(lang=self.lang)
