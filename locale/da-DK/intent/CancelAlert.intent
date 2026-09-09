@@ -1,2 +1,11 @@
-(afbryd|fjern|kasser|slet) (alarm|alarmer|vække mig|timer|timere|påmindelse|påmindelser|aftaler|begivenheder|tilfælde|udnævnelse)
-(afbryd|fjern|kasser|slet) (jeg|af|glip|har|en|gik|er|du|på|til|gået|mig|skal|i|ikke|der|fra|om|din|lav) (alarm|alarmer|vække mig|timer|timere|påmindelse|påmindelser|aftaler|begivenheder|tilfælde|udnævnelse)
+(aflys|slet|fjern|ryd|kassér|slip af med|sluk) (min|den|alle|alle mine|hver|enhver) (næste|kommende|afventende|lagrede|gemte|planlagte) {alertkind}
+(min|den|alle mine) (næste|kommende|afventende) {alertkind} (aflys|slet|fjern|ryd|kassér) (den|dem) [venligst]
+(min|den|alle mine|alle|hver) {alertkind} (aflys|slet|fjern|ryd|kassér) (den|dem) [venligst]
+(aflys|slet|fjern|ryd|kassér|sluk) (alarm|alarmer|vækkeur|timer|timere|nedtælling|påmindelse|påmindelser|begivenhed|begivenheder|aftale|aftaler|advarsel|advarsler)
+(aflys|slet|fjern|ryd|kassér) (min|den|alle|alle mine) {alertkind} og (min|den|alle|alle mine) {alertkind2}
+(aflys|slet|fjern|ryd|kassér|slip af med|sluk) (min|den|alle|alle mine|hver|enhver|alle) {alertkind}
+venligst (aflys|slet|fjern|ryd|kassér) (min|den|alle) {alertkind} og (min|den|alle) {alertkind2}
+(aflys|slet|fjern|ryd|kassér) min {name} (alarm|timer|nedtælling|påmindelse|begivenhed|aftale|advarsel)
+venligst (aflys|slet|fjern|ryd|kassér|sluk) (min|den|alle|alle mine) {alertkind}
+(aflys|slet|fjern|ryd|kassér) {alertkind} (til|om) {name}
+(aflys|slet|fjern|ryd) min (hele|samlede) {alertkind} liste

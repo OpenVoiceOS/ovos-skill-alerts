@@ -1,1 +1,11 @@
-væk mig [op] [klokken {time}]
+væk (mig|os) [op] [klokken {time}]
+(kan|vil) du vække (mig|os) [op] [klokken {time}]
+væk (mig|os) [op] om {duration}
+væk (mig|os) [op] hver {days} klokken {time}
+væk (børnene|alle) [op] [klokken {time}]
+væk (børnene|alle) op [klokken {time}]
+væk (børnene|alle) [op] hver {days} klokken {time}
+væk (mig|os|børnene|alle) op med {mediakind} (klokken|til) {time}
+(kan|vil) du vække (mig|os|børnene|alle) op med {mediakind} (klokken|til) {time}
+væk (mig|os|børnene|alle) op med {mediakind}
+(kan|vil) du vække (mig|os|børnene|alle) op med {mediakind}

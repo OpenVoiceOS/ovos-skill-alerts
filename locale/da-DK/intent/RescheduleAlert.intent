@@ -1,2 +1,29 @@
-(flyt|flytte|forandring|omplanlæg|skubbe|suspendere|tilpasse|udsæt|udsætte|udvide) (alarm|alarmer|vække mig|påmindelse|påmindelser|aftaler|begivenheder|tilfælde|udnævnelse|timer|timere)
-(flyt|flytte|forandring|omplanlæg|skubbe|suspendere|tilpasse|udsæt|udsætte|udvide) (jeg|af|glip|har|en|gik|er|du|på|til|gået|mig|skal|i|ikke|der|fra|om|din|lav) (alarm|alarmer|vække mig|påmindelse|påmindelser|aftaler|begivenheder|tilfælde|udnævnelse|timer|timere)
+(min|den) {old} (alarm|timer|nedtælling|påmindelse|begivenhed|aftale) (flyt|ændr|omlæg|skub|udsæt) (den|det) til {time}
+(flyt|ændr|omlæg|skub|udsæt|tilpas) (min|den) {old} (alarm|timer|nedtælling|påmindelse|begivenhed|aftale) til {time}
+(kan|vil) du (flytte|ændre|omlægge|skubbe|udsætte) (min|den) (næste|kommende) {schedkind} til {time}
+(min|den) {old} (alarm|timer|påmindelse|begivenhed|aftale) (flyt|ændr|omlæg|skub|udsæt) til {time}
+(flyt|skub) (min|den) (næste|kommende) {schedkind} (tidligere|hurtigere|senere|fremad|tilbage)
+(kan|vil) du (gøre|sætte) (min|den) {schedkind} (tidligere|hurtigere|senere|længere|kortere)
+(min|den) (næste|kommende) {schedkind} (tidligere|hurtigere|senere|længere|kortere) [venligst]
+(gør|sæt) (min|den) (næste|kommende) {schedkind} (tidligere|hurtigere|senere|længere|kortere)
+(flyt|skub) (min|den) {schedkind} (tidligere|hurtigere|senere|fremad|tilbage)
+(forkort|forlæng|udvid|forøg|reducér) (min|den) (næste|kommende) {schedkind}
+(min|den) {schedkind} (tidligere|hurtigere|senere|længere|kortere) [venligst]
+(gør|sæt) (min|den) {schedkind} (tidligere|hurtigere|senere|længere|kortere)
+(forkort|forlæng|udvid|forøg|reducér) (min|den) {schedkind}
+{schedkind} (tidligere|hurtigere|senere|længere|kortere) [venligst]
+(tidligere|hurtigere|senere|længere|kortere) {schedkind} [venligst]
+(kan|vil) du (flytte|ændre|omlægge|skubbe|udsætte) (min|den) {schedkind} til {time}
+(flyt|ændr|omlæg|skub|udsæt|tilpas) (min|den) (næste|kommende) {schedkind} til {time}
+(flyt|ændr|omlæg|skub|udsæt|tilpas) (min|den) (næste|kommende) {schedkind} (tidligere|hurtigere|senere)
+(flyt|ændr|omlæg|skub|udsæt|tilpas) (min|den) (næste|kommende) {schedkind} med {duration} (tidligere|hurtigere|senere)
+(flyt|ændr|omlæg|skub|udsæt|tilpas) (min|den) {schedkind} (til|tilbage til|fremad til) {time}
+(gør|sæt|ændr) (min|den) (næste|kommende) {schedkind} (til en heldagsbegivenhed|heldag|til at være heldag)
+(flyt|ændr|omlæg|skub|udsæt|tilpas) {schedkind} (for|om) {name} til {time}
+(flyt|ændr|omlæg|skub|udsæt|tilpas) (min|den) {schedkind} (tidligere|hurtigere|senere)
+{schedkind} (for|til) {old} (flyt|ændr|omlæg|skub|udsæt) den til {time}
+(min|den) {schedkind} (flyt|ændr|omlæg|skub|udsæt) til {time}
+(flyt|ændr|omlæg|skub) (min|den) {schedkind} til {time} i stedet
+(gør|sæt|ændr) (min|den) {schedkind} (til en heldagsbegivenhed|heldag|til at være heldag)
+(flyt|ændr|omlæg|skub|udsæt|tilpas) (min|den) {schedkind} fra {old} til {time}
+fra {old} til {time} (flyt|ændr|omlæg|skub|udsæt) (min|den) {schedkind}

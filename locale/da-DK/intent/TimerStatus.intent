@@ -1,4 +1,25 @@
-(timer|timere|tid) (ende|gjort|lang|parat|slutter|status|venstre)
-(ende|gjort|lang|parat|slutter|status|venstre) (timer|timere|tid)
-(timer|timere|tid) (jeg|af|glip|har|en|gik|er|du|på|til|gået|mig|skal|i|ikke|der|fra|om|din|lav) (ende|gjort|lang|parat|slutter|status|venstre)
-(er der|fik|fortæl mig|fortæl os|fra hvad|fra hvornår|gjorde du|gjorde jeg|gjorde vi|gør du|gør jeg|gør vi|har dig|har du|har jeg|har vi|hvad|hvad er|hvilke|hvor meget|hvordan|hvorfra|liste|læse|noget|når|opfriske|vise) (timer|timere|tid)
+hvor (længe|meget tid|meget længere) har (jeg|vi|den) (tilbage|resterende)
+hvor (længe|meget tid|meget længere) på (den|denne) (timer|nedtælling)
+hvor (længe|meget tid|meget længere) er (tilbage|resterende) (på|for) den {name} (timer|nedtælling)
+hvor (længe|meget tid|meget længere) er (tilbage|resterende) (på|for) (min|den) {timerkind}
+(fortæl|vis|giv) (mig|os) tiden (tilbage|resterende) (på|for) (min|den) {timerkind}
+hvor (længe|meget tid) til (min|den) {timerkind} (slutter|er færdig|er klar|er oppe)
+(på|for) (min|den) {timerkind} hvor (længe|meget tid) er (tilbage|resterende)
+hvor (længe|meget tid|meget længere) (tilbage|resterende) (på|for) (min|den) {timerkind}
+hvor (længe|meget tid|meget længere) er (tilbage|resterende) på den {name} (timer|nedtælling)
+er (min|den) {timerkind} (færdig|klar|slut|afsluttet|oppe)
+hvornår (er|slutter) (min|den) {timerkind} (slut|færdig|klar)
+(tiden|min tid) (tilbage|resterende) (på|for) (min|den) {timerkind}
+(min|den) {timerkind} hvor (længe|meget tid) er (tilbage|resterende)
+hvor (længe|meget tid|meget længere) (på|for) (min|den) {timerkind}
+hvor (længe|meget tid|meget længere) er (tilbage|resterende)
+(fortæl|vis|giv) (mig|os) tiden (tilbage|resterende)
+(fortæl|vis|giv) (mig|os) (min|den) {timerkind} status
+tid (tilbage|resterende) (på|for) (min|den) {timerkind}
+(fortæl|giv) (mig|os) status på (min|den) {timerkind}
+hvor (længe|meget tid|meget længere) på den {name} (timer|nedtælling)
+hvad er status på min {name} (timer|nedtælling)
+hvad er status på (min|den) {timerkind}
+hvad er (min|den) {timerkind} status
+hvor (meget|meget tid) (resterende|tilbage)
+{timerkind} status
