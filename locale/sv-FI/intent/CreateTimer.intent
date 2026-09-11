@@ -1,0 +1,6 @@
+(aseta|käynnistä|luo) ajastin [{duration}(:ksi|ksi)]
+uusi ajastin [{duration}]
+(aseta|käynnistä|luo) {duration}(:n|n) ajastin
+minulla on ajastimet
+aikataulu ajastimet
+luo ajastimet

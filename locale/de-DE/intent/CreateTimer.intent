@@ -1,0 +1,4 @@
+(stelle|starte|erzeuge) einen Timer [für {duration}]
+neuer Timer [für {duration}]
+(stelle|starte|erzeuge) einen {duration} Timer
+erzeuge timer

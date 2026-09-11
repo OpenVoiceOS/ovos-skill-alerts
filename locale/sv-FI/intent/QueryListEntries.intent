@@ -1,0 +1,4 @@
+(mitä|mitkä kohteet) on listalla [{name}]
+(lue|näytä) listan [{name}] kohteet
+(mitä|mitkä kohteet) on {name} listalla
+(lue|näytä) {name} listan kohteet

@@ -1,0 +1,5 @@
+(what|which) (items|entries|things) are (on|in) (my|the) list [{name}]
+(read|show) [me] the (items|entries) (on|in) (my|the) list [{name}]
+what is on (my|the) {name} list
+(what|which) (items|entries|things) are (on|in) (my|the) {name} list
+(read|show) [me] [the] (items|entries) (on|in) (my|the) {name} list

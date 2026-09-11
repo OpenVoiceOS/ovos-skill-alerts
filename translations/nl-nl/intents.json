@@ -1,7 +1,0 @@
-{
-  "/intent/missed_alerts.intent": [
-    "(heb ik) (een|) (gebeurtenis|herinnering|timer|alarm|waarschuwing|gebeurtenissen|herinneringen|timers|alarmen|wekker|wekkers) gemist?",
-    "welke (gebeurtenis|herinnering|timer|alarm|waarschuwing|gebeurtenissen|herinneringen|timers|alarmen|wekker|wekkers) heb ik gemist?",
-    "(is|zijn) er (gebeurtenis|herinnering|timer|alarm|waarschuwing|gebeurtenissen|herinneringen|timers|alarmen|wekker|wekkers) die ik gemist heb?"
-  ]
-}

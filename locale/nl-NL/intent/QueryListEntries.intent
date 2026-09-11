@@ -1,0 +1,5 @@
+(welke items|wat) (staat|staan) er op (mijn|de) lijst [{name}]
+(lees|toon) [me] de items op (mijn|de) lijst [{name}]
+(welke items|wat) (staat|staan) er op (mijn|de) {name} lijst
+(lees|toon) [me] de items op (mijn|de) {name} lijst
+wat staat er op (mijn|de) {name} lijst

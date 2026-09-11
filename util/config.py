@@ -1,7 +1,9 @@
 from dateutil.tz import gettz
 import datetime as dt
-from typing import List
+from typing import List, Optional
 
+from ovos_bus_client.message import Message
+from ovos_bus_client.session import SessionManager
 from ovos_config.config import Configuration
 from ovos_config.locale import get_default_tz
 from ovos_utils.file_utils import resolve_resource_file
@@ -20,6 +22,29 @@ DEFAULT_SETTINGS = {
     "frequency": 15,
     "sync_ask": False
 }
+
+
+def get_session_tz(message: Optional[Message] = None) -> dt.tzinfo:
+    """
+    Resolve the timezone to use for a user-facing time decision.
+
+    A satellite/client can override the global configuration by sending its
+    own location preferences on the session (`Session.location_preferences`,
+    see ovos-bus-client). Those preferences take precedence over the
+    device-wide config so that a satellite-created alert keeps the
+    satellite's own wall clock rather than the box's. When no message is
+    given, or the session carries no timezone, this falls back to the
+    global `location.timezone.code` from Configuration.
+    :param message: Message associated with the request, if available
+    :returns: tzinfo to anchor the alert/time computation to
+    """
+    if message is not None:
+        tz_code = SessionManager.get(message).timezone
+        if tz_code:
+            tz = gettz(tz_code)
+            if tz is not None:
+                return tz
+    return get_default_tz()
 
 
 def use_24h_format() -> bool:

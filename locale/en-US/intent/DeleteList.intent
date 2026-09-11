@@ -1,0 +1,3 @@
+(delete|remove|erase) (my|the) list [{name}]
+(delete|remove) [all] [my] lists
+(delete|remove|erase|drop) (my|the) {name} list

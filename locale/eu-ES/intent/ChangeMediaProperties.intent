@@ -1,0 +1,6 @@
+aldatu nire {schedkind} entzungarria izan dadin
+doitu hurrengo {schedkind} hau erreproduzitzeko {mediakind}
+ezarri {schedkind} hau {mediaform} erreproduzitzeko
+aldatu nire {schedkind}-ren soinua {mediakind}-ra
+aldatu {schedkind}-ren alerta {mediaform}-ra
+nahi dut nire hurrengo {schedkind}-k nire {mediakind} erreproduzitzea
