@@ -1,2 +1,25 @@
-(er der|fik|fortæl mig|fortæl os|fra hvad|fra hvornår|gjorde du|gjorde jeg|gjorde vi|gør du|gør jeg|gør vi|har dig|har du|har jeg|har vi|hvad|hvad er|hvilke|hvor meget|hvordan|hvorfra|liste|læse|noget|når|opfriske|vise) (alarm|alarmer|vække mig|påmindelse|påmindelser|aftaler|begivenheder|tilfælde|udnævnelse|fortælle|hukommelse|minde om)
-(er der|fik|fortæl mig|fortæl os|fra hvad|fra hvornår|gjorde du|gjorde jeg|gjorde vi|gør du|gør jeg|gør vi|har dig|har du|har jeg|har vi|hvad|hvad er|hvilke|hvor meget|hvordan|hvorfra|liste|læse|noget|når|opfriske|vise) (jeg|af|glip|har|en|gik|er|du|på|til|gået|mig|skal|i|ikke|der|fra|om|din|lav) (alarm|alarmer|vække mig|påmindelse|påmindelser|aftaler|begivenheder|tilfælde|udnævnelse|fortælle|hukommelse|minde om)
+(vis|læs|fortæl) (mig|os) (min|den) (alarm|alarmer|timer|timere|påmindelse|påmindelser|begivenhed|begivenheder|aftale|advarsel|advarsler) (til|om|på) {timeframe}
+(vis|læs|fortæl) (mig|os) (alle|alle mine|min|den) (alarm|alarmer|vækkeur|timer|timere|nedtælling|påmindelse|påmindelser|begivenhed|begivenheder|aftale|aftaler|advarsel|advarsler)
+(vis|læs|fortæl) (mig|os) (alle|alle mine) (alarmer|timere|påmindelser|begivenheder|aftaler|advarsler) (til|om|på) {timeframe}
+(vis|læs|fortæl) (mig|os) (min|den) (afventende|kommende|lagrede) {alertkind}
+(vis|læs|fortæl) (mig|os) alle (min|den) {alertkind}
+hvad er (min|den) (afventende|kommende|lagrede) {alertkind}
+har jeg (nogen|noget) {alertkind}
+har jeg (nogen|noget) {alertkind} (til|om|på|mellem|næste) {timeframe}
+(kan|vil) du fortælle (mig|os) hvilke {alertkind} (jeg|vi) har
+har (jeg|vi) (noget|nogen) (planlagt|lagret|gemt|sat|afventende) (til|om|på|i morgen|i dag) {timeframe}
+(vis|læs) (min|alle mine|den) (alarmer|timere|påmindelser|begivenheder|aftaler|advarsler) (til|om|på) {timeframe}
+(hvad|hvilke) {alertkind} er (lagret|gemt|sat|afventende|kommende|planlagt|der) (til|om|på|i morgen|i dag) {timeframe}
+har (jeg|vi) (nogen|noget) {alertkind} (til|om|på|mellem|i morgen|i dag|denne uge) {timeframe}
+hvad (har jeg|har vi) (sat|planlagt|gemt) (til|om|på|i morgen|i dag) {timeframe}
+(hvad|hvilke|hvor mange) {alertkind} (har jeg|har vi) (til|om|på|i morgen|i dag|denne uge) {timeframe}
+har (jeg|vi) (nogen|noget) (lagret|gemt|afventende|kommende|sat|planlagt) {alertkind}
+har (jeg|vi) (noget|nogen) (planlagt|lagret|gemt|sat|afventende)
+(hvad|hvilke) {alertkind} er (lagret|gemt|sat|afventende|kommende|planlagt|der)
+er der (nogen|noget) {alertkind} (til|om|på|mellem|i morgen|i dag|denne uge) {timeframe}
+(fortæl|vis|læs) (mig|os) (hvad|hvilke) {alertkind} (jeg|vi) har
+har (jeg|vi) (nogen|noget) {alertkind}
+(hvad|hvilke|hvor mange) {alertkind} (har jeg|har vi)
+(hvad|hvilke) {alertkind} og {alertkind2} (har jeg|har vi)
+(hvornår|hvad) er (min|den) (næste|kommende) {alertkind}
+er der (nogen|noget) {alertkind}

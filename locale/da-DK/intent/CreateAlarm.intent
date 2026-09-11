@@ -1,6 +1,18 @@
-(sæt|lav|tilføj) en alarm [til {time}]
+(sæt|opret|tilføj|planlæg|start) [en] alarm [til {time}]
 ny alarm [til {time}]
-sæt en alarm til {time}
-jeg har vække mig
-skema vække mig
-lav vække mig
+jeg har en ny alarm [til {time}]
+(sæt|opret) [en] alarm (klokken|til) {time}
+alarm (klokken|til) {time}
+(sæt|opret) [en] alarm hver (hverdag|weekend|dag|morgen|nat) [klokken {time}]
+(sæt|lav) en {time} [hverdags|weekend] alarm
+(sæt|opret|tilføj|planlæg|lav|start|ny|indstil) (en|min) alarm med {mediakind} (klokken|til) {time}
+(sæt|opret|tilføj|planlæg|lav|start|ny|indstil) (en|min) alarm der spiller {mediakind} (klokken|til) {time}
+(kan|vil) du (sætte|oprette|tilføje|planlægge|lave|starte) en alarm der spiller {mediakind} (klokken|til) {time}
+(sæt|opret|tilføj|planlæg|lav|start|ny|indstil) (en|min) alarm med {mediakind}
+(sæt|opret|tilføj|planlæg|lav|start|ny|indstil) (en|min) alarm der spiller {mediakind}
+(sæt|opret|tilføj|planlæg|lav|start) (en|min) {mediakind} alarm (klokken|til) {time}
+(sæt|opret|tilføj|planlæg|lav|start) (en|min) {mediakind} alarm
+ny alarm med {mediakind} (klokken|til) {time}
+ny alarm der spiller {mediakind} (klokken|til) {time}
+ny alarm med {mediakind}
+ny alarm der spiller {mediakind}
