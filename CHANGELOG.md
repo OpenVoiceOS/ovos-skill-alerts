@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.5.3a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.5.3a1) (2026-09-11)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.5.2a1...0.5.3a1)
+
+**Merged pull requests:**
+
+- fix: add missing en-US dialogs spoken from \_\_init\_\_.py [\#213](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/213) ([JarbasAl](https://github.com/JarbasAl))
+
 ## [0.5.2a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.5.2a1) (2026-09-07)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.5.1a1...0.5.2a1)
@@ -349,10 +357,6 @@
 ## [0.1.29a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.1.29a1) (2026-01-19)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.1.28...0.1.29a1)
-
-**Merged pull requests:**
-
-- ca-es/translate [\#100](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/100) ([gitlocalize-app[bot]](https://github.com/apps/gitlocalize-app))
 
 ## [0.1.28](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.1.28) (2025-12-15)
 
