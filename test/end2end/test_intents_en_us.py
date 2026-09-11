@@ -405,6 +405,45 @@ class TestPadatious1_Missed_alerts_intent(_IntentRoutingMixin, TestCase):
     def test_did_i_miss_a_alarm(self):
         self._assert_padatious(r"did i miss a alarm", r"missed_alerts.intent")
 
+    def test_did_i_miss_my_alarm(self):
+        self._assert_padatious(r"did i miss my alarm", r"missed_alerts.intent")
+
+    def test_have_i_missed_my_reminder(self):
+        self._assert_padatious(r"have i missed my reminder", r"missed_alerts.intent")
+
+    def test_did_i_miss_anything(self):
+        self._assert_padatious(r"did i miss anything", r"missed_alerts.intent")
+
+    def test_have_i_missed_anything(self):
+        self._assert_padatious(r"have i missed anything", r"missed_alerts.intent")
+
+    def test_tell_me_if_i_missed_any_alarms(self):
+        self._assert_padatious(r"tell me if i missed any alarms", r"missed_alerts.intent")
+
+    def test_tell_me_if_i_missed_any_reminders(self):
+        self._assert_padatious(r"tell me if i missed any reminders", r"missed_alerts.intent")
+
+    def test_let_me_know_if_i_missed_any_alarms(self):
+        self._assert_padatious(r"let me know if i missed any alarms", r"missed_alerts.intent")
+
+    def test_was_there_anything_i_missed(self):
+        self._assert_padatious(r"was there anything i missed", r"missed_alerts.intent")
+
+    def test_were_there_any_alerts_i_missed(self):
+        self._assert_padatious(r"were there any alerts i missed", r"missed_alerts.intent")
+
+    def test_did_any_alarms_go_off_that_i_missed(self):
+        self._assert_padatious(r"did any alarms go off that i missed", r"missed_alerts.intent")
+
+    def test_did_any_reminders_go_off_that_i_missed(self):
+        self._assert_padatious(r"did any reminders go off that i missed", r"missed_alerts.intent")
+
+    def test_was_i_supposed_to_hear_an_alarm_i_missed(self):
+        self._assert_padatious(r"was i supposed to hear an alarm i missed", r"missed_alerts.intent")
+
+    def test_what_did_i_miss_today(self):
+        self._assert_padatious(r"what did i miss today", r"missed_alerts.intent")
+
 class TestAdapt2_Createalarm(_IntentRoutingMixin, TestCase):
     """Padatious (intent file) intent: CreateAlarm.intent"""
     def test_set_an_alarm(self):
@@ -569,10 +608,28 @@ class TestAdapt6_Createtimer(_IntentRoutingMixin, TestCase):
             r"in 5 minutes let me know", r"CreateTimer.intent",
             "remaining", "five minutes")
 
+    def test_could_you_set_a_timer_for_me(self):
+        self._assert_padatious(r"could you set a timer for me", r"CreateTimer.intent")
+
+    def test_i_need_a_timer(self):
+        self._assert_padatious(r"i need a timer", r"CreateTimer.intent")
+
+    def test_i_want_to_set_a_timer(self):
+        self._assert_padatious(r"i want to set a timer", r"CreateTimer.intent")
+
+    def test_lets_set_a_timer(self):
+        self._assert_padatious(r"let's set a timer", r"CreateTimer.intent")
+
+    def test_start_the_timer_now(self):
+        self._assert_padatious(r"start the timer now", r"CreateTimer.intent")
+
 class TestAdapt7_Createreminder(_IntentRoutingMixin, TestCase):
     """Padatious (intent file) intent: CreateReminder.intent"""
     def test_set_a_reminder(self):
         self._assert_padatious(r"set a reminder", r"CreateReminder.intent")
+
+    def test_set_a_reminder_for_me(self):
+        self._assert_padatious(r"set a reminder for me", r"CreateReminder.intent")
 
     def test_set_a_new_reminder_to_reminder(self):
         self._assert_padatious(r"set a new reminder to call mom", r"CreateReminder.intent")
@@ -626,6 +683,9 @@ class TestAdapt9_Createevent(_IntentRoutingMixin, TestCase):
     """Padatious (intent file) intent: CreateEvent.intent"""
     def test_create_an_event(self):
         self._assert_padatious(r"create an event", r"CreateEvent.intent")
+
+    def test_can_you_schedule_an_appointment(self):
+        self._assert_padatious(r"can you schedule an appointment", r"CreateEvent.intent")
 
     def test_new_appointment(self):
         self._assert_padatious(r"new appointment", r"CreateEvent.intent")
