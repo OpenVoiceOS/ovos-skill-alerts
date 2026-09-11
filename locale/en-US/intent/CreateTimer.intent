@@ -4,8 +4,6 @@ new timer [for {duration}]
 (set|put) timer [for] {duration}
 timer [for] {duration}
 in {duration} let me know
-start a timer for {duration}
-start a timer
 please start a timer for {duration}
 i need a timer for {duration}
 i need a timer
@@ -24,7 +22,6 @@ start counting down from {duration}
 i want to set a timer
 i want a timer for {duration}
 give me a timer for {duration}
-add a timer for {duration}
 make me a timer for {duration}
 kick off a timer for {duration}
 i'd like to set a timer for {duration}

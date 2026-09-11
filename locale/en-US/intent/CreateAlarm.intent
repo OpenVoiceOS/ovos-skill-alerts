@@ -42,8 +42,6 @@ new alarm playing {mediakind} (at|for) {time}
 new alarm with {mediakind}
 new alarm that plays {mediakind}
 new alarm playing {mediakind}
-set an alarm
-set an alarm for {time}
 please set an alarm for {time}
 can you set an alarm for {time}
 could you set an alarm for {time}
@@ -54,10 +52,7 @@ i want an alarm for {time}
 let's set an alarm for {time}
 put an alarm on for {time}
 give me an alarm for {time}
-start an alarm for {time}
 turn on an alarm for {time}
 set my alarm for {time}
 set the alarm for {time}
 i'd like an alarm set for {time}
-new alarm for {time}
-make a {time} alarm

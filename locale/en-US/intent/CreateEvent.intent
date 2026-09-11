@@ -1,7 +1,6 @@
 (create|add|schedule) (an|a) (event|appointment) [{event}]
 new (event|appointment) [{event}]
 i have (an|a) [work] (event|appointment) [{event}]
-create an event
 create an event for {event}
 schedule an appointment for {event}
 please schedule an appointment for {event}
