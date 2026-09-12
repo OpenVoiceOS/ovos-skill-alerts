@@ -71,7 +71,7 @@ Mycroft.CardDelegate {
                 id: timerViews
                 width: timerFlick.width
                 height: parent.height
-                model: sessionData.activeTimers.timers
+                model: sessionData.active_timers.timers
                 delegate: TimerCard {}
                 onItemRemoved: {
                     timerFlick.returnToBounds()

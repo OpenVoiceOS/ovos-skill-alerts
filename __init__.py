@@ -1509,8 +1509,8 @@ class AlertSkill(ConversationalSkill):
         for alarm in alarms:
             alarms_view.append(build_gui_data(alarm))
 
-        self.gui['activeAlarmCount'] = len(alarms_view)
-        self.gui['activeAlarms'] = alarms_view
+        self.gui['active_alarm_count'] = len(alarms_view)
+        self.gui['active_alarms'] = alarms_view
 
         if any([alarm.is_expired for alarm in alarms]):
             override = True
@@ -1653,7 +1653,7 @@ class AlertSkill(ConversationalSkill):
             if timers_to_display:
                 display_data = [build_gui_data(timer)
                                 for timer in timers_to_display]
-                self.gui['activeTimers'] = {'timers': display_data}
+                self.gui['active_timers'] = {'timers': display_data}
             time.sleep(1)
         self._gui_timer_lock.release()
         self.gui.release()
@@ -1662,7 +1662,7 @@ class AlertSkill(ConversationalSkill):
         """
         Handle a GUI timer dismissal
         """
-        alert_id = message.data['timer']['alertId']
+        alert_id = message.data['timer']['alert_id']
         self._dismiss_alert(alert_id, speak=True)
         LOG.debug(f"Timers still active on GUI: {self.alert_manager.active_gui_timers}")
 
@@ -1670,9 +1670,10 @@ class AlertSkill(ConversationalSkill):
         """
         Handle a alarm dismissal per event
         """
-        alert_ids = message.data.get('alarmIndex')
+        alert_ids = message.data.get('alert_id')
         if alert_ids is None:
-            self.alert_manager.get_active_alerts(alert_type=AlertType.ALARM)
+            alert_ids = self.alert_manager.get_active_alerts(
+                alert_type=AlertType.ALARM)
         elif isinstance(alert_ids, str):
             alert_ids = [alert_ids]
         for alert_id in alert_ids:
@@ -1680,15 +1681,16 @@ class AlertSkill(ConversationalSkill):
 
     def _release_gui_alarm(self, alert_id: str):
         alarm = self.alert_manager.get_alert(alert_id)
-        if self.gui.get('activeAlarms'):
+        active_alarms = self.gui.get('active_alarms')
+        if active_alarms:
             # Multi Alarm view
-            for active in self.gui.get('activeAlarms'):
-                if active.get('alarmIndex') == alert_id:
-                    self.gui['activeAlarms'].remove(active)
+            for alarm in active_alarms:
+                if alarm.get('alert_id') == alert_id:
+                    active_alarms.remove(alarm)
                     break
-            self.gui['activeAlarmCount'] = len(self.gui['activeAlarms'])
+            self.gui['active_alarm_count'] = len(active_alarms)
             # dont release gui on multi alert or timers up
-            if self.gui['activeAlarmCount'] != 0 or \
+            if len(active_alarms) != 0 or \
                     self.alert_manager.active_gui_timers:
                 return
 
@@ -1704,9 +1706,10 @@ class AlertSkill(ConversationalSkill):
         """
         Handle a alarm snooze per event
         """
-        alert_ids = message.data.get('alarmIndex')
+        alert_ids = message.data.get('alert_id')
         if alert_ids is None:
-            self.alert_manager.get_active_alerts(alert_type=AlertType.ALARM)
+            alert_ids = self.alert_manager.get_active_alerts(
+                alert_type=AlertType.ALARM)
         elif isinstance(alert_ids, str):
             alert_ids = [alert_ids]
         for alert_id in alert_ids:

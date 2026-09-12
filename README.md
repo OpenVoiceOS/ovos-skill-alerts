@@ -239,7 +239,7 @@ _This is a known issue that a future release will fix. It comes from how the ski
 
 ## Recommended Versions
 These are not hard requirements, since preferences vary, but recommended.
-GUI: `skill-ovos-homescreen >= 0.0.3a6` (see also this [pending PR](https://github.com/OpenVoiceOS/skill-ovos-homescreen/pull/92))
+GUI: `skill-ovos-homescreen >= 0.0.3a11`
 
 ## Incompatible Skills
 This skill has known intent collisions with, and replaces:

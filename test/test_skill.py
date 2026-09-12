@@ -3712,25 +3712,25 @@ class TestUIModels(unittest.TestCase):
         self.assertEqual(
             set(timer_data.keys()),
             {
-                "alertId",
-                "backgroundColor",
+                "alert_id",
+                "background_color",
                 "expired",
-                "percentRemaining",
-                "timerName",
-                "timeDelta",
+                "percent_remaining",
+                "timer_name",
+                "time_delta",
             },
         )
-        self.assertEqual(timer_data["alertId"], valid_alert.ident)
-        self.assertAlmostEqual(timer_data["percentRemaining"], 1, 2)
-        self.assertEqual(timer_data["timerName"], "test timer")
-        self.assertIsInstance(timer_data["timeDelta"], str)
+        self.assertEqual(timer_data["alert_id"], valid_alert.ident)
+        self.assertAlmostEqual(timer_data["percent_remaining"], 1, 2)
+        self.assertEqual(timer_data["timer_name"], "test timer")
+        self.assertIsInstance(timer_data["time_delta"], str)
 
         time.sleep(1)
         new_timer_data = build_timer_data(valid_alert)
         self.assertLess(
-            new_timer_data["percentRemaining"], timer_data["percentRemaining"]
+            new_timer_data["percent_remaining"], timer_data["percent_remaining"]
         )
-        self.assertAlmostEqual(timer_data["percentRemaining"], 1, 1)         
+        self.assertAlmostEqual(timer_data["percent_remaining"], 1, 1)         
 
     @patch("skill_alerts.util.ui_models.use_24h_format")
     def test_build_alarm_data(self, mock_use_24h_format):        
@@ -3752,29 +3752,29 @@ class TestUIModels(unittest.TestCase):
         us_display = build_alarm_data(alarm)
         self.assertEqual(
             set(us_display.keys()),
-            {"alarmTime", "alarmAmPm", "alarmName", "alarmExpired", "alarmIndex",
-             "alarmRepeat", "alarmRepeatStr"},
+            {"alarm_time", "alarm_daytime", "alarm_name", "alarm_expired", "alert_id",
+             "alarm_repeat", "alarm_repeatstr"},
         )
-        self.assertEqual(us_display["alarmTime"], "9:00")
-        self.assertEqual(us_display["alarmAmPm"], "AM")
-        self.assertEqual(us_display["alarmName"], "Test Alarm")
-        self.assertFalse(us_display["alarmExpired"])
-        self.assertEqual(us_display["alarmIndex"], alarm.ident)
-        self.assertEqual(us_display["alarmRepeatStr"], "Once")
+        self.assertEqual(us_display["alarm_time"], "9:00")
+        self.assertEqual(us_display["alarm_daytime"], "AM")
+        self.assertEqual(us_display["alarm_name"], "Test Alarm")
+        self.assertFalse(us_display["alarm_expired"])
+        self.assertEqual(us_display["alert_id"], alarm.ident)
+        self.assertEqual(us_display["alarm_repeatstr"], "Once")
 
         mock_use_24h_format.return_value = True
         metric_display = build_alarm_data(alarm)
         self.assertEqual(
             set(metric_display.keys()),
-            {"alarmTime", "alarmAmPm", "alarmName", "alarmExpired", "alarmIndex",
-             "alarmRepeat", "alarmRepeatStr"},
+            {"alarm_time", "alarm_daytime", "alarm_name", "alarm_expired", "alert_id",
+             "alarm_repeat", "alarm_repeatstr"},
         )
-        self.assertEqual(metric_display["alarmTime"], "09:00")
-        self.assertEqual(metric_display["alarmAmPm"], "")
-        self.assertEqual(metric_display["alarmName"], "Test Alarm")
-        self.assertFalse(metric_display["alarmExpired"])
-        self.assertEqual(metric_display["alarmIndex"], alarm.ident)
-        self.assertEqual(metric_display["alarmRepeatStr"], "Once")
+        self.assertEqual(metric_display["alarm_time"], "09:00")
+        self.assertEqual(metric_display["alarm_daytime"], "")
+        self.assertEqual(metric_display["alarm_name"], "Test Alarm")
+        self.assertFalse(metric_display["alarm_expired"])
+        self.assertEqual(metric_display["alert_id"], alarm.ident)
+        self.assertEqual(metric_display["alarm_repeatstr"], "Once")
 
         # test repeating alarm (abbreviations)
         days = [Weekdays.MON, Weekdays.TUE, Weekdays.WED, Weekdays.THU, Weekdays.FRI]
@@ -3787,15 +3787,15 @@ class TestUIModels(unittest.TestCase):
         display = build_alarm_data(rep_alarm1)
         self.assertEqual(
             set(display.keys()),
-            {"alarmTime", "alarmAmPm", "alarmName", "alarmExpired", "alarmIndex",
-             "alarmRepeat", "alarmRepeatStr"},
+            {"alarm_time", "alarm_daytime", "alarm_name", "alarm_expired", "alert_id",
+             "alarm_repeat", "alarm_repeatstr"},
         )
-        self.assertEqual(display["alarmTime"], "09:00")
-        self.assertEqual(display["alarmAmPm"], "")
-        self.assertEqual(display["alarmName"], "Test Alarm")
-        self.assertFalse(display["alarmExpired"])
-        self.assertEqual(display["alarmIndex"], rep_alarm1.ident)
-        self.assertEqual(display["alarmRepeatStr"], "MON-FRI")
+        self.assertEqual(display["alarm_time"], "09:00")
+        self.assertEqual(display["alarm_daytime"], "")
+        self.assertEqual(display["alarm_name"], "Test Alarm")
+        self.assertFalse(display["alarm_expired"])
+        self.assertEqual(display["alert_id"], rep_alarm1.ident)
+        self.assertEqual(display["alarm_repeatstr"], "MON-FRI")
 
         days = [Weekdays.MON, Weekdays.THU, Weekdays.FRI, Weekdays.SAT]
         rep_alarm2 = Alert.create(
@@ -3807,15 +3807,15 @@ class TestUIModels(unittest.TestCase):
         display = build_alarm_data(rep_alarm2)
         self.assertEqual(
             set(display.keys()),
-            {"alarmTime", "alarmAmPm", "alarmName", "alarmExpired", "alarmIndex",
-             "alarmRepeat", "alarmRepeatStr"},
+            {"alarm_time", "alarm_daytime", "alarm_name", "alarm_expired", "alert_id",
+             "alarm_repeat", "alarm_repeatstr"},
         )
-        self.assertEqual(display["alarmTime"], "09:00")
-        self.assertEqual(display["alarmAmPm"], "")
-        self.assertEqual(display["alarmName"], "Test Alarm")
-        self.assertFalse(display["alarmExpired"])
-        self.assertEqual(display["alarmIndex"], rep_alarm2.ident)
-        self.assertEqual(display["alarmRepeatStr"], "MON,THU-SAT")
+        self.assertEqual(display["alarm_time"], "09:00")
+        self.assertEqual(display["alarm_daytime"], "")
+        self.assertEqual(display["alarm_name"], "Test Alarm")
+        self.assertFalse(display["alarm_expired"])
+        self.assertEqual(display["alert_id"], rep_alarm2.ident)
+        self.assertEqual(display["alarm_repeatstr"], "MON,THU-SAT")
 
         days = [Weekdays.MON, Weekdays.THU, Weekdays.SUN]
         rep_alarm3 = Alert.create(
@@ -3827,15 +3827,15 @@ class TestUIModels(unittest.TestCase):
         display = build_alarm_data(rep_alarm3)
         self.assertEqual(
             set(display.keys()),
-            {"alarmTime", "alarmAmPm", "alarmName", "alarmExpired", "alarmIndex",
-             "alarmRepeat", "alarmRepeatStr"},
+            {"alarm_time", "alarm_daytime", "alarm_name", "alarm_expired", "alert_id",
+             "alarm_repeat", "alarm_repeatstr"},
         )
-        self.assertEqual(display["alarmTime"], "09:00")
-        self.assertEqual(display["alarmAmPm"], "")
-        self.assertEqual(display["alarmName"], "Test Alarm")
-        self.assertFalse(display["alarmExpired"])
-        self.assertEqual(display["alarmIndex"], rep_alarm3.ident)
-        self.assertEqual(display["alarmRepeatStr"], "MON,THU,SUN")
+        self.assertEqual(display["alarm_time"], "09:00")
+        self.assertEqual(display["alarm_daytime"], "")
+        self.assertEqual(display["alarm_name"], "Test Alarm")
+        self.assertFalse(display["alarm_expired"])
+        self.assertEqual(display["alert_id"], rep_alarm3.ident)
+        self.assertEqual(display["alarm_repeatstr"], "MON,THU,SUN")
 
 
 @unittest.skip('Work in progress')

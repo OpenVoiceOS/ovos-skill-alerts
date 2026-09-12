@@ -67,12 +67,12 @@ def build_timer_data(alert: Alert) -> dict:
         human_delta = nice_duration(delta_seconds.total_seconds(), speech=False, lang=alert.lang)
 
     return {
-        'alertId': alert.ident,
-        'backgroundColor': '',  # TODO Color hex code
+        'alert_id': alert.ident,
+        'background_color': '',  # TODO Color hex code
         'expired': alert.is_expired,
-        'percentRemaining': percent_remaining,  # float percent remaining
-        'timerName': alert.alert_name,
-        'timeDelta': human_delta  # Human-readable time remaining
+        'percent_remaining': percent_remaining,  # float percent remaining
+        'timer_name': alert.alert_name,
+        'time_delta': human_delta  # Human-readable time remaining
     }
 
 
@@ -104,13 +104,13 @@ def build_alarm_data(alert: Alert) -> dict:
         alarm_repeat_str = translate("once", lang=alert.lang).title()
 
     return {
-        "alarmTime": alarm_time,
-        "alarmAmPm": alarm_am_pm,
-        "alarmName": alarm_name,
-        "alarmExpired": alarm_expired,
-        "alarmIndex": alarm_index,
-        "alarmRepeat": alert.has_repeat,
-        "alarmRepeatStr": alarm_repeat_str
+        "alarm_time": alarm_time,
+        "alarm_daytime": alarm_am_pm,
+        "alarm_name": alarm_name,
+        "alarm_expired": alarm_expired,
+        "alert_id": alarm_index,
+        "alarm_repeat": alert.has_repeat,
+        "alarm_repeatstr": alarm_repeat_str
     }
 
 

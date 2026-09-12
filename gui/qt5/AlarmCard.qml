@@ -46,7 +46,7 @@ Mycroft.CardDelegate {
 
                 Kirigami.Icon {
                     id: repeatButtonIcon
-                    visible: sessionData.alarmRepeat ? 1 : 0
+                    visible: sessionData.alarm_repeat ? 1 : 0
                     Layout.preferredWidth: parent.height * 0.8
                     Layout.preferredHeight: width
                     Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
@@ -56,7 +56,7 @@ Mycroft.CardDelegate {
 
                 Label {
                     id: alarmCardRepeatLabel
-                    text: sessionData.alarmRepeatStr
+                    text: sessionData.alarm_repeatstr
                     Layout.fillWidth: true
                     Layout.fillHeight: true
                     maximumLineCount: 1
@@ -101,10 +101,10 @@ Mycroft.CardDelegate {
             anchors.left: parent.left
             anchors.right: parent.right
             height: parent.height * 0.6
-            alarmName: sessionData.alarmName
-            alarmTime: sessionData.alarmTime
-            alarmAmPm: sessionData.alarmAmPm
-            alarmExpired: sessionData.alarmExpired
+            alarmName: sessionData.alarm_name
+            alarmTime: sessionData.alarm_time
+            alarmAmPm: sessionData.alarm_daytime
+            alarmExpired: sessionData.alarm_expired
         }
 
         Kirigami.Separator {
@@ -123,10 +123,10 @@ Mycroft.CardDelegate {
             anchors.right: parent.right
             anchors.topMargin: Mycroft.Units.gridUnit / 4
             height: parent.height * 0.2
-            alarmName: sessionData.alarmName
-            alarmIndex: sessionData.alarmIndex
+            alarmName: sessionData.alarm_name
+            alarmIndex: sessionData.alert_id
             alarmContext: "single"
-            alarmExpired: sessionData.alarmExpired
+            alarmExpired: sessionData.alarm_expired
         }
     }
 }
