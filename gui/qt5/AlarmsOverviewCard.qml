@@ -23,7 +23,7 @@ import org.kde.kirigami 2.11 as Kirigami
 
 Mycroft.CardDelegate {
     id: alarmFrame
-    property int activeAlarmCount: sessionData.activeAlarmCount
+    property int activeAlarmCount: sessionData.active_alarm_count
     property int previousCount: 0
 
     function getEndPos(){
@@ -92,7 +92,7 @@ Mycroft.CardDelegate {
                 id: activeAlarmsViews
                 width: alarmFlick.width
                 height: parent.height
-                model: sessionData.activeAlarms
+                model: sessionData.active_alarms
                 delegate: AlarmsOverviewDelegate {
                 }
                 onItemRemoved: {

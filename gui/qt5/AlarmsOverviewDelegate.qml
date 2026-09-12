@@ -53,7 +53,7 @@ ItemDelegate {
 
                 Kirigami.Icon {
                     id: repeatButtonIcon
-                    visible: model.alarmRepeat ? 1 : 0
+                    visible: model.alarm_repeat ? 1 : 0
                     Layout.preferredWidth: parent.height * 0.8
                     Layout.preferredHeight: width
                     Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
@@ -63,7 +63,7 @@ ItemDelegate {
 
                 Label {
                     id: alarmCardRepeatLabel
-                    text: model.alarmRepeatStr
+                    text: model.alarm_repeatstr
                     Layout.fillWidth: true
                     Layout.fillHeight: true
                     maximumLineCount: 1
@@ -94,10 +94,10 @@ ItemDelegate {
             anchors.left: parent.left
             anchors.right: parent.right
             height: parent.height * 0.6
-            alarmName: model.alarmName
-            alarmTime: model.alarmTime
-            alarmAmPm: model.alarmAmPm
-            alarmExpired: model.alarmExpired
+            alarmName: model.alarm_name
+            alarmTime: model.alarm_time
+            alarmAmPm: model.alarm_daytime
+            alarmExpired: model.alarm_expired
         }
 
         Kirigami.Separator {
@@ -117,10 +117,10 @@ ItemDelegate {
             anchors.bottom: parent.bottom
             anchors.topMargin: Mycroft.Units.gridUnit / 4
             height: parent.height * 0.27
-            alarmName: model.alarmName
-            alarmIndex: model.alarmIndex
+            alarmName: model.alarm_name
+            alarmIndex: model.alert_id
             alarmContext: "overview"
-            alarmExpired: model.alarmExpired
+            alarmExpired: model.alarm_expired
         }
     }
 }
