@@ -674,8 +674,7 @@ def parse_alert_context_from_message(message: Message) -> dict:
         "lang": get_message_lang(message),
         "ident": message.context.get("ident") or str(uuid4()),
         "origin_ident": message.context.get('ident'),
-        "created": message.context.get("timing",
-                                       {}).get("handle_utterance") or time()
+        "created": time()
     }
     return required_context
 
