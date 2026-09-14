@@ -153,13 +153,10 @@ intents:
   # Adapt intents are the name passed to the constructor
   adapt:
     - 'CreateAlarm'
-    - 'CreateOcpAlarm'
     - 'CreateTimer'
     - 'CreateReminder'
-    - 'CreateReminderAlt'
     - 'CreateEvent'
     - 'RescheduleAlert'
-    - 'RescheduleAlertAlt'
     - 'ChangeProperties'
     - 'ChangeMediaProperties'
     - 'ListAlerts'

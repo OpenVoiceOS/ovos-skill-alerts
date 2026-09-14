@@ -1,0 +1,6 @@
+skift min {schedkind} så den er hørbar
+tilpas den næste {schedkind} til at afspille {mediakind}
+sæt {schedkind} til at afspille {mediaform}
+skift lyden på min {schedkind} til {mediakind}
+tilpas alarmen for {schedkind} til {mediaform}
+jeg vil have min næste {schedkind} til at afspille min {mediakind}

@@ -1,0 +1,6 @@
+canvia la prioritat del meu {schedkind} a {priority}
+puja la prioritat del {schedkind} al nivell {priority}
+ajusta la prioritat del meu proper {schedkind}
+posa el {schedkind} amb prioritat {priority}
+baixa la prioritat del meu {schedkind}
+canvia el nivell de prioritat del {schedkind} a {priority}

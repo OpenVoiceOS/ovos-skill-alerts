@@ -1,0 +1,8 @@
+(change|set|adjust|extend) (my|the) {schedkind} to (last|run|go on) (until|till|for) {duration}
+(change|set|adjust) the (duration|length|event duration|event length) (of|for) (my|the) {schedkind} to {duration}
+(change|set|adjust|extend|shorten) (my|the) (next|upcoming) {schedkind} (duration|length) to {duration}
+(my|the) {schedkind} (change|set|adjust) (the|its) (duration|length) to {duration}
+(change|set|adjust|extend) (my|the) {schedkind} to (last|run|go on) for {duration}
+(change|set|adjust|extend|shorten) (my|the) {schedkind} (duration|length) to {duration}
+(change|set|adjust|extend) (my|the) {schedkind} (until|till) {duration}
+(change|set|adjust|extend) (my|the) {schedkind} to run for the next {duration}

@@ -1,0 +1,6 @@
+(sätt|starta|skapa) en timer [på {duration}]
+ny timer [på {duration}]
+(sätt|starta|skapa) en {duration} timer
+jag har Tidtagare
+schema Tidtagare
+skapa timer

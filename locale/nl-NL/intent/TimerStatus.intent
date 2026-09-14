@@ -1,0 +1,4 @@
+(timer|timers|tijd) (beëindig|eindigt|klaar|lang|overgebleven|status|toestand)
+(beëindig|eindigt|klaar|lang|overgebleven|status|toestand) (timer|timers|tijd)
+(timer|timers|tijd) (ik|heb|er|is|de|een|je|me|zijn|die|op|maak|van|mijn|het|geen|dit|moet|aan|wek) (beëindig|eindigt|klaar|lang|overgebleven|status|toestand)
+(Hoe|Wat|alles|gekregen|heb ik|heb je|heb jij|hebben we|hebben wij|hoe veel|iets|is er|lees|lijst|van wanneer|van wat|van wie|vernieuw|vertel me|vertel ons|wanneer|wat is|wat zijn|welke|zeg eens|zijn er) (timer|timers|tijd)

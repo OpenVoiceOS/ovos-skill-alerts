@@ -1,0 +1,6 @@
+muda a duração do meu {schedkind} para {duration}
+estende o meu {schedkind} até {duration}
+ajusta o comprimento do próximo {schedkind} para {duration}
+faz o {schedkind} durar {duration}
+muda o meu {schedkind} para durar até {duration}
+encurta a duração do meu {schedkind} para {duration}

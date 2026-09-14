@@ -1,0 +1,6 @@
+aldatu nire {schedkind}-ren lehentasuna {priority}-ra
+igo {schedkind}-ren lehentasuna {priority} mailara
+doitu nire hurrengo {schedkind}-ren lehentasuna
+ezarri {schedkind} hori {priority} lehentasunarekin
+jaitsi nire {schedkind}-ren lehentasuna
+aldatu {schedkind}-ren lehentasun-maila {priority}-ra

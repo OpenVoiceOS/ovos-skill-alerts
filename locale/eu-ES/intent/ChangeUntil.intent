@@ -1,0 +1,6 @@
+aldatu nire {schedkind}-ren iraupena {duration}-ra
+luzatu nire {schedkind} hau {duration} arte
+doitu hurrengo {schedkind}-ren luzera {duration}-ra
+egin {schedkind}-k {duration} iraun dezan
+aldatu nire {schedkind} hau {duration} arte iraun dezan
+laburtu nire {schedkind}-ren iraupena {duration}-ra

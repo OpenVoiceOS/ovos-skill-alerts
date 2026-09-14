@@ -1,0 +1,3 @@
+(create|make|add|start) a [new] list [called {name}]
+new list [called {name}]
+(create|make|add|start) a [new] {name} list

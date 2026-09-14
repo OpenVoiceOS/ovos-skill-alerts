@@ -1,0 +1,4 @@
+(delete|remove|erase) [the] (items|entries|things) (from|on) (my|the) [stored] list [{name}]
+(delete|remove) (everything|all [the] (items|entries)) (from|on) (my|the) list [{name}]
+(delete|remove|erase) [the] (items|entries|things) (from|on) (my|the) {name} list
+(delete|remove) (everything|all [the] (items|entries)) (from|on) (my|the) {name} list

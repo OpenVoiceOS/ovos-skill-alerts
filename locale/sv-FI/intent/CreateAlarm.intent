@@ -1,0 +1,6 @@
+(aseta|luo|lisää) hälytys [kello {time}]
+uusi hälytys [{time}]
+aseta hälytys kello {time}
+uusi herätä minut
+uusi hälytykset
+luo hälytykset
