@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.6.1a2](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.6.1a2) (2026-09-14)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.6.1a1...0.6.1a2)
+
+**Merged pull requests:**
+
+- translate\(kab\): update confirm\_timer\_started.dialog [\#225](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/225) ([ovos-localize[bot]](https://github.com/apps/ovos-localize))
+- translate\(kab\): update at\_time.dialog [\#223](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/223) ([ovos-localize[bot]](https://github.com/apps/ovos-localize))
+- translate\(kab\): update whole\_day.dialog [\#221](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/221) ([ovos-localize[bot]](https://github.com/apps/ovos-localize))
+
 ## [0.6.1a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.6.1a1) (2026-09-14)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.6.0a1...0.6.1a1)
@@ -341,19 +351,9 @@
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.1.29a3...0.1.30a1)
 
-**Merged pull requests:**
-
-- fix: rename bare lang code locale directories [\#112](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/112) ([ovos-localize[bot]](https://github.com/apps/ovos-localize))
-- translate\(nl-NL\): update abbreviation\_thursday.dialog [\#109](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/109) ([ovos-localize[bot]](https://github.com/apps/ovos-localize))
-
 ## [0.1.29a3](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.1.29a3) (2026-03-20)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.1.29a2...0.1.29a3)
-
-**Merged pull requests:**
-
-- translate\(nl-NL\): update abbreviation\_wednesday.dialog [\#111](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/111) ([ovos-localize[bot]](https://github.com/apps/ovos-localize))
-- translate\(nl-NL\): update abbreviation\_tuesday.dialog [\#110](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/110) ([ovos-localize[bot]](https://github.com/apps/ovos-localize))
 
 ## [0.1.29a2](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.1.29a2) (2026-03-09)
 
@@ -417,15 +417,15 @@
 
 ## [0.1.23](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.1.23) (2025-03-16)
 
-[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.1.23a1...0.1.23)
-
-## [0.1.23a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.1.23a1) (2025-03-16)
-
-[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.1.23a2...0.1.23a1)
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.1.23a2...0.1.23)
 
 ## [0.1.23a2](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.1.23a2) (2025-03-16)
 
-[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.1.22...0.1.23a2)
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.1.23a1...0.1.23a2)
+
+## [0.1.23a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.1.23a1) (2025-03-16)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.1.22...0.1.23a1)
 
 ## [0.1.22](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.1.22) (2025-03-15)
 
