@@ -1,2 +1,4 @@
 (verwijder|wis) (de items|alles) (van|uit) (mijn|de) lijst [{name}]
 (verwijder|wis) (de items|alles) (van|uit) (mijn|de) {name} lijst
+(verwijder|wis) mijn (to do|todo)[-lijst]
+(verwijder|wis) alles (van|uit) mijn (to do|todo)[-lijst]

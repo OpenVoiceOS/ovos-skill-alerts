@@ -2,3 +2,5 @@
 (delete|remove) (everything|all [the] (items|entries)) (from|on) (my|the) list [{name}]
 (delete|remove|erase) [the] (items|entries|things) (from|on) (my|the) {name} list
 (delete|remove) (everything|all [the] (items|entries)) (from|on) (my|the) {name} list
+(delete|remove|clear) my (todo|to do) (list|items|entries)
+(delete|remove) (everything|all) (from|on) my (todo|to do) [list]

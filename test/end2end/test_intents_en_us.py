@@ -14,6 +14,7 @@ import os
 import shutil
 import tempfile
 import unittest
+from typing import Optional
 from unittest import TestCase
 
 import pytest
@@ -183,6 +184,52 @@ class _IntentRoutingMixin:
             dialog_data.get(dialog_key), expected_value,
             f"spoken dialog data {dialog_key!r} was {dialog_data.get(dialog_key)!r}, "
             f"expected {expected_value!r} -- full dialog data: {dialog_data!r}")
+
+    def _assert_padatious_dialog(self, utterance: str, intent_file: str,
+                                 dialog_keys, data: Optional[dict] = None):
+        """Like ``_assert_padatious``, but asserts WHICH dialog the skill
+        spoke, and optionally its data.
+
+        QueryListEntries and DeleteListEntries each serve two kinds of
+        request -- the todo list as a whole, and the entries of one named
+        list -- under one intent name. The intent name alone therefore no
+        longer tells which kind of answer the user got; the dialog key does.
+        ``dialog_keys`` is a set because the todo-kind answer depends on
+        whether any todo is stored, which this shared MiniCroft does not
+        control.
+        """
+        intent_name = intent_file[:-len(".intent")] if intent_file.endswith(".intent") else intent_file
+        intent_msg_type = f"{SKILL_ID}:{intent_name}"
+        session = Session(f"e2e-en_us-dialogkey-{hash(utterance)}-{hash(intent_msg_type)}")
+        session.lang = LANG
+        session.pipeline = [
+            "ovos-padacioso-pipeline-plugin-high",
+            "ovos-padacioso-pipeline-plugin-medium",
+            "ovos-padacioso-pipeline-plugin-low",
+        ]
+        message = Message(
+            "recognizer_loop:utterance",
+            {"utterances": [utterance], "lang": LANG},
+            {"session": session.serialize()},
+        )
+        capture = CaptureSession(self.minicroft)
+        capture.capture(message, timeout=30)
+        messages = capture.finish()
+        types = [m.msg_type for m in messages]
+        self.assertIn(intent_msg_type, types)
+        speaks = [m for m in messages if m.msg_type == "ovos.utterance.speak"]
+        self.assertTrue(speaks, f"no ovos.utterance.speak for {utterance!r} -> {types}")
+        meta = speaks[0].data.get("meta", {})
+        spoken = meta.get("dialog")
+        self.assertIn(
+            spoken, set(dialog_keys),
+            f"{utterance!r} spoke dialog {spoken!r}, expected one of "
+            f"{sorted(dialog_keys)!r}")
+        for key, value in (data or {}).items():
+            self.assertEqual(
+                meta.get("data", {}).get(key), value,
+                f"{utterance!r} spoke {spoken!r} with {key!r}="
+                f"{meta.get('data', {}).get(key)!r}, expected {value!r}")
 
     def _assert_padatious_any(self, utterance: str, intent_files: list):
         """Like _assert_padatious, but accepts any one of several sibling
@@ -886,14 +933,6 @@ class TestAdapt19_Querylistnames(_IntentRoutingMixin, TestCase):
     def test_which_lists_are_stored(self):
         self._assert_padatious(r"which lists are stored", r"QueryListNames.intent")
 
-class TestAdapt20_Querytodoentries(_IntentRoutingMixin, TestCase):
-    """Padatious (intent file) intent: QueryTodoEntries.intent"""
-    def test_whats_on_my_todo(self):
-        self._assert_padatious(r"what's on my todo", r"QueryTodoEntries.intent")
-
-    def test_what_do_i_have_to_do(self):
-        self._assert_padatious(r"what do i have to do", r"QueryTodoEntries.intent")
-
 class TestAdapt21_Querylistentries(_IntentRoutingMixin, TestCase):
     """Padatious (intent file) intent: QueryListEntries.intent"""
     def test_what_items_are_on_my_list(self):
@@ -908,6 +947,29 @@ class TestAdapt21_Querylistentries(_IntentRoutingMixin, TestCase):
         # QueryListEntries.intent now has "(what|which) (items|entries|
         # things) are (on|in) (my|the) {name} list".
         self._assert_padatious(r"what items are on my shopping list", r"QueryListEntries.intent")
+
+    TODO_KIND_DIALOGS = ("list_todo_reminder", "list_todo_no_reminder")
+
+    def test_whats_on_my_todo(self):
+        # The merged intent serves both kinds, so the intent name alone no
+        # longer says which answer the user got -- assert the dialog.
+        self._assert_padatious_dialog(
+            r"what's on my todo", r"QueryListEntries.intent",
+            self.TODO_KIND_DIALOGS)
+
+    def test_what_do_i_have_to_do(self):
+        self._assert_padatious_dialog(
+            r"what do i have to do", r"QueryListEntries.intent",
+            self.TODO_KIND_DIALOGS)
+
+    def test_list_named_after_a_todo_word_reads_the_list(self):
+        # Review of PR #216: the kind was chosen by voc_match on the whole
+        # utterance, and en-US todo.voc holds "notes". A list named "notes"
+        # was answered with the todo summary instead of its own items.
+        self._seed_list_with_item("notes", "milk")
+        self._assert_padatious_dialog(
+            r"what is on the notes list", r"QueryListEntries.intent",
+            ("list_todo_subitems",), {"name": "notes", "items": "milk"})
 
 class TestAdapt22_Deletelistentries(_IntentRoutingMixin, TestCase):
     """Padatious (intent file) intent: DeleteListEntries.intent
@@ -940,6 +1002,12 @@ class TestAdapt22_Deletelistentries(_IntentRoutingMixin, TestCase):
         self._seed_list_with_item("groceries", "bread")
         self._assert_padatious(r"remove all items from the groceries list", r"DeleteListEntries.intent")
 
+    def test_delete_my_todo_list(self):
+        self._assert_padatious(r"delete my todo list", r"DeleteListEntries.intent")
+
+    def test_delete_everything_from_my_todo(self):
+        self._assert_padatious(r"delete everything from my todo", r"DeleteListEntries.intent")
+
 class TestAdapt23_Deletelist(_IntentRoutingMixin, TestCase):
     """Padatious (intent file) intent: DeleteList.intent"""
     @pytest.mark.xfail(strict=False, reason="ENGINE ISSUE (padacioso), not this skill's .intent files: 'delete my list pantry' is a literal expansion of DeleteList.intent's '(delete|remove|erase) (my|the) list [{name}]' line, but the full registered-skill pipeline misroutes it to CancelAlert -- same class of matcher tie-break defect as DeleteListEntries' collisions (see TestAdapt22_Deletelistentries.test_delete_all_items_from_my_list's reason) -- flagged for the engine lane, not fixed here.")
@@ -956,14 +1024,6 @@ class TestAdapt23_Deletelist(_IntentRoutingMixin, TestCase):
         # "(delete|remove|erase|drop) (my|the) {name} list".
         self._seed_list_with_item("hardware", "nails")
         self._assert_padatious(r"drop the hardware list", r"DeleteList.intent")
-
-class TestAdapt24_Deletetodoentries(_IntentRoutingMixin, TestCase):
-    """Padatious (intent file) intent: DeleteTodoEntries.intent"""
-    def test_delete_my_todo_list(self):
-        self._assert_padatious(r"delete my todo list", r"DeleteTodoEntries.intent")
-
-    def test_delete_everything_from_my_todo(self):
-        self._assert_padatious(r"delete everything from my todo", r"DeleteTodoEntries.intent")
 
 class TestAdapt25_Calendarlist(_IntentRoutingMixin, TestCase):
     """Padatious (intent file) intent: CalendarList.intent"""
