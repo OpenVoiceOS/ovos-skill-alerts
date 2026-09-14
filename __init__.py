@@ -922,6 +922,23 @@ class AlertSkill(ConversationalSkill):
         else:
             self.speak_dialog("list_todo_no_lists")
 
+    def _is_todo_kind(self, message: Message) -> bool:
+        """
+        Tell the todo kind of a list intent from the list kind.
+
+        A list-kind template declares a `name` slot. The engine extracts only
+        the slots of the template that matched, so a present `name` means a
+        list-kind line matched, whatever words the name holds. The keyword
+        test applies only when no name matched, because the todo-kind lines
+        declare no slot.
+        :param message: Message associated with request
+        :returns: True if the request is about the todo list as a whole
+        """
+        if message.data.get("name"):
+            return False
+        return bool(voc_match(message.data.get("utterance", ""), "todo",
+                              lang=self.lang))
+
     @intent_handler("QueryListEntries.intent")
     def handle_query_list_entries(self, message: Message):
         """
@@ -929,7 +946,7 @@ class AlertSkill(ConversationalSkill):
         for: the todo list as a whole, or the entries of one named list
         :param message: Message associated with request
         """
-        if voc_match(message.data.get("utterance", ""), "todo", lang=self.lang):
+        if self._is_todo_kind(message):
             return self._speak_todo_reminder_names()
         return self.handle_todo_list_entries(message)
 
@@ -986,7 +1003,7 @@ class AlertSkill(ConversationalSkill):
         the todo list as a whole, or the entries of one named list
         :param message: Message associated with request
         """
-        if voc_match(message.data.get("utterance", ""), "todo", lang=self.lang):
+        if self._is_todo_kind(message):
             return self._delete_todo_entries(message)
         return self._delete_list_entries(message)
 
