@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.6.3a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.6.3a1) (2026-09-16)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.6.2a1...0.6.3a1)
+
+**Merged pull requests:**
+
+- fix: time alerts through the scheduled-events service [\#173](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/173) ([JarbasAl](https://github.com/JarbasAl))
+
 ## [0.6.2a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.6.2a1) (2026-09-16)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.6.1a3...0.6.2a1)
@@ -345,7 +353,6 @@
 **Merged pull requests:**
 
 - ci: modernize GitHub workflows [\#119](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/119) ([JarbasAl](https://github.com/JarbasAl))
-- fix\(i18n\): normalize locale folders to canonical BCP-47 [\#118](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/118) ([JarbasAl](https://github.com/JarbasAl))
 
 ## [0.1.31a2](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.1.31a2) (2026-03-25)
 
