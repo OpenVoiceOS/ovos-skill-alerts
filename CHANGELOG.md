@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.6.4a2](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.6.4a2) (2026-09-16)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.6.4a1...0.6.4a2)
+
+**Merged pull requests:**
+
+- translate\(kab\): update AddListSubitems.intent [\#222](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/222) ([ovos-localize[bot]](https://github.com/apps/ovos-localize))
+
 ## [0.6.4a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.6.4a1) (2026-09-16)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.6.3a1...0.6.4a1)
@@ -349,10 +357,6 @@
 ## [0.1.31a4](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.1.31a4) (2026-04-09)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.1.31a3...0.1.31a4)
-
-**Merged pull requests:**
-
-- chore\(ovos-skill-alerts\): allow ovos-workshop\<9.0.0 [\#121](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/121) ([JarbasAl](https://github.com/JarbasAl))
 
 ## [0.1.31a3](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.1.31a3) (2026-04-04)
 
