@@ -68,7 +68,7 @@ Mycroft.CardDelegate {
                 id: timerViews
                 width: timerFlick.width
                 height: parent.height
-                model: sessionData.activeTimers.timers
+                model: sessionData.active_timers.timers
                 delegate: TimerCard {
                     implicitHeight: timerFrame.horizontalMode ? timerViews.height : (timerViews.count == 1 ? timerFlick.height : timerFlick.height / 2.5)
                     implicitWidth: timerFrame.horizontalMode ? (timerViews.count == 1 ? timerViews.width : timerViews.width / 2.5) : timerViews.width

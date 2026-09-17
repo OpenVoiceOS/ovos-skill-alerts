@@ -52,7 +52,7 @@ ItemDelegate {
                anchors.margins: 10
                verticalAlignment: Text.AlignVCenter
                horizontalAlignment: Text.AlignHCenter
-               text: modelData.timerName
+               text: modelData.timer_name
             }
         }
 
@@ -77,8 +77,8 @@ ItemDelegate {
                     anchors.centerIn: parent
                     width: parent.width
                     height: parent.height
-                    text: modelData.timeDelta
-                    value: parseFloat(modelData.percentRemaining).toFixed(2);
+                    text: modelData.time_delta
+                    value: parseFloat(modelData.percent_remaining).toFixed(2);
                 }
             }
         }
