@@ -1,2 +1,2 @@
-adiciona (itens|entradas|coisas) à lista [{name}]
+adiciona (itens|entradas|coisas) à lista [{list_name}]
 (cria|adiciona) entradas de lista [{items}]

@@ -14,6 +14,7 @@ import os
 import shutil
 import tempfile
 import unittest
+from typing import Optional
 from unittest import TestCase
 
 import pytest
@@ -53,7 +54,7 @@ _MODULE_MINICROFT = None
 # accumulates indefinitely across every local run and every CI job that
 # doesn't already isolate HOME/XDG_DATA_HOME, making any test whose
 # behavior depends on "does this alert/list already exist" nondeterministic
-# (see the DeleteList/DeleteListEntries xfails below, and issue #138's
+# (see the DeleteList/delete_list_entries xfails below, and issue #138's
 # state-leak investigation). Point XDG_DATA_HOME at a fresh tmpdir for the
 # whole module run so every invocation of this file starts from a
 # genuinely empty store, regardless of what accumulated on disk from any
@@ -184,6 +185,82 @@ class _IntentRoutingMixin:
             f"spoken dialog data {dialog_key!r} was {dialog_data.get(dialog_key)!r}, "
             f"expected {expected_value!r} -- full dialog data: {dialog_data!r}")
 
+    def _assert_padatious_dialog(self, utterance: str, intent_file: str,
+                                 dialog_keys, data: Optional[dict] = None):
+        """Like ``_assert_padatious``, but asserts WHICH dialog the skill
+        spoke, and optionally its data.
+
+        query_list_entries and delete_list_entries each serve two kinds of
+        request -- the todo list as a whole, and the entries of one named
+        list -- under one intent name. The intent name alone therefore no
+        longer tells which kind of answer the user got; the dialog key does.
+        ``dialog_keys`` is a set because the todo-kind answer depends on
+        whether any todo is stored, which this shared MiniCroft does not
+        control.
+        """
+        intent_name = intent_file[:-len(".intent")] if intent_file.endswith(".intent") else intent_file
+        intent_msg_type = f"{SKILL_ID}:{intent_name}"
+        session = Session(f"e2e-en_us-dialogkey-{hash(utterance)}-{hash(intent_msg_type)}")
+        session.lang = LANG
+        session.pipeline = [
+            "ovos-padacioso-pipeline-plugin-high",
+            "ovos-padacioso-pipeline-plugin-medium",
+            "ovos-padacioso-pipeline-plugin-low",
+        ]
+        message = Message(
+            "recognizer_loop:utterance",
+            {"utterances": [utterance], "lang": LANG},
+            {"session": session.serialize()},
+        )
+        capture = CaptureSession(self.minicroft)
+        capture.capture(message, timeout=30)
+        messages = capture.finish()
+        types = [m.msg_type for m in messages]
+        self.assertIn(intent_msg_type, types)
+        speaks = [m for m in messages if m.msg_type == "ovos.utterance.speak"]
+        self.assertTrue(speaks, f"no ovos.utterance.speak for {utterance!r} -> {types}")
+        meta = speaks[0].data.get("meta", {})
+        spoken = meta.get("dialog")
+        self.assertIn(
+            spoken, set(dialog_keys),
+            f"{utterance!r} spoke dialog {spoken!r}, expected one of "
+            f"{sorted(dialog_keys)!r}")
+        for key, value in (data or {}).items():
+            self.assertEqual(
+                meta.get("data", {}).get(key), value,
+                f"{utterance!r} spoke {spoken!r} with {key!r}="
+                f"{meta.get('data', {}).get(key)!r}, expected {value!r}")
+
+    def _assert_padatious_dialog_any(self, utterance: str, intent_files,
+                                     dialog_keys):
+        """Like ``_assert_padatious_dialog``, but accepts any one of several
+        intents; the spoken dialog carries the assertion."""
+        session = Session(f"e2e-en_us-dialogany-{hash(utterance)}")
+        session.lang = LANG
+        session.pipeline = [
+            "ovos-padacioso-pipeline-plugin-high",
+            "ovos-padacioso-pipeline-plugin-medium",
+            "ovos-padacioso-pipeline-plugin-low",
+        ]
+        message = Message(
+            "recognizer_loop:utterance",
+            {"utterances": [utterance], "lang": LANG},
+            {"session": session.serialize()},
+        )
+        capture = CaptureSession(self.minicroft)
+        capture.capture(message, timeout=30)
+        messages = capture.finish()
+        types = [m.msg_type for m in messages]
+        expected = {f"{SKILL_ID}:{f[:-len('.intent')]}" for f in intent_files}
+        self.assertTrue(expected & set(types),
+                        f"{utterance!r} matched none of {sorted(expected)}: {types}")
+        speaks = [m for m in messages if m.msg_type == "ovos.utterance.speak"]
+        self.assertTrue(speaks, f"no ovos.utterance.speak for {utterance!r} -> {types}")
+        spoken = speaks[0].data.get("meta", {}).get("dialog")
+        self.assertIn(spoken, set(dialog_keys),
+                      f"{utterance!r} spoke dialog {spoken!r}, expected one of "
+                      f"{sorted(dialog_keys)!r}")
+
     def _assert_padatious_any(self, utterance: str, intent_files: list):
         """Like _assert_padatious, but accepts any one of several sibling
         intent files as a pass -- ONLY legitimate when every name given
@@ -278,13 +355,24 @@ class _IntentRoutingMixin:
             "ovos-adapt-pipeline-plugin-low",
         ])
 
+    def _remove_list(self, list_name: str):
+        """Complete a seeded list and its items, so later tests that resolve
+        a list by name do not see it."""
+        from ovos_skill_alerts.util import AlertType
+
+        skill = self.minicroft.plugin_skills[SKILL_ID].instance
+        for parent in skill._get_alerts_list(AlertType.TODO, name=list_name):
+            for child in skill.alert_manager.get_children(parent.ident):
+                skill.alert_manager.mark_todo_complete(child)
+            skill.alert_manager.mark_todo_complete(parent)
+
     def _seed_list_with_item(self, list_name: str, item_name: str):
         """Create a TODO list (if needed) and add one child item to it
         directly via the AlertManager API, bypassing the interactive
         get_response cascade that AddListSubitems' real intent handler uses
         (there is no scripted answer to feed it in this end2end harness).
 
-        This exists because DeleteList/DeleteListEntries's own
+        This exists because DeleteList/delete_list_entries's own
         `_resolve_requested_alert` filters candidate TODO lists down to
         ones that HAVE CHILDREN (`filter(lambda alert: alert.children,
         alerts)`) whenever the utterance's vocab includes "list" -- an
@@ -847,10 +935,10 @@ class TestAdapt17_Createlist(_IntentRoutingMixin, TestCase):
         self._assert_padatious(r"new list called shopping", r"CreateList.intent")
 
     def test_create_a_named_shopping_list(self):
-        # PR #172 adversarial review: pre-noun "a {name} list" phrasing
-        # (name before "list", not after "called"/inside "[{name}]") was
+        # PR #172 adversarial review: pre-noun "a {list_name} list" phrasing
+        # (name before "list", not after "called"/inside "[{list_name}]") was
         # unmatched. CreateList.intent now has
-        # "(create|make|add|start) a [new] {name} list".
+        # "(create|make|add|start) a [new] {list_name} list".
         self._assert_padatious(r"create a shopping list", r"CreateList.intent")
 
 class TestAdapt18_Addlistsubitems(_IntentRoutingMixin, TestCase):
@@ -863,7 +951,7 @@ class TestAdapt18_Addlistsubitems(_IntentRoutingMixin, TestCase):
 
     def test_add_things_to_the_named_camping_list(self):
         # PR #172 adversarial review: "add things to the shopping list"
-        # (pre-noun {name}) scored 0.15. Uses a list name ("camping") not
+        # (pre-noun {list_name}) scored 0.15. Uses a list name ("camping") not
         # referenced anywhere else in this module on purpose -- the real
         # handler's interactive add-item cascade only starts once the
         # target list is resolved, and this harness has no scripted answer
@@ -886,31 +974,89 @@ class TestAdapt19_Querylistnames(_IntentRoutingMixin, TestCase):
     def test_which_lists_are_stored(self):
         self._assert_padatious(r"which lists are stored", r"QueryListNames.intent")
 
-class TestAdapt20_Querytodoentries(_IntentRoutingMixin, TestCase):
-    """Padatious (intent file) intent: QueryTodoEntries.intent"""
-    def test_whats_on_my_todo(self):
-        self._assert_padatious(r"what's on my todo", r"QueryTodoEntries.intent")
-
-    def test_what_do_i_have_to_do(self):
-        self._assert_padatious(r"what do i have to do", r"QueryTodoEntries.intent")
-
 class TestAdapt21_Querylistentries(_IntentRoutingMixin, TestCase):
-    """Padatious (intent file) intent: QueryListEntries.intent"""
+    """Padatious (intent file) intent: query_list_entries.intent"""
     def test_what_items_are_on_my_list(self):
-        self._assert_padatious(r"what items are on my list", r"QueryListEntries.intent")
+        self._assert_padatious(r"what items are on my list", r"query_list_entries.intent")
 
     def test_what_is_on_the_name_list(self):
-        self._assert_padatious(r"what is on the shopping list", r"QueryListEntries.intent")
+        self._assert_padatious(r"what is on the shopping list", r"query_list_entries.intent")
 
     def test_what_items_are_on_my_named_shopping_list(self):
         # PR #172 adversarial review: "what items are on my shopping list"
-        # (pre-noun {name}, "items" not "is") scored 0.15.
-        # QueryListEntries.intent now has "(what|which) (items|entries|
-        # things) are (on|in) (my|the) {name} list".
-        self._assert_padatious(r"what items are on my shopping list", r"QueryListEntries.intent")
+        # (pre-noun {list_name}, "items" not "is") scored 0.15.
+        # query_list_entries.intent now has "(what|which) (items|entries|
+        # things) are (on|in) (my|the) {list_name} list".
+        self._assert_padatious(r"what items are on my shopping list", r"query_list_entries.intent")
+
+    TODO_KIND_DIALOGS = ("list_todo_reminder", "list_todo_no_reminder")
+
+    def test_whats_on_my_todo(self):
+        # The merged intent serves both kinds, so the intent name alone no
+        # longer says which answer the user got -- assert the dialog.
+        self._assert_padatious_dialog(
+            r"what's on my todo", r"query_list_entries.intent",
+            self.TODO_KIND_DIALOGS)
+
+    def test_what_do_i_have_to_do(self):
+        self._assert_padatious_dialog(
+            r"what do i have to do", r"query_list_entries.intent",
+            self.TODO_KIND_DIALOGS)
+
+    def test_todo_word_in_the_name_slot_reads_the_todo_list(self):
+        # The list templates put "todo" in the list_name slot for these
+        # phrasings. With no stored list of that name, the user asked for
+        # the todo list, not for a list that does not exist.
+        for utterance in ("what is on my todo list",
+                          "what's on my todo list",
+                          "what items are on my todo list",
+                          "which things are on my todo list",
+                          "read me the items on my todo list",
+                          "show me the entries in my todo list"):
+            with self.subTest(utterance):
+                self._assert_padatious_dialog(
+                    utterance, r"query_list_entries.intent",
+                    self.TODO_KIND_DIALOGS)
+
+    def test_list_named_after_a_todo_word_reads_the_list(self):
+        # Review of PR #216: the kind was chosen by voc_match on the whole
+        # utterance, and en-US todo.voc holds "notes". A list named "notes"
+        # was answered with the todo summary instead of its own items.
+        self._seed_list_with_item("notes", "milk")
+        self._assert_padatious_dialog(
+            r"what is on the notes list", r"query_list_entries.intent",
+            ("list_todo_subitems",), {"name": "notes", "items": "milk"})
+        self._remove_list("notes")
+
+    def test_list_slot_needs_the_word_list(self):
+        # Review of PR #216 at 48972a5: "what's on my {list_name} [list]"
+        # took "what's on my calendar" and "clear my {list_name} entries"
+        # took a CancelAlert request. The entity file does not limit the
+        # slot, so a {list_name} line needs the word "list" or a todo word.
+        list_intents = {f"{SKILL_ID}:query_list_entries",
+                        f"{SKILL_ID}:delete_list_entries"}
+        self._assert_padatious(r"what's on my shopping list",
+                               r"query_list_entries.intent")
+        for utterance in ("what's on my calendar", "what is on my schedule",
+                          "what's on my agenda", "what's in my reminders",
+                          "list my reminder notes", "show me my alarm entries",
+                          "what's on my list", "clear my calendar entries",
+                          "remove all from my calendar"):
+            with self.subTest(utterance):
+                session = Session(f"e2e-en_us-neg-{hash(utterance)}")
+                session.lang = LANG
+                session.pipeline = PADACIOSO_TEST_PIPELINE
+                capture = CaptureSession(self.minicroft)
+                capture.capture(Message(
+                    "recognizer_loop:utterance",
+                    {"utterances": [utterance], "lang": LANG},
+                    {"session": session.serialize()}), timeout=30)
+                types = {m.msg_type for m in capture.finish()}
+                self.assertFalse(types & list_intents,
+                                 f"{utterance!r} -> {sorted(types)}")
 
 class TestAdapt22_Deletelistentries(_IntentRoutingMixin, TestCase):
-    """Padatious (intent file) intent: DeleteListEntries.intent
+    """Padatious (intent file) intent: delete_list_entries.intent
 
     Rows below use the "everything/all" phrasing (which resolves the
     "stored" adapt-vocab fallback to True and deletes without further
@@ -920,29 +1066,53 @@ class TestAdapt22_Deletelistentries(_IntentRoutingMixin, TestCase):
     pytest.ini wall-clock timeout kills it (same reason
     ``_seed_list_with_item`` bypasses ``AddListSubitems``'s own cascade).
     """
-    @pytest.mark.xfail(strict=False, reason="ENGINE ISSUE (padacioso), not this skill's .intent files: 'delete all items from my list shopping' is a literal expansion of DeleteListEntries.intent's '(delete|remove) (everything|all [the] (items|entries)) (from|on) (my|the) list [{name}]' line, but the full registered-skill pipeline misroutes it to CancelAlert (whose {alertkind} slot is a closed alarm/timer/reminder/event/alert entity that 'items' is not a member of) -- a matcher tie-break defect, not a coverage gap in this .intent file -- flagged for the engine lane, not fixed here.")
+    @pytest.mark.xfail(strict=False, reason="ENGINE ISSUE (padacioso), not this skill's .intent files: 'delete all items from my list shopping' is a literal expansion of delete_list_entries.intent's '(delete|remove) (everything|all [the] (items|entries)) (from|on) (my|the) list [{list_name}]' line, but the full registered-skill pipeline misroutes it to CancelAlert (whose {alertkind} slot is a closed alarm/timer/reminder/event/alert entity that 'items' is not a member of) -- a matcher tie-break defect, not a coverage gap in this .intent file -- flagged for the engine lane, not fixed here.")
     def test_delete_all_items_from_my_list(self):
         self._seed_list_with_item("shopping", "milk")
-        self._assert_padatious(r"delete all items from my list shopping", r"DeleteListEntries.intent")
+        self._assert_padatious(r"delete all items from my list shopping", r"delete_list_entries.intent")
 
-    @pytest.mark.xfail(strict=False, reason="ENGINE ISSUE (padacioso) -- see test_delete_all_items_from_my_list's reason (same collision, different {name}).")
+    @pytest.mark.xfail(strict=False, reason="ENGINE ISSUE (padacioso) -- see test_delete_all_items_from_my_list's reason (same collision, different {list_name}).")
     def test_delete_all_the_items_from_my_list(self):
         self._seed_list_with_item("grocery", "eggs")
-        self._assert_padatious(r"delete all the items from my list grocery", r"DeleteListEntries.intent")
+        self._assert_padatious(r"delete all the items from my list grocery", r"delete_list_entries.intent")
 
-    @pytest.mark.xfail(strict=False, reason="ENGINE ISSUE (padacioso) -- see test_delete_all_items_from_my_list's reason (same CancelAlert collision, pre-noun {name} shape).")
+    @pytest.mark.xfail(strict=False, reason="ENGINE ISSUE (padacioso) -- see test_delete_all_items_from_my_list's reason (same CancelAlert collision, pre-noun {list_name} shape).")
     def test_remove_all_items_from_the_named_grocery_list(self):
         # PR #172 adversarial review: "remove items from the grocery list"
-        # (pre-noun {name}) scored 0.15. Adds "all" (see class docstring)
+        # (pre-noun {list_name}) scored 0.15. Adds "all" (see class docstring)
         # to route through the non-interactive bulk-delete branch instead
         # of the bare "items" phrasing, which the real handler always
         # bounces through an interactive cascade this harness can't answer.
         self._seed_list_with_item("groceries", "bread")
-        self._assert_padatious(r"remove all items from the groceries list", r"DeleteListEntries.intent")
+        self._assert_padatious(r"remove all items from the groceries list", r"delete_list_entries.intent")
+
+    def test_delete_my_todo_list(self):
+        # "todo" fills {list_name}, so DeleteList.intent and
+        # delete_list_entries.intent both accept this line. Both handlers
+        # send a todo list_name to the todo entries.
+        self._assert_padatious_dialog_any(
+            r"delete my todo list",
+            (r"delete_list_entries.intent", r"DeleteList.intent"),
+            ("list_todo_no_reminder", "list_todo_dont_exist",
+             "list_todo_num_deleted"))
+
+    def test_delete_everything_from_my_todo(self):
+        self._assert_padatious(r"delete everything from my todo", r"delete_list_entries.intent")
+
+    def test_delete_everything_from_my_todo_list_deletes_todos(self):
+        # "todo" fills the list_name slot here; no list has that name, so the
+        # request goes to the todo entries, not to a missing named list.
+        # The list branch speaks nothing when no list matches; every dialog
+        # below comes from the todo branch. With stored todos the todo
+        # branch speaks list_todo_dont_exist first, as it does on dev.
+        self._assert_padatious_dialog(
+            r"delete everything from my todo list", r"delete_list_entries.intent",
+            ("list_todo_no_reminder", "list_todo_dont_exist",
+             "list_todo_num_deleted"))
 
 class TestAdapt23_Deletelist(_IntentRoutingMixin, TestCase):
     """Padatious (intent file) intent: DeleteList.intent"""
-    @pytest.mark.xfail(strict=False, reason="ENGINE ISSUE (padacioso), not this skill's .intent files: 'delete my list pantry' is a literal expansion of DeleteList.intent's '(delete|remove|erase) (my|the) list [{name}]' line, but the full registered-skill pipeline misroutes it to CancelAlert -- same class of matcher tie-break defect as DeleteListEntries' collisions (see TestAdapt22_Deletelistentries.test_delete_all_items_from_my_list's reason) -- flagged for the engine lane, not fixed here.")
+    @pytest.mark.xfail(strict=False, reason="ENGINE ISSUE (padacioso), not this skill's .intent files: 'delete my list pantry' is a literal expansion of DeleteList.intent's '(delete|remove|erase) (my|the) list [{list_name}]' line, but the full registered-skill pipeline misroutes it to CancelAlert -- same class of matcher tie-break defect as delete_list_entries' collisions (see TestAdapt22_Deletelistentries.test_delete_all_items_from_my_list's reason) -- flagged for the engine lane, not fixed here.")
     def test_delete_my_list_name(self):
         self._seed_list_with_item("pantry", "flour")
         self._assert_padatious(r"delete my list pantry", r"DeleteList.intent")
@@ -952,18 +1122,10 @@ class TestAdapt23_Deletelist(_IntentRoutingMixin, TestCase):
 
     def test_drop_the_named_pantry_list(self):
         # PR #172 adversarial review: "drop the pantry list" (pre-noun
-        # {name}, "drop" verb) scored 0.15. DeleteList.intent now has
-        # "(delete|remove|erase|drop) (my|the) {name} list".
+        # {list_name}, "drop" verb) scored 0.15. DeleteList.intent now has
+        # "(delete|remove|erase|drop) (my|the) {list_name} list".
         self._seed_list_with_item("hardware", "nails")
         self._assert_padatious(r"drop the hardware list", r"DeleteList.intent")
-
-class TestAdapt24_Deletetodoentries(_IntentRoutingMixin, TestCase):
-    """Padatious (intent file) intent: DeleteTodoEntries.intent"""
-    def test_delete_my_todo_list(self):
-        self._assert_padatious(r"delete my todo list", r"DeleteTodoEntries.intent")
-
-    def test_delete_everything_from_my_todo(self):
-        self._assert_padatious(r"delete everything from my todo", r"DeleteTodoEntries.intent")
 
 class TestAdapt25_Calendarlist(_IntentRoutingMixin, TestCase):
     """Padatious (intent file) intent: CalendarList.intent"""
