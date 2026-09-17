@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.6.4a3](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.6.4a3) (2026-09-17)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.6.4a2...0.6.4a3)
+
+**Merged pull requests:**
+
+- refactor: merge the todo-kind list intents into their list-kind siblings [\#216](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/216) ([openvoiceos-bot](https://github.com/openvoiceos-bot))
+
 ## [0.6.4a2](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.6.4a2) (2026-09-16)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.6.4a1...0.6.4a2)
@@ -282,27 +290,23 @@
 
 ## [0.3.0a4](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.3.0a4) (2026-08-12)
 
-[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.3.0a2...0.3.0a4)
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.3.0a3...0.3.0a4)
 
 **Merged pull requests:**
 
 - test: per-locale e2e golden coverage + fix 4 vocab shadowing defects [\#142](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/142) ([JarbasAl](https://github.com/JarbasAl))
 
-## [0.3.0a2](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.3.0a2) (2026-08-11)
-
-[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.3.0a3...0.3.0a2)
-
 ## [0.3.0a3](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.3.0a3) (2026-08-11)
 
-[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.3.0a1...0.3.0a3)
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.3.0a2...0.3.0a3)
+
+## [0.3.0a2](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.3.0a2) (2026-08-11)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.3.0a1...0.3.0a2)
 
 ## [0.3.0a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.3.0a1) (2026-08-11)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.2.2a2...0.3.0a1)
-
-**Merged pull requests:**
-
-- feat: add ovoscope end2end intent-routing tests [\#123](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/123) ([JarbasAl](https://github.com/JarbasAl))
 
 ## [0.2.2a2](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.2.2a2) (2026-08-01)
 
@@ -349,10 +353,6 @@
 ## [0.1.32a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.1.32a1) (2026-06-07)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.1.31a4...0.1.32a1)
-
-**Merged pull requests:**
-
-- fix\(deps\): allow ovos-bus-client 2.x \(widen cap to \<3.0.0\) [\#124](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/124) ([JarbasAl](https://github.com/JarbasAl))
 
 ## [0.1.31a4](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.1.31a4) (2026-04-09)
 
