@@ -1,2 +1,2 @@
-(vytvoř|udělej|přidej) [nový] seznam [s názvem {name}]
-nový seznam [{name}]
+(vytvoř|udělej|přidej) [nový] seznam [s názvem {list_name}]
+nový seznam [{list_name}]

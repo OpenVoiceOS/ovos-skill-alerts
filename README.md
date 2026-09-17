@@ -49,10 +49,9 @@ The skill matches utterances with file-based intents (padatious/padacioso), not 
 - `CreateList` — create a todo list.
 - `AddListSubitems` — add items to a todo list.
 - `QueryListNames` — list the names of existing todo lists.
-- `QueryTodoEntries` / `QueryListEntries` — list the entries of a todo/reminder list.
-- `DeleteListEntries` — remove specific entries from a todo list.
+- `query_list_entries` — read the todo list, or the entries of a named list.
+- `delete_list_entries` — delete the todo entries, or the entries of a named list.
 - `DeleteList` — delete a todo list and its entries.
-- `DeleteTodoEntries` — delete one or more todo entries.
 - `CalendarList` — list the CalDAV calendars available for sync.
 - `DAVSync` — sync with a configured CalDAV server.
 

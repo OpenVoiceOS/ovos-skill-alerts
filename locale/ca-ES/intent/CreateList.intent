@@ -1,2 +1,2 @@
-(crea|fes|afegeix) una llista [nova] [que es digui {name}]
-llista nova [{name}]
+(crea|fes|afegeix) una llista [nova] [que es digui {list_name}]
+llista nova [{list_name}]

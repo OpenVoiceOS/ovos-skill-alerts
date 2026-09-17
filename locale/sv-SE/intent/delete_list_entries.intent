@@ -1,0 +1,5 @@
+(radera|ta bort) (posterna|allt) (från|på) [min|] lista[n] [{list_name}]
+(radera|ta bort) (posterna|allt) (från|på) {list_name} lista[n]
+(radera|rensa) min {list_name} lista
+(radera|rensa) min (att göra|todo)[-lista]
+(radera|ta bort) allt (från|på) min (att göra|todo)[-lista]

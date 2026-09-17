@@ -1,2 +1,2 @@
-lisää (asioita|kohteita) listaan [{name}]
-lisää (asioita|kohteita) {name} listaan
+lisää (asioita|kohteita) listaan [{list_name}]
+lisää (asioita|kohteita) {list_name} listaan

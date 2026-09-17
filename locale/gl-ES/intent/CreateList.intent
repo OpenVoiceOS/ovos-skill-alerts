@@ -1,2 +1,2 @@
-(crea|fai|engade) unha lista [nova] [chamada {name}]
-lista nova [{name}]
+(crea|fai|engade) unha lista [nova] [chamada {list_name}]
+lista nova [{list_name}]

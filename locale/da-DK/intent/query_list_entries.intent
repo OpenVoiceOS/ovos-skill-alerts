@@ -1,0 +1,7 @@
+(hvilke punkter|hvad) (står|er) på [min|] liste[n] [{list_name}]
+(læs|vis) [mig] (punkterne|posterne) på liste[n] [{list_name}]
+(hvilke punkter|hvad) (står|er) på {list_name} liste[n]
+(læs|vis) [mig] (punkterne|posterne) på {list_name} liste[n]
+hvad (står|er) på min {list_name} liste
+hvad (står|er) på min (todo|huskeliste)[-liste]
+hvad skal jeg (gøre|lave)

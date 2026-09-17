@@ -1,2 +1,2 @@
-(crea|haz|añade) una lista [nueva] [llamada {name}]
-lista nueva [{name}]
+(crea|haz|añade) una lista [nueva] [llamada {list_name}]
+lista nueva [{list_name}]

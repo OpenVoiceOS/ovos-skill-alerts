@@ -1,2 +1,2 @@
-(utwórz|zrób|dodaj) [nową] listę [o nazwie {name}]
-nowa lista [{name}]
+(utwórz|zrób|dodaj) [nową] listę [o nazwie {list_name}]
+nowa lista [{list_name}]
