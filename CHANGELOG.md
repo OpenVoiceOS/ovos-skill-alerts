@@ -1,12 +1,19 @@
 # Changelog
 
+## [0.6.8a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.6.8a1) (2026-09-18)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.6.7a1...0.6.8a1)
+
+**Merged pull requests:**
+
+- fix\(locale\): "delete everything from my todo list" deletes the todos [\#240](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/240) ([openvoiceos-bot](https://github.com/openvoiceos-bot))
+
 ## [0.6.7a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.6.7a1) (2026-09-18)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.6.6a2...0.6.7a1)
 
 **Merged pull requests:**
 
-- fix\(locale\): "delete everything from my todo list" deletes the todos [\#240](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/240) ([openvoiceos-bot](https://github.com/openvoiceos-bot))
 - fix\(de-DE\): drop entferne from reschedule\_alert.intent's verb list [\#239](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/239) ([openvoiceos-bot](https://github.com/openvoiceos-bot))
 
 ## [0.6.6a2](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.6.6a2) (2026-09-18)
@@ -349,7 +356,6 @@
 
 - docs: rewrite README in Simplified Technical English [\#136](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/136) ([JarbasAl](https://github.com/JarbasAl))
 - fix\(da-DK\): add missing please.repeat.dialog [\#135](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/135) ([andlo](https://github.com/andlo))
-- fix\(da-DK\): restore English placeholder names in dialog templates [\#134](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/134) ([andlo](https://github.com/andlo))
 
 ## [0.2.2a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.2.2a1) (2026-07-17)
 
