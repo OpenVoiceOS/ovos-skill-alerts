@@ -1,0 +1,39 @@
+{
+ "en-US": {
+  "change my alarm to every weekend": {
+   "tied": [
+    "change_repeat",
+    "reschedule_alert"
+   ],
+   "winner": "change_repeat"
+  },
+  "change my alarm to repeat every monday": {
+   "tied": [
+    "change_repeat",
+    "reschedule_alert"
+   ],
+   "winner": "change_repeat"
+  },
+  "change my alarm to repeat on weekends": {
+   "tied": [
+    "change_repeat",
+    "reschedule_alert"
+   ],
+   "winner": "change_repeat"
+  },
+  "change the alarm to repeat every weekday": {
+   "tied": [
+    "change_repeat",
+    "reschedule_alert"
+   ],
+   "winner": "change_repeat"
+  },
+  "change the next alarm to repeat every morning": {
+   "tied": [
+    "change_repeat",
+    "reschedule_alert"
+   ],
+   "winner": "change_repeat"
+  }
+ }
+}
