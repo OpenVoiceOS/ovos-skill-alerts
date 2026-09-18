@@ -1110,6 +1110,29 @@ class TestAdapt22_Deletelistentries(_IntentRoutingMixin, TestCase):
             ("list_todo_no_reminder", "list_todo_dont_exist",
              "list_todo_num_deleted"))
 
+    def test_delete_everything_with_stored_todos_deletes_them_all(self):
+        # The intent line accepts "everything" as the all-word, but the
+        # handler decides "all" with stored.voc, which held "all", "every",
+        # "entire", "whole" and not "everything". So "everything" fell
+        # through to the item branch, was taken as an item name, and the
+        # skill answered list_todo_dont_exist with name "everything" while
+        # every stored todo stayed. With a todo stored, the first dialog
+        # must be the deleted count and the todo must be gone.
+        from ovos_skill_alerts.util import AlertType
+        from ovos_skill_alerts.util.alert import Alert, DAVType
+        skill = self.minicroft.plugin_skills[SKILL_ID].instance
+        todo = Alert.create(alert_name="buy stamps for everything test",
+                            alert_type=AlertType.TODO, dav_type=DAVType.VTODO,
+                            lang=LANG)
+        skill.alert_manager.add_alert(todo)
+        assert skill.alert_manager.get_unconnected_alerts(type=AlertType.TODO)
+        self._assert_padatious_dialog(
+            r"delete everything from my todo list", r"delete_list_entries.intent",
+            ("list_todo_num_deleted",))
+        left = [a.alert_name for a in
+                skill.alert_manager.get_unconnected_alerts(type=AlertType.TODO)]
+        assert "buy stamps for everything test" not in left, left
+
 class TestAdapt23_Deletelist(_IntentRoutingMixin, TestCase):
     """Padatious (intent file) intent: delete_list.intent"""
     @pytest.mark.xfail(strict=False, reason="ENGINE ISSUE (padacioso), not this skill's .intent files: 'delete my list pantry' is a literal expansion of delete_list.intent's '(delete|remove|erase) (my|the) list [{list_name}]' line, but the full registered-skill pipeline misroutes it to cancel_alert -- same class of matcher tie-break defect as delete_list_entries' collisions (see TestAdapt22_Deletelistentries.test_delete_all_items_from_my_list's reason) -- flagged for the engine lane, not fixed here.")
