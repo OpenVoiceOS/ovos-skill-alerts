@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.6.6a2](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.6.6a2) (2026-09-18)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.6.6a1...0.6.6a2)
+
+**Merged pull requests:**
+
+- test: record the winner of every gold utterance that ties at the matcher [\#236](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/236) ([openvoiceos-bot](https://github.com/openvoiceos-bot))
+
 ## [0.6.6a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.6.6a1) (2026-09-18)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.6.5a1...0.6.6a1)
@@ -345,10 +353,6 @@
 ## [0.2.1a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.2.1a1) (2026-07-16)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.2.0a1...0.2.1a1)
-
-**Merged pull requests:**
-
-- fix: repair malformed locale dialog and vocab templates [\#130](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/130) ([JarbasAl](https://github.com/JarbasAl))
 
 ## [0.2.0a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.2.0a1) (2026-07-03)
 
