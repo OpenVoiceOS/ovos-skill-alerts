@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.6.9a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.6.9a1) (2026-09-18)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.6.8a1...0.6.9a1)
+
+**Merged pull requests:**
+
+- fix\(en-US\): give the create intents the phrasing supply the query intents already have [\#206](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/206) ([JarbasAl](https://github.com/JarbasAl))
+
 ## [0.6.8a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.6.8a1) (2026-09-18)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.6.7a1...0.6.8a1)
@@ -351,11 +359,6 @@
 ## [0.2.2a2](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.2.2a2) (2026-08-01)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.2.2a1...0.2.2a2)
-
-**Merged pull requests:**
-
-- docs: rewrite README in Simplified Technical English [\#136](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/136) ([JarbasAl](https://github.com/JarbasAl))
-- fix\(da-DK\): add missing please.repeat.dialog [\#135](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/135) ([andlo](https://github.com/andlo))
 
 ## [0.2.2a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.2.2a1) (2026-07-17)
 
