@@ -5,8 +5,8 @@ locale/ ships real adapt vocab (create.voc / alarm.voc / timer.voc /
 reminder.voc / cancel.voc / query.voc, etc.) that was completely
 untested end-to-end. Alerts is a big skill (30+ adapt intents), so this
 suite keeps scope tractable: it covers only the primary alarm/timer/
-reminder-creation + cancel + query intents (CreateAlarm, CreateTimer,
-CreateReminder, CancelAlert, ListAlerts), ~15 rows per locale, across
+reminder-creation + cancel + query intents (create_alarm, create_timer,
+create_reminder, cancel_alert, list_alerts), ~15 rows per locale, across
 every locale that has real (non-metadata-only) vocab content on dev.
 
 Row construction: ovos-skill-alerts' adapt intents (see __init__.py
@@ -204,19 +204,19 @@ def _golden_id(row):
 # match ambiguous between two intents on a short 2-token utterance built
 # purely from that locale's own content:
 #   - de-DE locale/de-DE/vocab/timer.voc: "erinnerungen" (="reminders")
-#     duplicated a reminder.voc word, shadowing CreateReminder with
-#     CreateTimer. Removed from timer.voc.
+#     duplicated a reminder.voc word, shadowing create_reminder with
+#     create_timer. Removed from timer.voc.
 #   - cs-CZ locale/cs-CZ/vocab/query.voc: "mám" (="I have") duplicated the
-#     create.voc entry "Mám", shadowing CreateAlarm/CreateReminder with
-#     ListAlerts. Removed the query.voc duplicate (create.voc's is the
+#     create.voc entry "Mám", shadowing create_alarm/create_reminder with
+#     list_alerts. Removed the query.voc duplicate (create.voc's is the
 #     canonical slot, matching the en-US precedent where "i have" lives
 #     only in create.voc).
 #   - it-IT locale/it-IT/vocab/query.voc: same pattern, "ho" (="I have")
 #     duplicated the create.voc entry "Ho". Removed the query.voc
 #     duplicate.
 #   - sv-SE locale/sv-SE/vocab/change.voc: "avbryta" (="cancel/abort")
-#     duplicated the cancel.voc entry, shadowing CancelAlert with
-#     ChangeProperties/RescheduleAlert. "avbryta" does not mean
+#     duplicated the cancel.voc entry, shadowing cancel_alert with
+#     ChangeProperties/reschedule_alert. "avbryta" does not mean
 #     "postpone/reschedule" (change.voc's actual concept, cf. en-US's
 #     adjust/extend/move/postpone/reschedule/shift); removed from
 #     change.voc.

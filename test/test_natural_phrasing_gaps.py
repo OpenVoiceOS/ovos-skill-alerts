@@ -15,8 +15,8 @@ build_alert_from_intent -- days, hour and minute -- and not the confidence.
 
 The missed_alerts test trains a real padatious IntentContainer directly on
 shipped intent files (no MiniCroft/skill boot needed): the files this change
-touches, plus ListAlerts and CreateReminder, the intents that compete for
-"did I miss anything". Without the widening, ListAlerts takes that utterance,
+touches, plus list_alerts and create_reminder, the intents that compete for
+"did I miss anything". Without the widening, list_alerts takes that utterance,
 so the test asserts which intent wins, not a score. It does not train all of
 locale/en-US/intent: that directory holds 25 files and about 11,000 expanded
 samples, and training them all runs past the 420 s pytest timeout.
@@ -35,9 +35,9 @@ LOCALE_INTENT_DIR = Path(__file__).parent.parent / "locale" / "en-US" / "intent"
 
 
 # missed_alerts and the intents that compete with it for a generic
-# "did I miss anything": ListAlerts takes it when missed_alerts cannot.
+# "did I miss anything": list_alerts takes it when missed_alerts cannot.
 TRAINED_INTENTS = ("missed_alerts", "create_reminder_recurring",
-                   "ListAlerts", "CreateReminder")
+                   "list_alerts", "create_reminder")
 
 
 def _train_container() -> IntentContainer:

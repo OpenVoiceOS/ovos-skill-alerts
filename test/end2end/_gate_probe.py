@@ -6,7 +6,7 @@ Loads every .intent/.entity file this skill ships for en-US straight into
 a bare padacioso IntentContainer (no MiniCroft/skill boot needed) and
 checks every golden row resolves to one of the file(s) implementing its
 intent_label, plus a "theft set" of phrases that must NOT be captured by
-RescheduleAlert's {time} slot (ChangeMediaProperties' territory).
+reschedule_alert's {time} slot (change_media_properties' territory).
 """
 import json
 import re
@@ -21,18 +21,18 @@ GOLDEN = ROOT / "test" / "end2end" / "golden_utterances_en-US.jsonl"
 TIME_BLACKLIST = ROOT / "locale" / "en-US" / "vocab" / "time.blacklist"
 
 LABEL_TO_FILES = {
-    "CancelAlert": {"CancelAlert"},
-    "ChangeMediaProperties": {"ChangeMediaProperties"},
-    "ChangeProperties": {"ChangePriority", "ChangeRepeat", "ChangeUntil"},
-    "CreateAlarmAlt": {"CreateAlarmAlt"},
-    "DAVSync": {"DAVSync"},
-    "ListAlerts": {"ListAlerts"},
-    "RescheduleAlert": {"RescheduleAlert"},
-    "TimerStatus": {"TimerStatus"},
+    "cancel_alert": {"cancel_alert"},
+    "change_media_properties": {"change_media_properties"},
+    "ChangeProperties": {"change_priority", "change_repeat", "change_until"},
+    "create_alarm_alt": {"create_alarm_alt"},
+    "dav_sync": {"dav_sync"},
+    "list_alerts": {"list_alerts"},
+    "reschedule_alert": {"reschedule_alert"},
+    "timer_status": {"timer_status"},
 }
 
 THEFT_SET = [
-    # ChangeMediaProperties territory that RescheduleAlert's {time} slot
+    # change_media_properties territory that reschedule_alert's {time} slot
     # must not steal (OVOS-INTENT-2 4.3 slot-blacklist).
     "adjust my reminder to be spoken",
     "change my alarm to playback a file",
@@ -75,10 +75,10 @@ def main():
     for utterance in THEFT_SET:
         result = container.calc_intent(utterance)
         matched = result.get("name")
-        if matched == "RescheduleAlert":
+        if matched == "reschedule_alert":
             theft_hits.append((utterance, matched, result.get("conf")))
 
-    print(f"theft set: {len(THEFT_SET) - len(theft_hits)}/{len(THEFT_SET)} correctly NOT captured by RescheduleAlert")
+    print(f"theft set: {len(THEFT_SET) - len(theft_hits)}/{len(THEFT_SET)} correctly NOT captured by reschedule_alert")
     for u, matched, conf in theft_hits:
         print(f"  STOLEN: {u!r} -> {matched} conf={conf}")
 

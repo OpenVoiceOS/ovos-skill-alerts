@@ -33,27 +33,27 @@ If you were away, or your device was off or napping, ask for a summary of what y
 
 The skill matches utterances with file-based intents (padatious/padacioso), not Adapt keyword intents. Each `.intent` file under `locale/<lang>/intent/` is a set of phrase templates, optionally referencing a `.entity` file for a `{slot}` value list or a `.voc` file for an inline `<keyword>` alternation.
 
-- `CreateAlarm` / `CreateAlarmAlt` — set an alarm, optionally recurring on given weekdays, or (with a media word) playing media through OCP when it fires.
-- `CreateTimer` — start a countdown timer.
-- `CreateReminder` / `create_reminder_recurring` — set a reminder, optionally recurring.
-- `CreateEvent` — schedule an event, with collision and prenotification handling.
-- `RescheduleAlert` — move an existing alert earlier or later.
-- `ChangePriority` — change an alert's priority.
-- `ChangeRepeat` — change an alert's recurrence.
-- `ChangeUntil` — change an alert's recurrence end date.
-- `ChangeMediaProperties` — change the media/sound an alert plays.
-- `ListAlerts` — list active alerts, optionally within a timeframe.
-- `TimerStatus` — report the status of active timers.
+- `create_alarm` / `create_alarm_alt` — set an alarm, optionally recurring on given weekdays, or (with a media word) playing media through OCP when it fires.
+- `create_timer` — start a countdown timer.
+- `create_reminder` / `create_reminder_recurring` — set a reminder, optionally recurring.
+- `create_event` — schedule an event, with collision and prenotification handling.
+- `reschedule_alert` — move an existing alert earlier or later.
+- `change_priority` — change an alert's priority.
+- `change_repeat` — change an alert's recurrence.
+- `change_until` — change an alert's recurrence end date.
+- `change_media_properties` — change the media/sound an alert plays.
+- `list_alerts` — list active alerts, optionally within a timeframe.
+- `timer_status` — report the status of active timers.
 - `missed_alerts` — report and clear missed alerts.
-- `CancelAlert` — cancel one or more alerts.
-- `CreateList` — create a todo list.
-- `AddListSubitems` — add items to a todo list.
-- `QueryListNames` — list the names of existing todo lists.
+- `cancel_alert` — cancel one or more alerts.
+- `create_list` — create a todo list.
+- `add_list_subitems` — add items to a todo list.
+- `query_list_names` — list the names of existing todo lists.
 - `query_list_entries` — read the todo list, or the entries of a named list.
 - `delete_list_entries` — delete the todo entries, or the entries of a named list.
-- `DeleteList` — delete a todo list and its entries.
-- `CalendarList` — list the CalDAV calendars available for sync.
-- `DAVSync` — sync with a configured CalDAV server.
+- `delete_list` — delete a todo list and its entries.
+- `calendar_list` — list the CalDAV calendars available for sync.
+- `dav_sync` — sync with a configured CalDAV server.
 
 ## Scenarios
 
