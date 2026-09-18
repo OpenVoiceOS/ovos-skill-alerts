@@ -10,8 +10,8 @@ than just intent-name routing:
 * the media-alarm path ("set an alarm with music at 7 am") stores the
   media kind; the plain path ("set an alarm at 7 am") does not
 
-These are the timeframe-listing fold (into ListAlerts) and
-the media-alarm fold (into CreateAlarm/CreateAlarmAlt) before/after gate.
+These are the timeframe-listing fold (into list_alerts) and
+the media-alarm fold (into create_alarm/create_alarm_alt) before/after gate.
 """
 import datetime as dt
 import os
@@ -115,7 +115,7 @@ class TestClassCFoldGate(TestCase):
                            m.data.get("utterance", "")))
         return out
 
-    # -- timeframe path (folded into ListAlerts) --
+    # -- timeframe path (folded into list_alerts) --
 
     def test_timeframe_query_names_only_the_alert_inside_the_window(self):
         # KNOWN PRE-EXISTING DEFECT (unrelated to this fold -- parse_utils.py
@@ -151,8 +151,8 @@ class TestClassCFoldGate(TestCase):
 
         messages = self._fire("are there any alerts between 4 pm and 5 pm")
         types = [m.msg_type for m in messages]
-        self.assertIn(f"{SKILL_ID}:ListAlerts", types,
-                      f"did not route to ListAlerts.intent: {types}")
+        self.assertIn(f"{SKILL_ID}:list_alerts", types,
+                      f"did not route to list_alerts.intent: {types}")
 
         speaks = self._speak_dialogs(messages)
         self.assertTrue(speaks, f"no spoken dialog: {types}")
@@ -173,20 +173,20 @@ class TestClassCFoldGate(TestCase):
 
         messages = self._fire("list my alarms")
         types = [m.msg_type for m in messages]
-        self.assertIn(f"{SKILL_ID}:ListAlerts", types,
-                      f"did not route to ListAlerts.intent: {types}")
+        self.assertIn(f"{SKILL_ID}:list_alerts", types,
+                      f"did not route to list_alerts.intent: {types}")
         speaks = self._speak_dialogs(messages)
         spoken_text = " ".join(f"{d} {u}" for _, d, u in speaks)
         self.assertIn("wake up call", spoken_text,
                       f"plain listing did not name the alarm: {speaks}")
 
-    # -- media-alarm path (folded into CreateAlarm/CreateAlarmAlt) --
+    # -- media-alarm path (folded into create_alarm/create_alarm_alt) --
 
     def test_media_alarm_stores_media_kind(self):
         messages = self._fire("set an alarm with music at 7 am")
         types = [m.msg_type for m in messages]
-        self.assertIn(f"{SKILL_ID}:CreateAlarm", types,
-                      f"did not route to CreateAlarm.intent: {types}")
+        self.assertIn(f"{SKILL_ID}:create_alarm", types,
+                      f"did not route to create_alarm.intent: {types}")
 
         alerts = list(self.skill.alert_manager._pending_alerts.values())
         self.assertEqual(len(alerts), 1, f"expected exactly one stored alert: {alerts}")
@@ -196,8 +196,8 @@ class TestClassCFoldGate(TestCase):
     def test_plain_alarm_stores_no_media_kind(self):
         messages = self._fire("set an alarm at 7 am")
         types = [m.msg_type for m in messages]
-        self.assertIn(f"{SKILL_ID}:CreateAlarm", types,
-                      f"did not route to CreateAlarm.intent: {types}")
+        self.assertIn(f"{SKILL_ID}:create_alarm", types,
+                      f"did not route to create_alarm.intent: {types}")
 
         alerts = list(self.skill.alert_manager._pending_alerts.values())
         self.assertEqual(len(alerts), 1,

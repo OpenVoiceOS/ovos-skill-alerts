@@ -13,7 +13,7 @@ def _padatious_message(utterance: str) -> Message:
     """
     Build a message the way a padatious/padacioso template intent match
     looks: no "__tags__", "and", or other adapt-populated keys, just the
-    raw utterance. This is the shape ListAlerts3.intent produces.
+    raw utterance. This is the shape list_alerts.intent produces.
     """
     return Message("intent", {"utterance": utterance, "lang": "en-us"}, {})
 

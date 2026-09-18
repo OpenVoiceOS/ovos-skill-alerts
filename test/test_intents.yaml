@@ -22,7 +22,7 @@
 
 
 en-us:
-  CreateAlarm:
+  create_alarm:
     - set an alarm:
       - create
       - alarm
@@ -45,7 +45,7 @@ en-us:
     - wake me up with music:
       - alarm
       - media
-  CreateTimer:
+  create_timer:
     - set a timer
     - start a timer
     - create a baking timer
@@ -53,7 +53,7 @@ en-us:
     - start a 10 minute countdown:
       - create
       - timer
-  CreateReminder:
+  create_reminder:
     - set a playback reminder to take out the trash daily at 5 pm until november:
       - create
       - playable
@@ -80,7 +80,7 @@ en-us:
       - until
     - tell me to take out the trash at 5 pm:
       - remind
-  CreateEvent:
+  create_event:
     - I have a work event next tuesday at 7 PM:
       - event
     - I have an appointment at 9 PM every weekend night until next year:
@@ -91,7 +91,7 @@ en-us:
       - event
       - everyday
       - until
-  RescheduleAlert:
+  reschedule_alert:
     - move the baseball event to 08:00 pm:
       - change
       - event
@@ -119,7 +119,7 @@ en-us:
       - change
       - event
       - priority
-  ListAlerts:
+  list_alerts:
     - tell me my pending alarms
     - what are my upcoming reminders
     - show me all of my events
@@ -131,7 +131,7 @@ en-us:
     - what time is my next reminder
     - what is my next timer
     - what is my next event
-  TimerStatus:
+  timer_status:
     - how much time is left
     - how long on that timer
     - what is the timer status
@@ -140,7 +140,7 @@ en-us:
     - missed any reminder
     - have i missed any timers
     - miss any events
-  CancelAlert:
+  cancel_alert:
     - cancel my next alarm:
       - alarm
       - next
@@ -156,16 +156,16 @@ en-us:
     - remove my next alert:
       - alert
       - next
-  CalendarList:
+  calendar_list:
     - which calendars are available:
       - query
       - calendar
       - choice
-  CreateList:
+  create_list:
     - create a shopping list:
       - create
       - list
-  AddListSubitems:
+  add_list_subitems:
     - add things to the shopping list:
       - create
       - items
@@ -197,12 +197,12 @@ en-us:
       - delete
       - todo
       - stored
-  QueryListNames:
+  query_list_names:
     - which lists are stored:
       - query
       - list
       - stored
-  DeleteList:
+  delete_list:
     - drop the shopping list:
       - delete
       - list

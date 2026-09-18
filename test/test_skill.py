@@ -3119,7 +3119,7 @@ class TestParseUtils(unittest.TestCase):
         # padacioso .intent files never populate message.data["until"] (no
         # __tags__ at all), so the "until"/duration end-condition clause was
         # silently dropped for every migrated intent that can take one (eg.
-        # CreateReminder "... until november"). Message here has no
+        # create_reminder "... until november"). Message here has no
         # "__tags__"/"until" key, mirroring an actual padatious match.
         from ovos_skill_alerts.util.parse_utils import parse_end_condition_from_message
 
@@ -3869,14 +3869,14 @@ class TestSkillLoading(unittest.TestCase):
     supported_languages = ["en-us"]
 
     # Specify skill intents as sets
-    adapt_intents = {'CreateAlarm', 'CreateTimer',
-                     'CreateReminder', 'CreateEvent',
-                     'RescheduleAlert', 'ListAlerts',
-                     'ChangeProperties', 'ChangeMediaProperties',
-                     'TimerStatus', 'CancelAlert', 'CreateList',
-                     'AddListSubitems', 'QueryListNames',
-                     'query_list_entries', 'delete_list_entries', 'DeleteList',
-                     'CalendarList'}
+    adapt_intents = {'create_alarm', 'create_timer',
+                     'create_reminder', 'create_event',
+                     'reschedule_alert', 'list_alerts',
+                     'ChangeProperties', 'change_media_properties',
+                     'timer_status', 'cancel_alert', 'create_list',
+                     'add_list_subitems', 'query_list_names',
+                     'query_list_entries', 'delete_list_entries', 'delete_list',
+                     'calendar_list'}
     padatious_intents = {'missed_alerts.intent'}
 
     # regex entities, not necessarily filenames

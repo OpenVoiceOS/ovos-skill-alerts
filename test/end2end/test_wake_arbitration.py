@@ -1,6 +1,6 @@
 """Cross-skill arbitration for the "wake" vocabulary (en-US).
 
-``CreateAlarmAlt`` requires nothing but the ``wake`` keyword, so while
+``create_alarm_alt`` requires nothing but the ``wake`` keyword, so while
 ``wake.voc`` listed the bare forms "wake" and "wake up"
 this skill claimed a bare "wake up" — an utterance that belongs to
 ovos-skill-naptime — and answered it by asking what time to set an alarm
@@ -8,7 +8,7 @@ for. A single-skill MiniCroft cannot catch that: with no other skill loaded
 there is nobody to steal the utterance from. This module boots BOTH skills
 into one MiniCroft on ``ADAPT_ONLY_PIPELINE`` (adapt's three tiers) and
 asserts each utterance goes to the skill that owns it. Both competing
-intents (naptime's ``WakeUp``, this skill's ``CreateAlarmAlt``) are adapt
+intents (naptime's ``WakeUp``, this skill's ``create_alarm_alt``) are adapt
 intents, so this isolates the arbitration to the stage where it actually
 happens, with the smallest possible set of test dependencies.
 
@@ -62,7 +62,7 @@ ADAPT_ONLY_PIPELINE = [
     "ovos-adapt-pipeline-plugin-low",
 ]
 
-# This skill's wake templates (CreateAlarmAlt.intent, including its media
+# This skill's wake templates (create_alarm_alt.intent, including its media
 # lines) migrated off Adapt to padatious file-intents; naptime's WakeUp
 # intent is still Adapt. ADAPT_ONLY_PIPELINE alone can no longer see this
 # skill's side of the arbitration at all -- every wake phrasing this skill

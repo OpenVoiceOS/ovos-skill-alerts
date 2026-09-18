@@ -1,0 +1,28 @@
+fix: intent resource names per OVOS-INTENT-2 §2
+
+19 intent files carried CamelCase base names. §2 requires a resource base
+name of lowercase ASCII letters, digits and underscores, so CreateAlarm
+becomes create_alarm, ChangeMediaProperties becomes
+change_media_properties, DAVSync becomes dav_sync, and so on. The four
+names already compliant (create_reminder_recurring, delete_list_entries,
+missed_alerts, query_list_entries) do not move.
+
+346 files are renamed: the same 19 intent names across 18 locales, and
+the two .blacklist files whose base name must equal the intent they
+suppress (OVOS-INTENT-2 §4.3). The handler
+decorators, the tests, the golden utterance files, the example messages
+and the README follow. The CHANGELOG is a record of what happened and is
+left alone.
+
+Nothing about the utterances changes: this is a file name and a
+registered intent name, not a template.
+
+A model trained before this rename emits the old label, so the pair for
+each name goes into ovos-m2v-pipeline#210 in the same wave. The two must
+merge together or the intent stops routing for every published model.
+
+test (unit): 36 passed, 82 skipped, 9 subtests passed.
+test/end2end/test_intents_en_us.py: 111 passed, 7 xfailed, 9 xpassed,
+15 subtests passed.
+
+Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>
