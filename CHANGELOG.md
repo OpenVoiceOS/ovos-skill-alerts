@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.6.6a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.6.6a1) (2026-09-18)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.6.5a1...0.6.6a1)
+
+**Merged pull requests:**
+
+- fix: the golden rows name intents this skill registers [\#234](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/234) ([openvoiceos-bot](https://github.com/openvoiceos-bot))
+
 ## [0.6.5a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.6.5a1) (2026-09-18)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.6.4a3...0.6.5a1)
@@ -345,10 +353,6 @@
 ## [0.2.0a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.2.0a1) (2026-07-03)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.1.33a1...0.2.0a1)
-
-**Merged pull requests:**
-
-- feat\(en-US\): tighten and consolidate en-US intent vocab [\#128](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/128) ([JarbasAl](https://github.com/JarbasAl))
 
 ## [0.1.33a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.1.33a1) (2026-06-28)
 
