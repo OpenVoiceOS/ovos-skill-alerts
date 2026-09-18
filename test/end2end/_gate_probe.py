@@ -23,7 +23,6 @@ TIME_BLACKLIST = ROOT / "locale" / "en-US" / "vocab" / "time.blacklist"
 LABEL_TO_FILES = {
     "cancel_alert": {"cancel_alert"},
     "change_media_properties": {"change_media_properties"},
-    "ChangeProperties": {"change_priority", "change_repeat", "change_until"},
     "create_alarm_alt": {"create_alarm_alt"},
     "dav_sync": {"dav_sync"},
     "list_alerts": {"list_alerts"},
