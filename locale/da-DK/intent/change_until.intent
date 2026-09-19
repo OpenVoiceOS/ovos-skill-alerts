@@ -1,0 +1,6 @@
+skift varigheden på min {schedkind} til {duration}
+forlæng min {schedkind} indtil {duration}
+tilpas længden på næste {schedkind} til {duration}
+sørg for at {schedkind} varer {duration}
+skift min {schedkind} så den varer indtil {duration}
+forkort varigheden på min {schedkind} til {duration}

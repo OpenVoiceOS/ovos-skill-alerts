@@ -1,0 +1,6 @@
+ändere die Priorität meines {schedkind} auf {priority}
+erhöhe die Priorität von {schedkind} auf Stufe {priority}
+passe die Priorität meines nächsten {schedkind} an
+setze {schedkind} auf Priorität {priority}
+senke die Priorität meines {schedkind}
+ändere die Prioritätsstufe von {schedkind} auf {priority}

@@ -31,9 +31,11 @@ import json
 from time import time
 from typing import Set, Optional, Union, List
 from uuid import uuid4
+from zoneinfo import ZoneInfo
 
 import icalendar
 from dateutil.relativedelta import relativedelta
+from dateutil.tz import gettz, resolve_imaginary
 from json_database.utils import merge_dict
 from ovos_config import Configuration
 from ovos_config.locale import get_default_tz, get_default_lang
@@ -43,6 +45,41 @@ from ovos_utils.log import LOG
 
 LOCAL_USER = "local"
 TZID = Configuration().get("location", {}).get("timezone", {}).get("code") or "UTC"
+
+
+def _tz_name(tzinfo: Optional[dt.tzinfo]) -> Optional[str]:
+    """
+    Best-effort extraction of the IANA timezone name backing a tzinfo
+    object, so it can be persisted alongside an alert and later
+    reconstituted into a real (DST-aware) timezone via `dateutil.tz.gettz`
+    instead of the frozen fixed-offset that `datetime.fromisoformat`
+    produces when re-parsing a serialized alert.
+    """
+    if tzinfo is None:
+        return None
+    # zoneinfo.ZoneInfo
+    key = getattr(tzinfo, "key", None)
+    if key:
+        return key
+    # dateutil tzfile
+    filename = getattr(tzinfo, "_filename", None)
+    if filename and "zoneinfo" in filename:
+        return filename.split("zoneinfo/", 1)[-1]
+    # fixed offsets (dt.timezone.utc, tzoffset, ...): a name gettz resolves
+    # back to the same offset, so a UTC expiration is never relabeled with
+    # the config timezone
+    try:
+        offset = tzinfo.utcoffset(None)
+    except Exception:
+        return None
+    if offset is None:
+        return None
+    minutes = int(offset.total_seconds()) // 60
+    if minutes == 0:
+        return "UTC"
+    sign = "+" if minutes > 0 else "-"
+    hours, rem = divmod(abs(minutes), 60)
+    return f"UTC{sign}{hours:02d}:{rem:02d}"
 
 
 def alert_time_in_range(
@@ -139,11 +176,46 @@ class Alert:
     @property
     def timezone(self) -> dt.tzinfo:
         """
-        Tzinfo associated with this alert's expiration
+        Tzinfo associated with this alert's expiration. Alerts created after
+        the `tz_name` field was introduced carry the real IANA timezone,
+        which correctly tracks DST transitions. Alerts serialized before
+        that (or created without a resolvable IANA name) fall back to the
+        frozen fixed-offset recovered from the stored ISO timestamp, which
+        matches their pre-existing (non-DST-aware) behavior.
         """
+        tz_name = self._data.get("tz_name")
+        if tz_name:
+            tz = gettz(tz_name)
+            if tz is not None:
+                return tz
         expiration = self._data.get("next_expiration_time")
         return dt.datetime.fromisoformat(expiration).tzinfo if expiration \
             else get_default_tz()
+
+    @property
+    def timezone_name(self) -> str:
+        """
+        IANA name of the zone a wall-clock repeat of this alert is read in.
+        Unlike `timezone`, which only carries the fixed offset the expiration
+        was written with, this survives a daylight-saving transition. An
+        alert serialized before any zone name was stored repeats on the
+        frozen offset its own timestamp carries, never the config zone.
+        """
+        stored = self._data.get("tz_name") or self._data.get("timezone")
+        if stored:
+            return stored
+        expiration = self._data.get("next_expiration_time")
+        if expiration:
+            offset = dt.datetime.fromisoformat(expiration).utcoffset()
+            if offset is not None:
+                minutes = int(offset.total_seconds()) // 60
+                if minutes == 0:
+                    return "UTC"
+                sign = "+" if minutes > 0 else "-"
+                hours, rem = divmod(abs(minutes), 60)
+                return f"UTC{sign}{hours:02d}:{rem:02d}"
+        return Configuration().get("location", {}).get("timezone", {}) \
+            .get("code") or "UTC"
 
     @property
     def alert_type(self) -> AlertType:
@@ -212,6 +284,15 @@ class Alert:
         Returns the contextual info of the alert
         """
         return self._data.get("context") or dict()
+
+    @property
+    def message_context(self) -> dict:
+        """
+        Returns the creating message's bus context (session, source,
+        destination, etc.), held verbatim since creation so a re-offer to
+        the scheduler does not strip a satellite's routing identity.
+        """
+        return self._data.get("message_context") or dict()
 
     @property
     def alert_name(self) -> str:
@@ -362,12 +443,16 @@ class Alert:
         start point to calculate from
         """
         expiration = self.expiration
+        if expiration is None:
+            return
         if self.repeat_days:
             while expiration > self.now or (Weekdays(expiration.weekday()) not in self.repeat_days):
                 expiration -= dt.timedelta(days=1)
+            expiration = resolve_imaginary(expiration)
             self._data["next_expiration_time"] = expiration.isoformat()
         elif self.repeat_frequency:
             expiration = expiration - self.repeat_frequency
+            expiration = resolve_imaginary(expiration)
             self._data["next_expiration_time"] = expiration.isoformat()
 
     def remove_repeat(self) -> None:
@@ -551,13 +636,28 @@ class Alert:
 
     def _get_next_expiration_time(self, skip=False) -> Optional[dt.datetime]:
         """
-        Determine the next time this alert will expire and update Alert data
+        Determine the next time this alert will expire and update Alert data.
+
+        Repeat advancement is done on wall-clock, i.e. the stored timezone
+        (real, DST-aware) is re-attached before adding any `timedelta`, so
+        "8am daily" always lands on 8am local time rather than drifting by
+        the DST delta once a transition is crossed. Adding a `timedelta` to
+        an aware datetime only mutates the naive fields, so the resulting
+        UTC offset is recomputed from scratch for the new date/time by the
+        real tzinfo object.
+
+        A day/time that does not exist due to a spring-forward transition
+        (e.g. 2:30am) is resolved forward past the gap via
+        `dateutil.tz.resolve_imaginary`. An ambiguous time that occurs twice
+        due to a fall-back transition resolves to its first (pre-transition)
+        occurrence, which is Python's default `fold=0` behavior.
         """
         # Alarm has no expiration time
         if not self._data.get("next_expiration_time", False):
             return None
 
         expiration = dt.datetime.fromisoformat(self._data.get("next_expiration_time"))
+        expiration = expiration.replace(tzinfo=self.timezone)
         now = dt.datetime.now(expiration.tzinfo) if not skip else expiration
 
         # Alert hasn't expired since last update
@@ -569,17 +669,33 @@ class Alert:
             while expiration <= now:
                 expiration += self.repeat_frequency
         elif self.repeat_days:
+            # walked on the wall clock of the alert's own zone: a 07:30 alarm
+            # rings at 07:30 on either side of a daylight-saving change, which
+            # adding 24 hours to a fixed offset would not do
+            zone = gettz(self.timezone_name)
+            local = expiration.astimezone(zone)
+            # the intended time-of-day is fixed at the alert's own creation
+            # and never re-derived from a later occurrence, so a DST gap that
+            # forces a one-day shift (e.g. a 01:30 alarm landing on 02:30 the
+            # day the clock jumps) does not stick on every following day
+            time_of_day = self._data.setdefault(
+                "repeat_time_of_day", local.time().isoformat())
+            intended = dt.time.fromisoformat(time_of_day)
             while (
-                    expiration <= now
-                    or Weekdays(expiration.weekday()) not in self.repeat_days
+                    local <= now
+                    or Weekdays(local.weekday()) not in self.repeat_days
             ):
-                expiration += dt.timedelta(days=1)
+                local = dt.datetime.combine(
+                    local.date() + dt.timedelta(days=1), intended
+                ).replace(tzinfo=zone)
+            expiration = local
         elif self.until is not None:
             while expiration <= now:
                 expiration += dt.timedelta(days=1)
         else:
             # Alert expired with no repeat
             return None
+        expiration = resolve_imaginary(expiration)
         if self.until and expiration > self.until:
             # This alert is expired
             return None
@@ -607,7 +723,11 @@ class Alert:
         else:
             data = process_ical_event(event)
 
-        return Alert.create(**data)
+        # imported outside of any bus message, often on a background sync
+        # worker thread that may still be carrying a stale message from
+        # whatever it last handled; an explicit empty context keeps a CalDAV
+        # alert from inheriting the DAV-configurer's session
+        return Alert.create(message_context={}, **data)
 
     def to_ical(self) -> icalendar.Calendar:
         """
@@ -681,7 +801,9 @@ class Alert:
             dav_calendar: str = None,
             dav_service: str = None,
             context: dict = None,
-            lang: str = None
+            message_context: dict = None,
+            lang: str = None,
+            timezone: dt.tzinfo = None
     ):
         """
         Object representing an arbitrary alert
@@ -695,6 +817,12 @@ class Alert:
         :param until: datetime of final repeat/end of event
         :param audio_file: audio_file to playback on alert expiration
         :param context: Message context associated with alert
+        :param message_context: the creating message's bus context (session,
+            source, destination, etc.), held verbatim and handed back to the
+            scheduler on every re-offer so a restart does not strip the
+            creating satellite's routing identity from the schedule.
+        :param timezone: tzinfo to anchor an all-day `expiration` date to;
+            defaults to the global config timezone
         """
         from .parse_utils import get_default_alert_name
 
@@ -706,7 +834,7 @@ class Alert:
             elif expiration.__class__ == dt.date:
                 data["all_day"] = True
                 expiration = dt.datetime.combine(expiration, dt.time.min) \
-                    .replace(tzinfo=get_default_tz())
+                    .replace(tzinfo=timezone or get_default_tz())
             if not expiration.tzinfo:
                 raise ValueError("expiration missing tzinfo")
             # Round off any microseconds
@@ -752,6 +880,7 @@ class Alert:
 
         data.update({
             "next_expiration_time": expiration.isoformat() if expiration else None,
+            "tz_name": (_tz_name(expiration.tzinfo) if expiration else None) or TZID,
             "prenotification": prenotification,
             "alert_type": alert_type.value,
             "dav_type": dav_type.value,
@@ -762,6 +891,7 @@ class Alert:
             "alert_name": alert_name,
             "audio_file": audio_file,
             "context": context,
+            "message_context": message_context or dict(),
             "dav_calendar": dav_calendar,
             "dav_service": dav_service,
             "dav_synchron": False,

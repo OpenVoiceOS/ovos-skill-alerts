@@ -1,0 +1,6 @@
+wijzig de prioriteit van mijn {schedkind} naar {priority}
+verhoog de prioriteit van de {schedkind} naar niveau {priority}
+pas de prioriteit van mijn volgende {schedkind} aan
+zet de {schedkind} op prioriteit {priority}
+verlaag de prioriteit van mijn {schedkind}
+wijzig het prioriteitsniveau van de {schedkind} naar {priority}

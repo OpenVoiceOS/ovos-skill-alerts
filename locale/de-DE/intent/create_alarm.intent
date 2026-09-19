@@ -1,0 +1,9 @@
+(stelle|erzeuge|plane) einen Alarm [für {time}]
+neuer Alarm [für {time}]
+stelle einen Alarm (auf|für) {time}
+(stelle|erzeuge|plane) einen Wecker [für {time}]
+neuer Wecker [für {time}]
+stelle einen Wecker (auf|für) {time}
+plane weckzeiten
+neue wecke mich
+plane weck mich

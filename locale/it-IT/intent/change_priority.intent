@@ -1,0 +1,6 @@
+cambia la priorità del mio {schedkind} a {priority}
+alza la priorità del {schedkind} al livello {priority}
+regola la priorità del mio prossimo {schedkind}
+imposta il {schedkind} con priorità {priority}
+abbassa la priorità del mio {schedkind}
+cambia il livello di priorità del {schedkind} a {priority}

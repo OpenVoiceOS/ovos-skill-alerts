@@ -1,0 +1,4 @@
+(timer|tempo) (fatto|fine|lungo|pronto|sinistra|stato)
+(fatto|fine|lungo|pronto|sinistra|stato) (timer|tempo)
+(timer|tempo) (per|caso|mi|io|è|sono|ho|un|una|di|in|da|il|non|a|ci|c|la|devo|le) (fatto|fine|lungo|pronto|sinistra|stato)
+(abbiamo|avete|c'è|che|ci sono|come|cosa|cosa sono|cosa è|da cosa|da cui|da quando|diteci|ditemi|elenco|facciamo|faccio|hai|hanno i|leggere|lo fai|mostra|ottenuto|qualcosa|qualsiasi cosa|quando|quanto|rinfrescare) (timer|tempo)

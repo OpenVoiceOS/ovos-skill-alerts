@@ -1,0 +1,3 @@
+(radera|ta bort) [min|] lista[n] [{list_name}]
+(radera|ta bort) [alla] [mina] listor
+(radera|ta bort) {list_name} lista[n]

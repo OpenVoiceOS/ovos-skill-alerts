@@ -1,0 +1,6 @@
+változtasd meg a {schedkind}-om időtartamát erre: {duration}
+hosszabbítsd meg a {schedkind}-om eddig: {duration}
+állítsd be a következő {schedkind} hosszát erre: {duration}
+állítsd be, hogy a {schedkind} tartson {duration} ideig
+változtasd meg a {schedkind}-om, hogy eddig tartson: {duration}
+rövidítsd le a {schedkind}-om időtartamát erre: {duration}
