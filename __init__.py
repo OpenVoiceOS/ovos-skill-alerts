@@ -1326,7 +1326,7 @@ class AlertSkill(ConversationalSkill):
                         break
             else:
                 # failed to understand what alert we should snooze/dismiss, prompt user to ask again
-                self.speak_dialog("please.repeat", listen=True)
+                self.speak_dialog("please_repeat", listen=True)
 
     def _get_response_cascade(self, dialog: str = "",
                               data: Optional[dict] = None,
