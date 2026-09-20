@@ -1,2 +1,3 @@
-voeg (items|dingen) toe aan (mijn|de) lijst [{list_name}]
-voeg (items|dingen) toe aan (mijn|de) {list_name} lijst
+voeg {items} toe aan (mijn|de) lijst [{list_name}]
+voeg {items} toe aan (mijn|de) {list_name} lijst
+zet {items} op (|mijn) {list_name}
