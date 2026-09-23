@@ -3684,6 +3684,50 @@ class TestParseUtils(unittest.TestCase):
         )
 
 
+class TestPadatiousSlotIsTheName(unittest.TestCase):
+    """A padatious intent fills its own slot and populates no `__tags__`.
+
+    `tokens.unmatched()` is then the whole utterance, so the name parsed
+    from it carried the verb and the role words: "delete my shopping list"
+    parsed as "delete shopping list", and the skill spoke "There is no entry
+    delete shopping list stored." The slot the intent file declares is the
+    name the user said.
+    """
+
+    def _message(self, utterance, **data):
+        from ovos_bus_client.message import Message
+        return Message("test", {"utterance": utterance, "lang": "en-US", **data})
+
+    def test_the_declared_slot_is_the_name(self):
+        from ovos_skill_alerts.util.parse_utils import parse_alert_name_from_message
+        cases = {
+            "delete my shopping list": "shopping",
+            "delete everything from my shopping list": "shopping",
+            "remove the items from my reading list": "reading",
+        }
+        for utterance, slot in cases.items():
+            with self.subTest(utterance=utterance):
+                message = self._message(utterance, list_name=slot)
+                self.assertEqual(
+                    parse_alert_name_from_message(message), slot)
+
+    def test_the_token_parse_still_answers_without_a_slot(self):
+        # adapt populates `__tags__` and no `list_name`; that path is
+        # unchanged, and so is a padatious intent that declares no slot.
+        from ovos_skill_alerts.util.parse_utils import parse_alert_name_from_message
+        message = self._message("delete my shopping list")
+        self.assertEqual(parse_alert_name_from_message(message),
+                         "delete shopping list")
+
+    def test_an_empty_slot_falls_through(self):
+        from ovos_skill_alerts.util.parse_utils import parse_alert_name_from_message
+        for empty in ("", "   ", None):
+            with self.subTest(slot=repr(empty)):
+                message = self._message("delete my shopping list", list_name=empty)
+                self.assertEqual(parse_alert_name_from_message(message),
+                                 "delete shopping list")
+
+
 @unittest.skip('Work in progress')
 class TestUIModels(unittest.TestCase):
 

@@ -620,6 +620,16 @@ def parse_alert_name_from_message(message: Message,
     """
     lang = get_message_lang(message)
 
+    # A padatious intent fills its own slot and populates no `__tags__`, so
+    # `tokens.unmatched()` is the whole utterance: "delete my shopping list"
+    # parses as the name "delete shopping list", and the skill then speaks
+    # "There is no entry delete shopping list stored." The slot the intent
+    # file declares is the name the user said, so it wins when it is there.
+    # Adapt keeps working: it populates `__tags__` and no `list_name`.
+    slot_name = message.data.get("list_name")
+    if slot_name and isinstance(slot_name, str) and slot_name.strip():
+        return slot_name.strip().lower()
+
     tokens = tokens or tokenize_utterance(message)
     tokens.strip_time()
 
