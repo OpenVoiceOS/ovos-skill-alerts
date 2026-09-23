@@ -3,3 +3,5 @@ alarma nova [para {time}]
 horario acordarme
 definir acordarme
 facer acordarme
+(pon|crea|engade) unha alarma para que reproduza {mediakind} [para {time}]
+cambia o son da alarma a {mediakind} [para {time}]

@@ -3,3 +3,5 @@ alarma nova [per {time}]
 nova alarmes
 nova alarma
 crea alarmes
+(posa|crea|afegeix|programa) una alarma que reprodueixi {mediakind} [per {time}]
+estableix el so de l'alarma a {mediakind} [per {time}]

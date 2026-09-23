@@ -3,3 +3,5 @@ alarme novo [para {time}]
 novo alarme
 criar alarmes
 horário alarmes
+(põe|cria|adiciona|define|agenda) um alarme para reproduzir {mediakind} [para {time}]
+muda o som do alarme para {mediakind} [para {time}]

@@ -3,3 +3,5 @@ alarma nueva [para {time}]
 tengo alarma
 crear alarma
 tengo alarmas
+(pon|crea|añade|programa) una alarma que reproduzca {mediakind} [para {time}]
+cambia el sonido de la alarma a {mediakind} [para {time}]

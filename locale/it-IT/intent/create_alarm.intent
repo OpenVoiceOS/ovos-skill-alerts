@@ -3,3 +3,5 @@ nuovo allarme [per {time}]
 creare allarmi
 programma allarmi
 Ho allarmi
+(imposta|crea|aggiungi|programma) (un allarme|una sveglia) perché riproduca {mediakind} [per {time}]
+cambia il suono (dell'allarme|della sveglia) in {mediakind} [per {time}]

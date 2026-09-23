@@ -3,3 +3,5 @@ nouvelle alarme [pour {time}]
 nouveau alarmes
 j'ai alarme
 créer alarme
+(mets|crée|ajoute|programme) une alarme pour qu'elle joue {mediakind} [pour {time}]
+change le son de l'alarme en {mediakind} [pour {time}]
