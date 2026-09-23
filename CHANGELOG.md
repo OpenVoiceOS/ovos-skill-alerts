@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.6.11a3](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.6.11a3) (2026-09-23)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.6.11a2...0.6.11a3)
+
+**Merged pull requests:**
+
+- i18n: add please\_repeat.dialog for cs-CZ, hu-HU, kab, pl-PL, ru-RU, sv-FI [\#252](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/252) ([openvoiceos-bot](https://github.com/openvoiceos-bot))
+
 ## [0.6.11a2](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.6.11a2) (2026-09-20)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.6.11a1...0.6.11a2)
@@ -351,10 +359,6 @@
 ## [0.3.2a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.3.2a1) (2026-08-13)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.3.1a1...0.3.2a1)
-
-**Merged pull requests:**
-
-- fix: bump MiniCroft READY timeout in multilang golden-utterance test [\#147](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/147) ([JarbasAl](https://github.com/JarbasAl))
 
 ## [0.3.1a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.3.1a1) (2026-08-13)
 
