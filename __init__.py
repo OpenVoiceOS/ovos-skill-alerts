@@ -1022,7 +1022,13 @@ class AlertSkill(ConversationalSkill):
                                              dialog="list_item_delete_selection_intro")
 
         if todo is None:
-            return
+            # A matched intent must answer. This returned silently, so
+            # "delete everything from my shopping list" matched and said
+            # nothing at all when no list was stored. The sibling handler
+            # `handle_add_list_subitems` already speaks this dialog on the
+            # same condition.
+            name = parse_alert_name_from_message(message)
+            return self.speak_dialog("list_todo_dont_exist", {"name": name})
 
         if message.data.get("stored") or voc_match(message.data.get("utterance", ""),
                                                     "stored", lang=self.lang):

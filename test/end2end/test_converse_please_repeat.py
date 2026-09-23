@@ -89,6 +89,30 @@ class TestConversePleaseRepeat(unittest.TestCase):
             "converse spoke nothing: the please_repeat prompt never reached "
             "the bus")
 
+        # A non-empty speak list passes for any dialog the branch reaches,
+        # so the spoken sentence is compared against the rendered
+        # please_repeat line. The renderer rewrites a template, so the
+        # expected set is the expansion of the file and not the file.
+        said = spoken[0].data.get("utterance", "")
+        self.assertIn(
+            said, self._rendered("please_repeat"),
+            "converse spoke %r, which is not the please_repeat line" % said)
+
+    @staticmethod
+    def _rendered(dialog):
+        """Every sentence the en-US file for `dialog` can render as."""
+        from ovos_spec_tools import expand
+        path = os.path.join(os.path.dirname(os.path.dirname(
+            os.path.dirname(os.path.abspath(__file__)))),
+            "locale", "en-US", "dialog", dialog + ".dialog")
+        lines = [line.strip() for line in open(path, encoding="utf-8")
+                 if line.strip() and not line.strip().startswith("#")]
+        assert lines, "%s is empty" % path
+        out = set()
+        for line in lines:
+            out.update(expand(line))
+        return out
+
     def test_speak_dialog_accepts_the_keyword_converse_uses(self):
         """The signature, read off the real method rather than a Mock.
 
