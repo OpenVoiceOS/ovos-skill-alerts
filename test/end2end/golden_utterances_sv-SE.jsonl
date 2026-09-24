@@ -13,3 +13,4 @@
 {"skill_id": "ovos-skill-alerts.openvoiceos", "utterance": "något larm", "lang": "sv-SE", "intent_label": "list_alerts", "intent_type": "adapt", "required_vocab": ["query", "alarm"], "needs_manual": false, "machine_generated": false}
 {"skill_id": "ovos-skill-alerts.openvoiceos", "utterance": "visa larm", "lang": "sv-SE", "intent_label": "list_alerts", "intent_type": "adapt", "required_vocab": ["query", "alarm"], "needs_manual": false, "machine_generated": false}
 {"skill_id": "ovos-skill-alerts.openvoiceos", "utterance": "fick larm", "lang": "sv-SE", "intent_label": "list_alerts", "intent_type": "adapt", "required_vocab": ["query", "alarm"], "needs_manual": false, "machine_generated": false}
+{"skill_id": "ovos-skill-alerts.openvoiceos", "utterance": "sätt ett larm, så att den spelar musik", "lang": "sv-SE", "intent_label": "create_alarm", "intent_type": "padacioso", "required_vocab": ["create", "alarm"], "needs_manual": true, "machine_generated": true}

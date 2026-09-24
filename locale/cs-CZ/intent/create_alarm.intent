@@ -3,3 +3,4 @@ nový (alarm|budík) [na {time}]
 Mám alarmy
 plán alarmy
 vytvořit alarm
+nastav (alarm|budík) [na {time}], aby přehrával {mediakind}

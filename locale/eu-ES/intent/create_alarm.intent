@@ -3,3 +3,4 @@ alarma berria [{time}]
 berri alarmak
 sortu alarmak
 egin alarma
+ezarri alarma [bat] [{time}(etarako|rako)] erreproduzitzeko {mediakind}
