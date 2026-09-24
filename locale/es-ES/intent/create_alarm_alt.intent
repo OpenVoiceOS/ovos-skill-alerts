@@ -1,2 +1,5 @@
 despiérta(me|nos) [a las {time}]
 (puedes|podrías) despertarme [a las {time}]
+despiértame con {mediakind} a las {time}
+despiértame en {duration}
+despiértame cada {days} a las {time}

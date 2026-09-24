@@ -1,1 +1,4 @@
 herätä minut [kello {time}]
+herätä minut soittamaan {mediakind} kello {time}
+herätä minut {duration} kuluttua
+herätä minut joka {days} kello {time}
