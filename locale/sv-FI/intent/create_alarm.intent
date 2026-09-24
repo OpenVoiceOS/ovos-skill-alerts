@@ -4,3 +4,4 @@ aseta hälytys kello {time}
 uusi herätä minut
 uusi hälytykset
 luo hälytykset
+aseta hälytys [kello {time}] soittamaan {mediakind}

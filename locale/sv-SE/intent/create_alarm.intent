@@ -4,3 +4,4 @@ sätt ett larm till {time}
 schema larm
 ny larm
 jag har larm
+sätt ett larm [till {time}], så att den spelar {mediakind}
