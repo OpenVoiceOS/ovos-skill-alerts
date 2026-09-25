@@ -57,6 +57,19 @@ class TestMediaAndPriorityDialogsPerLocale(unittest.TestCase):
     "media_type_set" out loud. That is why each locale is asserted here and
     not only en-US, and why the slot value is asserted in the output: a
     translation that drops `{new}` renders without it and reports nothing.
+
+    The locale list is READ FROM THE TREE, never written here. A locale that
+    ships at least one of the five must ship all five; a locale that ships
+    none is not this test's business. So the answer to sv-FI, which T-1775
+    decides -- rewrite it in Finland-Swedish, or drop the directory -- does
+    not turn this test red either way, and a locale added tomorrow is
+    covered without an edit.
+
+    There is no assertion that the render is not a comment line: the loader
+    strips `#` lines before a phrase reaches the renderer, so it cannot
+    happen. Probed both ways on this tree: a file whose first line is a
+    comment renders its second line, and a comment-only file renders the
+    bare dialog name, which the first assertion below already catches.
     """
 
     CASES = {
@@ -67,23 +80,37 @@ class TestMediaAndPriorityDialogsPerLocale(unittest.TestCase):
         "media_type_set": ({"new": "chime"}, ["chime"]),
         "property_changed_priority": ({"num": 3}, ["3"]),
     }
-    LOCALES = ["en-US", "cs-CZ", "hu-HU", "pl-PL", "ru-RU", "sv-FI"]
+
+    @classmethod
+    def locales(cls):
+        """Locales that ship any of the five, read from locale/."""
+        root = os.path.join(SKILL_ROOT, "locale")
+        found = []
+        for lang in sorted(os.listdir(root)):
+            dialogs = os.path.join(root, lang, "dialog")
+            if not os.path.isdir(dialogs):
+                continue
+            if any(os.path.isfile(os.path.join(dialogs, f"{name}.dialog"))
+                   for name in cls.CASES):
+                found.append(lang)
+        return found
 
     def test_every_locale_renders_all_five(self):
-        for lang in self.LOCALES:
+        locales = self.locales()
+        self.assertIn("en-US", locales,
+                      "the reference locale ships none of the five; the "
+                      "locale reader is probably looking in the wrong place")
+        for lang in locales:
             resources = SkillResources(SKILL_ROOT, lang.lower())
             for name, (data, expected) in self.CASES.items():
                 with self.subTest(lang=lang, dialog=name):
                     text = resources.render_dialog(name, data)
                     self.assertNotEqual(
                         text, name,
-                        f"locale/{lang} has no {name}.dialog the loader can "
-                        f"read; the skill would speak the dialog name")
+                        f"locale/{lang} ships some of these five and not "
+                        f"{name}.dialog; the skill would speak the dialog "
+                        f"name out loud in that language")
                     self.assertTrue(text.strip())
-                    self.assertFalse(
-                        text.lstrip().startswith("#"),
-                        f"locale/{lang}/{name}.dialog rendered its comment "
-                        f"line: {text!r}")
                     for value in expected:
                         self.assertIn(
                             value, text,
