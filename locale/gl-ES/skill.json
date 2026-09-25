@@ -1,5 +1,5 @@
 {
-  "title": "Alertas",
+  "name": "Alertas",
   "description": "Unha habilidade para xestionar alarmas, temporizadores, recordatorios, eventos e tarefas pendentes, e opcionalmente sincronizalos cun servizo CalDAV.",
   "examples": [
     "Configura unha alarma para as 8 da mañá.",

@@ -1,5 +1,5 @@
 {
-    "title": "Alertes",
+    "name": "Alertes",
     "description": "Gérez vos alarmes, minuteurs, rappels, événements et listes de tâches, avec une synchronisation CalDAV en option.",
     "examples": [
         "Règle une alarme à 8 heures.",

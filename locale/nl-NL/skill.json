@@ -1,5 +1,5 @@
 {
-  "title": "Herinneringen en meldingen",
+  "name": "Herinneringen en meldingen",
   "description": "Een skill om wekkers, timers, herinneringen, agenda-afspraken en taken te plannen en te beheren. En deze eventueel te synchroniseren met een CalDAV-service.",
   "examples": [
     "Zet een wekker om 8 uur 's ochtends.",
