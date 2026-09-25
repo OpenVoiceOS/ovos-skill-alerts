@@ -3728,6 +3728,74 @@ class TestPadatiousSlotIsTheName(unittest.TestCase):
                                  "delete shopping list")
 
 
+class TestDeleteListEntriesAnswersWhenNoListMatches(unittest.TestCase):
+    """A matched intent must answer.
+
+    `_delete_list_entries` returned silently when `_resolve_requested_alert`
+    found no list, so "delete everything from my shopping list" matched and
+    said nothing at all. #254 made it speak `list_todo_dont_exist` with the
+    parsed name, the same dialog the sibling `handle_add_list_subitems`
+    speaks on the same condition. Reverting that hunk left every suite
+    green, so the behaviour is pinned here.
+    """
+
+    def _skill(self, resolved):
+        """The real class, with only the resolver and the speech stubbed."""
+        from ovos_skill_alerts import AlertSkill
+        skill = AlertSkill()
+        skill._resolve_requested_alert = lambda *a, **kw: resolved
+        skill.speak_dialog = Mock()
+        return skill
+
+    def _message(self, utterance, **data):
+        from ovos_bus_client.message import Message
+        return Message("test", {"utterance": utterance, "lang": "en-US",
+                                **data})
+
+    def test_no_list_matches_speaks_list_todo_dont_exist(self):
+        skill = self._skill(resolved=None)
+        message = self._message("delete everything from my shopping list",
+                                list_name="shopping")
+
+        skill._delete_list_entries(message)
+
+        skill.speak_dialog.assert_called_once_with(
+            "list_todo_dont_exist", {"name": "shopping"})
+
+    def test_the_name_comes_from_the_message(self):
+        # The control for the assertion above: the dialog carries the name
+        # the user said, not a fixed string.
+        skill = self._skill(resolved=None)
+        message = self._message("delete everything from my reading list",
+                                list_name="reading")
+
+        skill._delete_list_entries(message)
+
+        skill.speak_dialog.assert_called_once_with(
+            "list_todo_dont_exist", {"name": "reading"})
+
+    def test_a_resolved_list_does_not_speak_the_missing_dialog(self):
+        # The second control: the branch under test is the None branch only.
+        # With a list resolved, the handler goes on to the entries and must
+        # not answer "there is no such list".
+        resolved = Mock()
+        resolved.ident = "ident-1"
+        resolved.alert_name = "shopping"
+        skill = self._skill(resolved=resolved)
+        # `alert_manager` is a read-only property over `_alert_manager`.
+        manager = Mock()
+        manager.get_children.return_value = []
+        skill._alert_manager = manager
+        message = self._message("delete everything from my shopping list",
+                                list_name="shopping", stored=True)
+
+        skill._delete_list_entries(message)
+
+        spoken = [call.args[0] for call in skill.speak_dialog.call_args_list
+                  if call.args]
+        self.assertNotIn("list_todo_dont_exist", spoken)
+
+
 @unittest.skip('Work in progress')
 class TestUIModels(unittest.TestCase):
 
