@@ -21,12 +21,26 @@ LOCALE = END2END.parents[1] / "locale" / "en-US" / "intent"
 GOLDEN = END2END / "golden_utterances_en-US.jsonl"
 
 
-def _rows():
-    with GOLDEN.open(encoding="utf-8") as handle:
+def _rows(path=GOLDEN):
+    with path.open(encoding="utf-8") as handle:
         for line in handle:
             line = line.strip()
             if line:
                 yield json.loads(line)
+
+
+def _every_row():
+    """Every row of every locale, not just en-US.
+
+    The en-US file was the only one read here, so a label naming nothing in
+    any other locale had nothing to catch it: the suite that drives the rows
+    through a pipeline is the only other reader, and it was dark. 445 rows in
+    17 files were unchecked; 184 of them are en-US.
+    """
+    for path in sorted(END2END.glob("golden_utterances_*.jsonl")):
+        lang = path.name[len("golden_utterances_"):-len(".jsonl")]
+        for row in _rows(path):
+            yield lang, row
 
 
 def _registered():
@@ -49,3 +63,40 @@ def test_the_locale_directory_is_not_empty():
 def test_the_family_name_is_not_an_intent():
     """The control in the other direction, on the check itself."""
     assert "ChangeProperties" not in _registered()
+
+
+@pytest.mark.parametrize(
+    "lang,row", list(_every_row()),
+    ids=lambda v: v if isinstance(v, str) else v["utterance"])
+def test_every_locale_label_names_a_registered_intent(lang, row):
+    """A golden row in any locale names an intent the skill registers.
+
+    The label is checked against en-US, the reference locale: a locale that
+    does not ship a given .intent file still answers to that intent, so the
+    registered set is en-US's, not that locale's own.
+    """
+    label = row["intent_label"]
+    assert label in _registered(), (
+        f"{lang} {row['utterance']!r}: {label!r} is not an intent this skill "
+        f"registers in locale/en-US")
+
+
+def test_every_locale_file_is_read():
+    """The control: this suite is worthless if the glob finds one file."""
+    langs = {lang for lang, _ in _every_row()}
+    assert len(langs) > 10, f"only {len(langs)} locale file(s) read"
+    assert "en-US" in langs
+
+
+def test_only_kab_has_no_golden_file():
+    """Every locale the skill ships has golden rows, except kab.
+
+    kab is the one gap and it is pinned here so it cannot quietly grow: a
+    second locale losing its golden file fails this, and kab gaining one
+    fails it too, which is the day to delete this test.
+    """
+    shipped = {p.name for p in (END2END.parents[1] / "locale").iterdir()
+               if p.is_dir()}
+    covered = {lang for lang, _ in _every_row()}
+    assert shipped - covered == {"kab"}, (
+        f"locales with no golden file: {sorted(shipped - covered)}")

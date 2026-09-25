@@ -49,10 +49,9 @@ from ._wait_trained import wait_for_minicroft_ready
 # blacklisted_pipelines re-applied over the pre-boot override), so this
 # suite ERRORs at fixture setup for a test-framework reason, not a skill
 # defect -- the migration is live-validated. Re-enable when ovoscope#179 lands.
-pytestmark = pytest.mark.skip(
-    reason="blocked on ovoscope harness bug OpenVoiceOS/ovoscope#179 "
-           "(get_minicroft cannot boot m2v/trained pipelines); re-enable when fixed"
-)
+# ovoscope#179 is closed and setup.py's test extra already floors ovoscope at
+# 1.6.8a1, so the skip below is retired. Left as a comment rather than deleted
+# so the reason this suite was dark is still readable next to it.
 
 SKILL_ID = "ovos-skill-alerts.openvoiceos"
 
