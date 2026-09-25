@@ -1162,9 +1162,11 @@ class TestAdapt22_Deletelistentries(_IntentRoutingMixin, TestCase):
     def test_delete_everything_from_my_todo_list_deletes_todos(self):
         # "todo" fills the list_name slot here; no list has that name, so the
         # request goes to the todo entries, not to a missing named list.
-        # The list branch speaks nothing when no list matches; every dialog
-        # below comes from the todo branch. With stored todos the todo
-        # branch speaks list_todo_dont_exist first, as it does on dev.
+        # Since #254 the list branch also speaks list_todo_dont_exist when
+        # no list matches, so the dialog below can come from either branch.
+        # With stored todos the todo branch speaks it first, as it does on
+        # dev. TestDeleteListEntriesAnswersWhenNoListMatches in
+        # test/test_skill.py pins the list branch on its own.
         self._assert_padatious_dialog(
             r"delete everything from my todo list", r"delete_list_entries.intent",
             ("list_todo_no_reminder", "list_todo_dont_exist",
