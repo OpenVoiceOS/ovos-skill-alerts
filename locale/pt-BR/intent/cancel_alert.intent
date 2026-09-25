@@ -1,0 +1,12 @@
+# machine translation from en-US, unvouched
+(cancele|apague|remova|limpe|descarte|elimine|desligue) (meu|o|todos|todos os meus|cada|qualquer) {alertkind} (próximo|pendente|guardado|salvo|agendado)
+(meu|o|todos os meus) {alertkind} (próximo|pendente|futuro) (cancele|apague|remova|limpe|descarte) (ele|eles) [por favor]
+(meu|o|todos os meus|todos|cada) {alertkind} (cancele|apague|remova|limpe|descarte) (ele|eles) [por favor]
+(cancele|apague|remova|limpe|descarte|desligue) (alarme|alarmes|despertador|timer|timers|contagem regressiva|lembrete|lembretes|evento|eventos|compromisso|compromissos|alerta|alertas)
+(cancele|apague|remova|limpe|descarte) (meu|o|todo|todos os meus) {alertkind} e (meu|o|todo|todos os meus) {alertkind2}
+(cancele|apague|remova|limpe|descarte|elimine|desligue) (meu|o|todo|todos os meus|todos os|cada|qualquer) {alertkind}
+por favor (cancele|apague|remova|limpe|descarte) (meu|o|todo) {alertkind} e (meu|o|todo) {alertkind2}
+(cancele|apague|remova|limpe|descarte) meu (alarme|timer|contagem regressiva|lembrete|evento|compromisso|alerta) {name}
+por favor (cancele|apague|remova|limpe|descarte|desligue) (meu|o|todo|todos os meus) {alertkind}
+(cancele|apague|remova|limpe|descarte) o {alertkind} (para|às|sobre|de) {name}
+(cancele|apague|limpe|remova) minha lista (toda|inteira) de {alertkind}

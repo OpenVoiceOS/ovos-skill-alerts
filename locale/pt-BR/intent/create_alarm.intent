@@ -1,0 +1,77 @@
+# machine translation from en-US, unvouched
+(defina|crie|adicione|agende|comece) um alarme [para {time}]
+novo alarme [para {time}]
+eu tenho um alarme novo [para {time}]
+(defina|crie) um alarme (às|para) {time}
+alarme (às|para) {time}
+(defina|crie) um alarme todo (dia útil|fim de semana|dia|de manhã|de noite) [às {time}]
+(defina|faça) um alarme de {time} [dia útil|fim de semana]
+(defina|crie|adicione|agende|faça|comece|novo|coloque) (um|o|meu) alarme com {mediakind} (às|para) {time}
+(defina|crie|adicione|agende|faça|comece|novo|coloque) (um|o|meu) alarme com a {mediakind} (às|para) {time}
+(defina|crie|adicione|agende|faça|comece|novo|coloque) (um|o|meu) alarme com uma {mediakind} (às|para) {time}
+(defina|crie|adicione|agende|faça|comece|novo|coloque) (um|o|meu) alarme para tocar {mediakind} (às|para) {time}
+(defina|crie|adicione|agende|faça|comece|novo|coloque) (um|o|meu) alarme que toca {mediakind} (às|para) {time}
+(defina|crie|adicione|agende|faça|comece|novo|coloque) (um|o|meu) alarme tocando {mediakind} (às|para) {time}
+(defina|crie|adicione|agende|faça|comece) (um|o|meu) alarme de {mediakind} (às|para) {time}
+(poderia|pode|consegue) você (definir|criar|adicionar|agendar|fazer|começar) um alarme que toca {mediakind} (às|para) {time}
+(defina|crie|adicione|agende|faça|comece|novo|coloque) (um|o|meu) alarme com {mediakind}
+(defina|crie|adicione|agende|faça|comece|novo|coloque) (um|o|meu) alarme com a {mediakind}
+(defina|crie|adicione|agende|faça|comece|novo|coloque) (um|o|meu) alarme com minha {mediakind}
+(defina|crie|adicione|agende|faça|comece|novo|coloque) (um|o|meu) alarme com uma {mediakind}
+(defina|crie|adicione|agende|faça|comece|novo|coloque) (um|o|meu) alarme para tocar {mediakind}
+(defina|crie|adicione|agende|faça|comece|novo|coloque) (um|o|meu) alarme para tocar a {mediakind}
+(defina|crie|adicione|agende|faça|comece|novo|coloque) (um|o|meu) alarme que toca {mediakind}
+(defina|crie|adicione|agende|faça|comece|novo|coloque) (um|o|meu) alarme que toca a {mediakind}
+(defina|crie|adicione|agende|faça|comece|novo|coloque) (um|o|meu) alarme tocando {mediakind}
+(defina|crie|adicione|agende|faça|comece|novo|coloque) (um|o|meu) alarme tocando a {mediakind}
+(defina|crie|adicione|agende|faça|comece|novo|coloque) (um|o|meu) alarme tocando minha {mediakind}
+(defina|crie|adicione|agende|faça|comece) (um|o|meu) alarme de {mediakind}
+(defina|crie|adicione|agende|faça|comece) (um|o|meu) alarme novo com {mediakind}
+(defina|crie|adicione|agende|faça|comece) (um|o|meu) alarme novo que toca {mediakind}
+(defina|crie|adicione|agende|faça|comece) (um|o|meu) alarme novo tocando {mediakind}
+(poderia|pode|consegue) você (definir|criar|adicionar|agendar|fazer|começar) um alarme com {mediakind}
+(poderia|pode|consegue) você (definir|criar|adicionar|agendar|fazer|começar) um alarme com uma {mediakind}
+(poderia|pode|consegue) você (definir|criar|adicionar|agendar|fazer|começar) um alarme que toca {mediakind}
+(poderia|pode|consegue) você (definir|criar|adicionar|agendar|fazer|começar) um alarme tocando {mediakind}
+(faça|deixe) (meu|o) alarme tocar {mediakind} (às|para) {time}
+(faça|deixe) (meu|o) alarme tocar a {mediakind} (às|para) {time}
+(faça|deixe) (meu|o) alarme tocar {mediakind}
+(faça|deixe) (meu|o) alarme tocar a {mediakind}
+(faça|deixe) (meu|o) alarme tocar minha {mediakind}
+novo alarme com {mediakind} (às|para) {time}
+novo alarme tocando {mediakind} (às|para) {time}
+novo alarme com {mediakind}
+novo alarme que toca {mediakind}
+novo alarme tocando {mediakind}
+por favor defina um alarme para {time}
+pode definir um alarme para {time}
+poderia definir um alarme para {time}
+você criaria um alarme para {time}
+eu preciso de um alarme para {time}
+eu preciso de um alarme marcado para {time}
+eu quero um alarme para {time}
+vamos definir um alarme para {time}
+coloque um alarme para {time}
+me dê um alarme para {time}
+ligue um alarme para {time}
+defina meu alarme para {time}
+defina o alarme para {time}
+eu gostaria de um alarme marcado para {time}
+me (acorde|acorda) [às {time}]
+(poderia|pode|consegue) você me (acordar|despertar) [às {time}]
+me (acorde|acorda) em {duration}
+me (acorde|acorda) toda {days} às {time}
+(acorde|acorda) (as crianças|todo mundo) [às {time}]
+(acorde|acorda) logo (as crianças|todo mundo) [às {time}]
+(acorde|acorda) (as crianças|todo mundo) toda {days} às {time}
+(acorde|acorda) (a mim|nós|as crianças|todo mundo) (com|ao som de|tocando) (um|uma|minha|a) {mediakind} (às|para) {time}
+(poderia|pode|consegue) você (acordar|despertar) (a mim|nós|as crianças|todo mundo) (com|ao som de|tocando) {mediakind} (às|para) {time}
+(acorde|acorda) (a mim|nós|as crianças|todo mundo) (com|ao som de|tocando) (um|uma|minha|a) {mediakind}
+(acorde|acorda) logo (a mim|nós|as crianças|todo mundo) (com|ao som de|tocando) (um|uma|minha|a) {mediakind}
+(poderia|pode|consegue) você (acordar|despertar) (a mim|nós|as crianças|todo mundo) (com|ao som de|tocando) {mediakind}
+(acorde|acorda) (a mim|nós|as crianças|todo mundo) (com|ao som de|tocando) {mediakind} (às|para) {time}
+(acorde|acorda) logo (a mim|nós|as crianças|todo mundo) (com|ao som de|tocando) {mediakind} (às|para) {time}
+(acorde|acorda) agora (as crianças|todo mundo) (com|ao som de|tocando) {mediakind} (às|para) {time}
+(acorde|acorda) (a mim|nós|as crianças|todo mundo) (com|ao som de|tocando) {mediakind}
+(acorde|acorda) logo (a mim|nós|as crianças|todo mundo) (com|ao som de|tocando) {mediakind}
+(acorde|acorda) agora (as crianças|todo mundo) (com|ao som de|tocando) {mediakind}

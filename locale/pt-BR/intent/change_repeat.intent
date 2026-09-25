@@ -1,0 +1,15 @@
+# machine translation from en-US, unvouched
+(mude|defina|ajuste|deixe) (meu|o) {schedkind} (próximo|futuro) (repetindo|recorrente|se repetindo) (a cada|toda) {repeat}
+(mude|defina|ajuste|deixe) (meu|o) {schedkind} (próximo|futuro) para (repetir|recorrer|ser recorrente) (a cada|toda) {repeat}
+(mude|defina|ajuste|deixe) (meu|o) {schedkind} para (repetir|recorrer|ser recorrente|ficar repetindo) (a cada|toda) {repeat}
+(mude|defina|ajuste|deixe) (meu|o) {schedkind} (repetindo|recorrendo|recorrente|se repetindo) (a cada|toda) {repeat}
+(meu|o) {schedkind} (mude|defina|ajuste) (a|sua) (frequência|repetição|recorrência) para {repeat}
+(mude|defina|ajuste|deixe) (meu|o) {schedkind} para (repetir|recorrer|ser recorrente|ficar repetindo) {repeat}
+(mude|defina|ajuste|deixe) (meu|o) {schedkind} (repetindo|recorrendo|recorrente|se repetindo) {repeat}
+(mude|defina|ajuste|deixe) (meu|o) {schedkind} (próximo|futuro) para (repetir|recorrer) {repeat}
+(mude|defina|ajuste) a (frequência|repetição|recorrência|periodicidade) (do meu|do) {schedkind} para {repeat}
+(mude|defina|ajuste) a (frequência|repetição|recorrência|periodicidade) (do meu|do) {schedkind} para cada {repeat}
+(mude|defina|ajuste) a (frequência|repetição|recorrência|periodicidade) (do meu|do) {schedkind} a cada {repeat}
+(mude|defina|ajuste|deixe|remarque) (meu|o) {schedkind} para cada {repeat}
+(mude|defina|ajuste|deixe|remarque) (meu|o) {schedkind} de acordar para cada {repeat}
+(mude|ajuste) com que frequência (meu|o) {schedkind} (repete|recorre)

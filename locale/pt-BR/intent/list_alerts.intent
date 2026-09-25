@@ -1,0 +1,30 @@
+# machine translation from en-US, unvouched
+(liste|mostre|leia|diga) (para mim|para nós) (meus|os) (alarme|alarmes|timer|timers|lembrete|lembretes|evento|eventos|compromisso|alerta|alertas) (para|às|de) {timeframe}
+(liste|mostre|leia|diga) (para mim|para nós) (todos|todos os meus|meus|os) (alarme|alarmes|despertador|timer|timers|contagem regressiva|lembrete|lembretes|evento|eventos|compromisso|compromissos|alerta|alertas)
+(liste|mostre|leia|diga) (para mim|para nós) (todos|todos os meus) (alarmes|timers|lembretes|eventos|compromissos|alertas) (para|às|de) {timeframe}
+(liste|mostre|leia|diga) (para mim|para nós) (meu|o) {alertkind} (pendente|próximo|guardado)
+(liste|mostre|leia|diga) (para mim|para nós) todos (os meus|os) {alertkind}
+(quais|qual) (são|é) (meus|os) {alertkind} (pendentes|próximos|guardados)
+tem (algum|alguns) {alertkind}
+tem (algum|alguns) {alertkind} (para|às|de|entre|na próxima) {timeframe}
+(poderia|pode|consegue) você dizer (para mim|para nós) quais {alertkind} (eu tenho|nós temos)
+(eu tenho|nós temos|eu tinha) (alguma coisa|algo) (agendado|guardado|salvo|marcado|pendente) (para|às|em|amanhã|hoje) {timeframe}
+(liste|mostre|leia) (meus|todos os meus|os) (alarmes|timers|lembretes|eventos|compromissos|alertas) (para|às|de) {timeframe}
+(quais|que) {alertkind} (estão|está) (guardados|salvos|marcados|pendentes|próximos|agendados|aí) (para|às|em|amanhã|hoje) {timeframe}
+(liste|mostre|leia) (meus|todos os meus|os) (alarme|alarmes|despertador|timer|timers|contagem regressiva|lembrete|lembretes|evento|eventos|compromisso|compromissos|alerta|alertas)
+(eu tenho|nós temos|eu tinha) (algum|alguns|um|uma) {alertkind} (para|às|em|entre|amanhã|hoje|esta semana) {timeframe}
+o que (eu|nós) (defini|agendei|guardei|agendamos|guardamos) (para|em|às|amanhã|hoje) {timeframe}
+(quais|que|quantos) {alertkind} (eu tenho|nós temos|eu tinha) (para|às|em|amanhã|hoje|esta semana) {timeframe}
+(eu tenho|nós temos|eu tinha) (algum|alguns) {alertkind} (guardado|salvo|pendente|próximo|marcado|agendado)
+(eu tenho|nós temos|eu tinha) (alguma coisa|algo) (agendado|guardado|salvo|marcado|pendente)
+(quais|que) {alertkind} (estão|está) (guardados|salvos|marcados|pendentes|próximos|agendados|aí)
+(tem|existe) (algum|alguns) {alertkind} (para|às|em|entre|amanhã|hoje|esta semana) {timeframe}
+(diga|mostre|leia) (para mim|para nós) (quais|que) {alertkind} (eu tenho|nós temos)
+(eu|nós) (tenho|temos|guardei|marquei) (algum|alguns) {alertkind}
+(eu|nós) (defini|agendei|guardei|definimos) (algum|alguns) {alertkind}
+(tem|existe) (algum|alguns) {alertkind} (guardado|salvo|pendente|próximo|agendado)
+(eu tenho|nós temos|eu tinha) (algum|alguns|um|uma) {alertkind}
+(quais|que|quantos) {alertkind} (eu tenho|nós temos|eu tinha)
+(quais|que) {alertkind} e {alertkind2} (eu tenho|nós temos)
+(quando|qual) é meu {alertkind} (próximo|futuro)
+(tem|existe) (algum|alguns) {alertkind}
