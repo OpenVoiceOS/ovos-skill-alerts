@@ -1,5 +1,5 @@
-(ezarri|abiarazi|sortu) tenporizadore bat [{duration}(eko|ko)]
-tenporizadore berria [{duration}]
+(ezarri|abiarazi|sortu) tenporizadore bat [{duration:duration}(eko|ko)]
+tenporizadore berria [{duration:duration}]
 berri tenporizadore
 programatu tenporizadoreak
 nik dut tenporizadore

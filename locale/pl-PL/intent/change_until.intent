@@ -1,6 +1,6 @@
-zmień czas trwania mojego {schedkind} na {duration}
-przedłuż mój {schedkind} do {duration}
-dostosuj długość następnego {schedkind} do {duration}
-spraw, żeby {schedkind} trwał {duration}
-zmień mój {schedkind}, żeby trwał do {duration}
-skróć czas trwania mojego {schedkind} do {duration}
+zmień czas trwania mojego {schedkind} na {duration:duration}
+przedłuż mój {schedkind} do {duration:duration}
+dostosuj długość następnego {schedkind} do {duration:duration}
+spraw, żeby {schedkind} trwał {duration:duration}
+zmień mój {schedkind}, żeby trwał do {duration:duration}
+skróć czas trwania mojego {schedkind} do {duration:duration}

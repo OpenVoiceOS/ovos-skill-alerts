@@ -1,4 +1,4 @@
-(stelle|starte|erzeuge) einen Timer [für {duration}]
-neuer Timer [für {duration}]
-(stelle|starte|erzeuge) einen {duration} Timer
+(stelle|starte|erzeuge) einen Timer [für {duration:duration}]
+neuer Timer [für {duration:duration}]
+(stelle|starte|erzeuge) einen {duration:duration} Timer
 erzeuge timer

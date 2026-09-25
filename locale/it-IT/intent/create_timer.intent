@@ -1,5 +1,5 @@
-(imposta|avvia|crea) un timer [di {duration}]
-nuovo timer [di {duration}]
+(imposta|avvia|crea) un timer [di {duration:duration}]
+nuovo timer [di {duration:duration}]
 creare timer
 Ho timer
 programma timer

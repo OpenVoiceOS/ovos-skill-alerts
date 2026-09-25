@@ -1,5 +1,5 @@
-(pon|crea|inicia) un temporizador [de {duration}]
-temporizador nuevo [de {duration}]
+(pon|crea|inicia) un temporizador [de {duration:duration}]
+temporizador nuevo [de {duration:duration}]
 nuevo temporizador
 añadir temporizador
 añadir temporizadores

@@ -1,7 +1,7 @@
-(ustaw|utwórz|dodaj) [nowe] przypomnienie [o {reminder}] [o {time}]
+(ustaw|utwórz|dodaj) [nowe] przypomnienie [o {reminder}] [o {date:time}]
 nowe przypomnienie [{reminder}]
 nowy przypomnienia
 marka przypomnienia
 tworzyć przypomnienia
-przypomnij (mi|nam) [o {reminder}] [o {time}]
+przypomnij (mi|nam) [o {reminder}] [o {date:time}]
 powiedz mi żebym {reminder}

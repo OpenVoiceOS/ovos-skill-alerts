@@ -1,29 +1,29 @@
 # machine translation from en-US, unvouched
-(defina|crie|comece|adicione) um (timer|contagem regressiva) [de {duration}]
-novo timer [de {duration}]
-(defina|comece|faça) um timer de {duration}
-(defina|coloque) timer [de] {duration}
-timer [de] {duration}
-em {duration} me avise
-por favor comece um timer de {duration}
-eu preciso de um timer de {duration}
+(defina|crie|comece|adicione) um (timer|contagem regressiva) [de {duration:duration}]
+novo timer [de {duration:duration}]
+(defina|comece|faça) um timer de {duration:duration}
+(defina|coloque) timer [de] {duration:duration}
+timer [de] {duration:duration}
+em {duration:duration} me avise
+por favor comece um timer de {duration:duration}
+eu preciso de um timer de {duration:duration}
 eu preciso de um timer
-você pode começar um timer de {duration}
-você pode definir um timer de {duration}
+você pode começar um timer de {duration:duration}
+você pode definir um timer de {duration:duration}
 poderia definir um timer para mim
-você começaria um timer de {duration}
-vamos começar um timer de {duration}
+você começaria um timer de {duration:duration}
+vamos começar um timer de {duration:duration}
 vamos definir um timer
-defina um timer de {duration} para mim
-defina um timer de {duration} por favor
-coloque um timer de {duration}
-ligue um timer de {duration}
-comece uma contagem regressiva de {duration}
-comece a contar de {duration}
+defina um timer de {duration:duration} para mim
+defina um timer de {duration:duration} por favor
+coloque um timer de {duration:duration}
+ligue um timer de {duration:duration}
+comece uma contagem regressiva de {duration:duration}
+comece a contar de {duration:duration}
 eu quero definir um timer
-eu quero um timer de {duration}
-me dê um timer de {duration}
-faça um timer de {duration} para mim
-dispare um timer de {duration}
-eu gostaria de definir um timer de {duration}
+eu quero um timer de {duration:duration}
+me dê um timer de {duration:duration}
+faça um timer de {duration:duration} para mim
+dispare um timer de {duration:duration}
+eu gostaria de definir um timer de {duration:duration}
 comece o timer agora

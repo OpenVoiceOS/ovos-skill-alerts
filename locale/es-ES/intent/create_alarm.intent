@@ -1,10 +1,10 @@
-(pon|crea|añade|programa) una alarma [para {time}]
-alarma nueva [para {time}]
+(pon|crea|añade|programa) una alarma [para {date:time}]
+alarma nueva [para {date:time}]
 tengo alarma
 crear alarma
 tengo alarmas
-despiérta(me|nos) [a las {time}]
-(puedes|podrías) despertarme [a las {time}]
-despiértame con {mediakind} a las {time}
-despiértame en {duration}
-despiértame cada {days} a las {time}
+despiérta(me|nos) [a las {date:time}]
+(puedes|podrías) despertarme [a las {date:time}]
+despiértame con {mediakind} a las {date:time}
+despiértame en {duration:duration}
+despiértame cada {days} a las {date:time}

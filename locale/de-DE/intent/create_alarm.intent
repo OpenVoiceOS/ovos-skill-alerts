@@ -1,15 +1,15 @@
-(stelle|erzeuge|plane) einen Alarm [für {time}]
-neuer Alarm [für {time}]
-stelle einen Alarm (auf|für) {time}
-(stelle|erzeuge|plane) einen Wecker [für {time}]
-neuer Wecker [für {time}]
-stelle einen Wecker (auf|für) {time}
+(stelle|erzeuge|plane) einen Alarm [für {date:time}]
+neuer Alarm [für {date:time}]
+stelle einen Alarm (auf|für) {date:time}
+(stelle|erzeuge|plane) einen Wecker [für {date:time}]
+neuer Wecker [für {date:time}]
+stelle einen Wecker (auf|für) {date:time}
 plane weckzeiten
 neue wecke mich
 plane weck mich
-stelle einen Alarm [für {time}], damit er {mediakind} abspielt
-(weck|wecke) (mich|uns) [auf] [um {time}]
-(könntest|kannst) du (mich|uns) [um {time}] wecken
-weck mich mit {mediakind} um {time}
-weck mich in {duration}
-weck mich jeden {days} um {time}
+stelle einen Alarm [für {date:time}], damit er {mediakind} abspielt
+(weck|wecke) (mich|uns) [auf] [um {date:time}]
+(könntest|kannst) du (mich|uns) [um {date:time}] wecken
+weck mich mit {mediakind} um {date:time}
+weck mich in {duration:duration}
+weck mich jeden {days} um {date:time}

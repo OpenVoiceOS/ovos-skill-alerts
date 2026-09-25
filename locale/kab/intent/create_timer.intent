@@ -1,3 +1,3 @@
-sbedd-iyi-d timer i {duration}
-rnu-yi-d timer amaynut i {duration}
-sbedd timer {duration}
+sbedd-iyi-d timer i {duration:duration}
+rnu-yi-d timer amaynut i {duration:duration}
+sbedd timer {duration:duration}
