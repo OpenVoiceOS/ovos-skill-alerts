@@ -1,2 +1,5 @@
 sveglia(mi|ci) [alle {time}]
 (puoi|potresti) svegliarmi [alle {time}]
+svegliami con {mediakind} alle {time}
+svegliami tra {duration}
+svegliami ogni {days} alle {time}

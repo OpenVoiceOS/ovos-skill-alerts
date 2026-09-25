@@ -12,3 +12,4 @@
 {"skill_id": "ovos-skill-alerts.openvoiceos", "utterance": "cómo alarma", "lang": "es-ES", "intent_label": "list_alerts", "intent_type": "adapt", "required_vocab": ["query", "alarm"], "needs_manual": false, "machine_generated": false}
 {"skill_id": "ovos-skill-alerts.openvoiceos", "utterance": "cuánto alarma", "lang": "es-ES", "intent_label": "list_alerts", "intent_type": "adapt", "required_vocab": ["query", "alarm"], "needs_manual": false, "machine_generated": false}
 {"skill_id": "ovos-skill-alerts.openvoiceos", "utterance": "conseguido alarma", "lang": "es-ES", "intent_label": "list_alerts", "intent_type": "adapt", "required_vocab": ["query", "alarm"], "needs_manual": false, "machine_generated": false}
+{"skill_id": "ovos-skill-alerts.openvoiceos", "utterance": "despiértame con Libro de audio a las 7", "lang": "es-ES", "intent_label": "create_alarm_alt", "intent_type": "padacioso", "needs_manual": true, "machine_generated": false}
