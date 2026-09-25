@@ -1,3 +1,8 @@
+# 'queda' is this locale's own word for the time that remains: it is the
+# word timer_status.dialog already speaks, Al temporizador {name} le queda {remaining}.
+# 'izquierda' below is the DIRECTION left and does not belong here. It is kept
+# so no phrasing is lost until a speaker removes it. Both lines unvouched.
+queda
 estado
 fin
 hecho
