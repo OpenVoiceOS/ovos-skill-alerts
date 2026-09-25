@@ -1,3 +1,14 @@
+# The days line below carries no {time}, and hu-HU is the only locale of 18
+# here that does not pair them, so 'ebressz fel minden hetfon 7-kor' binds
+# the time text into {days}. The line added below puts the time first, where
+# 'minden' separates the two slots: OVOS-INTENT-2 forbids adjacent slots, and
+# Hungarian marks time with the -kor suffix rather than a preposition, so the
+# shape every other locale uses has no separator word to borrow here.
+# Every word below is already in this file. Both lines are kept, so the
+# days-only phrasing still matches. Unvouched: hu-HU has no reviewer of
+# record. Open for a speaker: whether the days-then-time order is wanted,
+# which needs a literal word between the two slots that only a speaker can give.
 ébressz fel [minket] [{time}(-kor|kor)]
 ébressz fel {time}(-kor|kor), hogy {mediakind} szóljon
 ébressz fel minden {days}
+ébressz fel {time}(-kor|kor) minden {days}

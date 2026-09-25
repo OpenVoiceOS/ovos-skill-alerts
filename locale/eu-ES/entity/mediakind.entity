@@ -1,9 +1,17 @@
+# 'podcast bat' and 'Audiobook bat' carry 'bat', the indefinite article,
+# where en-US carries a bare noun. The bare form is added beside each so a
+# speaker saying the noun alone is matched too; neither line is removed.
+# Unvouched: eu-ES has no reviewer of record. Two questions are open and
+# are not guessed here: whether the -a and -ak forms below should also have
+# a bare form, and whether 'Audiobook' is the Basque word at all.
 musika
 Irratia
 Berriak
 podcast bat
+podcast
 podcastak
 Audiobook bat
+Audiobook
 Audiokopiak
 Bideoak
 audio-entzunezkoak
