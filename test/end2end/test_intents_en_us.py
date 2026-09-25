@@ -568,52 +568,57 @@ class TestAdapt2_Createalarm(_IntentRoutingMixin, TestCase):
         self._assert_padatious(r"alarm in an hour", r"create_alarm.intent")
 
 class TestAdapt3_Createalarmalt(_IntentRoutingMixin, TestCase):
-    """Padatious (intent file) intent: create_alarm_alt.intent"""
+    """Padatious (intent file) intent: create_alarm.intent, wake forms.
+
+    These lines lived in create_alarm_alt.intent until the fold; a skill
+    defines each intent once (RULES.md, One intent, one definition), so they
+    are now part of create_alarm.intent and must still route there."""
     def test_wake_me_up(self):
-        self._assert_padatious(r"wake me up", r"create_alarm_alt.intent")
+        self._assert_padatious(r"wake me up", r"create_alarm.intent")
 
     def test_wake_me_up_at_time(self):
-        self._assert_padatious(r"wake me up at 7 am", r"create_alarm_alt.intent")
+        self._assert_padatious(r"wake me up at 7 am", r"create_alarm.intent")
 
     def test_can_you_wake_me_up(self):
-        self._assert_padatious(r"can you wake me up", r"create_alarm_alt.intent")
+        self._assert_padatious(r"can you wake me up", r"create_alarm.intent")
 
     def test_wake_us_up_every_weekday_at_time(self):
-        self._assert_padatious(r"wake us up every weekday at 6 am", r"create_alarm_alt.intent")
+        self._assert_padatious(r"wake us up every weekday at 6 am", r"create_alarm.intent")
 
     def test_wake_the_kids_up(self):
         # issue #175: third-person wake phrasings. wake.voc only had
         # "wake me/us [up]" before this, so "wake the kids" fell through.
-        # create_alarm_alt.intent's "wake (the kids|everyone) [up] ..." lines
+        # the "wake (the kids|everyone) [up] ..." lines, folded in from
+        # create_alarm_alt.intent
         # already cover this natively -- no Adapt needed.
-        self._assert_padatious(r"wake the kids up", r"create_alarm_alt.intent")
+        self._assert_padatious(r"wake the kids up", r"create_alarm.intent")
 
     def test_wake_the_kids(self):
-        self._assert_padatious(r"wake the kids", r"create_alarm_alt.intent")
+        self._assert_padatious(r"wake the kids", r"create_alarm.intent")
 
     def test_wake_up_the_kids(self):
-        self._assert_padatious(r"wake up the kids", r"create_alarm_alt.intent")
+        self._assert_padatious(r"wake up the kids", r"create_alarm.intent")
 
     def test_wake_everyone_up(self):
-        self._assert_padatious(r"wake everyone up", r"create_alarm_alt.intent")
+        self._assert_padatious(r"wake everyone up", r"create_alarm.intent")
 
     def test_wake_everyone(self):
-        self._assert_padatious(r"wake everyone", r"create_alarm_alt.intent")
+        self._assert_padatious(r"wake everyone", r"create_alarm.intent")
 
     def test_wake_the_kids_up_at_time(self):
-        # issue #175 live validation: the default pipeline serves
-        # create_alarm_alt from create_alarm_alt.intent (padatious/padacioso),
-        # which only had "wake (me|us)" forms -- "wake the kids up at 7"
+        # issue #175 live validation: the wake forms, then in
+        # create_alarm_alt.intent and now folded into create_alarm.intent,
+        # only had "wake (me|us)" shapes -- "wake the kids up at 7"
         # never reached the padatious-tier template that carries {time}
         # and fell through to fallback.
-        self._assert_padatious_high(r"wake the kids up at 7", r"create_alarm_alt.intent")
+        self._assert_padatious_high(r"wake the kids up at 7", r"create_alarm.intent")
 
     def test_wake_up_the_kids_at_time(self):
-        self._assert_padatious_high(r"wake up the kids at 7", r"create_alarm_alt.intent")
+        self._assert_padatious_high(r"wake up the kids at 7", r"create_alarm.intent")
 
-    @pytest.mark.xfail(strict=False, reason="ENGINE ISSUE (padacioso), not this skill's .intent files: 'wake everyone up every weekday at 7' is a literal expansion of create_alarm_alt.intent's 'wake (the kids|everyone) [up] every {days} at {time}' line and matches correctly at padacioso's MEDIUM confidence tier, but padacioso does not score it high enough to clear its own HIGH tier threshold (verified via a raw padacioso.IntentContainer probe outside the full pipeline). padacioso is meant to be an exact-match template engine; a literal grammar expansion not clearing its own top confidence tier is a matcher-scoring defect, not a phrasing/coverage gap in this skill's templates -- flagged for the engine lane, not fixed here.")
+    @pytest.mark.xfail(strict=False, reason="ENGINE ISSUE (padacioso), not this skill's .intent files: 'wake everyone up every weekday at 7' is a literal expansion of create_alarm.intent's 'wake (the kids|everyone) [up] every {days} at {time}' line and matches correctly at padacioso's MEDIUM confidence tier, but padacioso does not score it high enough to clear its own HIGH tier threshold (verified via a raw padacioso.IntentContainer probe outside the full pipeline). padacioso is meant to be an exact-match template engine; a literal grammar expansion not clearing its own top confidence tier is a matcher-scoring defect, not a phrasing/coverage gap in this skill's templates -- flagged for the engine lane, not fixed here.")
     def test_wake_everyone_up_every_weekday_at_time(self):
-        self._assert_padatious_high(r"wake everyone up every weekday at 7", r"create_alarm_alt.intent")
+        self._assert_padatious_high(r"wake everyone up every weekday at 7", r"create_alarm.intent")
 
 class TestAdapt4_Createocpalarm(_IntentRoutingMixin, TestCase):
     """Padatious (intent file) intent: create_alarm.intent (media branch).
@@ -633,14 +638,15 @@ class TestAdapt4_Createocpalarm(_IntentRoutingMixin, TestCase):
         self._assert_padatious(r"set an alarm with music", r"create_alarm.intent")
 
 class TestAdapt5_Createocpalarmalt(_IntentRoutingMixin, TestCase):
-    """Padatious (intent file) intent: create_alarm_alt.intent (media branch).
+    """Padatious (intent file) intent: create_alarm.intent (media branch).
 
     The dedicated media-alarm intent file's wake-phrasing lines were folded
-    into create_alarm_alt.intent (the wake form); handle_create_alarm_alt
-    delegates to handle_create_alarm's {mediakind} branch.
+    into the wake forms, and those in turn into create_alarm.intent, so
+    handle_create_alarm's {mediakind} branch serves them directly. There is
+    no separate alt handler any more.
     """
     def test_wake_me_up_with_music(self):
-        self._assert_padatious(r"wake me up with music", r"create_alarm_alt.intent")
+        self._assert_padatious(r"wake me up with music", r"create_alarm.intent")
 
 class TestAdapt6_Createtimer(_IntentRoutingMixin, TestCase):
     """Padatious (intent file) intent: create_timer.intent"""
@@ -1284,7 +1290,7 @@ class TestAdaptMigration_Padatious_kw_split(_IntentRoutingMixin, TestCase):
         self._assert_padatious(r"set an alarm with music", r"create_alarm.intent")
 
     def test_create_ocp_alarm_alt_padatious(self):
-        self._assert_padatious(r"wake me up with music", r"create_alarm_alt.intent")
+        self._assert_padatious(r"wake me up with music", r"create_alarm.intent")
 
     def test_dav_sync_padatious(self):
         self._assert_padatious(r"synchronize my calendar", r"dav_sync.intent")

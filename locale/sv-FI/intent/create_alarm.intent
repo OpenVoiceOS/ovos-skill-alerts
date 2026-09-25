@@ -5,3 +5,6 @@ uusi herätä minut
 uusi hälytykset
 luo hälytykset
 aseta hälytys [kello {time}] soittamaan {mediakind}
+herätä minut [kello {time}]
+herätä minut soittamaan {mediakind} kello {time}
+herätä minut joka {days} kello {time}

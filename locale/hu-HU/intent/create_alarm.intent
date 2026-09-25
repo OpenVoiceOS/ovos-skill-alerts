@@ -4,3 +4,7 @@ hozzon létre riasztások
 ütemterv riasztások
 új riasztások
 állíts be [egy] riasztást [{time}(-ra|-re)], hogy {mediakind} szóljon
+ébressz fel [minket] [{time}(-kor|kor)]
+ébressz fel {time}(-kor|kor), hogy {mediakind} szóljon
+ébressz fel minden {days}
+ébressz fel {time}(-kor|kor) minden {days}

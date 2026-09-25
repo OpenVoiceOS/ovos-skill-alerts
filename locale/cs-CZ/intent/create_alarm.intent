@@ -4,3 +4,6 @@ Mám alarmy
 plán alarmy
 vytvořit alarm
 nastav (alarm|budík) [na {time}], aby přehrával {mediakind}
+(vzbuď|probuď) (mě|nás) [v {time}]
+vzbuď mě s {mediakind} v {time}
+vzbuď mě každý {days} v {time}

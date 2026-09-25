@@ -4,3 +4,6 @@ berri alarmak
 sortu alarmak
 egin alarma
 ezarri alarma [bat] [{time}(etarako|rako)] erreproduzitzeko {mediakind}
+esnatu (nazazu|gaitzazu) [{time}(etan|tan)]
+esnatu nazazu {mediakind}(rekin|ekin) {time}(etan|tan)
+esnatu nazazu {days} bakoitzean {time}(etan|tan)

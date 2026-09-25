@@ -33,7 +33,7 @@ If you were away, or your device was off or napping, ask for a summary of what y
 
 The skill matches utterances with file-based intents (padatious/padacioso), not Adapt keyword intents. Each `.intent` file under `locale/<lang>/intent/` is a set of phrase templates, optionally referencing a `.entity` file for a `{slot}` value list or a `.voc` file for an inline `<keyword>` alternation.
 
-- `create_alarm` / `create_alarm_alt` — set an alarm, optionally recurring on given weekdays, or (with a media word) playing media through OCP when it fires.
+- `create_alarm` — set an alarm, optionally recurring on given weekdays, or (with a media word) playing media through OCP when it fires.
 - `create_timer` — start a countdown timer.
 - `create_reminder` / `create_reminder_recurring` — set a reminder, optionally recurring.
 - `create_event` — schedule an event, with collision and prenotification handling.

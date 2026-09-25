@@ -3,3 +3,6 @@ nowy (alarm|budzik) [na {time}]
 harmonogram alarm
 tworzyć alarm
 ustaw (alarm|budzik) [na {time}], żeby odtwarzał {mediakind}
+obudź (mnie|nas) [o {time}]
+obudź mnie z {mediakind} o {time}
+obudź mnie co {days} o {time}

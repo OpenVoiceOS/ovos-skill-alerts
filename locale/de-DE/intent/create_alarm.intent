@@ -8,3 +8,8 @@ plane weckzeiten
 neue wecke mich
 plane weck mich
 stelle einen Alarm [für {time}], damit er {mediakind} abspielt
+(weck|wecke) (mich|uns) [auf] [um {time}]
+(könntest|kannst) du (mich|uns) [um {time}] wecken
+weck mich mit {mediakind} um {time}
+weck mich in {duration}
+weck mich jeden {days} um {time}
