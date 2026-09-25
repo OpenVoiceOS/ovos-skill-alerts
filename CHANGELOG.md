@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.11.0a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.11.0a1) (2026-09-25)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.10.0a1...0.11.0a1)
+
+**Merged pull requests:**
+
+- feat\(intents\): declare typed slots across every locale [\#275](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/275) ([openvoiceos-bot](https://github.com/openvoiceos-bot))
+
 ## [0.10.0a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.10.0a1) (2026-09-25)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.9.0a5...0.10.0a1)
@@ -196,10 +204,6 @@
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.6.2a1...0.6.3a1)
 
-**Merged pull requests:**
-
-- fix: time alerts through the scheduled-events service [\#173](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/173) ([JarbasAl](https://github.com/JarbasAl))
-
 ## [0.6.2a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.6.2a1) (2026-09-16)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.6.1a3...0.6.2a1)
@@ -370,10 +374,6 @@
 ## [0.3.6a5](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.3.6a5) (2026-09-02)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.3.6a4...0.3.6a5)
-
-**Merged pull requests:**
-
-- Migrate 15 class-C Adapt intents to intent files [\#172](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/172) ([JarbasAl](https://github.com/JarbasAl))
 
 ## [0.3.6a4](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.3.6a4) (2026-08-26)
 
