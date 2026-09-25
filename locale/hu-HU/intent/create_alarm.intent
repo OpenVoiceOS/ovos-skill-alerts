@@ -8,3 +8,4 @@ hozzon létre riasztások
 ébressz fel {date:time}(-kor|kor), hogy {mediakind} szóljon
 ébressz fel minden {days}
 ébressz fel {date:time}(-kor|kor) minden {days}
+ébressz fel [minket] {duration:duration} múlva

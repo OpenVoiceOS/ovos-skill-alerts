@@ -8,3 +8,4 @@ aseta hälytys [kello {date:time}] soittamaan {mediakind}
 herätä minut [kello {date:time}]
 herätä minut soittamaan {mediakind} kello {date:time}
 herätä minut joka {days} kello {date:time}
+herätä minut {duration:duration} kuluttua

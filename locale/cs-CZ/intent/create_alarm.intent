@@ -7,3 +7,4 @@ nastav (alarm|budík) [na {date:time}], aby přehrával {mediakind}
 (vzbuď|probuď) (mě|nás) [v {date:time}]
 vzbuď mě s {mediakind} v {date:time}
 vzbuď mě každý {days} v {date:time}
+(vzbuď|probuď) (mě|nás) za {duration:duration}
