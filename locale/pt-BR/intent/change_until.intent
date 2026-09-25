@@ -1,0 +1,9 @@
+# machine translation from en-US, unvouched
+(mude|defina|ajuste|estenda) (meu|o) {schedkind} para (durar|correr|seguir) (até|por) {duration}
+(mude|defina|ajuste) a (duração|extensão|duração do evento|extensão do evento) (do|de) (meu|o) {schedkind} para {duration}
+(mude|defina|ajuste|estenda|encurte) a (duração|extensão) (do meu|do) {schedkind} (próximo|futuro) para {duration}
+(meu|o) {schedkind} (mude|defina|ajuste) (a|sua) (duração|extensão) para {duration}
+(mude|defina|ajuste|estenda) (meu|o) {schedkind} para (durar|correr|seguir) por {duration}
+(mude|defina|ajuste|estenda|encurte) a (duração|extensão) (do meu|do) {schedkind} para {duration}
+(mude|defina|ajuste|estenda) (meu|o) {schedkind} (até|até as) {duration}
+(mude|defina|ajuste|estenda) (meu|o) {schedkind} para durar pelos próximos {duration}
