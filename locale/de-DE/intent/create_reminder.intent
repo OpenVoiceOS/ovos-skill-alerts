@@ -1,8 +1,8 @@
-(erstelle|setze|plane) eine [neue] Erinnerung [an {reminder}] [um {time}]
+(erstelle|setze|plane) eine [neue] Erinnerung [an {reminder}] [um {date:time}]
 neue Erinnerung [{reminder}]
 neuer erinnerungen
 neue benachrichtigung
 plane erinnerung
-erinnere (mich|uns) [an {reminder}] [um {time}]
+erinnere (mich|uns) [an {reminder}] [um {date:time}]
 sag mir dass ich {reminder} [soll]
-erinnere (mich|uns) in {duration} [an {reminder}]
+erinnere (mich|uns) in {duration:duration} [an {reminder}]

@@ -1,15 +1,15 @@
 # machine translation from en-US, unvouched
-(defina|crie|adicione|agende) um lembrete [novo] [para {reminder}] [às {time}]
+(defina|crie|adicione|agende) um lembrete [novo] [para {reminder}] [às {date:time}]
 novo lembrete [{reminder}]
-(me|nos) lembre [de {reminder}] [às {time}]
-me diga para {reminder} [às {time}]
-me lembre em {duration} [de {reminder}]
+(me|nos) lembre [de {reminder}] [às {date:time}]
+me diga para {reminder} [às {date:time}]
+me lembre em {duration:duration} [de {reminder}]
 defina um lembrete para mim
 por favor defina um lembrete para {reminder}
 você pode definir um lembrete para {reminder}
 você pode me lembrar de {reminder}
 poderia me lembrar de {reminder}
-você me lembraria de {reminder} às {time}
+você me lembraria de {reminder} às {date:time}
 eu preciso de um lembrete para {reminder}
 eu preciso ser lembrado de {reminder}
 eu quero um lembrete para {reminder}

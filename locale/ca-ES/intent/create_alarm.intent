@@ -1,10 +1,10 @@
-(posa|crea|afegeix|programa) una alarma [per {time}]
-alarma nova [per {time}]
+(posa|crea|afegeix|programa) una alarma [per {date:time}]
+alarma nova [per {date:time}]
 nova alarmes
 nova alarma
 crea alarmes
-(desperta'm|lleva'm) [a les {time}]
-em (despertes|lleves) [a les {time}]
-desperta'm amb {mediakind} a les {time}
-desperta'm d'aquí a {duration}
-desperta'm cada {days} a les {time}
+(desperta'm|lleva'm) [a les {date:time}]
+em (despertes|lleves) [a les {date:time}]
+desperta'm amb {mediakind} a les {date:time}
+desperta'm d'aquí a {duration:duration}
+desperta'm cada {days} a les {date:time}

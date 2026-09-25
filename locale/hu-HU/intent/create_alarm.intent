@@ -1,10 +1,10 @@
-(állíts be|hozz létre|adj hozzá) [egy] riasztást [{time}(-ra|-re)]
-új riasztás [{time}]
+(állíts be|hozz létre|adj hozzá) [egy] riasztást [{date:time}(-ra|-re)]
+új riasztás [{date:time}]
 hozzon létre riasztások
 ütemterv riasztások
 új riasztások
-állíts be [egy] riasztást [{time}(-ra|-re)], hogy {mediakind} szóljon
-ébressz fel [minket] [{time}(-kor|kor)]
-ébressz fel {time}(-kor|kor), hogy {mediakind} szóljon
+állíts be [egy] riasztást [{date:time}(-ra|-re)], hogy {mediakind} szóljon
+ébressz fel [minket] [{date:time}(-kor|kor)]
+ébressz fel {date:time}(-kor|kor), hogy {mediakind} szóljon
 ébressz fel minden {days}
-ébressz fel {time}(-kor|kor) minden {days}
+ébressz fel {date:time}(-kor|kor) minden {days}

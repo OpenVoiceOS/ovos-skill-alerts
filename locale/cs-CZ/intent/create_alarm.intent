@@ -1,9 +1,9 @@
-(nastav|vytvoř|přidej) (alarm|budík) [na {time}]
-nový (alarm|budík) [na {time}]
+(nastav|vytvoř|přidej) (alarm|budík) [na {date:time}]
+nový (alarm|budík) [na {date:time}]
 Mám alarmy
 plán alarmy
 vytvořit alarm
-nastav (alarm|budík) [na {time}], aby přehrával {mediakind}
-(vzbuď|probuď) (mě|nás) [v {time}]
-vzbuď mě s {mediakind} v {time}
-vzbuď mě každý {days} v {time}
+nastav (alarm|budík) [na {date:time}], aby přehrával {mediakind}
+(vzbuď|probuď) (mě|nás) [v {date:time}]
+vzbuď mě s {mediakind} v {date:time}
+vzbuď mě každý {days} v {date:time}

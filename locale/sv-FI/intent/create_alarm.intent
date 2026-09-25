@@ -1,10 +1,10 @@
-(aseta|luo|lisää) hälytys [kello {time}]
-uusi hälytys [{time}]
-aseta hälytys kello {time}
+(aseta|luo|lisää) hälytys [kello {date:time}]
+uusi hälytys [{date:time}]
+aseta hälytys kello {date:time}
 uusi herätä minut
 uusi hälytykset
 luo hälytykset
-aseta hälytys [kello {time}] soittamaan {mediakind}
-herätä minut [kello {time}]
-herätä minut soittamaan {mediakind} kello {time}
-herätä minut joka {days} kello {time}
+aseta hälytys [kello {date:time}] soittamaan {mediakind}
+herätä minut [kello {date:time}]
+herätä minut soittamaan {mediakind} kello {date:time}
+herätä minut joka {days} kello {date:time}

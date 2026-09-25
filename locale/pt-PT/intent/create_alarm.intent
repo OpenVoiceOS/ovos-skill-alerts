@@ -1,9 +1,9 @@
-(põe|cria|adiciona|define|agenda) um alarme [para {time}]
-alarme novo [para {time}]
+(põe|cria|adiciona|define|agenda) um alarme [para {date:time}]
+alarme novo [para {date:time}]
 novo alarme
 criar alarmes
 horário alarmes
-acorda(-me|-nos) [às {time}]
-(podes|podias) acordar-me [às {time}]
-acorda-me com {mediakind} às {time}
-acorda-me a cada {days} às {time}
+acorda(-me|-nos) [às {date:time}]
+(podes|podias) acordar-me [às {date:time}]
+acorda-me com {mediakind} às {date:time}
+acorda-me a cada {days} às {date:time}

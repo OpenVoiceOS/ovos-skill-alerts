@@ -1,9 +1,9 @@
-(pon|crea|engade) unha alarma [para {time}]
-alarma nova [para {time}]
+(pon|crea|engade) unha alarma [para {date:time}]
+alarma nova [para {date:time}]
 horario acordarme
 definir acordarme
 facer acordarme
-(espértame|acórdame) [ás {time}]
-espértame con {mediakind} ás {time}
-espértame dentro de {duration}
-espértame cada {days} ás {time}
+(espértame|acórdame) [ás {date:time}]
+espértame con {mediakind} ás {date:time}
+espértame dentro de {duration:duration}
+espértame cada {days} ás {date:time}

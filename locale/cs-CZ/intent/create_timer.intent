@@ -1,5 +1,5 @@
-(nastav|spusť|vytvoř) časovač [na {duration}]
-nový časovač [na {duration}]
+(nastav|spusť|vytvoř) časovač [na {duration:duration}]
+nový časovač [na {duration:duration}]
 Mám časovače
 plán časovač
 Mám časovač

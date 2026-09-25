@@ -1,9 +1,9 @@
-(ezarri|sortu|gehitu) alarma [bat] [{time}(etarako|rako)]
-alarma berria [{time}]
+(ezarri|sortu|gehitu) alarma [bat] [{date:time}(etarako|rako)]
+alarma berria [{date:time}]
 berri alarmak
 sortu alarmak
 egin alarma
-ezarri alarma [bat] [{time}(etarako|rako)] erreproduzitzeko {mediakind}
-esnatu (nazazu|gaitzazu) [{time}(etan|tan)]
-esnatu nazazu {mediakind}(rekin|ekin) {time}(etan|tan)
-esnatu nazazu {days} bakoitzean {time}(etan|tan)
+ezarri alarma [bat] [{date:time}(etarako|rako)] erreproduzitzeko {mediakind}
+esnatu (nazazu|gaitzazu) [{date:time}(etan|tan)]
+esnatu nazazu {mediakind}(rekin|ekin) {date:time}(etan|tan)
+esnatu nazazu {days} bakoitzean {date:time}(etan|tan)

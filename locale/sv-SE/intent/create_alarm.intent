@@ -1,11 +1,11 @@
-(sätt|skapa|lägg till) ett larm [till {time}]
-nytt larm [till {time}]
-sätt ett larm till {time}
+(sätt|skapa|lägg till) ett larm [till {date:time}]
+nytt larm [till {date:time}]
+sätt ett larm till {date:time}
 schema larm
 ny larm
 jag har larm
-sätt ett larm [till {time}], så att den spelar {mediakind}
-väck (mig|oss) [klockan {time}]
-väck mig med {mediakind} klockan {time}
-väck mig om {duration}
-väck mig varje {days} klockan {time}
+sätt ett larm [till {date:time}], så att den spelar {mediakind}
+väck (mig|oss) [klockan {date:time}]
+väck mig med {mediakind} klockan {date:time}
+väck mig om {duration:duration}
+väck mig varje {days} klockan {date:time}

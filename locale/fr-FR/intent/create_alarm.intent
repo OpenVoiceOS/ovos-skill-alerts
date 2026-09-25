@@ -1,10 +1,10 @@
-(mets|crée|ajoute|programme) une alarme [pour {time}]
-nouvelle alarme [pour {time}]
+(mets|crée|ajoute|programme) une alarme [pour {date:time}]
+nouvelle alarme [pour {date:time}]
 nouveau alarmes
 j'ai alarme
 créer alarme
-réveille(-moi|-nous) [à {time}]
-(peux-tu|pourrais-tu) me réveiller [à {time}]
-réveille-moi avec {mediakind} à {time}
-réveille-moi dans {duration}
-réveille-moi chaque {days} à {time}
+réveille(-moi|-nous) [à {date:time}]
+(peux-tu|pourrais-tu) me réveiller [à {date:time}]
+réveille-moi avec {mediakind} à {date:time}
+réveille-moi dans {duration:duration}
+réveille-moi chaque {days} à {date:time}

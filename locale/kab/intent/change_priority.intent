@@ -1,3 +1,3 @@
-beddel priorité n {schedkind}-inu ɣer {priority}
-ali priorité n {schedkind} ɣer {priority}
+beddel priorité n {schedkind}-inu ɣer {number:priority}
+ali priorité n {schedkind} ɣer {number:priority}
 sers priorité n {schedkind}-inu

@@ -1,6 +1,6 @@
-измени приоритет моего {schedkind} на {priority}
-повысь приоритет {schedkind} до уровня {priority}
+измени приоритет моего {schedkind} на {number:priority}
+повысь приоритет {schedkind} до уровня {number:priority}
 настрой приоритет моего следующего {schedkind}
-установи {schedkind} с приоритетом {priority}
+установи {schedkind} с приоритетом {number:priority}
 понизь приоритет моего {schedkind}
-измени уровень приоритета {schedkind} на {priority}
+измени уровень приоритета {schedkind} на {number:priority}
