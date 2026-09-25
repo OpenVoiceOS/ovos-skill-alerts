@@ -1,5 +1,5 @@
 {
-  "title": "Alertes",
+  "name": "Alertes",
   "description": "Una habilitat per a gestionar alarmes, temporitzadors, recordatoris, esdeveniments i tasques pendents i, opcionalment, sincronitzar-los amb un servei CalDAV. ",
   "examples": [
     "Posa una alarma a les 8 AM.",

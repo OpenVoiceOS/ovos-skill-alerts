@@ -1,5 +1,5 @@
 {
-    "title": "Alerts",
+    "name": "Alerts",
     "description": "A skill to manage alarms, timers, reminders, events and todos and optionally sync them with a CalDAV service. ",
     "examples": [
         "Set an alarm for 8 AM.",

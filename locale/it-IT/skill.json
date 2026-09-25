@@ -1,5 +1,5 @@
 {
-  "title": "Avvisi",
+  "name": "Avvisi",
   "description": "Una competenza per gestire allarmi, timer, promemoria, eventi e cose da fare e, facoltativamente, per sincronizzarli con un servizio CalDAV.",
   "examples": [
     "Imposta una sveglia per le 8.",

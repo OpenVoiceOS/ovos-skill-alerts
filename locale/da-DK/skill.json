@@ -1,5 +1,5 @@
 {
-  "title": "Advarsler",
+  "name": "Advarsler",
   "description": "En færdighed til at administrere alarmer, timere, påmindelser, begivenheder og gøremål og eventuelt synkronisere dem med en CalDAV-tjeneste. ",
   "examples": [
     "Indstil en alarm til kl. 8.",

@@ -1,5 +1,5 @@
 {
-  "title": "Alertas",
+  "name": "Alertas",
   "description": "Una skill para gestionar alarmas, temporizadores, recordatorios, eventos, tareas pendientes y, opcionalmente, sincronizarlos con un servicio CalDAV.",
   "examples": [
 	"Pon una alarma a las 8 a.m.",

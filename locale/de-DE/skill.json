@@ -1,5 +1,5 @@
 {
-  "title": "Benachrichtigungen",
+  "name": "Benachrichtigungen",
   "description": "Ein Skill zum Verwalten von Alarmen, Timern, Erinnerungen, Ereignissen und Aufgaben und optional zum Synchronisieren dieser mit einem CalDAV-Dienst.",
   "examples": [
     "Stelle den Wecker auf 8 Uhr.",
