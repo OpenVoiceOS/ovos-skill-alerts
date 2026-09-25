@@ -1,1 +1,4 @@
 väck (mig|oss) [klockan {time}]
+väck mig med {mediakind} klockan {time}
+väck mig om {duration}
+väck mig varje {days} klockan {time}

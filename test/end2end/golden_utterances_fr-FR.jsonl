@@ -13,3 +13,4 @@
 {"skill_id": "ovos-skill-alerts.openvoiceos", "utterance": "faisons-nous alarmes", "lang": "fr-FR", "intent_label": "list_alerts", "intent_type": "adapt", "required_vocab": ["query", "alarm"], "needs_manual": false, "machine_generated": false}
 {"skill_id": "ovos-skill-alerts.openvoiceos", "utterance": "avons-nous alarmes", "lang": "fr-FR", "intent_label": "list_alerts", "intent_type": "adapt", "required_vocab": ["query", "alarm"], "needs_manual": false, "machine_generated": false}
 {"skill_id": "ovos-skill-alerts.openvoiceos", "utterance": "combien alarme", "lang": "fr-FR", "intent_label": "list_alerts", "intent_type": "adapt", "required_vocab": ["query", "alarm"], "needs_manual": false, "machine_generated": false}
+{"skill_id": "ovos-skill-alerts.openvoiceos", "utterance": "réveille-moi avec audio à 7 heures", "lang": "fr-FR", "intent_label": "create_alarm_alt", "intent_type": "padacioso", "needs_manual": true, "machine_generated": false}
