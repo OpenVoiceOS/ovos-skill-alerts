@@ -5,3 +5,7 @@ schema larm
 ny larm
 jag har larm
 sätt ett larm [till {time}], så att den spelar {mediakind}
+väck (mig|oss) [klockan {time}]
+väck mig med {mediakind} klockan {time}
+väck mig om {duration}
+väck mig varje {days} klockan {time}

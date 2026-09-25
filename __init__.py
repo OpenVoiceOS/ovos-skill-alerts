@@ -287,9 +287,9 @@ class AlertSkill(ConversationalSkill):
         """
         Intent handler for creating an alarm. The dedicated media-alarm
         template's phrasings ("set an alarm with music at 7 am", "wake me
-        up with music") were folded into this template and create_alarm_alt's
-        (the wake form reaches this method via handle_create_alarm_alt's
-        delegation), so a matched {mediakind} slot means this is a request
+        up with music") were folded into this template, as were the wake
+        forms that create_alarm_alt.intent used to carry, so a matched
+        {mediakind} slot means this is a request
         for a media alarm -- branch to the OCP path instead of building a
         plain alarm.
         :param message: Message associated with request
@@ -312,20 +312,12 @@ class AlertSkill(ConversationalSkill):
 
         self.confirm_alert(alarm, message)
 
-    @intent_handler("create_alarm_alt.intent")
-    def handle_create_alarm_alt(self, message: Message):
-        """
-        Alternate intent handler for creating an alarm
-        :param message: Message associated with request
-        """
-        return self.handle_create_alarm(message)
-
     def handle_ocp_alarm(self, message: Message):
         """
         Handler for creating an alarm that plays media via OCP. Reached via
-        handle_create_alarm's and handle_create_alarm_alt's {mediakind}
-        branch (create_alarm.intent / create_alarm_alt.intent) -- this used to
-        be its own dedicated intent file/decorator, now folded in.
+        handle_create_alarm's {mediakind} branch (create_alarm.intent) --
+        this used to be its own dedicated intent file/decorator, now folded
+        in.
         :param message: Message associated with request
         """
         if not self.bus.wait_for_response(Message("ovos.common_play.ping"),

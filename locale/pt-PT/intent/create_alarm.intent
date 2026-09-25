@@ -3,3 +3,7 @@ alarme novo [para {time}]
 novo alarme
 criar alarmes
 horário alarmes
+acorda(-me|-nos) [às {time}]
+(podes|podias) acordar-me [às {time}]
+acorda-me com {mediakind} às {time}
+acorda-me a cada {days} às {time}

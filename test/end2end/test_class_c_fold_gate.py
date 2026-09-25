@@ -11,7 +11,7 @@ than just intent-name routing:
   media kind; the plain path ("set an alarm at 7 am") does not
 
 These are the timeframe-listing fold (into list_alerts) and
-the media-alarm fold (into create_alarm/create_alarm_alt) before/after gate.
+the media-alarm fold (into create_alarm) before/after gate.
 """
 import datetime as dt
 import os
@@ -180,7 +180,7 @@ class TestClassCFoldGate(TestCase):
         self.assertIn("wake up call", spoken_text,
                       f"plain listing did not name the alarm: {speaks}")
 
-    # -- media-alarm path (folded into create_alarm/create_alarm_alt) --
+    # -- media-alarm path (folded into create_alarm) --
 
     def test_media_alarm_stores_media_kind(self):
         messages = self._fire("set an alarm with music at 7 am")
