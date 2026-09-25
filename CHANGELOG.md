@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.9.0a3](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.9.0a3) (2026-09-25)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.9.0a2...0.9.0a3)
+
+**Merged pull requests:**
+
+- test: pin the list branch of \_delete\_list\_entries [\#263](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/263) ([openvoiceos-bot](https://github.com/openvoiceos-bot))
+
 ## [0.9.0a2](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.9.0a2) (2026-09-25)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.9.0a1...0.9.0a2)
@@ -364,8 +372,6 @@
 - translate\(kab\): update everyday.voc [\#167](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/167) ([ovos-localize[bot]](https://github.com/apps/ovos-localize))
 - translate\(kab\): update day.dialog [\#166](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/166) ([ovos-localize[bot]](https://github.com/apps/ovos-localize))
 - translate\(kab\): update choice.voc [\#165](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/165) ([ovos-localize[bot]](https://github.com/apps/ovos-localize))
-- translate\(kab\): update cancel.voc [\#164](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/164) ([ovos-localize[bot]](https://github.com/apps/ovos-localize))
-- translate\(kab\): update calendar.voc [\#163](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/163) ([ovos-localize[bot]](https://github.com/apps/ovos-localize))
 
 ## [0.3.6a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.3.6a1) (2026-08-14)
 
