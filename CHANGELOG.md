@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.12.9a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.12.9a1) (2026-09-26)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.12.8a1...0.12.9a1)
+
+**Merged pull requests:**
+
+- fix\(sv-SE\): reschedule\_alert and timer\_status are sentences, not word bags [\#320](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/320) ([openvoiceos-bot](https://github.com/openvoiceos-bot))
+- fix\(nl-NL\): reschedule\_alert and timer\_status are sentences, not word bags [\#319](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/319) ([openvoiceos-bot](https://github.com/openvoiceos-bot))
+
 ## [0.12.8a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.12.8a1) (2026-09-26)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.12.7a2...0.12.8a1)
@@ -325,10 +334,6 @@
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.6.3a1...0.6.4a1)
 
-**Merged pull requests:**
-
-- fix: drop dead timing lookup in alert context [\#212](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/212) ([JarbasAl](https://github.com/JarbasAl))
-
 ## [0.6.3a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.6.3a1) (2026-09-16)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.6.2a1...0.6.3a1)
@@ -375,10 +380,6 @@
 ## [0.5.3a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.5.3a1) (2026-09-11)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.5.2a1...0.5.3a1)
-
-**Merged pull requests:**
-
-- fix: add missing en-US dialogs spoken from \_\_init\_\_.py [\#213](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/213) ([JarbasAl](https://github.com/JarbasAl))
 
 ## [0.5.2a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.5.2a1) (2026-09-07)
 
