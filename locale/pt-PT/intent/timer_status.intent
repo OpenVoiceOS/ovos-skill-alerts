@@ -1,4 +1,9 @@
-(temporizador|temporizadores|tempo) (esquerda|estatuto|feito|fim|fins|longo|pronto)
-(esquerda|estatuto|feito|fim|fins|longo|pronto) (temporizador|temporizadores|tempo)
-(temporizador|temporizadores|tempo) (o|me|um|de|não|a|é|em|os|para|está|as|devo|seu|uma|do|na|há|qual|cria) (esquerda|estatuto|feito|fim|fins|longo|pronto)
-(a partir do qual|algo|atualizar|como|de quando|de que|diga-me|diga-nos|espetáculo|eu|eu fiz|existe|existem|fez|ler|lista|nós|o que|o que são|o que é|obteve|qualquer coisa|quando|quanto|que|tem|temos|tenho|ter i) (temporizador|temporizadores|tempo)
+# machine translation from en-US, unvouched
+quanto (tempo|falta) resta (no|para o) {timerkind}
+quanto (tempo|falta) resta no {timerkind} de {name}
+quanto (tempo|falta) (falta|resta) até (o|o meu) {timerkind} (terminar|acabar)
+(já|) (terminou|está pronto) (o|o meu) {timerkind}
+(diz|dá) me o tempo que resta (no|do) {timerkind}
+qual é o estado (do|do meu) {timerkind}
+estado (do|do meu) {timerkind}
+quando (termina|acaba) (o|o meu) {timerkind}
