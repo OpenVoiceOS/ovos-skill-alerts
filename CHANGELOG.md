@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.12.6a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.12.6a1) (2026-09-26)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.12.5a1...0.12.6a1)
+
+**Merged pull requests:**
+
+- fix\(es-ES\): list\_alerts and cancel\_alert hear the language, not a word list [\#301](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/301) ([openvoiceos-bot](https://github.com/openvoiceos-bot))
+
 ## [0.12.5a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.12.5a1) (2026-09-26)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.12.4a1...0.12.5a1)
@@ -368,10 +376,6 @@
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.4.2a1...0.5.0a1)
 
-**Merged pull requests:**
-
-- feat\(kab\): a machine-authored Kabyle intent set as a base for the translators — needs the owner's word [\#203](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/203) ([JarbasAl](https://github.com/JarbasAl))
-
 ## [0.4.2a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.4.2a1) (2026-09-07)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.4.1a4...0.4.2a1)
@@ -379,10 +383,6 @@
 ## [0.4.1a4](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.4.1a4) (2026-09-07)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.4.1a3...0.4.1a4)
-
-**Merged pull requests:**
-
-- refactor: fold the orphaned CreateReminderAlt templates into CreateReminder in every locale [\#204](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/204) ([JarbasAl](https://github.com/JarbasAl))
 
 ## [0.4.1a3](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.4.1a3) (2026-09-07)
 
