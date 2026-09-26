@@ -1,4 +1,9 @@
-(temporizador|temporizadores|hora) (estado|listo|longo|queda|remata|rematan)
-(estado|listo|longo|queda|remata|rematan) (temporizador|temporizadores|hora)
-(temporizador|temporizadores|hora) (de|a|un|non|o|unha|as|ás|é|para|os|con|túa|está|na|en|novo|crea|do|debo) (estado|listo|longo|queda|remata|rematan)
-(actualizar|algo|cal|cando|canto|como|dende cal|dende cando|dende que|dime|dinos|enumerar|eu|fixeches|fixemos|fixen|hai|ler|mostrar|nós|o que sexa|que|que son|que é|tedes|temos|tes|teño|ti|vós) (temporizador|temporizadores|hora)
+# machine translation from en-US, unvouched
+canto (tempo|falta) queda (no|para o) {timerkind}
+canto (tempo|falta) queda no {timerkind} de {name}
+canto (tempo|falta) queda ata que (o|o meu) {timerkind} (remate|acabe)
+(xa|) (rematou|está listo) (o|o meu) {timerkind}
+(dime|dame) o tempo que queda (no|do) {timerkind}
+cal é o estado (do|do meu) {timerkind}
+estado (do|do meu) {timerkind}
+cando (remata|acaba) (o|o meu) {timerkind}
