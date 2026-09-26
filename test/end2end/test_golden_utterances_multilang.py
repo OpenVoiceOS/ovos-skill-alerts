@@ -44,15 +44,16 @@ from ovoscope import CaptureSession, get_minicroft
 
 from ._wait_trained import wait_for_minicroft_ready
 
-# SKIPPED pending the ovoscope harness fix. get_minicroft cannot boot the
-# m2v/trained pipelines (OVOSCOPE_TRAINED_TIMEOUT=5s default, and
-# blacklisted_pipelines re-applied over the pre-boot override), so this
-# suite ERRORs at fixture setup for a test-framework reason, not a skill
-# defect -- the migration is live-validated. Re-enable when ovoscope#179 lands.
-pytestmark = pytest.mark.skip(
-    reason="blocked on ovoscope harness bug OpenVoiceOS/ovoscope#179 "
-           "(get_minicroft cannot boot m2v/trained pipelines); re-enable when fixed"
-)
+# The module-level skip for ovoscope#179 (get_minicroft could not boot the
+# m2v/trained pipelines) is removed. OpenVoiceOS/ovoscope#189 fixed it (merged
+# 2026-09-09, commit 78a92c1) and 1.8.3a1 is the first release that contains it:
+# 1.8.2a1 is behind that commit, 1.8.3a1 is ahead.
+#
+# This module therefore needs ovoscope>=1.8.3a1 to boot its fixture at all.
+# setup.py's test extra still names the older floor >=1.6.8a1; that floor is
+# stale, not load-bearing -- pip and uv resolve the newest matching release, so
+# a normal install lands well above it. Raising the floor is left to the
+# setup.py->pyproject migration rather than edited here.
 
 SKILL_ID = "ovos-skill-alerts.openvoiceos"
 
