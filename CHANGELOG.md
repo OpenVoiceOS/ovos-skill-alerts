@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.12.25a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.12.25a1) (2026-09-26)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.12.24a1...0.12.25a1)
+
+**Merged pull requests:**
+
+- fix\(locale\): four en-US store examples the skill cannot hear [\#296](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/296) ([openvoiceos-bot](https://github.com/openvoiceos-bot))
+
 ## [0.12.24a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.12.24a1) (2026-09-26)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.12.23a1...0.12.24a1)
@@ -381,10 +389,6 @@
 ## [0.6.10a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.6.10a1) (2026-09-19)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.6.9a2...0.6.10a1)
-
-**Merged pull requests:**
-
-- fix\(locale\): please.repeat.dialog becomes please\_repeat.dialog [\#245](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/245) ([openvoiceos-bot](https://github.com/openvoiceos-bot))
 
 ## [0.6.9a2](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.6.9a2) (2026-09-19)
 
