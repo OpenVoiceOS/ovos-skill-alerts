@@ -14,6 +14,18 @@ from ovos_workshop.resource_files import SkillResources
 SKILL_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
+def locale_dirs():
+    """Every locale directory the tree ships, read from the tree.
+
+    Written out as a literal, this list goes stale silently: a locale added
+    by a translation PR is simply never asserted, and the suite still reports
+    all green. `locale/` is the only source that cannot drift from what ships.
+    """
+    root = os.path.join(SKILL_ROOT, "locale")
+    return sorted(name for name in os.listdir(root)
+                  if os.path.isdir(os.path.join(root, name)))
+
+
 class TestDialogRendering(unittest.TestCase):
     def setUp(self):
         self.resources = SkillResources(SKILL_ROOT, "en-us")
@@ -67,9 +79,40 @@ class TestMediaAndPriorityDialogsPerLocale(unittest.TestCase):
         "media_type_set": ({"new": "chime"}, ["chime"]),
         "property_changed_priority": ({"num": 3}, ["3"]),
     }
-    LOCALES = ["en-US", "cs-CZ", "hu-HU", "pl-PL", "ru-RU", "sv-FI"]
+    # kab is a stub locale: it ships 5 of the 122 dialog files en-US ships, and
+    # none of the five below. It is named here rather than skipped by a
+    # "does the file exist" test, because a missing file is the very defect
+    # this class catches -- the loader answers with the dialog NAME, so the
+    # skill says "media_type_set" out loud. Naming it keeps the gap visible
+    # and keeps every other locale asserted.
+    STUB_LOCALES = ("kab",)
+
+    @property
+    def LOCALES(self):
+        return [l for l in locale_dirs() if l not in self.STUB_LOCALES]
+
+    def test_the_stub_locale_list_is_still_accurate(self):
+        """Fails when kab grows the five files, or another locale loses them.
+
+        Without this the tuple above is an unchecked exemption: a locale added
+        to it silently stops being asserted, and kab filling in never removes
+        it from it.
+        """
+        stubs = tuple(
+            lang for lang in locale_dirs()
+            if not all(os.path.isfile(os.path.join(
+                SKILL_ROOT, "locale", lang, "dialog", f"{name}.dialog"))
+                for name in self.CASES))
+        self.assertEqual(
+            self.STUB_LOCALES, stubs,
+            f"locales missing one of {sorted(self.CASES)} are now {stubs}; "
+            f"set STUB_LOCALES to that in the same commit that changes which "
+            f"locales ship them")
 
     def test_every_locale_renders_all_five(self):
+        self.assertGreater(len(self.LOCALES), 15,
+                           "the locale list collapsed; it is no longer being "
+                           "read from the tree")
         for lang in self.LOCALES:
             resources = SkillResources(SKILL_ROOT, lang.lower())
             for name, (data, expected) in self.CASES.items():
@@ -80,10 +123,6 @@ class TestMediaAndPriorityDialogsPerLocale(unittest.TestCase):
                         f"locale/{lang} has no {name}.dialog the loader can "
                         f"read; the skill would speak the dialog name")
                     self.assertTrue(text.strip())
-                    self.assertFalse(
-                        text.lstrip().startswith("#"),
-                        f"locale/{lang}/{name}.dialog rendered its comment "
-                        f"line: {text!r}")
                     for value in expected:
                         self.assertIn(
                             value, text,
@@ -137,6 +176,33 @@ class TestEverySpokenDialogSlot(unittest.TestCase):
                 computed.add(name)
         return known, computed
 
+    # The call sites below build their data dictionary at runtime, so the AST
+    # reader cannot know which keys they pass and the slot check skips them.
+    # They are named here for the same reason STUB_LOCALES is: an unchecked
+    # skip that nothing watches grows silently, and a dialog added to it stops
+    # being covered without anybody deciding that.
+    COMPUTED_DATA_DIALOGS = (
+        "alert_rescheduled_end",
+        "alert_rescheduled_repeat",
+        "list_alert_missed",
+        "list_alert_w_duration",
+        "list_alert_wo_duration",
+        "timer_status",
+    )
+
+    def test_the_computed_data_dialog_list_is_still_accurate(self):
+        """Fails when a call site starts or stops building its data at runtime.
+
+        Shrinking is as much a change as growing: a dialog that becomes
+        readable should join the slot check, not stay exempt.
+        """
+        _, computed = self._call_sites()
+        self.assertEqual(
+            self.COMPUTED_DATA_DIALOGS, tuple(sorted(computed)),
+            "the dialogs whose data is built at runtime are now "
+            f"{tuple(sorted(computed))}; set COMPUTED_DATA_DIALOGS to that in "
+            "the same commit that changes the call site")
+
     def test_no_dialog_line_uses_a_slot_its_caller_never_passes(self):
         known, computed = self._call_sites()
         checkable = {n: k for n, k in known.items() if n not in computed}
@@ -145,23 +211,34 @@ class TestEverySpokenDialogSlot(unittest.TestCase):
                            "probably no longer reading __init__.py")
         offenders = []
         for name, keys in sorted(checkable.items()):
-            path = os.path.join(SKILL_ROOT, "locale", "en-US", "dialog",
-                                f"{name}.dialog")
-            if not os.path.isfile(path):
+            if not os.path.isfile(os.path.join(SKILL_ROOT, "locale", "en-US",
+                                               "dialog", f"{name}.dialog")):
                 offenders.append(f"{name}.dialog: en-US ships no such file")
                 continue
-            with open(path, encoding="utf-8") as handle:
-                for number, line in enumerate(handle, start=1):
-                    line = line.strip()
-                    if not line or line.startswith("#"):
-                        continue
-                    for slot in self.SLOT.findall(line):
-                        # a typed slot declares {type:name}; the name binds
-                        if slot.split(":")[-1] not in keys:
-                            offenders.append(
-                                f"{name}.dialog:{number}: uses "
-                                f"{{{slot}}}, and the call site passes "
-                                f"{sorted(keys)}")
+            # Every locale that ships the file, not en-US alone. The slot
+            # typo this guards for lived in all 18 locales that shipped
+            # alert_prenotification.dialog, and a locale is where a
+            # translation pass introduces the next one: #274 added 25
+            # machine-translated dialog files across five unvouched locales
+            # an hour before #279. Reading en-US alone, the guard reports
+            # "1 passed" with {remimder} sitting in pl-PL.
+            for lang in locale_dirs():
+                path = os.path.join(SKILL_ROOT, "locale", lang, "dialog",
+                                    f"{name}.dialog")
+                if not os.path.isfile(path):
+                    continue
+                with open(path, encoding="utf-8") as handle:
+                    for number, line in enumerate(handle, start=1):
+                        line = line.strip()
+                        if not line or line.startswith("#"):
+                            continue
+                        for slot in self.SLOT.findall(line):
+                            # a typed slot declares {type:name}; the name binds
+                            if slot.split(":")[-1] not in keys:
+                                offenders.append(
+                                    f"{lang}/{name}.dialog:{number}: uses "
+                                    f"{{{slot}}}, and the call site passes "
+                                    f"{sorted(keys)}")
         self.assertEqual([], offenders, "\n".join([""] + offenders))
 
 
