@@ -1,6 +1,7 @@
-vaihda {schedkind} prioriteetti tasolle {number:priority}
-nosta {schedkind} prioriteetti tasolle {number:priority}
-säädä seuraavan {schedkind} prioriteettia
-aseta {schedkind} prioriteetiksi {number:priority}
-laske {schedkind} prioriteettia
-vaihda {schedkind} prioriteettitaso arvoon {number:priority}
+# unvouched: copied from sv-SE, awaiting a Finland-Swedish speaker
+ändra prioriteten på min {schedkind} till {number:priority}
+höj prioriteten på {schedkind} till nivå {number:priority}
+justera prioriteten på min nästa {schedkind}
+sätt {schedkind} till prioritet {number:priority}
+sänk prioriteten på min {schedkind}
+ändra prioritetsnivån på {schedkind} till {number:priority}

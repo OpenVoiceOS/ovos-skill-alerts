@@ -1,0 +1,6 @@
+vaihda {schedkind} toisto joka {repeat}
+aseta {schedkind} toistumaan joka {repeat}
+säädä {schedkind} taajuus arvoon {repeat}
+vaihda seuraava {schedkind} toistumaan joka {repeat}
+haluan {schedkind} toistuvan joka {repeat}
+vaihda {schedkind} toisto arvoon {repeat}

@@ -1,6 +1,7 @@
-(aseta|käynnistä|luo) ajastin [{duration:duration}(:ksi|ksi)]
-uusi ajastin [{duration:duration}]
-(aseta|käynnistä|luo) {duration:duration}(:n|n) ajastin
-minulla on ajastimet
-aikataulu ajastimet
-luo ajastimet
+# unvouched: copied from sv-SE, awaiting a Finland-Swedish speaker
+(sätt|starta|skapa) en timer [på {duration:duration}]
+ny timer [på {duration:duration}]
+(sätt|starta|skapa) en {duration:duration} timer
+jag har Tidtagare
+schema Tidtagare
+skapa timer

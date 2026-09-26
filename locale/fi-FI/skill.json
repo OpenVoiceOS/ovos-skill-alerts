@@ -1,0 +1,29 @@
+{
+  "name": "Hälytykset",
+  "description": "Taito, joka hallitsee hälytyksiä, ajastimia, muistutuksia, tapahtumia ja tehtävälistoja, ja voi halutessa pitää ne ajan tasalla CalDAV-palvelun kanssa.",
+  "examples": [
+    "aseta hälytys kello 8",
+    "uusi hälytys",
+    "herätä minut kello 7",
+    "käynnistä ajastin 30 minuutiksi",
+    "uusi ajastin 10 minuuttia",
+    "muistuta minua kello 19",
+    "luo muistutus kello 19",
+    "luo tapahtuma",
+    "poista hälytykset",
+    "poista ajastimet",
+    "unohdinko hälytyksen",
+    "ajastin tila",
+    "näytä hälytykset",
+    "mitä muistutukset"
+  ],
+  "tags": [
+    "Tuottavuus",
+    "Päivittäin",
+    "alert",
+    "hälytys",
+    "ajastin",
+    "muistutus",
+    "aikataulu"
+  ]
+}

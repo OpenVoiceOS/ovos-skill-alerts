@@ -67,7 +67,7 @@ class TestMediaAndPriorityDialogsPerLocale(unittest.TestCase):
         "media_type_set": ({"new": "chime"}, ["chime"]),
         "property_changed_priority": ({"num": 3}, ["3"]),
     }
-    LOCALES = ["en-US", "cs-CZ", "hu-HU", "pl-PL", "ru-RU", "sv-FI"]
+    LOCALES = ["en-US", "cs-CZ", "hu-HU", "pl-PL", "ru-RU", "fi-FI", "sv-FI"]
 
     def test_every_locale_renders_all_five(self):
         for lang in self.LOCALES:
