@@ -1,2 +1,6 @@
-(cancel·la|descarta|elimina|esborra|neteja) (alarma|alarmes|desperta'm|lleva'm|temporitzador|compte enree|temporitzadors|comptes enre|recordatori|recordatoris|cita|cites|esdeveniment|event|esdeveniments|events|alerta|alertes)
-(cancel·la|descarta|elimina|esborra|neteja) (que|vaig|m|em|un|una|cap|unes|uns|de|a|la|ha|hi|no|d|les|en|l|per) (alarma|alarmes|desperta'm|lleva'm|temporitzador|compte enree|temporitzadors|comptes enre|recordatori|recordatoris|cita|cites|esdeveniment|event|esdeveniments|events|alerta|alertes)
+(cancel·la|cancel·lar|esborra|esborrar|elimina|eliminar|descarta|descartar) {alertkind}
+(cancel·la|cancel·lar|esborra|esborrar|elimina|eliminar|descarta|descartar) (el|la|els|les) {alertkind}
+(cancel·la|cancel·lar|esborra|esborrar|elimina|eliminar) (tots els|totes les) {alertkind}
+(cancel·la|cancel·lar|esborra|esborrar|elimina|eliminar) (el meu|la meva|els meus|les meves) {alertkind}
+(cancel·la|cancel·lar|esborra|esborrar) (el|la) pròxim {alertkind}
+(cancel·la|anul·la|elimina|esborra|treu) (el meu|la meva|els meus|les meves) {alertkind} de {name}
