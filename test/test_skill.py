@@ -3727,6 +3727,119 @@ class TestPadatiousSlotIsTheName(unittest.TestCase):
                 self.assertEqual(parse_alert_name_from_message(message),
                                  "delete shopping list")
 
+    def test_the_name_slot_is_the_name_too(self):
+        # cancel_alert, timer_status and reschedule_alert declare {name} and had
+        # the identical defect: the parsed name kept the verb and the role
+        # words, so "cancel dentist alarm" looked for an alert of that name.
+        from ovos_skill_alerts.util.parse_utils import parse_alert_name_from_message
+        cases = {
+            "cancel dentist alarm": "dentist",
+            "how long left on the pasta timer": "pasta",
+            "reschedule standup reminder": "standup",
+        }
+        for utterance, slot in cases.items():
+            with self.subTest(utterance=utterance):
+                message = self._message(utterance, name=slot)
+                self.assertEqual(
+                    parse_alert_name_from_message(message), slot)
+
+    def test_an_empty_name_slot_falls_through(self):
+        from ovos_skill_alerts.util.parse_utils import parse_alert_name_from_message
+        for empty in ("", "   ", None):
+            with self.subTest(slot=repr(empty)):
+                message = self._message("cancel dentist alarm", name=empty)
+                self.assertEqual(parse_alert_name_from_message(message),
+                                 "cancel dentist alarm")
+
+    # Every slot the en-US intent files declare, classified once by hand.
+    # A naming slot holds a name the user said and must reach the parser;
+    # everything else must not become the alert name.
+    #
+    # The point of splitting them is that the test below asserts the two sets
+    # TOGETHER account for every slot on disk. A new slot of either kind fails
+    # this class until somebody puts it in one of these sets on purpose, which
+    # is the only mechanical way to catch a naming slot being GAINED: whether
+    # a new slot names something is a judgement, not something a regex knows.
+    NAMING_SLOTS = {"list_name", "name"}
+    NOT_NAMING_SLOTS = {
+        "alertkind", "davkind", "days", "event", "items", "mediaform",
+        "mediakind", "reminder", "repeat", "schedkind", "timeframe",
+        "timerkind",
+    }
+
+    @staticmethod
+    def _declared_slots():
+        """Every slot name the en-US intent files declare."""
+        import os
+        import re
+
+        here = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        intent_dir = os.path.join(here, "locale", "en-US", "intent")
+        declared = set()
+        for entry in sorted(os.listdir(intent_dir)):
+            if not entry.endswith(".intent"):
+                continue
+            with open(os.path.join(intent_dir, entry), encoding="utf-8") as fh:
+                declared.update(re.findall(r"\{([a-z_]+)\}", fh.read()))
+        return declared
+
+    def _honours(self, slot_key):
+        """Does the parser return this slot's value as the alert name?
+
+        The marker cannot be reached by the token path: it is not a word of
+        the utterance. So the answer is the parser's behaviour, measured,
+        not a tuple read out of its source.
+        """
+        from ovos_skill_alerts.util.parse_utils import parse_alert_name_from_message
+
+        marker = "zzmarkerzz"
+        message = self._message("cancel my alarm", **{slot_key: marker})
+        return parse_alert_name_from_message(message) == marker
+
+    def test_every_declared_slot_is_classified(self):
+        """A slot on disk that neither set names fails, whichever kind it is.
+
+        The assertion this replaces was `naming <= declared`, a subset test.
+        Adding a slot grows `declared` and a subset still holds, so it could
+        only fail when a naming slot was LOST. Appending "forget my
+        {alert_label}" to cancel_alert.intent left it green.
+        """
+        declared = self._declared_slots()
+        classified = self.NAMING_SLOTS | self.NOT_NAMING_SLOTS
+        self.assertEqual(
+            declared, classified,
+            "the en-US intent files and this test disagree about which slots "
+            f"exist. On disk and unclassified: {sorted(declared - classified)}. "
+            f"Classified and gone from disk: {sorted(classified - declared)}. "
+            "A new slot must be added to NAMING_SLOTS, and taught to "
+            "parse_alert_name_from_message, or to NOT_NAMING_SLOTS.")
+
+    def test_the_parser_honours_exactly_the_naming_slots(self):
+        """The declared naming set equals the set the parser really reads.
+
+        Measured one slot at a time, so a naming slot the parser forgot and a
+        non-naming slot it swallowed both fail here.
+        """
+        honoured = {slot for slot in sorted(self._declared_slots())
+                    if self._honours(slot)}
+        self.assertEqual(
+            honoured, self.NAMING_SLOTS,
+            f"the parser honours {sorted(honoured)}, and the naming slots are "
+            f"{sorted(self.NAMING_SLOTS)}. Not honoured: "
+            f"{sorted(self.NAMING_SLOTS - honoured)}. Honoured but not a "
+            f"name: {sorted(honoured - self.NAMING_SLOTS)}.")
+
+    def test_every_naming_slot_reaches_the_parser(self):
+        """The behaviour the two sets above describe, on a real utterance."""
+        from ovos_skill_alerts.util.parse_utils import parse_alert_name_from_message
+
+        for slot_key in sorted(self.NAMING_SLOTS):
+            with self.subTest(slot=slot_key):
+                message = self._message("cancel dentist alarm",
+                                        **{slot_key: "dentist"})
+                self.assertEqual(
+                    parse_alert_name_from_message(message), "dentist")
+
 
 class TestDeleteListEntriesAnswersWhenNoListMatches(unittest.TestCase):
     """A matched intent must answer.
