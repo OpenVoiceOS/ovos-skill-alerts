@@ -1,0 +1,29 @@
+{
+  "name": "Larm",
+  "description": "En färdighet som hanterar larm, timer, påminnelser, händelser och att-göra-listor, och som kan hålla dem i takt med en CalDAV-tjänst.",
+  "examples": [
+    "sätt ett larm till 8",
+    "nytt larm",
+    "väck mig klockan 7",
+    "starta en timer på 30 minuter",
+    "ny timer på 10 minuter",
+    "påminn mig klockan 19",
+    "skapa en påminnelse klockan 19",
+    "skapa ett evenemang",
+    "ta bort larm",
+    "ta bort Tidtagare",
+    "Har jag missat ett larm",
+    "timer status",
+    "visa larm",
+    "vad är påminnelse"
+  ],
+  "tags": [
+    "Produktivitet",
+    "Daglig",
+    "alert",
+    "larm",
+    "timer",
+    "påminnelse",
+    "schema"
+  ]
+}

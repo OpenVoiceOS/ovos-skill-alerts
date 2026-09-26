@@ -1,11 +1,12 @@
-(aseta|luo|lisää) hälytys [kello {date:time}]
-uusi hälytys [{date:time}]
-aseta hälytys kello {date:time}
-uusi herätä minut
-uusi hälytykset
-luo hälytykset
-aseta hälytys [kello {date:time}] soittamaan {mediakind}
-herätä minut [kello {date:time}]
-herätä minut soittamaan {mediakind} kello {date:time}
-herätä minut joka {days} kello {date:time}
-herätä minut {duration:duration} kuluttua
+# unvouched: copied from sv-SE, awaiting a Finland-Swedish speaker
+(sätt|skapa|lägg till) ett larm [till {date:time}]
+nytt larm [till {date:time}]
+sätt ett larm till {date:time}
+schema larm
+ny larm
+jag har larm
+sätt ett larm [till {date:time}], så att den spelar {mediakind}
+väck (mig|oss) [klockan {date:time}]
+väck mig med {mediakind} klockan {date:time}
+väck mig om {duration:duration}
+väck mig varje {days} klockan {date:time}

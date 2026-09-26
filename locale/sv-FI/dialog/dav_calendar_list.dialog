@@ -1,2 +1,3 @@
-{calendars} on {service}.
-{service}-palvelussa on {calendars}.
+# unvouched: copied from sv-SE, awaiting a Finland-Swedish speaker
+På {service}-tjänsten finns det {calendars}.
+{calendars} på {service}.

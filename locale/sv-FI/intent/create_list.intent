@@ -1,3 +1,4 @@
-(luo|tee|lisää) [uusi] lista [nimeltä {list_name}]
-uusi lista [{list_name}]
-(luo|tee|lisää) [uusi] {list_name} lista
+# unvouched: copied from sv-SE, awaiting a Finland-Swedish speaker
+(skapa|gör|lägg till) en [ny] lista [som heter {list_name}]
+ny lista [{list_name}]
+(skapa|gör|lägg till) en [ny] {list_name} lista

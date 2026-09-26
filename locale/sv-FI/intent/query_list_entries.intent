@@ -1,6 +1,7 @@
-(mitä|mitkä kohteet) on listalla [{list_name}]
-(lue|näytä) listan [{list_name}] kohteet
-(mitä|mitkä kohteet) on {list_name} listalla
-(lue|näytä) {list_name} listan kohteet
-mitä on (tehtävälistallani|muistilistallani)
-mitä minun pitää tehdä
+# unvouched: copied from sv-SE, awaiting a Finland-Swedish speaker
+(vilka poster|vad) (står|finns) på [min|] lista[n] [{list_name}]
+(läs|visa) [mig] posterna på lista[n] [{list_name}]
+(vilka poster|vad) (står|finns) på {list_name} lista[n]
+(läs|visa) [mig] posterna på {list_name} lista[n]
+vad (står|finns) på min (att göra|todo)[-lista]
+vad ska jag göra
