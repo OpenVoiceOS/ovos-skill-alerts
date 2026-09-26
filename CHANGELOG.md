@@ -1,12 +1,19 @@
 # Changelog
 
+## [0.12.2a7](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.12.2a7) (2026-09-26)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.12.2a6...0.12.2a7)
+
+**Merged pull requests:**
+
+- locale\(pt-BR\): the store name and description \(unvouched\) [\#294](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/294) ([openvoiceos-bot](https://github.com/openvoiceos-bot))
+
 ## [0.12.2a6](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.12.2a6) (2026-09-26)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.12.2a5...0.12.2a6)
 
 **Merged pull requests:**
 
-- locale\(pt-BR\): the store name and description \(unvouched\) [\#294](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/294) ([openvoiceos-bot](https://github.com/openvoiceos-bot))
 - locale\(pl-PL\): the store name and description \(unvouched\) [\#293](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/293) ([openvoiceos-bot](https://github.com/openvoiceos-bot))
 
 ## [0.12.2a5](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.12.2a5) (2026-09-26)
