@@ -628,7 +628,12 @@ def parse_alert_name_from_message(message: Message,
     # Adapt keeps working: it populates `__tags__` and no `list_name`.
     slot_name = message.data.get("list_name")
     if slot_name and isinstance(slot_name, str) and slot_name.strip():
-        return slot_name.strip().lower()
+        # The user's own words, case and diacritics kept. A name is stored and
+        # spoken back, so folding it here made "Åsa" an alert named "åsa" and
+        # "Zahnarzt" one named "zahnarzt" (T-5773). Every comparison of a name
+        # folds both sides instead: fuzzy_match, and the default-name test in
+        # util/locale.py.
+        return slot_name.strip()
 
     tokens = tokens or tokenize_utterance(message)
     tokens.strip_time()
@@ -642,8 +647,10 @@ def parse_alert_name_from_message(message: Message,
         # "wake me up every monday and thursday at 9 AM." as its own " ."
         # token, and after `strip_time()` that period is the whole remainder,
         # so without this the alert is named ".".
-        cleaned_chunk = " ".join([word.lower() for word in chunk.split()
-                                  if word not in noise_words
+        # The noise-word list is lowercase, so the test folds; the word that
+        # survives it is appended as the user said it.
+        cleaned_chunk = " ".join([word for word in chunk.split()
+                                  if word.lower() not in noise_words
                                   and any(c.isalnum() for c in word)])
         if cleaned_chunk:
             candidate_names.append(cleaned_chunk)
@@ -868,6 +875,11 @@ def fuzzy_match(test: str, against: str, confidence: int = None) -> Any:
     :param conf: confidence cut (optional)
     """
 
+    # Both sides are folded here rather than at parse time, so a stored name
+    # keeps the user's words while "Åsa" still matches "åsa" and "ÅSA"
+    # (T-5773). rapidfuzz is case-sensitive: fuzz.ratio("Åsa", "åsa") is 67.
+    test = (test or "").casefold()
+    against = (against or "").casefold()
     ratio = fuzz.ratio(test, against)
     partial_ratio = fuzz.partial_ratio(test, against)
     token_sort_ratio = fuzz.token_sort_ratio(test, against)

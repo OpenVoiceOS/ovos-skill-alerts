@@ -293,7 +293,9 @@ def get_alert_dialog_data(alert: Alert,
     expired_time = alert.data["next_expiration_time"]
     expired_time = dt.datetime.fromisoformat(expired_time)
     spoken_type = spoken_alert_type(alert.alert_type, lang)
-    default_name = spoken_type in alert.alert_name
+    # Folded on both sides: the name keeps the user's case now, and the
+    # spoken type comes from a locale file in lowercase (T-5773).
+    default_name = spoken_type.casefold() in alert.alert_name.casefold()
 
     if anchor_date is None:
         anchor_date = dt.datetime.now(expired_time.tzinfo)
