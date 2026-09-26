@@ -1,4 +1,9 @@
-(chronomètres|minuterie|temps) (fait|fin|fins|gauche|long|prêt|statut)
-(fait|fin|fins|gauche|long|prêt|statut) (chronomètres|minuterie|temps)
-(chronomètres|minuterie|temps) (je|ai|de|vous|à|est|un|la|des|n|ce|il|dans|pas|le|les|moi|avez|que|nous) (fait|fin|fins|gauche|long|prêt|statut)
-(Dites-moi|a|ai-je|avez-vous|avons-nous|ce que|ce qui est|combien|comment|est là|est-ce que je|faisons-nous|faites-vous|lire|liste|montrer|n'importe quoi|nous dire|ont i|qu'est-ce que|quand|quelque chose|quels sont|qui|rafraîchir|sont là|à partir de laquelle|à partir de quoi|à partir du moment où) (chronomètres|minuterie|temps)
+# machine translation from en-US, unvouched
+combien de temps reste-t-il (sur|pour) (mon|le) {timerkind}
+combien de temps reste-t-il (sur|pour) (le|mon) {timerkind} (appelé|nommé) {name}
+combien de temps (avant|jusqu'à ce) que (mon|le) {timerkind} (se termine|soit fini)
+est-ce que (mon|le) {timerkind} est (fini|terminé|prêt)
+(dis|donne) moi le temps restant (sur|pour) (mon|le) {timerkind}
+quel est (le statut|l'état) (de mon|du) {timerkind}
+(statut|état) (du|de mon) {timerkind}
+quand (mon|le) {timerkind} (se termine|sera fini)
