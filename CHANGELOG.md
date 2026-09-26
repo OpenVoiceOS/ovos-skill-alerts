@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.12.4a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.12.4a1) (2026-09-26)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.12.3a1...0.12.4a1)
+
+**Merged pull requests:**
+
+- fix\(pt-PT\): list\_alerts and cancel\_alert hear Portuguese, not a word list [\#298](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/298) ([openvoiceos-bot](https://github.com/openvoiceos-bot))
+
 ## [0.12.3a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.12.3a1) (2026-09-26)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.12.2a7...0.12.3a1)
@@ -379,10 +387,6 @@
 ## [0.4.1a3](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.4.1a3) (2026-09-07)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.4.1a2...0.4.1a3)
-
-**Merged pull requests:**
-
-- refactor: fold timeframe listing and media alarms into ListAlerts and CreateAlarm [\#199](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/199) ([JarbasAl](https://github.com/JarbasAl))
 
 ## [0.4.1a2](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.4.1a2) (2026-09-07)
 
