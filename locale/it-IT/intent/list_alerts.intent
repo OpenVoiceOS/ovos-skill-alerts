@@ -1,2 +1,9 @@
-(abbiamo|avete|c'è|che|ci sono|come|cosa|cosa sono|cosa è|da cosa|da cui|da quando|diteci|ditemi|elenco|facciamo|faccio|hai|hanno i|leggere|lo fai|mostra|ottenuto|qualcosa|qualsiasi cosa|quando|quanto|rinfrescare) (allarme|allarmi|svegliarmi|promemoria|appuntamenti|appuntamento|eventi|evento|avvisi|memoria|raccontare|ricordare)
-(abbiamo|avete|c'è|che|ci sono|come|cosa|cosa sono|cosa è|da cosa|da cui|da quando|diteci|ditemi|elenco|facciamo|faccio|hai|hanno i|leggere|lo fai|mostra|ottenuto|qualcosa|qualsiasi cosa|quando|quanto|rinfrescare) (per|caso|mi|io|è|sono|ho|un|una|di|in|da|il|non|a|ci|c|la|devo|le) (allarme|allarmi|svegliarmi|promemoria|appuntamenti|appuntamento|eventi|evento|avvisi|memoria|raccontare|ricordare)
+(quali|che) {alertkind} ho
+(quali|che cosa) sono i miei {alertkind}
+(elenca|mostra|mostrami|leggi|dimmi) i miei {alertkind}
+(elenca|mostra|mostrami|leggi) {alertkind}
+ho (qualche|dei|delle) {alertkind}
+(c'è|ci sono) (un|una|dei|delle) {alertkind}
+ci sono {alertkind} (salvati|salvate|programmati|programmate|in sospeso)
+(quando|quale) è il mio (prossimo|prossima) {alertkind}
+che cosa ho (salvato|programmato|in programma)
