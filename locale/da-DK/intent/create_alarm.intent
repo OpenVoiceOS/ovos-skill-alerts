@@ -1,0 +1,29 @@
+(sæt|opret|tilføj|planlæg|start) [en] alarm [til {date:time}]
+ny alarm [til {date:time}]
+jeg har en ny alarm [til {date:time}]
+(sæt|opret) [en] alarm (klokken|til) {date:time}
+alarm (klokken|til) {date:time}
+(sæt|opret) [en] alarm hver (hverdag|weekend|dag|morgen|nat) [klokken {date:time}]
+(sæt|lav) en {date:time} [hverdags|weekend] alarm
+(sæt|opret|tilføj|planlæg|lav|start|ny|indstil) (en|min) alarm med {mediakind} (klokken|til) {date:time}
+(sæt|opret|tilføj|planlæg|lav|start|ny|indstil) (en|min) alarm der spiller {mediakind} (klokken|til) {date:time}
+(kan|vil) du (sætte|oprette|tilføje|planlægge|lave|starte) en alarm der spiller {mediakind} (klokken|til) {date:time}
+(sæt|opret|tilføj|planlæg|lav|start|ny|indstil) (en|min) alarm med {mediakind}
+(sæt|opret|tilføj|planlæg|lav|start|ny|indstil) (en|min) alarm der spiller {mediakind}
+(sæt|opret|tilføj|planlæg|lav|start) (en|min) {mediakind} alarm (klokken|til) {date:time}
+(sæt|opret|tilføj|planlæg|lav|start) (en|min) {mediakind} alarm
+ny alarm med {mediakind} (klokken|til) {date:time}
+ny alarm der spiller {mediakind} (klokken|til) {date:time}
+ny alarm med {mediakind}
+ny alarm der spiller {mediakind}
+væk (mig|os) [op] [klokken {date:time}]
+(kan|vil) du vække (mig|os) [op] [klokken {date:time}]
+væk (mig|os) [op] om {duration:duration}
+væk (mig|os) [op] hver {days} klokken {date:time}
+væk (børnene|alle) [op] [klokken {date:time}]
+væk (børnene|alle) op [klokken {date:time}]
+væk (børnene|alle) [op] hver {days} klokken {date:time}
+væk (mig|os|børnene|alle) op med {mediakind} (klokken|til) {date:time}
+(kan|vil) du vække (mig|os|børnene|alle) op med {mediakind} (klokken|til) {date:time}
+væk (mig|os|børnene|alle) op med {mediakind}
+(kan|vil) du vække (mig|os|børnene|alle) op med {mediakind}

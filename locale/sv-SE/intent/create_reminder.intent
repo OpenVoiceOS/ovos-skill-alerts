@@ -1,0 +1,7 @@
+(sätt|skapa|lägg till) en [ny] påminnelse [om {reminder}] [klockan {date:time}]
+ny påminnelse [{reminder}]
+schema påminnelse
+skapa påminnelse
+påminn (mig|oss) [om att {reminder}] [klockan {date:time}]
+berätta att jag ska {reminder}
+påminn (mig|oss) om {duration:duration} [att {reminder}]

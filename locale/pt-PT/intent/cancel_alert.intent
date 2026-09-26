@@ -1,0 +1,5 @@
+(cancela|cancelar|apaga|apagar|elimina|eliminar|remove|remover|descarta|descartar) {alertkind}
+(cancela|cancelar|apaga|apagar|elimina|eliminar|remove|remover|descarta|descartar) (o|a|os|as) {alertkind}
+(cancela|cancelar|apaga|apagar|elimina|eliminar|remove|remover) (todos os|todas as) {alertkind}
+(cancela|cancelar|apaga|apagar|elimina|eliminar|remove|remover) (o meu|a minha|os meus|as minhas) {alertkind}
+(cancela|cancelar|apaga|apagar) (o|a) próximo {alertkind}

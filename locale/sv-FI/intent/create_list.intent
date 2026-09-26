@@ -1,0 +1,3 @@
+(luo|tee|lisää) [uusi] lista [nimeltä {list_name}]
+uusi lista [{list_name}]
+(luo|tee|lisää) [uusi] {list_name} lista

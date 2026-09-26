@@ -1,0 +1,6 @@
+změň trvání mého {schedkind} na {duration:duration}
+prodluž můj {schedkind} do {duration:duration}
+uprav délku dalšího {schedkind} na {duration:duration}
+nastav, aby {schedkind} trval {duration:duration}
+změň můj {schedkind}, aby trval do {duration:duration}
+zkrať trvání mého {schedkind} na {duration:duration}

@@ -1,0 +1,31 @@
+# machine translation from en-US, unvouched
+(meu|o) (alarme|timer|contagem regressiva|lembrete|evento|compromisso) de {date:old} (mova|mude|remarque|desloque|empurre|adie) (ele|isso) (para|até) {date:time}
+(mova|mude|remarque|desloque|empurre|adie|ajuste) (meu|o) (alarme|timer|contagem regressiva|lembrete|evento|compromisso) de {date:old} (para|até) {date:time}
+(poderia|pode|consegue) você (mover|mudar|remarcar|deslocar|empurrar|adiar) (meu|o) {schedkind} (próximo|futuro) (para|até) {date:time}
+(meu|o) (alarme|timer|lembrete|evento|compromisso) de {date:old} (mova|mude|remarque|desloque|empurre|adie) (para|até) {date:time}
+(mova|empurre|desloque) (meu|o) {schedkind} (próximo|futuro) (para antes|para mais cedo|para mais tarde|para frente|para trás)
+(poderia|pode|consegue) você (fazer|deixar) (meu|o) {schedkind} (mais cedo|antes|mais tarde|mais longo|mais curto)
+(meu|o) {schedkind} (próximo|futuro) (mais cedo|antes|mais tarde|mais longo|mais curto) [por favor]
+(faça|deixe) (meu|o) {schedkind} (próximo|futuro) (mais cedo|antes|mais tarde|mais longo|mais curto)
+(mova|empurre|desloque) (meu|o) {schedkind} (para antes|para mais cedo|para mais tarde|para frente|para trás)
+(encurte|alongue|estenda|amplie|aumente|diminua) (meu|o) {schedkind} (próximo|futuro)
+(meu|o) {schedkind} (mais cedo|antes|mais tarde|mais longo|mais curto) [por favor]
+(faça|deixe) (meu|o) {schedkind} (mais cedo|antes|mais tarde|mais longo|mais curto)
+(encurte|alongue|estenda|amplie|aumente|diminua) (meu|o) {schedkind}
+{schedkind} (mais cedo|antes|mais tarde|mais longo|mais curto) [por favor]
+(mais cedo|antes|mais tarde|mais longo|mais curto) o {schedkind} [por favor]
+(mais cedo|antes|mais tarde|mais longo|mais curto) o {schedkind}
+(poderia|pode|consegue) você (mover|mudar|remarcar|deslocar|empurrar|adiar) (meu|o) {schedkind} (para|até) {date:time}
+(mova|mude|remarque|desloque|empurre|adie|ajuste) (meu|o) {schedkind} (próximo|futuro) (para|até) {date:time}
+(mova|mude|remarque|desloque|empurre|adie|ajuste) (meu|o) {schedkind} (próximo|futuro) (para mais cedo|para antes|para mais tarde)
+(mova|mude|remarque|desloque|empurre|adie|ajuste) (meu|o) {schedkind} (próximo|futuro) em {duration:duration} (para mais cedo|para antes|para mais tarde)
+(mova|mude|remarque|desloque|empurre|adie|ajuste|antecipe) (meu|o) {schedkind} (para|até|de volta para|para frente para) {date:time}
+(faça|deixe|mude) (meu|o) {schedkind} (próximo|futuro) (um evento de dia inteiro|o dia inteiro|para um evento de dia inteiro|para o dia inteiro)
+(mova|mude|remarque|desloque|empurre|adie|ajuste) o {schedkind} (para|sobre) {name} (para|até) {date:time}
+(mova|mude|remarque|desloque|empurre|adie|ajuste) (meu|o) {schedkind} (para mais cedo|para antes|para mais tarde)
+o {schedkind} (de|às) {date:old} (mova|mude|remarque|desloque|empurre|adie) ele (para|até) {date:time}
+(meu|o) {schedkind} (mova|mude|remarque|desloque|empurre|adie) (para|até) {date:time}
+(mova|mude|remarque|desloque|empurre) (meu|o) {schedkind} (para|até) {date:time} no lugar
+(faça|deixe|mude) (meu|o) {schedkind} (um evento de dia inteiro|o dia inteiro|um evento do dia todo|para um evento de dia inteiro|para o dia inteiro)
+(mova|mude|remarque|desloque|empurre|adie|ajuste) (meu|o) {schedkind} de {date:old} para {date:time}
+de {date:old} para {date:time} (mova|mude|remarque|desloque|empurre|adie) (meu|o) {schedkind}

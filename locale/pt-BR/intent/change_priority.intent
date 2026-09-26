@@ -1,0 +1,15 @@
+# machine translation from en-US, unvouched
+(mude|defina|ajuste|aumente|diminua) (a|minha) prioridade (do|de|no) (meu|o) {schedkind} (para|para o nível) {number:priority}
+(mude|defina|ajuste|aumente|diminua) (a|minha) prioridade (do|de|no) (meu|o) {schedkind}
+(mude|defina|ajuste|aumente|diminua) a prioridade (do meu|do) {schedkind} (próximo|futuro) (para|para o nível) {number:priority}
+(meu|o) {schedkind} (mude|defina|ajuste) (a|sua) prioridade (para|para o nível) {number:priority}
+(mude|defina|ajuste|aumente|diminua) a prioridade (do meu|do) {schedkind} (para|para o nível) {number:priority}
+(mude|defina|ajuste|aumente|diminua) a prioridade (do meu|do) {schedkind} (próximo|futuro)
+(mude|defina|ajuste) a prioridade para {number:priority} (do|de|no) (meu|o) {schedkind}
+(mova|suba|aumente|diminua) a prioridade (do meu|do) {schedkind} (para cima|para baixo)
+(meu|o) {schedkind} (mude|defina|ajuste) (a|sua) prioridade
+a prioridade (do meu|do) {schedkind} (mude|defina|ajuste|aumente|diminua) ela
+(mude|defina|ajuste|aumente|diminua) o nível de prioridade (do meu|do) {schedkind}
+(mude|defina|ajuste|aumente|diminua) a prioridade (do meu|do) {schedkind}
+a prioridade do {schedkind} (mude|defina|ajuste) ela (para|para o nível) {number:priority}
+a prioridade do {schedkind} (mude|defina|ajuste|aumente|diminua) ela

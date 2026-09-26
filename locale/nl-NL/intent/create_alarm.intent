@@ -1,0 +1,11 @@
+(zet|maak|voeg) een wekker [toe] [voor {date:time}]
+nieuwe wekker [voor {date:time}]
+zet een wekker voor {date:time}
+ik heb wek me
+nieuwe wek me
+start wekker
+zet een wekker [toe] [voor {date:time}], zodat hij {mediakind} afspeelt
+(maak|wek) (me|mij|ons) wakker [om {date:time}]
+wek me met {mediakind} om {date:time}
+wek me over {duration:duration}
+wek me elke {days} om {date:time}

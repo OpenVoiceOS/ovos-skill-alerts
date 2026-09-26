@@ -1,0 +1,9 @@
+# machine translation from en-US, unvouched
+(déplace|change|reporte|repousse) (mon|ma) {schedkind} (à|pour) {date:time}
+(déplace|change|reporte|repousse) (mon|ma) {schedkind} de {date:old} (à|pour) {date:time}
+(déplace|change|reporte|repousse) (le|la) {schedkind} (pour|de) {name} (à|pour) {date:time}
+(avance|retarde) (mon|ma) (prochain|prochaine) {schedkind}
+(prolonge|raccourcis) (mon|ma) {schedkind}
+(repousse|retarde) (mon|ma) (prochain|prochaine) {schedkind} de {duration:duration}
+(mon|ma) {schedkind} (déplace|change) (le|la) (à|pour) {date:time}
+(règle|mets) (mon|ma) (prochain|prochaine) {schedkind} (plus tôt|plus tard)

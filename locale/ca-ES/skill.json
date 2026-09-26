@@ -1,0 +1,29 @@
+{
+  "name": "Alertes",
+  "description": "Una habilitat per a gestionar alarmes, temporitzadors, recordatoris, esdeveniments i tasques pendents i, opcionalment, sincronitzar-los amb un servei CalDAV.",
+  "examples": [
+    "Posa una alarma a les 8 AM.",
+    "Inicia un temporitzador de pa durant 30 minuts.",
+    "Programa un esdeveniment de tennis per a les 14:00 de divendres amb una durada de 2 hores.",
+    "Estableix una alarma diària per a les 8 del matí.",
+    "Estableix una alarma per a les 8 del matí tots els dissabtes.",
+    "recorda'm de treure les escombraries cada dijous i diumenge a les 19h.",
+    "desperta'm a les 8 del matí amb música.",
+    "Quan és la meva pròxima alarma?",
+    "Quins són els meus recordatoris?",
+    "Cancel·la totes les alarmes.",
+    "Cancel·la tots els temporitzadors.",
+    "Cancel·la tots els recordatoris.",
+    "Què m'he perdut?",
+    "M'he perdut alguna cosa?"
+  ],
+  "tags": [
+    "productivitat",
+    "dia a dia",
+    "alerta",
+    "alarma",
+    "temporitzador",
+    "recordatori",
+    "programació"
+  ]
+}

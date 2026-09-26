@@ -39,7 +39,6 @@ from mock.mock import call
 from ovos_date_parser import nice_time, nice_date_time, nice_duration
 from ovos_number_parser import pronounce_number
 from ovos_bus_client.message import Message
-from ovos_utils.events import EventSchedulerInterface
 from ovos_utils.messagebus import FakeBus
 from ovos_workshop.skills import OVOSSkill
 
@@ -83,10 +82,12 @@ def sleep_until_full_second():
     return dt.datetime.now(tzlocal()).replace(microsecond=0)
 
 
-def change_user_tz(message: Message, tz):
-    message.context["username"] = "test_user"
-    message.context["user_profiles"] = [{"user": {"username": "test_user"},
-                                        "location": {"tz": tz}}]
+# Note: the skill only reads the timezone from `Configuration()`
+# (location.timezone.code); it never consumes a per-session/user-profile
+# timezone from message context. A helper that stashed a "tz" into
+# `message.context["user_profiles"]` used to live here, but it was a no-op
+# that the skill code never read. Session-level timezone support is a
+# separate design question, not covered by these tests.
 
 def now_time(tz=None):
     tz = tz or get_default_tz()
@@ -424,19 +425,6 @@ class TestSkill(unittest.TestCase):
         
         self.reset_alert_manager()
 
-    def test_handle_create_reminder_alt(self):
-        real_method = self.skill.handle_create_reminder
-        create_reminder = Mock()
-        self.skill.handle_create_reminder = create_reminder
-        test_message = Message("test", {"data": True}, {"context": "test"})
-        self.skill.handle_create_reminder_alt(test_message)
-        create_reminder.assert_called_once()
-        create_reminder.assert_called_with(test_message)
-
-        self.skill.handle_create_reminder = real_method
-        
-        self.reset_alert_manager()
-
     def test_handle_create_event(self):
         self.populate_alerts()
 
@@ -604,7 +592,7 @@ class TestSkill(unittest.TestCase):
         self.skill.speak_dialog.reset_mock()
 
         # list of todos (todos WITHOUT subitems)
-        self.skill.handle_query_todo_reminder_names(message)
+        self.skill._speak_todo_reminder_names()
         self.skill.speak_dialog.assert_called_once()
         self.skill.speak_dialog.assert_called_with(
             "list_todo_reminder", {"reminders": "flowers"}
@@ -628,7 +616,7 @@ class TestSkill(unittest.TestCase):
         # with list name
         list_delete_entry = _get_message_from_file("todo_entry_delete.json")
         self.skill._get_response_cascade.return_value=["butter"]
-        self.skill.handle_delete_todo_list_entries(list_delete_entry)
+        self.skill._delete_list_entries(list_delete_entry)
         self.skill.speak_dialog.assert_called_once()
         self.skill.speak_dialog.assert_called_with("list_todo_num_deleted", {"num": "one"})
         entries = self.skill.alert_manager.get_children(self.shopping_list.ident)
@@ -641,7 +629,7 @@ class TestSkill(unittest.TestCase):
         list_delete_entry = _get_message_from_file("todo_entry_delete_wo_listname.json")
         self.skill._get_response_cascade.return_value=["mango"]
         self.skill.ask_selection.return_value="shopping"
-        self.skill.handle_delete_todo_list_entries(list_delete_entry)
+        self.skill._delete_list_entries(list_delete_entry)
         self.assertEqual(self.skill.speak_dialog.call_count, 2)
         self.skill.speak_dialog.assert_called_with("list_todo_num_deleted", {"num": "one"})
         entries = self.skill.alert_manager.get_children(self.shopping_list.ident)
@@ -652,7 +640,7 @@ class TestSkill(unittest.TestCase):
         self.populate_alerts([self.shopping_subitem1])
         # item not stored
         self.skill._get_response_cascade.return_value=["not there"]
-        self.skill.handle_delete_todo_list_entries(list_delete_entry)
+        self.skill._delete_list_entries(list_delete_entry)
         self.assertEqual(self.skill.speak_dialog.call_count, 3)
         self.skill.speak_dialog.assert_called_with("list_todo_num_deleted", {"num": "zero"})
         self.skill.speak_dialog.reset_mock()
@@ -661,7 +649,7 @@ class TestSkill(unittest.TestCase):
         todo_list_delete_all = _get_message_from_file("todo_entry_delete_all.json")
         shopping_items = len(self.skill.alert_manager.get_children(self.shopping_list.ident))
         assert shopping_items > 0
-        self.skill.handle_delete_todo_list_entries(todo_list_delete_all)
+        self.skill._delete_list_entries(todo_list_delete_all)
         self.skill.speak_dialog.assert_called_once()
         self.skill.speak_dialog.assert_called_with("list_todo_num_deleted",
                                                    {"num": pronounce_number(shopping_items)})
@@ -1726,7 +1714,6 @@ class TestSkill(unittest.TestCase):
         pass
 
 
-@unittest.skip('Work in progress')
 class TestAlert(unittest.TestCase):
     def test_alert_create(self):
         now_time_valid = dt.datetime.now(dt.timezone.utc)
@@ -2147,10 +2134,10 @@ class TestAlertManager(unittest.TestCase):
             if isfile(test_file):
                 remove(test_file)
         
-        scheduler = EventSchedulerInterface("test", bus=self.bus)
+        skill = OVOSSkill(skill_id="ovos-skill-alerts", bus=self.bus)
         alert_manager = AlertManager(
             self.manager_path,
-            scheduler,
+            skill,
             (
                 alert_prenotification,
                 alert_expired,
@@ -2189,10 +2176,10 @@ class TestAlertManager(unittest.TestCase):
         test_file = join(self.manager_path, "alerts.json")
         if isfile(test_file):
             remove(test_file)
-        scheduler = EventSchedulerInterface("test", bus=self.bus)
+        skill = OVOSSkill(skill_id="ovos-skill-alerts", bus=self.bus)
         alert_manager = AlertManager(
             self.manager_path,
-            scheduler,
+            skill,
             (
                 alert_prenotification,
                 alert_expired,
@@ -2290,7 +2277,7 @@ class TestAlertManager(unittest.TestCase):
         # no errors to report
         self.assertEqual(errors["dav.credentials.missing"], [])
         self.assertEqual(errors["dav.service.cant.connect"], [])
-        self.assertEqual(len(alert_manager._scheduler.events.events), 0)
+        self.assertEqual(len(alert_manager._skill.event_scheduler.events.events), 0)
         remove(credentials_file)
 
     def test_alert_manager_dav_init_conncheck(self):
@@ -2307,7 +2294,7 @@ class TestAlertManager(unittest.TestCase):
         alert_manager = self._init_alert_manager()
         errors = alert_manager.init_dav_clients(dav_services, 15)
         self.assertEqual(alert_manager.dav_active, False)
-        self.assertEqual(len(alert_manager._scheduler.events.events), 0)
+        self.assertEqual(len(alert_manager._skill.event_scheduler.events.events), 0)
         self.assertIn("testservice", errors["dav.service.cant.connect"])
         remove(credentials_file)
 
@@ -2330,7 +2317,7 @@ class TestAlertManager(unittest.TestCase):
         self.assertIn("testservice", alert_manager._dav_clients)
         self.assertEqual(errors["dav.credentials.missing"], [])
         self.assertEqual(errors["dav.service.cant.connect"], [])
-        self.assertEqual(len(alert_manager._scheduler.events.events), 1)
+        self.assertEqual(len(alert_manager._skill.event_scheduler.events.events), 1)
         remove(credentials_file)
     
     def test_alert_manager_cache_file(self):
@@ -2388,10 +2375,10 @@ class TestAlertManager(unittest.TestCase):
         self.assertEqual(len(alert_manager.active_alerts), 1)
         self.assertEqual(alert_manager.missed_alerts, dict())
         # Check scheduled events
-        self.assertEqual(len(alert_manager._scheduler.events.events), 2)
+        self.assertEqual(len(alert_manager._skill.event_scheduler.events.events), 2)
         # Shutdown manager
         alert_manager.shutdown()
-        self.assertFalse(alert_manager._scheduler.events.events)
+        self.assertFalse(alert_manager._skill.event_scheduler.events.events)
         # Create new manager
         new_manager = self._init_alert_manager(wipe=False)
         self.assertEqual(len(new_manager.pending_alerts), 2)
@@ -2400,7 +2387,7 @@ class TestAlertManager(unittest.TestCase):
         self.assertEqual(alert_manager.pending_alerts.keys(),
                          new_manager.pending_alerts.keys())
         # Check scheduled events
-        self.assertEqual(len(new_manager._scheduler.events.events), 2)
+        self.assertEqual(len(new_manager._skill.event_scheduler.events.events), 2)
 
     def test_get_user_alerts(self):
 
@@ -2835,7 +2822,6 @@ class TestAlertManager(unittest.TestCase):
         self.clear_storage(manager)
 
 
-@unittest.skip('Work in progress')
 class TestParseUtils(unittest.TestCase):
     def test_round_nearest_minute(self):
         from ovos_skill_alerts.util.parse_utils import round_nearest_minute
@@ -2914,7 +2900,10 @@ class TestParseUtils(unittest.TestCase):
         self.assertEqual(to_speak, "eight hours")
         
 
-    @patch("skill_alerts.util.parse_utils.use_24h_format")
+    # The package is `ovos_skill_alerts`; `skill_alerts` was its old name and
+    # the patch raised ModuleNotFoundError. parse_utils imports the symbol
+    # directly (util/parse_utils.py:43) so this module is the right target.
+    @patch("ovos_skill_alerts.util.parse_utils.use_24h_format")
     def test_get_default_alert_name(self, mock_use_24h_format):
         from ovos_skill_alerts.util.parse_utils import get_default_alert_name
 
@@ -2923,12 +2912,17 @@ class TestParseUtils(unittest.TestCase):
         now_time = dt.datetime.now(dt.timezone.utc)
         timer_time = now_time + dt.timedelta(minutes=10)
         self.assertEqual(
-            get_default_alert_name(timer_time, AlertType.TIMER, now_time),
+            # `timezone` was inserted as the third parameter since this test
+            # was written, so a positional now_time landed there and raised
+            # TypeError. Keyword from here on.
+            get_default_alert_name(timer_time, AlertType.TIMER,
+                                   now_time=now_time),
             "ten minutes timer",
         )
         timer_time = now_time + dt.timedelta(hours=6, seconds=1)
         self.assertEqual(
-            get_default_alert_name(timer_time, AlertType.TIMER, now_time),
+            get_default_alert_name(timer_time, AlertType.TIMER,
+                                   now_time=now_time),
             "six hours timer",
         )
 
@@ -2956,33 +2950,46 @@ class TestParseUtils(unittest.TestCase):
         )
 
     def test_Tokens(self):
+        """Two behaviours drifted since this class was last run, and both are
+        improvements rather than regressions, so the expectations move.
+
+        The normaliser lowercases, so "9 AM" tokenizes as "9 am".
+        `ovos_date_parser.extract_datetime` returns the same datetime for
+        either spelling (checked both ways), so nothing downstream changes.
+
+        `unmatched()` no longer offers the article "an" or the old wake word
+        "neon" as parse candidates, although both are still in the token list.
+        `parse_alert_time_from_message` loops over `unmatched()` and tries
+        `extract_duration` then `extract_datetime` on each token, so a shorter
+        candidate list is strictly better: those two were never times.
+        """
         from ovos_skill_alerts.util.parse_utils import tokenize_utterance, Tokens
 
         daily = _get_message_from_file("create_alarm_daily.json")
         tokens = tokenize_utterance(daily)
         self.assertIsInstance(tokens, Tokens)
         self.assertEqual(tokens, ["create", "an", "alarm", "for 10", "daily"])
-        self.assertEqual(tokens.unmatched(), ["an", "for 10"])
+        self.assertEqual(tokens.unmatched(), ["for 10"])
 
         weekly = _get_message_from_file("create_alarm_every_tuesday.json")
         tokens = tokenize_utterance(weekly)
-        self.assertEqual(tokens, ["set", "an", "alarm", "for 9 AM", "every", "tuesday"])
-        self.assertEqual(tokens.unmatched(), ["an", "for 9 AM", "tuesday"])
+        self.assertEqual(tokens, ["set", "an", "alarm", "for 9 am", "every", "tuesday"])
+        self.assertEqual(tokens.unmatched(), ["for 9 am", "tuesday"])
 
         weekdays = _get_message_from_file("create_alarm_weekdays.json")
         tokens = tokenize_utterance(weekdays)
-        self.assertEqual(tokens, ["set", "an", "alarm", "for 8 AM on", "weekdays"])
-        self.assertEqual(tokens.unmatched(), ["an", "for 8 AM on"])
+        self.assertEqual(tokens, ["set", "an", "alarm", "for 8 am on", "weekdays"])
+        self.assertEqual(tokens.unmatched(), ["for 8 am on"])
 
         weekends = _get_message_from_file("wake_me_up_weekends.json")
         tokens = tokenize_utterance(weekends)
-        self.assertEqual(tokens, ["wake me up", "at 9 30 AM on", "weekends"])
-        self.assertEqual(tokens.unmatched(), ["at 9 30 AM on"])
+        self.assertEqual(tokens, ["wake me up", "at 9 30 am on", "weekends"])
+        self.assertEqual(tokens.unmatched(), ["at 9 30 am on"])
 
         wakeup_at = _get_message_from_file("wake_me_up_at_time_alarm.json")
         tokens = tokenize_utterance(wakeup_at)
-        self.assertEqual(tokens, ["neon", "wake me up", "at 7 AM"])
-        self.assertEqual(tokens.unmatched(), ["neon", "at 7 AM"])
+        self.assertEqual(tokens, ["neon", "wake me up", "at 7 am"])
+        self.assertEqual(tokens.unmatched(), ["at 7 am"])
 
         wakeup_in = _get_message_from_file("wake_me_up_in_time_alarm.json")
         tokens = tokenize_utterance(wakeup_in)
@@ -2991,8 +2998,13 @@ class TestParseUtils(unittest.TestCase):
 
         multi_day_repeat = _get_message_from_file("alarm_every_monday_thursday.json")
         tokens = tokenize_utterance(multi_day_repeat)
-        self.assertEqual(tokens, ["wake me up", "every", "monday and thursday at 9 AM"])
-        self.assertEqual(tokens.unmatched(), ["monday and thursday at 9 AM"])
+        # The source utterance ends with a period ("... at 9 AM."), and the
+        # tokenizer now keeps it as a trailing " ." instead of stripping it.
+        # extract_datetime returns the same datetime with or without it, and
+        # parse_repeat_from_message still reads [MON, THU], so this is
+        # cosmetic.
+        self.assertEqual(tokens, ["wake me up", "every", "monday and thursday at 9 am ."])
+        self.assertEqual(tokens.unmatched(), ["monday and thursday at 9 am ."])
 
         # TODO if this is a real issue, its an intent parser problem
         # if STT sends "Alarm in ..." it should be tagged as such
@@ -3053,7 +3065,11 @@ class TestParseUtils(unittest.TestCase):
         repeat = parse_repeat_from_message(multi_day_repeat, tokens)
         self.assertIsInstance(repeat, list)
         self.assertEqual(repeat, [Weekdays.MON, Weekdays.THU])
-        self.assertEqual(tokens, ["wake me up", "every", "and", "at 9 AM"])
+        # The repeat value above is what this test is named for and it is
+        # unchanged. The token list carries the same two drifts as
+        # test_Tokens: the normaliser lowercases, and the utterance's own
+        # trailing period survives as " .".
+        self.assertEqual(tokens, ["wake me up", "every", "and", "at 9 am ."])
 
         daily_reminder = _get_message_from_file(
             "remind_me_for_duration_to_action_every_repeat.json"
@@ -3126,6 +3142,43 @@ class TestParseUtils(unittest.TestCase):
         self.assertEqual(next_sunday.weekday(), Weekdays.SUN)
         self.assertGreaterEqual(next_sunday, now_time)
 
+    def test_parse_end_condition_from_message_no_adapt_tags(self):
+        # PR #172 adversarial review: intents migrated from Adapt to
+        # padacioso .intent files never populate message.data["until"] (no
+        # __tags__ at all), so the "until"/duration end-condition clause was
+        # silently dropped for every migrated intent that can take one (eg.
+        # create_reminder "... until november"). Message here has no
+        # "__tags__"/"until" key, mirroring an actual padatious match.
+        from ovos_skill_alerts.util.parse_utils import parse_end_condition_from_message
+
+        now_time = dt.datetime.now(dt.timezone.utc)
+        message = Message(
+            "recognizer_loop:utterance",
+            {"utterance": "create a reminder to go to work at 9 am daily until november",
+             "lang": "en-US"},
+        )
+        end = parse_end_condition_from_message(message, anchor_time=now_time)
+        self.assertIsNotNone(end)
+        if isinstance(end, dt.timedelta):
+            end = now_time + end
+        self.assertEqual(end.month, 11)
+
+    def test_parse_repeat_from_message_no_adapt_tags(self):
+        # Same gap as above for the arbitrary "every <interval>" branch of
+        # parse_repeat_from_message (the "everyday"/"weekends"/"weekdays"
+        # short-circuits already had a voc_match fallback; the generic
+        # "repeat" clause used for "every 3 days" etc. did not).
+        from ovos_skill_alerts.util.parse_utils import parse_repeat_from_message
+
+        message = Message(
+            "recognizer_loop:utterance",
+            {"utterance": "set a reminder every 3 days to check for test failures",
+             "lang": "en-US"},
+        )
+        repeat = parse_repeat_from_message(message)
+        self.assertIsInstance(repeat, dt.timedelta)
+        self.assertEqual(repeat, dt.timedelta(days=3))
+
     def test_parse_alert_time_from_message_alarm(self):
         from ovos_skill_alerts.util.parse_utils import parse_alert_time_from_message, tokenize_utterance
 
@@ -3159,7 +3212,15 @@ class TestParseUtils(unittest.TestCase):
         wakeup_in = _get_message_from_file("wake_me_up_in_time_alarm.json")
         alert_time = parse_alert_time_from_message(wakeup_in).replace(microsecond=0)
         self.assertIsInstance(alert_time, dt.datetime)
-        self.assertEqual(alert_time.tzinfo, dt.timezone(alert_time.utcoffset()))
+        # parse_alert_time_from_message used to normalise the anchor's tzinfo
+        # to a fixed `dt.timezone(offset)`; that conversion is commented out in
+        # util/parse_utils.py now, so the named zone survives (a tzfile). That
+        # is the better of the two: a named zone knows its DST transitions and
+        # a fixed offset does not, which matters for an expiration months out.
+        # The invariant is the offset, not the tzinfo object's identity.
+        self.assertIsNotNone(alert_time.tzinfo)
+        self.assertEqual(alert_time.utcoffset(),
+                         dt.datetime.now(alert_time.tzinfo).utcoffset())
 
         valid_alert_time = dt.datetime.now(tzlocal()).replace(
             microsecond=0
@@ -3285,8 +3346,11 @@ class TestParseUtils(unittest.TestCase):
             "set_reminder_to_action_every_interval_until_end.json"
         )
 
+        # The repository ships `locale/en-US`. This read was hardcoded to
+        # `en-us` and raised FileNotFoundError, which is one of the reasons
+        # this class was skipped rather than fixed.
         with open(join(dirname(dirname(__file__)),
-                       "locale", "en-us", "vocab", "noise_words.voc")) as f:
+                       "locale", "en-US", "vocab", "noise_words.voc")) as f:
             noise_words = f.read().split('\n')
 
         self.assertEqual(parse_alert_name_from_message(monday_thursday_alarm,
@@ -3374,11 +3438,29 @@ class TestParseUtils(unittest.TestCase):
         self.assertIsInstance(no_context["ident"], str)
         self.assertIsInstance(no_context["created"], float)
 
+        before = time.time()
         local_user = parse_alert_context_from_message(test_message_local_user)
+        after = time.time()
         self.assertEqual(local_user["user"], "local")
         self.assertEqual(local_user["ident"], "1644629287")
-        self.assertEqual(local_user["created"], 1644629287.028714)
-        self.assertIsInstance(local_user["timing"], dict)
+        # `created` used to be read from context["timing"]["handle_utterance"],
+        # so this asserted the frozen 2022 epoch the message above carries.
+        # parse_utils now stamps `time()` at parse time (util/parse_utils.py,
+        # "created": time()). In production the two differ by the milliseconds
+        # between the utterance and the parse, so the invariant worth pinning
+        # is that it is a float stamped during this call, not a literal.
+        self.assertIsInstance(local_user["created"], float)
+        self.assertGreaterEqual(local_user["created"], before)
+        self.assertLessEqual(local_user["created"], after)
+        # This used to assert context["timing"] was a dict. The returned
+        # context no longer carries `timing` at all, so the key set is pinned
+        # instead: a silent addition or removal here changes what every Alert
+        # stores.
+        self.assertEqual(
+            sorted(local_user),
+            ["created", "destination", "ident", "lang", "origin_ident",
+             "source", "user"],
+        )
 
     def test_build_alert_from_intent_alarm(self):
         from ovos_skill_alerts.util.parse_utils import build_alert_from_intent
@@ -3388,8 +3470,6 @@ class TestParseUtils(unittest.TestCase):
         wakeup_in = _get_message_from_file("wake_me_up_in_time_alarm.json")
 
         daily_alert_local = build_alert_from_intent(daily)
-        # infuse utc timezone
-        change_user_tz(daily, "UTC")
         daily_alert_utc = build_alert_from_intent(daily)
 
         def _validate_daily(alert: Alert):
@@ -3413,8 +3493,6 @@ class TestParseUtils(unittest.TestCase):
         )
 
         wakeup_at_alert_local = build_alert_from_intent(wakeup_at)
-        # infuse utc timezone
-        change_user_tz(wakeup_at, "UTC")
         wakeup_at_alert_utc = build_alert_from_intent(wakeup_at)
 
         def _validate_wakeup_at(alert: Alert):
@@ -3442,8 +3520,6 @@ class TestParseUtils(unittest.TestCase):
         )
 
         wakeup_in_alert_local = build_alert_from_intent(wakeup_in)
-        # infuse utc timezone
-        change_user_tz(wakeup_in, "UTC")
         wakeup_in_alert_utc = build_alert_from_intent(wakeup_in)
 
         def _validate_wakeup_in(alert: Alert):
@@ -3491,8 +3567,6 @@ class TestParseUtils(unittest.TestCase):
             self.assertIsInstance(timer.expiration, dt.datetime)
 
         no_name_timer_local = build_alert_from_intent(no_name_10_minutes)
-        # infuse utc timezone
-        change_user_tz(no_name_10_minutes, "UTC")
         no_name_timer_utc = build_alert_from_intent(no_name_10_minutes)
 
         _validate_alert_default_params(no_name_timer_utc)
@@ -3511,6 +3585,12 @@ class TestParseUtils(unittest.TestCase):
         _validate_alert_default_params(bread_timer_local)
         self.assertEqual(bread_timer_local.alert_name, "bread")
 
+    @unittest.expectedFailure  # T-5284: parse_alert_time_from_message breaks
+    # on the first unmatched token that yields a duration, so the until
+    # duration "4 weeks" in "remind me for the next four weeks to exercise
+    # every day at 10 AM" becomes the alert time and "at 10 am" is never
+    # read. The alert fires at the hour the user asked instead of 10:00. The
+    # assertion below is correct; the parser is not.
     def test_build_alert_from_intent_reminder(self):
         from ovos_skill_alerts.util.parse_utils import build_alert_from_intent
 
@@ -3636,6 +3716,13 @@ class TestParseUtils(unittest.TestCase):
         self.assertIsNone(rotate_logs_reminder.repeat_days)
         self.assertEqual(rotate_logs_reminder.repeat_frequency, dt.timedelta(hours=8))
 
+    @unittest.expectedFailure  # T-5268: ovos_date_parser.extract_datetime
+    # returns a NAIVE datetime for a holiday name ("halloween" -> Oct 31)
+    # while returning a tz-aware one for every other form given the same
+    # tz-aware anchorDate, so util/alert.py raises
+    # ValueError("expiration missing tzinfo") and no alert is created. The
+    # assertions below are correct; the parser is not. Remove this decorator
+    # when ovos-date-parser is fixed.
     def test_build_alert_from_intent_event(self):
         from ovos_skill_alerts.util.parse_utils import build_alert_from_intent
 
@@ -3665,6 +3752,118 @@ class TestParseUtils(unittest.TestCase):
             halloween_reminder.until,
             halloween_reminder.expiration + dt.timedelta(hours=3),
         )
+
+
+class TestPadatiousSlotIsTheName(unittest.TestCase):
+    """A padatious intent fills its own slot and populates no `__tags__`.
+
+    `tokens.unmatched()` is then the whole utterance, so the name parsed
+    from it carried the verb and the role words: "delete my shopping list"
+    parsed as "delete shopping list", and the skill spoke "There is no entry
+    delete shopping list stored." The slot the intent file declares is the
+    name the user said.
+    """
+
+    def _message(self, utterance, **data):
+        from ovos_bus_client.message import Message
+        return Message("test", {"utterance": utterance, "lang": "en-US", **data})
+
+    def test_the_declared_slot_is_the_name(self):
+        from ovos_skill_alerts.util.parse_utils import parse_alert_name_from_message
+        cases = {
+            "delete my shopping list": "shopping",
+            "delete everything from my shopping list": "shopping",
+            "remove the items from my reading list": "reading",
+        }
+        for utterance, slot in cases.items():
+            with self.subTest(utterance=utterance):
+                message = self._message(utterance, list_name=slot)
+                self.assertEqual(
+                    parse_alert_name_from_message(message), slot)
+
+    def test_the_token_parse_still_answers_without_a_slot(self):
+        # adapt populates `__tags__` and no `list_name`; that path is
+        # unchanged, and so is a padatious intent that declares no slot.
+        from ovos_skill_alerts.util.parse_utils import parse_alert_name_from_message
+        message = self._message("delete my shopping list")
+        self.assertEqual(parse_alert_name_from_message(message),
+                         "delete shopping list")
+
+    def test_an_empty_slot_falls_through(self):
+        from ovos_skill_alerts.util.parse_utils import parse_alert_name_from_message
+        for empty in ("", "   ", None):
+            with self.subTest(slot=repr(empty)):
+                message = self._message("delete my shopping list", list_name=empty)
+                self.assertEqual(parse_alert_name_from_message(message),
+                                 "delete shopping list")
+
+
+class TestDeleteListEntriesAnswersWhenNoListMatches(unittest.TestCase):
+    """A matched intent must answer.
+
+    `_delete_list_entries` returned silently when `_resolve_requested_alert`
+    found no list, so "delete everything from my shopping list" matched and
+    said nothing at all. #254 made it speak `list_todo_dont_exist` with the
+    parsed name, the same dialog the sibling `handle_add_list_subitems`
+    speaks on the same condition. Reverting that hunk left every suite
+    green, so the behaviour is pinned here.
+    """
+
+    def _skill(self, resolved):
+        """The real class, with only the resolver and the speech stubbed."""
+        from ovos_skill_alerts import AlertSkill
+        skill = AlertSkill()
+        skill._resolve_requested_alert = lambda *a, **kw: resolved
+        skill.speak_dialog = Mock()
+        return skill
+
+    def _message(self, utterance, **data):
+        from ovos_bus_client.message import Message
+        return Message("test", {"utterance": utterance, "lang": "en-US",
+                                **data})
+
+    def test_no_list_matches_speaks_list_todo_dont_exist(self):
+        skill = self._skill(resolved=None)
+        message = self._message("delete everything from my shopping list",
+                                list_name="shopping")
+
+        skill._delete_list_entries(message)
+
+        skill.speak_dialog.assert_called_once_with(
+            "list_todo_dont_exist", {"name": "shopping"})
+
+    def test_the_name_comes_from_the_message(self):
+        # The control for the assertion above: the dialog carries the name
+        # the user said, not a fixed string.
+        skill = self._skill(resolved=None)
+        message = self._message("delete everything from my reading list",
+                                list_name="reading")
+
+        skill._delete_list_entries(message)
+
+        skill.speak_dialog.assert_called_once_with(
+            "list_todo_dont_exist", {"name": "reading"})
+
+    def test_a_resolved_list_does_not_speak_the_missing_dialog(self):
+        # The second control: the branch under test is the None branch only.
+        # With a list resolved, the handler goes on to the entries and must
+        # not answer "there is no such list".
+        resolved = Mock()
+        resolved.ident = "ident-1"
+        resolved.alert_name = "shopping"
+        skill = self._skill(resolved=resolved)
+        # `alert_manager` is a read-only property over `_alert_manager`.
+        manager = Mock()
+        manager.get_children.return_value = []
+        skill._alert_manager = manager
+        message = self._message("delete everything from my shopping list",
+                                list_name="shopping", stored=True)
+
+        skill._delete_list_entries(message)
+
+        spoken = [call.args[0] for call in skill.speak_dialog.call_args_list
+                  if call.args]
+        self.assertNotIn("list_todo_dont_exist", spoken)
 
 
 @unittest.skip('Work in progress')
@@ -3852,14 +4051,14 @@ class TestSkillLoading(unittest.TestCase):
     supported_languages = ["en-us"]
 
     # Specify skill intents as sets
-    adapt_intents = {'CreateAlarm', 'CreateOcpAlarm', 'CreateTimer', 
-                     'CreateReminder', 'CreateReminderAlt', 'CreateEvent',
-                     'RescheduleAlert', 'RescheduleAlertAlt', 'ListAlerts',
-                     'ChangeProperties', 'ChangeMediaProperties',
-                     'TimerStatus', 'CancelAlert', 'CreateList',
-                     'AddListSubitems', 'QueryListNames', 'QueryTodoEntries',
-                     'QueryListEntries', 'DeleteListEntries', 'DeleteList',
-                     'DeleteTodoEntries', 'CalendarList'}
+    adapt_intents = {'create_alarm', 'create_timer',
+                     'create_reminder', 'create_event',
+                     'reschedule_alert', 'list_alerts',
+                     'ChangeProperties', 'change_media_properties',
+                     'timer_status', 'cancel_alert', 'create_list',
+                     'add_list_subitems', 'query_list_names',
+                     'query_list_entries', 'delete_list_entries', 'delete_list',
+                     'calendar_list'}
     padatious_intents = {'missed_alerts.intent'}
 
     # regex entities, not necessarily filenames

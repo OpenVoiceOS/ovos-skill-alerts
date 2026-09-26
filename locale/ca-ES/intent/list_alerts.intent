@@ -1,0 +1,9 @@
+(quins|quines|què) {alertkind} tinc
+quins són els meus {alertkind}
+(llista|mostra|digues-me|llegeix) els meus {alertkind}
+(llista|mostra|digues-me|llegeix) {alertkind}
+tinc (algun|alguna) {alertkind}
+(hi ha|existeix) (algun|alguna) {alertkind}
+hi ha {alertkind} (programats|programades|desats|desades)
+(quan|quin) és el meu pròxim {alertkind}
+què tinc (programat|desat|apuntat)

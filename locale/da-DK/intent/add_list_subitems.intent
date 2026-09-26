@@ -1,0 +1,4 @@
+tilføj (punkter|poster|ting) til [min|] liste[n] [{list_name}]
+(opret|tilføj) liste (punkter|poster) [{items}]
+tilføj (punkter|poster|ting) til (min|den) {list_name} liste
+tilføj {items} til (min|den) {list_name} liste

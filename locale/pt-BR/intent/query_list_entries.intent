@@ -1,0 +1,10 @@
+# machine translation from en-US, unvouched
+(quais|que) (itens|entradas|coisas) estão (na|dentro da) (minha|a) lista [{list_name}]
+(leia|mostre) [para mim] (os itens|as entradas) (na|dentro da) (minha|a) lista [{list_name}]
+o que tem (na|em) (minha|a) lista de {list_name}
+(quais|que) (itens|entradas|coisas) estão (na|dentro da) (minha|a) lista de {list_name}
+(leia|mostre) [para mim] [os|as] (itens|entradas) (na|dentro da) (minha|a) lista de {list_name}
+(o que tem|o que está) (na|dentro da) minha lista de {list_name}
+(o que tem|o que está) (nas|dentro das) minhas [listas de] tarefas
+(leia|mostre|liste) [para mim] (meus itens|minhas entradas|minhas notas) de tarefas
+o que eu tenho para fazer

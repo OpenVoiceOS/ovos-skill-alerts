@@ -1,0 +1,7 @@
+(pon|crea|añade) un recordatorio [para {reminder}] [a las {date:time}]
+recordatorio nuevo [{reminder}]
+crear recordatorios
+iniciar recordatorios
+programar recordatorios
+recuérda(me|nos) [que {reminder}] [a las {date:time}]
+dime que {reminder} [a las {date:time}]

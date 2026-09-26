@@ -1,0 +1,9 @@
+# machine translation from en-US, unvouched
+quant (temps|de temps) queda (al|del|en el) {timerkind}
+quant (temps|de temps) queda (al|del) {timerkind} de {name}
+quant (temps|de temps) falta (perquè|fins que) (el|el meu) {timerkind} (acabi|estigui llest)
+(ja|) (ha acabat|està llest) (el|el meu) {timerkind}
+(digues|dona) me el temps que queda (al|del) {timerkind}
+quin és (l'estat|la situació) (del|del meu) {timerkind}
+estat (del|del meu) {timerkind}
+quan (acaba|acabarà) (el|el meu) {timerkind}

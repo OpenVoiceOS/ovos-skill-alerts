@@ -1,0 +1,9 @@
+(ustaw|utwórz|dodaj) (alarm|budzik) [na {date:time}]
+nowy (alarm|budzik) [na {date:time}]
+harmonogram alarm
+tworzyć alarm
+ustaw (alarm|budzik) [na {date:time}], żeby odtwarzał {mediakind}
+obudź (mnie|nas) [o {date:time}]
+obudź mnie z {mediakind} o {date:time}
+obudź mnie co {days} o {date:time}
+obudź (mnie|nas) za {duration:duration}

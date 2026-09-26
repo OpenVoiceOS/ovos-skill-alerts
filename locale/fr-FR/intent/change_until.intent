@@ -1,0 +1,6 @@
+change la durée de mon {schedkind} à {duration:duration}
+prolonge mon {schedkind} jusqu'à {duration:duration}
+ajuste la longueur du prochain {schedkind} à {duration:duration}
+fais durer le {schedkind} pendant {duration:duration}
+change mon {schedkind} pour qu'il dure jusqu'à {duration:duration}
+raccourcis la durée de mon {schedkind} à {duration:duration}

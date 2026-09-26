@@ -1,0 +1,10 @@
+(imposta|crea|aggiungi|programma) (un allarme|una sveglia) [per {date:time}]
+nuovo allarme [per {date:time}]
+creare allarmi
+programma allarmi
+Ho allarmi
+sveglia(mi|ci) [alle {date:time}]
+(puoi|potresti) svegliarmi [alle {date:time}]
+svegliami con {mediakind} alle {date:time}
+svegliami tra {duration:duration}
+svegliami ogni {days} alle {date:time}

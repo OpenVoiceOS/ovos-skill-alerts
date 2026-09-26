@@ -1,0 +1,9 @@
+# machine translation from en-US, unvouched
+(flytta|ändra|skjut upp) (min|mitt|den) {schedkind} till {date:time}
+(flytta|ändra|skjut upp) (min|mitt|den) {schedkind} från {date:old} till {date:time}
+(flytta|ändra|skjut upp) {schedkind} för {name} till {date:time}
+(flytta|lägg) (min|mitt|den) (nästa|kommande) {schedkind} (tidigare|senare)
+(förläng|förkorta) (min|mitt|den) {schedkind}
+(skjut upp|flytta) (min|mitt|den) (nästa|kommande) {schedkind} med {duration:duration}
+(min|mitt|den) {schedkind} (flytta|ändra) (den|det) till {date:time}
+(gör|sätt) (min|mitt|den) (nästa|kommande) {schedkind} (tidigare|senare)

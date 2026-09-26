@@ -1,0 +1,9 @@
+# machine translation from en-US, unvouched
+(sposta|cambia|rimanda) (il|la|il mio|la mia) {schedkind} alle {date:time}
+(sposta|cambia|rimanda) (il|la|il mio|la mia) {schedkind} da {date:old} alle {date:time}
+(sposta|cambia|rimanda) (il|la) {schedkind} di {name} alle {date:time}
+(anticipa|ritarda) (il|la|il mio|la mia) (prossimo|prossima) {schedkind}
+(allunga|accorcia) (il|la|il mio|la mia) {schedkind}
+(rimanda|ritarda) (il|la|il mio|la mia) (prossimo|prossima) {schedkind} di {duration:duration}
+(il|la|il mio|la mia) {schedkind} (spostalo|cambialo|spostala|cambiala) alle {date:time}
+(metti|imposta) (il|la|il mio|la mia) (prossimo|prossima) {schedkind} (prima|più tardi)

@@ -1,0 +1,6 @@
+změň prioritu mého {schedkind} na {number:priority}
+zvyš prioritu {schedkind} na úroveň {number:priority}
+uprav prioritu mého dalšího {schedkind}
+nastav {schedkind} na prioritu {number:priority}
+sniž prioritu mého {schedkind}
+změň úroveň priority {schedkind} na {number:priority}

@@ -1,0 +1,6 @@
+(zet|start|maak) een timer [voor {duration:duration}]
+nieuwe timer [voor {duration:duration}]
+(zet|start|maak) een {duration:duration} timer
+start timers
+ik heb timer
+maak timer

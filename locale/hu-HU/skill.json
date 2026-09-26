@@ -1,0 +1,29 @@
+{
+  "name": "Riasztások",
+  "description": "Készség ébresztők, időzítők, emlékeztetők, események és teendők kezelésére, igény szerint CalDAV szolgáltatással szinkronizálva.",
+  "examples": [
+    "Állíts be ébresztőt reggel 8-ra.",
+    "Indíts kenyérsütés időzítőt 30 percre.",
+    "Ütemezz egy teniszeseményt péntek 14 órára, két óra hosszan.",
+    "Állíts be napi ébresztőt reggel 8-ra.",
+    "Állíts be ébresztőt szombatonként reggel 8-ra.",
+    "emlékeztess, hogy vigyem ki a szemetet minden csütörtökön és vasárnap 19 órakor.",
+    "ébressz fel reggel 8-kor zenével.",
+    "Mikor lesz a következő ébresztőm?",
+    "Milyen emlékeztetőim vannak?",
+    "Töröld az összes ébresztőt.",
+    "Töröld az összes időzítőt.",
+    "Töröld az összes emlékeztetőt.",
+    "Miről maradtam le?",
+    "Lemaradtam valamiről?"
+  ],
+  "tags": [
+    "Produktivitás",
+    "Napi",
+    "riasztás",
+    "ébresztő",
+    "időzítő",
+    "emlékeztető",
+    "ütemezés"
+  ]
+}

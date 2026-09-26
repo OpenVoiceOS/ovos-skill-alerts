@@ -1,0 +1,6 @@
+(annule|annuler|supprime|supprimer|efface|effacer|retire|retirer) {alertkind}
+(annule|annuler|supprime|supprimer|efface|effacer) (le|la|les) {alertkind}
+(annule|annuler|supprime|supprimer|efface|effacer) (tous|toutes) (les|mes) {alertkind}
+(annule|annuler|supprime|supprimer|efface|effacer) (mon|ma|mes) {alertkind}
+(annule|annuler|supprime|supprimer) (le|la) (prochain|prochaine) {alertkind}
+(annule|annuler|supprime|supprimer|efface|effacer) (mon|ma|mes) {alertkind} pour {name}

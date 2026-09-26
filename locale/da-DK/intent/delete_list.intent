@@ -1,0 +1,3 @@
+(slet|fjern) [min|] liste[n] [{list_name}]
+(slet|fjern) [alle] [mine] lister
+(slet|fjern) {list_name} liste[n]
