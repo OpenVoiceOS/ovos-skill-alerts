@@ -5,3 +5,9 @@ jeg har påmindelse
 mind mig om [at {reminder}] [klokken {date:time}]
 fortæl mig at jeg skal {reminder}
 mind mig om {duration:duration} [at {reminder}]
+mind mig om at tage på arbejde hver hverdag morgen klokken 8
+mind mig hver hverdags morgen om at tage min medicin klokken 8
+mind mig om at gå tur med hunden hver hverdag morgen klokken 7
+mind mig om at tjekke min mail hver hverdag morgen klokken 9
+mind mig hver hverdags aften om at ringe til mor klokken 6
+mind mig om at vande planterne hver weekend morgen klokken 8
