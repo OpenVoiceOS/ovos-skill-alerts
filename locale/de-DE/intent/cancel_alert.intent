@@ -1,2 +1,6 @@
-(abbrechen|aufhören|entferne|entfernen|leere|leeren|lösche|löschen|stop|stoppen|verwerfen|verwirf) (alarm|alarme|weck mich|weck mich auf|wecke mich|wecke mich auf|timer|wecker|weckzeiten|benachrichtigung|benachrichtigungen|erinnerung|erinnerungen|Event|Treffen|Verabredung|Verabredungen|Events|termin|termine|Alarm|Alarme|Wecker)
-(abbrechen|aufhören|entferne|entfernen|leere|leeren|lösche|löschen|stop|stoppen|verwerfen|verwirf) (ich|habe|wir|hab|ein|eine|auf|mich|der|in|du|die|was|von|soll|weck|hast|aus|dem|es) (alarm|alarme|weck mich|weck mich auf|wecke mich|wecke mich auf|timer|wecker|weckzeiten|benachrichtigung|benachrichtigungen|erinnerung|erinnerungen|Event|Treffen|Verabredung|Verabredungen|Events|termin|termine|Alarm|Alarme|Wecker)
+(lösche|löschen|entferne|entfernen|breche ab|abbrechen|verwirf) {alertkind}
+(lösche|löschen|entferne|entfernen|breche ab|abbrechen|verwirf) (den|die|das) {alertkind}
+(lösche|löschen|entferne|entfernen) (alle|alle meine) {alertkind}
+(lösche|löschen|entferne|entfernen) (meinen|meine|mein) {alertkind}
+(lösche|löschen|entferne|entfernen) (den|die|das) (nächsten|nächste|nächstes) {alertkind}
+(lösche|entferne|streiche|beende) (meinen|meine|mein) {alertkind} für {name}
