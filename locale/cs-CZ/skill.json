@@ -1,0 +1,29 @@
+{
+  "name": "Upozornění",
+  "description": "Dovednost pro správu budíků, časovačů, připomínek, událostí a úkolů, volitelně se synchronizací se službou CalDAV.",
+  "examples": [
+    "Nastav budík na 8 ráno.",
+    "Spusť časovač na chleba na 30 minut.",
+    "Naplánuj na pátek od 14:00 tenis na dvě hodiny.",
+    "Nastav denní budík na 8 ráno.",
+    "Nastav budík na 8 ráno v sobotu.",
+    "Připomeň mi vynést koš každý čtvrtek a neděli v 19:00.",
+    "Vzbuď mě v 8 ráno hudbou.",
+    "Kdy mám další budík?",
+    "Jaké mám připomínky?",
+    "Zruš všechny budíky.",
+    "Zruš všechny časovače.",
+    "Zruš všechny připomínky.",
+    "Co jsem zmeškal?",
+    "Zmeškal jsem něco?"
+  ],
+  "tags": [
+    "Produktivita",
+    "Denní",
+    "upozornění",
+    "budík",
+    "časovač",
+    "připomínka",
+    "plán"
+  ]
+}
