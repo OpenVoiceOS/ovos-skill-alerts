@@ -637,8 +637,14 @@ def parse_alert_name_from_message(message: Message,
     candidate_names = list()
     # First try to parse a name from the remainder tokens
     for chunk in tokens.unmatched():
+        # A word with no letter or digit in it is punctuation left over by the
+        # normaliser, not a name. The tokenizer keeps the trailing period of
+        # "wake me up every monday and thursday at 9 AM." as its own " ."
+        # token, and after `strip_time()` that period is the whole remainder,
+        # so without this the alert is named ".".
         cleaned_chunk = " ".join([word.lower() for word in chunk.split()
-                                  if word not in noise_words])
+                                  if word not in noise_words
+                                  and any(c.isalnum() for c in word)])
         if cleaned_chunk:
             candidate_names.append(cleaned_chunk)
     # default name
