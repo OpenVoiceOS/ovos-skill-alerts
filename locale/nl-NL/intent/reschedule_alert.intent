@@ -1,2 +1,9 @@
-(pas aan|plan opnieuw|stel uit|verdaag|verleng|verplaats|wijzig) (maak me wakker|maak mij wakker|wekker|zet een wekker|wek me|Herinneringen|herinnering|afspraak|afspraken|timer|timers)
-(pas aan|plan opnieuw|stel uit|verdaag|verleng|verplaats|wijzig) (ik|heb|er|is|de|een|je|me|zijn|die|op|maak|van|mijn|het|geen|dit|moet|aan|wek) (maak me wakker|maak mij wakker|wekker|zet een wekker|wek me|Herinneringen|herinnering|afspraak|afspraken|timer|timers)
+# machine translation from en-US, unvouched
+(verplaats|verzet|wijzig|stel uit) (mijn|de) {schedkind} naar {date:time}
+(verplaats|verzet|wijzig) (mijn|de) {schedkind} van {date:old} naar {date:time}
+(verplaats|verzet|wijzig) de {schedkind} van {name} naar {date:time}
+zet (mijn|de) (volgende|eerstvolgende) {schedkind} (eerder|later)
+(verleng|verkort) (mijn|de) {schedkind}
+(stel|zet) (mijn|de) (volgende|eerstvolgende) {schedkind} met {duration:duration} (later|eerder)
+(mijn|de) {schedkind} (verplaats|verzet) (hem|die) naar {date:time}
+(maak|zet) (mijn|de) {schedkind} (eerder|later)
