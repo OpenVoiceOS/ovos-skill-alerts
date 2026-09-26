@@ -1,2 +1,6 @@
-(borrar|cancelar|descartar|eliminar|limpiar) (alarma|alarmas|despiértame|temporizador|temporizadores|recordatorio|recordatorios|cita|citas|evento|eventos|alerta|alertas)
-(borrar|cancelar|descartar|eliminar|limpiar) (de|en|la|no|el|a|por|hay|este|una|tu|un|mi|está|debo|que|es|las|se|he) (alarma|alarmas|despiértame|temporizador|temporizadores|recordatorio|recordatorios|cita|citas|evento|eventos|alerta|alertas)
+(cancela|cancelar|borra|borrar|elimina|eliminar|descarta|descartar) {alertkind}
+(cancela|cancelar|borra|borrar|elimina|eliminar|descarta|descartar) (el|la|los|las) {alertkind}
+(cancela|cancelar|borra|borrar|elimina|eliminar) (todos los|todas las) {alertkind}
+(cancela|cancelar|borra|borrar|elimina|eliminar) (mi|mis) {alertkind}
+(cancela|cancelar|borra|borrar) (el|la) próximo {alertkind}
+(cancela|anula|elimina|borra|quita) (mi|mis) {alertkind} de {name}
