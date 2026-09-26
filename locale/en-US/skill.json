@@ -3,18 +3,18 @@
     "description": "A skill to manage alarms, timers, reminders, events and todos and optionally sync them with a CalDAV service. ",
     "examples": [
         "Set an alarm for 8 AM.",
-        "Start a bread timer for 30 minutes.",
-        "Schedule a tennis event for 2 PM on friday spanning 2 hours.",
+        "Start a timer for 30 minutes.",
+        "Schedule an appointment for tennis on friday at 2 PM.",
         "Set a daily alarm for 8 AM.",
         "Set an alarm for 8 AM on saturdays.",
         "remind me to take out the trash every Thursday and Sunday at 7 PM.",
         "wake me up at 8 AM with music.",
         "When is my next alarm?",
-        "What are my reminders?",
+        "What are my upcoming reminders?",
         "Cancel all alarms.",
         "Cancel all timers.",
         "Cancel all reminders.",
-        "What did I miss?",
+        "What did I miss today?",
         "Did I miss anything?"
     ],
     "tags": [
