@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.12.19a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.12.19a1) (2026-09-26)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.12.18a1...0.12.19a1)
+
+**Merged pull requests:**
+
+- fix\(fr-FR\): list\_alerts and cancel\_alert hear the language, not a word list [\#305](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/305) ([openvoiceos-bot](https://github.com/openvoiceos-bot))
+
 ## [0.12.18a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.12.18a1) (2026-09-26)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.12.17a2...0.12.18a1)
@@ -378,17 +386,9 @@
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.6.5a1...0.6.6a1)
 
-**Merged pull requests:**
-
-- fix: the golden rows name intents this skill registers [\#234](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/234) ([openvoiceos-bot](https://github.com/openvoiceos-bot))
-
 ## [0.6.5a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.6.5a1) (2026-09-18)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.6.4a3...0.6.5a1)
-
-**Merged pull requests:**
-
-- fix: intent resource names per OVOS-INTENT-2 §2 [\#233](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/233) ([openvoiceos-bot](https://github.com/openvoiceos-bot))
 
 ## [0.6.4a3](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.6.4a3) (2026-09-17)
 
