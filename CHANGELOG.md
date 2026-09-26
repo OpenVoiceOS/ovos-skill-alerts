@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.12.23a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.12.23a1) (2026-09-26)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.12.22a1...0.12.23a1)
+
+**Merged pull requests:**
+
+- fix\(sv-SE\): list\_alerts and cancel\_alert hear the language, not a word list [\#309](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/309) ([openvoiceos-bot](https://github.com/openvoiceos-bot))
+
 ## [0.12.22a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.12.22a1) (2026-09-26)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.12.21a1...0.12.22a1)
