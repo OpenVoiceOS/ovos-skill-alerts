@@ -24,9 +24,11 @@ the utterance IS additionally claimed by ovos-skill-date-time's
 That is a real arbitration loss under that broader pipeline, but it is a
 downstream consequence of the coverage gap, not the primary bug.
 
-The fix: a dedicated padatious template intent
-(``locale/en-US/intent/create_reminder_recurring.intent``) trained on this
-class of recurring-reminder phrasing, which matches at padatious-high --
+The fix: padatious templates for this class of recurring-reminder
+phrasing, which match at padatious-high. They shipped as a separate
+``create_reminder_recurring.intent`` and are now lines of
+``locale/en-US/intent/create_reminder.intent`` (one intent, one
+definition), which matches at padatious-high --
 closing the coverage gap under the REAL default pipeline directly (alerts
 now answers at all) and, incidentally, also winning outright under the
 broader test pipeline before any low-confidence tier is reached.
@@ -251,7 +253,7 @@ class TestReminderVsDateTimeArbitration(unittest.TestCase):
             f"{ALERTS_ID!r} but got {claimant!r}. "
             f"messages seen: {[m.msg_type for m in recs]}")
         claim_types = {m.msg_type for m in recs}
-        self.assertIn(f"{ALERTS_ID}:create_reminder_recurring", claim_types)
+        self.assertIn(f"{ALERTS_ID}:create_reminder", claim_types)
 
 
 if __name__ == "__main__":

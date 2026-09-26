@@ -7,7 +7,7 @@ templates could not reach.
 about a specific kind, fell below padatious' conf_low (0.5).
 
 "remind me to take out the trash every Thursday and Sunday at 7 PM" --
-create_reminder_recurring.intent's 12 examples all use weekday/weekend/
+the recurring examples in create_reminder.intent all use weekday/weekend/
 morning/afternoon shapes; none reaches an explicit day-of-week list. A
 padatious match on such a phrasing is only useful if the handler then books
 the days the user named, so that test asserts the parsed alert through
@@ -36,8 +36,7 @@ LOCALE_INTENT_DIR = Path(__file__).parent.parent / "locale" / "en-US" / "intent"
 
 # missed_alerts and the intents that compete with it for a generic
 # "did I miss anything": list_alerts takes it when missed_alerts cannot.
-TRAINED_INTENTS = ("missed_alerts", "create_reminder_recurring",
-                   "list_alerts", "create_reminder")
+TRAINED_INTENTS = ("missed_alerts", "list_alerts", "create_reminder")
 
 
 def _train_container() -> IntentContainer:
@@ -60,8 +59,8 @@ def test_missed_alerts_generic_phrasing():
     )
 
 
-# Neither utterance appears in create_reminder_recurring.intent, and the
-# second uses a clock time none of its templates carry.
+# Neither utterance appears in create_reminder.intent, and the second
+# uses a clock time none of its templates carry.
 DAY_OF_WEEK_CASES = [
     ("remind me to take out the trash every Thursday and Sunday at 7 PM",
      {Weekdays.THU, Weekdays.SUN}, 19, 0),
@@ -71,7 +70,7 @@ DAY_OF_WEEK_CASES = [
 
 
 @pytest.mark.parametrize("utterance,days,hour,minute", DAY_OF_WEEK_CASES)
-def test_create_reminder_recurring_day_of_week_outcome(utterance, days, hour, minute):
+def test_create_reminder_day_of_week_outcome(utterance, days, hour, minute):
     # padatious-shaped: no adapt "repeat" tag, only the utterance
     msg = Message("intent", {"utterance": utterance, "lang": "en-US"})
     alert = build_alert_from_intent(msg)

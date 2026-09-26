@@ -35,7 +35,7 @@ The skill matches utterances with file-based intents (padatious/padacioso), not 
 
 - `create_alarm` — set an alarm, optionally recurring on given weekdays, or (with a media word) playing media through OCP when it fires.
 - `create_timer` — start a countdown timer.
-- `create_reminder` / `create_reminder_recurring` — set a reminder, optionally recurring.
+- `create_reminder` — set a reminder, optionally recurring on given weekdays.
 - `create_event` — schedule an event, with collision and prenotification handling.
 - `reschedule_alert` — move an existing alert earlier or later.
 - `change_priority` — change an alert's priority.
