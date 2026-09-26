@@ -1,5 +1,8 @@
-(cancela|cancelar|apaga|apagar|elimina|eliminar|remove|remover|descarta|descartar) {alertkind}
-(cancela|cancelar|apaga|apagar|elimina|eliminar|remove|remover|descarta|descartar) (o|a|os|as) {alertkind}
-(cancela|cancelar|apaga|apagar|elimina|eliminar|remove|remover) (todos os|todas as) {alertkind}
-(cancela|cancelar|apaga|apagar|elimina|eliminar|remove|remover) (o meu|a minha|os meus|as minhas) {alertkind}
-(cancela|cancelar|apaga|apagar) (o|a) próximo {alertkind}
+# machine translation from en-US, unvouched
+(cancela|cancelar|apaga|apagar|elimina|eliminar|remove|remover) {alertkind}
+(cancela|cancelar|apaga|apagar|elimina|eliminar|remove|remover) (o|a|os|as) {alertkind}
+(cancela|cancelar|apaga|apagar|elimina|eliminar) (todos os|todas as) {alertkind}
+(cancela|cancelar|apaga|apagar|elimina|eliminar) (o meu|a minha|os meus|as minhas) {alertkind}
+(cancela|cancelar|apaga|apagar) o próximo {alertkind}
+(cancela|cancelar|apaga|apagar) a próxima {alertkind}
+(cancela|cancelar|apaga|apagar|elimina|eliminar) (o|a) {alertkind} de {name}
