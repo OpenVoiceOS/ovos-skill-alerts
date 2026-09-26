@@ -1,2 +1,9 @@
-(Har du|Har vi|berätta för mig|berätta för oss|fick|finns där|från när|från vad|från vilken|gjorde jag|gjorde vi|gör du|gör jag|gör vi|har du|har jag|hur|hur mycket|lista|läsa|när|någonting|något|som|uppdatera|vad|vad är|visa) (larm|väck mig|Påminnelser|påminnelse|evenemang|möten|utnämning|varning|varningar|berätta|minne|påminna)
-(Har du|Har vi|berätta för mig|berätta för oss|fick|finns där|från när|från vad|från vilken|gjorde jag|gjorde vi|gör du|gör jag|gör vi|har du|har jag|hur|hur mycket|lista|läsa|när|någonting|något|som|uppdatera|vad|vad är|visa) (jag|har|en|du|till|på|i|ett|är|för|att|ska|din|inte|det|mig|från|gör|bort|ta) (larm|väck mig|Påminnelser|påminnelse|evenemang|möten|utnämning|varning|varningar|berätta|minne|påminna)
+(vilka|vilket|vad för) {alertkind} har jag
+(vilka|vad) är mina {alertkind}
+(visa|lista|läs|berätta|säg) (mig|oss) mina {alertkind}
+(visa|lista|läs) mina {alertkind}
+har jag (ett|en|några) {alertkind}
+(finns det|har du) (ett|en|några) {alertkind}
+finns det {alertkind} (sparade|inställda|planerade)
+(när|vad) är (mitt|min) (nästa|kommande) {alertkind}
+vad har jag (sparat|inställt|planerat)
