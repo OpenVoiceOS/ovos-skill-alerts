@@ -1,2 +1,12 @@
-(abbiamo|avete|c'è|che|ci sono|come|cosa|cosa sono|cosa è|da cosa|da cui|da quando|diteci|ditemi|elenco|facciamo|faccio|hai|hanno i|leggere|lo fai|mostra|ottenuto|qualcosa|qualsiasi cosa|quando|quanto|rinfrescare) (allarme|allarmi|svegliarmi|promemoria|appuntamenti|appuntamento|eventi|evento|avvisi|memoria|raccontare|ricordare)
-(abbiamo|avete|c'è|che|ci sono|come|cosa|cosa sono|cosa è|da cosa|da cui|da quando|diteci|ditemi|elenco|facciamo|faccio|hai|hanno i|leggere|lo fai|mostra|ottenuto|qualcosa|qualsiasi cosa|quando|quanto|rinfrescare) (per|caso|mi|io|è|sono|ho|un|una|di|in|da|il|non|a|ci|c|la|devo|le) (allarme|allarmi|svegliarmi|promemoria|appuntamenti|appuntamento|eventi|evento|avvisi|memoria|raccontare|ricordare)
+(che|quali) {alertkind} ho
+quali sono i miei {alertkind}
+(elenca|mostra|mostrami|dimmi|ditemi|diteci|leggi) i miei {alertkind}
+(elenca|mostra|mostrami|dimmi|ditemi|diteci|leggi) (i|gli|le) {alertkind}
+(elenca|mostra|mostrami|dimmi|ditemi|diteci|leggi) {alertkind}
+(ho|abbiamo) (qualche|dei|degli|delle) {alertkind}
+(c'è|ci sono) (qualche|dei|degli|delle) {alertkind}
+(c'è|ci sono) {alertkind}
+ci sono {alertkind} (programmati|salvati|in programma)
+(quando|qual) è il mio prossimo {alertkind}
+quanti {alertkind} (ho|abbiamo)
+(cosa|che cosa) (ho|abbiamo) (in programma|programmato|salvato)
