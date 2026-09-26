@@ -1,12 +1,27 @@
 # Changelog
 
+## [0.12.16a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.12.16a1) (2026-09-26)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.12.15a1...0.12.16a1)
+
+**Merged pull requests:**
+
+- fix\(pt-PT\): reschedule\_alert and timer\_status are sentences, not word bags [\#326](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/326) ([openvoiceos-bot](https://github.com/openvoiceos-bot))
+
 ## [0.12.15a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.12.15a1) (2026-09-26)
 
-[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.12.13a1...0.12.15a1)
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.12.14a1...0.12.15a1)
 
 **Merged pull requests:**
 
 - fix\(it-IT\): reschedule\_alert and timer\_status are sentences, not word bags [\#325](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/325) ([openvoiceos-bot](https://github.com/openvoiceos-bot))
+
+## [0.12.14a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.12.14a1) (2026-09-26)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.12.13a1...0.12.14a1)
+
+**Merged pull requests:**
+
 - fix\(gl-ES\): reschedule\_alert and timer\_status are sentences, not word bags [\#324](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/324) ([openvoiceos-bot](https://github.com/openvoiceos-bot))
 
 ## [0.12.13a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.12.13a1) (2026-09-26)
@@ -375,17 +390,9 @@
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.6.1a2...0.6.1a3)
 
-**Merged pull requests:**
-
-- translate\(kab\): update timer.voc [\#224](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/224) ([ovos-localize[bot]](https://github.com/apps/ovos-localize))
-
 ## [0.6.1a2](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.6.1a2) (2026-09-14)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.6.1a1...0.6.1a2)
-
-**Merged pull requests:**
-
-- translate\(kab\): update confirm\_timer\_started.dialog [\#225](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/225) ([ovos-localize[bot]](https://github.com/apps/ovos-localize))
 
 ## [0.6.1a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.6.1a1) (2026-09-14)
 
