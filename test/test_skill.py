@@ -26,7 +26,7 @@ import unittest
 from os import mkdir, remove
 from os.path import dirname, join, exists, isfile
 from threading import Event
-from typing import Set, Union, List, Optional
+from typing import ClassVar, Set, Union, List, Optional
 import time
 from copy import deepcopy
 
@@ -3830,8 +3830,8 @@ class TestPadatiousSlotIsTheName(unittest.TestCase):
     # this class until somebody puts it in one of these sets on purpose, which
     # is the only mechanical way to catch a naming slot being GAINED: whether
     # a new slot names something is a judgement, not something a regex knows.
-    NAMING_SLOTS = {"list_name", "name"}
-    NOT_NAMING_SLOTS = {
+    NAMING_SLOTS: ClassVar[set[str]] = {"list_name", "name"}
+    NOT_NAMING_SLOTS: ClassVar[set[str]] = {
         "alertkind", "davkind", "days", "event", "items", "mediaform",
         "mediakind", "reminder", "repeat", "schedkind", "timeframe",
         "timerkind",
