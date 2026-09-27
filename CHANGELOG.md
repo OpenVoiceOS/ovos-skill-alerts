@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.12.26a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.12.26a1) (2026-09-27)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.12.25a1...0.12.26a1)
+
+**Merged pull requests:**
+
+- fix\(ru-RU\): the timer\_status line keeps the verb a speaker uses [\#358](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/358) ([openvoiceos-bot](https://github.com/openvoiceos-bot))
+- fix\(fr-FR\): an entity value carries no article [\#357](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/357) ([openvoiceos-bot](https://github.com/openvoiceos-bot))
+
 ## [0.12.25a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.12.25a1) (2026-09-26)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.12.24a1...0.12.25a1)
@@ -382,10 +391,6 @@
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.6.10a1...0.6.11a1)
 
-**Merged pull requests:**
-
-- fix\(locale\): restore the slot names the nl-NL dialogs renamed [\#248](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/248) ([openvoiceos-bot](https://github.com/openvoiceos-bot))
-
 ## [0.6.10a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.6.10a1) (2026-09-19)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.6.9a2...0.6.10a1)
@@ -560,15 +565,15 @@
 
 ## [0.3.0a4](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.3.0a4) (2026-08-12)
 
-[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.3.0a3...0.3.0a4)
-
-## [0.3.0a3](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.3.0a3) (2026-08-11)
-
-[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.3.0a2...0.3.0a3)
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.3.0a2...0.3.0a4)
 
 ## [0.3.0a2](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.3.0a2) (2026-08-11)
 
-[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.3.0a1...0.3.0a2)
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.3.0a3...0.3.0a2)
+
+## [0.3.0a3](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.3.0a3) (2026-08-11)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.3.0a1...0.3.0a3)
 
 ## [0.3.0a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.3.0a1) (2026-08-11)
 
