@@ -24,13 +24,39 @@ from unittest.mock import Mock
 from ovos_bus_client.message import Message
 from ovos_bus_client.session import Session
 from ovos_config.locale import get_default_tz
-from ovos_date_parser import extract_datetime
 from ovoscope import CaptureSession, get_minicroft, LEAN_DEFAULT_PIPELINE
 
 from ovos_skill_alerts.util import AlertState, AlertType
 from ovos_skill_alerts.util.alert import Alert
+from ovos_skill_alerts.util.parse_utils import parse_timeframe_from_message
 
 from ._wait_trained import wait_for_minicroft_ready
+
+
+def _clock_words(moment: dt.datetime) -> str:
+    """Say a whole hour the way a person does: 8 pm, 1 am."""
+    hour = moment.hour % 12 or 12
+    return f"{hour} {'am' if moment.hour < 12 else 'pm'}"
+
+
+def _future_window(now: dt.datetime) -> tuple:
+    """A one-hour window that is always ahead of `now`, and says so in words.
+
+    Three hours ahead, on the hour. Midnight is stepped around: the parser
+    reads "12 am" as today's midnight, which is behind every caller, and reads
+    it as an end at 23:59:59, so a window that names midnight would not be the
+    window the skill resolves. Both are parser defects of their own; this test
+    is about the timeframe query, so it asks a question the parser answers.
+    Measured over all 24 hours and four minute offsets each: the resolved
+    window equals this one, and is in the future, at every position.
+    """
+    start = (now + dt.timedelta(hours=3)).replace(
+        minute=0, second=0, microsecond=0)
+    if not 1 <= start.hour <= 21:
+        start = (now + dt.timedelta(days=1)).replace(
+            hour=9, minute=0, second=0, microsecond=0)
+    return start, start + dt.timedelta(hours=1)
+
 
 SKILL_ID = "ovos-skill-alerts.openvoiceos"
 LANG = "en-US"
@@ -118,38 +144,45 @@ class TestClassCFoldGate(TestCase):
     # -- timeframe path (folded into list_alerts) --
 
     def test_timeframe_query_names_only_the_alert_inside_the_window(self):
-        # KNOWN PRE-EXISTING DEFECT (unrelated to this fold -- parse_utils.py
-        # is untouched, and handle_event_timeframe_check's body is byte
-        # identical before/after): parse_alert_time_from_message extracts
-        # only the LAST clock time out of a "between X and Y" phrase and
-        # consumes both tokens doing so, so parse_timeframe_from_message
-        # comes back with begin=<next occurrence of Y>, end=None instead of
-        # begin=X, end=Y -- verified directly against parse_timeframe_from_message
-        # with several phrasing variants, all showing the same begin=Y/end=None
-        # result. get_alerts_in_timeframe's overlap check with a None query
-        # end degrades to "does the reference alert's own span contain this
-        # single point", so the fixture below targets that actual resolved
-        # behaviour (a point at "5 pm") with a duration-bearing alert
-        # (AlertType.EVENT, which carries `until`) rather than the nominal
-        # "5 pm" clock text.
+        # The window is built from the clock, not written into the utterance,
+        # and it is always in the future. "between 4 pm and 5 pm" named a
+        # window that lapses every afternoon: once the clock passes it, an
+        # alert inside it has lapsed too, Alert.expiration answers None, and
+        # the answer can only be "nothing stored" (before T-6164 it was worse
+        # than that -- the query raised TypeError and the skill spoke
+        # skill.error). A window three hours ahead cannot lapse while the
+        # test runs, whatever hour the test runs at.
         tz = get_default_tz()
         now = dt.datetime.now(tz)
-        point, _ = extract_datetime("5 pm", "en-us", now)
+        window_start, window_end = _future_window(now)
+        utterance = (f"are there any alerts between {_clock_words(window_start)}"
+                     f" and {_clock_words(window_end)}")
+
+        # The window the skill resolves is the window this test believes in.
+        # Asserted here, so a parser change shows up as a named mismatch
+        # rather than as a silent "nothing stored".
+        begin, end = parse_timeframe_from_message(
+            Message("intent", {"utterance": utterance, "lang": LANG}, {}),
+            timezone=tz)
+        self.assertEqual((begin, end), (window_start, window_end),
+                         f"the skill resolves {utterance!r} to "
+                         f"{begin}..{end}, not {window_start}..{window_end}")
+
         # a name containing the alert-kind word ("alarm"/"alert"/"event") is
         # treated as generic/default and blanked out of the dialog data --
         # use names that aren't, so they show up in the spoken answer.
-        inside = Alert.create(expiration=point - dt.timedelta(minutes=30),
-                              until=point + dt.timedelta(minutes=30),
+        inside = Alert.create(expiration=window_start + dt.timedelta(minutes=15),
+                              until=window_start + dt.timedelta(minutes=45),
                               alert_name="dentist checkup",
                               alert_type=AlertType.EVENT)
-        outside = Alert.create(expiration=point + dt.timedelta(hours=2),
-                               until=point + dt.timedelta(hours=3),
+        outside = Alert.create(expiration=window_end + dt.timedelta(hours=2),
+                               until=window_end + dt.timedelta(hours=3),
                                alert_name="grocery run",
                                alert_type=AlertType.EVENT)
         self.skill.alert_manager.add_alert(inside)
         self.skill.alert_manager.add_alert(outside)
 
-        messages = self._fire("are there any alerts between 4 pm and 5 pm")
+        messages = self._fire(utterance)
         types = [m.msg_type for m in messages]
         self.assertIn(f"{SKILL_ID}:list_alerts", types,
                       f"did not route to list_alerts.intent: {types}")
@@ -161,6 +194,44 @@ class TestClassCFoldGate(TestCase):
                       f"expected the in-window alert named, got: {speaks}")
         self.assertNotIn("grocery run", spoken_text,
                          f"outside-of-window alert leaked into the answer: {speaks}")
+
+    def test_a_lapsed_alert_does_not_break_a_timeframe_query(self):
+        """T-6164: one lapsed pending alert used to raise TypeError.
+
+        Alert.expiration answers None once an alert is past with no repeat
+        left, and alert_time_in_range compared that None. The user heard
+        skill.error for every timeframe question while such an alert sat in
+        the store. The control is in the same run: the live alert is still
+        named, so the query really ran.
+        """
+        tz = get_default_tz()
+        now = dt.datetime.now(tz)
+        lapsed = Alert.create(expiration=now - dt.timedelta(minutes=5),
+                              until=now + dt.timedelta(minutes=25),
+                              alert_name="dentist checkup",
+                              alert_type=AlertType.EVENT)
+        self.assertIsNone(lapsed.expiration,
+                          "fixture is wrong: this alert has not lapsed")
+        window_start, window_end = _future_window(now)
+        live = Alert.create(expiration=window_start + dt.timedelta(minutes=15),
+                            until=window_start + dt.timedelta(minutes=45),
+                            alert_name="grocery run",
+                            alert_type=AlertType.EVENT)
+        self.skill.alert_manager.add_alert(lapsed)
+        self.skill.alert_manager.add_alert(live)
+
+        utterance = (f"are there any alerts between {_clock_words(window_start)}"
+                     f" and {_clock_words(window_end)}")
+        messages = self._fire(utterance)
+        types = [m.msg_type for m in messages]
+        self.assertNotIn("mycroft.skill.handler.error", types,
+                         f"the timeframe query raised: {types}")
+        speaks = self._speak_dialogs(messages)
+        spoken_text = " ".join(f"{d} {u}" for _, d, u in speaks)
+        self.assertNotIn("skill.error", spoken_text,
+                         f"the skill spoke an error: {speaks}")
+        self.assertIn("grocery run", spoken_text,
+                      f"the live alert was not named: {speaks}")
 
     def test_plain_list_alarms_still_lists(self):
         now = dt.datetime.now(get_default_tz()) + dt.timedelta(hours=2)
