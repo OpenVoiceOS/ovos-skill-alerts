@@ -1,2 +1,9 @@
-(ajustar|aplazar|cambiar|cambio|empujar|extender|mover|posponer|reprogramar|suspender) (alarma|alarmas|despiértame|recordatorio|recordatorios|cita|citas|evento|eventos|temporizador|temporizadores)
-(ajustar|aplazar|cambiar|cambio|empujar|extender|mover|posponer|reprogramar|suspender) (de|en|la|no|el|a|por|hay|este|una|tu|un|mi|está|debo|que|es|las|se|he) (alarma|alarmas|despiértame|recordatorio|recordatorios|cita|citas|evento|eventos|temporizador|temporizadores)
+# machine translation from en-US, unvouched
+(mueve|cambia|aplaza) (mi|el|la) {schedkind} a {date:time}
+(mueve|cambia|aplaza) (mi|el|la) {schedkind} de {date:old} a {date:time}
+(mueve|cambia|aplaza) (el|la) {schedkind} de {name} a {date:time}
+(adelanta|retrasa) (mi|el|la) (próximo|próxima|siguiente) {schedkind}
+(alarga|acorta) (mi|el|la) {schedkind}
+(aplaza|retrasa) (mi|el|la) (próximo|próxima|siguiente) {schedkind} unos {duration:duration}
+(mi|el|la) {schedkind} (muévelo|cámbialo|muévela|cámbiala) a {date:time}
+(pon|deja) (mi|el|la) (próximo|próxima|siguiente) {schedkind} (antes|más tarde)

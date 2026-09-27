@@ -1,0 +1,29 @@
+{
+  "name": "Alertas",
+  "description": "Uma habilidade para gerenciar alarmes, timers, lembretes, eventos e listas de tarefas e, opcionalmente, sincronizá-los com um serviço CalDAV.",
+  "examples": [
+    "Coloque um alarme para as 8 da manhã.",
+    "Inicie um timer de pão de 30 minutos.",
+    "Agende um evento de tênis para sexta-feira às 14h com duração de 2 horas.",
+    "Coloque um alarme diário para as 8 da manhã.",
+    "Coloque um alarme para as 8 da manhã nos sábados.",
+    "me lembre de levar o lixo para fora toda quinta e domingo às 19h.",
+    "me acorde às 8 da manhã com música.",
+    "Quando é meu próximo alarme?",
+    "Quais são meus lembretes?",
+    "Cancele todos os alarmes.",
+    "Cancele todos os timers.",
+    "Cancele todos os lembretes.",
+    "O que eu perdi?",
+    "Perdi alguma coisa?"
+  ],
+  "tags": [
+    "Produtividade",
+    "Diário",
+    "alerta",
+    "alarme",
+    "timer",
+    "lembrete",
+    "agenda"
+  ]
+}

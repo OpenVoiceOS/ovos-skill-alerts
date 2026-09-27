@@ -1,2 +1,9 @@
-(adiar|axustar|cambiar|desprazar|estender|mover|pospoñer|reprogramar|suspender) (acordarme|alarma|alarmas|espertarme|lembrete|lembretes|cita|citas|evento|eventos|temporizador|temporizadores)
-(adiar|axustar|cambiar|desprazar|estender|mover|pospoñer|reprogramar|suspender) (de|a|un|non|o|unha|as|ás|é|para|os|con|túa|está|na|en|novo|crea|do|debo) (acordarme|alarma|alarmas|espertarme|lembrete|lembretes|cita|citas|evento|eventos|temporizador|temporizadores)
+# machine translation from en-US, unvouched
+(move|cambia|aprazar) (o|a|o meu|a miña) {schedkind} ás {date:time}
+(move|cambia) (o|a|o meu|a miña) {schedkind} de {date:old} ás {date:time}
+(move|cambia) (o|a) {schedkind} de {name} ás {date:time}
+(adianta|atrasa) (o|a|o meu|a miña) (próximo|próxima|seguinte) {schedkind}
+(alonga|acurta) (o|a|o meu|a miña) {schedkind}
+(apraza|atrasa) (o|a|o meu|a miña) (próximo|próxima|seguinte) {schedkind} uns {duration:duration}
+(o|a|o meu|a miña) {schedkind} (móveo|cámbiao|móvea|cámbiaa) ás {date:time}
+(pon|deixa) (o|a|o meu|a miña) (próximo|próxima|seguinte) {schedkind} (antes|máis tarde)

@@ -1,2 +1,9 @@
-(ajourner|ajuster|changement|changer|déplacer|pousser|reporter|suspendre|étendre) (alarme|alarmes|réveillez-moi|rappel|rappels|nominations|rendez-vous|événement|événements|chronomètres|minuterie)
-(ajourner|ajuster|changement|changer|déplacer|pousser|reporter|suspendre|étendre) (je|ai|de|vous|à|est|un|la|des|n|ce|il|dans|pas|le|les|moi|avez|que|nous) (alarme|alarmes|réveillez-moi|rappel|rappels|nominations|rendez-vous|événement|événements|chronomètres|minuterie)
+# machine translation from en-US, unvouched
+(déplace|change|reporte|repousse) (mon|ma) {schedkind} (à|pour) {date:time}
+(déplace|change|reporte|repousse) (mon|ma) {schedkind} de {date:old} (à|pour) {date:time}
+(déplace|change|reporte|repousse) (le|la) {schedkind} (pour|de) {name} (à|pour) {date:time}
+(avance|retarde) (mon|ma) (prochain|prochaine) {schedkind}
+(prolonge|raccourcis) (mon|ma) {schedkind}
+(repousse|retarde) (mon|ma) (prochain|prochaine) {schedkind} de {duration:duration}
+(mon|ma) {schedkind} (déplace|change) (le|la) (à|pour) {date:time}
+(règle|mets) (mon|ma) (prochain|prochaine) {schedkind} (plus tôt|plus tard)

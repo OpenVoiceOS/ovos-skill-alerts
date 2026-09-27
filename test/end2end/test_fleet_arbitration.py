@@ -60,8 +60,8 @@ from ovos_utils.log import LOG
 from ovoscope import get_minicroft, is_pipeline_available
 
 from ._wait_trained import wait_for_minicroft_ready
-from util.parse_utils import build_alert_from_intent
-from util import Weekdays
+from ovos_skill_alerts.util.parse_utils import build_alert_from_intent
+from ovos_skill_alerts.util import Weekdays
 
 ALERTS_ID = "ovos-skill-alerts.openvoiceos"
 DATE_TIME_ID = "ovos-skill-date-time.openvoiceos"

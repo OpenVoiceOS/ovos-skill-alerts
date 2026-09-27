@@ -1,2 +1,6 @@
-(annullare|cancellare|chiaro|rimuovere|scartare) (allarme|allarmi|svegliarmi|timer|promemoria|appuntamenti|appuntamento|eventi|evento|avvisi)
-(annullare|cancellare|chiaro|rimuovere|scartare) (per|caso|mi|io|è|sono|ho|un|una|di|in|da|il|non|a|ci|c|la|devo|le) (allarme|allarmi|svegliarmi|timer|promemoria|appuntamenti|appuntamento|eventi|evento|avvisi)
+(annulla|annullare|cancella|cancellare|rimuovi|rimuovere|elimina|eliminare) {alertkind}
+(annulla|annullare|cancella|cancellare|rimuovi|rimuovere|elimina|eliminare) (il|lo|la|i|gli|le) {alertkind}
+(annulla|annullare|cancella|cancellare|rimuovi|rimuovere|elimina) (tutti|tutte) (i|gli|le) {alertkind}
+(annulla|annullare|cancella|cancellare|rimuovi|rimuovere|elimina) (il mio|la mia|i miei|le mie) {alertkind}
+(annulla|annullare|cancella|cancellare|elimina) (il|la) (prossimo|prossima) {alertkind}
+(annulla|cancella|elimina|rimuovi) (il mio|la mia|i miei|le mie) {alertkind} per {name}

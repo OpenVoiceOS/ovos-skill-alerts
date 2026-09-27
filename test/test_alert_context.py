@@ -4,7 +4,7 @@ from time import time
 
 from ovos_bus_client.message import Message
 
-from util.parse_utils import parse_alert_context_from_message
+from ovos_skill_alerts.util.parse_utils import parse_alert_context_from_message
 
 
 class TestAlertContext(unittest.TestCase):

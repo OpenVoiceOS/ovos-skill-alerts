@@ -1,2 +1,6 @@
-(avbryta|kasta|klar|radera|ta bort) (larm|väck mig|Tidtagare|timer|Påminnelser|påminnelse|evenemang|möten|utnämning|varning|varningar)
-(avbryta|kasta|klar|radera|ta bort) (jag|har|en|du|till|på|i|ett|är|för|att|ska|din|inte|det|mig|från|gör|bort|ta) (larm|väck mig|Tidtagare|timer|Påminnelser|påminnelse|evenemang|möten|utnämning|varning|varningar)
+(avbryt|avboka|ta bort|radera|rensa|slopa) {alertkind}
+(avbryt|avboka|ta bort|radera|rensa) (den|det) {alertkind}
+(avbryt|avboka|ta bort|radera|rensa) alla (mina|de) {alertkind}
+(avbryt|avboka|ta bort|radera|rensa) (mitt|min|mina) {alertkind}
+(avbryt|avboka|ta bort|radera) (den|det) (nästa|kommande) {alertkind}
+(avbryt|radera|ta bort|rensa) (mitt|min|mina) {alertkind} för {name}

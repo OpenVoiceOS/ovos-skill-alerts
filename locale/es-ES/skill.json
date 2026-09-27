@@ -3,7 +3,7 @@
   "description": "Una skill para gestionar alarmas, temporizadores, recordatorios, eventos, tareas pendientes y, opcionalmente, sincronizarlos con un servicio CalDAV.",
   "examples": [
 	"Pon una alarma a las 8 a.m.",
-	"Inicia un temporizador de pandurante 30 minutos.",
+	"Inicia un temporizador para el pan de 30 minutos.",
 	"Programa un evento de tenis para las 14:00 del viernes con una duración de 2 horas.",
 	"Establece una alarma diaria para las 8 de la mañana.",
 	"Establece una alarma para las 8 de la mañana todos los sábados.",
