@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.12.29a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.12.29a1) (2026-09-28)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.12.28a1...0.12.29a1)
+
+**Merged pull requests:**
+
+- fix\(locale\): the word for the time that remains, in 11 locales [\#359](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/359) ([openvoiceos-bot](https://github.com/openvoiceos-bot))
+
 ## [0.12.28a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.12.28a1) (2026-09-27)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.12.27a1...0.12.28a1)
@@ -370,10 +378,6 @@
 ## [0.7.1a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.7.1a1) (2026-09-24)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.7.0a1...0.7.1a1)
-
-**Merged pull requests:**
-
-- fix: the padatious slot is the list name, and a matched delete answers [\#254](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/254) ([openvoiceos-bot](https://github.com/openvoiceos-bot))
 
 ## [0.7.0a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.7.0a1) (2026-09-23)
 
