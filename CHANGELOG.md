@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.12.31a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.12.31a1) (2026-09-28)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.12.30a2...0.12.31a1)
+
+**Merged pull requests:**
+
+- fix: a lapsed pending alert no longer breaks every timeframe query [\#367](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/367) ([openvoiceos-bot](https://github.com/openvoiceos-bot))
+
 ## [0.12.30a2](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.12.30a2) (2026-09-28)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.12.30a1...0.12.30a2)
