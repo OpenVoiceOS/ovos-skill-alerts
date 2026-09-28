@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.12.30a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.12.30a1) (2026-09-28)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.12.29a2...0.12.30a1)
+
+**Merged pull requests:**
+
+- fix\(eu-ES\): mediakind takes the bare noun beside the article form [\#360](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/360) ([openvoiceos-bot](https://github.com/openvoiceos-bot))
+
 ## [0.12.29a2](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.12.29a2) (2026-09-28)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.12.29a1...0.12.29a2)
@@ -378,10 +386,6 @@
 ## [0.7.1a2](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.7.1a2) (2026-09-24)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.7.1a1...0.7.1a2)
-
-**Merged pull requests:**
-
-- i18n: one value per line in four bare-pipe vocab files [\#258](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/258) ([openvoiceos-bot](https://github.com/openvoiceos-bot))
 
 ## [0.7.1a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.7.1a1) (2026-09-24)
 
