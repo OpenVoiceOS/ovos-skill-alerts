@@ -54,8 +54,6 @@ from ovos_bus_client.message import Message
 from ovos_bus_client.session import Session
 from ovoscope import get_minicroft
 
-from ovos_utils.process_utils import ProcessState
-
 from ._wait_trained import wait_for_minicroft_ready
 
 ADAPT_ONLY_PIPELINE = [
@@ -105,10 +103,10 @@ CAPTURE_SETTLE = 0.4
 #
 # The wait is handed to _wait_trained.wait_for_minicroft_ready, as
 # test_class_c_fold_gate and test_intents_en_us do, with a budget named
-# from that measurement rather than ovoscope's default. The helper returns
-# instead of raising when its budget runs out, so the assertion below is
-# what makes an unfinished train loud: without it a timeout would reach
-# the tests as a wake-routing failure, or pass by luck.
+# from that measurement rather than ovoscope's default. The helper raises
+# MinicroftNotReady when either budget runs out, so an overrun stops the
+# module at setup and names itself, instead of reaching the tests as a
+# wake-routing failure or passing by luck.
 TRAINED_WAIT = 240.0
 
 
@@ -119,12 +117,6 @@ def minicroft():
     loaded = set(mc.plugin_skills)
     assert {ALERTS_ID, NAPTIME_ID} <= loaded, (
         f"arbitration needs BOTH skills loaded, got {sorted(loaded)}"
-    )
-    assert getattr(getattr(mc, "status", None), "state", None) == ProcessState.READY, (
-        f"MiniCroft never reached READY within the budget; "
-        f"state={getattr(getattr(mc, 'status', None), 'state', None)!r}. "
-        f"wait_for_minicroft_ready returns on timeout rather than raising, "
-        f"so this assert is the loud edge."
     )
     yield mc
     mc.stop()

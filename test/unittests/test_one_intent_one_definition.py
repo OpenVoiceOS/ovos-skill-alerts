@@ -10,7 +10,7 @@ This skill carried `create_alarm_alt.intent` in 18 locales, registered by
 `handle_create_alarm_alt`, which did nothing but call
 `handle_create_alarm`. Both are gone. These tests keep them gone.
 
-It carried `create_reminder_recurring.intent` in 19 locales the same way,
+It carried `create_reminder_recurring.intent` in 20 locales the same way,
 registered by `handle_create_reminder_recurring`, whose whole body was a
 call to `handle_create_reminder`. The recurring lines are now lines of
 `create_reminder.intent`, so one padatious template covers the short and
@@ -36,6 +36,7 @@ RECURRING_LINE_PER_LOCALE = {
     "da-DK": "mind mig hver hverdags aften om at ringe til mor klokken 6",
     "de-DE": "erinnere mich jeden Wochentag morgens um 8 an meine Medizin",
     "en-US": "remind me to stretch weekend mornings at 8",
+    "es-CO": "recuérdame ir al trabajo entre semana por la mañana a las 8",
     "es-ES": "recuérdame ir al trabajo entre semana por la mañana a las 8",
     "eu-ES": "gogorarazi lanera joateko astegunetan goizeko 8etan",
     "fr-FR": "rappelle-moi chaque soir de semaine d'appeler ma mère à 6 heures",
