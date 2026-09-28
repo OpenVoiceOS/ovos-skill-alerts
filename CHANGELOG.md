@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.12.31a4](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.12.31a4) (2026-09-28)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.12.31a3...0.12.31a4)
+
+**Merged pull requests:**
+
+- test: clear the two dev reds a draft locale left behind [\#374](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/374) ([openvoiceos-bot](https://github.com/openvoiceos-bot))
+
 ## [0.12.31a3](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.12.31a3) (2026-09-28)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.12.31a2...0.12.31a3)
@@ -370,10 +378,6 @@
 ## [0.9.0a5](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.9.0a5) (2026-09-25)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.9.0a4...0.9.0a5)
-
-**Merged pull requests:**
-
-- locale: machine translation for pt-BR parity \(unvouched\) [\#268](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/268) ([openvoiceos-bot](https://github.com/openvoiceos-bot))
 
 ## [0.9.0a4](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.9.0a4) (2026-09-25)
 
