@@ -1,2 +1,41 @@
-(anulować|czysty|odrzut|usunąć) (alarm|alarmy|obudź mnie|timer|timery|przypomnienia|przypomnienie|nominacja|nominacje|wydarzenia|wydarzenie|alert|alerty)
-(anulować|czysty|odrzut|usunąć) (w|jest|nie|z|na|do|masz|są|brak|o|mam|się|twój|usuń|tym|to|mnie|i|tam|mi) (alarm|alarmy|obudź mnie|timer|timery|przypomnienia|przypomnienie|nominacja|nominacje|wydarzenia|wydarzenie|alert|alerty)
+anuluj mój następny {alertkind}
+Usuń mój następny {alertkind}
+Wyczyść mój następny {alertkind}
+mój następny {alertkind} anuluj to
+następny {alertkind} anuluj to
+/moje nadchodzące {alertkind} anuluj to
+przyszłe {alertkind} anuluj to
+mój... {alertkind} anuluj to
+{alertkind} anuluj
+wszystkie {alertkind} odwołać
+każde {alertkind} anuluj to
+anuluj alarm
+usuń alarm
+Usuń alarm
+czysty alarm
+anuluj mój {alertkind} i mój {alertkind2}
+usuń mój {alertkind} i mój {alertkind2}
+Usuń mój {alertkind} i mój {alertkind2}
+Wyczyść mój {alertkind} i mój {alertkind2}
+anuluj mój {alertkind}
+usuń mój {alertkind}
+Usuń mój {alertkind}
+Wyczyść mój {alertkind}
+Proszę anuluj mój {alertkind} i mój {alertkind2}
+Proszę usunąć mój {alertkind} i mój {alertkind2}
+Proszę, wyczyść mój. {alertkind} i mój {alertkind2}
+anuluj mój alarm {name}
+Usuń mój alarm {name}
+Usuń mój {name} alarm
+Wyczyść mój {name} alarm
+Proszę anuluj mój {alertkind}
+Proszę usunąć mój {alertkind}
+Proszę, wyczyść mój. {alertkind}
+anuluj {alertkind} dla {name}
+usuń {alertkind} dla {name}
+Usuń {alertkind} dla {name}
+Wyczyść {alertkind} dla {name}
+anuluj moje całe {alertkind} lista
+usunąć całość {alertkind} lista
+Wyczyść całe moje. {alertkind} lista
+Usuń całość {alertkind} lista
