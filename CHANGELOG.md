@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.12.31a3](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.12.31a3) (2026-09-28)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.12.31a2...0.12.31a3)
+
+**Merged pull requests:**
+
+- locale: draft fa-IR from en-US by machine \(unvouched, 184 files\) [\#376](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/376) ([openvoiceos-bot](https://github.com/openvoiceos-bot))
+
 ## [0.12.31a2](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.12.31a2) (2026-09-28)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.12.31a1...0.12.31a2)
@@ -382,10 +390,6 @@
 ## [0.9.0a2](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.9.0a2) (2026-09-25)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.9.0a1...0.9.0a2)
-
-**Merged pull requests:**
-
-- translate\(kab\): update list\_name.entity [\#265](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/265) ([ovos-localize[bot]](https://github.com/apps/ovos-localize))
 
 ## [0.9.0a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.9.0a1) (2026-09-25)
 
