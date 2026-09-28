@@ -85,7 +85,7 @@ def _tz_name(tzinfo: Optional[dt.tzinfo]) -> Optional[str]:
 def alert_time_in_range(
         start: dt.datetime,
         end: Optional[dt.datetime],
-        ref_start: dt.datetime,
+        ref_start: Optional[dt.datetime],
         ref_end: Optional[dt.datetime]
 ) -> bool:
     """
@@ -93,10 +93,16 @@ def alert_time_in_range(
     overlap each other. 
     :param start: datetime
     :param end: datetime, mostly end dt of timespan check
-    :param ref_start: event reference start datetime
+    :param ref_start: event reference start datetime, or None if the
+                      reference alert has no next expiration
     :param ref_end: event reference end datetime
     :returns: bool
     """
+    # Alert.expiration is None once an alert has gone past with no repeat
+    # left, and the callers pass it straight in. Such an alert starts at no
+    # time at all, so it overlaps nothing.
+    if ref_start is None:
+        return False
     # no duration on both
     if ref_end is None and end is None:
         return False
