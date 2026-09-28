@@ -1,0 +1,102 @@
+من {old} هشدارها را به {time}
+در این {old} هشدارها را به {time}
+من {old} زمان آن را به {time}
+در این {old} زمان آن را به {time}
+حرکت من {old} هشدار به {time}
+تغییر من {old} هشدار به {time}
+بازگرداندن من {old} هشدار به {time}
+آیا می توانم بعدی خود را حرکت دهم؟ {schedkind} برای {time}
+اگر می خواهی بعدی من را حرکت دهی {schedkind} برای {time}
+آیا می توانم بعدی خود را حرکت دهم {schedkind} برای {time}
+آیا می توانم بعدی خود را تغییر دهم؟ {schedkind} برای {time}
+من {old} هشدار حرکت به {time}
+در این {old} هشدار حرکت به {time}
+من {old} زمان حرکت به {time}
+در این {old} زمان حرکت به {time}
+حرکت بعدی من {schedkind} قبلی
+بعدی من را فشار دهید {schedkind} قبلی
+جایگزین بعدی من {schedkind} قبلی
+حرکت بعدی {schedkind} قبلی
+شما می توانید من را {schedkind} قبلی
+اگر می خواهی من را {schedkind} قبلی
+می توانید من را بسازید {schedkind} قبلی
+می توانی من را قرار دهی {schedkind} قبلی
+بعدی من {schedkind} قبلی
+بعدی {schedkind} قبلی
+آینده من {schedkind} قبلی
+در آینده {schedkind} قبلی
+بعدی من را بفرستید {schedkind} قبلی
+قرار دادن بعدی من {schedkind} قبلی
+بعدی را بسازید {schedkind} قبلی
+قرار دادن بعدی {schedkind} قبلی
+حرکت من {schedkind} قبلی
+من را فشار دهید {schedkind} قبلی
+تغییر من {schedkind} قبلی
+حرکت می کند {schedkind} قبلی
+کوتاه کردن بعدی {schedkind}
+ادامه مطلب بعدی {schedkind}
+بعدی گسترش من {schedkind}
+من {schedkind} قبلی
+در این {schedkind} قبلی
+من {schedkind} زودتر
+در این {schedkind} زودتر
+من را بسازید {schedkind} قبلی
+تنظیم من {schedkind} قبلی
+این را بسازید {schedkind} قبلی
+قرار دادن آن {schedkind} قبلی
+کوتاه کردن من {schedkind}
+طول می کشد من {schedkind}
+گسترش من {schedkind}
+{schedkind} قبلی
+{schedkind} زودتر
+{schedkind} بعداً
+{schedkind} طولانی تر
+قبلی {schedkind}
+زودتر {schedkind}
+بعداً {schedkind}
+طولانی تر {schedkind}
+شما می توانید من را حرکت دهید {schedkind} برای {time}
+اگر حرکت می کنی من {schedkind} برای {time}
+می توانی من را عوض کنی {schedkind} برای {time}
+حرکت بعدی من {schedkind} برای {time}
+تغییر بعدی من {schedkind} برای {time}
+بعدی من را بازگردانید {schedkind} برای {time}
+جایگزین بعدی من {schedkind} برای {time}
+تغییر بعدی من {schedkind} قبلی
+بعدی من را بازگردانید {schedkind} قبلی
+حرکت بعدی من {schedkind} با {duration} قبلی
+تغییر بعدی من {schedkind} با {duration} قبلی
+بعدی من را بازگردانید {schedkind} با {duration} قبلی
+جایگزین بعدی من {schedkind} با {duration} قبلی
+حرکت من {schedkind} برای {time}
+تغییر من {schedkind} برای {time}
+بازگرداندن من {schedkind} برای {time}
+بعدی من را بفرستید {schedkind} تمام روز
+قرار دادن بعدی من {schedkind} تمام روز
+تغییر بعدی من {schedkind} تمام روز
+بعدی را بسازید {schedkind} تمام روز
+حرکت می کند {schedkind} برای {name} برای {time}
+تغییراتی در {schedkind} برای {name} برای {time}
+بازگرداندن آن {schedkind} برای {name} برای {time}
+تغییر را تغییر دهید {schedkind} برای {name} برای {time}
+بازگرداندن من {schedkind} قبلی
+در این {schedkind} برای {old} حرکت می کند برای {time}
+در این {schedkind} برای {old} تغییر آن برای {time}
+در این {schedkind} برای {old} آن را برای {time}
+من {schedkind} حرکت به {time}
+در این {schedkind} حرکت به {time}
+من {schedkind} تغییر به {time}
+در این {schedkind} تغییر به {time}
+حرکت من {schedkind} برای {time} به جای آن
+تغییر من {schedkind} برای {time} به جای آن
+بازگرداندن من {schedkind} برای {time} به جای آن
+من را بسازید {schedkind} تمام روز
+تنظیم من {schedkind} تمام روز
+تغییر من {schedkind} تمام روز
+این را بسازید {schedkind} تمام روز
+حرکت من {schedkind} از {old} برای {time}
+تغییر من {schedkind} از {old} برای {time}
+بازگرداندن من {schedkind} از {old} برای {time}
+از {old} برای {time} حرکت من {schedkind}
+از {old} برای {time} تغییر من {schedkind}
+از {old} برای {time} بازگرداندن من {schedkind}
