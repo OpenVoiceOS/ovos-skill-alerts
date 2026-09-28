@@ -1,4 +1,76 @@
-(timer|timery|czas) (długi|gotowy|koniec|końce|lewy|status|wykonany|pozostały)
-(długi|gotowy|koniec|końce|lewy|status|wykonany|pozostały) (timer|timery|czas)
-(timer|timery|czas) (w|jest|nie|z|na|do|masz|są|brak|o|mam|się|twój|usuń|tym|to|mnie|i|tam|mi) (długi|gotowy|koniec|końce|lewy|status|wykonany|pozostały)
-(co|co to jest|cokolwiek|coś|czy|czy ja|czy mam|czy mamy|czy masz|czy my|czytać|ile|jak|jakie są|jest tam|kiedy|który|lista|mieć i|od kiedy|odświeżenie|otrzymany|pokaz|powiedz mi|powiedz nam|są tam|z czego|z którego) (timer|timery|czas)
+/Ile mi zostało /
+Ile czasu mi zostało
+Ile czasu nam zostało
+Jak długo ten czas.
+Jak długo ten czas
+Jak długo na nim czas.
+Jak długo odlicza się ten odliczek?
+/Jak długo pozostał mój {timerkind}
+/Jak długo pozostał na moim {timerkind}
+Jak długo pozostaje na mnie {timerkind}
+Jak długo pozostają na mnie {timerkind}
+Powiesz mi czas, który został. {timerkind}
+Pokaż mi czas, który został. {timerkind}
+Daj mi czas, który został. {timerkind}
+Powiesz nam czas, który pozostał. {timerkind}
+ile będzie do mojego czasu {timerkind} kończy się
+Jak długo będzie moja {timerkind} kończy się
+jak długo do czasu {timerkind} kończy się
+Jak długo do {timerkind} kończy się
+na mojej {timerkind} jak długo zostało
+dla mojego {timerkind} jak długo zostało
+w sprawie {timerkind} jak długo zostało
+w odniesieniu do: {timerkind} jak długo zostało
+ile czasu mi pozostało {timerkind}
+Jak długo pozostało na mnie {timerkind}
+Jak długo pozostaje mój czas {timerkind}
+To, co zostało na moim {timerkind}
+To, co pozostało na moim {timerkind}
+To, co zostało dla mnie {timerkind}
+/jest mój {timerkind} gotowane
+to jest {timerkind} gotowane
+ma {timerkind} gotowane
+Kiedy to robi się moje {timerkind} koniec
+Kiedy będzie mój {timerkind} koniec
+kiedy to robi się {timerkind} koniec
+Kiedy będzie {timerkind} koniec
+Mój czas został na mnie {timerkind}
+Mój czas pozostaje na mnie {timerkind}
+Mój czas został dla mnie {timerkind}
+Mój czas pozostał dla mnie {timerkind}
+mój... {timerkind} jak długo zostało
+mój... {timerkind} ile czasu zostało
+/Jak długo na mnie / {timerkind}
+/Jak długo będzie moja / {timerkind}
+ile czasu będzie {timerkind}
+jak długo zostało
+ile czasu zostało
+jak długo pozostało
+Powiedz mi, kiedy pozostał czas.
+pokaż mi czas, który został
+Daj mi czas, który został.
+Powiesz nam, kiedy pozostał czas
+Powiedz mi mój {timerkind} stan
+Pokaż mi mój {timerkind} stan
+Oddaj mi mój {timerkind} stan
+Powiedz nam, mój {timerkind} stan
+czas pozostaje na moim {timerkind}
+czas pozostały na mój czas {timerkind}
+Czas pozostał dla mnie {timerkind}
+Pozostały czas dla mnie {timerkind}
+ile zostało w lewej długości
+ile zostało
+ile pozostało
+Powiedz mi, jaki jest status {timerkind}
+Daj mi status {timerkind}
+Powiedz nam, jaki jest status {timerkind}
+Daj nam status {timerkind}
+ile czasu będzie {name} odliczanie
+Jaki jest mój status? {name} odliczanie
+Jaki jest status {timerkind}
+Co to jest? {timerkind} stan
+Co jest moje {timerkind} stan
+/Jak długo jest mój / {timerkind}
+ile czasu jest {timerkind}
+/Jak długo jest / {timerkind}
+{timerkind} stan
