@@ -79,24 +79,25 @@ class TestMediaAndPriorityDialogsPerLocale(unittest.TestCase):
         "media_type_set": ({"new": "chime"}, ["chime"]),
         "property_changed_priority": ({"num": 3}, ["3"]),
     }
-    # kab is a stub locale: it ships 5 of the 122 dialog files en-US ships, and
-    # none of the five below. It is named here rather than skipped by a
-    # "does the file exist" test, because a missing file is the very defect
-    # this class catches -- the loader answers with the dialog NAME, so the
-    # skill says "media_type_set" out loud. Naming it keeps the gap visible
-    # and keeps every other locale asserted.
-    STUB_LOCALES = ("kab",)
+    # A stub locale ships none of the five dialogs below. It is named here
+    # rather than skipped by a "does the file exist" test, because a missing
+    # file is the very defect this class catches -- the loader answers with
+    # the dialog NAME, so the skill says "media_type_set" out loud. Naming it
+    # keeps the gap visible and keeps every other locale asserted.
+    # kab was the one entry until #371 gave it all five; the tuple is empty
+    # now, and every locale on disk is asserted.
+    STUB_LOCALES = ()
 
     @property
     def LOCALES(self):
         return [l for l in locale_dirs() if l not in self.STUB_LOCALES]
 
     def test_the_stub_locale_list_is_still_accurate(self):
-        """Fails when kab grows the five files, or another locale loses them.
+        """Fails when a stub locale grows the five files, or a locale loses them.
 
         Without this the tuple above is an unchecked exemption: a locale added
-        to it silently stops being asserted, and kab filling in never removes
-        it from it.
+        to it silently stops being asserted, and a locale filling the five
+        files in never removes it from it.
         """
         stubs = tuple(
             lang for lang in locale_dirs()
