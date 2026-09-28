@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.12.29a2](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.12.29a2) (2026-09-28)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.12.29a1...0.12.29a2)
+
+**Merged pull requests:**
+
+- test: read every locale in the slot guard, and the locale list from the tree [\#286](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/286) ([openvoiceos-bot](https://github.com/openvoiceos-bot))
+
 ## [0.12.29a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.12.29a1) (2026-09-28)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.12.28a1...0.12.29a1)
@@ -383,10 +391,6 @@
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.6.11a3...0.7.0a1)
 
-**Merged pull requests:**
-
-- feat\(locale\): entity parity for alertkind/davkind/mediaform/mediakind/schedkind/timerkind [\#255](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/255) ([openvoiceos-bot](https://github.com/openvoiceos-bot))
-
 ## [0.6.11a3](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.6.11a3) (2026-09-23)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.6.11a2...0.6.11a3)
@@ -573,15 +577,15 @@
 
 ## [0.3.0a4](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.3.0a4) (2026-08-12)
 
-[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.3.0a3...0.3.0a4)
-
-## [0.3.0a3](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.3.0a3) (2026-08-11)
-
-[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.3.0a2...0.3.0a3)
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.3.0a2...0.3.0a4)
 
 ## [0.3.0a2](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.3.0a2) (2026-08-11)
 
-[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.3.0a1...0.3.0a2)
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.3.0a3...0.3.0a2)
+
+## [0.3.0a3](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.3.0a3) (2026-08-11)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.3.0a1...0.3.0a3)
 
 ## [0.3.0a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.3.0a1) (2026-08-11)
 
