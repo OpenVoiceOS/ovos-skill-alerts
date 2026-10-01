@@ -1,2 +1,8 @@
-(Mik azok a|Mondd meg nekem.|akarom-e|amely|amelyből|amikor|attól a pillanattól kezdve, amikor|bármi|frissítés|hogyan|lista|megvan|mennyit|mi|mi az|miből|mondd el nekünk|mutasd meg a|olvasd el|te...|vajon|valami|van|van i|van-e|van...|vannak|voltunk|voltál) (riasztás|riasztások|Ébressz fel!|ébressz fel!|emlékeztető|emlékeztetők|esemény|események|kinevezés|kinevezések|figyelmeztetések|emlékeztesse a|memória|mondd meg a)
-(Mik azok a|Mondd meg nekem.|akarom-e|amely|amelyből|amikor|attól a pillanattól kezdve, amikor|bármi|frissítés|hogyan|lista|megvan|mennyit|mi|mi az|miből|mondd el nekünk|mutasd meg a|olvasd el|te...|vajon|valami|van|van i|van-e|van...|vannak|voltunk|voltál) (a|az|egy|el|fel|meg|nem|le|ki|kor|kell|új|ben|e|hogy|todo|hozz|ra|re|be) (riasztás|riasztások|Ébressz fel!|ébressz fel!|emlékeztető|emlékeztetők|esemény|események|kinevezés|kinevezések|figyelmeztetések|emlékeztesse a|memória|mondd meg a)
+milyen {alertkind} vannak
+milyen {alertkind} van (beállítva|elmentve)
+(mutasd|mutasd meg|listázd|olvasd fel) (nekem|nekünk) (a|az) {alertkind}
+van {alertkind}
+van (valami|valamilyen) {alertkind}
+(van|vannak) (elmentett|beállított|betervezett) {alertkind}
+mi (a|az) (következő|soron következő) {alertkind}
+mi van (elmentve|betervezve|beállítva)
