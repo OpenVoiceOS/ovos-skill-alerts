@@ -1,8 +1,8 @@
 # Changelog
 
-## [0.12.31a9](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.12.31a9) (2026-10-01)
+## [0.12.31a10](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.12.31a10) (2026-10-01)
 
-[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.12.31a5...0.12.31a9)
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.12.31a5...0.12.31a10)
 
 **Merged pull requests:**
 
