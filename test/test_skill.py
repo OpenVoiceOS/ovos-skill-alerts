@@ -3566,16 +3566,46 @@ class TestParseUtils(unittest.TestCase):
             self.assertIsInstance(timer.time_to_expiration, dt.timedelta)
             self.assertIsInstance(timer.expiration, dt.datetime)
 
-        no_name_timer_local = build_alert_from_intent(no_name_10_minutes)
-        no_name_timer_utc = build_alert_from_intent(no_name_10_minutes)
+        # Both alerts are built under ONE frozen clock, and the two
+        # expirations are then required to be equal exactly.
+        #
+        # parse_alert_context_from_message stamps "created": time() on every
+        # call, build_alert_from_intent anchors the expiration on that stamp,
+        # and Alert.__init__ then truncates the expiration with
+        # replace(microsecond=0). So two builds whose anchors straddle a whole
+        # second get expirations a full second apart, and the old
+        # assertAlmostEqual(..., places=0) failed on a 0.99999 s difference.
+        # The failure rate was the wall-clock gap between the two build calls:
+        # roughly 13% on CI, and it reddened alerts#355 and alerts#299 as the
+        # only failing check on either (T-6268).
+        #
+        # The clock is frozen rather than the tolerance widened, because a
+        # tolerance that swallows a whole second also swallows a real
+        # one-second error, and sleeping to the next boundary (as
+        # sleep_until_full_second does elsewhere in this file) only shrinks
+        # the window instead of closing it.
+        #
+        # The patch target is the module the import above resolves to.
+        # `util.parse_utils` and `ovos_skill_alerts.util.parse_utils` are the
+        # same FILE loaded as two distinct module objects, so patching the
+        # other name is a silent no-op that proves nothing.
+        from ovos_skill_alerts.util import parse_utils as _parse_utils
+
+        frozen = time.time()
+        with patch.object(_parse_utils, "time", lambda: frozen):
+            no_name_timer_local = build_alert_from_intent(no_name_10_minutes)
+            no_name_timer_utc = build_alert_from_intent(no_name_10_minutes)
 
         _validate_alert_default_params(no_name_timer_utc)
         _validate_alert_default_params(no_name_timer_local)
-        self.assertAlmostEqual(
-            no_name_timer_local.time_to_expiration.total_seconds(),
-            no_name_timer_utc.time_to_expiration.total_seconds(),
-            0,
-        )
+        self.assertEqual(no_name_timer_local.expiration,
+                         no_name_timer_utc.expiration)
+        # The control that the patch bit: without it, each build stamps its
+        # own time() and "created" is a later float than `frozen`. An equal
+        # stamp can only come from the frozen clock, so this assertion fails
+        # if the patch target is ever wrong.
+        self.assertEqual(no_name_timer_local.context["created"], frozen)
+        self.assertEqual(no_name_timer_utc.context["created"], frozen)
 
         baking_timer_local = build_alert_from_intent(baking_12_minutes)
         _validate_alert_default_params(baking_timer_local)
