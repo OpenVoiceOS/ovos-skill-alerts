@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.12.32a2](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.12.32a2) (2026-10-01)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.12.32a1...0.12.32a2)
+
+**Merged pull requests:**
+
+- translate\(kab\): update weekend.dialog [\#402](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/402) ([ovos-localize[bot]](https://github.com/apps/ovos-localize))
+
 ## [0.12.32a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.12.32a1) (2026-10-01)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.12.31a10...0.12.32a1)
@@ -95,10 +103,6 @@
 ## [0.12.29a2](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.12.29a2) (2026-09-28)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.12.29a1...0.12.29a2)
-
-**Merged pull requests:**
-
-- test: read every locale in the slot guard, and the locale list from the tree [\#286](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/286) ([openvoiceos-bot](https://github.com/openvoiceos-bot))
 
 ## [0.12.29a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.12.29a1) (2026-09-28)
 
@@ -353,10 +357,6 @@
 ## [0.12.2a4](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.12.2a4) (2026-09-26)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.12.2a3...0.12.2a4)
-
-**Merged pull requests:**
-
-- locale\(cs-CZ\): the store name and description \(unvouched\) [\#287](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/287) ([openvoiceos-bot](https://github.com/openvoiceos-bot))
 
 ## [0.12.2a3](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.12.2a3) (2026-09-26)
 
