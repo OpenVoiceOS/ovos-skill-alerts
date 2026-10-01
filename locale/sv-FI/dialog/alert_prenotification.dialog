@@ -1,1 +1,2 @@
-Haluan muistuttaa teitä {reminder}:sta {time_until}:ssä.
+# unvouched: copied from sv-SE, awaiting a Finland-Swedish speaker
+Jag vill påminna dig om {reminder} i {time_until}

@@ -1,3 +1,6 @@
-(poista|tyhjennä) listan [{list_name}] (kohteet|kaikki)
-(poista|tyhjennä) {list_name} listan (kohteet|kaikki)
-(poista|tyhjennä) (tehtävälistani|muistilistani)
+# unvouched: copied from sv-SE, awaiting a Finland-Swedish speaker
+(radera|ta bort) (posterna|allt) (från|på) [min|] lista[n] [{list_name}]
+(radera|ta bort) (posterna|allt) (från|på) {list_name} lista[n]
+(radera|rensa) min {list_name} lista
+(radera|rensa) min (att göra|todo)[-lista]
+(radera|ta bort) allt (från|på) min (att göra|todo)[-lista]

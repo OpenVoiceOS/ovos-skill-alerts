@@ -1,8 +1,8 @@
-(luo|lisää|aseta) [uusi] muistutus [{reminder}] [kello {date:time}]
-uusi muistutus [{reminder}]
-aikataulu muistutukset
-luo muistutukset
-uusi muistutukset
-muistuta minua [{reminder}(:sta|sta)] [kello {date:time}]
-kerro minulle että {reminder}
-muistuta minua {duration:duration}(:n|n) päästä [{reminder}(:sta|sta)]
+# unvouched: copied from sv-SE, awaiting a Finland-Swedish speaker
+(sätt|skapa|lägg till) en [ny] påminnelse [om {reminder}] [klockan {date:time}]
+ny påminnelse [{reminder}]
+schema påminnelse
+skapa påminnelse
+påminn (mig|oss) [om att {reminder}] [klockan {date:time}]
+berätta att jag ska {reminder}
+påminn (mig|oss) om {duration:duration} [att {reminder}]
