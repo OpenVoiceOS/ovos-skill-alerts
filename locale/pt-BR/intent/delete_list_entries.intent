@@ -1,0 +1,9 @@
+# machine translation from en-US, unvouched
+(apague|remova|elimine) [os] (itens|entradas|coisas) (da|na) (minha|a) lista [guardada] [{list_name}]
+(apague|remova) (tudo|todos [os] (itens|entradas)) (da|na) (minha|a) lista [{list_name}]
+(apague|remova|elimine) [os] (itens|entradas|coisas) (da|na) (minha|a) lista de {list_name}
+(apague|remova) (tudo|todos [os] (itens|entradas)) (da|na) (minha|a) lista de {list_name}
+(apague|remova|limpe) minha lista de {list_name}
+(apague|remova|limpe) (minhas|minha) (tarefas|lista de tarefas|entradas de tarefas)
+(apague|remova) (tudo|todos) (da|na) minha lista de {list_name}
+(apague|remova) (tudo|todos) (da|na) minha [lista de] tarefas

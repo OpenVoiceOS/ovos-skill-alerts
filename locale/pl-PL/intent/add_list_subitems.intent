@@ -1,0 +1,17 @@
+# machine draft, unvouched: opus-mt-en-pl-int8.
+# A native speaker corrects these lines; none of them is vouched for.
+dodać elementy do listy {list_name}
+Dodaj wpisy do listy {list_name}
+dodać rzeczy do listy {list_name}
+dodać elementy do listy
+utwórz elementy listy {items}
+Dodaj elementy listy {items}
+utwórz wpisy listy {items}
+Dodaj wpisy do listy {items}
+utwórz elementy listy
+dodać elementy do mojej listy {list_name}
+Dodaj wpisy do mojej listy {list_name}
+Dodaj rzeczy do mojej listy {list_name}
+dodać elementy do {list_name} lista
+Dodaj {items} do mojego {list_name} lista
+Dodaj {items} do {list_name} lista

@@ -1,0 +1,6 @@
+(annuleer|annuleren|verwijder|verwijderen|wis|wissen|schrap) {alertkind}
+(annuleer|annuleren|verwijder|verwijderen|wis|wissen|schrap) (de|het) {alertkind}
+(annuleer|annuleren|verwijder|verwijderen|wis|wissen) (al|alle) (mijn|de) {alertkind}
+(annuleer|annuleren|verwijder|verwijderen|wis|wissen) mijn {alertkind}
+(annuleer|annuleren|verwijder|verwijderen) (de|het) (volgende|eerstvolgende) {alertkind}
+(annuleer|verwijder|wis|stop) mijn {alertkind} voor {name}

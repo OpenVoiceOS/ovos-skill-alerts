@@ -1,0 +1,4 @@
+# machine translation from en-US, unvouched
+(crie|faça|adicione|comece) uma lista [nova] [chamada {list_name}]
+lista nova [chamada {list_name}]
+(crie|faça|adicione|comece) uma lista [nova] de {list_name}

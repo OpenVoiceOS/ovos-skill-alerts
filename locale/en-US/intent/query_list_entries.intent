@@ -1,0 +1,9 @@
+(what|which) (items|entries|things) are (on|in) (my|the) list [{list_name}]
+(read|show) [me] the (items|entries) (on|in) (my|the) list [{list_name}]
+what is on (my|the) {list_name} list
+(what|which) (items|entries|things) are (on|in) (my|the) {list_name} list
+(read|show) [me] [the] (items|entries) (on|in) (my|the) {list_name} list
+(what is|what's) (on|in) my {list_name} list
+(what is|what's) (on|in) my (todo|to do) [list]
+(read|show|list) [me] my (todo|to do) (items|entries|notes)
+what do i have to do

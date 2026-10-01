@@ -1,0 +1,6 @@
+(lösche|löschen|entferne|entfernen|breche ab|abbrechen|verwirf) {alertkind}
+(lösche|löschen|entferne|entfernen|breche ab|abbrechen|verwirf) (den|die|das) {alertkind}
+(lösche|löschen|entferne|entfernen) (alle|alle meine) {alertkind}
+(lösche|löschen|entferne|entfernen) (meinen|meine|mein) {alertkind}
+(lösche|löschen|entferne|entfernen) (den|die|das) (nächsten|nächste|nächstes) {alertkind}
+(lösche|entferne|streiche|beende) (meinen|meine|mein) {alertkind} für {name}

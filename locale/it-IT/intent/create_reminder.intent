@@ -1,0 +1,6 @@
+(crea|aggiungi|imposta) un [nuovo] promemoria [per {reminder}] [alle {date:time}]
+nuovo promemoria [{reminder}]
+creare promemoria
+programma promemoria
+ricorda(mi|ci) [di {reminder}] [alle {date:time}]
+dimmi di {reminder} [alle {date:time}]

@@ -1,0 +1,76 @@
+(set|create|add|schedule|start) [an] alarm [for {date:time}]
+new alarm [for {date:time}]
+i have a new alarm [for {date:time}]
+(set|create) [an] alarm (at|for) {date:time}
+alarm (at|for) {date:time}
+(set|create) [an] alarm every (weekday|weekend|day|morning|night) [at {date:time}]
+(set|make) a {date:time} [weekday|weekend] alarm
+(set|create|add|schedule|make|start|new|put) (a|an|my) alarm with {mediakind} (at|for) {date:time}
+(set|create|add|schedule|make|start|new|put) (a|an|my) alarm with the {mediakind} (at|for) {date:time}
+(set|create|add|schedule|make|start|new|put) (a|an|my) alarm with an {mediakind} (at|for) {date:time}
+(set|create|add|schedule|make|start|new|put) (a|an|my) alarm to play {mediakind} (at|for) {date:time}
+(set|create|add|schedule|make|start|new|put) (a|an|my) alarm that plays {mediakind} (at|for) {date:time}
+(set|create|add|schedule|make|start|new|put) (a|an|my) alarm playing {mediakind} (at|for) {date:time}
+(set|create|add|schedule|make|start) (a|an|my) {mediakind} alarm (at|for) {date:time}
+(could|would|can) you (set|create|add|schedule|make|start) an alarm that plays {mediakind} (at|for) {date:time}
+(set|create|add|schedule|make|start|new|put) (a|an|my) alarm with {mediakind}
+(set|create|add|schedule|make|start|new|put) (a|an|my) alarm with the {mediakind}
+(set|create|add|schedule|make|start|new|put) (a|an|my) alarm with my {mediakind}
+(set|create|add|schedule|make|start|new|put) (a|an|my) alarm with an {mediakind}
+(set|create|add|schedule|make|start|new|put) (a|an|my) alarm to play {mediakind}
+(set|create|add|schedule|make|start|new|put) (a|an|my) alarm to play the {mediakind}
+(set|create|add|schedule|make|start|new|put) (a|an|my) alarm that plays {mediakind}
+(set|create|add|schedule|make|start|new|put) (a|an|my) alarm that plays the {mediakind}
+(set|create|add|schedule|make|start|new|put) (a|an|my) alarm playing {mediakind}
+(set|create|add|schedule|make|start|new|put) (a|an|my) alarm playing the {mediakind}
+(set|create|add|schedule|make|start|new|put) (a|an|my) alarm playing my {mediakind}
+(set|create|add|schedule|make|start) (a|an|my) {mediakind} alarm
+(set|create|add|schedule|make|start) (a|an|my) new alarm with {mediakind}
+(set|create|add|schedule|make|start) (a|an|my) new alarm that plays {mediakind}
+(set|create|add|schedule|make|start) (a|an|my) new alarm playing {mediakind}
+(could|would|can) you (set|create|add|schedule|make|start) an alarm with {mediakind}
+(could|would|can) you (set|create|add|schedule|make|start) an alarm with an {mediakind}
+(could|would|can) you (set|create|add|schedule|make|start) an alarm that plays {mediakind}
+(could|would|can) you (set|create|add|schedule|make|start) an alarm playing {mediakind}
+(make|set) (my|the) alarm play {mediakind} (at|for) {date:time}
+(make|set) (my|the) alarm play the {mediakind} (at|for) {date:time}
+(make|set) (my|the) alarm play {mediakind}
+(make|set) (my|the) alarm play the {mediakind}
+(make|set) (my|the) alarm play my {mediakind}
+new alarm with {mediakind} (at|for) {date:time}
+new alarm playing {mediakind} (at|for) {date:time}
+new alarm with {mediakind}
+new alarm that plays {mediakind}
+new alarm playing {mediakind}
+please set an alarm for {date:time}
+can you set an alarm for {date:time}
+could you set an alarm for {date:time}
+would you create an alarm for {date:time}
+i need an alarm for {date:time}
+i need an alarm set for {date:time}
+i want an alarm for {date:time}
+let's set an alarm for {date:time}
+put an alarm on for {date:time}
+give me an alarm for {date:time}
+turn on an alarm for {date:time}
+set my alarm for {date:time}
+set the alarm for {date:time}
+i'd like an alarm set for {date:time}
+wake (me|us) [up] [at {date:time}]
+(could|would|can) you wake (me|us) [up] [at {date:time}]
+wake (me|us) [up] in {duration:duration}
+wake (me|us) [up] every {days} at {date:time}
+wake (the kids|everyone) [up] [at {date:time}]
+wake up (the kids|everyone) [at {date:time}]
+wake (the kids|everyone) [up] every {days} at {date:time}
+wake (me|us|the kids|everyone) up (with|to|playing) (a|an|my|the) {mediakind} (at|for) {date:time}
+(could|would|can) you wake (me|us|the kids|everyone) up (with|to|playing) {mediakind} (at|for) {date:time}
+wake (me|us|the kids|everyone) up (with|to|playing) (a|an|my|the) {mediakind}
+wake (me|us|the kids|everyone) (with|to|playing) (a|an|my|the) {mediakind}
+(could|would|can) you wake (me|us|the kids|everyone) up (with|to|playing) {mediakind}
+wake (me|us|the kids|everyone) up (with|to|playing) {mediakind} (at|for) {date:time}
+wake (me|us|the kids|everyone) (with|to|playing) {mediakind} (at|for) {date:time}
+wake up (the kids|everyone) (with|to|playing) {mediakind} (at|for) {date:time}
+wake (me|us|the kids|everyone) up (with|to|playing) {mediakind}
+wake (me|us|the kids|everyone) (with|to|playing) {mediakind}
+wake up (the kids|everyone) (with|to|playing) {mediakind}

@@ -1,0 +1,97 @@
+هشدار من را برای {timeframe}
+به من هشدار بدهید {timeframe}
+هشدار من را بخوانید {timeframe}
+همه هشدارها را به من بفرستید
+همه هشدارها را به من نشان دهید
+همه هشدارها را بخوانید
+همه هشدارها را به من بگویید
+همه هشدارها را برای {timeframe}
+همه هشدارها را به من نشان دهید {timeframe}
+همه هشدارها را بخوانید {timeframe}
+همه هشدارها را به من بگویید {timeframe}
+به من یادآوری می کنم {alertkind}
+به من نشان دهید که در حال چرخش هستم {alertkind}
+من را بخوانم در حالی که منتظر {alertkind}
+به من بگویید که منتظر من هستم {alertkind}
+همه چیز را برای من بنویسید {alertkind}
+همه چیز را به من نشان دهید {alertkind}
+همه ی من را بخوانید {alertkind}
+همه چیز را به من بگویید {alertkind}
+چه چیزی در انتظار من است {alertkind}
+چه چیزی در انتظار {alertkind}
+کسی را دریافت کرد {alertkind}
+برخی را دریافت کرد {alertkind}
+کسی را دریافت کرد {alertkind} برای {timeframe}
+برخی را دریافت کرد {alertkind} برای {timeframe}
+کسی را دریافت کرد {alertkind} در {timeframe}
+برخی را دریافت کرد {alertkind} در {timeframe}
+می توانی به من بگو چه {alertkind} من دارم
+می خواهی به من بگو چه {alertkind} من دارم
+شما می توانید به ما بگویید که {alertkind} من دارم
+چه چیزی برنامه ریزی شده برای {timeframe}
+من چیزی برای برنامه ریزی داشتم. {timeframe}
+چه چیزی برنامه ریزی شده است؟ {timeframe}
+چه چیزی برای برنامه ریزی شده بود؟ {timeframe}
+هشدارها را برای {timeframe}
+هشدارها را بخوانید برای {timeframe}
+هشدارها را برای {timeframe} ذکر کنید.
+چه چیزی {alertkind} ذخیره شده برای {timeframe}
+چه کسی {alertkind} ذخیره شده برای {timeframe}
+هشدار من را بفرستید
+هشدار من را نشان دهید
+هشدار من را بخوانید
+فهرست هشدارها
+آیا من کسی دارم {alertkind} برای {timeframe}
+آیا ما کسی داریم {alertkind} برای {timeframe}
+برای چه چیزی تنظیم کرده ام {timeframe}
+برای چه چیزی قرار داده ام {timeframe}
+برای چه چیزی قرار داده ایم {timeframe}
+چه چیزی {alertkind} آیا من برای {timeframe}
+چه کسی {alertkind} آیا من برای {timeframe}
+چه چیزی {alertkind} من برای {timeframe}
+چه کسی {alertkind} من برای {timeframe}
+آیا کسی را ذخیره کرده ام؟ {alertkind}
+آیا ما ذخیره شده ایم؟ {alertkind}
+چه چیزی برنامه ریزی شده است
+من چیزی برنامه ریزی کرده ام
+آیا چیزی برنامه ریزی شده است
+چه چیزی {alertkind} ذخیره می شوند
+چه کسی {alertkind} ذخیره می شوند
+چه چیزی {alertkind} ذخیره شده
+چه کسی {alertkind} ذخیره شده
+وجود دارد کسی {alertkind} برای {timeframe}
+آیا کسی وجود دارد {alertkind} برای {timeframe}
+برخی وجود دارد {alertkind} برای {timeframe}
+به من بگویید چه {alertkind} من دارم
+به من نشان دهید چه {alertkind} من دارم
+چه چیزی را بخوانید {alertkind} من دارم
+به ما بگویید چه {alertkind} من دارم
+اگر کسی داشته باشم {alertkind}
+آیا کسی را به دست آورده ام {alertkind}
+اگر کسی داشته باشیم {alertkind}
+آیا کسی را به دست آورده ایم {alertkind}
+من هر چیزی را تعیین می کنم {alertkind}
+من کسی را قرار دادم {alertkind}
+هر کدام از آنها را قرار می دهیم {alertkind}
+ما هر کدام از آن ها را قرار دادیم. {alertkind}
+چه چیزی ذخیره شده است {alertkind}
+آیا ذخیره شده است؟ {alertkind}
+برخی از آنها ذخیره شده اند. {alertkind}
+بعضی ها ذخیره شده اند {alertkind}
+آیا من کسی دارم {alertkind}
+آیا ما کسی داریم {alertkind}
+چه چیزی {alertkind} من دارم
+چه کسی {alertkind} من دارم
+چه چیزی {alertkind} من داشتم
+چه کسی {alertkind} من داشتم
+چه چیزی {alertkind} و {alertkind2} من دارم
+چه کسی {alertkind} و {alertkind2} من دارم
+چه چیزی {alertkind} و {alertkind2} من داشتم
+چه کسی {alertkind} و {alertkind2} من داشتم
+زمانی که بعدی من {alertkind}
+چه چیزی بعدی من است {alertkind}
+چه زمانی آینده ام می آید {alertkind}
+آینده من چیست {alertkind}
+وجود دارد کسی {alertkind}
+آیا کسی وجود دارد {alertkind}
+برخی وجود دارد {alertkind}

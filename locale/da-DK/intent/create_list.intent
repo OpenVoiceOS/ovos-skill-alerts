@@ -1,0 +1,3 @@
+(lav|opret|tilføj) en [ny] liste [kaldet {list_name}]
+ny liste [{list_name}]
+(lav|opret|tilføj) en [ny] {list_name} liste

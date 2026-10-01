@@ -1,0 +1,7 @@
+(lösche|entferne) [die] Einträge (von|aus) (meiner|der) Liste [{list_name}]
+(lösche|entferne) alles (von|aus) (meiner|der) Liste [{list_name}]
+(lösche|entferne) [die] Einträge (von|aus) (meiner|der) {list_name} Liste
+(lösche|entferne) alles (von|aus) (meiner|der) {list_name} Liste
+(lösche|entferne) meine {list_name} Liste
+(lösche|entferne) meine (Aufgabenliste|Aufgaben|Notizen)
+(lösche|entferne) alles (von|aus) meiner (Aufgaben|To-do)[-liste]

@@ -1,0 +1,10 @@
+(que|quais) {alertkind} tenho
+quais são os meus {alertkind}
+(lista|mostra|diz-me|diga-me|lê) os meus {alertkind}
+(lista|mostra|diz-me|diga-me|lê) {alertkind}
+(tenho|temos) algum {alertkind}
+(há|existe) algum {alertkind}
+(há|existem) {alertkind} (marcados|agendados|guardados)
+(quando|qual) é o meu próximo {alertkind}
+o que tenho (agendado|marcado|guardado)
+o que é que tenho (agendado|marcado|guardado)

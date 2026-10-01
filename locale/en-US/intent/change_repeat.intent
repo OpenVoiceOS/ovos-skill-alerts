@@ -1,0 +1,14 @@
+(change|set|adjust|make) (my|the) (next|upcoming) {schedkind} (repeat|recur|repeating|recurring) (every|on) {repeat}
+(change|set|adjust|make) (my|the) (next|upcoming) {schedkind} to (repeat|recur|be recurring) (every|on) {repeat}
+(change|set|adjust|make) (my|the) {schedkind} to (repeat|recur|be recurring|be repeating) (every|on) {repeat}
+(change|set|adjust|make) (my|the) {schedkind} (repeat|recur|repeating|recurring) (every|on) {repeat}
+(my|the) {schedkind} (change|set|adjust) (the|its) (frequency|repetition|repeat) to {repeat}
+(change|set|adjust|make) (my|the) {schedkind} to (repeat|recur|be recurring|be repeating) {repeat}
+(change|set|adjust|make) (my|the) {schedkind} (repeat|recur|repeating|recurring) {repeat}
+(change|set|adjust|make) (my|the) (next|upcoming) {schedkind} to (repeat|recur) {repeat}
+(change|set|adjust) (my|the) {schedkind} (frequency|repetition|recurrance|repeat) to {repeat}
+(change|set|adjust) (my|the) {schedkind} (frequency|repetition|recurrance|repeat) to every {repeat}
+(change|set|adjust) (my|the) {schedkind} (frequency|repetition|recurrance|repeat) every {repeat}
+(change|set|adjust|make|reschedule) (my|the) {schedkind} to every {repeat}
+(change|set|adjust|make|reschedule) (my|the) wake {schedkind} to every {repeat}
+(change|adjust) how often (my|the) {schedkind} (repeats|recurs)

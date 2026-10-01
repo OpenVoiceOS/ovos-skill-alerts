@@ -1,0 +1,6 @@
+(slet|fjern) (punkterne|posterne|alt) (fra|på) [min|] liste[n] [{list_name}]
+(slet|fjern) (punkterne|posterne|alt) (fra|på) {list_name} liste[n]
+(slet|ryd) min {list_name} liste
+(slet|ryd) min (todo|huskeliste)[-liste]
+(slet|fjern) alt (fra|på) min {list_name} liste
+(slet|fjern) alt (fra|på) min (todo|huskeliste)

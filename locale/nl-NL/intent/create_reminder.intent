@@ -1,0 +1,8 @@
+(zet|maak|voeg) een [nieuwe] herinnering [toe] [om {reminder}] [om {date:time}]
+nieuwe herinnering [{reminder}]
+nieuwe Herinneringen
+start Herinneringen
+rooster herinnering
+herinner (me|mij) [aan {reminder}] [om {date:time}]
+vertel me dat ik moet {reminder}
+herinner (me|mij) over {duration:duration} [aan {reminder}]

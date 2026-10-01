@@ -1,0 +1,9 @@
+# machine translation from en-US, unvouched
+(verschiebe|verlege|ändere) (meinen|meine|mein|den|die|das) {schedkind} auf {date:time}
+(verschiebe|verlege|ändere) (meinen|meine|mein|den|die|das) {schedkind} von {date:old} auf {date:time}
+(verschiebe|verlege|ändere) (den|die|das) {schedkind} für {name} auf {date:time}
+(setze|lege) (meinen|meine|mein|den|die|das) (nächsten|nächste|nächstes) {schedkind} (früher|später)
+(verlängere|verkürze) (meinen|meine|mein|den|die|das) {schedkind}
+(verschiebe|vertage) (meinen|meine|mein|den|die|das) (nächsten|nächste|nächstes) {schedkind} um {duration:duration}
+(meinen|meine|mein) {schedkind} (verschiebe|verlege) (ihn|sie|es) auf {date:time}
+(mach|stelle) (meinen|meine|mein|den|die|das) (nächsten|nächste|nächstes) {schedkind} (früher|später)

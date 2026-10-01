@@ -1,0 +1,6 @@
+változtasd meg a {schedkind}-om ismétlődését minden {repeat}-ra
+állítsd be, hogy a {schedkind}-om minden {repeat} ismétlődjön
+állítsd be a {schedkind} gyakoriságát erre: {repeat}
+változtasd meg a következő {schedkind}-om, hogy {repeat} ismétlődjön
+azt akarom, hogy a {schedkind} minden {repeat} ismétlődjön
+változtasd meg a {schedkind}-om ismétlődését erre: {repeat}

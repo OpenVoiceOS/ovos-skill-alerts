@@ -1,0 +1,5 @@
+(verwijder|wis) (de items|alles) (van|uit) (mijn|de) lijst [{list_name}]
+(verwijder|wis) (de items|alles) (van|uit) (mijn|de) {list_name} lijst
+(verwijder|wis) mijn {list_name} lijst
+(verwijder|wis) mijn (to do|todo)[-lijst]
+(verwijder|wis) alles (van|uit) mijn (to do|todo)[-lijst]

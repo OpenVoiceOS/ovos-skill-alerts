@@ -1,0 +1,9 @@
+(quels|quelles) {alertkind} ai-je
+(quels|quelles) sont mes {alertkind}
+(liste|montre|montrez|lis|dis) (moi|nous) mes {alertkind}
+(liste|montre|montrez|lis|montre-moi|montrez-moi|dis-moi|lis-moi) mes {alertkind}
+ai-je (un|une|des) {alertkind}
+(y a-t-il|est-ce qu'il y a) (un|une|des) {alertkind}
+y a-t-il (des|un|une) {alertkind} (enregistré|enregistrée|enregistrés|prévu|prévus)
+(quand|quel) est mon (prochain|prochaine) {alertkind}
+(qu'est-ce que|ce que) j'ai (de prévu|d'enregistré|de noté)

@@ -1,0 +1,5 @@
+(sæt|start|lav) en timer [på {duration:duration}]
+ny timer [på {duration:duration}]
+(sæt|start|lav) en {duration:duration} timer
+start timere
+lav timer

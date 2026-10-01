@@ -1,0 +1,19 @@
+# machine translation from en-US, unvouched
+(mude|defina|ajuste|deixe) (meu|o|meu próximo|o próximo) {schedkind} para ser (audível|tocável|falado|gravado)
+(mude|defina|ajuste|deixe) (meu|o|meu próximo|o próximo) {schedkind} (audível|tocável|falado|gravado)
+(mude|defina|ajuste|deixe|adie) (meu|o|meu próximo|o próximo) {schedkind} (audível|tocável|falado|gravado)
+(mude|defina|ajuste) o alerta (do meu|do|do meu próximo|do próximo) {schedkind} para (áudio|reprodução)
+(mude|defina|ajuste|deixe) (meu|o|meu próximo|o próximo|meu futuro) {schedkind} para tocar {mediakind}
+(mude|defina|ajuste|deixe) (meu|o|meu próximo|o próximo|meu futuro) {schedkind} para reproduzir {mediakind}
+(mude|defina|ajuste|deixe) (meu|o|meu próximo|o próximo) {schedkind} para {mediaform}
+(mude|defina|ajuste|deixe) (meu|o|meu próximo|o próximo) {schedkind} para usar {mediaform}
+(mude|defina|ajuste|deixe) (meu|o|meu próximo|o próximo) {schedkind} para repetir {mediaform}
+(mude|defina|ajuste|deixe) (meu|o|meu próximo|o próximo) {schedkind} para reproduzir {mediaform}
+(mude|defina|ajuste|deixe) (meu|o|meu próximo|o próximo) {schedkind} para tocar {mediaform}
+(mude|defina|ajuste|deixe) (meu|o|meu próximo|o próximo) {schedkind} para tocar a {mediakind}
+(mude|defina|ajuste|deixe) (meu|o|meu próximo|o próximo) {schedkind} para tocar minha {mediakind}
+(mude|defina|ajuste|deixe) (meu|o|meu próximo|o próximo) {schedkind} para tocar uma {mediakind}
+(mude|defina|ajuste|deixe) (meu|o|meu próximo|o próximo) {schedkind} tocando {mediaform}
+(mude|defina|ajuste) o som (do meu|do|do meu próximo|do próximo) {schedkind} para {mediakind}
+(mude|defina|ajuste) o som (do meu|do|do meu próximo|do próximo) {schedkind} para {mediaform}
+(mude|defina|ajuste) o alerta (do meu|do|do meu próximo|do próximo) {schedkind} para {mediaform}

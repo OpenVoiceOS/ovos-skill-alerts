@@ -1,0 +1,6 @@
+change mon {schedkind} pour qu'il soit audible
+ajuste le prochain {schedkind} pour qu'il joue {mediakind}
+fais jouer {mediaform} par le {schedkind}
+change le son de mon {schedkind} en {mediakind}
+change l'alerte du {schedkind} en {mediaform}
+je veux que mon prochain {schedkind} joue ma {mediakind}
