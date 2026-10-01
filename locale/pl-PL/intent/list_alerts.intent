@@ -1,11 +1,2 @@
-(jakie|które) {alertkind} mam
-jakie mam {alertkind}
-co to są moje {alertkind}
-(pokaż|wyświetl|wymień|przeczytaj|powiedz) (mi|nam) moje {alertkind}
-(pokaż|wyświetl|wymień|przeczytaj) moje {alertkind}
-czy mam (jakiś|jakieś|jakąś) {alertkind}
-czy mam {alertkind}
-(czy masz|czy są) (jakiś|jakieś|jakąś) {alertkind}
-czy są {alertkind} (zapisane|ustawione|zaplanowane)
-(kiedy|co) jest (moje|mój|moja) (następne|następny|następna) {alertkind}
-co mam (zapisane|zaplanowane|ustawione)
+(co|co to jest|cokolwiek|coś|czy|czy ja|czy mam|czy mamy|czy masz|czy my|czytać|ile|jak|jakie są|jest tam|kiedy|który|lista|mieć i|od kiedy|odświeżenie|otrzymany|pokaz|powiedz mi|powiedz nam|są tam|z czego|z którego) (alarm|alarmy|obudź mnie|przypomnienia|przypomnienie|nominacja|nominacje|wydarzenia|wydarzenie|alert|alerty|pamięć|powiedzieć)
+(co|co to jest|cokolwiek|coś|czy|czy ja|czy mam|czy mamy|czy masz|czy my|czytać|ile|jak|jakie są|jest tam|kiedy|który|lista|mieć i|od kiedy|odświeżenie|otrzymany|pokaz|powiedz mi|powiedz nam|są tam|z czego|z którego) (w|jest|nie|z|na|do|masz|są|brak|o|mam|się|twój|usuń|tym|to|mnie|i|tam|mi) (alarm|alarmy|obudź mnie|przypomnienia|przypomnienie|nominacja|nominacje|wydarzenia|wydarzenie|alert|alerty|pamięć|powiedzieć)
