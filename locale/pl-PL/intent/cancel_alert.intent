@@ -1,2 +1,6 @@
-(anulować|czysty|odrzut|usunąć) (alarm|alarmy|obudź mnie|timer|timery|przypomnienia|przypomnienie|nominacja|nominacje|wydarzenia|wydarzenie|alert|alerty)
-(anulować|czysty|odrzut|usunąć) (w|jest|nie|z|na|do|masz|są|brak|o|mam|się|twój|usuń|tym|to|mnie|i|tam|mi) (alarm|alarmy|obudź mnie|timer|timery|przypomnienia|przypomnienie|nominacja|nominacje|wydarzenia|wydarzenie|alert|alerty)
+(anuluj|usuń|skasuj|wyczyść|odwołaj) {alertkind}
+(anuluj|usuń|skasuj|wyczyść) (ten|ta|to) {alertkind}
+(anuluj|usuń|skasuj|wyczyść) wszystkie (moje|te) {alertkind}
+(anuluj|usuń|skasuj|wyczyść) (mój|moje|moja) {alertkind}
+(anuluj|usuń|skasuj) (ten|ta|to) (następny|następne|następna) {alertkind}
+(anuluj|usuń|skasuj|wyczyść) (mój|moje|moja) {alertkind} dla {name}
