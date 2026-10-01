@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.12.31a6](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.12.31a6) (2026-10-01)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.12.31a5...0.12.31a6)
+
+**Merged pull requests:**
+
+- fix\(pl-PL\): list\_alerts and cancel\_alert hear the language, not a word list [\#390](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/390) ([openvoiceos-bot](https://github.com/openvoiceos-bot))
+- fix\(hu-HU\): list\_alerts and cancel\_alert hear the language, not a word list [\#389](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/389) ([openvoiceos-bot](https://github.com/openvoiceos-bot))
+- fix\(eu-ES\): list\_alerts and cancel\_alert hear the language, not a word list [\#388](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/388) ([openvoiceos-bot](https://github.com/openvoiceos-bot))
+- fix\(cs-CZ\): list\_alerts and cancel\_alert hear the language, not a word list [\#387](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/387) ([openvoiceos-bot](https://github.com/openvoiceos-bot))
+- fix\(fa-IR\): strip the terminal question mark from the intent templates [\#386](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/386) ([openvoiceos-bot](https://github.com/openvoiceos-bot))
+
 ## [0.12.31a5](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.12.31a5) (2026-09-28)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.12.31a4...0.12.31a5)
@@ -365,23 +377,14 @@
 **Merged pull requests:**
 
 - fix\(locale\): the prenotification slot is reminder, not remimder [\#279](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/279) ([openvoiceos-bot](https://github.com/openvoiceos-bot))
-- feat\(locale\): the wake-in-duration line in cs-CZ, eu-ES, hu-HU, pl-PL and sv-FI [\#278](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/278) ([openvoiceos-bot](https://github.com/openvoiceos-bot))
 
 ## [0.11.0a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.11.0a1) (2026-09-25)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.10.0a1...0.11.0a1)
 
-**Merged pull requests:**
-
-- feat\(intents\): declare typed slots across every locale [\#275](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/275) ([openvoiceos-bot](https://github.com/openvoiceos-bot))
-
 ## [0.10.0a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.10.0a1) (2026-09-25)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.9.0a5...0.10.0a1)
-
-**Merged pull requests:**
-
-- feat\(locale\): the five sound and priority dialogs in cs-CZ, hu-HU, pl-PL, ru-RU and sv-FI [\#274](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/274) ([openvoiceos-bot](https://github.com/openvoiceos-bot))
 
 ## [0.9.0a5](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.9.0a5) (2026-09-25)
 
