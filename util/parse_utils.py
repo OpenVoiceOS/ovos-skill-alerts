@@ -625,10 +625,22 @@ def parse_alert_name_from_message(message: Message,
     # parses as the name "delete shopping list", and the skill then speaks
     # "There is no entry delete shopping list stored." The slot the intent
     # file declares is the name the user said, so it wins when it is there.
-    # Adapt keeps working: it populates `__tags__` and no `list_name`.
-    slot_name = message.data.get("list_name")
-    if slot_name and isinstance(slot_name, str) and slot_name.strip():
-        return slot_name.strip().lower()
+    # Adapt keeps working: it populates `__tags__` and neither slot.
+    #
+    # Both slots that carry a name the user said are read. `{list_name}` is
+    # declared by the list intents; `{name}` by cancel_alert, timer_status and
+    # reschedule_alert, which held the identical defect. No intent file
+    # declares both, so the order settles a tie that cannot occur.
+    #
+    # `{event}`, `{reminder}` and `{items}` are deliberately not read here.
+    # `{items}` holds the items to add, not a name. `{event}` and `{reminder}`
+    # name a thing being created rather than one to match, and the suite
+    # asserts token-parsed names for them, such as "start making dinner", so
+    # reading those slots would change behaviour this change does not measure.
+    for slot_key in ("list_name", "name"):
+        slot_name = message.data.get(slot_key)
+        if slot_name and isinstance(slot_name, str) and slot_name.strip():
+            return slot_name.strip().lower()
 
     tokens = tokens or tokenize_utterance(message)
     tokens.strip_time()
