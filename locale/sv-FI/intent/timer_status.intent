@@ -1,4 +1,10 @@
-(ajastimet|ajastin|aika) (end|pitkä|päättyy|tila|valmis|vasen|jäljellä)
-(end|pitkä|päättyy|tila|valmis|vasen|jäljellä) (ajastimet|ajastin|aika)
-(ajastimet|ajastin|aika) (on|en|ole|ei|olen|luo|onko|jäi|mikä|uusi|n|sta|ksi|ssä|ssa|ovat|minä|et|lle|dav) (end|pitkä|päättyy|tila|valmis|vasen|jäljellä)
-(Kerro minulle|Mikä on|Mitä ovat|et ollut|joka|josta|jotain|kaikki|kerro meille|kuinka paljon|kun|lista|lue|me|mistä|miten|mitä|näytä|on i|on olemassa|onko meillä|onko minulla|onko sinulla|päivitä|sain|teenkö minä|teetkö|teimme|teinkö minä|teitkö sinä) (ajastimet|ajastin|aika)
+# unvouched: copied from sv-SE, awaiting a Finland-Swedish speaker
+# machine translation from en-US, unvouched
+hur (lång tid|mycket tid) är kvar på (min|mitt|den) {timerkind}
+hur (lång tid|mycket tid) är kvar på {timerkind} som heter {name}
+hur (lång tid|länge) (är det|dröjer det) (innan|till) (min|mitt|den) {timerkind} (är klar|går ut)
+är (min|mitt|den) {timerkind} (klar|slut)
+(säg|ge) mig tiden som är kvar på (min|mitt|den) {timerkind}
+vad är statusen på (min|mitt|den) {timerkind}
+status på (min|mitt|den) {timerkind}
+när (är|blir) (min|mitt|den) {timerkind} (klar|slut)

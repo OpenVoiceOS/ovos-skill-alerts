@@ -1,6 +1,7 @@
-voitko synkronoida {davkind}
-synkronoi {davkind} nyt
-lataa {davkind}
-lähetä {davkind}
-synkronoi kaikki {davkind}
-synkronoi {davkind} ja {davkind2}
+# unvouched: copied from sv-SE, awaiting a Finland-Swedish speaker
+kan du synkronisera {davkind}
+synkronisera min {davkind} nu
+ladda ner {davkind}
+ladda upp min {davkind}
+synkronisera alla mina {davkind}
+synkronisera {davkind} och {davkind2}
