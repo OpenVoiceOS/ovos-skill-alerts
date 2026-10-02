@@ -1,3 +1,5 @@
 beddel {schedkind}-inu ɣer {date:time}
 err {schedkind} ad yili {date:time} deg umkan n {date:old}
 sbeɛɛed {schedkind}-inu ɣer sdat
+# machine recombination of vouched kab vocabulary (cancel_alert.intent "n {name}"), unvouched for this line
+beddel {schedkind} n {name} ɣer {date:time}
