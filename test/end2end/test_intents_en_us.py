@@ -807,9 +807,8 @@ class TestAdapt9_Createevent(_IntentRoutingMixin, TestCase):
 
 class TestAdapt10_Reschedulealert(_IntentRoutingMixin, TestCase):
     """Padatious (intent file) intent: reschedule_alert.intent"""
-    @pytest.mark.xfail(strict=True, reason="issue #155: relative/absolute time argument makes the utterance unmatched under the full default pipeline -- real skill defect (Adapt confidence dilution / unhandled duration vocab), confirmed via control-pair evidence ('move the baseball event' matches reschedule_alert, 'move the baseball event to 08:00 pm' matches nothing). See https://github.com/OpenVoiceOS/ovos-skill-alerts/issues/155.")
     def test_move_the_baseball_event_to_08_00_pm(self):
-        self._assert_padatious(r"move the baseball event to 08:00 pm", r"RescheduleAlert_kw")
+        self._assert_padatious(r"move the baseball event to 08:00 pm", r"reschedule_alert.intent")
 
     def test_reschedule_the_next_event_two_hours_earl(self):
         # Full-pipeline correction: no reschedule_alert.intent line accepted a
@@ -822,13 +821,11 @@ class TestAdapt10_Reschedulealert(_IntentRoutingMixin, TestCase):
             r"reschedule the next event two hours earlier",
             r"reschedule_alert.intent")
 
-    @pytest.mark.xfail(strict=True, reason="issue #155: relative/absolute time argument makes the utterance unmatched under the full default pipeline -- real skill defect (Adapt confidence dilution / unhandled duration vocab), confirmed via control-pair evidence ('adjust the pizza timer' matches reschedule_alert, 'adjust the pizza timer by 2 minutes' matches nothing). See https://github.com/OpenVoiceOS/ovos-skill-alerts/issues/155.")
     def test_extend_the_pizza_timer_by_2_minutes(self):
-        self._assert_padatious(r"extend the pizza timer by 2 minutes", r"RescheduleAlert_kw")
+        self._assert_padatious(r"extend the pizza timer by 2 minutes", r"reschedule_alert.intent")
 
-    @pytest.mark.xfail(strict=True, reason="issue #155: relative/absolute time argument makes the utterance unmatched under the full default pipeline -- real skill defect (Adapt confidence dilution / unhandled duration vocab), confirmed via control-pair evidence ('decrease the bread timer' matches a sibling intent, 'decrease the bread timer by 5 minutes' matches nothing at all). See https://github.com/OpenVoiceOS/ovos-skill-alerts/issues/155.")
     def test_decrease_the_bread_timer_by_5_minutes(self):
-        self._assert_padatious(r"decrease the bread timer by 5 minutes", r"RescheduleAlert_kw")
+        self._assert_padatious(r"decrease the bread timer by 5 minutes", r"reschedule_alert.intent")
 
 class TestAdapt11_Reschedulealertalt(_IntentRoutingMixin, TestCase):
     """Padatious (intent file) intent: reschedule_alert.intent (earlier/sooner/longer/shorter lines folded in)"""
@@ -840,9 +837,8 @@ class TestAdapt11_Reschedulealertalt(_IntentRoutingMixin, TestCase):
         # equivalent test intent/coverage rather than dropping the row.
         self._assert_padatious(r"shorten the timer", r"reschedule_alert.intent")
 
-    @pytest.mark.xfail(strict=True, reason="issue #155: relative/absolute time argument makes the utterance unmatched under the full default pipeline -- real skill defect (Adapt confidence dilution / unhandled duration vocab), confirmed via control-pair evidence ('reschedule the next event' matches a sibling intent, 'reschedule the next event two hours earlier' matches nothing at all under reschedule_alert). See https://github.com/OpenVoiceOS/ovos-skill-alerts/issues/155.")
     def test_reschedule_the_next_event_two_hours_earl(self):
-        self._assert_padatious(r"reschedule the next event two hours earlier", r"RescheduleAlert_kw")
+        self._assert_padatious(r"reschedule the next event two hours earlier", r"reschedule_alert.intent")
 
     def test_extend_the_pizza_timer_by_2_minutes(self):
         # issue #138 triage: original auto-generated utterance did not
