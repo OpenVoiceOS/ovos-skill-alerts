@@ -30,6 +30,14 @@ training has genuinely gone quiet), bounded overall by ``max_trained_wait``
 so a pathological stream of passes cannot block forever. A boot with
 nothing to train at all (so the event never fires even once) falls back
 to a short plain settle instead of blocking for the full timeout.
+
+Both budgets raise ``MinicroftNotReady`` when they run out. An earlier
+version returned instead, which made an overrun silent: the caller went
+on to query a container that was still compiling, and the timeout
+reached the test as a wake-routing failure or passed by luck. A caller
+cannot tell a settled boot from an exhausted budget by looking at the
+MiniCroft, because the skill reports READY long before padatious stops
+training, so the helper must be the one that says so.
 """
 import threading
 import time
@@ -46,11 +54,19 @@ QUIET_WINDOW = 4.0
 FALLBACK_SETTLE = 3.0
 
 
+class MinicroftNotReady(AssertionError):
+    """A readiness budget ran out. Raised, never returned."""
+
+
 def wait_for_minicroft_ready(mc, ready_timeout: float = DEFAULT_READY_TIMEOUT,
                              max_trained_wait: float = DEFAULT_TRAINED_TIMEOUT,
                              quiet_window: float = QUIET_WINDOW) -> None:
     """Block until *mc* is READY and its padatious/padacioso containers
     have finished (re)compiling from this boot's registrations.
+
+    :raises MinicroftNotReady: *mc* did not reach READY within
+        *ready_timeout*, or training was still delivering passes when
+        *max_trained_wait* ran out.
     """
     trained = threading.Event()
 
@@ -62,20 +78,37 @@ def wait_for_minicroft_ready(mc, ready_timeout: float = DEFAULT_READY_TIMEOUT,
         deadline = time.monotonic() + ready_timeout
         while getattr(getattr(mc, "status", None), "state", None) != ProcessState.READY:
             if time.monotonic() > deadline:
-                break
+                raise MinicroftNotReady(
+                    f"MiniCroft did not reach READY within {ready_timeout}s; "
+                    f"state="
+                    f"{getattr(getattr(mc, 'status', None), 'state', None)!r}"
+                )
             time.sleep(0.2)
 
         overall_deadline = time.monotonic() + max_trained_wait
         saw_any = False
+        settled = False
         while True:
             remaining = overall_deadline - time.monotonic()
             if remaining <= 0:
-                break
-            if trained.wait(timeout=min(quiet_window, remaining)):
+                break  # budget gone with training still arriving
+            window = min(quiet_window, remaining)
+            if trained.wait(timeout=window):
                 trained.clear()
                 saw_any = True
                 continue  # a delivery landed -- reset the quiet-window clock
+            if window < quiet_window:
+                break  # the budget cut the window short: it proves nothing
+            settled = True
             break  # quiet_window elapsed with no new delivery: settled
+
+        if not settled:
+            raise MinicroftNotReady(
+                f"padatious was still training when the {max_trained_wait}s "
+                f"budget ran out: no quiet window of {quiet_window}s ever "
+                f"closed. Queries now would read a half-compiled container. "
+                f"Raise max_trained_wait or lighten the boot."
+            )
 
         if not saw_any:
             time.sleep(FALLBACK_SETTLE)
