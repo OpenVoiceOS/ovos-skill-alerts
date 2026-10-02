@@ -4,10 +4,17 @@ test_intents_en_us.py only exercises en-US; every other locale under
 locale/ ships real adapt vocab (create.voc / alarm.voc / timer.voc /
 reminder.voc / cancel.voc / query.voc, etc.) that was completely
 untested end-to-end. Alerts is a big skill (30+ adapt intents), so this
-suite keeps scope tractable: it covers only the primary alarm/timer/
-reminder-creation + cancel + query intents (create_alarm, create_timer,
-create_reminder, cancel_alert, list_alerts), ~15 rows per locale, across
-every locale that has real (non-metadata-only) vocab content on dev.
+suite keeps scope tractable for the 16 locales built by hand: for those it
+covers only the primary alarm/timer/reminder-creation + cancel + query
+intents (create_alarm, create_timer, create_reminder, cancel_alert,
+list_alerts), ~15 rows per locale, across every locale that has real
+(non-metadata-only) vocab content on dev.
+
+en-US and pt-BR carry a wider corpus, generated over about 30 intents (184
+and 110 rows), and both are dispatched here too: every
+golden_utterances_<lang>.jsonl this directory ships is read, which
+test_golden_corpus_is_dispatched.py now pins. Measured on this tree, the two
+wide corpora give 288 passed and 7 xfailed.
 
 Row construction: ovos-skill-alerts' adapt intents (see __init__.py
 IntentBuilder(...).require(...) calls) are presence-only matches over
@@ -22,9 +29,10 @@ introduced; the "sentences" read as adapt-vocab keyword concatenations
 rather than fluent native prose, which matches how the adapt pipeline
 actually matches them (bag-of-required-vocab, order-independent).
 
-One shared MiniCroft is booted with en-US as the primary language and
-every covered locale as a secondary_lang (ovoscope>=1.6.5a1 /
-padacioso>=2.2.3a1, cross-language detach fix).
+One shared MiniCroft is booted with en-US as the primary language and every
+covered locale as a secondary_lang (ovoscope>=1.11.1a1 / padacioso>=2.2.3a1).
+en-US is therefore absent from LANGS, which is the secondary-language list,
+and present in ROW_LANGS, which is the list the corpus is read from.
 
 Capture ends at ``mycroft.skill.handler.start``: several of these
 handlers call get_response() for a missing time/duration follow-up
@@ -44,15 +52,14 @@ from ovoscope import CaptureSession, get_minicroft
 
 from ._wait_trained import wait_for_minicroft_ready
 
-# SKIPPED pending the ovoscope harness fix. get_minicroft cannot boot the
-# m2v/trained pipelines (OVOSCOPE_TRAINED_TIMEOUT=5s default, and
-# blacklisted_pipelines re-applied over the pre-boot override), so this
-# suite ERRORs at fixture setup for a test-framework reason, not a skill
-# defect -- the migration is live-validated. Re-enable when ovoscope#179 lands.
-pytestmark = pytest.mark.skip(
-    reason="blocked on ovoscope harness bug OpenVoiceOS/ovoscope#179 "
-           "(get_minicroft cannot boot m2v/trained pipelines); re-enable when fixed"
-)
+# The module ran under a blanket pytest.mark.skip for OpenVoiceOS/ovoscope#179
+# (get_minicroft could not boot the m2v/trained pipelines, so the fixture
+# ERRORed for a harness reason). That issue closed on 2026-09-06 and the fix is
+# released: measured here on ovoscope 1.11.1a1, the de-DE selection gives 17
+# passed in 144s, so the skip is lifted. An older harness makes this whole
+# module ERROR at fixture setup rather than fail one row, so the floor is
+# asserted in test_golden_corpus_is_dispatched.py, which says so in a sentence
+# instead of a fixture error.
 
 SKILL_ID = "ovos-skill-alerts.openvoiceos"
 
@@ -96,9 +103,17 @@ END2END_DIR = Path(__file__).parent
 
 LANGS = [
     "ca-ES", "cs-CZ", "da-DK", "de-DE", "es-ES", "eu-ES", "fr-FR",
-    "gl-ES", "hu-HU", "it-IT", "nl-NL", "pl-PL", "pt-PT", "ru-RU",
+    "gl-ES", "hu-HU", "it-IT", "nl-NL", "pl-PL", "pt-BR", "pt-PT", "ru-RU",
     "sv-FI", "sv-SE",
 ]
+
+# The MiniCroft boots with en-US as its primary language and LANGS as its
+# secondary languages, so en-US is not in LANGS. Its rows are dispatched all
+# the same: ROW_LANGS is what the corpus is read from, and every
+# golden_utterances_<lang>.jsonl this directory ships must appear here, or the
+# file is carried and never dispatched. A census of the fleet found that exact
+# state in this repository: 18 files, none of them run (T-5487).
+ROW_LANGS = ["en-US"] + LANGS
 
 CROSS_LANG_NEGATIVES = [
     ("Wecker stellen", "en-US", "german utterance in an english session"),
@@ -129,7 +144,7 @@ def _load_rows(lang):
 
 
 ALL_ROWS = []
-for _lang in LANGS:
+for _lang in ROW_LANGS:
     for _row in _load_rows(_lang):
         ALL_ROWS.append(_row)
 
