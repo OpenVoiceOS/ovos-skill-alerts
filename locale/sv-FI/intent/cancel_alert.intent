@@ -1,2 +1,7 @@
-(Hävitä|peruuttaa|poista|selkeä) (herätä minut|hälytykset|hälytys|ajastimet|ajastin|muistutukset|muistutus|tapaaminen|tapaamiset|tapahtuma|tapahtumat)
-(Hävitä|peruuttaa|poista|selkeä) (on|en|ole|ei|olen|luo|onko|jäi|mikä|uusi|n|sta|ksi|ssä|ssa|ovat|minä|et|lle|dav) (herätä minut|hälytykset|hälytys|ajastimet|ajastin|muistutukset|muistutus|tapaaminen|tapaamiset|tapahtuma|tapahtumat)
+# unvouched: copied from sv-SE, awaiting a Finland-Swedish speaker
+(avbryt|avboka|ta bort|radera|rensa|slopa) {alertkind}
+(avbryt|avboka|ta bort|radera|rensa) (den|det) {alertkind}
+(avbryt|avboka|ta bort|radera|rensa) alla (mina|de) {alertkind}
+(avbryt|avboka|ta bort|radera|rensa) (mitt|min|mina) {alertkind}
+(avbryt|avboka|ta bort|radera) (den|det) (nästa|kommande) {alertkind}
+(avbryt|radera|ta bort|rensa) (mitt|min|mina) {alertkind} för {name}

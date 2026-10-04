@@ -97,7 +97,7 @@ END2END_DIR = Path(__file__).parent
 LANGS = [
     "ca-ES", "cs-CZ", "da-DK", "de-DE", "es-ES", "eu-ES", "fr-FR",
     "gl-ES", "hu-HU", "it-IT", "nl-NL", "pl-PL", "pt-PT", "ru-RU",
-    "sv-FI", "sv-SE",
+    "fi-FI", "sv-FI", "sv-SE",
 ]
 
 CROSS_LANG_NEGATIVES = [

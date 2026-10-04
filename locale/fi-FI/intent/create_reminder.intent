@@ -1,0 +1,8 @@
+(luo|lisää|aseta) [uusi] muistutus [{reminder}] [kello {date:time}]
+uusi muistutus [{reminder}]
+aikataulu muistutukset
+luo muistutukset
+uusi muistutukset
+muistuta minua [{reminder}(:sta|sta)] [kello {date:time}]
+kerro minulle että {reminder}
+muistuta minua {duration:duration}(:n|n) päästä [{reminder}(:sta|sta)]
