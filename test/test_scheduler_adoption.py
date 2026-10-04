@@ -66,7 +66,10 @@ class Assistant:
         self.expired = []
         self.prenotified = []
         self.missed_reports = []
+        self.scheduled = set()
         self.bus.on(SCHEDULER_MISSED, self.missed_reports.append)
+        self.bus.on("ovos.scheduler.schedule.response",
+                    lambda message: self.scheduled.add(message.data["id"]))
         self.service = ScheduledEventService(
             self.bus, store_path=os.path.join(home, "schedule.json"),
             autostart=False)
@@ -101,6 +104,19 @@ class Assistant:
         while time.monotonic() < deadline and self.schedule_ids() != expected:
             time.sleep(0.05)
         assert self.schedule_ids() == expected
+
+    def await_requests_sent(self, *ids):
+        """Wait for this run's own scheduling requests to be answered.
+
+        ``await_schedules`` cannot tell a run's requests from the schedules a
+        previous run left in the store, so after a restart it returns at once.
+        The skill subscribes to an occurrence before it asks for the schedule,
+        and a replay that starts earlier fires into nothing.
+        """
+        deadline = time.monotonic() + 10
+        while time.monotonic() < deadline and not set(ids) <= self.scheduled:
+            time.sleep(0.05)
+        assert set(ids) <= self.scheduled
 
     def await_next_occurrence(self, ident):
         """Wait until the schedule agrees with the alert's next occurrence."""
@@ -195,7 +211,7 @@ def test_alarm_due_during_downtime_is_reported_missed(assistant, clock):
 
     clock.advance(minutes=30)
     second = assistant()
-    second.await_schedules(ident)
+    second.await_requests_sent(ident)
     second.start()
     second.service.tick()
     second.await_missed(ident)
