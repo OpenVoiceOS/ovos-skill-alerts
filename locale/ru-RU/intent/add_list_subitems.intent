@@ -1,3 +1,5 @@
+# machine draft, unvouched: opus-mt-en-ru-int8.
+# A native speaker corrects these lines; none of them is vouched for.
 добавить в перечень пункты {list_name}
 добавить записи в список {list_name}
 добавить вещи в список {list_name}
@@ -9,4 +11,6 @@
 создать список объектов
 добавить к моему {list_name} список
 добавить записи в мой {list_name} список
+добавить к моим {list_name} список
+добавить кое-что к моему {list_name} список
 добавить {items} К моему {list_name} список

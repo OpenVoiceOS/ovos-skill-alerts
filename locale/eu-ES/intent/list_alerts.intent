@@ -1,2 +1,9 @@
-(Ba al dugu|Ba al dut|Ba al duzu|Bada|Badago|Badaude|Badira|al dugu|al dut|al duzu|al gara|al genuen|al ginen|al naiz|al nintzen|al nuen|al zara|al zenuen|al zinen|edozer|eguneratu|erakutsi|esadazu|esaguzu|ezer|irakurri|lortuta|noiz|noiztik|nola|zein|zeinetatik|zenbat|zer|zer ari dira|zer ari gara|zer ari zara|zer ari zarete|zer da|zer dira|zer gara|zer zara|zer zarete|zerbait|zerrenda|zertatik) (alarma|alarmak|esna nazazu|esnatu|gogorarazpen|gogorarazpenak|ekitaldi|ekitaldiak|hitzordu|hitzorduak|alerta|alertak|esan|gogorarazi|memoria)
-(Ba al dugu|Ba al dut|Ba al duzu|Bada|Badago|Badaude|Badira|al dugu|al dut|al duzu|al gara|al genuen|al ginen|al naiz|al nintzen|al nuen|al zara|al zenuen|al zinen|edozer|eguneratu|erakutsi|esadazu|esaguzu|ezer|irakurri|lortuta|noiz|noiztik|nola|zein|zeinetatik|zenbat|zer|zer ari dira|zer ari gara|zer ari zara|zer ari zarete|zer da|zer dira|zer gara|zer zara|zer zarete|zerbait|zerrenda|zertatik) (al|ba|dut|bat|nuen|da|dago|duzu|zure|ez|ari|izan|ezin|une|ere|gara|zara|dira|esna|dugu) (alarma|alarmak|esna nazazu|esnatu|gogorarazpen|gogorarazpenak|ekitaldi|ekitaldiak|hitzordu|hitzorduak|alerta|alertak|esan|gogorarazi|memoria)
+zer {alertkind} ditut
+zer dira nire {alertkind}
+(erakutsi|zerrendatu|irakurri|esan) (niri|guri) nire {alertkind}
+(erakutsi|zerrendatu|irakurri) nire {alertkind}
+{alertkind} bat badut
+(baduzu|badago) {alertkind} bat
+{alertkind} (gordeta|ezarrita|programatuta) daude
+(noiz|zein) da nire (hurrengo|datorren) {alertkind}
+zer daukat (gordeta|programatuta)

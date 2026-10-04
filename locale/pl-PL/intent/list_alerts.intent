@@ -101,3 +101,14 @@ Są tam jakieś {alertkind}
 Istnieją jakieś {alertkind}
 Są tam jakieś. {alertkind}
 Czy są jakieś? {alertkind}
+(jakie|które) {alertkind} mam
+jakie mam {alertkind}
+co to są moje {alertkind}
+(pokaż|wyświetl|wymień|przeczytaj|powiedz) (mi|nam) moje {alertkind}
+(pokaż|wyświetl|wymień|przeczytaj) moje {alertkind}
+czy mam (jakiś|jakieś|jakąś) {alertkind}
+czy mam {alertkind}
+(czy masz|czy są) (jakiś|jakieś|jakąś) {alertkind}
+czy są {alertkind} (zapisane|ustawione|zaplanowane)
+(kiedy|co) jest (moje|mój|moja) (następne|następny|następna) {alertkind}
+co mam (zapisane|zaplanowane|ustawione)

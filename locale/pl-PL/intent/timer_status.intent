@@ -31,6 +31,31 @@ To, co zostało dla mnie {timerkind}
 to jest {timerkind} gotowane
 ma {timerkind} gotowane
 Kiedy to robi się moje {timerkind} koniec
+# machine draft, unvouched: opus-mt-en-pl-int8.
+# A native speaker corrects these lines; none of them is vouched for.
+Ile mi zostało
+Jak długo na tym tamerku
+Jak długo odlicza się to odliczanie?
+ile czasu pozostaje na {name} czasownik
+jak długo pozostał na {name} czasownik
+ile czasu pozostaje {name} czasownik
+Jak długo pozostał mój {timerkind}
+Powiedz mi, kiedy pozołł czas. {timerkind}
+pokaż mi czas, który został {timerkind}
+Daj mi czas, który został {timerkind}
+Powiesz nam, kiedy pozostał czas. {timerkind}
+Jak długo do mojego {timerkind} kończy się
+na moim {timerkind} ile czasu zostało
+dla mojego {timerkind} ile czasu zostało
+w sprawie {timerkind} ile czasu zostało
+w odniesieniu do: {timerkind} ile czasu zostało
+Jak długo pozostał na mnie {timerkind}
+Ile czasu mi pozostało? {timerkind}
+Jak długo pozostał mój {name} czasownik
+Jak długo pozostaje na mnie {name} czasownik
+To, co pozostało dla mnie {timerkind}
+jest mój {timerkind} gotowane
+Kiedy to będzie moje {timerkind} koniec
 Kiedy będzie mój {timerkind} koniec
 kiedy to robi się {timerkind} koniec
 Kiedy będzie {timerkind} koniec
@@ -49,6 +74,11 @@ jak długo pozostało
 Powiedz mi, kiedy pozostał czas.
 pokaż mi czas, który został
 Daj mi czas, który został.
+mój {timerkind} ile czasu zostało
+Jak długo na mój czas {timerkind}
+Jak długo będzie moja {timerkind}
+Powiedz mi, kiedy pozostał czas
+Daj mi czas, który pozostał.
 Powiesz nam, kiedy pozostał czas
 Powiedz mi mój {timerkind} stan
 Pokaż mi mój {timerkind} stan
@@ -73,4 +103,16 @@ Co jest moje {timerkind} stan
 /Jak długo jest mój / {timerkind}
 ile czasu jest {timerkind}
 /Jak długo jest / {timerkind}
+czas pozostał na mnie {timerkind}
+Pozostały czas dla mojego {timerkind}
+Powiedz mi, jaki jest stan {timerkind}
+ile czasu będzie {name} czasownik
+ile czasu na {name} czasownik
+Jak długo jeszcze będzie {name} czasownik
+Jaki jest mój status {name} czasownik
+Jaki jest mój status {name} odliczanie
+Jaki jest mój stan? {name} czasownik
+Co jest moim {timerkind} stan
+Jak długo jest mój {timerkind}
+Jak długo to będzie {timerkind}
 {timerkind} stan
