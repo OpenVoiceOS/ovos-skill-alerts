@@ -1,5 +1,29 @@
 # Changelog
 
+## [0.12.35a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.12.35a1) (2026-10-04)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.12.34a1...0.12.35a1)
+
+**Merged pull requests:**
+
+- fix\(locale\): pt-BR store examples match their own intents [\#413](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/413) ([openvoiceos-bot](https://github.com/openvoiceos-bot))
+
+## [0.12.34a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.12.34a1) (2026-10-04)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.12.33a1...0.12.34a1)
+
+**Merged pull requests:**
+
+- fix\(locale\): add the sv-SE store name and description [\#412](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/412) ([openvoiceos-bot](https://github.com/openvoiceos-bot))
+
+## [0.12.33a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.12.33a1) (2026-10-01)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.12.32a7...0.12.33a1)
+
+**Merged pull requests:**
+
+- fix\(pl-PL,ru-RU\): four alerts intents carry the slots their reference declares [\#410](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/410) ([openvoiceos-bot](https://github.com/openvoiceos-bot))
+
 ## [0.12.32a7](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.12.32a7) (2026-10-01)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.12.32a6...0.12.32a7)
@@ -213,25 +237,13 @@
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.12.19a1...0.12.20a1)
 
-**Merged pull requests:**
-
-- fix\(it-IT\): list\_alerts and cancel\_alert hear the language, not a word list [\#306](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/306) ([openvoiceos-bot](https://github.com/openvoiceos-bot))
-
 ## [0.12.19a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.12.19a1) (2026-09-26)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.12.18a1...0.12.19a1)
 
-**Merged pull requests:**
-
-- fix\(fr-FR\): list\_alerts and cancel\_alert hear the language, not a word list [\#305](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/305) ([openvoiceos-bot](https://github.com/openvoiceos-bot))
-
 ## [0.12.18a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.12.18a1) (2026-09-26)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.12.17a2...0.12.18a1)
-
-**Merged pull requests:**
-
-- fix\(de-DE\): list\_alerts and cancel\_alert hear the language, not a word list [\#304](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/304) ([openvoiceos-bot](https://github.com/openvoiceos-bot))
 
 ## [0.12.17a2](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.12.17a2) (2026-09-26)
 
@@ -318,33 +330,17 @@
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.12.7a1...0.12.7a2)
 
-**Merged pull requests:**
-
-- locale\(ru-RU\): the store name and description, examples taken from the templates [\#303](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/303) ([openvoiceos-bot](https://github.com/openvoiceos-bot))
-
 ## [0.12.7a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.12.7a1) (2026-09-26)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.12.6a1...0.12.7a1)
-
-**Merged pull requests:**
-
-- fix\(gl-ES\): list\_alerts and cancel\_alert hear the language, not a word list [\#302](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/302) ([openvoiceos-bot](https://github.com/openvoiceos-bot))
 
 ## [0.12.6a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.12.6a1) (2026-09-26)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.12.5a1...0.12.6a1)
 
-**Merged pull requests:**
-
-- fix\(es-ES\): list\_alerts and cancel\_alert hear the language, not a word list [\#301](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/301) ([openvoiceos-bot](https://github.com/openvoiceos-bot))
-
 ## [0.12.5a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.12.5a1) (2026-09-26)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.12.4a1...0.12.5a1)
-
-**Merged pull requests:**
-
-- fix\(ca-ES\): list\_alerts and cancel\_alert hear the language, not a word list [\#300](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/300) ([openvoiceos-bot](https://github.com/openvoiceos-bot))
 
 ## [0.12.4a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.12.4a1) (2026-09-26)
 
@@ -748,15 +744,15 @@
 
 ## [0.1.23](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.1.23) (2025-03-16)
 
-[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.1.23a2...0.1.23)
-
-## [0.1.23a2](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.1.23a2) (2025-03-16)
-
-[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.1.23a1...0.1.23a2)
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.1.23a1...0.1.23)
 
 ## [0.1.23a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.1.23a1) (2025-03-16)
 
-[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.1.22...0.1.23a1)
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.1.23a2...0.1.23a1)
+
+## [0.1.23a2](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.1.23a2) (2025-03-16)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.1.22...0.1.23a2)
 
 ## [0.1.22](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.1.22) (2025-03-15)
 

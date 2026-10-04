@@ -1,2 +1,90 @@
-(adiustacja|dostosowanie|odroczyć|pchnięcie|rozszerzenie|ruch|zawieszenie|zmiana|zmiana harmonogramu) (alarm|alarmy|obudź mnie|przypomnienia|przypomnienie|nominacja|nominacje|wydarzenia|wydarzenie|timer|timery)
-(adiustacja|dostosowanie|odroczyć|pchnięcie|rozszerzenie|ruch|zawieszenie|zmiana|zmiana harmonogramu) (w|jest|nie|z|na|do|masz|są|brak|o|mam|się|twój|usuń|tym|to|mnie|i|tam|mi) (alarm|alarmy|obudź mnie|przypomnienia|przypomnienie|nominacja|nominacje|wydarzenia|wydarzenie|timer|timery)
+# machine draft, unvouched: opus-mt-en-pl-int8.
+# A native speaker corrects these lines; none of them is vouched for.
+mój {date:old} alarm przesuń to do {date:time}
+mój {date:old} Tymer przesuń go do {date:time}
+Przesuń mój {date:old} alarm {date:time}
+Zmień mój {date:old} alarm {date:time}
+przesuń mój {date:old} alarm {date:time}
+Możesz przesunąć moją następną? {schedkind} do {date:time}
+Przesuniesz moją kolejną. {schedkind} do {date:time}
+Mógłbyś zmienić moje kolejne? {schedkind} do {date:time}
+mój {date:old} alarm przesuń się do {date:time}
+mój {date:old} przesuń się do tagera {date:time}
+Przesuń moje kolejne {schedkind} wczesniej
+Naciśnij mój następny {schedkind} wczesniej
+przesuń moje kolejne {schedkind} wczesniej
+przesuń następną {schedkind} wczesniej
+Mógłbyś zrobić mój {schedkind} wczesniej
+Zrobiłbyś mój? {schedkind} wczesniej
+Możesz zrobić mój {schedkind} wczesniej
+Możesz ustawić mój {schedkind} wczesniej
+mój następny {schedkind} wczesniej
+następny {schedkind} wczesniej
+moje nadchodzące {schedkind} wczesniej
+przyszłe {schedkind} wczesniej
+zrób następne. {schedkind} wczesniej
+Ustaw mój następny {schedkind} wczesniej
+wystartować następujący {schedkind} wczesniej
+ustaw kolejne {schedkind} wczesniej
+Przesuń mój {schedkind} wczesniej
+Popchaj mój {schedkind} wcześniej
+przesuń mój {schedkind} wczesniej
+Przesuń {schedkind} wczesniej
+skróć mój następny {schedkind}
+Wydłuż moje kolejne {schedkind}
+przedłużyć mój następny {schedkind}
+rozszerzyj mój następny {schedkind}
+mój {schedkind} wczesniej
+mój {schedkind} wczesniej.
+Zrób mój {schedkind} wczesniej
+Ustaw mój {schedkind} wczesniej
+Zrób to, co jest... {schedkind} wczesniej
+ustawić {schedkind} wczesniej
+Zwróć mój {schedkind}
+Wyciągnij mój {schedkind}
+rozszerzyć mój {schedkind}
+rozszerzyj moje {schedkind}
+{schedkind} wcześniej
+{schedkind} wczesniej.
+{schedkind} później
+{schedkind} dłużej
+wczesniej {schedkind}
+wczesniej. {schedkind}
+dłużej {schedkind}
+Możesz przesunąć mój {schedkind} do {date:time}
+Przesuniesz mi mój {schedkind} do {date:time}
+Mógłbyś zmienić mój {schedkind} do {date:time}
+Przesuń moje kolejne {schedkind} do {date:time}
+Zmień mój następujący {schedkind} do {date:time}
+przesuń moje kolejne {schedkind} do {date:time}
+Zmień mój następujący {schedkind} wczesniej
+Przesuń moje kolejne {schedkind} przez {duration:duration} wczesniej
+Zmień mój następujący {schedkind} przez {duration:duration} wczesniej
+przesuń moje kolejne {schedkind} przez {duration:duration} wczesniej
+Przesuń mój {schedkind} do {date:time}
+Zmień mój {schedkind} do {date:time}
+przesuń mój {schedkind} do {date:time}
+zrób następne. {schedkind} cały dzień
+Ustaw mój następny {schedkind} cały dzień
+Zmień mój następujący {schedkind} cały dzień
+wystartować następujący {schedkind} cały dzień
+Przesuń {schedkind} dla {name} dla {date:time}
+zmień {schedkind} dla {name} dla {date:time}
+przesuń przesunięcie {schedkind} dla {name} dla {date:time}
+przesuń {schedkind} dla {name} dla {date:time}
+Zmień mój {schedkind} wczesniej
+mój {schedkind} przesuń się do {date:time}
+mój {schedkind} przemiana na {date:time}
+Przesuń mój {schedkind} do {date:time} zamiast tego
+Zmień mój {schedkind} do {date:time} zamiast tego
+przesuń mój {schedkind} do {date:time} zamiast tego
+Zrób mój {schedkind} cały dzień
+Ustaw mój {schedkind} cały dzień
+Zmień mój {schedkind} cały dzień
+Zrób to, co jest... {schedkind} cały dzień
+Przesuń mój {schedkind} od {date:old} do {date:time}
+Zmień mój {schedkind} od {date:old} do {date:time}
+przesuń mój {schedkind} od {date:old} do {date:time}
+od {date:old} do {date:time} Przesuń mój {schedkind}
+od {date:old} do {date:time} Zmień mój {schedkind}
+od {date:old} do {date:time} przesuń mój {schedkind}
