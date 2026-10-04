@@ -1,3 +1,106 @@
+Wyślij mój alarm na {timeframe}
+Pokaż mi mój alarm na {timeframe}
+Odczytaj mój alarm dla {timeframe}
+Powiedz mi mój alarm na {timeframe}
+Wyślij mi wszystkie alarmy
+Pokaż mi wszystkie alarmy
+czytaj mi wszystkie alarm
+Opowiedz mi cały alarm.
+Wyślij mi wszystkie alarmy {timeframe}
+pokaż mi wszystkie alarmy {timeframe}
+przeczytaj mi wszystkie alarmy dla {timeframe}
+Powiedz mi wszystkie alarmy na {timeframe}
+Wyślij mi mój bieg {alertkind}
+pokaż mi mój oczekujący {alertkind}
+czytaj mi mój wkład {alertkind}
+Powiesz mi mój rozgląd {alertkind}
+Wylicz mi wszystkie moje {alertkind}
+Pokaż mi wszystkie moje {alertkind}
+Przeczytaj mi wszystkie moje {alertkind}
+Opowiedz mi wszystkie moje. {alertkind}
+Jaki jest mój oczekujący {alertkind}
+co jest moim oczekiwaniem {alertkind}
+Jakie są oczekiwania {alertkind}
+w czym jest dochodzenie {alertkind}
+/Mam jakiegoś {alertkind}
+Mam trochę. {alertkind}
+/Mam jakiegoś {alertkind} dla {timeframe}
+Mam trochę. {alertkind} dla {timeframe}
+/Mam jakiegoś {alertkind} na {timeframe}
+Mam trochę. {alertkind} na {timeframe}
+Czy mam coś zaplanowanego {timeframe}
+Czy ja mam coś zaplanowanego {timeframe}
+Mamy coś zaplanowanego {timeframe}
+Czy mieliśmy coś zaplanowanego {timeframe}
+lista alarmów na {timeframe}
+pokaż moje alarmy {timeframe}
+czytaj moje alarmy {timeframe}
+Co? {alertkind} są przechowywane dla {timeframe}
+który {alertkind} są przechowywane dla {timeframe}
+Co? {alertkind} jest przechowywany w {timeframe}
+który {alertkind} jest przechowywany w {timeframe}
+wyślij mój alarm
+pokaż mój alarm
+czytaj mój alarm
+wyświetla alarm
+Czy ja mam jakieś {alertkind} dla {timeframe}
+Czy ja miałam jakieś {alertkind} dla {timeframe}
+Czy mamy jakieś {alertkind} dla {timeframe}
+Czy mieliśmy jakieś {alertkind} dla {timeframe}
+Co ja ustawiłem {timeframe}
+Co my ustawiliśmy {timeframe}
+Co? {alertkind} Czy mam coś dla {timeframe}
+który {alertkind} Czy mam coś dla {timeframe}
+Co? {alertkind} Czy ja miałem dla {timeframe}
+który {alertkind} Czy ja miałem dla {timeframe}
+Czy mam jakiekolwiek zapisywane {alertkind}
+Czy miałem jakiekolwiek zapisywane {alertkind}
+Czy mamy jakiekolwiek zapisywane {alertkind}
+Czy mieliśmy jakieś zapisywane {alertkind}
+Czy mam coś zaplanowanego
+Czy ja mam coś zaplanowanego
+Czy mamy coś zaplanowanego
+Czy mieliśmy coś zaplanowanego
+Co? {alertkind} są przechowywane
+który {alertkind} są przechowywane
+Co {alertkind} jest przechowywane
+który {alertkind} jest przechowywany
+Są tam jakieś {alertkind} dla {timeframe}
+Istnieją jakieś {alertkind} dla {timeframe}
+Są tam jakieś. {alertkind} dla {timeframe}
+Czy są jakieś? {alertkind} dla {timeframe}
+Mam jakieś... {alertkind}
+Mam jakiegoś {alertkind}
+Mamy jakieś... {alertkind}
+Mamy jakiegoś {alertkind}
+Czy ja ustawię jakiekolwiek {alertkind}
+Czy ja ustawiłem cokolwiek {alertkind}
+Czy ustawimy jakiekolwiek {alertkind}
+Czy my ustawiliśmy jakiekolwiek... {alertkind}
+są jakiekolwiek przechowywane {alertkind}
+jest jakichkolwiek zapisywanych {alertkind}
+są niektóre zapisywane {alertkind}
+jest kilka przechowywanych {alertkind}
+Czy ja mam jakieś {alertkind}
+Czy ja miałam jakieś {alertkind}
+Czy mamy jakieś {alertkind}
+Czy mieliśmy jakieś {alertkind}
+Co? {alertkind} Czy ja mam
+który {alertkind} Czy ja mam
+Co? {alertkind} Czy ja miałem
+który {alertkind} Czy ja miałem
+Co {alertkind} i {alertkind2} mam
+który {alertkind} oraz {alertkind2} Czy ja mam
+Co {alertkind} i {alertkind2} miałem
+który {alertkind} oraz {alertkind2} Czy ja miałem
+Kiedy jest mój następny {alertkind}
+Jakie są moje kolejne {alertkind}
+kiedy jest mój nadchodzący {alertkind}
+Jaki jest mój przyszły {alertkind}
+Są tam jakieś {alertkind}
+Istnieją jakieś {alertkind}
+Są tam jakieś. {alertkind}
+Czy są jakieś? {alertkind}
 (jakie|które) {alertkind} mam
 jakie mam {alertkind}
 co to są moje {alertkind}

@@ -1,41 +1,60 @@
+/Ile mi zostało /
+Ile czasu mi zostało
+Ile czasu nam zostało
+Jak długo ten czas.
+Jak długo ten czas
+Jak długo na nim czas.
+Jak długo odlicza się ten odliczek?
+/Jak długo pozostał mój {timerkind}
+/Jak długo pozostał na moim {timerkind}
+Jak długo pozostaje na mnie {timerkind}
+Jak długo pozostają na mnie {timerkind}
+Powiesz mi czas, który został. {timerkind}
+Pokaż mi czas, który został. {timerkind}
+Daj mi czas, który został. {timerkind}
+Powiesz nam czas, który pozostał. {timerkind}
+ile będzie do mojego czasu {timerkind} kończy się
+Jak długo będzie moja {timerkind} kończy się
+jak długo do czasu {timerkind} kończy się
+Jak długo do {timerkind} kończy się
+na mojej {timerkind} jak długo zostało
+dla mojego {timerkind} jak długo zostało
+w sprawie {timerkind} jak długo zostało
+w odniesieniu do: {timerkind} jak długo zostało
+ile czasu mi pozostało {timerkind}
+Jak długo pozostało na mnie {timerkind}
+Jak długo pozostaje mój czas {timerkind}
+To, co zostało na moim {timerkind}
+To, co pozostało na moim {timerkind}
+To, co zostało dla mnie {timerkind}
+/jest mój {timerkind} gotowane
+to jest {timerkind} gotowane
+ma {timerkind} gotowane
+Kiedy to robi się moje {timerkind} koniec
 # machine draft, unvouched: opus-mt-en-pl-int8.
 # A native speaker corrects these lines; none of them is vouched for.
 Ile mi zostało
-Ile czasu mi zostało
-Ile czasu nam zostało
 Jak długo na tym tamerku
-Jak długo ten czas
-Jak długo na nim czas.
 Jak długo odlicza się to odliczanie?
 ile czasu pozostaje na {name} czasownik
 jak długo pozostał na {name} czasownik
 ile czasu pozostaje {name} czasownik
 Jak długo pozostał mój {timerkind}
-Jak długo pozostaje na mnie {timerkind}
 Powiedz mi, kiedy pozołł czas. {timerkind}
 pokaż mi czas, który został {timerkind}
 Daj mi czas, który został {timerkind}
 Powiesz nam, kiedy pozostał czas. {timerkind}
 Jak długo do mojego {timerkind} kończy się
-Jak długo będzie moja {timerkind} kończy się
-jak długo do czasu {timerkind} kończy się
-Jak długo do {timerkind} kończy się
 na moim {timerkind} ile czasu zostało
 dla mojego {timerkind} ile czasu zostało
 w sprawie {timerkind} ile czasu zostało
 w odniesieniu do: {timerkind} ile czasu zostało
-ile czasu mi pozostało {timerkind}
 Jak długo pozostał na mnie {timerkind}
 Ile czasu mi pozostało? {timerkind}
-Jak długo pozostało na mnie {timerkind}
 Jak długo pozostał mój {name} czasownik
 Jak długo pozostaje na mnie {name} czasownik
-To, co zostało na moim {timerkind}
-To, co zostało dla mnie {timerkind}
 To, co pozostało dla mnie {timerkind}
 jest mój {timerkind} gotowane
-to jest {timerkind} gotowane
-ma {timerkind} gotowane
 Kiedy to będzie moje {timerkind} koniec
 Kiedy będzie mój {timerkind} koniec
 kiedy to robi się {timerkind} koniec
@@ -44,41 +63,56 @@ Mój czas został na mnie {timerkind}
 Mój czas pozostaje na mnie {timerkind}
 Mój czas został dla mnie {timerkind}
 Mój czas pozostał dla mnie {timerkind}
+mój... {timerkind} jak długo zostało
+mój... {timerkind} ile czasu zostało
+/Jak długo na mnie / {timerkind}
+/Jak długo będzie moja / {timerkind}
+ile czasu będzie {timerkind}
+jak długo zostało
+ile czasu zostało
+jak długo pozostało
+Powiedz mi, kiedy pozostał czas.
+pokaż mi czas, który został
+Daj mi czas, który został.
 mój {timerkind} ile czasu zostało
 Jak długo na mój czas {timerkind}
 Jak długo będzie moja {timerkind}
-ile czasu będzie {timerkind}
-ile czasu zostało
-jak długo pozostało
 Powiedz mi, kiedy pozostał czas
-pokaż mi czas, który został
 Daj mi czas, który pozostał.
 Powiesz nam, kiedy pozostał czas
 Powiedz mi mój {timerkind} stan
 Pokaż mi mój {timerkind} stan
 Oddaj mi mój {timerkind} stan
 Powiedz nam, mój {timerkind} stan
-czas pozostał na mnie {timerkind}
+czas pozostaje na moim {timerkind}
 czas pozostały na mój czas {timerkind}
 Czas pozostał dla mnie {timerkind}
-Pozostały czas dla mojego {timerkind}
+Pozostały czas dla mnie {timerkind}
+ile zostało w lewej długości
 ile zostało
 ile pozostało
-Powiedz mi, jaki jest stan {timerkind}
+Powiedz mi, jaki jest status {timerkind}
 Daj mi status {timerkind}
 Powiedz nam, jaki jest status {timerkind}
 Daj nam status {timerkind}
-ile czasu będzie {name} czasownik
 ile czasu będzie {name} odliczanie
+Jaki jest mój status? {name} odliczanie
+Jaki jest status {timerkind}
+Co to jest? {timerkind} stan
+Co jest moje {timerkind} stan
+/Jak długo jest mój / {timerkind}
+ile czasu jest {timerkind}
+/Jak długo jest / {timerkind}
+czas pozostał na mnie {timerkind}
+Pozostały czas dla mojego {timerkind}
+Powiedz mi, jaki jest stan {timerkind}
+ile czasu będzie {name} czasownik
 ile czasu na {name} czasownik
 Jak długo jeszcze będzie {name} czasownik
 Jaki jest mój status {name} czasownik
 Jaki jest mój status {name} odliczanie
 Jaki jest mój stan? {name} czasownik
-Jaki jest status {timerkind}
-Co to jest? {timerkind} stan
 Co jest moim {timerkind} stan
 Jak długo jest mój {timerkind}
-ile czasu jest {timerkind}
 Jak długo to będzie {timerkind}
 {timerkind} stan

@@ -1,3 +1,4 @@
+mój... {date:old} alarm przesuń to do {date:time}
 # machine draft, unvouched: opus-mt-en-pl-int8.
 # A native speaker corrects these lines; none of them is vouched for.
 mój {date:old} alarm przesuń to do {date:time}
@@ -7,7 +8,9 @@ Zmień mój {date:old} alarm {date:time}
 przesuń mój {date:old} alarm {date:time}
 Możesz przesunąć moją następną? {schedkind} do {date:time}
 Przesuniesz moją kolejną. {schedkind} do {date:time}
+Możesz przesunąć moje kolejne {schedkind} do {date:time}
 Mógłbyś zmienić moje kolejne? {schedkind} do {date:time}
+mój... {date:old} alarm przesuń się do {date:time}
 mój {date:old} alarm przesuń się do {date:time}
 mój {date:old} przesuń się do tagera {date:time}
 Przesuń moje kolejne {schedkind} wczesniej
@@ -15,13 +18,18 @@ Naciśnij mój następny {schedkind} wczesniej
 przesuń moje kolejne {schedkind} wczesniej
 przesuń następną {schedkind} wczesniej
 Mógłbyś zrobić mój {schedkind} wczesniej
-Zrobiłbyś mój? {schedkind} wczesniej
+Czy ty zrobisz moje {schedkind} wczesniej
 Możesz zrobić mój {schedkind} wczesniej
-Możesz ustawić mój {schedkind} wczesniej
+Mógłbyś ustawić mój? {schedkind} wczesniej
 mój następny {schedkind} wczesniej
 następny {schedkind} wczesniej
-moje nadchodzące {schedkind} wczesniej
+/moje nadchodzące {schedkind} wczesniej
 przyszłe {schedkind} wczesniej
+/zrób to następne. {schedkind} wczesniej
+Ustawić mój następny {schedkind} wczesniej
+Zrobiłbyś mój? {schedkind} wczesniej
+Możesz ustawić mój {schedkind} wczesniej
+moje nadchodzące {schedkind} wczesniej
 zrób następne. {schedkind} wczesniej
 Ustaw mój następny {schedkind} wczesniej
 wystartować następujący {schedkind} wczesniej
@@ -29,11 +37,15 @@ ustaw kolejne {schedkind} wczesniej
 Przesuń mój {schedkind} wczesniej
 Popchaj mój {schedkind} wcześniej
 przesuń mój {schedkind} wczesniej
-Przesuń {schedkind} wczesniej
+Przesuń się {schedkind} wczesniej
 skróć mój następny {schedkind}
-Wydłuż moje kolejne {schedkind}
+Powiększ moje kolejne {schedkind}
 przedłużyć mój następny {schedkind}
 rozszerzyj mój następny {schedkind}
+mój... {schedkind} wczesniej
+mój... {schedkind} wcześniej.
+Przesuń {schedkind} wczesniej
+Wydłuż moje kolejne {schedkind}
 mój {schedkind} wczesniej
 mój {schedkind} wczesniej.
 Zrób mój {schedkind} wczesniej
@@ -43,36 +55,49 @@ ustawić {schedkind} wczesniej
 Zwróć mój {schedkind}
 Wyciągnij mój {schedkind}
 rozszerzyć mój {schedkind}
-rozszerzyj moje {schedkind}
+rozszerzyj mój {schedkind}
 {schedkind} wcześniej
-{schedkind} wczesniej.
+{schedkind} wcześniej.
 {schedkind} później
 {schedkind} dłużej
 wczesniej {schedkind}
-wczesniej. {schedkind}
+wcześniej. {schedkind}
 dłużej {schedkind}
 Możesz przesunąć mój {schedkind} do {date:time}
-Przesuniesz mi mój {schedkind} do {date:time}
+Przesuńcie mi mój. {schedkind} do {date:time}
 Mógłbyś zmienić mój {schedkind} do {date:time}
 Przesuń moje kolejne {schedkind} do {date:time}
-Zmień mój następujący {schedkind} do {date:time}
+Zmień moje następne {schedkind} do {date:time}
 przesuń moje kolejne {schedkind} do {date:time}
-Zmień mój następujący {schedkind} wczesniej
+Zmień moje następne {schedkind} wczesniej
 Przesuń moje kolejne {schedkind} przez {duration:duration} wczesniej
+Zmień moje następne {schedkind} przez {duration:duration} wczesniej
+rozszerzyj moje {schedkind}
+{schedkind} wczesniej.
+wczesniej. {schedkind}
+Przesuniesz mi mój {schedkind} do {date:time}
+Zmień mój następujący {schedkind} do {date:time}
+Zmień mój następujący {schedkind} wczesniej
 Zmień mój następujący {schedkind} przez {duration:duration} wczesniej
 przesuń moje kolejne {schedkind} przez {duration:duration} wczesniej
 Przesuń mój {schedkind} do {date:time}
 Zmień mój {schedkind} do {date:time}
 przesuń mój {schedkind} do {date:time}
+/zrób to następne. {schedkind} cały dzień
+Ustawić mój następny {schedkind} cały dzień
+Zmień moje następne {schedkind} cały dzień
+wystartować następujący {schedkind} cały dzień
+Przesuń się {schedkind} dla {name} dla {date:time}
 zrób następne. {schedkind} cały dzień
 Ustaw mój następny {schedkind} cały dzień
 Zmień mój następujący {schedkind} cały dzień
-wystartować następujący {schedkind} cały dzień
 Przesuń {schedkind} dla {name} dla {date:time}
 zmień {schedkind} dla {name} dla {date:time}
 przesuń przesunięcie {schedkind} dla {name} dla {date:time}
 przesuń {schedkind} dla {name} dla {date:time}
 Zmień mój {schedkind} wczesniej
+mój... {schedkind} przesuń się do {date:time}
+mój... {schedkind} zmian na {date:time}
 mój {schedkind} przesuń się do {date:time}
 mój {schedkind} przemiana na {date:time}
 Przesuń mój {schedkind} do {date:time} zamiast tego
