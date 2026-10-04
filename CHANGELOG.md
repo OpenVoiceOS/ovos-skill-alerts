@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.12.34a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.12.34a1) (2026-10-04)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.12.33a1...0.12.34a1)
+
+**Merged pull requests:**
+
+- fix\(locale\): add the sv-SE store name and description [\#412](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/412) ([openvoiceos-bot](https://github.com/openvoiceos-bot))
+
 ## [0.12.33a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.12.33a1) (2026-10-01)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.12.32a7...0.12.33a1)
@@ -237,10 +245,6 @@
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.12.17a2...0.12.18a1)
 
-**Merged pull requests:**
-
-- fix\(de-DE\): list\_alerts and cancel\_alert hear the language, not a word list [\#304](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/304) ([openvoiceos-bot](https://github.com/openvoiceos-bot))
-
 ## [0.12.17a2](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.12.17a2) (2026-09-26)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.12.17a1...0.12.17a2)
@@ -326,17 +330,9 @@
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.12.7a1...0.12.7a2)
 
-**Merged pull requests:**
-
-- locale\(ru-RU\): the store name and description, examples taken from the templates [\#303](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/303) ([openvoiceos-bot](https://github.com/openvoiceos-bot))
-
 ## [0.12.7a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.12.7a1) (2026-09-26)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.12.6a1...0.12.7a1)
-
-**Merged pull requests:**
-
-- fix\(gl-ES\): list\_alerts and cancel\_alert hear the language, not a word list [\#302](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/302) ([openvoiceos-bot](https://github.com/openvoiceos-bot))
 
 ## [0.12.6a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.12.6a1) (2026-09-26)
 
