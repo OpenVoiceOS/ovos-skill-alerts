@@ -7,3 +7,4 @@
 (skjut upp|flytta) (min|mitt|den) (nästa|kommande) {schedkind} med {duration:duration}
 (min|mitt|den) {schedkind} (flytta|ändra) (den|det) till {date:time}
 (gör|sätt) (min|mitt|den) (nästa|kommande) {schedkind} (tidigare|senare)
+(mitt|min) [(nästa|kommande)] (Alarm|väckarklocka|Timer|tidtagare|nedräkning|påminnelse|påminnelser|händelse|händelser|möte|möten|larm|larmet|väckarklockan|timern|äggklocka|påminnelsen|mötet|händelsen) ska (flyttas|skjutas upp) [med {duration:duration}]

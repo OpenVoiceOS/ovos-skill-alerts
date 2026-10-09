@@ -1,2 +1,8 @@
-(Kerro minulle|Mikä on|Mitä ovat|et ollut|joka|josta|jotain|kaikki|kerro meille|kuinka paljon|kun|lista|lue|me|mistä|miten|mitä|näytä|on i|on olemassa|onko meillä|onko minulla|onko sinulla|päivitä|sain|teenkö minä|teetkö|teimme|teinkö minä|teitkö sinä) (herätä minut|hälytykset|hälytys|muistutukset|muistutus|tapaaminen|tapaamiset|tapahtuma|tapahtumat|Kerro|muisti|muistuta)
-(Kerro minulle|Mikä on|Mitä ovat|et ollut|joka|josta|jotain|kaikki|kerro meille|kuinka paljon|kun|lista|lue|me|mistä|miten|mitä|näytä|on i|on olemassa|onko meillä|onko minulla|onko sinulla|päivitä|sain|teenkö minä|teetkö|teimme|teinkö minä|teitkö sinä) (on|en|ole|ei|olen|luo|onko|jäi|mikä|uusi|n|sta|ksi|ssä|ssa|ovat|minä|et|lle|dav) (herätä minut|hälytykset|hälytys|muistutukset|muistutus|tapaaminen|tapaamiset|tapahtuma|tapahtumat|Kerro|muisti|muistuta)
+# Finland-Swedish machine draft, unvouched
+vad har jag för {alertkind} [inställda]
+har jag (något|någon|några) (alarm|alarmet|alarmen|larm|larmet|väckarklocka|väckarklockan|väckarklockor|timer|timern|timrar|timers|nedräkning|nedräkningar|påminnelse|påminnelsen|påminnelser|händelse|händelsen|händelser|möte|mötet|möten|varning|varningar) [i dag|i morgon|inställt|inställda]
+finns det (något|någon|några) (alarm|alarmet|alarmen|larm|larmet|väckarklocka|väckarklockan|väckarklockor|timer|timern|timrar|timers|nedräkning|nedräkningar|påminnelse|påminnelsen|påminnelser|händelse|händelsen|händelser|möte|mötet|möten|varning|varningar) [inställda|sparade]
+när är (mitt|min) nästa {alertkind}
+när ringer (mitt|nästa) (alarm|larm)
+vad har jag (inställt|planerat|sparat) [för i morgon|i dag]
+kan du berätta vilka {alertkind} jag har

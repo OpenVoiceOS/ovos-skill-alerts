@@ -1,2 +1,5 @@
 (ezabatu|kendu) [{list_name}] zerrenda
 (ezabatu|kendu) [nire] zerrenda [guztiak]
+(kendu|borratu) [nire] {list_name}-zerrenda
+# machine draft, unvouched: written by Claude Opus 5.5. A native speaker checks the lines below.
+ezabatu nire {list_name} zerrenda

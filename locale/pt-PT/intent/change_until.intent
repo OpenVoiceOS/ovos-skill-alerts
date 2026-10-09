@@ -4,3 +4,10 @@ ajusta o comprimento do próximo {schedkind} para {duration:duration}
 faz o {schedkind} durar {duration:duration}
 muda o meu {schedkind} para durar até {duration:duration}
 encurta a duração do meu {schedkind} para {duration:duration}
+(quero|preciso) que o (alarme|temporizador|evento) dure (mais|menos) tempo
+estende o (alarme|temporizador|evento) por mais tempo
+# machine draft, unvouched: written by Claude Opus 5.5. A native speaker checks the lines below.
+(prolonga|estica) o meu {schedkind} por mais {duration:duration}
+quero que o {schedkind} (dure|toque) {duration:duration}
+deixa o {schedkind} a tocar durante {duration:duration}
+altera quanto tempo dura o meu {schedkind}

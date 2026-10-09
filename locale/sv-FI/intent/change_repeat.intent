@@ -1,6 +1,6 @@
-vaihda {schedkind} toisto joka {repeat}
-aseta {schedkind} toistumaan joka {repeat}
-säädä {schedkind} taajuus arvoon {repeat}
-vaihda seuraava {schedkind} toistumaan joka {repeat}
-haluan {schedkind} toistuvan joka {repeat}
-vaihda {schedkind} toisto arvoon {repeat}
+# Finland-Swedish machine draft, unvouched
+ändra upprepningen (på|för) (mitt|min) {schedkind} till varje {repeat}
+justera hur ofta {schedkind} upprepas till {repeat}
+jag vill att {schedkind} ska upprepas varje {repeat}
+ställ in (mitt|min) {schedkind} att (upprepas|ringa|gå) varje {repeat}
+gör (mitt|min) {schedkind} återkommande varje {repeat}

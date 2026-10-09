@@ -1,3 +1,4 @@
 (cria|adiciona|agenda) (um evento|um compromisso) [{event}]
 evento novo [{event}]
 tenho (um evento|um compromisso) [{event}]
+(marca|agenda) (um evento|uma reunião) na agenda

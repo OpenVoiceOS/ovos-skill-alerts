@@ -4,3 +4,5 @@ ajuste la fréquence du {schedkind} à {repeat}
 change mon prochain {schedkind} pour qu'il se répète {repeat}
 je veux que le {schedkind} se répète chaque {repeat}
 change la répétition de mon {schedkind} à chaque {repeat}
+fais revenir mon alarme chaque jour de la semaine
+je veux que ce rappel se répète tous les lundis

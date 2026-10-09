@@ -7,3 +7,4 @@
 (adia|atrasa) (o|a|o meu|a minha) (próximo|próxima|seguinte) {schedkind} em {duration:duration}
 (o|a|o meu|a minha) {schedkind} (muda|move) (o|a) para as {date:time}
 (põe|deixa) (o|a|o meu|a minha) (próximo|próxima|seguinte) {schedkind} (mais cedo|mais tarde)
+(quero|preciso) que o despertador toque mais (cedo|tarde)

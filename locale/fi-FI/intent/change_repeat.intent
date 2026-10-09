@@ -1,0 +1,10 @@
+vaihda {schedkind} toisto joka {repeat}
+aseta {schedkind} toistumaan joka {repeat}
+säädä {schedkind} taajuus arvoon {repeat}
+vaihda seuraava {schedkind} toistumaan joka {repeat}
+haluan {schedkind} toistuvan joka {repeat}
+vaihda {schedkind} toisto arvoon {repeat}
+muuta (hälytys|hälytykset|herätyskello|ajastin|ajastimet|takaisinlaskenta|muistutus|muistutukset|tapahtuma|tapahtumat|tapaaminen|tapaamiset|herätys|herätyksen|herätykseni|herätystä|hälytyksen|muistutuksen|ajastimen|tapahtuman|herätyskellon|herätyskelloa) toistumaan joka {repeat}
+anna (hälytys|hälytykset|herätyskello|ajastin|ajastimet|takaisinlaskenta|muistutus|muistutukset|tapahtuma|tapahtumat|tapaaminen|tapaamiset|herätys|herätyksen|herätykseni|herätystä|hälytyksen|muistutuksen|ajastimen|tapahtuman|herätyskellon|herätyskelloa) toistua joka {repeat}
+(aseta|laita) (hälytys|hälytykset|herätyskello|ajastin|ajastimet|takaisinlaskenta|muistutus|muistutukset|tapahtuma|tapahtumat|tapaaminen|tapaamiset|herätys|herätyksen|herätykseni|herätystä|hälytyksen|muistutuksen|ajastimen|tapahtuman|herätyskellon|herätyskelloa) soimaan joka {repeat}
+(muuta|laita) (hälytys|hälytykset|herätyskello|ajastin|ajastimet|takaisinlaskenta|muistutus|muistutukset|tapahtuma|tapahtumat|tapaaminen|tapaamiset|herätys|herätyksen|herätykseni|herätystä|hälytyksen|muistutuksen|ajastimen|tapahtuman|herätyskellon|herätyskelloa) toistumaan (päivittäin|viikoittain|arkisin|viikonloppuisin)

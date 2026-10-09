@@ -1,54 +1,22 @@
 """Cross-skill regression test for ovos-skill-alerts: recurring reminder
-coverage gap + arbitration against ovos-skill-date-time.
+coverage and arbitration against ovos-skill-date-time.
 
-The true story (confirmed by re-checking against the REAL OVOS default
-pipeline, i.e. the ``pipeline`` list shipped in
-``ovos-config``'s ``mycroft.conf`` -- NOT ovoscope's broader
-``DEFAULT_TEST_PIPELINE`` constant, which additionally enables
-padatious-low/adapt-low/padacioso tiers that a real default OVOS install
-does not run):
+"remind me to go to work weekday mornings at 8" matches the recurring lines
+of ``locale/en-US/intent/create_reminder.intent``. Without them, a single
+``remind`` keyword out of ten words falls under adapt's ``conf_low``, so under the stock pipeline (no
+low-confidence tiers) nobody answers, and under broader test pipelines
+ovos-skill-date-time's ``weekday.for.date`` takes the utterance.
 
-Under the REAL default pipeline, "remind me to go to work weekday mornings
-at 8" is a **coverage gap in ovos-skill-alerts**, not a theft: alerts' only
-matching intent (``create_reminder``, adapt, single ``remind`` keyword)
-scores an adapt confidence around matched-keywords/total-words, and one
-matched keyword out of ten words falls under adapt's ``conf_low`` (0.25)
-threshold, so alerts never claims it. Under the real default pipeline (no
-low-confidence tiers at all) the utterance is simply left UNMATCHED --
-nobody answers.
+Routing alone is not enough: the handler must strip the recurrence phrase
+("weekday", "weekend", "everyday") from the text it hands to
+``extract_datetime()``. A file intent does not carry adapt's keyword tags,
+so ``_strip_voc_phrase()`` in ``util/parse_utils.py`` does that on the
+``voc_match()`` path.
 
-Separately, under ovoscope's broader ``DEFAULT_TEST_PIPELINE`` (which is
-useful for arbitration testing precisely because it exercises more tiers),
-the utterance IS additionally claimed by ovos-skill-date-time's
-``weekday.for.date`` padatious-low match once the low tiers are enabled.
-That is a real arbitration loss under that broader pipeline, but it is a
-downstream consequence of the coverage gap, not the primary bug.
-
-The fix: a dedicated padatious template intent
-(``locale/en-US/intent/create_reminder_recurring.intent``) trained on this
-class of recurring-reminder phrasing, which matches at padatious-high --
-closing the coverage gap under the REAL default pipeline directly (alerts
-now answers at all) and, incidentally, also winning outright under the
-broader test pipeline before any low-confidence tier is reached.
-
-Fixing routing alone was not sufficient: the handler's recurrence parsing
-(``parse_repeat_from_message`` in ``util/parse_utils.py``) only stripped the
-recurrence vocab phrase ("weekday"/"weekend"/"everyday") out of the token
-stream when adapt had tagged it as a keyword (``message.data[...]``). A
-padatious-triggered intent doesn't populate those adapt tags, so on the
-``voc_match()`` fallback path the recurrence phrase was left sitting inside
-the token later handed to ``extract_datetime()`` for time parsing, corrupting
-the extracted time (reported symptom: date-time parses to something like
-"between nine o'clock and seven oh four" instead of 8am, and the recurrence
-is lost). ``_strip_voc_phrase()`` now mirrors adapt's tag-stripping for the
-voc_match fallback path too, so ANY padatious-triggered reminder intent
-gets correct slot extraction, not just this one template.
-
-This test asserts on the actual PARSED OUTCOME (extracted alert time +
-weekday recurrence via ``build_alert_from_intent``), not merely which
-intent/skill handled the utterance, plus a routing-arbitration check against
-date-time under both the real default pipeline and ovoscope's broader test
-pipeline.
+This module asserts the PARSED OUTCOME (alert time and weekday recurrence
+via ``build_alert_from_intent``) and the arbitration against date-time with
+both skills loaded, on the stock pipeline order with padacioso serving the
+file-intent stage.
 """
 import time
 import unittest
@@ -69,21 +37,15 @@ ENTRY_TOPIC = "recognizer_loop:utterance"
 EOF_TYPES = {"ovos.utterance.handled", "mycroft.skill.handler.complete",
              "complete_intent_failure", "ovos.intent.unmatched"}
 
-# The non-media-plugin-dependent subset of the REAL OVOS default pipeline,
-# as shipped in ovos-config's mycroft.conf ("pipeline" key). The full real
-# default additionally includes ovos-ocp-pipeline-plugin-{high,medium} and
-# ovos-m2v-pipeline-high, but neither this skill nor date-time register any
-# OCP/media or model2vec intents for reminder-vs-datetime utterances, and
-# those plugins are not installed as test dependencies of this repo's CI
-# (installing them is out of scope for this fix). What matters for this
-# arbitration -- and what THIS list deliberately preserves from the real
-# default -- is the exclusion of padatious-low / adapt-low / padacioso,
-# which ARE present in ovoscope's broader DEFAULT_TEST_PIPELINE test
-# constant but NOT in a real default OVOS install.
+# The subset of the stock pipeline in ovos-config's mycroft.conf that serves
+# these two skills, with padacioso in the file-intent slot. OCP and m2v
+# stages are left out: neither skill registers OCP intents, and the m2v
+# golden runner covers that engine. What this list keeps from the stock
+# order is the absence of low-confidence file-intent and adapt tiers.
 REAL_DEFAULT_PIPELINE = [
     "ovos-stop-pipeline-plugin-high",
     "ovos-converse-pipeline-plugin",
-    "ovos-padatious-pipeline-plugin-high",
+    "ovos-padacioso-pipeline-plugin-high",
     "ovos-adapt-pipeline-plugin-high",
     "ovos-fallback-pipeline-plugin-high",
     "ovos-stop-pipeline-plugin-medium",
@@ -130,8 +92,8 @@ class TestRecurringReminderOutcome(unittest.TestCase):
                     f"got {alert.repeat_days}")
 
     def test_day_of_week_recurrence_parsed_without_adapt_tag(self):
-        """An explicit day list, matched by padatious (no adapt "repeat"
-        tag), must still book those days and that time."""
+        """An explicit day list, matched as a file intent (no adapt
+        "repeat" tag), must still book those days and that time."""
         cases = [
             ("remind me to take out the trash every thursday and sunday at 7 pm",
              {Weekdays.THU, Weekdays.SUN}, 19, 0),
@@ -163,13 +125,6 @@ class TestRecurringReminderOutcome(unittest.TestCase):
             f"simple reminder should have no recurrence, got {alert.repeat_days}")
 
 
-@pytest.mark.skip(reason="Boots the padatious engine, which is being removed "
-                         "from the test suite (padatious trains on boot and "
-                         "stalls CI waiting for mycroft.skills.trained). The "
-                         "m2v replacement is blocked on the ovoscope harness "
-                         "not booting m2v/trained pipelines "
-                         "(OpenVoiceOS/ovoscope#179); re-enable as an m2v "
-                         "arbitration test once that is fixed.")
 @pytest.mark.timeout(480)
 class TestReminderVsDateTimeArbitration(unittest.TestCase):
     """Two-skill MiniCroft: alerts must claim the recurring-reminder
@@ -181,15 +136,14 @@ class TestReminderVsDateTimeArbitration(unittest.TestCase):
         LOG.set_level("ERROR")
         # Fail loudly on a missing test dependency instead of letting the
         # arbitration assertion below report a misleading routing failure.
-        # Without ovos-padatious installed the padatious stage is dropped from
-        # the pipeline ("Unknown pipeline matcher: ovos-padatious-pipeline-
-        # plugin-high") and without ovos-skill-date-time there is no second
+        # Without padacioso installed the file-intent stage is dropped from
+        # the pipeline ("Unknown pipeline matcher") and without ovos-skill-date-time there is no second
         # skill to arbitrate against; in BOTH cases the utterance simply comes
         # back as ovos.intent.unmatched, which looks exactly like a routing
         # regression. Both are declared in the `test` extra (setup.py).
         assert is_pipeline_available(REAL_DEFAULT_PIPELINE), (
             f"missing pipeline stage(s) for {REAL_DEFAULT_PIPELINE} -- install "
-            f"the `test` extra (needs ovos-padatious and ovos-adapt-parser)")
+            f"the `test` extra (needs padacioso and ovos-adapt-parser)")
         cls.mc = get_minicroft([DATE_TIME_ID, ALERTS_ID], max_wait=600,
                                 default_pipeline=REAL_DEFAULT_PIPELINE)
         loaded = set(cls.mc.plugin_skills)
@@ -251,7 +205,7 @@ class TestReminderVsDateTimeArbitration(unittest.TestCase):
             f"{ALERTS_ID!r} but got {claimant!r}. "
             f"messages seen: {[m.msg_type for m in recs]}")
         claim_types = {m.msg_type for m in recs}
-        self.assertIn(f"{ALERTS_ID}:create_reminder_recurring", claim_types)
+        self.assertIn(f"{ALERTS_ID}:create_reminder", claim_types)
 
 
 if __name__ == "__main__":

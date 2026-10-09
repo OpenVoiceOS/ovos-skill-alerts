@@ -48,3 +48,5 @@
 در این {schedkind} اولویت بندی آن را به {number:priority}
 در این {schedkind} اولویت بندی آن را تنظیم کنید
 در این {schedkind} اولویت آن را بالا می برد
+{schedkind} را با اولویت {number:priority} (تنظیم کن|بگذار)
+{schedkind} (من|بعدی) را (مهم‌تر|کم‌اهمیت‌تر|فوری) کن

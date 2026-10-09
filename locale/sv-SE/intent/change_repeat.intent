@@ -4,3 +4,4 @@ justera frekvensen på {schedkind} till {repeat}
 ändra min nästa {schedkind} så att den upprepas {repeat}
 jag vill att {schedkind} återkommer varje {repeat}
 ändra upprepningen på min {schedkind} till {repeat}
+ändra (mitt|min) [(nästa|kommande)] {schedkind} så att (det|den) upprepas [varje] {repeat}

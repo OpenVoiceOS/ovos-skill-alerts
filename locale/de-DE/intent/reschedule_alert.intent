@@ -7,3 +7,5 @@
 (verschiebe|vertage) (meinen|meine|mein|den|die|das) (nächsten|nächste|nächstes) {schedkind} um {duration:duration}
 (meinen|meine|mein) {schedkind} (verschiebe|verlege) (ihn|sie|es) auf {date:time}
 (mach|stelle) (meinen|meine|mein|den|die|das) (nächsten|nächste|nächstes) {schedkind} (früher|später)
+verschiebe den Termin von morgen auf fünfzehn Uhr
+mein Wecker soll eine halbe Stunde später klingeln

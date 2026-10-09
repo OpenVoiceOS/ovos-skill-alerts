@@ -6,42 +6,12 @@ this skill claimed a bare "wake up" — an utterance that belongs to
 ovos-skill-naptime — and answered it by asking what time to set an alarm
 for. A single-skill MiniCroft cannot catch that: with no other skill loaded
 there is nobody to steal the utterance from. This module boots BOTH skills
-into one MiniCroft on ``ADAPT_ONLY_PIPELINE`` (adapt's three tiers) and
-asserts each utterance goes to the skill that owns it. Both competing
-intents (naptime's ``WakeUp``, this skill's ``create_alarm_alt``) are adapt
-intents, so this isolates the arbitration to the stage where it actually
-happens, with the smallest possible set of test dependencies.
+into one MiniCroft and asserts each utterance goes to the skill that owns
+it.
 
-Also verified LOCALLY (not committed as a CI-enforced variant here — see
-"Real-default pipeline, verified locally" below for why) against
-``REAL_DEFAULT_PIPELINE``, the actual pipeline order a real device boots
-with (``Configuration()["intents"]["pipeline"]`` on ovos-core@dev — stop
-high, converse, ocp high, padatious high, adapt high, m2v high, ocp medium,
-fallback high, stop medium, adapt medium, fallback medium, fallback low).
-Bare "wake"/"wake up" reliably reach naptime there too, and at least one
-scheduled phrasing ("wake me up at 7") reliably reaches alerts — the fix is
-not merely an adapt-only-tier artifact.
-
-Real-default pipeline, verified locally
-----------------------------------------
-Requesting ``REAL_DEFAULT_PIPELINE`` needs ``ovos-ocp-pipeline-plugin`` and
-``ovos-m2v-pipeline`` installed (a requested stage whose plugin is absent
-makes the whole turn resolve to ``ovos.intent.unmatched`` instead of being
-skipped), which in turn need ``ovos-m2v-pipeline``'s own undeclared runtime
-deps ``scikit-learn``/``skops``. Adding all of that to this repo's ``test``
-extra was tried and reverted: this CI's own ``build-tests`` workflow
-(``.github/workflows/build-tests.yml`` -> gh-automations' shared
-``build-tests.yml``) only installs the ``swig`` system dep, not
-``libfann-dev``, so ``ovos-padatious`` fails to build there and every
-padatious-tagged test (including this repo's own pre-existing
-``test_intents_en_us.py`` suite) falls back to ``padacioso`` — "orders of
-magnitude slower" per its own warning. Combined with the heavier plugin
-surface, this pushed the shared CI job's total runtime well past what its
-per-test timeouts tolerate and started timing out UNRELATED, pre-existing
-tests in the same pytest session (a session-wide side effect, not a bug in
-those tests). That's a pre-existing gap in this CI workflow's own system
-deps, out of scope for this PR to fix. Real-default coverage for this fix
-is therefore a local, LOG_LEVEL=DEBUG-verified finding, not a CI gate here.
+This skill's wake templates are file intents, so the mixed pipeline runs
+padacioso's file-intent tiers ahead of adapt's, in the order of the stock
+pipeline in ovos-config's mycroft.conf.
 
 See ovos-test-harness ``test/skills_fleet/FINDINGS.md``, "Wrong-skill theft"
 row: expected ``ovos-skill-naptime.openvoiceos``, utterance "wake up",
@@ -63,20 +33,16 @@ ADAPT_ONLY_PIPELINE = [
 ]
 
 # This skill's wake templates (create_alarm_alt.intent, including its media
-# lines) migrated off Adapt to padatious file-intents; naptime's WakeUp
-# intent is still Adapt. ADAPT_ONLY_PIPELINE alone can no longer see this
-# skill's side of the arbitration at all -- every wake phrasing this skill
-# is supposed to own would come back unmatched regardless of template
-# content, not because of a real routing defect. Mirrors the tier ORDER
-# from this module's own docstring for REAL_DEFAULT_PIPELINE (padatious
-# tiers ahead of adapt tiers) so the arbitration outcome reflects a real
-# device, not an artifact of which engine happens to run first in the list.
+# lines) are file intents; naptime's WakeUp intent is Adapt.
+# ADAPT_ONLY_PIPELINE alone cannot see this skill's side of the arbitration
+# at all. The file-intent tiers run ahead of the adapt tiers, as on a real
+# device, served by padacioso.
 MIXED_PIPELINE = [
-    "ovos-padatious-pipeline-plugin-high",
+    "ovos-padacioso-pipeline-plugin-high",
     "ovos-adapt-pipeline-plugin-high",
-    "ovos-padatious-pipeline-plugin-medium",
+    "ovos-padacioso-pipeline-plugin-medium",
     "ovos-adapt-pipeline-plugin-medium",
-    "ovos-padatious-pipeline-plugin-low",
+    "ovos-padacioso-pipeline-plugin-low",
     "ovos-adapt-pipeline-plugin-low",
 ]
 
@@ -96,7 +62,8 @@ CAPTURE_SETTLE = 0.4
 
 @pytest.fixture(scope="module")
 def minicroft():
-    mc = get_minicroft([ALERTS_ID, NAPTIME_ID], max_wait=300)
+    mc = get_minicroft([ALERTS_ID, NAPTIME_ID], max_wait=300,
+                       default_pipeline=MIXED_PIPELINE)
     wait_for_minicroft_ready(mc)
     yield mc
     mc.stop()

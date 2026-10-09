@@ -7,3 +7,5 @@ zet (mijn|de) (volgende|eerstvolgende) {schedkind} (eerder|later)
 (stel|zet) (mijn|de) (volgende|eerstvolgende) {schedkind} met {duration:duration} (later|eerder)
 (mijn|de) {schedkind} (verplaats|verzet) (hem|die) naar {date:time}
 (maak|zet) (mijn|de) {schedkind} (eerder|later)
+verschuif de afspraak van morgen naar drie uur 's middags
+mijn wekker moet een half uur later afgaan

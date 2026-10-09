@@ -27,3 +27,10 @@ væk (mig|os|børnene|alle) op med {mediakind} (klokken|til) {date:time}
 (kan|vil) du vække (mig|os|børnene|alle) op med {mediakind} (klokken|til) {date:time}
 væk (mig|os|børnene|alle) op med {mediakind}
 (kan|vil) du vække (mig|os|børnene|alle) op med {mediakind}
+væk mig i morgen tidlig klokken halv syv
+programmer et vækkeur til klokken syv i morgen
+# machine draft, unvouched: written by Claude Opus 5.5. A native speaker checks the lines below.
+kan du lave en alarm til mig
+husk at vække mig (klokken|til) {date:time}
+jeg skal vækkes (klokken|til) {date:time}
+giv mig en alarm i morgen tidlig

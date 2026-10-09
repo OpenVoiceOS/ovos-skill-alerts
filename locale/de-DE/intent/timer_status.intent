@@ -10,3 +10,5 @@ ist (mein|meine|der|die) {timerkind} (fertig|abgelaufen|zu Ende)
 was ist der Status (von meinem|von meiner|vom|von der) {timerkind}
 Status (von meinem|von meiner|vom|von der) {timerkind}
 wann (ist|läuft) (mein|meine|der|die) {timerkind} (fertig|ab)
+wie viele Minuten bleiben bis zum Ende der Eieruhr
+wie weit ist der Countdown, den ich gestartet habe

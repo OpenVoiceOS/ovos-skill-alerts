@@ -1,5 +1,7 @@
 kkes iferdisen seg tebdart n {list_name}
 sfeḍ ayen yellan deg tebdart-inu {list_name}
 kkes akk iferdisen seg tebdart {list_name}
-kkes tabdart n {list_name}-inu
 sfeḍ akk seg tebdart n {list_name}
+# machine draft, unvouched: written by Claude Opus 5.5. A native speaker checks the lines below.
+(sfeḍ|kkes) akk ayen yellan deg tebdart n {list_name}
+(sfeḍ|kkes) (iferdisen|tiɣawsiwin) seg tebdart n {list_name} maca eǧǧ tabdart

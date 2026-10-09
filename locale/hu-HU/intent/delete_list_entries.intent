@@ -1,2 +1,5 @@
 (töröld|távolítsd el) a [{list_name}] lista (tételeit|összes tételét)
-(töröld|ürítsd ki) a {list_name} listámat
+ürítsd ki a {list_name} listámat
+# machine draft, unvouched: written by Claude Opus 5.5. A native speaker checks the lines below.
+(töröld|távolítsd el) az összes tételt a [{list_name}] listáról
+(ürítsd ki|tisztítsd meg) az egész [{list_name}] listát

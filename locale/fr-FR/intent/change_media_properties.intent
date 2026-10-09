@@ -4,3 +4,5 @@ fais jouer {mediaform} par le {schedkind}
 change le son de mon {schedkind} en {mediakind}
 change l'alerte du {schedkind} en {mediaform}
 je veux que mon prochain {schedkind} joue ma {mediakind}
+au lieu de sonner mon réveil doit lire de la musique
+fais jouer un enregistrement par mon alarme quand elle se déclenche

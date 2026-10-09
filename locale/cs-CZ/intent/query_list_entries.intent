@@ -2,3 +2,5 @@
 (přečti|ukaž) [mi] položky na seznamu [{list_name}]
 co (je|mám) na [mém] {list_name} seznamu
 co mám (dělat|udělat)
+# machine draft, unvouched: written by Claude Opus 5.5. A native speaker checks the lines below.
+(přečti|ukaž) mi všechny položky (ze|z) [mého] seznamu [{list_name}]

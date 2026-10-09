@@ -1,0 +1,66 @@
+{"skill_id": "ovos-skill-alerts.openvoiceos", "utterance": "شیر و نان را به لیست خریدم اضافه کن", "intent_label": "add_list_subitems", "needs_manual": true, "lang": "fa-IR", "machine_generated": true}
+{"skill_id": "ovos-skill-alerts.openvoiceos", "utterance": "چند مورد به لیست کارهای امروزم اضافه کن", "intent_label": "add_list_subitems", "needs_manual": true, "lang": "fa-IR", "machine_generated": true}
+{"skill_id": "ovos-skill-alerts.openvoiceos", "utterance": "لطفاً تخم‌مرغ و پنیر را به لیست خرید اضافه کن", "intent_label": "add_list_subitems", "needs_manual": true, "lang": "fa-IR", "machine_generated": true}
+{"skill_id": "ovos-skill-alerts.openvoiceos", "utterance": "چه تقویم‌هایی در دسترس است؟", "intent_label": "calendar_list", "needs_manual": true, "lang": "fa-IR", "machine_generated": true}
+{"skill_id": "ovos-skill-alerts.openvoiceos", "utterance": "گزینه‌های تقویم را برایم بخوان", "intent_label": "calendar_list", "needs_manual": true, "lang": "fa-IR", "machine_generated": true}
+{"skill_id": "ovos-skill-alerts.openvoiceos", "utterance": "کدام تقویم‌ها را می‌توانم انتخاب کنم؟", "intent_label": "calendar_list", "needs_manual": true, "lang": "fa-IR", "machine_generated": true}
+{"skill_id": "ovos-skill-alerts.openvoiceos", "utterance": "این هشدار را دیگر لازم ندارم، لغوش کن", "intent_label": "cancel_alert", "needs_manual": true, "lang": "fa-IR", "machine_generated": true}
+{"skill_id": "ovos-skill-alerts.openvoiceos", "utterance": "هشدار بعدی‌ام را حذف کن", "intent_label": "cancel_alert", "needs_manual": true, "lang": "fa-IR", "machine_generated": true}
+{"skill_id": "ovos-skill-alerts.openvoiceos", "utterance": "زنگ ساعت فردا صبح را خاموش کن", "intent_label": "cancel_alert", "needs_manual": true, "lang": "fa-IR", "machine_generated": true}
+{"skill_id": "ovos-skill-alerts.openvoiceos", "utterance": "هشدار بعدی‌ام را صوتی کن", "intent_label": "change_media_properties", "needs_manual": true, "lang": "fa-IR", "machine_generated": true}
+{"skill_id": "ovos-skill-alerts.openvoiceos", "utterance": "زنگ ساعتم را طوری تنظیم کن که با صدا پخش شود", "intent_label": "change_media_properties", "needs_manual": true, "lang": "fa-IR", "machine_generated": true}
+{"skill_id": "ovos-skill-alerts.openvoiceos", "utterance": "یادآوری بعدی‌ام را با صدا بخوان", "intent_label": "change_media_properties", "needs_manual": true, "lang": "fa-IR", "machine_generated": true}
+{"skill_id": "ovos-skill-alerts.openvoiceos", "utterance": "اولویت هشدارم را به سطح پنج تغییر بده", "intent_label": "change_priority", "needs_manual": true, "lang": "fa-IR", "machine_generated": true}
+{"skill_id": "ovos-skill-alerts.openvoiceos", "utterance": "اولویت زنگ ساعت بعدی‌ام را بالا ببر", "intent_label": "change_priority", "needs_manual": true, "lang": "fa-IR", "machine_generated": true}
+{"skill_id": "ovos-skill-alerts.openvoiceos", "utterance": "لطفاً اولویت قرار ملاقات فردا را روی بالا بگذار", "intent_label": "change_priority", "needs_manual": true, "lang": "fa-IR", "machine_generated": true}
+{"skill_id": "ovos-skill-alerts.openvoiceos", "utterance": "هشدارم را طوری تغییر بده که هر دوشنبه تکرار شود", "intent_label": "change_repeat", "needs_manual": true, "lang": "fa-IR", "machine_generated": true}
+{"skill_id": "ovos-skill-alerts.openvoiceos", "utterance": "زنگ ساعتم را روی تکرار هر روز صبح تنظیم کن", "intent_label": "change_repeat", "needs_manual": true, "lang": "fa-IR", "machine_generated": true}
+{"skill_id": "ovos-skill-alerts.openvoiceos", "utterance": "یادآوری بعدی‌ام را هفته‌ای یک بار تکرار کن", "intent_label": "change_repeat", "needs_manual": true, "lang": "fa-IR", "machine_generated": true}
+{"skill_id": "ovos-skill-alerts.openvoiceos", "utterance": "مدت جلسه‌ام را به دو ساعت تغییر بده", "intent_label": "change_until", "needs_manual": true, "lang": "fa-IR", "machine_generated": true}
+{"skill_id": "ovos-skill-alerts.openvoiceos", "utterance": "رویداد بعدی‌ام را تا ساعت پنج عصر تمدید کن", "intent_label": "change_until", "needs_manual": true, "lang": "fa-IR", "machine_generated": true}
+{"skill_id": "ovos-skill-alerts.openvoiceos", "utterance": "طول قرار ملاقاتم را به چهل و پنج دقیقه کوتاه کن", "intent_label": "change_until", "needs_manual": true, "lang": "fa-IR", "machine_generated": true}
+{"skill_id": "ovos-skill-alerts.openvoiceos", "utterance": "یک زنگ ساعت برای هفت صبح بگذار", "intent_label": "create_alarm", "needs_manual": true, "lang": "fa-IR", "machine_generated": true}
+{"skill_id": "ovos-skill-alerts.openvoiceos", "utterance": "فردا ساعت شش صبح بیدارم کن", "intent_label": "create_alarm", "needs_manual": true, "lang": "fa-IR", "machine_generated": true}
+{"skill_id": "ovos-skill-alerts.openvoiceos", "utterance": "یک هشدار جدید برای ساعت هشت شب تنظیم کن", "intent_label": "create_alarm", "needs_manual": true, "lang": "fa-IR", "machine_generated": true}
+{"skill_id": "ovos-skill-alerts.openvoiceos", "utterance": "یک قرار ملاقات با دندان‌پزشک برای پنجشنبه ثبت کن", "intent_label": "create_event", "needs_manual": true, "lang": "fa-IR", "machine_generated": true}
+{"skill_id": "ovos-skill-alerts.openvoiceos", "utterance": "یک رویداد جدید برای جشن تولد سارا بساز", "intent_label": "create_event", "needs_manual": true, "lang": "fa-IR", "machine_generated": true}
+{"skill_id": "ovos-skill-alerts.openvoiceos", "utterance": "فردا ساعت ده یک جلسه‌ی کاری دارم", "intent_label": "create_event", "needs_manual": true, "lang": "fa-IR", "machine_generated": true}
+{"skill_id": "ovos-skill-alerts.openvoiceos", "utterance": "یک لیست جدید بساز", "intent_label": "create_list", "needs_manual": true, "lang": "fa-IR", "machine_generated": true}
+{"skill_id": "ovos-skill-alerts.openvoiceos", "utterance": "می‌خواهم یک لیست خرید جدید شروع کنم", "intent_label": "create_list", "needs_manual": true, "lang": "fa-IR", "machine_generated": true}
+{"skill_id": "ovos-skill-alerts.openvoiceos", "utterance": "لطفاً یک لیست به اسم کارهای خانه درست کن", "intent_label": "create_list", "needs_manual": true, "lang": "fa-IR", "machine_generated": true}
+{"skill_id": "ovos-skill-alerts.openvoiceos", "utterance": "به من یادآوری کن که ساعت پنج به مادرم زنگ بزنم", "intent_label": "create_reminder", "needs_manual": true, "lang": "fa-IR", "machine_generated": true}
+{"skill_id": "ovos-skill-alerts.openvoiceos", "utterance": "فردا صبح به ما یادآوری کن که قبض برق را بپردازیم", "intent_label": "create_reminder", "needs_manual": true, "lang": "fa-IR", "machine_generated": true}
+{"skill_id": "ovos-skill-alerts.openvoiceos", "utterance": "لطفاً ساعت نه شب به من یادآوری کنید که داروهایم را بخورم", "intent_label": "create_reminder", "needs_manual": true, "lang": "fa-IR", "machine_generated": true}
+{"skill_id": "ovos-skill-alerts.openvoiceos", "utterance": "روزهای کاری ساعت هشت صبح به من یادآوری کن که سر کار بروم", "intent_label": "create_reminder", "needs_manual": true, "lang": "fa-IR", "machine_generated": true}
+{"skill_id": "ovos-skill-alerts.openvoiceos", "utterance": "روزهای کاری ساعت شش صبح یادم بینداز که به باشگاه بروم", "intent_label": "create_reminder", "needs_manual": true, "lang": "fa-IR", "machine_generated": true}
+{"skill_id": "ovos-skill-alerts.openvoiceos", "utterance": "هر روز کاری ساعت هفت صبح به من یادآوری کنید که سگ را بیرون ببرم", "intent_label": "create_reminder", "needs_manual": true, "lang": "fa-IR", "machine_generated": true}
+{"skill_id": "ovos-skill-alerts.openvoiceos", "utterance": "یک تایمر ده دقیقه‌ای بگذار", "intent_label": "create_timer", "needs_manual": true, "lang": "fa-IR", "machine_generated": true}
+{"skill_id": "ovos-skill-alerts.openvoiceos", "utterance": "تایمر را برای پنج دقیقه شروع کن", "intent_label": "create_timer", "needs_manual": true, "lang": "fa-IR", "machine_generated": true}
+{"skill_id": "ovos-skill-alerts.openvoiceos", "utterance": "لطفاً یک شمارش معکوس بیست دقیقه‌ای تنظیم کن", "intent_label": "create_timer", "needs_manual": true, "lang": "fa-IR", "machine_generated": true}
+{"skill_id": "ovos-skill-alerts.openvoiceos", "utterance": "تقویمم را همگام‌سازی کن", "intent_label": "dav_sync", "needs_manual": true, "lang": "fa-IR", "machine_generated": true}
+{"skill_id": "ovos-skill-alerts.openvoiceos", "utterance": "می‌توانی رویدادهایم را همگام‌سازی کنی؟", "intent_label": "dav_sync", "needs_manual": true, "lang": "fa-IR", "machine_generated": true}
+{"skill_id": "ovos-skill-alerts.openvoiceos", "utterance": "رویدادهای تقویم را الان به‌روز کن", "intent_label": "dav_sync", "needs_manual": true, "lang": "fa-IR", "machine_generated": true}
+{"skill_id": "ovos-skill-alerts.openvoiceos", "utterance": "همه‌ی لیست‌هایم را حذف کن", "intent_label": "delete_list", "needs_manual": true, "lang": "fa-IR", "machine_generated": true}
+{"skill_id": "ovos-skill-alerts.openvoiceos", "utterance": "لیست کارهایم را پاک کن", "intent_label": "delete_list", "needs_manual": true, "lang": "fa-IR", "machine_generated": true}
+{"skill_id": "ovos-skill-alerts.openvoiceos", "utterance": "لیست خریدم را حذف کن", "intent_label": "delete_list", "needs_manual": true, "lang": "fa-IR", "machine_generated": true}
+{"skill_id": "ovos-skill-alerts.openvoiceos", "utterance": "همه‌ی موارد لیست خریدم را پاک کن", "intent_label": "delete_list_entries", "needs_manual": true, "lang": "fa-IR", "machine_generated": true}
+{"skill_id": "ovos-skill-alerts.openvoiceos", "utterance": "همه چیز را از لیست کارهایم حذف کن", "intent_label": "delete_list_entries", "needs_manual": true, "lang": "fa-IR", "machine_generated": true}
+{"skill_id": "ovos-skill-alerts.openvoiceos", "utterance": "لطفاً موارد لیست را پاک کن", "intent_label": "delete_list_entries", "needs_manual": true, "lang": "fa-IR", "machine_generated": true}
+{"skill_id": "ovos-skill-alerts.openvoiceos", "utterance": "هشدارهایم را برایم فهرست کن", "intent_label": "list_alerts", "needs_manual": true, "lang": "fa-IR", "machine_generated": true}
+{"skill_id": "ovos-skill-alerts.openvoiceos", "utterance": "همه‌ی یادآوری‌هایم را نشان بده", "intent_label": "list_alerts", "needs_manual": true, "lang": "fa-IR", "machine_generated": true}
+{"skill_id": "ovos-skill-alerts.openvoiceos", "utterance": "زنگ‌های ساعتم را برایم بخوان", "intent_label": "list_alerts", "needs_manual": true, "lang": "fa-IR", "machine_generated": true}
+{"skill_id": "ovos-skill-alerts.openvoiceos", "utterance": "آیا هشداری را از دست داده‌ام؟", "intent_label": "missed_alerts", "needs_manual": true, "lang": "fa-IR", "machine_generated": true}
+{"skill_id": "ovos-skill-alerts.openvoiceos", "utterance": "کدام یادآوری‌ها را از دست دادم؟", "intent_label": "missed_alerts", "needs_manual": true, "lang": "fa-IR", "machine_generated": true}
+{"skill_id": "ovos-skill-alerts.openvoiceos", "utterance": "زنگ ساعتم را از دست دادم؟", "intent_label": "missed_alerts", "needs_manual": true, "lang": "fa-IR", "machine_generated": true}
+{"skill_id": "ovos-skill-alerts.openvoiceos", "utterance": "چه چیزهایی در لیست خریدم هست؟", "intent_label": "query_list_entries", "needs_manual": true, "lang": "fa-IR", "machine_generated": true}
+{"skill_id": "ovos-skill-alerts.openvoiceos", "utterance": "موارد لیست کارهایم را برایم بخوان", "intent_label": "query_list_entries", "needs_manual": true, "lang": "fa-IR", "machine_generated": true}
+{"skill_id": "ovos-skill-alerts.openvoiceos", "utterance": "لطفاً همه‌ی موارد لیست را نشان بده", "intent_label": "query_list_entries", "needs_manual": true, "lang": "fa-IR", "machine_generated": true}
+{"skill_id": "ovos-skill-alerts.openvoiceos", "utterance": "اسم لیست‌هایی که ساخته‌ام را بگو", "intent_label": "query_list_names", "needs_manual": true, "lang": "fa-IR", "machine_generated": true}
+{"skill_id": "ovos-skill-alerts.openvoiceos", "utterance": "کدام لیست‌ها وجود دارند؟", "intent_label": "query_list_names", "needs_manual": true, "lang": "fa-IR", "machine_generated": true}
+{"skill_id": "ovos-skill-alerts.openvoiceos", "utterance": "اسم لیست‌هایم را برایم بخوان", "intent_label": "query_list_names", "needs_manual": true, "lang": "fa-IR", "machine_generated": true}
+{"skill_id": "ovos-skill-alerts.openvoiceos", "utterance": "هشدار ساعت هفت را به ساعت هشت منتقل کن", "intent_label": "reschedule_alert", "needs_manual": true, "lang": "fa-IR", "machine_generated": true}
+{"skill_id": "ovos-skill-alerts.openvoiceos", "utterance": "زنگ ساعت فردا را نیم ساعت عقب بینداز", "intent_label": "reschedule_alert", "needs_manual": true, "lang": "fa-IR", "machine_generated": true}
+{"skill_id": "ovos-skill-alerts.openvoiceos", "utterance": "می‌توانی یادآوری بعدی‌ام را به ساعت سه بعدازظهر منتقل کنی؟", "intent_label": "reschedule_alert", "needs_manual": true, "lang": "fa-IR", "machine_generated": true}
+{"skill_id": "ovos-skill-alerts.openvoiceos", "utterance": "تایمر چند دقیقه دیگر زنگ می‌زند؟", "intent_label": "timer_status", "needs_manual": true, "lang": "fa-IR", "machine_generated": true}
+{"skill_id": "ovos-skill-alerts.openvoiceos", "utterance": "تا تمام شدن شمارش معکوس چقدر وقت داریم؟", "intent_label": "timer_status", "needs_manual": true, "lang": "fa-IR", "machine_generated": true}
+{"skill_id": "ovos-skill-alerts.openvoiceos", "utterance": "تایمر چقدر دیگر مانده؟", "intent_label": "timer_status", "needs_manual": true, "lang": "fa-IR", "machine_generated": true}

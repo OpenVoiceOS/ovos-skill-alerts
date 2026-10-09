@@ -9,3 +9,5 @@ zet een wekker [toe] [voor {date:time}], zodat hij {mediakind} afspeelt
 wek me met {mediakind} om {date:time}
 wek me over {duration:duration}
 wek me elke {days} om {date:time}
+ik wil morgen vroeg door een wekker gewekt worden
+programmeer een wekker voor zeven uur morgen

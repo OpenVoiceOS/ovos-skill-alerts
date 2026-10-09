@@ -1,3 +1,4 @@
 (elimina|borra) (os elementos|as entradas|todo) da [miña] lista [{list_name}]
-(elimina|borra) a miña lista de {list_name}
+baleira a miña lista de {list_name}
 (elimina|borra) todo da miña lista de {list_name}
+(borra|quita) (as tarefas|as cousas) da lista sen borrar a lista

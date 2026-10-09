@@ -4,3 +4,4 @@ ajusta la prioritat del meu proper {schedkind}
 posa el {schedkind} amb prioritat {number:priority}
 baixa la prioritat del meu {schedkind}
 canvia el nivell de prioritat del {schedkind} a {number:priority}
+(dona|posa) (més|menys) importància a (la|aquella|la meva) alarma

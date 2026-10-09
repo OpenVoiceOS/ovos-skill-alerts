@@ -3,3 +3,5 @@ temporizador novo [de {duration:duration}]
 horário temporizador
 horário temporizadores
 criar temporizadores
+faz uma contagem decrescente de {duration:duration}
+preciso de um temporizador já

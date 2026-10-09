@@ -3,3 +3,5 @@ temporizador novo [de {duration:duration}]
 crear temporizador
 facer temporizadores
 definir temporizador
+(quero|preciso) un temporizador (para a cociña|mentres cociño)
+quero que contes {duration:duration} co temporizador

@@ -4,3 +4,7 @@ justera prioriteten på min nästa {schedkind}
 sätt {schedkind} till prioritet {number:priority}
 sänk prioriteten på min {schedkind}
 ändra prioritetsnivån på {schedkind} till {number:priority}
+(höj|sänk|ändra|justera) prioriteten (på|för) (mitt|min) [(nästa|kommande)] {schedkind}
+(höj|sänk|ändra|justera) prioriteten (på|för) (mitt|min) [(nästa|kommande)] {schedkind} till [nivå] {number:priority}
+ge (mitt|min) [(nästa|kommande)] {schedkind} (högre|lägre|hög|låg) prioritet
+(mitt|min) {schedkind} ska ha (högre|lägre) prioritet

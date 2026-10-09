@@ -1,6 +1,8 @@
-muuta {schedkind} niin että se on kuultavissa
-säädä seuraava {schedkind} soittamaan {mediakind}
-aseta {schedkind} toistamaan {mediaform}
-vaihda {schedkind} ääneksi {mediakind}
-vaihda {schedkind} hälytys muotoon {mediaform}
-haluan seuraavan {schedkind} soittavan {mediakind}
+# Finland-Swedish machine draft, unvouched
+gör (mitt|min) (alarm|alarmet|larm|larmet|väckarklocka|väckarklockan|timer|timern|timrar|nedräkning|påminnelse|påminnelsen|påminnelser|händelse|händelsen|händelser|möte|mötet|möten) hörbar
+ändra ljudet på (mitt|min) {schedkind} till {mediakind}
+byt ljud på {schedkind} till {mediaform}
+jag vill att (mitt|min) nästa {schedkind} spelar {mediakind}
+ska (mitt|min) {schedkind} spela {mediakind} i stället
+gör (alarmet|väckarklockan|timern|påminnelsen) hörbar
+ställ in (alarmet|väckarklockan) så att (det|den) låter

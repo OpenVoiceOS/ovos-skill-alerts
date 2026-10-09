@@ -9,3 +9,5 @@ venligst (aflys|slet|fjern|ryd|kassér) (min|den|alle) {alertkind} og (min|den|a
 venligst (aflys|slet|fjern|ryd|kassér|sluk) (min|den|alle|alle mine) {alertkind}
 (aflys|slet|fjern|ryd|kassér) {alertkind} (til|om) {name}
 (aflys|slet|fjern|ryd) min (hele|samlede) {alertkind} liste
+stop den timer jeg lige har startet og fjern den
+vækkeuret til i morgen tidlig skal jeg ikke bruge, tag det væk

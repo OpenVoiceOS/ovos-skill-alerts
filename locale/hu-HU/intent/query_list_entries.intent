@@ -2,3 +2,6 @@
 (olvasd fel|mutasd) a [{list_name}] lista tételeit
 mi van a {list_name} listámon
 mit kell (tennem|csinálnom)
+# machine draft, unvouched: written by Claude Opus 5.5. A native speaker checks the lines below.
+(olvasd fel|mutasd meg) az összes tételt a [{list_name}] listáról
+(mi|milyen tételek) (van|vannak) a [{list_name}] listámon felírva

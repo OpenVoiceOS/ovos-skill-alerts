@@ -8,3 +8,6 @@ despiérta(me|nos) [a las {date:time}]
 despiértame con {mediakind} a las {date:time}
 despiértame en {duration:duration}
 despiértame cada {days} a las {date:time}
+(despiértame|levántame) (mañana|temprano) a las {date:time}
+necesito que suene una alarma por la mañana
+quiero que me despierte una alarma

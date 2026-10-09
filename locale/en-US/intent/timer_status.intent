@@ -28,3 +28,10 @@ how (long|much time|much longer) on the {name} (timer|countdown)
 how long (is|are) (my|the) {timerkind}
 how (much|much time) (remaining|left)
 {timerkind} status
+(minutes|seconds) (to go|remaining) (on|for) (my|the) (timer|countdown)
+(check|look at) (my|the) (timer|countdown) for me
+(timer|countdown) (progress|update) please
+(minutes|seconds) left before the (timer|countdown) (beeps|rings)
+how many minutes (until|till) (the|my) timer (is done|finishes)
+how many (minutes|seconds) does (my|the) (timer|countdown) have (left|to go)
+how many more minutes on (my|the) (timer|countdown)

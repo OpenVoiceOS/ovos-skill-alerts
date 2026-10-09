@@ -1,2 +1,5 @@
-(aldatu|birprogramatu|bultzatu|doitu|eten|geldiarazi|geroratu|luzatu|mugitu) (alarma|alarmak|esna nazazu|esnatu|gogorarazpen|gogorarazpenak|ekitaldi|ekitaldiak|hitzordu|hitzorduak|tenporizadore|tenporizadoreak)
-(aldatu|birprogramatu|bultzatu|doitu|eten|geldiarazi|geroratu|luzatu|mugitu) (al|ba|dut|bat|nuen|da|dago|duzu|zure|ez|ari|izan|ezin|une|ere|gara|zara|dira|esna|dugu) (alarma|alarmak|esna nazazu|esnatu|gogorarazpen|gogorarazpenak|ekitaldi|ekitaldiak|hitzordu|hitzorduak|tenporizadore|tenporizadoreak)
+(aldatu|birprogramatu|bultzatu|doitu|eten|geldiarazi|geroratu|luzatu|mugitu) (alarma|alarmak|gogorarazpen|gogorarazpenak|ekitaldi|ekitaldiak|hitzordu|hitzorduak|tenporizadore|tenporizadoreak)
+(aldatu|mugitu) {date:old}(ko|eko) {schedkind} eta jarri {date:time}(etarako|tarako|rako)
+(mugitu|eraman|pasatu) [nire] (hurrengo|datorren) {schedkind} (goizeko|arratsaldeko|gaueko) {date:time}(etara|tara|ra)
+(aldatu|mugitu|eraman) biharko {schedkind} beste ordu batera
+(atzeratu|aurreratu) ordu (bat|erdi) biharko alarma

@@ -1,2 +1,4 @@
 añade (elementos|entradas|cosas) a la lista [{list_name}]
 (crea|añade) entradas de lista [{items}]
+# machine draft, unvouched: written by Claude Opus 5.5. A native speaker checks the lines below.
+hágame el favor de anotar {items} en la lista [de {list_name}]

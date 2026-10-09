@@ -1,3 +1,5 @@
-(poista|hävitä) lista [{list_name}]
-(poista|hävitä) [kaikki] listani
-(poista|hävitä) {list_name} lista
+# Finland-Swedish machine draft, unvouched
+radera listan [{list_name}]
+släng listan [{list_name}]
+jag behöver inte listan [{list_name}] längre
+ta bort min lista helt

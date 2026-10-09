@@ -8,3 +8,5 @@ réveille(-moi|-nous) [à {date:time}]
 réveille-moi avec {mediakind} à {date:time}
 réveille-moi dans {duration:duration}
 réveille-moi chaque {days} à {date:time}
+réveille-moi demain matin à six heures et demie
+programme un réveil pour sept heures demain

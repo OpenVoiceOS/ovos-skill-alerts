@@ -4,3 +4,4 @@ ajusta la longitud del próximo {schedkind} a {duration:duration}
 haz que el {schedkind} dure {duration:duration}
 cambia mi {schedkind} para que vaya hasta {duration:duration}
 acorta la duración de mi {schedkind} a {duration:duration}
+(que|haga que) (la|mi) alarma (dure|suene) hasta más tarde

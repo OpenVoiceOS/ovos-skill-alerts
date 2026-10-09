@@ -4,3 +4,6 @@ haz que el {schedkind} reproduzca {mediaform}
 cambia el sonido de mi {schedkind} a {mediakind}
 cambia la alerta del {schedkind} a {mediaform}
 quiero que mi próximo {schedkind} reproduzca mi {mediakind}
+(cambie|ajuste) (mi|el|la) {schedkind} para que (sea audible|suene)
+(cambie|ponga) (el sonido|el aviso|el tono) (de mi|del|de la) {schedkind} (a|por) {mediakind}
+(cambie|ponga) (el sonido|el aviso|el tono) (de mi|del|de la) {schedkind} (a|por) {mediaform}

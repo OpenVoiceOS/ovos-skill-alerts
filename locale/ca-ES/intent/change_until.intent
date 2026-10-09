@@ -4,3 +4,5 @@ ajusta la longitud del pròxim {schedkind} a {duration:duration}
 fes que el {schedkind} duri {duration:duration}
 canvia el meu {schedkind} perquè vagi fins {duration:duration}
 escurça la durada del meu {schedkind} a {duration:duration}
+allarga (una mica|més) la durada de (l'alarma|l'esdeveniment)
+(vull|necessito) que (l'alarma|el temporitzador) duri (més|menys) (estona|temps)

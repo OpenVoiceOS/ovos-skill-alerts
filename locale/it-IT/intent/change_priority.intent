@@ -4,3 +4,5 @@ regola la priorità del mio prossimo {schedkind}
 imposta il {schedkind} con priorità {number:priority}
 abbassa la priorità del mio {schedkind}
 cambia il livello di priorità del {schedkind} a {number:priority}
+dai più importanza al mio prossimo promemoria
+il promemoria di domani è meno urgente degli altri

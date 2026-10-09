@@ -1,0 +1,6 @@
+vaihda {schedkind} kesto arvoon {duration:duration}
+jatka {schedkind} kestoa arvoon {duration:duration}
+säädä seuraavan {schedkind} pituus arvoon {duration:duration}
+aseta {schedkind} kestämään {duration:duration}
+vaihda {schedkind} kestämään {duration:duration} asti
+lyhennä {schedkind} kestoa arvoon {duration:duration}

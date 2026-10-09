@@ -34,7 +34,6 @@
 تغییر من {schedkind} قبلی
 حرکت می کند {schedkind} قبلی
 کوتاه کردن بعدی {schedkind}
-ادامه مطلب بعدی {schedkind}
 بعدی گسترش من {schedkind}
 من {schedkind} قبلی
 در این {schedkind} قبلی
@@ -45,7 +44,6 @@
 این را بسازید {schedkind} قبلی
 قرار دادن آن {schedkind} قبلی
 کوتاه کردن من {schedkind}
-طول می کشد من {schedkind}
 گسترش من {schedkind}
 {schedkind} قبلی
 {schedkind} زودتر
@@ -100,3 +98,7 @@
 از {date:old} برای {date:time} حرکت من {schedkind}
 از {date:old} برای {date:time} تغییر من {schedkind}
 از {date:old} برای {date:time} بازگرداندن من {schedkind}
+(هشدار|ساعت هشدار|زمانبندی|شمارش|یادآوری|رویداد|رویدادها|زنگ ساعت|زنگ|آلارم|تایمر|قرار|قرار ملاقات|جلسه) را (زودتر|دیرتر) (کن|بگذار)
+{schedkind} را [برای] تمام روز (کن|بگذار)
+# machine draft, unvouched: written by Claude Opus 5.5. A native speaker checks the lines below.
+{schedkind} را به وقت دیگری ببر

@@ -8,3 +8,4 @@ esnatu (nazazu|gaitzazu) [{date:time}(etan|tan)]
 esnatu nazazu {mediakind}(rekin|ekin) {date:time}(etan|tan)
 esnatu nazazu {days} bakoitzean {date:time}(etan|tan)
 esnatu (nazazu|gaitzazu) {duration:duration} barru
+alarma bat behar dut {date:time}(etarako|rako)

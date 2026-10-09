@@ -7,3 +7,5 @@ tinc (algun|alguna) {alertkind}
 hi ha {alertkind} (programats|programades|desats|desades)
 (quan|quin) és el meu pròxim {alertkind}
 què tinc (programat|desat|apuntat)
+(digue'm|llegeix-me) les alarmes que encara (queden|estan actives)
+(quines|quantes) alarmes (estan|són) pendents (ara|avui)

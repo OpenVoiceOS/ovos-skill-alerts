@@ -26,3 +26,4 @@ reserve um compromisso para {event}
 eu gostaria de agendar um compromisso para {event}
 novo compromisso para {event}
 eu tenho um compromisso novo para {event}
+(marca|agenda) (uma reunião|um compromisso) (com o time|na agenda) (na quinta|amanhã)
