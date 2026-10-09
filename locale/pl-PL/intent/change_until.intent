@@ -1,0 +1,12 @@
+zmień czas trwania mojego {schedkind} na {duration:duration}
+przedłuż mój {schedkind} do {duration:duration}
+dostosuj długość następnego {schedkind} do {duration:duration}
+spraw, żeby {schedkind} trwał {duration:duration}
+zmień mój {schedkind}, żeby trwał do {duration:duration}
+skróć czas trwania mojego {schedkind} do {duration:duration}
+niech (alarm|budzik|minutnik) dzwoni przez {duration:duration}
+(alarm|budzik|minutnik) ma dzwonić (przez|do) {duration:duration}
+# machine draft, unvouched: written by Claude Opus 5.5. A native speaker checks the lines below.
+niech {schedkind} trwa aż do {date:time}
+wydłuż czas dzwonienia (alarmu|budzika) do {duration:duration}
+(alarm|zegar budzący|minutnik|minutniki|odliczenie|przypomnienie|Przypomnienia|wydarzenie|wydarzenia|spotkanie|budzik|budziki|timer|timery) powinien trwać {duration:duration}

@@ -161,4 +161,6 @@ cython_debug/
 #.idea/
 
 # vscode
-.vscode/
+.vscode/.msg.txt
+.body.md
+install*.log

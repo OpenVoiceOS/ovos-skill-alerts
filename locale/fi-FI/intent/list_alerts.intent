@@ -1,0 +1,6 @@
+(voitko|voisitko) kertoa mitä {alertkind} minulla on
+# machine draft, unvouched: written by Claude Opus 5.5. A native speaker checks the lines below.
+mitä {alertkind} minulle on asetettu
+luettele kaikki (hälytys|hälytykset|herätyskello|ajastin|ajastimet|takaisinlaskenta|muistutus|muistutukset|tapahtuma|tapahtumat|tapaaminen|tapaamiset|varoitus|varoitukset|herätys|herätykset|herätykseni|herätyksiä|hälytyksiä|muistutuksia|muistutukseni|ajastimia|ajastimeni|tapahtumia)
+onko minulla (yhtään|mitään) (hälytys|hälytykset|herätyskello|ajastin|ajastimet|takaisinlaskenta|muistutus|muistutukset|tapahtuma|tapahtumat|tapaaminen|tapaamiset|varoitus|varoitukset|herätys|herätykset|herätykseni|herätyksiä|hälytyksiä|muistutuksia|muistutukseni|ajastimia|ajastimeni|tapahtumia) [(huomenna|tänään)]
+näytä tulevat (hälytys|hälytykset|herätyskello|ajastin|ajastimet|takaisinlaskenta|muistutus|muistutukset|tapahtuma|tapahtumat|tapaaminen|tapaamiset|varoitus|varoitukset|herätys|herätykset|herätykseni|herätyksiä|hälytyksiä|muistutuksia|muistutukseni|ajastimia|ajastimeni|tapahtumia)

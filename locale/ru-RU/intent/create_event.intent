@@ -1,0 +1,4 @@
+(создай|добавь|запланируй) (мероприятие|встречу) [{event}]
+(новое мероприятие|новая встреча) [{event}]
+# machine draft, unvouched: written by Claude Opus 5.5. A native speaker checks the lines below.
+(создай|добавь) [мне] новое (мероприятие|событие) в календаре

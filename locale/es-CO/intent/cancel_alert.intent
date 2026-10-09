@@ -1,0 +1,8 @@
+(cancela|cancelar|borra|borrar|elimina|eliminar|descarta|descartar) {alertkind}
+(cancela|cancelar|borra|borrar|elimina|eliminar|descarta|descartar) (el|la|los|las) {alertkind}
+(cancela|cancelar|borra|borrar|elimina|eliminar) (todos los|todas las) {alertkind}
+(cancela|cancelar|borra|borrar|elimina|eliminar) (mi|mis) {alertkind}
+(cancela|cancelar|borra|borrar) (el|la) próximo {alertkind}
+(cancela|anula|elimina|borra|quita) (mi|mis) {alertkind} de {name}
+(cancele|borre|elimine|quite|anule|descarte) (alarma|alarmas|el despertador|temporizador|temporizadores|cuenta regresiva|recordatorio|recordatorios|evento|acontecimientos|cita|citas|alerta|alertas|cronómetro)
+(cancele|borre|elimine|quite|anule|descarte) (el|la|los|las|mi|mis) (alarma|alarmas|el despertador|temporizador|temporizadores|cuenta regresiva|recordatorio|recordatorios|evento|acontecimientos|cita|citas|alerta|alertas|cronómetro)

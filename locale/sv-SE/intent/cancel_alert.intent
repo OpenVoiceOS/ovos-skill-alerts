@@ -1,0 +1,6 @@
+(avbryt|avboka|ta bort|radera|rensa|slopa) {alertkind}
+(avbryt|avboka|ta bort|radera|rensa) (den|det) {alertkind}
+(avbryt|avboka|ta bort|radera|rensa) alla (mina|de) {alertkind}
+(avbryt|avboka|ta bort|radera|rensa) (mitt|min|mina) {alertkind}
+(avbryt|avboka|ta bort|radera) (den|det) (nästa|kommande) {alertkind}
+(avbryt|radera|ta bort|rensa) (mitt|min|mina) {alertkind} för {name}

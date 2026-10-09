@@ -1,0 +1,19 @@
+# Finland-Swedish machine draft, unvouched
+ny påminnelse [om {reminder}]
+glöm inte att påminna mig om {reminder}
+kom ihåg att påminna mig om {reminder}
+säg till mig att {reminder} [klockan {date:time}]
+påminn mig om att (köpa mjölk|ringa banken|ta ut soporna|hämta paketet) (i morgon|i kväll|på lördag|klockan tre)
+påminn mig om (tandläkaren|frisören|mötet|bastun) (på torsdag|i morgon|klockan fem)
+kan du påminna mig om (mötet|tandläkaren|tvättstugan) (klockan två|i morgon|på onsdag)
+gör en påminnelse om att (ringa mormor|betala räkningen|köpa blommor) (i morgon|på söndag|klockan sex)
+# Finland-Swedish machine draft, unvouched
+påminn mig om att gå till jobbet varje vardagsmorgon klockan 8
+påminn mig om att rasta hunden varje vardagsmorgon klockan 7
+påminn mig om att kolla mejlen varje vardagsmorgon klockan 9
+påminn mig om att vattna blommorna varje helgmorgon klockan 8
+påminn mig varje morgon klockan 7 om att ta vitaminerna
+påminn mig varje söndag om att ringa mormor
+påminn mig varje kväll klockan 9 att borsta tänderna
+påminn mig varje måndag att ta ut soporna
+påminn mig varje fredag eftermiddag om att städa

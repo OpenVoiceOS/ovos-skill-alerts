@@ -1,0 +1,4 @@
+(poista|tyhjennä) listan [{list_name}] (kohteet|kaikki)
+(poista|tyhjennä) {list_name} listan (kohteet|kaikki)
+tyhjennä (tehtävälistani|muistilistani)
+tyhjennä (ostoslista|kauppalista|ostoslistani|kauppalistani)

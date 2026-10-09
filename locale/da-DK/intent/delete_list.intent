@@ -1,0 +1,8 @@
+(slet|fjern) [min|] liste[n] [{list_name}]
+(slet|fjern) [alle] [mine] lister
+(slet|fjern) {list_name} liste[n]
+fjern indkøbslisten fra enheden for altid
+gavelisten bruger jeg ikke mere, slet den helt
+# machine draft, unvouched: written by Claude Opus 5.5. A native speaker checks the lines below.
+slet min {list_name} liste
+slet min (todo|huskeliste)[-liste]

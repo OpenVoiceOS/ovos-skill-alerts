@@ -1,0 +1,6 @@
+(cancel·la|cancel·lar|esborra|esborrar|elimina|eliminar|descarta|descartar) {alertkind}
+(cancel·la|cancel·lar|esborra|esborrar|elimina|eliminar|descarta|descartar) (el|la|els|les) {alertkind}
+(cancel·la|cancel·lar|esborra|esborrar|elimina|eliminar) (tots els|totes les) {alertkind}
+(cancel·la|cancel·lar|esborra|esborrar|elimina|eliminar) (el meu|la meva|els meus|les meves) {alertkind}
+(cancel·la|cancel·lar|esborra|esborrar) (el|la) pròxim {alertkind}
+(cancel·la|anul·la|elimina|esborra|treu) (el meu|la meva|els meus|les meves) {alertkind} de {name}

@@ -1,0 +1,8 @@
+ändere die Dauer meines {schedkind} auf {duration:duration}
+verlängere meinen {schedkind} bis {duration:duration}
+passe die Länge des nächsten {schedkind} auf {duration:duration} an
+lass den {schedkind} für {duration:duration} andauern
+ändere meinen {schedkind} so, dass er bis {duration:duration} läuft
+verkürze die Dauer meines {schedkind} auf {duration:duration}
+der Klingelton meines Weckers soll länger andauern
+lass den Alarm drei statt einer Minute klingeln

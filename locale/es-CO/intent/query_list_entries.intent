@@ -1,0 +1,10 @@
+(qué elementos|qué entradas) hay en (mi|la) lista [{list_name}]
+(lee|muestra) [me] las entradas de (mi|la) lista [{list_name}]
+qué hay en (mi|la) lista {list_name}
+qué hay en mi lista de {list_name}
+(lee|muestra) [me] mis (notas|tareas) [pendientes]
+qué tengo que hacer
+(léame|dígame|muéstreme) (lo que hay en|las cosas de|qué hay en) (mi|la) lista [de {list_name}]
+qué (tengo|hay) pendiente [para hoy]
+qué (tengo|hay) anotado en (la|esa|mi) lista
+qué cosas me faltan por hacer de la lista

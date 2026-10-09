@@ -1,0 +1,9 @@
+لیست من را حذف کنید {list_name}
+لیست را حذف کنید {list_name}
+حذف لیست ها
+حذف لیست من {list_name}
+(حذف|پاک کردن) لیست {list_name}
+لیست {list_name} [دیگر] لازم نیست، (حذفش کن|پاکش کن)
+# machine draft, unvouched: written by Claude Opus 5.5. A native speaker checks the lines below.
+حذف کل لیست
+لیست کل من را حذف کنید

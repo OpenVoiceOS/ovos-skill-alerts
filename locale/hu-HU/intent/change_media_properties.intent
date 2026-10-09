@@ -1,0 +1,6 @@
+állítsd be a {schedkind}-omat, hogy hallható legyen
+állítsd be a következő {schedkind}-ot, hogy {mediakind} szóljon
+állítsd be a {schedkind}-ot {mediaform} lejátszására
+változtasd meg a {schedkind}-om hangját erre: {mediakind}
+változtasd meg a {schedkind} riasztását erre: {mediaform}
+azt akarom, hogy a következő {schedkind}-om a {mediakind}-omat játssza le

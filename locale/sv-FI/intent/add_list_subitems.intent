@@ -1,0 +1,8 @@
+# Finland-Swedish machine draft, unvouched
+lägg till (saker|grejer|poster|punkter) (på|i|till) [min] lista[n] [{list_name}]
+lägg till (saker|grejer|poster|punkter) (på|i|till) [min] {list_name}-lista[n]
+lägg till (mjölk|bröd|ägg|smör|ost|bananer|tvättmedel) (på|i) (listan|min lista|inköpslistan|shoppinglistan) [{list_name}]
+lägg till (tvätta bilen|ringa tandläkaren|betala räkningarna|klippa gräset) på (min|) {list_name}-lista[n]
+jag vill lägga till (något|några saker|en sak) på [min] lista[n] [{list_name}]
+skriv upp (mjölk|bröd|ägg|kaffe och socker) på (listan|inköpslistan) [{list_name}]
+sätt upp (några saker|något) på [min] lista[n] [{list_name}]

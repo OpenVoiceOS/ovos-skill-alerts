@@ -1,11 +1,11 @@
 {
-    "type": "skill-alerts.neongeckocom:TimerStatus",
+    "type": "skill-alerts.neongeckocom:timer_status",
     "data": {
       "utterances": [
         "how much time is left on the oven timer"
       ],
       "lang": "en-us",
-      "intent_type": "skill-alerts.neongeckocom:TimerStatus",
+      "intent_type": "skill-alerts.neongeckocom:timer_status",
       "query": "how much",
       "time": "time",
       "remaining": "left",

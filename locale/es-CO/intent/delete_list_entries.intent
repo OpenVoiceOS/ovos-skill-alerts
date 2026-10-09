@@ -1,0 +1,5 @@
+(elimina|borra|quita) (los elementos|las entradas) de (mi|la) lista [{list_name}]
+(elimina|borra) todo de (mi|la) lista [{list_name}]
+(elimina|borra) todo de mi lista de {list_name}
+(vacíe|vacía|limpie|limpia|desocupe) (mi|la) lista [de {list_name}]
+(deje|desocupe) (la|esa|mi) lista (vacía|sin nada)

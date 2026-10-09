@@ -1,0 +1,6 @@
+(delete|remove|erase) (my|the) list [{list_name}]
+(delete|remove) [all] [my] lists
+(delete|remove|erase|drop) (my|the) {list_name} list
+(trash|scrap|throw away) all (of my|the) lists
+# machine draft, unvouched: written by Claude Opus 5.5. A native speaker checks the lines below.
+(delete|remove) my (todo|to do) list

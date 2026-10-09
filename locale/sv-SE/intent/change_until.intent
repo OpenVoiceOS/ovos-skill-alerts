@@ -1,0 +1,8 @@
+ändra varaktigheten på min {schedkind} till {duration:duration}
+förläng min {schedkind} till {duration:duration}
+justera längden på nästa {schedkind} till {duration:duration}
+gör så att {schedkind} varar {duration:duration}
+ändra min {schedkind} så att den varar till {duration:duration}
+korta ner varaktigheten på min {schedkind} till {duration:duration}
+(mitt|min) (Alarm|väckarklocka|Timer|tidtagare|nedräkning|påminnelse|påminnelser|händelse|händelser|möte|möten|larm|larmet|väckarklockan|timern|äggklocka|påminnelsen|mötet|händelsen) ska (ringa|låta|pågå|vara) [i] {duration:duration}
+ändra (varaktigheten|längden|tiden) (på|för) (mitt|min) {schedkind} så att (det|den) (varar|pågår) {duration:duration}

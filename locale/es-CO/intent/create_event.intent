@@ -1,0 +1,6 @@
+(crea|añade|programa) (un evento|una cita) [{event}]
+evento nuevo [{event}]
+tengo (un evento|una cita) [{event}]
+(agéndeme|agéndame) (un evento|una cita|una reunión) [{event}]
+(anote|ponga) en (la|mi) agenda (una cita|el médico|una reunión)
+(agende|programe) (un evento|una reunión) para (el viernes|mañana|la tarde)

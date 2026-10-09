@@ -1,0 +1,5 @@
+(usuń|wykasuj) (pozycje|wszystko) z [mojej] listy [{list_name}]
+wyczyść [moją] listę {list_name}
+(usuń|wykasuj) wszystko z [mojej] listy {list_name}
+# machine draft, unvouched: written by Claude Opus 5.5. A native speaker checks the lines below.
+(usuń|wykasuj|skasuj) wszystkie pozycje z [mojej] listy [{list_name}]
