@@ -94,10 +94,30 @@ CAPTURE_TIMEOUT = 30.0
 CAPTURE_SETTLE = 0.4
 
 
+# The fold makes create_reminder one padatious intent of 312 lines where
+# there were two of 179 and 140. The sample count is unchanged, but
+# padatious cost per intent is not linear in it, so the alerts container
+# trains slower: harness-c timed this boot at 123.9s and 76.8s on the
+# merged tree against 72.9s and 62.6s on dev, alternating under one load.
+# ovoscope's own max_wait=300 then errored at setup on a loaded box.
+#
+# The wait is handed to _wait_trained.wait_for_minicroft_ready, as
+# test_class_c_fold_gate and test_intents_en_us do, with a budget named
+# from that measurement rather than ovoscope's default. The helper raises
+# MinicroftNotReady when either budget runs out, so an overrun stops the
+# module at setup and names itself, instead of reaching the tests as a
+# wake-routing failure or passing by luck.
+TRAINED_WAIT = 240.0
+
+
 @pytest.fixture(scope="module")
 def minicroft():
-    mc = get_minicroft([ALERTS_ID, NAPTIME_ID], max_wait=300)
-    wait_for_minicroft_ready(mc)
+    mc = get_minicroft([ALERTS_ID, NAPTIME_ID], wait_for_trained=False)
+    wait_for_minicroft_ready(mc, max_trained_wait=TRAINED_WAIT)
+    loaded = set(mc.plugin_skills)
+    assert {ALERTS_ID, NAPTIME_ID} <= loaded, (
+        f"arbitration needs BOTH skills loaded, got {sorted(loaded)}"
+    )
     yield mc
     mc.stop()
 
