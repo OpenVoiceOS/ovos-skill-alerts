@@ -82,6 +82,16 @@
 {"lang": "eu-ES", "utterance": "zein elementu daude egiteko zerrendan", "list_name": "egiteko", "kind": "list", "intent": "query_list_entries", "source_template": "(zein elementu|zer) daude [{list_name}] zerrendan"}
 {"lang": "eu-ES", "utterance": "irakurri shopping zerrendako sarrerak", "list_name": "shopping", "kind": "list", "intent": "query_list_entries", "source_template": "(irakurri|erakutsi) [{list_name}] zerrendako sarrerak"}
 {"lang": "eu-ES", "utterance": "zein elementu daude shopping zerrendan", "list_name": "shopping", "kind": "list", "intent": "query_list_entries", "source_template": "(zein elementu|zer) daude [{list_name}] zerrendan"}
+{"lang": "fa-IR", "utterance": "همه چیز را نشان می دهم", "list_name": null, "kind": "todo", "intent": "query_list_entries", "source_template": "همه چیز را نشان می دهم"}
+{"lang": "fa-IR", "utterance": "چه چیزی در لیست shopping", "list_name": "shopping", "kind": "list", "intent": "query_list_entries", "source_template": "چه چیزی در لیست {list_name}"}
+{"lang": "fa-IR", "utterance": "نمایش آیتم ها در لیست shopping", "list_name": "shopping", "kind": "list", "intent": "query_list_entries", "source_template": "نمایش آیتم ها در لیست {list_name}"}
+{"lang": "fa-IR", "utterance": "نوشته ها را در لیست بخوانید shopping", "list_name": "shopping", "kind": "list", "intent": "query_list_entries", "source_template": "نوشته ها را در لیست بخوانید {list_name}"}
+{"lang": "fa-IR", "utterance": "چه چیزی در لیست یادداشت", "list_name": "یادداشت", "kind": "list", "intent": "query_list_entries", "source_template": "چه چیزی در لیست {list_name}"}
+{"lang": "fa-IR", "utterance": "همه چیز را حذف کنید", "list_name": null, "kind": "todo", "intent": "delete_list_entries", "source_template": "همه چیز را حذف کنید"}
+{"lang": "fa-IR", "utterance": "همه چیز را از کل من دور کن", "list_name": null, "kind": "todo", "intent": "delete_list_entries", "source_template": "همه چیز را از کل من دور کن"}
+{"lang": "fa-IR", "utterance": "حذف آیتم ها از لیست من shopping", "list_name": "shopping", "kind": "list", "intent": "delete_list_entries", "source_template": "حذف آیتم ها از لیست من {list_name}"}
+{"lang": "fa-IR", "utterance": "حذف ورودی ها از لیست من shopping", "list_name": "shopping", "kind": "list", "intent": "delete_list_entries", "source_template": "حذف ورودی ها از لیست من {list_name}"}
+{"lang": "fa-IR", "utterance": "حذف آیتم ها از لیست من یادداشت", "list_name": "یادداشت", "kind": "list", "intent": "delete_list_entries", "source_template": "حذف آیتم ها از لیست من {list_name}"}
 {"lang": "fr-FR", "utterance": "supprime ma liste de choses à faire", "list_name": null, "kind": "todo", "intent": "delete_list_entries", "source_template": "(supprime|efface) ma liste (de choses à faire|todo)"}
 {"lang": "fr-FR", "utterance": "supprime tout de ma liste de choses à faire", "list_name": null, "kind": "todo", "intent": "delete_list_entries", "source_template": "(supprime|efface) tout de ma liste (de choses à faire|todo)"}
 {"lang": "fr-FR", "utterance": "supprime les articles de ma liste mémo", "list_name": "mémo", "kind": "list", "intent": "delete_list_entries", "source_template": "(supprime|efface|enlève) les (articles|entrées) de (ma|la) liste [{list_name}]"}
