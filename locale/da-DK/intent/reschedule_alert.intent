@@ -27,3 +27,5 @@
 (gør|sæt|ændr) (min|den) {schedkind} (til en heldagsbegivenhed|heldag|til at være heldag)
 (flyt|ændr|omlæg|skub|udsæt|tilpas) (min|den) {schedkind} fra {date:old} til {date:time}
 fra {date:old} til {date:time} (flyt|ændr|omlæg|skub|udsæt) (min|den) {schedkind}
+flyt aftalen i morgen til klokken femten
+mit vækkeur skal ringe en halv time senere

@@ -4,3 +4,5 @@ axusta a frecuencia do {schedkind} a {repeat}
 cambia o meu próximo {schedkind} para que se repita {repeat}
 quero que o {schedkind} se repita cada {repeat}
 cambia a repetición do meu {schedkind} a cada {repeat}
+cambia cada canto se repite (a alarma|o lembrete|o temporizador)
+(quero que|fai que) a alarma (volva soar|soe) (cada semana|os luns)

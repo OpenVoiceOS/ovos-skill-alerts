@@ -1,2 +1,9 @@
 (elimina|borra) a [miña] lista [{list_name}]
 (elimina|borra) [todas] as [miñas] listas
+(tira|desfaite de) (esa|a) lista (enteira|completa)
+(tira|desfaite de) todas as listas
+(quero|podes) (eliminar|borrar) (esa|a) lista (para sempre|dunha vez)
+(elimina|borra) (cada unha das|todas as) listas que (fixen|teño)
+(quero|vou) (quitar|tirar) todas as listas (que fixen|dunha vez)
+# machine draft, unvouched: written by Claude Opus 5.5. A native speaker checks the lines below.
+(elimina|borra) a miña lista de {list_name}

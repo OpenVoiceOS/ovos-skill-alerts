@@ -1,11 +1,10 @@
-(aseta|luo|lisää) hälytys [kello {date:time}]
-uusi hälytys [{date:time}]
-aseta hälytys kello {date:time}
-uusi herätä minut
-uusi hälytykset
-luo hälytykset
-aseta hälytys [kello {date:time}] soittamaan {mediakind}
-herätä minut [kello {date:time}]
-herätä minut soittamaan {mediakind} kello {date:time}
-herätä minut joka {days} kello {date:time}
-herätä minut {duration:duration} kuluttua
+# Finland-Swedish machine draft, unvouched
+nytt (alarm|larm) [{date:time}]
+(sätt|ställ) (alarmet|väckarklockan) på {date:time}
+jag (vill ha|behöver) ett alarm (klockan|till) {date:time}
+kan du sätta ett (alarm|larm) (klockan|till|på) {date:time}
+kan du väcka (mig|oss) [klockan {date:time}]
+# machine draft, unvouched: written by Claude Opus 5.5. A native speaker checks the lines below.
+jag vill bli väckt [klockan {date:time}]
+väck mig i morgon bitti [klockan {date:time}]
+ställ in väckning [klockan {date:time}]

@@ -12,3 +12,4 @@
 (change|set|adjust|make|reschedule) (my|the) {schedkind} to every {repeat}
 (change|set|adjust|make|reschedule) (my|the) wake {schedkind} to every {repeat}
 (change|adjust) how often (my|the) {schedkind} (repeats|recurs)
+(have|let) (my|the) alarm repeat (on weekdays|on weekends|every day) (instead|from now on)

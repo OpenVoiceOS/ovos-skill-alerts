@@ -4,3 +4,4 @@ ajusta la prioridad de mi próximo {schedkind}
 pon el {schedkind} con prioridad {number:priority}
 baja la prioridad de mi {schedkind}
 cambia el nivel de prioridad del {schedkind} a {number:priority}
+(dale|ponle) (más|menos) importancia a (la|esa|mi) alarma

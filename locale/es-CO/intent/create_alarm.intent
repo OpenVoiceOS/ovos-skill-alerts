@@ -8,3 +8,8 @@ despiérta(me|nos) [a las {date:time}]
 despiértame con {mediakind} a las {date:time}
 despiértame en {duration:duration}
 despiértame cada {days} a las {date:time}
+(me puede|podría|puede) despertar (a las|para las) {date:time}
+# machine draft, unvouched: written by Claude Opus 5.5. A native speaker checks the lines below.
+necesito que me despierte [a las {date:time}]
+prográmeme el despertador [para las {date:time}]
+active el despertador [a las {date:time}]

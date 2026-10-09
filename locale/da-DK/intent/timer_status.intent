@@ -23,3 +23,5 @@ hvad er status på (min|den) {timerkind}
 hvad er (min|den) {timerkind} status
 hvor (meget|meget tid) (resterende|tilbage)
 {timerkind} status
+hvor mange minutter er der tilbage til æggeuret er færdigt
+hvor langt er nedtællingen som jeg startede

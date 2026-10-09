@@ -3,3 +3,5 @@ temporizador nuevo [de {duration:duration}]
 nuevo temporizador
 añadir temporizador
 añadir temporizadores
+(cuénteme|controle) {duration:duration} con el temporizador
+(póngame|arranque) un temporizador (mientras cocino|para la cocina)

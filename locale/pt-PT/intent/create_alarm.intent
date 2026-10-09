@@ -7,3 +7,5 @@ acorda(-me|-nos) [às {date:time}]
 (podes|podias) acordar-me [às {date:time}]
 acorda-me com {mediakind} às {date:time}
 acorda-me a cada {days} às {date:time}
+quero acordar (cedo|amanhã de manhã) (às|pelas) {date:time}
+(acorda-me|desperta-me) com (um audiolivro|música|o rádio) (amanhã|de manhã)

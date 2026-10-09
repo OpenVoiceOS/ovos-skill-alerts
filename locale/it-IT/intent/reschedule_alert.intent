@@ -7,3 +7,5 @@
 (rimanda|ritarda) (il|la|il mio|la mia) (prossimo|prossima) {schedkind} di {duration:duration}
 (il|la|il mio|la mia) {schedkind} (spostalo|cambialo|spostala|cambiala) alle {date:time}
 (metti|imposta) (il|la|il mio|la mia) (prossimo|prossima) {schedkind} (prima|più tardi)
+sposta l'appuntamento di domani alle quindici
+voglio che la sveglia suoni mezz'ora più tardi

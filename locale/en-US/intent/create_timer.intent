@@ -26,3 +26,5 @@ make me a timer for {duration:duration}
 kick off a timer for {duration:duration}
 i'd like to set a timer for {duration:duration}
 start the timer now
+(time|count down) (my|the) (cooking|workout|break|nap) (please|for me)
+(run|start) a countdown (please|now)

@@ -16,3 +16,4 @@
 (change|set|adjust) (my|the|my next|the next) {schedkind} sound to {mediakind}
 (change|set|adjust) (my|the|my next|the next) {schedkind} sound to {mediaform}
 (change|set|adjust) (my|the|my next|the next) {schedkind} alert to {mediaform}
+read (my|the) (reminder|alarm) (aloud|out loud) when it (fires|rings|goes off)

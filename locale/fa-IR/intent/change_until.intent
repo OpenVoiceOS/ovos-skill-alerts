@@ -20,7 +20,7 @@
 تغییر من {schedkind} تا زمانی که {duration:duration}
 تنظیم من {schedkind} تا زمانی که {duration:duration}
 گسترش من {schedkind} تا زمانی که {duration:duration}
-تغییراتی در {schedkind} برای پیاده روی بعدی {duration:duration}
-قرار دادن آن {schedkind} برای پیاده روی بعدی {duration:duration}
-تنظیم شده توسط {schedkind} برای پیاده روی بعدی {duration:duration}
-را گسترش دهید {schedkind} برای پیاده روی بعدی {duration:duration}
+(بگذار|بذار) {schedkind} به مدت {duration:duration} طول (بکشد|بکشه)
+مدت زمان {schedkind}م را (عوض کن|تغییر بده) [به {duration:duration}]
+{schedkind} را (چند دقیقه|نیم ساعت|یک ساعت) (کوتاه‌تر|طولانی‌تر) کن
+مدت {schedkind}م را (کوتاه|کمتر|بیشتر|طولانی‌تر) کن

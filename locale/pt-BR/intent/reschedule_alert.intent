@@ -29,3 +29,4 @@ o {schedkind} (de|às) {date:old} (mova|mude|remarque|desloque|empurre|adie) ele
 (faça|deixe|mude) (meu|o) {schedkind} (um evento de dia inteiro|o dia inteiro|um evento do dia todo|para um evento de dia inteiro|para o dia inteiro)
 (mova|mude|remarque|desloque|empurre|adie|ajuste) (meu|o) {schedkind} de {date:old} para {date:time}
 de {date:old} para {date:time} (mova|mude|remarque|desloque|empurre|adie) (meu|o) {schedkind}
+(passa|empurra) o (alarme|despertador) para mais tarde

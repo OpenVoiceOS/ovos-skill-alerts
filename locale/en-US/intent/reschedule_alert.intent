@@ -28,3 +28,10 @@ the {schedkind} (for|at) {date:old} (move|change|reschedule|shift|push|postpone)
 (make|set|change) (my|the) {schedkind} (an all day event|all day|a whole day event|to an all day event|to all day)
 (move|change|reschedule|shift|push|postpone|adjust) (my|the) {schedkind} from {date:old} to {date:time}
 from {date:old} to {date:time} (move|change|reschedule|shift|push|postpone) (my|the) {schedkind}
+(lengthen|stretch) (my|the) timer by (five|ten|a few) minutes
+(trim|shave) (five|ten|two) minutes (from|off) (my|the) timer
+(turn|convert) (my|the) (event|appointment) into an all day (event|one)
+(ring|wake me) (an hour|half an hour|a bit) earlier (tomorrow|than planned)
+(top up|extend) the (timer|countdown) (a bit|by a few minutes)
+(the|my) (timer|countdown) needs (more|extra) (time|minutes)
+(bump|move) (my|the) alarm (up|forward) (a bit|an hour)

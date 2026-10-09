@@ -12,3 +12,5 @@
 (change|set|adjust|raise|lower) (my|the) {schedkind} priority
 the {schedkind} priority (change|set|adjust) it (to|to level) {number:priority}
 the {schedkind} priority (change|set|adjust|raise|lower) it
+(raise|lower) the importance of (my|the) (alarm|reminder|event)
+(prioritize|deprioritize) (my|the|that) (reminder|alarm|event)

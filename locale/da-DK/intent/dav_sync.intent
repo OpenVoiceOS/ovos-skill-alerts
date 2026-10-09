@@ -4,3 +4,5 @@ download {davkind}
 upload min {davkind}
 synkroniser alle mine {davkind}
 synkroniser {davkind} og {davkind2}
+afstem min kalender med onlineserveren
+hent nyhederne i min kalender fra internettet

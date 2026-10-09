@@ -7,3 +7,5 @@
 (mude|defina|ajuste|estenda|encurte) a (duração|extensão) (do meu|do) {schedkind} para {duration:duration}
 (mude|defina|ajuste|estenda) (meu|o) {schedkind} (até|até as) {duration:duration}
 (mude|defina|ajuste|estenda) (meu|o) {schedkind} para durar pelos próximos {duration:duration}
+(o|meu) compromisso (vai até|termina) (mais tarde|mais cedo) do que (eu marquei|o previsto)
+(estica|encurta) (a duração do|o) (compromisso|alarme) (um pouco|mais)

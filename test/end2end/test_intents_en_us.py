@@ -560,7 +560,7 @@ class TestAdapt2_Createalarm(_IntentRoutingMixin, TestCase):
 
     def test_set_an_alarm_every_weekday_at_time(self):
         # PR #172 adversarial review: this phrasing previously misrouted to
-        # create_reminder_recurring.intent.
+        # the recurring reminder templates.
         self._assert_padatious(r"set an alarm every weekday at 6", r"create_alarm.intent")
 
     @pytest.mark.xfail(strict=True, reason="issue #155: 'alarm in an hour' -- with no leading verb (set/create/...) and no explicit clock time -- scores below the padatious pipeline's confidence tiers under the full default pipeline; real skill defect carried over from the pre-migration Adapt-only xfail, not a test artifact. See https://github.com/OpenVoiceOS/ovos-skill-alerts/issues/155.")

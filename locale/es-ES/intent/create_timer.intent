@@ -3,3 +3,7 @@ temporizador nuevo [de {duration:duration}]
 nuevo temporizador
 añadir temporizador
 añadir temporizadores
+(cuéntame|controla) {duration:duration} con el temporizador
+(pon|añade) un temporizador (para la cocina|mientras cocino)
+necesito un temporizador para la cocina
+cuenta unos minutos con un temporizador

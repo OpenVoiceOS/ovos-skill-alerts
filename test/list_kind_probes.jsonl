@@ -177,17 +177,24 @@
 {"lang": "ru-RU", "utterance": "какие пункты в списке shopping", "list_name": "shopping", "kind": "list", "intent": "query_list_entries", "source_template": "(какие пункты|что) (в списке|в моём списке) [{list_name}]"}
 {"lang": "ru-RU", "utterance": "прочитай мне пункты списка shopping", "list_name": "shopping", "kind": "list", "intent": "query_list_entries", "source_template": "(прочитай|покажи) [мне] (пункты|записи) списка [{list_name}]"}
 {"lang": "ru-RU", "utterance": "какие пункты в списке todo", "list_name": "todo", "kind": "list", "intent": "query_list_entries", "source_template": "(какие пункты|что) (в списке|в моём списке) [{list_name}]"}
-{"lang": "sv-FI", "utterance": "poista tehtävälistani", "list_name": null, "kind": "todo", "intent": "delete_list_entries", "source_template": "(poista|tyhjennä) (tehtävälistani|muistilistani)"}
-{"lang": "sv-FI", "utterance": "poista listan huomautus kohteet", "list_name": "huomautus", "kind": "list", "intent": "delete_list_entries", "source_template": "(poista|tyhjennä) listan [{list_name}] (kohteet|kaikki)"}
-{"lang": "sv-FI", "utterance": "poista listan shopping kohteet", "list_name": "shopping", "kind": "list", "intent": "delete_list_entries", "source_template": "(poista|tyhjennä) listan [{list_name}] (kohteet|kaikki)"}
-{"lang": "sv-FI", "utterance": "poista shopping listan kohteet", "list_name": "shopping", "kind": "list", "intent": "delete_list_entries", "source_template": "(poista|tyhjennä) {list_name} listan (kohteet|kaikki)"}
-{"lang": "sv-FI", "utterance": "mitä minun pitää tehdä", "list_name": null, "kind": "todo", "intent": "query_list_entries", "source_template": "mitä minun pitää tehdä"}
-{"lang": "sv-FI", "utterance": "mitä on tehtävälistallani", "list_name": null, "kind": "todo", "intent": "query_list_entries", "source_template": "mitä on (tehtävälistallani|muistilistallani)"}
-{"lang": "sv-FI", "utterance": "mitä on listalla huomautus", "list_name": "huomautus", "kind": "list", "intent": "query_list_entries", "source_template": "(mitä|mitkä kohteet) on listalla [{list_name}]"}
-{"lang": "sv-FI", "utterance": "lue listan shopping kohteet", "list_name": "shopping", "kind": "list", "intent": "query_list_entries", "source_template": "(lue|näytä) listan [{list_name}] kohteet"}
-{"lang": "sv-FI", "utterance": "lue shopping listan kohteet", "list_name": "shopping", "kind": "list", "intent": "query_list_entries", "source_template": "(lue|näytä) {list_name} listan kohteet"}
-{"lang": "sv-FI", "utterance": "mitä on listalla shopping", "list_name": "shopping", "kind": "list", "intent": "query_list_entries", "source_template": "(mitä|mitkä kohteet) on listalla [{list_name}]"}
-{"lang": "sv-FI", "utterance": "mitä on shopping listalla", "list_name": "shopping", "kind": "list", "intent": "query_list_entries", "source_template": "(mitä|mitkä kohteet) on {list_name} listalla"}
+{"lang": "fi-FI", "utterance": "poista tehtävälistani", "list_name": null, "kind": "todo", "intent": "delete_list_entries", "source_template": "(poista|tyhjennä) (tehtävälistani|muistilistani)"}
+{"lang": "fi-FI", "utterance": "poista listan huomautus kohteet", "list_name": "huomautus", "kind": "list", "intent": "delete_list_entries", "source_template": "(poista|tyhjennä) listan [{list_name}] (kohteet|kaikki)"}
+{"lang": "fi-FI", "utterance": "poista listan shopping kohteet", "list_name": "shopping", "kind": "list", "intent": "delete_list_entries", "source_template": "(poista|tyhjennä) listan [{list_name}] (kohteet|kaikki)"}
+{"lang": "fi-FI", "utterance": "poista shopping listan kohteet", "list_name": "shopping", "kind": "list", "intent": "delete_list_entries", "source_template": "(poista|tyhjennä) {list_name} listan (kohteet|kaikki)"}
+{"lang": "fi-FI", "utterance": "mitä minun pitää tehdä", "list_name": null, "kind": "todo", "intent": "query_list_entries", "source_template": "mitä minun pitää tehdä"}
+{"lang": "fi-FI", "utterance": "mitä on tehtävälistallani", "list_name": null, "kind": "todo", "intent": "query_list_entries", "source_template": "mitä on (tehtävälistallani|muistilistallani)"}
+{"lang": "fi-FI", "utterance": "mitä on listalla huomautus", "list_name": "huomautus", "kind": "list", "intent": "query_list_entries", "source_template": "(mitä|mitkä kohteet) on listalla [{list_name}]"}
+{"lang": "fi-FI", "utterance": "lue listan shopping kohteet", "list_name": "shopping", "kind": "list", "intent": "query_list_entries", "source_template": "(lue|näytä) listan [{list_name}] kohteet"}
+{"lang": "fi-FI", "utterance": "lue shopping listan kohteet", "list_name": "shopping", "kind": "list", "intent": "query_list_entries", "source_template": "(lue|näytä) {list_name} listan kohteet"}
+{"lang": "fi-FI", "utterance": "mitä on listalla shopping", "list_name": "shopping", "kind": "list", "intent": "query_list_entries", "source_template": "(mitä|mitkä kohteet) on listalla [{list_name}]"}
+{"lang": "fi-FI", "utterance": "mitä on shopping listalla", "list_name": "shopping", "kind": "list", "intent": "query_list_entries", "source_template": "(mitä|mitkä kohteet) on {list_name} listalla"}
+{"lang": "sv-FI", "utterance": "töm min att göra-lista helt", "list_name": null, "kind": "todo", "intent": "delete_list_entries", "source_template": "(töm|rensa) min (att göra|todo)-lista[n] helt"}
+{"lang": "sv-FI", "utterance": "töm listan shopping", "list_name": "shopping", "kind": "list", "intent": "delete_list_entries", "source_template": "(töm|rensa) (listan|min lista) [{list_name}]"}
+{"lang": "sv-FI", "utterance": "töm listan memo", "list_name": "memo", "kind": "list", "intent": "delete_list_entries", "source_template": "(töm|rensa) (listan|min lista) [{list_name}]"}
+{"lang": "sv-FI", "utterance": "vad ska jag göra", "list_name": null, "kind": "todo", "intent": "query_list_entries", "source_template": "vad (ska|måste) jag göra [i dag]"}
+{"lang": "sv-FI", "utterance": "vad finns det på min att göra-lista", "list_name": null, "kind": "todo", "intent": "query_list_entries", "source_template": "vad finns det på min (att göra|todo)-lista"}
+{"lang": "sv-FI", "utterance": "vad står på listan shopping", "list_name": "shopping", "kind": "list", "intent": "query_list_entries", "source_template": "(vad|vilka poster) (står|finns) på [min] lista[n] [{list_name}]"}
+{"lang": "sv-FI", "utterance": "vad står på listan memo", "list_name": "memo", "kind": "list", "intent": "query_list_entries", "source_template": "(vad|vilka poster) (står|finns) på [min] lista[n] [{list_name}]"}
 {"lang": "sv-SE", "utterance": "radera allt från min att göra-lista", "list_name": null, "kind": "todo", "intent": "delete_list_entries", "source_template": "(radera|ta bort) allt (från|på) min (att göra|todo)[-lista]"}
 {"lang": "sv-SE", "utterance": "radera min att göra-lista", "list_name": null, "kind": "todo", "intent": "delete_list_entries", "source_template": "(radera|rensa) min (att göra|todo)[-lista]"}
 {"lang": "sv-SE", "utterance": "radera posterna från min listan memo", "list_name": "memo", "kind": "list", "intent": "delete_list_entries", "source_template": "(radera|ta bort) (posterna|allt) (från|på) [min|] lista[n] [{list_name}]"}
@@ -224,3 +231,12 @@
 {"lang": "es-CO", "utterance": "lee me las entradas de mi lista shopping", "list_name": "shopping", "kind": "list", "intent": "query_list_entries", "source_template": "(lee|muestra) [me] las entradas de (mi|la) lista [{list_name}]"}
 {"lang": "es-CO", "utterance": "qué elementos hay en mi lista shopping", "list_name": "shopping", "kind": "list", "intent": "query_list_entries", "source_template": "(qué elementos|qué entradas) hay en (mi|la) lista [{list_name}]"}
 {"lang": "es-CO", "utterance": "qué hay en mi lista shopping", "list_name": "shopping", "kind": "list", "intent": "query_list_entries", "source_template": "qué hay en (mi|la) lista {list_name}"}
+{"lang": "fa-IR", "utterance": "همه چیز را حذف کنید", "list_name": null, "kind": "todo", "intent": "delete_list_entries", "source_template": "همه چیز را حذف کنید"}
+{"lang": "fa-IR", "utterance": "همه‌ی آیتم‌های لیست را پاک کن", "list_name": null, "kind": "todo", "intent": "delete_list_entries", "source_template": "همه‌ی آیتم‌های لیست را (پاک کن|حذف کن)"}
+{"lang": "fa-IR", "utterance": "حذف آیتم ها از لیست من خرید", "list_name": "خرید", "kind": "list", "intent": "delete_list_entries", "source_template": "حذف آیتم ها از لیست من {list_name}"}
+{"lang": "fa-IR", "utterance": "حذف ورودی ها از لیست من خرید", "list_name": "خرید", "kind": "list", "intent": "delete_list_entries", "source_template": "حذف ورودی ها از لیست من {list_name}"}
+{"lang": "fa-IR", "utterance": "حذف آیتم ها از لیست من یادداشت", "list_name": "یادداشت", "kind": "list", "intent": "delete_list_entries", "source_template": "حذف آیتم ها از لیست من {list_name}"}
+{"lang": "fa-IR", "utterance": "همه چیز را نشان بده", "list_name": null, "kind": "todo", "intent": "query_list_entries", "source_template": "همه چیز را نشان بده"}
+{"lang": "fa-IR", "utterance": "چه چیزهایی در لیست من وجود دارد خرید", "list_name": "خرید", "kind": "list", "intent": "query_list_entries", "source_template": "چه چیزهایی در لیست من وجود دارد {list_name}"}
+{"lang": "fa-IR", "utterance": "نمایش آیتم ها در لیست خرید", "list_name": "خرید", "kind": "list", "intent": "query_list_entries", "source_template": "نمایش آیتم ها در لیست {list_name}"}
+{"lang": "fa-IR", "utterance": "چه چیزهایی در لیست من وجود دارد یادداشت", "list_name": "یادداشت", "kind": "list", "intent": "query_list_entries", "source_template": "چه چیزهایی در لیست من وجود دارد {list_name}"}

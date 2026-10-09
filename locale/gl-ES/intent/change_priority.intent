@@ -4,3 +4,4 @@ axusta a prioridade do meu próximo {schedkind}
 pon o {schedkind} con prioridade {number:priority}
 baixa a prioridade do meu {schedkind}
 cambia o nivel de prioridade do {schedkind} a {number:priority}
+(dálle|ponlle) (máis|menos) importancia á (alarma|miña alarma)

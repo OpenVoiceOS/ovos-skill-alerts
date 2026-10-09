@@ -1,19 +1,37 @@
 {
+ "cs-CZ": {
+  "odstraň všechno z mého nákupního seznamu": {
+   "tied": [
+    "cancel_alert",
+    "delete_list_entries"
+   ],
+   "winner": "delete_list_entries"
+  },
+  "smaž položky z mého seznamu úkolů": {
+   "tied": [
+    "cancel_alert",
+    "delete_list_entries"
+   ],
+   "winner": "delete_list_entries"
+  }
+ },
+ "de-DE": {
+  "ändere die Dauer meines Alarms auf zwei Minuten": {
+   "tied": [
+    "change_until",
+    "reschedule_alert"
+   ],
+   "winner": "change_until"
+  },
+  "ändere die Wiederholung meines Weckers auf jeden Werktag": {
+   "tied": [
+    "change_repeat",
+    "reschedule_alert"
+   ],
+   "winner": "change_repeat"
+  }
+ },
  "en-US": {
-  "change my alarm to every weekend": {
-   "tied": [
-    "change_repeat",
-    "reschedule_alert"
-   ],
-   "winner": "change_repeat"
-  },
-  "change my alarm to repeat every monday": {
-   "tied": [
-    "change_repeat",
-    "reschedule_alert"
-   ],
-   "winner": "change_repeat"
-  },
   "change my alarm to repeat on weekends": {
    "tied": [
     "change_repeat",
@@ -21,19 +39,107 @@
    ],
    "winner": "change_repeat"
   },
-  "change the alarm to repeat every weekday": {
+  "erase the items on my packing list": {
+   "tied": [
+    "delete_list",
+    "delete_list_entries"
+   ],
+   "winner": "delete_list_entries"
+  }
+ },
+ "es-ES": {
+  "dime qué alarmas tengo": {
+   "tied": [
+    "create_reminder",
+    "list_alerts"
+   ],
+   "winner": "create_reminder"
+  }
+ },
+ "fi-FI": {
+  "poista tämä lista": {
+   "tied": [
+    "cancel_alert",
+    "delete_list"
+   ],
+   "winner": "delete_list"
+  }
+ },
+ "fr-FR": {
+  "supprime ma liste de courses": {
+   "tied": [
+    "cancel_alert",
+    "delete_list"
+   ],
+   "winner": "delete_list"
+  }
+ },
+ "gl-ES": {
+  "dime que alarmas teño": {
+   "tied": [
+    "create_reminder",
+    "list_alerts"
+   ],
+   "winner": "create_reminder"
+  }
+ },
+ "hu-HU": {
+  "töröld a karácsonyi listát": {
+   "tied": [
+    "cancel_alert",
+    "delete_list"
+   ],
+   "winner": "delete_list"
+  }
+ },
+ "it-IT": {
+  "elimina la lista della spesa": {
+   "tied": [
+    "cancel_alert",
+    "delete_list"
+   ],
+   "winner": "delete_list"
+  }
+ },
+ "kab": {
+  "beddel ales n alarme-inu ɣer yal ass n ssebt": {
    "tied": [
     "change_repeat",
     "reschedule_alert"
    ],
    "winner": "change_repeat"
+  }
+ },
+ "pt-PT": {
+  "apaga a lista de compras": {
+   "tied": [
+    "cancel_alert",
+    "delete_list"
+   ],
+   "winner": "delete_list"
   },
-  "change the next alarm to repeat every morning": {
+  "apaga tudo da lista de compras": {
    "tied": [
-    "change_repeat",
-    "reschedule_alert"
+    "cancel_alert",
+    "delete_list_entries"
    ],
-   "winner": "change_repeat"
+   "winner": "delete_list_entries"
+  },
+  "elimina a lista de tarefas": {
+   "tied": [
+    "cancel_alert",
+    "delete_list"
+   ],
+   "winner": "delete_list"
+  }
+ },
+ "sv-SE": {
+  "ta bort listan som heter julklappar": {
+   "tied": [
+    "cancel_alert",
+    "delete_list"
+   ],
+   "winner": "delete_list"
   }
  }
 }

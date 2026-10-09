@@ -13,3 +13,5 @@ a prioridade (do meu|do) {schedkind} (mude|defina|ajuste|aumente|diminua) ela
 (mude|defina|ajuste|aumente|diminua) a prioridade (do meu|do) {schedkind}
 a prioridade do {schedkind} (mude|defina|ajuste) ela (para|para o nível) {number:priority}
 a prioridade do {schedkind} (mude|defina|ajuste|aumente|diminua) ela
+(deixa|torna) (esse|aquele|o meu) (alarme|lembrete|compromisso) (mais|menos) importante
+(muda|troca) a prioridade do (timer|alarme|lembrete)

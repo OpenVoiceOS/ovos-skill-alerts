@@ -75,3 +75,5 @@ me (acorde|acorda) toda {days} às {date:time}
 (acorde|acorda) (a mim|nós|as crianças|todo mundo) (com|ao som de|tocando) {mediakind}
 (acorde|acorda) logo (a mim|nós|as crianças|todo mundo) (com|ao som de|tocando) {mediakind}
 (acorde|acorda) agora (as crianças|todo mundo) (com|ao som de|tocando) {mediakind}
+(preciso|quero) acordar (cedo|amanhã) (às|as) {date:time}
+(programa|liga) o despertador (para amanhã|para mais tarde)

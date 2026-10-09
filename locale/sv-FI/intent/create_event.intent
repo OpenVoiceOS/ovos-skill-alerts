@@ -1,2 +1,4 @@
-(luo|lisää) (tapahtuma|tapaaminen) [{event}]
-uusi (tapahtuma|tapaaminen) [{event}]
+# Finland-Swedish machine draft, unvouched
+ny (händelse|möte) [{event}]
+(lägg in|skriv in) {event} i kalendern
+kan du boka ett möte [{event}]

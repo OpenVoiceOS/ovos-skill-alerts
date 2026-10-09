@@ -1,0 +1,5 @@
+(ajastimet|ajastin|aika) (end|pitkä|päättyy|tila|valmis|vasen|jäljellä)
+(end|pitkä|päättyy|tila|valmis|vasen|jäljellä) (ajastimet|ajastin|aika)
+kuinka kauan {timerkind} vielä kestää
+milloin (ajastin|ajastimet|takaisinlaskenta|ajastimessa|ajastimella|ajastimesi) (päättyy|on valmis|loppuu)
+onko (ajastin|ajastimet|takaisinlaskenta|ajastimessa|ajastimella|ajastimesi) jo valmis

@@ -27,3 +27,8 @@ what (did|have) (i|we) (set|schedule|store|scheduled|stored) (for|on|at|tomorrow
 (what|which) {alertkind} and {alertkind2} (do|did) (i|we) have
 (when|what) is my (next|upcoming) {alertkind}
 (are|is) there (any|some) {alertkind}
+what is (on my schedule|coming up for me)
+which (alarms|reminders|alerts) (will|are going to) (ring|go off) (soon|later)
+when is the (next|upcoming) alarm going to ring
+(summarize|recap) (my|the) (alarms|alerts|reminders) for (me|today)
+(list|recap) everything i (have|set) (scheduled|pending)

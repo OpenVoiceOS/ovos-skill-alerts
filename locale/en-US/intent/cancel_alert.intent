@@ -9,3 +9,6 @@ please (cancel|delete|remove|clear|discard) (my|the|all) {alertkind} and (my|the
 please (cancel|delete|remove|clear|discard|turn off) (my|the|all|all my) {alertkind}
 (cancel|delete|remove|clear|discard) the {alertkind} (for|at|about|on) {name}
 (cancel|delete|clear|remove) my (whole|entire) {alertkind} list
+(scrap|drop|kill) (my|the|that) (alarm|timer|reminder|event)
+i (no longer|do not) need (my|the|that) (alarm|timer|reminder|event)
+throw (that|the) (timer|alarm) away

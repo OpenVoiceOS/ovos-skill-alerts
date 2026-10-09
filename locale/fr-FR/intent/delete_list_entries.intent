@@ -1,4 +1,5 @@
 (supprime|efface|enlève) les (articles|entrées) de (ma|la) liste [{list_name}]
 (supprime|efface) tout de (ma|la) liste [{list_name}]
-(supprime|efface) ma liste {list_name}
 (supprime|efface) tout de ma liste {list_name}
+retire tous les éléments de la liste des courses sans la supprimer
+nettoie le contenu de ma liste de tâches et garde la liste

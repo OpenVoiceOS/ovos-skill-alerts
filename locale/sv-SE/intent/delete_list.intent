@@ -1,3 +1,6 @@
 (radera|ta bort) [min|] lista[n] [{list_name}]
 (radera|ta bort) [alla] [mina] listor
 (radera|ta bort) {list_name} lista[n]
+# machine draft, unvouched: written by Claude Opus 5.5. A native speaker checks the lines below.
+radera min {list_name} lista
+radera min (att göra|todo)[-lista]

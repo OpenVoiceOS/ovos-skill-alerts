@@ -13,3 +13,5 @@ stelle einen Alarm [für {date:time}], damit er {mediakind} abspielt
 weck mich mit {mediakind} um {date:time}
 weck mich in {duration:duration}
 weck mich jeden {days} um {date:time}
+weck mich morgen früh um halb sieben
+programmiere einen Wecker für sieben Uhr morgen

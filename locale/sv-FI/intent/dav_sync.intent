@@ -1,6 +1,2 @@
-voitko synkronoida {davkind}
-synkronoi {davkind} nyt
-lataa {davkind}
-lähetä {davkind}
-synkronoi kaikki {davkind}
-synkronoi {davkind} ja {davkind2}
+# Finland-Swedish machine draft, unvouched
+synkronisera (kalender|kalendern|kalendrar|kalendrarna|händelser|händelserna|påminnelser|påminnelserna)

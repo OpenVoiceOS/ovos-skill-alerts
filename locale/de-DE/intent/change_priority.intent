@@ -4,3 +4,5 @@ passe die Priorität meines nächsten {schedkind} an
 setze {schedkind} auf Priorität {number:priority}
 senke die Priorität meines {schedkind}
 ändere die Prioritätsstufe von {schedkind} auf {number:priority}
+gib meiner nächsten Erinnerung eine höhere Wichtigkeit
+die Erinnerung von morgen ist weniger dringend als die anderen

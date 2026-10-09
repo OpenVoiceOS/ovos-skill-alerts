@@ -4,3 +4,5 @@ ajuste la longueur du prochain {schedkind} à {duration:duration}
 fais durer le {schedkind} pendant {duration:duration}
 change mon {schedkind} pour qu'il dure jusqu'à {duration:duration}
 raccourcis la durée de mon {schedkind} à {duration:duration}
+je veux que la sonnerie de mon réveil dure plus longtemps
+laisse sonner mon alarme pendant trois minutes au lieu d'une

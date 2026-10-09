@@ -9,3 +9,5 @@ väck (mig|oss) [klockan {date:time}]
 väck mig med {mediakind} klockan {date:time}
 väck mig om {duration:duration}
 väck mig varje {days} klockan {date:time}
+(ställ|ställ in|sätt) väckarklockan (på|till) {date:time}
+jag vill bli väckt (klockan|kl) {date:time}

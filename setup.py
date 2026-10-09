@@ -115,23 +115,14 @@ setup(
     extras_require={
         # ovos-skill-naptime is a TEST dependency only: test/end2end/
         # test_wake_arbitration.py boots it alongside this skill to assert the
-        # "wake" vocabulary arbitrates correctly between the two, on
-        # ADAPT_ONLY_PIPELINE (see that module's docstring for why a
-        # real-device-default variant is not committed as a CI-enforced test
-        # here: this CI workflow's own missing libfann-dev system dep makes
-        # padatious unavailable, forcing slow padacioso fallback, and adding
-        # the extra ocp/m2v test deps needed for that variant pushed the
-        # shared CI job's total runtime past what other, pre-existing tests
-        # in the same session tolerate).
-        # ovos-padatious ships the 'ovos-padatious-pipeline-plugin' entry point
-        # and ovos-skill-date-time is the second skill in the cross-skill
-        # arbitration test. Without BOTH, test/end2end/test_fleet_arbitration.py
-        # silently degrades: the padatious pipeline stage does not exist
-        # ("Unknown pipeline matcher"), date-time never loads, and the
-        # utterance comes back as ovos.intent.unmatched.
-        "test": ["mock", "ovoscope>=1.6.8a1", "ovos-adapt-parser",
+        # "wake" vocabulary arbitrates correctly between the two.
+        # padacioso serves file intents in the tests; no test uses padatious.
+        # ovos-skill-date-time is the second skill in the cross-skill
+        # arbitration test, test/end2end/test_fleet_arbitration.py.
+        "test": ["mock", "ovoscope>=1.11.2a1", "ovos-adapt-parser",
                  "ovos-spec-tools>=1.5.0a1", "pytest>=7.0.0", "pytest-timeout>=2.0.0",
-                 "ovos-skill-naptime>=0.4.0a5", "ovos-padatious>=1.6.2a1",
+                 "ovos-skill-naptime>=0.4.0a5", "padacioso",
+                 "ovos-m2v-pipeline>=0.32.0a1",
                  "ovos-skill-date-time"],
         "dev": ["mock", "ovoscope>=0.13.1", "ovos-adapt-parser"],
     },

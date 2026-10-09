@@ -7,3 +7,5 @@ har jag (ett|en|några) {alertkind}
 finns det {alertkind} (sparade|inställda|planerade)
 (när|vad) är (mitt|min) (nästa|kommande) {alertkind}
 vad har jag (sparat|inställt|planerat)
+hur många {alertkind} har jag [(inställda|planerade)]
+(kan du|skulle du kunna) (berätta|säga) vilka {alertkind} jag har
