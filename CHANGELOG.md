@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.12.37a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.12.37a1) (2026-10-13)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.12.36a2...0.12.37a1)
+
+**Merged pull requests:**
+
+- fix: add the alert\_list\_choose\_between dialog in every locale [\#421](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/421) ([openvoiceos-bot](https://github.com/openvoiceos-bot))
+
 ## [0.12.36a2](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.12.36a2) (2026-10-09)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.12.36a1...0.12.36a2)
