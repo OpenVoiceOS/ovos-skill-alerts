@@ -10,6 +10,7 @@ issues, the store-isolation fixture below).
 
 Run: pytest test/end2end/ -v
 """
+import datetime as dt
 import os
 import shutil
 import tempfile
@@ -412,6 +413,57 @@ class _IntentRoutingMixin:
         )
         skill.alert_manager.add_alert(child)
 
+    # The confirmations handle_reschedule_alert speaks once the alert moved.
+    RESCHEDULED_DIALOGS = {"alert_rescheduled", "alert_rescheduled_unnamed"}
+
+    def _assert_rescheduled(self, utterance: str, alert_type: str,
+                            alert_name: str, expires_in):
+        """Seed one alert, speak a reschedule request for it, and assert the
+        skill confirmed the new time rather than routing and then failing.
+
+        Routing alone passes when the handler speaks error_no_time or
+        error_no_scheduled_kind, or when rendering the confirmation raises
+        and the user hears the skill's error message. The alert is seeded
+        directly through the AlertManager, as _seed_list_with_item does, and
+        removed again afterwards.
+        """
+        from ovos_skill_alerts.util import AlertType
+        from ovos_skill_alerts.util.alert import Alert
+
+        skill = self.minicroft.plugin_skills[SKILL_ID].instance
+        alert = Alert.create(
+            expiration=dt.datetime.now(dt.timezone.utc) + expires_in,
+            alert_name=alert_name, alert_type=AlertType[alert_type],
+            lang=LANG)
+        ident = skill.alert_manager.add_alert(alert)
+        self.addCleanup(skill.alert_manager.rm_alert, ident)
+
+        session = Session(f"e2e-en_us-resched-{hash(utterance)}")
+        session.lang = LANG
+        session.pipeline = [
+            "ovos-padacioso-pipeline-plugin-high",
+            "ovos-padacioso-pipeline-plugin-medium",
+            "ovos-padacioso-pipeline-plugin-low",
+        ]
+        capture = CaptureSession(self.minicroft)
+        capture.capture(Message(
+            "recognizer_loop:utterance",
+            {"utterances": [utterance], "lang": LANG},
+            {"session": session.serialize()}), timeout=30)
+        messages = capture.finish()
+        types = [m.msg_type for m in messages]
+        self.assertIn(f"{SKILL_ID}:reschedule_alert", types)
+        spoken = [(m.data.get("meta", {}).get("dialog"), m.data.get("utterance"))
+                  for m in messages
+                  if m.msg_type in ("speak", "ovos.utterance.speak")]
+        # The skill's own error_* dialogs, and ovos-workshop's handler-error
+        # line, which is spoken with no dialog key.
+        errors = [s for s in spoken if s[0] is None or "error" in s[0]]
+        self.assertEqual([], errors, f"{utterance!r} spoke an error: {spoken!r}")
+        self.assertTrue(
+            any(dialog in self.RESCHEDULED_DIALOGS for dialog, _ in spoken),
+            f"{utterance!r} did not confirm the reschedule: {spoken!r}")
+
     def _fire_adapt(self, utterance: str):
         """Fire an utterance through the adapt-only pipeline with no
         assertion -- used purely to set up state (e.g. create a todo list)
@@ -808,7 +860,8 @@ class TestAdapt9_Createevent(_IntentRoutingMixin, TestCase):
 class TestAdapt10_Reschedulealert(_IntentRoutingMixin, TestCase):
     """Padatious (intent file) intent: reschedule_alert.intent"""
     def test_move_the_baseball_event_to_08_00_pm(self):
-        self._assert_padatious(r"move the baseball event to 08:00 pm", r"reschedule_alert.intent")
+        self._assert_rescheduled(r"move the baseball event to 08:00 pm",
+                                 "EVENT", "baseball", dt.timedelta(days=1))
 
     def test_reschedule_the_next_event_two_hours_earl(self):
         # Full-pipeline correction: no reschedule_alert.intent line accepted a
@@ -822,10 +875,12 @@ class TestAdapt10_Reschedulealert(_IntentRoutingMixin, TestCase):
             r"reschedule_alert.intent")
 
     def test_extend_the_pizza_timer_by_2_minutes(self):
-        self._assert_padatious(r"extend the pizza timer by 2 minutes", r"reschedule_alert.intent")
+        self._assert_rescheduled(r"extend the pizza timer by 2 minutes",
+                                 "TIMER", "pizza", dt.timedelta(minutes=10))
 
     def test_decrease_the_bread_timer_by_5_minutes(self):
-        self._assert_padatious(r"decrease the bread timer by 5 minutes", r"reschedule_alert.intent")
+        self._assert_rescheduled(r"decrease the bread timer by 5 minutes",
+                                 "TIMER", "bread", dt.timedelta(minutes=20))
 
 class TestAdapt11_Reschedulealertalt(_IntentRoutingMixin, TestCase):
     """Padatious (intent file) intent: reschedule_alert.intent (earlier/sooner/longer/shorter lines folded in)"""
@@ -838,7 +893,8 @@ class TestAdapt11_Reschedulealertalt(_IntentRoutingMixin, TestCase):
         self._assert_padatious(r"shorten the timer", r"reschedule_alert.intent")
 
     def test_reschedule_the_next_event_two_hours_earl(self):
-        self._assert_padatious(r"reschedule the next event two hours earlier", r"reschedule_alert.intent")
+        self._assert_rescheduled(r"reschedule the next event two hours earlier",
+                                 "EVENT", "meeting", dt.timedelta(days=1))
 
     def test_extend_the_pizza_timer_by_2_minutes(self):
         # issue #138 triage: original auto-generated utterance did not
