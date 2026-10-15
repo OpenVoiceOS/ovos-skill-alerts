@@ -64,6 +64,18 @@ _ISOLATED_XDG_DATA_HOME = None
 _ORIGINAL_XDG_DATA_HOME = None
 
 
+def _local_day(days: int, hour: int) -> dt.datetime:
+    """``hour``:00 on the day ``days`` from today, in the assistant's zone."""
+    from ovos_config.locale import get_default_tz
+    now = dt.datetime.now(get_default_tz())
+    return (now + dt.timedelta(days=days)).replace(
+        hour=hour, minute=0, second=0, microsecond=0)
+
+
+def _in(**delta) -> dt.datetime:
+    return dt.datetime.now(dt.timezone.utc) + dt.timedelta(**delta)
+
+
 def setUpModule():
     global _MODULE_MINICROFT, _ISOLATED_XDG_DATA_HOME, _ORIGINAL_XDG_DATA_HOME
     _ORIGINAL_XDG_DATA_HOME = os.environ.get("XDG_DATA_HOME")
@@ -417,9 +429,9 @@ class _IntentRoutingMixin:
     RESCHEDULED_DIALOGS = {"alert_rescheduled", "alert_rescheduled_unnamed"}
 
     def _assert_rescheduled(self, utterance: str, alert_type: str,
-                            alert_name: str, expires_in):
+                            alert_name: str, expiration, expected):
         """Seed one alert, speak a reschedule request for it, and assert the
-        skill confirmed the new time rather than routing and then failing.
+        skill confirmed it and moved the alert to ``expected``.
 
         Routing alone passes when the handler speaks error_no_time or
         error_no_scheduled_kind, or when rendering the confirmation raises
@@ -440,10 +452,8 @@ class _IntentRoutingMixin:
         for other in skill._get_alerts_list(kind):
             skill.alert_manager.rm_alert(other.ident)
             self.addCleanup(skill.alert_manager.add_alert, other)
-        alert = Alert.create(
-            expiration=dt.datetime.now(dt.timezone.utc) + expires_in,
-            alert_name=alert_name, alert_type=AlertType[alert_type],
-            lang=LANG)
+        alert = Alert.create(expiration=expiration, alert_name=alert_name,
+                             alert_type=kind, lang=LANG)
         ident = skill.alert_manager.add_alert(alert)
         self.addCleanup(skill.alert_manager.rm_alert, ident)
 
@@ -472,6 +482,12 @@ class _IntentRoutingMixin:
         self.assertTrue(
             any(dialog in self.RESCHEDULED_DIALOGS for dialog, _ in spoken),
             f"{utterance!r} did not confirm the reschedule: {spoken!r}")
+        moved = [a.expiration for a in skill._get_alerts_list(kind)
+                 if a.alert_name == alert_name]
+        self.assertEqual(1, len(moved), f"{alert_name!r} pending: {moved!r}")
+        self.assertLess(abs(moved[0] - expected), dt.timedelta(seconds=1),
+                        f"{utterance!r} moved the alert from {expiration} to "
+                        f"{moved[0]}, expected {expected}")
 
     def _fire_adapt(self, utterance: str):
         """Fire an utterance through the adapt-only pipeline with no
@@ -869,8 +885,10 @@ class TestAdapt9_Createevent(_IntentRoutingMixin, TestCase):
 class TestAdapt10_Reschedulealert(_IntentRoutingMixin, TestCase):
     """Padatious (intent file) intent: reschedule_alert.intent"""
     def test_move_the_baseball_event_to_08_00_pm(self):
+        # a time of day keeps the event on its own day, two days out
         self._assert_rescheduled(r"move the baseball event to 08:00 pm",
-                                 "EVENT", "baseball", dt.timedelta(days=1))
+                                 "EVENT", "baseball", _local_day(2, 18),
+                                 _local_day(2, 20))
 
     def test_reschedule_the_next_event_two_hours_earl(self):
         # Full-pipeline correction: no reschedule_alert.intent line accepted a
@@ -884,12 +902,16 @@ class TestAdapt10_Reschedulealert(_IntentRoutingMixin, TestCase):
             r"reschedule_alert.intent")
 
     def test_extend_the_pizza_timer_by_2_minutes(self):
+        expiration = _in(minutes=10)
         self._assert_rescheduled(r"extend the pizza timer by 2 minutes",
-                                 "TIMER", "pizza", dt.timedelta(minutes=10))
+                                 "TIMER", "pizza", expiration,
+                                 expiration + dt.timedelta(minutes=2))
 
     def test_decrease_the_bread_timer_by_5_minutes(self):
+        expiration = _in(minutes=20)
         self._assert_rescheduled(r"decrease the bread timer by 5 minutes",
-                                 "TIMER", "bread", dt.timedelta(minutes=20))
+                                 "TIMER", "bread", expiration,
+                                 expiration - dt.timedelta(minutes=5))
 
 class TestAdapt11_Reschedulealertalt(_IntentRoutingMixin, TestCase):
     """Padatious (intent file) intent: reschedule_alert.intent (earlier/sooner/longer/shorter lines folded in)"""
@@ -903,7 +925,8 @@ class TestAdapt11_Reschedulealertalt(_IntentRoutingMixin, TestCase):
 
     def test_reschedule_the_next_event_two_hours_earl(self):
         self._assert_rescheduled(r"reschedule the next event two hours earlier",
-                                 "EVENT", "meeting", dt.timedelta(days=1))
+                                 "EVENT", "meeting", _local_day(1, 15),
+                                 _local_day(1, 13))
 
     def test_extend_the_pizza_timer_by_2_minutes(self):
         # issue #138 triage: original auto-generated utterance did not
