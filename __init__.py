@@ -440,11 +440,6 @@ class AlertSkill(ConversationalSkill):
             return self.speak_dialog("error_no_scheduled_kind",
                                      {"kind": spoken_type}, wait=True)
 
-        # ref_day = convenience experimental because of repeating alerts
-        # user only have to state the time instead remembering the day
-        ref_day = alert.expiration.replace(hour=0, minute=0, second=0)
-        anchor_time = ref_day if alert.has_repeat else None
-
         if message.data.get("all_day"):
             # the appropriate time is set by the object
             alert.is_all_day = True
@@ -452,7 +447,8 @@ class AlertSkill(ConversationalSkill):
             dialog = "alert_rescheduled_all_day"
         else:
             alert.is_all_day = False
-            rescheduled_time = parse_relative_time_from_message(message, anchor_time=anchor_time)
+            rescheduled_time = parse_relative_time_from_message(
+                message, anchor_time=alert.expiration)
             dialog = "alert_rescheduled"
 
         if rescheduled_time is None:
