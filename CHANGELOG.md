@@ -1,14 +1,12 @@
 # Changelog
 
-## [0.12.42a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.12.42a1) (2026-10-15)
+## [0.12.40a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.12.40a1) (2026-10-15)
 
-[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.12.39a1...0.12.42a1)
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.12.39a1...0.12.40a1)
 
 **Merged pull requests:**
 
-- fix\(locale\): read words and vocabularies through ovos-spec-tools [\#432](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/432) ([JarbasAl](https://github.com/JarbasAl))
 - fix\(scheduler\): read the missed-occurrence owner from skill\_id [\#428](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/428) ([JarbasAl](https://github.com/JarbasAl))
-- test: wait for the restarted skill to subscribe before the replay [\#418](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/418) ([openvoiceos-bot](https://github.com/openvoiceos-bot))
 
 ## [0.12.39a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.12.39a1) (2026-10-15)
 
@@ -294,10 +292,6 @@
 ## [0.12.17a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.12.17a1) (2026-09-26)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.12.16a1...0.12.17a1)
-
-**Merged pull requests:**
-
-- fix\(ru-RU\): reschedule\_alert and timer\_status are sentences, not word bags [\#327](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/327) ([openvoiceos-bot](https://github.com/openvoiceos-bot))
 
 ## [0.12.16a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.12.16a1) (2026-09-26)
 
@@ -753,15 +747,15 @@
 
 ## [0.1.23](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.1.23) (2025-03-16)
 
-[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.1.23a1...0.1.23)
-
-## [0.1.23a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.1.23a1) (2025-03-16)
-
-[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.1.23a2...0.1.23a1)
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.1.23a2...0.1.23)
 
 ## [0.1.23a2](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.1.23a2) (2025-03-16)
 
-[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.1.22...0.1.23a2)
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.1.23a1...0.1.23a2)
+
+## [0.1.23a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.1.23a1) (2025-03-16)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.1.22...0.1.23a1)
 
 ## [0.1.22](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.1.22) (2025-03-15)
 
@@ -773,15 +767,15 @@
 
 ## [0.1.21](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.1.21) (2025-03-04)
 
-[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.1.21a3...0.1.21)
-
-## [0.1.21a3](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.1.21a3) (2025-03-04)
-
-[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.1.21a4...0.1.21a3)
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.1.21a4...0.1.21)
 
 ## [0.1.21a4](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.1.21a4) (2025-03-04)
 
-[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.1.21a2...0.1.21a4)
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.1.21a3...0.1.21a4)
+
+## [0.1.21a3](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.1.21a3) (2025-03-04)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.1.21a2...0.1.21a3)
 
 ## [0.1.21a2](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.1.21a2) (2025-03-04)
 
