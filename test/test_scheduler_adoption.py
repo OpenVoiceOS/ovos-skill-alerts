@@ -66,7 +66,10 @@ class Assistant:
         self.expired = []
         self.prenotified = []
         self.missed_reports = []
+        self.scheduled = set()
         self.bus.on(SCHEDULER_MISSED, self.missed_reports.append)
+        self.bus.on("ovos.scheduler.schedule.response",
+                    lambda message: self.scheduled.add(message.data["id"]))
         self.service = ScheduledEventService(
             self.bus, store_path=os.path.join(home, "schedule.json"),
             autostart=False)
@@ -101,6 +104,19 @@ class Assistant:
         while time.monotonic() < deadline and self.schedule_ids() != expected:
             time.sleep(0.05)
         assert self.schedule_ids() == expected
+
+    def await_requests_sent(self, *ids):
+        """Wait for this run's own scheduling requests to be answered.
+
+        ``await_schedules`` cannot tell a run's requests from the schedules a
+        previous run left in the store, so after a restart it returns at once.
+        The skill subscribes to an occurrence before it asks for the schedule,
+        and a replay that starts earlier fires into nothing.
+        """
+        deadline = time.monotonic() + 10
+        while time.monotonic() < deadline and not set(ids) <= self.scheduled:
+            time.sleep(0.05)
+        assert set(ids) <= self.scheduled
 
     def await_next_occurrence(self, ident):
         """Wait until the schedule agrees with the alert's next occurrence."""
@@ -175,8 +191,9 @@ def test_alarm_survives_a_restart_and_fires_exactly_once(assistant, clock):
     first.await_schedules(ident)
     first.stop()
 
-    second = assistant().start()
-    second.await_schedules(ident)
+    second = assistant()
+    second.await_requests_sent(ident)
+    second.start()
     assert second.expired == [], "an alarm not yet due must not ring on load"
 
     second.run_until(clock.now + dt.timedelta(minutes=2, seconds=30))
@@ -195,7 +212,7 @@ def test_alarm_due_during_downtime_is_reported_missed(assistant, clock):
 
     clock.advance(minutes=30)
     second = assistant()
-    second.await_schedules(ident)
+    second.await_requests_sent(ident)
     second.start()
     second.service.tick()
     second.await_missed(ident)
@@ -298,8 +315,13 @@ def test_adding_the_same_alert_twice_leaves_one_schedule(assistant, clock):
 
     # the skill restarts between writing its cache and finishing the add, so
     # the same alert is offered to the scheduler a second time
-    second = assistant().start()
+    second = assistant()
+    second.await_requests_sent(ident)
+    second.start()
+    # the offer made on load has been answered; wait for the second one too
+    second.scheduled.clear()
     assert second.manager.add_alert(Alert.deserialize(pending.serialize)) == ident
+    second.await_requests_sent(ident)
     second.await_schedules(ident)
 
     second.run_until(clock.now + dt.timedelta(minutes=5, seconds=30))
