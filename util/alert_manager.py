@@ -922,7 +922,10 @@ class AlertManager:
         on to deliver late is settled by the delivery instead.
         """
         schedule_id = message.data.get("id", "")
-        if message.data.get("owner") != self._skill.skill_id or \
+        # ovos-bus-client names the schedule's owner skill_id; releases
+        # before OpenVoiceOS/ovos-bus-client#351 named it owner.
+        owner = message.data.get("skill_id", message.data.get("owner"))
+        if owner != self._skill.skill_id or \
                 schedule_id in _HOUSEKEEPING_IDS or schedule_id.endswith(".pre"):
             return
         undelivered = set(message.data.get("missed") or ()) - \
