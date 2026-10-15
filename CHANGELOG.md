@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.12.47a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.12.47a1) (2026-10-15)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.12.46a1...0.12.47a1)
+
+**Merged pull requests:**
+
+- fix\(locale\): ru-RU names an alarm clock будильник, not сигнализация [\#440](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/440) ([JarbasAl](https://github.com/JarbasAl))
+
 ## [0.12.46a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.12.46a1) (2026-10-15)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.12.45a2...0.12.46a1)
