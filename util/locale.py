@@ -67,6 +67,15 @@ def _locale_resources() -> LocaleResources:
     return LocaleResources(join(dirname(dirname(__file__)), "locale"))
 
 
+def locale_voc_match(utterance: str, base_name: str, lang: str = None) -> bool:
+    """Whether ``utterance`` holds a phrase of ``<base_name>.voc``, by the
+    OVOS-INTENT-2 occurrence rule: whole words, ignoring case, accents and
+    punctuation."""
+    if not utterance:
+        return False
+    return _locale_resources().voc_match(utterance, base_name,
+                                         lang or get_default_lang())
+
 def translate(word, lang=None):
     """The first phrase of ``<word>.dialog`` for ``lang``.
 

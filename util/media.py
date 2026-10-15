@@ -1,8 +1,8 @@
 from typing import List 
 
 from ovos_utils.log import LOG
-from ovos_config import get_default_lang
 from ovos_bus_client import Message, MessageBusClient
+from ovos_bus_client.util import get_message_lang
 try:
     from ovos_plugin_common_play.ocp.status import MediaType
     from ovos_plugin_common_play.ocp.search import OCPQuery
@@ -17,18 +17,13 @@ except ImportError:
     pass
 
 from ovos_skill_alerts.util.alert import Alert
-from ovos_skill_alerts.util.locale import get_words_list, voc_match
+from ovos_skill_alerts.util.locale import locale_voc_match, voc_match
 
 
-LANG2MEDIA = {
-    "audio": ["audio"],
-    "music": ["music"],
-    "video": ["video"],
-    "audiobook": ["audiobook"],
-    "podcast": ["podcast"],
-    "radio": ["radio"],
-    "news": ["news"]
-}
+# OCP media types with a media_<type>.voc, the most specific first: an
+# audiobook is spoken as "livro de áudio", which also holds the audio word.
+MEDIA_TYPES = ("audiobook", "podcast", "music", "radio", "news", "video",
+               "audio")
 
 
 def ocp_query(phrase: str, message: Message, bus: MessageBusClient) \
@@ -81,22 +76,16 @@ def ocp_request(alert: Alert, bus: MessageBusClient):
 
 
 def get_ocp_media_type(message: Message) -> str:
-    lang = message.data.get("lang")
-    _update_lang2media(lang)
+    """The OCP media type the user named, or "generic".
 
-    media_str = message.data.get("media") 
-    for type_, tx in LANG2MEDIA.items():
-        if media_str in tx:
+    The intents fill the ``{mediakind}`` slot; ``media`` is the older key.
+    """
+    lang = get_message_lang(message)
+    spoken = message.data.get("mediakind") or message.data.get("media")
+    for type_ in MEDIA_TYPES:
+        if locale_voc_match(spoken, f"media_{type_}", lang):
             return type_
-    
     return "generic"
-
-
-def _update_lang2media(lang: str = ""):
-    lang = lang or get_default_lang()
-
-    for type_ in LANG2MEDIA.keys():
-        LANG2MEDIA[type_] = get_words_list(f"{type_}.dialog", lang)
 
 
 def get_media_source_from_intent(message: Message):
