@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.12.46a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.12.46a1) (2026-10-15)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.12.45a2...0.12.46a1)
+
+**Merged pull requests:**
+
+- test\(cancel\): pin that "next" cancels the soonest of several alarms [\#437](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/437) ([JarbasAl](https://github.com/JarbasAl))
+
+## [0.12.45a2](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.12.45a2) (2026-10-15)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.12.45a1...0.12.45a2)
+
 ## [0.12.45a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.12.45a1) (2026-10-15)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.12.44a1...0.12.45a1)
