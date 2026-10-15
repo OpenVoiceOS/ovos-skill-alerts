@@ -467,6 +467,9 @@ class AlertSkill(ConversationalSkill):
         rescheduled = self.alert_manager.reschedule_alert(alert, rescheduled_time, once)
         self._display_alert(rescheduled)
         dialog_data = get_alert_dialog_data(rescheduled, self.lang)
+        if dialog == "alert_rescheduled" and not dialog_data["name"]:
+            # a default-named alert has its name blanked; say the kind alone
+            dialog = "alert_rescheduled_unnamed"
         self.speak_dialog(dialog, dialog_data, wait=True)
         # ask if prenotification should be adjusted
         if rescheduled.prenotification:
