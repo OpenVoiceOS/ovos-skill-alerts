@@ -1351,7 +1351,13 @@ class AlertSkill(ConversationalSkill):
         if alert_type == AlertType.TODO and has_list and not has_create:
             alerts = list(filter(lambda alert: alert.children, alerts))
 
-        if message.data.get("next") or len(alerts) == 1:
+        # A padacioso match carries no ``next`` flag, so read "next" from
+        # the words left once the time is parsed out: "the next event two
+        # hours earlier" keeps it, "the baseball event to next monday" does
+        # not, as "next monday" is the time.
+        asks_next = message.data.get("next") or (
+            requested_name and voc_match(requested_name, "next", lang=self.lang))
+        if asks_next or len(alerts) == 1:
             return alerts[0]
         elif not any((requested_name, requested_time)):
             return self._pick_one_by_name(alerts, dialog)
