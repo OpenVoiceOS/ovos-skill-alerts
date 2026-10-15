@@ -1,0 +1,6 @@
+zmień priorytet mojego {schedkind} na {number:priority}
+podnieś priorytet {schedkind} na poziom {number:priority}
+dostosuj priorytet mojego następnego {schedkind}
+ustaw {schedkind} z priorytetem {number:priority}
+obniż priorytet mojego {schedkind}
+zmień poziom priorytetu {schedkind} na {number:priority}

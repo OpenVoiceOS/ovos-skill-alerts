@@ -1,0 +1,7 @@
+(jakie pozycje|co) (jest|są) na [mojej] liście [{list_name}]
+(przeczytaj|pokaż) [mi] pozycje z [mojej] listy [{list_name}]
+co (jest|mam) na [mojej] liście {list_name}
+co mam do zrobienia
+# machine draft, unvouched: written by Claude Opus 5.5. A native speaker checks the lines below.
+(przeczytaj|pokaż) mi wszystkie pozycje z [mojej] listy [{list_name}]
+(co|jakie pozycje) mam zapisane na liście [{list_name}]

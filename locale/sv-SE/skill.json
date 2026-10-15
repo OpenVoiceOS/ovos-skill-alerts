@@ -1,0 +1,29 @@
+{
+  "name": "Alerts",
+  "description": "En färdighet för att hantera larm, timers, påminnelser, händelser och att göra-listor, och att eventuellt synkronisera dem med en CalDAV-tjänst.",
+  "examples": [
+    "Sätt ett larm till klockan 8.",
+    "Starta en timer på 30 minuter.",
+    "Planera ett möte för tennis på fredag klockan 14.",
+    "Sätt ett larm varje dag klockan 8.",
+    "Sätt ett larm till klockan 8 på lördagar.",
+    "Påminn mig om att slänga soporna varje torsdag och söndag klockan 19.",
+    "Väck mig klockan 8 med musik.",
+    "När är mitt nästa larm?",
+    "Vilka är mina kommande påminnelser?",
+    "Avbryt alla mina larm.",
+    "Avbryt alla mina timers.",
+    "Avbryt alla mina påminnelser.",
+    "Vilka larm har jag missat?",
+    "Har jag missat något?"
+  ],
+  "tags": [
+    "Produktivitet",
+    "Daglig",
+    "varning",
+    "larm",
+    "timer",
+    "påminnelse",
+    "schema"
+  ]
+}

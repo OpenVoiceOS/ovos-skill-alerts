@@ -1,0 +1,65 @@
+{"skill_id": "ovos-skill-alerts.openvoiceos", "utterance": "rnu kra n yiferdisen ɣer tebdart-iw", "intent_label": "add_list_subitems", "needs_manual": true, "lang": "kab", "machine_generated": true}
+{"skill_id": "ovos-skill-alerts.openvoiceos", "utterance": "rnu iferdisen ɣer tebdart n twuriwin-iw", "intent_label": "add_list_subitems", "needs_manual": true, "lang": "kab", "machine_generated": true}
+{"skill_id": "ovos-skill-alerts.openvoiceos", "utterance": "rnu aɣrum d uyefki ɣer tebdart n usewweq", "intent_label": "add_list_subitems", "needs_manual": true, "lang": "kab", "machine_generated": true}
+{"skill_id": "ovos-skill-alerts.openvoiceos", "utterance": "anwi iwitayen i yellan", "intent_label": "calendar_list", "needs_manual": true, "lang": "kab", "machine_generated": true}
+{"skill_id": "ovos-skill-alerts.openvoiceos", "utterance": "sken-iyi-d iwitayen i zemreɣ ad ferneɣ", "intent_label": "calendar_list", "needs_manual": true, "lang": "kab", "machine_generated": true}
+{"skill_id": "ovos-skill-alerts.openvoiceos", "utterance": "anwi iwitayen i sɛiɣ", "intent_label": "calendar_list", "needs_manual": true, "lang": "kab", "machine_generated": true}
+{"skill_id": "ovos-skill-alerts.openvoiceos", "utterance": "sefsex alarme-inu", "intent_label": "cancel_alert", "needs_manual": true, "lang": "kab", "machine_generated": true}
+{"skill_id": "ovos-skill-alerts.openvoiceos", "utterance": "kkes akk alarmes i sbeddeɣ", "intent_label": "cancel_alert", "needs_manual": true, "lang": "kab", "machine_generated": true}
+{"skill_id": "ovos-skill-alerts.openvoiceos", "utterance": "sefsex akk alarmes n uzekka ṣṣbeḥ", "intent_label": "cancel_alert", "needs_manual": true, "lang": "kab", "machine_generated": true}
+{"skill_id": "ovos-skill-alerts.openvoiceos", "utterance": "bɣiɣ alarme-inu ad yesɛu imesli", "intent_label": "change_media_properties", "needs_manual": true, "lang": "kab", "machine_generated": true}
+{"skill_id": "ovos-skill-alerts.openvoiceos", "utterance": "beddel imesli n alarme-inu ɣer tezlit", "intent_label": "change_media_properties", "needs_manual": true, "lang": "kab", "machine_generated": true}
+{"skill_id": "ovos-skill-alerts.openvoiceos", "utterance": "err alarme i d-iteddun ad d-yeqqar s taɣect", "intent_label": "change_media_properties", "needs_manual": true, "lang": "kab", "machine_generated": true}
+{"skill_id": "ovos-skill-alerts.openvoiceos", "utterance": "sers priorité n alarme-inu", "intent_label": "change_priority", "needs_manual": true, "lang": "kab", "machine_generated": true}
+{"skill_id": "ovos-skill-alerts.openvoiceos", "utterance": "ali priorité n alarme n ṣṣbeḥ ɣer kraḍ", "intent_label": "change_priority", "needs_manual": true, "lang": "kab", "machine_generated": true}
+{"skill_id": "ovos-skill-alerts.openvoiceos", "utterance": "err priorité n alarme-inu d semmus", "intent_label": "change_priority", "needs_manual": true, "lang": "kab", "machine_generated": true}
+{"skill_id": "ovos-skill-alerts.openvoiceos", "utterance": "err alarme-inu ad d-yales yal ass", "intent_label": "change_repeat", "needs_manual": true, "lang": "kab", "machine_generated": true}
+{"skill_id": "ovos-skill-alerts.openvoiceos", "utterance": "beddel alarme ad d-yuɣal yal ass n ddurt", "intent_label": "change_repeat", "needs_manual": true, "lang": "kab", "machine_generated": true}
+{"skill_id": "ovos-skill-alerts.openvoiceos", "utterance": "beddel ales n alarme-inu ɣer yal ass n ssebt", "intent_label": "change_repeat", "needs_manual": true, "lang": "kab", "machine_generated": true}
+{"skill_id": "ovos-skill-alerts.openvoiceos", "utterance": "err alarme ad yeqqim semmus n tedqiqin", "intent_label": "change_until", "needs_manual": true, "lang": "kab", "machine_generated": true}
+{"skill_id": "ovos-skill-alerts.openvoiceos", "utterance": "ssiweḍ alarme-inu ad yeqqim ɛecra n tedqiqin", "intent_label": "change_until", "needs_manual": true, "lang": "kab", "machine_generated": true}
+{"skill_id": "ovos-skill-alerts.openvoiceos", "utterance": "beddel tanzagt n alarme-inu ɣer nnefṣ n saɛa", "intent_label": "change_until", "needs_manual": true, "lang": "kab", "machine_generated": true}
+{"skill_id": "ovos-skill-alerts.openvoiceos", "utterance": "ssaki-yi-d ɣef setta n ṣṣbeḥ", "intent_label": "create_alarm", "needs_manual": true, "lang": "kab", "machine_generated": true}
+{"skill_id": "ovos-skill-alerts.openvoiceos", "utterance": "ssaki-yi-d di nnefṣ n saɛa", "intent_label": "create_alarm", "needs_manual": true, "lang": "kab", "machine_generated": true}
+{"skill_id": "ovos-skill-alerts.openvoiceos", "utterance": "sbedd-iyi-d alarme ɣef sebɛa u nnefṣ", "intent_label": "create_alarm", "needs_manual": true, "lang": "kab", "machine_generated": true}
+{"skill_id": "ovos-skill-alerts.openvoiceos", "utterance": "bɣiɣ ad rnuɣ yiwet n tedyant tamaynut deg uwitay-iw", "intent_label": "create_event", "needs_manual": true, "lang": "kab", "machine_generated": true}
+{"skill_id": "ovos-skill-alerts.openvoiceos", "utterance": "sɛiɣ tadyant azekka ɣef tlata n tmeddit", "intent_label": "create_event", "needs_manual": true, "lang": "kab", "machine_generated": true}
+{"skill_id": "ovos-skill-alerts.openvoiceos", "utterance": "rnu-yi-d tadyant n tmeɣra ass n lḥedd", "intent_label": "create_event", "needs_manual": true, "lang": "kab", "machine_generated": true}
+{"skill_id": "ovos-skill-alerts.openvoiceos", "utterance": "ḥwaǧeɣ yiwet n tebdart tamaynut, ma ulac aɣilif xdem-iyi-tt-id", "intent_label": "create_list", "needs_manual": true, "lang": "kab", "machine_generated": true}
+{"skill_id": "ovos-skill-alerts.openvoiceos", "utterance": "rnu tabdart tamaynut n twuriwin n uxxam", "intent_label": "create_list", "needs_manual": true, "lang": "kab", "machine_generated": true}
+{"skill_id": "ovos-skill-alerts.openvoiceos", "utterance": "sbedd-iyi-d tabdart n usewweq", "intent_label": "create_list", "needs_manual": true, "lang": "kab", "machine_generated": true}
+{"skill_id": "ovos-skill-alerts.openvoiceos", "utterance": "rnu-yi-d asmekti ad d-sɣeɣ aɣrum", "intent_label": "create_reminder", "needs_manual": true, "lang": "kab", "machine_generated": true}
+{"skill_id": "ovos-skill-alerts.openvoiceos", "utterance": "smekti-yi ad siwleɣ i baba ɣef tesɛa n yiḍ", "intent_label": "create_reminder", "needs_manual": true, "lang": "kab", "machine_generated": true}
+{"skill_id": "ovos-skill-alerts.openvoiceos", "utterance": "smekti-yi di ɛecrin n tedqiqin ad d-kkseɣ aɣrum seg ufurnu", "intent_label": "create_reminder", "needs_manual": true, "lang": "kab", "machine_generated": true}
+{"skill_id": "ovos-skill-alerts.openvoiceos", "utterance": "smektay-iyi ad ssufɣeɣ aqjun yal ṣṣbeḥ n ussan n ddurt ɣef sebɛa", "intent_label": "create_reminder", "needs_manual": true, "lang": "kab", "machine_generated": true}
+{"skill_id": "ovos-skill-alerts.openvoiceos", "utterance": "ɣef ttmanya n ṣṣbeḥ, seg letnayen ar lǧemɛa, smektay-iyi ad sweɣ adwa-inu", "intent_label": "create_reminder", "needs_manual": true, "lang": "kab", "machine_generated": true}
+{"skill_id": "ovos-skill-alerts.openvoiceos", "utterance": "seg letnayen ar lǧemɛa ɣef tesɛa n ṣṣbeḥ, smektay-iyi ad ẓreɣ imaylen-iw", "intent_label": "create_reminder", "needs_manual": true, "lang": "kab", "machine_generated": true}
+{"skill_id": "ovos-skill-alerts.openvoiceos", "utterance": "sbedd amakud n semmus n tedqiqin", "intent_label": "create_timer", "needs_manual": true, "lang": "kab", "machine_generated": true}
+{"skill_id": "ovos-skill-alerts.openvoiceos", "utterance": "sbedd-iyi-d amakud i ɛecra n tedqiqin", "intent_label": "create_timer", "needs_manual": true, "lang": "kab", "machine_generated": true}
+{"skill_id": "ovos-skill-alerts.openvoiceos", "utterance": "rnu-yi-d amakud amaynut i nnefṣ n saɛa", "intent_label": "create_timer", "needs_manual": true, "lang": "kab", "machine_generated": true}
+{"skill_id": "ovos-skill-alerts.openvoiceos", "utterance": "sinkronizi awitay-iw", "intent_label": "dav_sync", "needs_manual": true, "lang": "kab", "machine_generated": true}
+{"skill_id": "ovos-skill-alerts.openvoiceos", "utterance": "sali awitay-iw ɣer uqeddac", "intent_label": "dav_sync", "needs_manual": true, "lang": "kab", "machine_generated": true}
+{"skill_id": "ovos-skill-alerts.openvoiceos", "utterance": "tzemreḍ ad tsinkronizeḍ tismektiyin-iw tura", "intent_label": "dav_sync", "needs_manual": true, "lang": "kab", "machine_generated": true}
+{"skill_id": "ovos-skill-alerts.openvoiceos", "utterance": "kkes-iyi-d akk tibdiwin-iw, ur ḥwaǧeɣ ula d yiwet seg-sent", "intent_label": "delete_list", "needs_manual": true, "lang": "kab", "machine_generated": true}
+{"skill_id": "ovos-skill-alerts.openvoiceos", "utterance": "kkes tabdart n twuriwin", "intent_label": "delete_list", "needs_manual": true, "lang": "kab", "machine_generated": true}
+{"skill_id": "ovos-skill-alerts.openvoiceos", "utterance": "sfeḍ tabdart-iw n usewweq", "intent_label": "delete_list", "needs_manual": true, "lang": "kab", "machine_generated": true}
+{"skill_id": "ovos-skill-alerts.openvoiceos", "utterance": "kkes akk twuriwin seg tebdart-iw", "intent_label": "delete_list_entries", "needs_manual": true, "lang": "kab", "machine_generated": true}
+{"skill_id": "ovos-skill-alerts.openvoiceos", "utterance": "sfeḍ kullec seg tebdart n twuriwin", "intent_label": "delete_list_entries", "needs_manual": true, "lang": "kab", "machine_generated": true}
+{"skill_id": "ovos-skill-alerts.openvoiceos", "utterance": "kkes iferdisen seg tebdart n usewweq", "intent_label": "delete_list_entries", "needs_manual": true, "lang": "kab", "machine_generated": true}
+{"skill_id": "ovos-skill-alerts.openvoiceos", "utterance": "anwi alarmes i sɛiɣ", "intent_label": "list_alerts", "needs_manual": true, "lang": "kab", "machine_generated": true}
+{"skill_id": "ovos-skill-alerts.openvoiceos", "utterance": "ɣer-iyi-d alarmes i sbeddeɣ", "intent_label": "list_alerts", "needs_manual": true, "lang": "kab", "machine_generated": true}
+{"skill_id": "ovos-skill-alerts.openvoiceos", "utterance": "sken-iyi-d akk alarmes-inu n uzekka", "intent_label": "list_alerts", "needs_manual": true, "lang": "kab", "machine_generated": true}
+{"skill_id": "ovos-skill-alerts.openvoiceos", "utterance": "yella kra n umakud i zegleɣ", "intent_label": "missed_alerts", "needs_manual": true, "lang": "kab", "machine_generated": true}
+{"skill_id": "ovos-skill-alerts.openvoiceos", "utterance": "anwa amakud i zegleɣ", "intent_label": "missed_alerts", "needs_manual": true, "lang": "kab", "machine_generated": true}
+{"skill_id": "ovos-skill-alerts.openvoiceos", "utterance": "ma yella alarme i zegleɣ", "intent_label": "missed_alerts", "needs_manual": true, "lang": "kab", "machine_generated": true}
+{"skill_id": "ovos-skill-alerts.openvoiceos", "utterance": "d acu i yi-d-yeqqimen ad t-xedmeɣ deg tebdart?", "intent_label": "query_list_entries", "needs_manual": true, "lang": "kab", "machine_generated": true}
+{"skill_id": "ovos-skill-alerts.openvoiceos", "utterance": "bɣiɣ ad ẓreɣ ayen akk i yellan deg tebdart-iw", "intent_label": "query_list_entries", "needs_manual": true, "lang": "kab", "machine_generated": true}
+{"skill_id": "ovos-skill-alerts.openvoiceos", "utterance": "d acu yellan deg tebdart-iw n usewweq", "intent_label": "query_list_entries", "needs_manual": true, "lang": "kab", "machine_generated": true}
+{"skill_id": "ovos-skill-alerts.openvoiceos", "utterance": "acḥal n tibdiwin i sɛiɣ, u d acu ismawen-nsent?", "intent_label": "query_list_names", "needs_manual": true, "lang": "kab", "machine_generated": true}
+{"skill_id": "ovos-skill-alerts.openvoiceos", "utterance": "bder-iyi-d ismawen n tibdiwin akk i d-xedmeɣ yakan", "intent_label": "query_list_names", "needs_manual": true, "lang": "kab", "machine_generated": true}
+{"skill_id": "ovos-skill-alerts.openvoiceos", "utterance": "sbeɛɛed alarme-inu ɣer sdat", "intent_label": "reschedule_alert", "needs_manual": true, "lang": "kab", "machine_generated": true}
+{"skill_id": "ovos-skill-alerts.openvoiceos", "utterance": "beddel alarme-inu ɣer sebɛa n ṣṣbeḥ", "intent_label": "reschedule_alert", "needs_manual": true, "lang": "kab", "machine_generated": true}
+{"skill_id": "ovos-skill-alerts.openvoiceos", "utterance": "err alarme ad yili ɣef tmanya deg umkan n sebɛa", "intent_label": "reschedule_alert", "needs_manual": true, "lang": "kab", "machine_generated": true}
+{"skill_id": "ovos-skill-alerts.openvoiceos", "utterance": "d acu i d-yeqqimen deg umakud", "intent_label": "timer_status", "needs_manual": true, "lang": "kab", "machine_generated": true}
+{"skill_id": "ovos-skill-alerts.openvoiceos", "utterance": "sken-iyi-d addad n yimakuden-iw", "intent_label": "timer_status", "needs_manual": true, "lang": "kab", "machine_generated": true}
+{"skill_id": "ovos-skill-alerts.openvoiceos", "utterance": "acḥal i d-yeqqimen deg umakud-iw", "intent_label": "timer_status", "needs_manual": true, "lang": "kab", "machine_generated": true}

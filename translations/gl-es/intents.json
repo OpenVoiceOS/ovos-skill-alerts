@@ -1,7 +1,0 @@
-{
-    "/intent/missed_alerts.intent": [
-        "perdín (un|unha|algúns|algunhas) (evento|lembrete|temporizador|alarma|alerta|eventos|lembretes|temporizadores|alarmas|alertas)",
-        "perdín (un|unha|algúns|algunhas) (evento|lembrete|temporizador|alarma|alerta|eventos|lembretes|temporizadores|alarmas|alertas)",
-        "(que) (evento|lembrete|temporizador|alarma|alerta|eventos|lembretes|temporizadores|alarmas|alertas) (perdín)"
-    ]
-}

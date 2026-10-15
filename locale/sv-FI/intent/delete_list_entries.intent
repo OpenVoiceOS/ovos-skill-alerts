@@ -1,0 +1,8 @@
+# Finland-Swedish machine draft, unvouched
+(töm|rensa) {list_name}-listan
+rensa bort allt från {list_name}-listan
+stryk allt på [min] {list_name}-lista[n]
+# machine draft, unvouched: written by Claude Opus 5.5. A native speaker checks the lines below.
+töm listan [{list_name}] men behåll den
+ta bort alla saker som står på listan [{list_name}]
+gör listan [{list_name}] tom
