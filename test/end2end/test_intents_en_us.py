@@ -431,6 +431,15 @@ class _IntentRoutingMixin:
         from ovos_skill_alerts.util.alert import Alert
 
         skill = self.minicroft.plugin_skills[SKILL_ID].instance
+        # Earlier tests in this module leave alerts behind. Set the ones of
+        # this kind aside, so the request resolves to the seeded alert, and
+        # put them back afterwards. With several events pending, "the next
+        # event" resolves to none of them: a padacioso match carries no
+        # ``next`` flag.
+        kind = AlertType[alert_type]
+        for other in skill._get_alerts_list(kind):
+            skill.alert_manager.rm_alert(other.ident)
+            self.addCleanup(skill.alert_manager.add_alert, other)
         alert = Alert.create(
             expiration=dt.datetime.now(dt.timezone.utc) + expires_in,
             alert_name=alert_name, alert_type=AlertType[alert_type],
