@@ -10,6 +10,7 @@ issues, the store-isolation fixture below).
 
 Run: pytest test/end2end/ -v
 """
+import datetime as dt
 import os
 import shutil
 import tempfile
@@ -61,6 +62,18 @@ _MODULE_MINICROFT = None
 # other process.
 _ISOLATED_XDG_DATA_HOME = None
 _ORIGINAL_XDG_DATA_HOME = None
+
+
+def _local_day(days: int, hour: int) -> dt.datetime:
+    """``hour``:00 on the day ``days`` from today, in the assistant's zone."""
+    from ovos_config.locale import get_default_tz
+    now = dt.datetime.now(get_default_tz())
+    return (now + dt.timedelta(days=days)).replace(
+        hour=hour, minute=0, second=0, microsecond=0)
+
+
+def _in(**delta) -> dt.datetime:
+    return dt.datetime.now(dt.timezone.utc) + dt.timedelta(**delta)
 
 
 def setUpModule():
@@ -411,6 +424,70 @@ class _IntentRoutingMixin:
             lang=LANG,
         )
         skill.alert_manager.add_alert(child)
+
+    # The confirmations handle_reschedule_alert speaks once the alert moved.
+    RESCHEDULED_DIALOGS = {"alert_rescheduled", "alert_rescheduled_unnamed"}
+
+    def _assert_rescheduled(self, utterance: str, alert_type: str,
+                            alert_name: str, expiration, expected):
+        """Seed one alert, speak a reschedule request for it, and assert the
+        skill confirmed it and moved the alert to ``expected``.
+
+        Routing alone passes when the handler speaks error_no_time or
+        error_no_scheduled_kind, or when rendering the confirmation raises
+        and the user hears the skill's error message. The alert is seeded
+        directly through the AlertManager, as _seed_list_with_item does, and
+        removed again afterwards.
+        """
+        from ovos_skill_alerts.util import AlertType
+        from ovos_skill_alerts.util.alert import Alert
+
+        skill = self.minicroft.plugin_skills[SKILL_ID].instance
+        # Earlier tests in this module leave alerts behind. Set the ones of
+        # this kind aside, so the request resolves to the seeded alert, and
+        # put them back afterwards. With several events pending, "the next
+        # event" resolves to none of them: a padacioso match carries no
+        # ``next`` flag.
+        kind = AlertType[alert_type]
+        for other in skill._get_alerts_list(kind):
+            skill.alert_manager.rm_alert(other.ident)
+            self.addCleanup(skill.alert_manager.add_alert, other)
+        alert = Alert.create(expiration=expiration, alert_name=alert_name,
+                             alert_type=kind, lang=LANG)
+        ident = skill.alert_manager.add_alert(alert)
+        self.addCleanup(skill.alert_manager.rm_alert, ident)
+
+        session = Session(f"e2e-en_us-resched-{hash(utterance)}")
+        session.lang = LANG
+        session.pipeline = [
+            "ovos-padacioso-pipeline-plugin-high",
+            "ovos-padacioso-pipeline-plugin-medium",
+            "ovos-padacioso-pipeline-plugin-low",
+        ]
+        capture = CaptureSession(self.minicroft)
+        capture.capture(Message(
+            "recognizer_loop:utterance",
+            {"utterances": [utterance], "lang": LANG},
+            {"session": session.serialize()}), timeout=30)
+        messages = capture.finish()
+        types = [m.msg_type for m in messages]
+        self.assertIn(f"{SKILL_ID}:reschedule_alert", types)
+        spoken = [(m.data.get("meta", {}).get("dialog"), m.data.get("utterance"))
+                  for m in messages
+                  if m.msg_type in ("speak", "ovos.utterance.speak")]
+        # The skill's own error_* dialogs, and ovos-workshop's handler-error
+        # line, which is spoken with no dialog key.
+        errors = [s for s in spoken if s[0] is None or "error" in s[0]]
+        self.assertEqual([], errors, f"{utterance!r} spoke an error: {spoken!r}")
+        self.assertTrue(
+            any(dialog in self.RESCHEDULED_DIALOGS for dialog, _ in spoken),
+            f"{utterance!r} did not confirm the reschedule: {spoken!r}")
+        moved = [a.expiration for a in skill._get_alerts_list(kind)
+                 if a.alert_name == alert_name]
+        self.assertEqual(1, len(moved), f"{alert_name!r} pending: {moved!r}")
+        self.assertLess(abs(moved[0] - expected), dt.timedelta(seconds=1),
+                        f"{utterance!r} moved the alert from {expiration} to "
+                        f"{moved[0]}, expected {expected}")
 
     def _fire_adapt(self, utterance: str):
         """Fire an utterance through the adapt-only pipeline with no
@@ -807,9 +884,11 @@ class TestAdapt9_Createevent(_IntentRoutingMixin, TestCase):
 
 class TestAdapt10_Reschedulealert(_IntentRoutingMixin, TestCase):
     """Padatious (intent file) intent: reschedule_alert.intent"""
-    @pytest.mark.xfail(strict=True, reason="issue #155: relative/absolute time argument makes the utterance unmatched under the full default pipeline -- real skill defect (Adapt confidence dilution / unhandled duration vocab), confirmed via control-pair evidence ('move the baseball event' matches reschedule_alert, 'move the baseball event to 08:00 pm' matches nothing). See https://github.com/OpenVoiceOS/ovos-skill-alerts/issues/155.")
     def test_move_the_baseball_event_to_08_00_pm(self):
-        self._assert_padatious(r"move the baseball event to 08:00 pm", r"RescheduleAlert_kw")
+        # a time of day keeps the event on its own day, two days out
+        self._assert_rescheduled(r"move the baseball event to 08:00 pm",
+                                 "EVENT", "baseball", _local_day(2, 18),
+                                 _local_day(2, 20))
 
     def test_reschedule_the_next_event_two_hours_earl(self):
         # Full-pipeline correction: no reschedule_alert.intent line accepted a
@@ -822,13 +901,17 @@ class TestAdapt10_Reschedulealert(_IntentRoutingMixin, TestCase):
             r"reschedule the next event two hours earlier",
             r"reschedule_alert.intent")
 
-    @pytest.mark.xfail(strict=True, reason="issue #155: relative/absolute time argument makes the utterance unmatched under the full default pipeline -- real skill defect (Adapt confidence dilution / unhandled duration vocab), confirmed via control-pair evidence ('adjust the pizza timer' matches reschedule_alert, 'adjust the pizza timer by 2 minutes' matches nothing). See https://github.com/OpenVoiceOS/ovos-skill-alerts/issues/155.")
     def test_extend_the_pizza_timer_by_2_minutes(self):
-        self._assert_padatious(r"extend the pizza timer by 2 minutes", r"RescheduleAlert_kw")
+        expiration = _in(minutes=10)
+        self._assert_rescheduled(r"extend the pizza timer by 2 minutes",
+                                 "TIMER", "pizza", expiration,
+                                 expiration + dt.timedelta(minutes=2))
 
-    @pytest.mark.xfail(strict=True, reason="issue #155: relative/absolute time argument makes the utterance unmatched under the full default pipeline -- real skill defect (Adapt confidence dilution / unhandled duration vocab), confirmed via control-pair evidence ('decrease the bread timer' matches a sibling intent, 'decrease the bread timer by 5 minutes' matches nothing at all). See https://github.com/OpenVoiceOS/ovos-skill-alerts/issues/155.")
     def test_decrease_the_bread_timer_by_5_minutes(self):
-        self._assert_padatious(r"decrease the bread timer by 5 minutes", r"RescheduleAlert_kw")
+        expiration = _in(minutes=20)
+        self._assert_rescheduled(r"decrease the bread timer by 5 minutes",
+                                 "TIMER", "bread", expiration,
+                                 expiration - dt.timedelta(minutes=5))
 
 class TestAdapt11_Reschedulealertalt(_IntentRoutingMixin, TestCase):
     """Padatious (intent file) intent: reschedule_alert.intent (earlier/sooner/longer/shorter lines folded in)"""
@@ -840,9 +923,10 @@ class TestAdapt11_Reschedulealertalt(_IntentRoutingMixin, TestCase):
         # equivalent test intent/coverage rather than dropping the row.
         self._assert_padatious(r"shorten the timer", r"reschedule_alert.intent")
 
-    @pytest.mark.xfail(strict=True, reason="issue #155: relative/absolute time argument makes the utterance unmatched under the full default pipeline -- real skill defect (Adapt confidence dilution / unhandled duration vocab), confirmed via control-pair evidence ('reschedule the next event' matches a sibling intent, 'reschedule the next event two hours earlier' matches nothing at all under reschedule_alert). See https://github.com/OpenVoiceOS/ovos-skill-alerts/issues/155.")
     def test_reschedule_the_next_event_two_hours_earl(self):
-        self._assert_padatious(r"reschedule the next event two hours earlier", r"RescheduleAlert_kw")
+        self._assert_rescheduled(r"reschedule the next event two hours earlier",
+                                 "EVENT", "meeting", _local_day(1, 15),
+                                 _local_day(1, 13))
 
     def test_extend_the_pizza_timer_by_2_minutes(self):
         # issue #138 triage: original auto-generated utterance did not
