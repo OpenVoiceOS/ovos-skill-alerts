@@ -96,7 +96,7 @@ def _update_lang2media(lang: str = ""):
     lang = lang or get_default_lang()
 
     for type_ in LANG2MEDIA.keys():
-        LANG2MEDIA[type_] = get_words_list(type_, lang)
+        LANG2MEDIA[type_] = get_words_list(f"{type_}.dialog", lang)
 
 
 def get_media_source_from_intent(message: Message):
