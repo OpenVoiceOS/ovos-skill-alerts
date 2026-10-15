@@ -58,3 +58,37 @@ def test_a_named_day_is_read_from_now_not_from_the_alert():
         _message("move the baseball event to tomorrow at 8 pm"),
         anchor_time=_days_ahead(3, 18))
     assert result == _days_ahead(1, 20)
+
+
+def _skip_late_in_the_day(hour):
+    if dt.datetime.now(get_default_tz()).hour >= hour:
+        pytest.skip("the named time of today has already gone by")
+
+
+@pytest.mark.parametrize("lang, utterance", [
+    ("en-US", "move the dinner event to tonight at 11:30 pm"),
+    ("en-US", "move the dinner event to today at 11:30 pm"),
+    ("de-DE", "verschiebe den Termin auf heute um 23:30 Uhr"),
+    ("pt-BR", "mude o evento para hoje às 23:30"),
+])
+def test_a_time_that_names_today_is_read_from_now(lang, utterance):
+    _skip_late_in_the_day(23)
+    result = parse_relative_time_from_message(
+        _message(utterance, lang), anchor_time=_days_ahead(4, 18))
+    assert result == _days_ahead(0, 23).replace(minute=30)
+
+
+@pytest.mark.parametrize("lang, utterance, delta", [
+    ("de-DE", "verkürze den Timer um 5 Minuten", dt.timedelta(minutes=-5)),
+    ("pt-BR", "antecipar o alarme em 10 minutos", dt.timedelta(minutes=-10)),
+    ("pt-BR", "passe o alarme mais para adiante 10 minutos",
+     dt.timedelta(minutes=10)),
+    ("it-IT", "anticipa la sveglia di 10 minuti", dt.timedelta(minutes=-10)),
+    ("it-IT", "posticipa la prima sveglia di 10 minuti",
+     dt.timedelta(minutes=10)),
+])
+def test_each_locale_reads_the_direction_its_words_ask_for(lang, utterance,
+                                                           delta):
+    result = parse_relative_time_from_message(
+        _message(utterance, lang), anchor_time=_days_ahead(1, 7))
+    assert result == delta

@@ -755,8 +755,9 @@ def parse_relative_time_from_message(message: Message,
     earlier.voc or by Adapt's ``earlier`` tag. A time of day is read on the
     day of ``anchor_time``, the alert's own day, so "move the event to 8 pm"
     keeps the event's date. A phrase that resolves to another day, such as
-    "tomorrow at 8 pm", and a time already past on the alert's day are read
-    from now.
+    "tomorrow at 8 pm", a phrase that names today by a word of today.voc,
+    such as "tonight at 10", and a time already past on the alert's day are
+    read from now.
     :param message: Message associated with the request
     :param tokens: optional tokens parsed from message by `tokenize_utterances`
     :param timezone: timezone of the request
@@ -775,7 +776,9 @@ def parse_relative_time_from_message(message: Message,
                                                   timezone, not earlier)
         if not time_:
             continue
-        if anchor_time is not None and isinstance(time_, dt.datetime):
+        # "tonight at 10" names today: read it from now, not on the alert's day
+        if anchor_time is not None and isinstance(time_, dt.datetime) and \
+                not voc_match(token, "today", lang):
             day = anchor_time.replace(hour=0, minute=0, second=0,
                                       microsecond=0)
             on_day, on_day_remainder = extract_datetime(
