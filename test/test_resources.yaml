@@ -64,6 +64,7 @@ dialog:
   - alert_prenotification
   - alert_prenotification_ask
   - alert_rescheduled
+  - alert_rescheduled_unnamed
   - at_time
   - confirm_alert_playback
   - confirm_alert_recurring

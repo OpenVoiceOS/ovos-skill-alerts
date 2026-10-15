@@ -299,5 +299,37 @@ class TestRescheduleDialogSlots(unittest.TestCase):
         self.assertIn("baseball", text)
 
 
+class TestRescheduleConfirmationWithoutAName(unittest.TestCase):
+    """A default-named alert is confirmed without a name.
+
+    get_alert_dialog_data blanks the name of an alert whose name is its kind,
+    such as "timer", and "{name} of type {kind} adjusted" then spoke as "of
+    type timer adjusted". handle_reschedule_alert speaks
+    alert_rescheduled_unnamed instead, so every locale ships it and no line
+    of it waits for a name.
+    """
+
+    def test_every_locale_confirms_with_the_kind_alone(self):
+        offenders = []
+        for lang in locale_dirs():
+            path = os.path.join(SKILL_ROOT, "locale", lang, "dialog",
+                                "alert_rescheduled_unnamed.dialog")
+            if not os.path.isfile(path):
+                offenders.append(f"{lang}: no alert_rescheduled_unnamed.dialog")
+                continue
+            with open(path, encoding="utf-8") as handle:
+                lines = [line.strip() for line in handle
+                         if line.strip() and not line.startswith("#")]
+            for line in lines or ["<empty>"]:
+                if TestEverySpokenDialogSlot.SLOT.findall(line) != ["kind"]:
+                    offenders.append(f"{lang}: {line}")
+        self.assertEqual([], offenders, "\n".join([""] + offenders))
+
+    def test_an_unnamed_timer_reads_as_a_sentence_in_en_us(self):
+        text = SkillResources(SKILL_ROOT, "en-us").render_dialog(
+            "alert_rescheduled_unnamed", {"name": "", "kind": "timer"})
+        self.assertEqual("Your timer has been adjusted.", text)
+
+
 if __name__ == "__main__":
     unittest.main()
