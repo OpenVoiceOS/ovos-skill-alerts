@@ -191,8 +191,9 @@ def test_alarm_survives_a_restart_and_fires_exactly_once(assistant, clock):
     first.await_schedules(ident)
     first.stop()
 
-    second = assistant().start()
-    second.await_schedules(ident)
+    second = assistant()
+    second.await_requests_sent(ident)
+    second.start()
     assert second.expired == [], "an alarm not yet due must not ring on load"
 
     second.run_until(clock.now + dt.timedelta(minutes=2, seconds=30))
@@ -314,8 +315,13 @@ def test_adding_the_same_alert_twice_leaves_one_schedule(assistant, clock):
 
     # the skill restarts between writing its cache and finishing the add, so
     # the same alert is offered to the scheduler a second time
-    second = assistant().start()
+    second = assistant()
+    second.await_requests_sent(ident)
+    second.start()
+    # the offer made on load has been answered; wait for the second one too
+    second.scheduled.clear()
     assert second.manager.add_alert(Alert.deserialize(pending.serialize)) == ident
+    second.await_requests_sent(ident)
     second.await_schedules(ident)
 
     second.run_until(clock.now + dt.timedelta(minutes=5, seconds=30))
