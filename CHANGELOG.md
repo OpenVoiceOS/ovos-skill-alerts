@@ -1,5 +1,26 @@
 # Changelog
 
+## [0.12.43a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.12.43a1) (2026-10-15)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.12.42a1...0.12.43a1)
+
+**Merged pull requests:**
+
+- fix\(locale\): confirm a default-named reschedule by its kind alone [\#430](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/430) ([JarbasAl](https://github.com/JarbasAl))
+
+## [0.12.42a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.12.42a1) (2026-10-15)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.12.41a1...0.12.42a1)
+
+## [0.12.41a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.12.41a1) (2026-10-15)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.12.40a1...0.12.41a1)
+
+**Merged pull requests:**
+
+- fix\(locale\): read words and vocabularies through ovos-spec-tools [\#432](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/432) ([JarbasAl](https://github.com/JarbasAl))
+- test: wait for the restarted skill to subscribe before the replay [\#418](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/418) ([openvoiceos-bot](https://github.com/openvoiceos-bot))
+
 ## [0.12.40a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.12.40a1) (2026-10-15)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.12.39a1...0.12.40a1)
@@ -256,10 +277,6 @@
 ## [0.12.24a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.12.24a1) (2026-09-26)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.12.23a1...0.12.24a1)
-
-**Merged pull requests:**
-
-- fix\(test\): import util through the installed package, not off the checkout [\#330](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/330) ([openvoiceos-bot](https://github.com/openvoiceos-bot))
 
 ## [0.12.23a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.12.23a1) (2026-09-26)
 
