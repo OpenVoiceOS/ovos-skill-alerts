@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.12.42a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.12.42a1) (2026-10-15)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.12.39a1...0.12.42a1)
+
+**Merged pull requests:**
+
+- fix\(locale\): read words and vocabularies through ovos-spec-tools [\#432](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/432) ([JarbasAl](https://github.com/JarbasAl))
+- fix\(scheduler\): read the missed-occurrence owner from skill\_id [\#428](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/428) ([JarbasAl](https://github.com/JarbasAl))
+- test: wait for the restarted skill to subscribe before the replay [\#418](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/418) ([openvoiceos-bot](https://github.com/openvoiceos-bot))
+
 ## [0.12.39a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.12.39a1) (2026-10-15)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.12.38a1...0.12.39a1)
