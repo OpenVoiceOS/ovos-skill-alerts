@@ -747,20 +747,47 @@ def parse_relative_time_from_message(message: Message,
                                      tokens: Optional[Tokens] = None,
                                      timezone: Optional[dt.tzinfo] = None,
                                      anchor_time: Optional[dt.datetime] = None):
+    """
+    Parse the new time of a rescheduled alert.
+
+    A duration is returned as a signed delta for the caller to apply to the
+    alert: negative when the utterance asks for earlier, by a word of
+    earlier.voc or by Adapt's ``earlier`` tag. A time of day is read on the
+    day of ``anchor_time``, the alert's own day, so "move the event to 8 pm"
+    keeps the event's date. A phrase that resolves to another day, such as
+    "tomorrow at 8 pm", a phrase that names today by a word of today.voc,
+    such as "tonight at 10", and a time already past on the alert's day are
+    read from now.
+    :param message: Message associated with the request
+    :param tokens: optional tokens parsed from message by `tokenize_utterances`
+    :param timezone: timezone of the request
+    :param anchor_time: the alert's day; the time of day is ignored
+    :returns: datetime, signed timedelta or relativedelta, or None
+    """
     lang = get_message_lang(message)
-    earlier = "earlier" in message.data
+    earlier = "earlier" in message.data or \
+        voc_match(message.data.get("utterance", ""), "earlier", lang)
 
     timezone = timezone or get_default_tz()
     tokens = tokens or tokenize_utterance(message)
 
     for token in tokens.unmatched():
-        time_, remainder = extract_dt_or_duration(token, lang,
-                                                  anchor_time,
-                                                  timezone,
-                                                  not earlier)
-        if time_:
-            tokens[tokens.index(token)] = remainder
-            return time_
+        time_, remainder = extract_dt_or_duration(token, lang, None,
+                                                  timezone, not earlier)
+        if not time_:
+            continue
+        # "tonight at 10" names today: read it from now, not on the alert's day
+        if anchor_time is not None and isinstance(time_, dt.datetime) and \
+                not voc_match(token, "today", lang):
+            day = anchor_time.replace(hour=0, minute=0, second=0,
+                                      microsecond=0)
+            on_day, on_day_remainder = extract_datetime(
+                token, anchorDate=day, lang=lang) or (None, remainder)
+            if on_day and on_day.date() == day.date() and \
+                    on_day > dt.datetime.now(on_day.tzinfo):
+                time_, remainder = on_day, on_day_remainder
+        tokens[tokens.index(token)] = remainder
+        return time_
     return None
 
 
