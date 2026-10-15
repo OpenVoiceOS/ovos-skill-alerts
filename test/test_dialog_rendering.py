@@ -243,5 +243,61 @@ class TestEverySpokenDialogSlot(unittest.TestCase):
         self.assertEqual([], offenders, "\n".join([""] + offenders))
 
 
+
+class TestRescheduleDialogSlots(unittest.TestCase):
+    """The reschedule confirmations use only slots get_alert_dialog_data fills.
+
+    handle_reschedule_alert speaks alert_rescheduled or
+    alert_rescheduled_all_day through a variable, with the dictionary that
+    get_alert_dialog_data builds, so the call-site reader above cannot see
+    either one. A slot that dictionary lacks raises KeyError in the
+    renderer, and the user hears the skill's error message instead of the
+    confirmation. Every line of every locale is read, because the renderer
+    picks one line at random.
+    """
+
+    DIALOGS = ("alert_rescheduled", "alert_rescheduled_all_day")
+
+    @staticmethod
+    def _dialog_data():
+        import datetime as dt
+        from ovos_skill_alerts.util import AlertType
+        from ovos_skill_alerts.util.alert import Alert
+        from ovos_skill_alerts.util.locale import get_alert_dialog_data
+
+        alert = Alert.create(
+            expiration=dt.datetime.now(dt.timezone.utc) + dt.timedelta(hours=2),
+            alert_name="baseball", alert_type=AlertType.EVENT)
+        return get_alert_dialog_data(alert, "en-US")
+
+    def test_every_slot_is_a_key_of_the_dialog_data(self):
+        keys = set(self._dialog_data())
+        offenders, read = [], 0
+        for lang in locale_dirs():
+            for name in self.DIALOGS:
+                path = os.path.join(SKILL_ROOT, "locale", lang, "dialog",
+                                    f"{name}.dialog")
+                if not os.path.isfile(path):
+                    continue
+                read += 1
+                with open(path, encoding="utf-8") as handle:
+                    for number, line in enumerate(handle, start=1):
+                        line = line.strip()
+                        if not line or line.startswith("#"):
+                            continue
+                        for slot in TestEverySpokenDialogSlot.SLOT.findall(line):
+                            if slot not in keys:
+                                offenders.append(
+                                    f"{lang}/{name}.dialog:{number}: uses "
+                                    f"{{{slot}}}, and the data has {sorted(keys)}")
+        self.assertGreater(read, 30, "the reschedule dialogs were not found")
+        self.assertEqual([], offenders, "\n".join([""] + offenders))
+
+    def test_alert_rescheduled_renders_with_the_alert_name(self):
+        text = SkillResources(SKILL_ROOT, "en-us").render_dialog(
+            "alert_rescheduled", self._dialog_data())
+        self.assertIn("baseball", text)
+
+
 if __name__ == "__main__":
     unittest.main()
