@@ -9,6 +9,12 @@ to forward to another handler is the same defect seen from the code side.
 This skill carried `create_alarm_alt.intent` in 18 locales, registered by
 `handle_create_alarm_alt`, which did nothing but call
 `handle_create_alarm`. Both are gone. These tests keep them gone.
+
+It carried `create_reminder_recurring.intent` the same way, registered by
+`handle_create_reminder_recurring`, whose whole body was a call to
+`handle_create_reminder`. The recurring phrasings are lines of
+`create_reminder.intent`, and these tests keep the second file and the
+forwarding handler from coming back.
 """
 import re
 import unittest
@@ -17,8 +23,9 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 LOCALE = ROOT / "locale"
 
-#: the suffixes RULES.md names, plus the separator that introduces them
-DUPLICATE_SUFFIX = re.compile(r"_(alt|2|extra|alias)$")
+#: the suffixes RULES.md names, plus `_recurring`, which named a second
+#: file for an intent that already had one
+DUPLICATE_SUFFIX = re.compile(r"_(alt|2|extra|alias|recurring)$")
 
 
 class TestOneIntentOneDefinition(unittest.TestCase):
@@ -61,6 +68,29 @@ class TestOneIntentOneDefinition(unittest.TestCase):
         source = (ROOT / "__init__.py").read_text(encoding="utf-8")
         self.assertNotIn("def handle_create_alarm_alt", source)
         self.assertNotIn('@intent_handler("create_alarm_alt.intent")', source)
+
+    def test_create_reminder_recurring_is_gone_from_every_locale(self):
+        """The control for the reminder fold, named the same way."""
+        found = sorted(
+            p.parent.parent.name
+            for p in LOCALE.glob("*/intent/create_reminder_recurring.intent")
+        )
+        self.assertEqual(found, [])
+
+    def test_every_locale_still_defines_create_reminder(self):
+        locales = sorted(p.name for p in LOCALE.iterdir() if p.is_dir())
+        missing = [
+            l for l in locales
+            if (LOCALE / l / "intent").is_dir()
+            and not (LOCALE / l / "intent" / "create_reminder.intent").is_file()
+        ]
+        self.assertEqual(missing, [])
+
+    def test_no_forwarding_recurring_handler_remains(self):
+        source = (ROOT / "__init__.py").read_text(encoding="utf-8")
+        self.assertNotIn("def handle_create_reminder_recurring", source)
+        self.assertNotIn(
+            '@intent_handler("create_reminder_recurring.intent")', source)
 
 
 if __name__ == "__main__":
