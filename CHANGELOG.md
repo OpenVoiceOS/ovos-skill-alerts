@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.12.49a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.12.49a1) (2026-10-15)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.12.48a1...0.12.49a1)
+
+**Merged pull requests:**
+
+- fix\(locale\): alarm.voc carries each locale's alarm-clock word [\#441](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/441) ([JarbasAl](https://github.com/JarbasAl))
+
 ## [0.12.48a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.12.48a1) (2026-10-15)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.12.47a1...0.12.48a1)
