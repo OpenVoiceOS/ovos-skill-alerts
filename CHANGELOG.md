@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.12.44a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.12.44a1) (2026-10-15)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.12.43a1...0.12.44a1)
+
+**Merged pull requests:**
+
+- fix\(reschedule\): keep the direction the words ask for and the alert's own day [\#427](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/427) ([JarbasAl](https://github.com/JarbasAl))
+
 ## [0.12.43a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.12.43a1) (2026-10-15)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.12.42a1...0.12.43a1)
