@@ -27,6 +27,7 @@
 # SOFTWARE,  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import os
+import re
 import time
 from datetime import datetime, timedelta
 from threading import RLock
@@ -1355,6 +1356,17 @@ class AlertSkill(ConversationalSkill):
         # the words left once the time is parsed out: "the next event two
         # hours earlier" keeps it, "the baseball event to next monday" does
         # not, as "next monday" is the time.
+        # An alert whose own name holds the word, such as "next steps", is
+        # named by the request rather than asked for as the next one.
+        if not message.data.get("next") and requested_name:
+            spoken = requested_name.lower()
+            named = [alert for alert in alerts
+                     if alert.alert_name and voc_match(alert.alert_name, "next",
+                                                       lang=self.lang)
+                     and re.search(r"(?<!\w)" + re.escape(
+                         alert.alert_name.lower()) + r"(?!\w)", spoken)]
+            if named:
+                return self._pick_one_by_name(named, dialog)
         asks_next = message.data.get("next") or (
             requested_name and voc_match(requested_name, "next", lang=self.lang))
         if asks_next or len(alerts) == 1:
