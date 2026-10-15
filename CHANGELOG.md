@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.12.38a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.12.38a1) (2026-10-15)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.12.37a2...0.12.38a1)
+
 ## [0.12.37a2](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.12.37a2) (2026-10-15)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.12.37a1...0.12.37a2)
@@ -305,10 +309,6 @@
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.12.12a1...0.12.13a1)
 
-**Merged pull requests:**
-
-- fix\(es-ES\): reschedule\_alert and timer\_status are sentences, not word bags [\#323](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/323) ([openvoiceos-bot](https://github.com/openvoiceos-bot))
-
 ## [0.12.12a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.12.12a1) (2026-09-26)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.12.11a1...0.12.12a1)
@@ -316,11 +316,6 @@
 ## [0.12.11a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.12.11a1) (2026-09-26)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.12.10a1...0.12.11a1)
-
-**Merged pull requests:**
-
-- fix\(de-DE\): reschedule\_alert and timer\_status are sentences, not word bags [\#322](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/322) ([openvoiceos-bot](https://github.com/openvoiceos-bot))
-- fix\(ca-ES\): reschedule\_alert and timer\_status are sentences, not word bags [\#321](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/321) ([openvoiceos-bot](https://github.com/openvoiceos-bot))
 
 ## [0.12.10a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.12.10a1) (2026-09-26)
 
