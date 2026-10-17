@@ -6,3 +6,8 @@ tilpas alarmen for {schedkind} til {mediaform}
 jeg vil have min næste {schedkind} til at afspille min {mediakind}
 i stedet for at bippe skal mit vækkeur spille musik
 lad min alarm afspille en optagelse når den går i gang
+
+(sæt|opret|tilføj|planlæg|lav|start|ny|indstil) min alarm med {mediakind} (klokken|til) {date:time}
+(sæt|opret|tilføj|planlæg|lav|start|ny|indstil) min alarm der spiller {mediakind} (klokken|til) {date:time}
+(sæt|opret|tilføj|planlæg|lav|start|ny|indstil) min alarm med {mediakind}
+(sæt|opret|tilføj|planlæg|lav|start|ny|indstil) min alarm der spiller {mediakind}

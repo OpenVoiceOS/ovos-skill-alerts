@@ -5,11 +5,11 @@ jeg har en ny alarm [til {date:time}]
 alarm (klokken|til) {date:time}
 (sæt|opret) [en] alarm hver (hverdag|weekend|dag|morgen|nat) [klokken {date:time}]
 (sæt|lav) en {date:time} [hverdags|weekend] alarm
-(sæt|opret|tilføj|planlæg|lav|start|ny|indstil) (en|min) alarm med {mediakind} (klokken|til) {date:time}
-(sæt|opret|tilføj|planlæg|lav|start|ny|indstil) (en|min) alarm der spiller {mediakind} (klokken|til) {date:time}
+(sæt|opret|tilføj|planlæg|lav|start|ny|indstil) en alarm med {mediakind} (klokken|til) {date:time}
+(sæt|opret|tilføj|planlæg|lav|start|ny|indstil) en alarm der spiller {mediakind} (klokken|til) {date:time}
 (kan|vil) du (sætte|oprette|tilføje|planlægge|lave|starte) en alarm der spiller {mediakind} (klokken|til) {date:time}
-(sæt|opret|tilføj|planlæg|lav|start|ny|indstil) (en|min) alarm med {mediakind}
-(sæt|opret|tilføj|planlæg|lav|start|ny|indstil) (en|min) alarm der spiller {mediakind}
+(sæt|opret|tilføj|planlæg|lav|start|ny|indstil) en alarm med {mediakind}
+(sæt|opret|tilføj|planlæg|lav|start|ny|indstil) en alarm der spiller {mediakind}
 (sæt|opret|tilføj|planlæg|lav|start) (en|min) {mediakind} alarm (klokken|til) {date:time}
 (sæt|opret|tilføj|planlæg|lav|start) (en|min) {mediakind} alarm
 ny alarm med {mediakind} (klokken|til) {date:time}

@@ -566,22 +566,36 @@ class AlertSkill(ConversationalSkill):
         alert_type, spoken_type = get_alert_type_from_intent(message)
         alert: Alert = self._resolve_requested_alert(message, alert_type)
 
-        old_media = alert.media_type
-        new_media = get_media_source_from_intent(message)
-        if new_media == "file":
-            audio = parse_audio_file_from_message(message)
-            if audio:
-                alert.audio_file = f"file:/{audio}"
-            else:
-                return self.speak_dialog("error_no_script", {"kind": spoken_type})
+        if alert is None:
+            return self.speak_dialog("error_no_scheduled_kind",
+                                     {"kind": spoken_type}, wait=True)
 
-        if old_media:
-            self.speak_dialog("media_type_changed",
-                              {"old": translate(old_media, lang=self.lang),
-                               "new": translate(new_media, lang=self.lang)})
+        old_source = alert.media_source
+        if isinstance(old_source, dict):
+            old_source = old_source.get("title") or message.data.get("media")
+        if get_media_source_from_intent(message) == "file":
+            audio = parse_audio_file_from_message(message)
+            if not audio:
+                return self.speak_dialog("error_no_script", {"kind": spoken_type})
+            alert.audio_file = f"file:/{audio}"
+            new_source = audio
         else:
-            self.speak_dialog("media_type_set",
-                              {"new": translate(new_media, lang=self.lang)})
+            if not self.bus.wait_for_response(Message("ovos.common_play.ping"),
+                                              "ovos.common_play.pong"):
+                return self.speak_dialog("ocp_missing")
+            ocp_result = self._ocp_query(message)
+            if ocp_result is None:
+                return self.speak_dialog("ocp_breaking_up")
+            alert.ocp_request = ocp_result
+            new_source = message.data.get("mediakind") or ocp_result.get("title", "")
+        self.alert_manager.write_cache_now()
+        self.alert_manager.sync_dav_item(alert)
+
+        if old_source:
+            self.speak_dialog("media_type_changed",
+                              {"old": old_source, "new": new_source})
+        else:
+            self.speak_dialog("media_type_set", {"new": new_source})
 
     # Query Alerts
     @intent_handler("list_alerts.intent")

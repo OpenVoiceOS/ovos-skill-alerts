@@ -977,6 +977,18 @@ class TestAdapt12_Changeproperties(_IntentRoutingMixin, TestCase):
 
 class TestAdapt13_Changemediaproperties(_IntentRoutingMixin, TestCase):
     """Padatious (intent file) intent: change_media_properties.intent"""
+    def test_a_time_is_not_a_new_sound(self):
+        self._assert_padatious(r"change my alarm to 8", r"reschedule_alert.intent")
+
+    def test_the_alarm_sound_goes_to_the_media_intent(self):
+        self._assert_padatious(r"change my alarm sound to the radio", r"change_media_properties.intent")
+
+    def test_my_alarm_to_play_a_podcast(self):
+        self._assert_padatious(r"set my alarm to play a podcast", r"change_media_properties.intent")
+
+    def test_make_my_alarm_play_music(self):
+        self._assert_padatious(r"make my alarm play music", r"change_media_properties.intent")
+
     def test_audible_adjourn(self):
         # issue #138 triage: original auto-generated utterance did not
         # route to this intent under the adapt-only pipeline pin (verified
