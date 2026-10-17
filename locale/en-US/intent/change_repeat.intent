@@ -1,15 +1,20 @@
-(change|set|adjust|make) (my|the) (next|upcoming) {schedkind} (repeat|recur|repeating|recurring) (every|on) {repeat}
-(change|set|adjust|make) (my|the) (next|upcoming) {schedkind} to (repeat|recur|be recurring) (every|on) {repeat}
-(change|set|adjust|make) (my|the) {schedkind} to (repeat|recur|be recurring|be repeating) (every|on) {repeat}
-(change|set|adjust|make) (my|the) {schedkind} (repeat|recur|repeating|recurring) (every|on) {repeat}
-(my|the) {schedkind} (change|set|adjust) (the|its) (frequency|repetition|repeat) to {repeat}
-(change|set|adjust|make) (my|the) {schedkind} to (repeat|recur|be recurring|be repeating) {repeat}
-(change|set|adjust|make) (my|the) {schedkind} (repeat|recur|repeating|recurring) {repeat}
-(change|set|adjust|make) (my|the) (next|upcoming) {schedkind} to (repeat|recur) {repeat}
-(change|set|adjust) (my|the) {schedkind} (frequency|repetition|recurrance|repeat) to {repeat}
-(change|set|adjust) (my|the) {schedkind} (frequency|repetition|recurrance|repeat) to every {repeat}
-(change|set|adjust) (my|the) {schedkind} (frequency|repetition|recurrance|repeat) every {repeat}
-(change|set|adjust|make|reschedule) (my|the) {schedkind} to every {repeat}
-(change|set|adjust|make|reschedule) (my|the) wake {schedkind} to every {repeat}
+make (my|the) [next|upcoming] {schedkind} (repeat|recur) (every|on) {repeat}
+make (my|the) [next|upcoming] {schedkind} (repeating|recurring) (every|on) {repeat}
+(change|set|adjust) (my|the) [next|upcoming] {schedkind} to (repeat|recur|be recurring|be repeating) (every|on) {repeat}
+(change|set|adjust) (my|the) [next|upcoming] {schedkind} to (repeat|recur) {repeat}
+(change|set|adjust) (my|the) {schedkind} to (be recurring|be repeating) {repeat}
+make (my|the) {schedkind} (repeat|recur) {repeat}
+(change|set|adjust) (my|the) {schedkind} (frequency|repetition|recurrence|repeat) to {repeat}
+(change|set|adjust) (my|the) {schedkind} (frequency|repetition|recurrence|repeat) to every {repeat}
+(change|set|adjust|reschedule) (my|the) {schedkind} to every {repeat}
 (change|adjust) how often (my|the) {schedkind} (repeats|recurs)
 (have|let) (my|the) alarm repeat (on weekdays|on weekends|every day) (instead|from now on)
+make (my|the) (alarms|alarm clocks|timers|countdowns|reminders|events|appointments) (repeat|recur) (every|on) {repeat}
+make (my|the) (alarms|alarm clocks|timers|countdowns|reminders|events|appointments) (repeating|recurring) (every|on) {repeat}
+(change|set|adjust) (my|the) (alarms|alarm clocks|timers|countdowns|reminders|events|appointments) to (repeat|recur|be recurring|be repeating) (every|on) {repeat}
+(change|set|adjust) (my|the) (alarms|alarm clocks|timers|countdowns|reminders|events|appointments) to (repeat|recur) {repeat}
+(change|set|adjust) (my|the) (alarms|alarm clocks|timers|countdowns|reminders|events|appointments) to (be recurring|be repeating) {repeat}
+make (my|the) (alarms|alarm clocks|timers|countdowns|reminders|events|appointments) (repeat|recur) {repeat}
+(change|set|adjust) (my|the) (alarms|alarm clocks|timers|countdowns|reminders|events|appointments) (frequency|repetition|recurrence|repeat) to {repeat}
+(change|set|adjust) (my|the) (alarms|alarm clocks|timers|countdowns|reminders|events|appointments) (frequency|repetition|recurrence|repeat) to every {repeat}
+(change|set|adjust|reschedule) (my|the) (alarms|alarm clocks|timers|countdowns|reminders|events|appointments) to every {repeat}

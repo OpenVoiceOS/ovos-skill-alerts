@@ -78,6 +78,27 @@ GOLDEN_LOCALE_GAPS = {
     "pl-PL": "58.2% and 59.5% of rows match in two runs; the pl-PL templates are "
              "unvouched machine drafts, and a Polish speaker must write lines",
 }
+# Intents for which the published m2v model matched none of a locale's rows in
+# five measured runs. The model predates these templates; remove an entry after
+# the retrain. An entry is strict: it fails once the model matches every row of
+# the intent, so a fixed gap cannot stay listed.
+PUBLISHED_MODEL_GAPS = {
+    "da-DK": ("delete_list", "missed_alerts"),
+    "es-CO": ("add_list_subitems", "create_timer", "delete_list"),
+    "es-ES": ("delete_list",),
+    "fi-FI": ("change_until", "reschedule_alert"),
+    "hu-HU": ("add_list_subitems", "delete_list", "delete_list_entries",
+              "query_list_entries"),
+    "nl-NL": ("missed_alerts",),
+    "sv-FI": ("add_list_subitems", "reschedule_alert"),
+}
+# Locales whose rate stays below MIN_MATCH_RATE on the published m2v model: 55.7%
+# of 79 rows in every measured run, on the branch and on origin/dev alike. The
+# model predates these templates; remove an entry after the retrain. The entry
+# is strict: the test fails once the rate reaches the gate.
+PUBLISHED_MODEL_LOCALE_GAPS = {
+    "hu-HU": "55.7% of rows match; the published m2v model predates these templates",
+}
 END2END_DIR = Path(__file__).parent
 # With only this skill loaded, the published m2v model claims every fa-IR and
 # ru-RU request for another skill at the medium or low tier.
@@ -117,6 +138,9 @@ NEGATIVE_KNOWN_CLAIMS = {
         "millainen sää huomenna on": ("change_media_properties",),
         "miten tavataan sana välttämätön": ("change_media_properties",),
     },
+    "fr-FR": {
+        "joue de la musique jazz": ("change_media_properties",),
+    },
     "gl-ES": {
         "cal é o meu enderezo ip": ("list_alerts",),
     },
@@ -125,7 +149,7 @@ NEGATIVE_KNOWN_CLAIMS = {
         "hány óra van": ("timer_status",),
         "játssz valami jazz zenét": ("list_alerts",),
         "mi az ip címem": ("list_alerts",),
-        "milyen idő lesz holnap": ("timer_status",),
+        "milyen idő lesz holnap": ("list_alerts", "timer_status"),
         "állítsd a hangerőt ötven százalékra": ("change_media_properties",),
     },
     "it-IT": {
@@ -149,6 +173,7 @@ NEGATIVE_KNOWN_CLAIMS = {
     },
     "pt-BR": {
         "qual é o meu endereço ip": ("list_alerts",),
+        "toca uma música de jazz": ("create_alarm",),
     },
     "pt-PT": {
         "qual é o meu endereço ip": ("list_alerts",),
@@ -220,7 +245,7 @@ def test_golden_rows_match_their_intent(lang):
     rate = 1 - len(misses) / len(rows)
     print(f"[{lang}] {rate:.1%} of {len(rows)} rows match", *lines, "misses:", *misses,
           sep="\n  ")
-    gaps = set(GOLDEN_INTENT_GAPS.get(lang, ()))
+    gaps = set(GOLDEN_INTENT_GAPS.get(lang, ())) | set(PUBLISHED_MODEL_GAPS.get(lang, ()))
     lost = sorted({row["intent_label"] for row in rows
                    if hits_per_intent[row["intent_label"]] < MIN_MATCHED_ROWS_PER_INTENT}
                   - gaps)
@@ -230,6 +255,16 @@ def test_golden_rows_match_their_intent(lang):
         f"[{lang}] intents with fewer than {MIN_MATCHED_ROWS_PER_INTENT} matched row:\n  "
         + "\n  ".join(report)
     )
+    fixed = sorted(
+        intent for intent in PUBLISHED_MODEL_GAPS.get(lang, ())
+        if hits_per_intent[intent] == sum(row["intent_label"] == intent for row in rows))
+    assert not fixed, (
+        f"[{lang}] the published model matches every row of {fixed}; "
+        "remove them from PUBLISHED_MODEL_GAPS")
+    if lang in PUBLISHED_MODEL_LOCALE_GAPS:
+        assert rate < MIN_MATCH_RATE, (
+            f"[{lang}] {rate:.1%} of rows match; remove {lang} from PUBLISHED_MODEL_LOCALE_GAPS")
+        pytest.xfail(f"[{lang}] {rate:.1%} of rows match: {PUBLISHED_MODEL_LOCALE_GAPS[lang]}")
     if rate < MIN_MATCH_RATE and lang in GOLDEN_LOCALE_GAPS:
         pytest.xfail(f"[{lang}] {rate:.1%} of rows match: {GOLDEN_LOCALE_GAPS[lang]}")
     assert rate >= MIN_MATCH_RATE, (

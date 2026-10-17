@@ -1,14 +1,123 @@
-(cancel|delete|remove|clear|discard|get rid of|turn off) (my|the|all|all my|every|any) (next|upcoming|pending|stored|saved|scheduled) {alertkind}
-(my|the|all my) (next|upcoming|pending) {alertkind} (cancel|delete|remove|clear|discard) (it|them) [please]
-(my|the|all my|all|every) {alertkind} (cancel|delete|remove|clear|discard) (it|them) [please]
-(cancel|delete|remove|clear|discard|turn off) (alarm|alarms|alarm clock|timer|timers|countdown|reminder|reminders|event|events|appointment|appointments|alert|alerts)
-(cancel|delete|remove|clear|discard) (my|the|all|all my) {alertkind} and (my|the|all|all my) {alertkind2}
-(cancel|delete|remove|clear|discard|get rid of|turn off) (my|the|all|all my|all of my|every|any|all the) {alertkind}
-please (cancel|delete|remove|clear|discard) (my|the|all) {alertkind} and (my|the|all) {alertkind2}
+(cancel|delete|remove|clear|discard|get rid of|turn off) (my|the) [next|upcoming|pending|stored|saved|scheduled] {alertkind}
+(cancel|delete|remove|clear|discard|get rid of|turn off) (every|any) [upcoming|pending|stored|saved|scheduled] {alertkind}
+(cancel|delete|remove|clear|discard|get rid of|turn off) (my|the|any|all|all my|all of my|all the) [upcoming|pending|stored|saved|scheduled] (alarms|timers|countdowns|reminders|events|appointments|alerts)
+(cancel|delete|remove|clear|discard) {alertkind}
+(cancel|delete|remove|clear|discard) (alarms|timers|countdowns|reminders|events|appointments|alerts)
+turn off {alertkind}
+turn off (alarms|timers|countdowns|reminders|events|appointments|alerts)
+please (cancel|delete|remove|clear|discard|get rid of|turn off) (my|the) {alertkind}
+please (cancel|delete|remove|clear|discard|get rid of|turn off) (my|the|all|all my) (alarms|timers|countdowns|reminders|events|appointments|alerts)
 (cancel|delete|remove|clear|discard) my {name} (alarm|timer|countdown|reminder|event|appointment|alert)
-please (cancel|delete|remove|clear|discard|turn off) (my|the|all|all my) {alertkind}
 (cancel|delete|remove|clear|discard) the {alertkind} (for|at|about|on) {name}
 (cancel|delete|clear|remove) my (whole|entire) {alertkind} list
 (scrap|drop|kill) (my|the|that) (alarm|timer|reminder|event)
 i (no longer|do not) need (my|the|that) (alarm|timer|reminder|event)
 throw (that|the) (timer|alarm) away
+(cancel|delete|remove|clear|discard) (my|the) alarm and (my|the) timer
+(cancel|delete|remove|clear|discard) (all|all my|my|the) alarms and (all|all my|my|the) timers
+(cancel|delete|remove|clear|discard) (my|the) alarm and (my|the) countdown
+(cancel|delete|remove|clear|discard) (all|all my|my|the) alarms and (all|all my|my|the) countdowns
+(cancel|delete|remove|clear|discard) (my|the) alarm and (my|the) reminder
+(cancel|delete|remove|clear|discard) (all|all my|my|the) alarms and (all|all my|my|the) reminders
+(cancel|delete|remove|clear|discard) (my|the) alarm and (my|the) event
+(cancel|delete|remove|clear|discard) (all|all my|my|the) alarms and (all|all my|my|the) events
+(cancel|delete|remove|clear|discard) (my|the) alarm and (my|the) appointment
+(cancel|delete|remove|clear|discard) (all|all my|my|the) alarms and (all|all my|my|the) appointments
+(cancel|delete|remove|clear|discard) (my|the) alarm and (my|the) alert
+(cancel|delete|remove|clear|discard) (all|all my|my|the) alarms and (all|all my|my|the) alerts
+(cancel|delete|remove|clear|discard) (my|the) alarm clock and (my|the) timer
+(cancel|delete|remove|clear|discard) (all|all my|my|the) alarm clocks and (all|all my|my|the) timers
+(cancel|delete|remove|clear|discard) (my|the) alarm clock and (my|the) countdown
+(cancel|delete|remove|clear|discard) (all|all my|my|the) alarm clocks and (all|all my|my|the) countdowns
+(cancel|delete|remove|clear|discard) (my|the) alarm clock and (my|the) reminder
+(cancel|delete|remove|clear|discard) (all|all my|my|the) alarm clocks and (all|all my|my|the) reminders
+(cancel|delete|remove|clear|discard) (my|the) alarm clock and (my|the) event
+(cancel|delete|remove|clear|discard) (all|all my|my|the) alarm clocks and (all|all my|my|the) events
+(cancel|delete|remove|clear|discard) (my|the) alarm clock and (my|the) appointment
+(cancel|delete|remove|clear|discard) (all|all my|my|the) alarm clocks and (all|all my|my|the) appointments
+(cancel|delete|remove|clear|discard) (my|the) alarm clock and (my|the) alert
+(cancel|delete|remove|clear|discard) (all|all my|my|the) alarm clocks and (all|all my|my|the) alerts
+(cancel|delete|remove|clear|discard) (my|the) timer and (my|the) alarm
+(cancel|delete|remove|clear|discard) (all|all my|my|the) timers and (all|all my|my|the) alarms
+(cancel|delete|remove|clear|discard) (my|the) timer and (my|the) alarm clock
+(cancel|delete|remove|clear|discard) (all|all my|my|the) timers and (all|all my|my|the) alarm clocks
+(cancel|delete|remove|clear|discard) (my|the) timer and (my|the) countdown
+(cancel|delete|remove|clear|discard) (all|all my|my|the) timers and (all|all my|my|the) countdowns
+(cancel|delete|remove|clear|discard) (my|the) timer and (my|the) reminder
+(cancel|delete|remove|clear|discard) (all|all my|my|the) timers and (all|all my|my|the) reminders
+(cancel|delete|remove|clear|discard) (my|the) timer and (my|the) event
+(cancel|delete|remove|clear|discard) (all|all my|my|the) timers and (all|all my|my|the) events
+(cancel|delete|remove|clear|discard) (my|the) timer and (my|the) appointment
+(cancel|delete|remove|clear|discard) (all|all my|my|the) timers and (all|all my|my|the) appointments
+(cancel|delete|remove|clear|discard) (my|the) timer and (my|the) alert
+(cancel|delete|remove|clear|discard) (all|all my|my|the) timers and (all|all my|my|the) alerts
+(cancel|delete|remove|clear|discard) (my|the) countdown and (my|the) alarm
+(cancel|delete|remove|clear|discard) (all|all my|my|the) countdowns and (all|all my|my|the) alarms
+(cancel|delete|remove|clear|discard) (my|the) countdown and (my|the) alarm clock
+(cancel|delete|remove|clear|discard) (all|all my|my|the) countdowns and (all|all my|my|the) alarm clocks
+(cancel|delete|remove|clear|discard) (my|the) countdown and (my|the) timer
+(cancel|delete|remove|clear|discard) (all|all my|my|the) countdowns and (all|all my|my|the) timers
+(cancel|delete|remove|clear|discard) (my|the) countdown and (my|the) reminder
+(cancel|delete|remove|clear|discard) (all|all my|my|the) countdowns and (all|all my|my|the) reminders
+(cancel|delete|remove|clear|discard) (my|the) countdown and (my|the) event
+(cancel|delete|remove|clear|discard) (all|all my|my|the) countdowns and (all|all my|my|the) events
+(cancel|delete|remove|clear|discard) (my|the) countdown and (my|the) appointment
+(cancel|delete|remove|clear|discard) (all|all my|my|the) countdowns and (all|all my|my|the) appointments
+(cancel|delete|remove|clear|discard) (my|the) countdown and (my|the) alert
+(cancel|delete|remove|clear|discard) (all|all my|my|the) countdowns and (all|all my|my|the) alerts
+(cancel|delete|remove|clear|discard) (my|the) reminder and (my|the) alarm
+(cancel|delete|remove|clear|discard) (all|all my|my|the) reminders and (all|all my|my|the) alarms
+(cancel|delete|remove|clear|discard) (my|the) reminder and (my|the) alarm clock
+(cancel|delete|remove|clear|discard) (all|all my|my|the) reminders and (all|all my|my|the) alarm clocks
+(cancel|delete|remove|clear|discard) (my|the) reminder and (my|the) timer
+(cancel|delete|remove|clear|discard) (all|all my|my|the) reminders and (all|all my|my|the) timers
+(cancel|delete|remove|clear|discard) (my|the) reminder and (my|the) countdown
+(cancel|delete|remove|clear|discard) (all|all my|my|the) reminders and (all|all my|my|the) countdowns
+(cancel|delete|remove|clear|discard) (my|the) reminder and (my|the) event
+(cancel|delete|remove|clear|discard) (all|all my|my|the) reminders and (all|all my|my|the) events
+(cancel|delete|remove|clear|discard) (my|the) reminder and (my|the) appointment
+(cancel|delete|remove|clear|discard) (all|all my|my|the) reminders and (all|all my|my|the) appointments
+(cancel|delete|remove|clear|discard) (my|the) reminder and (my|the) alert
+(cancel|delete|remove|clear|discard) (all|all my|my|the) reminders and (all|all my|my|the) alerts
+(cancel|delete|remove|clear|discard) (my|the) event and (my|the) alarm
+(cancel|delete|remove|clear|discard) (all|all my|my|the) events and (all|all my|my|the) alarms
+(cancel|delete|remove|clear|discard) (my|the) event and (my|the) alarm clock
+(cancel|delete|remove|clear|discard) (all|all my|my|the) events and (all|all my|my|the) alarm clocks
+(cancel|delete|remove|clear|discard) (my|the) event and (my|the) timer
+(cancel|delete|remove|clear|discard) (all|all my|my|the) events and (all|all my|my|the) timers
+(cancel|delete|remove|clear|discard) (my|the) event and (my|the) countdown
+(cancel|delete|remove|clear|discard) (all|all my|my|the) events and (all|all my|my|the) countdowns
+(cancel|delete|remove|clear|discard) (my|the) event and (my|the) reminder
+(cancel|delete|remove|clear|discard) (all|all my|my|the) events and (all|all my|my|the) reminders
+(cancel|delete|remove|clear|discard) (my|the) event and (my|the) appointment
+(cancel|delete|remove|clear|discard) (all|all my|my|the) events and (all|all my|my|the) appointments
+(cancel|delete|remove|clear|discard) (my|the) event and (my|the) alert
+(cancel|delete|remove|clear|discard) (all|all my|my|the) events and (all|all my|my|the) alerts
+(cancel|delete|remove|clear|discard) (my|the) appointment and (my|the) alarm
+(cancel|delete|remove|clear|discard) (all|all my|my|the) appointments and (all|all my|my|the) alarms
+(cancel|delete|remove|clear|discard) (my|the) appointment and (my|the) alarm clock
+(cancel|delete|remove|clear|discard) (all|all my|my|the) appointments and (all|all my|my|the) alarm clocks
+(cancel|delete|remove|clear|discard) (my|the) appointment and (my|the) timer
+(cancel|delete|remove|clear|discard) (all|all my|my|the) appointments and (all|all my|my|the) timers
+(cancel|delete|remove|clear|discard) (my|the) appointment and (my|the) countdown
+(cancel|delete|remove|clear|discard) (all|all my|my|the) appointments and (all|all my|my|the) countdowns
+(cancel|delete|remove|clear|discard) (my|the) appointment and (my|the) reminder
+(cancel|delete|remove|clear|discard) (all|all my|my|the) appointments and (all|all my|my|the) reminders
+(cancel|delete|remove|clear|discard) (my|the) appointment and (my|the) event
+(cancel|delete|remove|clear|discard) (all|all my|my|the) appointments and (all|all my|my|the) events
+(cancel|delete|remove|clear|discard) (my|the) appointment and (my|the) alert
+(cancel|delete|remove|clear|discard) (all|all my|my|the) appointments and (all|all my|my|the) alerts
+(cancel|delete|remove|clear|discard) (my|the) alert and (my|the) alarm
+(cancel|delete|remove|clear|discard) (all|all my|my|the) alerts and (all|all my|my|the) alarms
+(cancel|delete|remove|clear|discard) (my|the) alert and (my|the) alarm clock
+(cancel|delete|remove|clear|discard) (all|all my|my|the) alerts and (all|all my|my|the) alarm clocks
+(cancel|delete|remove|clear|discard) (my|the) alert and (my|the) timer
+(cancel|delete|remove|clear|discard) (all|all my|my|the) alerts and (all|all my|my|the) timers
+(cancel|delete|remove|clear|discard) (my|the) alert and (my|the) countdown
+(cancel|delete|remove|clear|discard) (all|all my|my|the) alerts and (all|all my|my|the) countdowns
+(cancel|delete|remove|clear|discard) (my|the) alert and (my|the) reminder
+(cancel|delete|remove|clear|discard) (all|all my|my|the) alerts and (all|all my|my|the) reminders
+(cancel|delete|remove|clear|discard) (my|the) alert and (my|the) event
+(cancel|delete|remove|clear|discard) (all|all my|my|the) alerts and (all|all my|my|the) events
+(cancel|delete|remove|clear|discard) (my|the) alert and (my|the) appointment
+(cancel|delete|remove|clear|discard) (all|all my|my|the) alerts and (all|all my|my|the) appointments

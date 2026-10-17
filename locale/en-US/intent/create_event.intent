@@ -1,6 +1,6 @@
-(create|add|schedule) (an|a) (event|appointment) [{event}]
-new (event|appointment) [{event}]
-i have (an|a) [work] (event|appointment) [{event}]
+(create|add|schedule) an (event|appointment) [for {event}]
+new (event|appointment) [for {event}]
+i have (an event|an appointment|a work event|a work appointment) [{event}]
 create an event for {event}
 schedule an appointment for {event}
 please schedule an appointment for {event}
@@ -18,7 +18,6 @@ add an event to my calendar for {event}
 add an appointment for {event}
 make an appointment for {event}
 make an event for {event}
-give me an event for {event}
 set up an event for {event}
 set up an appointment for {event}
 book an appointment for {event}

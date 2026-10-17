@@ -53,6 +53,7 @@ from ovos_skill_alerts.util.locale import (
     datetime_display
 )
 from ovos_skill_alerts.util.media import (
+    named_media_type,
     ocp_query,
     ocp_request,
     get_media_source_from_intent
@@ -295,7 +296,7 @@ class AlertSkill(ConversationalSkill):
         plain alarm.
         :param message: Message associated with request
         """
-        if message.data.get("mediakind"):
+        if named_media_type(message):
             return self.handle_ocp_alarm(message)
 
         alarm = build_alert_from_intent(message)
@@ -565,6 +566,10 @@ class AlertSkill(ConversationalSkill):
         """
         alert_type, spoken_type = get_alert_type_from_intent(message)
         alert: Alert = self._resolve_requested_alert(message, alert_type)
+
+        if alert is None:
+            return self.speak_dialog("error_no_scheduled_kind",
+                                     {"kind": spoken_type}, wait=True)
 
         old_media = alert.media_type
         new_media = get_media_source_from_intent(message)

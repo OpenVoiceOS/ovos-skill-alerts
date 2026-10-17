@@ -1,7 +1,7 @@
 # Finland-Swedish machine draft, unvouched
-ny påminnelse [om {reminder}]
-glöm inte att påminna mig om {reminder}
-kom ihåg att påminna mig om {reminder}
+ny påminnelse [om att {reminder}]
+glöm inte att påminna mig om att {reminder}
+kom ihåg att påminna mig om att {reminder}
 säg till mig att {reminder} [klockan {date:time}]
 påminn mig om att (köpa mjölk|ringa banken|ta ut soporna|hämta paketet) (i morgon|i kväll|på lördag|klockan tre)
 påminn mig om (tandläkaren|frisören|mötet|bastun) (på torsdag|i morgon|klockan fem)

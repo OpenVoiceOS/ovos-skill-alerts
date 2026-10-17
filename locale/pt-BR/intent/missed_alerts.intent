@@ -1,6 +1,8 @@
 # machine translation from en-US, unvouched
 # Frases que perguntam quais alertas, se houver, foram perdidos - opcionalmente por tipo.
-[(eu|nós) (perdi|perdemos)] (perdi|perdemos) [(um|uma|algum|alguns)] (alarme|alarmes|alerta|alertas|evento|eventos|lembrete|lembretes|timer|timers|alguma coisa|algo)
+(eu perdi|nós perdemos) (algum alarme|algum alerta|algum evento|algum lembrete|algum timer|alguma coisa|algo)
+(eu perdi|nós perdemos) (alguns alarmes|alguns alertas|alguns eventos|alguns lembretes|alguns timers)
+(perdi|perdemos) (algum alarme|algum alerta|algum evento|algum lembrete|algum timer|alguma coisa|algo)
 (qual|quais) (alarme|alarmes|alerta|alertas|evento|eventos|lembrete|lembretes|timer|timers|alguma coisa|algo) (eu|nós) (perdi|perdemos)
 eu perdi meu alarme
 eu perdi meu lembrete

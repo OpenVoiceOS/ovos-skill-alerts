@@ -1,17 +1,22 @@
 (could|would|can) you (sync|synchronize|synchronise) the {davkind}
 (could|would|can) you (sync|synchronize|synchronise) my {davkind}
-(sync|synchronize|synchronise|download|load|upload|refresh) {davkind} now
+(sync|synchronize|synchronise|download|load|upload|refresh) (calendars|events|reminders) now
 (sync|synchronize|synchronise|download|load|upload|refresh) the {davkind} now
 (sync|synchronize|synchronise|download|load|upload|refresh) the {davkind}
 (sync|synchronize|synchronise|download|load|upload|refresh) my {davkind} now
 (sync|synchronize|synchronise|download|load|upload|refresh) my {davkind}
-(sync|synchronize|synchronise|download|load|upload|refresh) all my {davkind}
+(sync|synchronize|synchronise|download|load|upload|refresh) all my (calendars|events|reminders)
 please (sync|synchronize|synchronise|download|load|upload) the {davkind}
 please (sync|synchronize|synchronise|download|load|upload) my {davkind}
-(sync|synchronize|synchronise|download|load|upload) {davkind}
-(sync|synchronize|synchronise|download|load|upload) the {davkind} and the {davkind2}
-(sync|synchronize|synchronise|download|load|upload) my {davkind} and {davkind2}
+(sync|synchronize|synchronise|download|load|upload) (calendars|events|reminders)
+(sync|synchronize|synchronise|download|load|upload) the calendars and the (events|reminders)
+(sync|synchronize|synchronise|download|load|upload) my calendar and (events|reminders)
 (match|mirror) (my|the) (calendar|events|reminders) with the (server|cloud)
 (refresh|update) (my|the) (calendar|events) (from|with) the (cloud|server) copy
 (keep|make) (my|the) (reminders|events|calendar) (in sync|consistent) across (devices|my devices)
 (download|pull) my (online|cloud) (events|calendar)
+(sync|synchronize|synchronise|download|load|upload|refresh) calendar now
+(sync|synchronize|synchronise|download|load|upload) (my|the) (calendar|calendars) and (my|the) (event|events|reminder|reminders)
+(sync|synchronize|synchronise|download|load|upload) (my|the) (event|events) and (my|the) (reminder|reminders|calendar|calendars)
+(sync|synchronize|synchronise|download|load|upload) (my|the) (reminder|reminders) and (my|the) (event|events|calendar|calendars)
+(sync|synchronize|synchronise|download|load|upload|refresh) calendar

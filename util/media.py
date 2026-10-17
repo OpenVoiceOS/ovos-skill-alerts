@@ -1,4 +1,4 @@
-from typing import List 
+from typing import List, Optional
 
 from ovos_utils.log import LOG
 from ovos_bus_client import Message, MessageBusClient
@@ -75,17 +75,24 @@ def ocp_request(alert: Alert, bus: MessageBusClient):
     return result
 
 
-def get_ocp_media_type(message: Message) -> str:
-    """The OCP media type the user named, or "generic".
-
-    The intents fill the ``{mediakind}`` slot; ``media`` is the older key.
-    """
+def named_media_type(message: Message) -> Optional[str]:
+    """The OCP media type named by the ``{mediakind}`` slot, the older
+    ``media`` key, or, for a template that carries the media word as plain
+    text ("set a music alarm"), by the utterance. None if none is named."""
     lang = get_message_lang(message)
-    spoken = message.data.get("mediakind") or message.data.get("media")
+    spoken = message.data.get("mediakind") or message.data.get("media") \
+        or message.data.get("utterance")
+    if not spoken:
+        return None
     for type_ in MEDIA_TYPES:
         if locale_voc_match(spoken, f"media_{type_}", lang):
             return type_
-    return "generic"
+    return None
+
+
+def get_ocp_media_type(message: Message) -> str:
+    """The OCP media type the user named, or "generic"."""
+    return named_media_type(message) or "generic"
 
 
 def get_media_source_from_intent(message: Message):

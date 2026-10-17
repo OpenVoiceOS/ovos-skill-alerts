@@ -1,34 +1,52 @@
-(list|show|read|tell) (me|us) (my|the) (alarm|alarms|timer|timers|reminder|reminders|event|events|appointment|alert|alerts) (for|at|on) {timeframe}
-(list|show|read|tell) (me|us) (all|all my|my|the) (alarm|alarms|alarm clock|timer|timers|countdown|reminder|reminders|event|events|appointment|appointments|alert|alerts)
-(list|show|read|tell) (me|us) (all|all my) (alarms|timers|reminders|events|appointments|alerts) (for|at|on) {timeframe}
-(list|show|read|tell) (me|us) (my|the) (pending|upcoming|stored) {alertkind}
-(list|show|read|tell) (me|us) all of (my|the) {alertkind}
-what (are|is) (my|the) (pending|upcoming|stored) {alertkind}
-got (any|some) {alertkind}
-got (any|some) {alertkind} (for|at|on|between|next) {timeframe}
-(could|would|can) you tell (me|us) what {alertkind} (i|we) have
-(do|did) (i|we) have (anything|something) (scheduled|stored|saved|set|pending) (for|at|on|tomorrow|today) {timeframe}
-(list|show|read) (my|all my|the) (alarms|timers|reminders|events|appointments|alerts) (for|at|on) {timeframe}
-(what|which) {alertkind} (are|is) (stored|saved|set|pending|upcoming|scheduled|there) (for|at|on|tomorrow|today) {timeframe}
-(list|show|read) (my|all my|the) (alarm|alarms|alarm clock|timer|timers|countdown|reminder|reminders|event|events|appointment|appointments|alert|alerts)
-(do|did) (i|we) have (any|some|a|an) {alertkind} (for|at|on|between|tomorrow|today|this week) {timeframe}
-what (did|have) (i|we) (set|schedule|store|scheduled|stored) (for|on|at|tomorrow|today) {timeframe}
-(what|which|how many) {alertkind} (do|did) (i|we) have (for|at|on|tomorrow|today|this week) {timeframe}
-(do|did) (i|we) have (any|some) (stored|saved|pending|upcoming|set|scheduled) {alertkind}
-(do|did) (i|we) have (anything|something) (scheduled|stored|saved|set|pending)
-(what|which) {alertkind} (are|is) (stored|saved|set|pending|upcoming|scheduled|there)
-(are|is) there (any|some) {alertkind} (for|at|on|between|tomorrow|today|this week) {timeframe}
-(tell|show|read) (me|us) (what|which) {alertkind} (i|we) have
-(have|has) (i|we) (got|set|stored) (any|some) {alertkind}
-(do|did) (i|we) (set|schedule|store) (any|some) {alertkind}
-(are|is) there (any|some) (stored|saved|pending|upcoming|scheduled) {alertkind}
-(do|did) (i|we) have (any|some|a|an) {alertkind}
-(what|which|how many) {alertkind} (do|did) (i|we) have
-(what|which) {alertkind} and {alertkind2} (do|did) (i|we) have
+(show|tell|read) (me|us) (my|the|all my|all) (alarms|timers|countdowns|reminders|events|appointments|alerts) [(for|at|on) {timeframe}]
+list (my|the|all my|all) (alarms|timers|countdowns|reminders|events|appointments|alerts) [(for|at|on) {timeframe}]
+(show|tell|read) (me|us) (my|the) (next|upcoming) {alertkind}
+(show|tell|read) (me|us) (my|the|all my) (pending|upcoming|stored) (alarms|timers|countdowns|reminders|events|appointments|alerts)
+(show|tell|read) (me|us) all of (my|the) (alarms|timers|countdowns|reminders|events|appointments|alerts)
+list (my|the|all my) (pending|upcoming|stored) (alarms|timers|countdowns|reminders|events|appointments|alerts)
+what are (my|the) (pending|upcoming|stored) (alarms|timers|countdowns|reminders|events|appointments|alerts)
+what is (my|the) (next|upcoming|pending|stored) {alertkind}
+got (any|some) (alarms|timers|countdowns|reminders|events|appointments|alerts) [(for|at|on|between|next) {timeframe}]
+(could|would|can) you tell (me|us) what (alarms|timers|countdowns|reminders|events|appointments|alerts) (i|we) have
+(do|did) (i|we) have (anything|something) (scheduled|stored|saved|set|pending) [(for|at|on) {timeframe}]
+(what|which) (alarms|timers|countdowns|reminders|events|appointments|alerts) are (stored|saved|set|pending|upcoming|scheduled|there) [(for|at|on) {timeframe}]
+(do|did) (i|we) have (any|some) (alarms|timers|countdowns|reminders|events|appointments|alerts) [(for|at|on|between|this week) {timeframe}]
+(do|did) (i|we) have (an alarm|a timer|a countdown|a reminder|an event|an appointment|an alert) [(for|at|on|between) {timeframe}]
+what did (i|we) (set|schedule|store) (for|on|at) {timeframe}
+what have (i|we) (set|scheduled|stored) (for|on|at) {timeframe}
+(what|which|how many) (alarms|timers|countdowns|reminders|events|appointments|alerts) (do|did) (i|we) have [(for|at|on|this week) {timeframe}]
+(do|did) (i|we) have (any|some) (stored|saved|pending|upcoming|set|scheduled) (alarms|timers|countdowns|reminders|events|appointments|alerts)
+(are|is) there (any|some) (alarms|timers|countdowns|reminders|events|appointments|alerts) [(for|at|on|between|this week) {timeframe}]
+is there (an alarm|a timer|a countdown|a reminder|an event|an appointment|an alert) [(for|at|on) {timeframe}]
+(tell|show|read) (me|us) (what|which) (alarms|timers|countdowns|reminders|events|appointments|alerts) (i|we) have
+have (i|we) (got|set|stored) (any|some) (alarms|timers|countdowns|reminders|events|appointments|alerts)
+(do|did) (i|we) (set|schedule|store) (any|some) (alarms|timers|countdowns|reminders|events|appointments|alerts)
+are there (any|some) (stored|saved|pending|upcoming|scheduled) (alarms|timers|countdowns|reminders|events|appointments|alerts)
+(what|which) (alarms|reminders|events) and (timers|countdowns) (do|did) (i|we) have
 (when|what) is my (next|upcoming) {alertkind}
-(are|is) there (any|some) {alertkind}
-what is (on my schedule|coming up for me)
+what is on my schedule
+what is coming up for me
 which (alarms|reminders|alerts) (will|are going to) (ring|go off) (soon|later)
 when is the (next|upcoming) alarm going to ring
 (summarize|recap) (my|the) (alarms|alerts|reminders) for (me|today)
-(list|recap) everything i (have|set) (scheduled|pending)
+list everything i have (scheduled|pending)
+recap everything i have (scheduled|pending)
+(do|did) (i|we) have (any|some) (alarms|timers|countdowns|reminders|events|appointments|alerts) (today|tomorrow|this week)
+(what|which|how many) (alarms|timers|countdowns|reminders|events|appointments|alerts) (do|did) (i|we) have (today|tomorrow|this week)
+(do|did) (i|we) have (anything|something) (scheduled|stored|saved|set|pending) (today|tomorrow|this week)
+(what|which) {alertkind} is (stored|saved|set|pending|upcoming|scheduled|there) [(for|at|on) {timeframe}]
+(what|which) {alertkind} is (stored|saved|set|pending|upcoming|scheduled|there) (today|tomorrow|this week)
+is there any [pending|stored|saved|upcoming|scheduled] {alertkind}
+got any {alertkind} [(for|at|on|between|next) {timeframe}]
+(show|tell|read) (me|us) (my|the) [pending|stored|upcoming] {alertkind} [(for|at|on) {timeframe}]
+list (my|the) [pending|stored|upcoming] {alertkind} [(for|at|on) {timeframe}]
+(show|tell|read) (me|us) what {alertkind} (i|we) have
+(show|tell|read) (me|us) which {alertkind} (i|we) have
+(could|would|can) you (tell|show) (me|us) what {alertkind} (i|we) have
+(do|did) (i|we) have (any|some) {alertkind} [(for|at|on|between|this week) {timeframe}]
+(do|did) (i|we) have (any|some) (stored|saved|pending|upcoming|set|scheduled) {alertkind}
+(do|did) (i|we) (set|schedule|store) (any|some) {alertkind}
+(do|did) (i|we) have (an alarm|a timer|a countdown|a reminder|an event|an appointment|an alert) this week
+is there any {alertkind} [(for|at|on|between|this week) {timeframe}]
+is there any (stored|saved|pending|upcoming|scheduled) {alertkind}
+(what|which) {alertkind} (do|did) (i|we) have [(for|at|on|this week) {timeframe}]

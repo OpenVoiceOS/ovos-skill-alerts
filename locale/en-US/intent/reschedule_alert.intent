@@ -1,33 +1,32 @@
-(my|the) {date:old} (alarm|timer|countdown|reminder|event|appointment) (move|change|reschedule|shift|push|postpone) (it|that) (to|until|for) {date:time}
-(move|change|reschedule|shift|push|postpone|adjust) (my|the) {date:old} (alarm|timer|countdown|reminder|event|appointment) (to|until|for) {date:time}
-(could|would|can) you (move|change|reschedule|shift|push|postpone) (my|the) (next|upcoming) {schedkind} (to|until|for) {date:time}
-(my|the) {date:old} (alarm|timer|reminder|event|appointment) (move|change|reschedule|shift|push|postpone) (to|until|for) {date:time}
-(move|push|shift) (my|the) (next|upcoming) {schedkind} (earlier|sooner|later|forward|back)
-(could|would|can) you (make|set) (my|the) {schedkind} (earlier|sooner|later|longer|shorter)
-(my|the) (next|upcoming) {schedkind} (earlier|sooner|later|longer|shorter) [please]
-(make|set) (my|the) (next|upcoming) {schedkind} (earlier|sooner|later|longer|shorter)
-(move|push|shift) (my|the) {schedkind} (earlier|sooner|later|forward|back)
-(shorten|lengthen|extend|expand|increase|decrease) (my|the) (next|upcoming) {schedkind}
-(my|the) {schedkind} (earlier|sooner|later|longer|shorter) [please]
-(make|set) (my|the) {schedkind} (earlier|sooner|later|longer|shorter)
-(shorten|lengthen|extend|expand|increase|decrease) (my|the) {schedkind}
-{schedkind} (earlier|sooner|later|longer|shorter) [please]
-(earlier|sooner|later|longer|shorter) {schedkind} [please]
-(earlier|sooner|later|longer|shorter) {schedkind}
-(could|would|can) you (move|change|reschedule|shift|push|postpone) (my|the) {schedkind} (to|until|for) {date:time}
-(move|change|reschedule|shift|push|postpone|adjust) (my|the) (next|upcoming) {schedkind} (to|until|for) {date:time}
-(move|change|reschedule|shift|push|postpone|adjust) (my|the) (next|upcoming) {schedkind} (earlier|sooner|later)
-(move|change|reschedule|shift|push|postpone|adjust) (my|the) (next|upcoming) {schedkind} by {duration:duration} (earlier|sooner|later)
-(move|change|reschedule|shift|push|postpone|adjust|adjourn) (my|the) {schedkind} (to|until|for|back to|forward to) {date:time}
-(make|set|change) (my|the) (next|upcoming) {schedkind} (an all day event|all day|to an all day event|to all day)
-(move|change|reschedule|shift|push|postpone|adjust) the {schedkind} (for|about) {name} (to|until|for) {date:time}
-(move|change|reschedule|shift|push|postpone|adjust) (my|the) {schedkind} (earlier|sooner|later)
-the {schedkind} (for|at) {date:old} (move|change|reschedule|shift|push|postpone) it (to|until|for) {date:time}
-(my|the) {schedkind} (move|change|reschedule|shift|push|postpone) (to|until|for) {date:time}
-(move|change|reschedule|shift|push) (my|the) {schedkind} (to|until|for) {date:time} instead
-(make|set|change) (my|the) {schedkind} (an all day event|all day|a whole day event|to an all day event|to all day)
-(move|change|reschedule|shift|push|postpone|adjust) (my|the) {schedkind} from {date:old} to {date:time}
-from {date:old} to {date:time} (move|change|reschedule|shift|push|postpone) (my|the) {schedkind}
+(move|change|shift|adjust|push|postpone|reschedule) (my|the) {date:old} (alarm|timer|countdown|reminder|event|appointment) to {date:time}
+reschedule (my|the) {date:old} (alarm|timer|countdown|reminder|event|appointment) for {date:time}
+(postpone|adjourn) (my|the) {date:old} (alarm|timer|countdown|reminder|event|appointment) until {date:time}
+(move|change|shift|adjust|push|postpone|reschedule|adjourn) (my|the) [next|upcoming] {schedkind} to {date:time}
+reschedule (my|the) [next|upcoming] {schedkind} for {date:time}
+(postpone|adjourn|push) (my|the) [next|upcoming] {schedkind} until {date:time}
+(move|push|shift) (my|the) [next|upcoming] {schedkind} back to {date:time}
+(move|push|shift) (my|the) [next|upcoming] {schedkind} forward to {date:time}
+(could|would|can) you (move|change|shift|adjust|push|postpone|reschedule|adjourn) (my|the) [next|upcoming] {schedkind} to {date:time}
+(could|would|can) you reschedule (my|the) [next|upcoming] {schedkind} for {date:time}
+(could|would|can) you (postpone|adjourn|push) (my|the) [next|upcoming] {schedkind} until {date:time}
+(move|push|shift) (my|the) [next|upcoming] {schedkind} (earlier|sooner|later|forward|back)
+(change|reschedule|postpone|adjust) (my|the) [next|upcoming] {schedkind} (earlier|sooner|later)
+(move|change|reschedule|shift|push|postpone|adjust) (my|the) [next|upcoming] {schedkind} by {duration:duration} (earlier|sooner|later)
+(could|would|can) you make (my|the) [next|upcoming] {schedkind} (earlier|sooner|later|longer|shorter)
+(could|would|can) you set (my|the) [next|upcoming] {schedkind} (earlier|sooner|later)
+make (my|the) [next|upcoming] {schedkind} (earlier|sooner|later|longer|shorter)
+set (my|the) [next|upcoming] {schedkind} (earlier|sooner|later)
+(shorten|lengthen|extend|expand|increase|decrease) (my|the) [next|upcoming] {schedkind} [by {duration:duration}]
+(my|the) [next|upcoming] {schedkind} (earlier|sooner|later|longer|shorter) [please]
+(earlier|later|longer|shorter) {schedkind} [please]
+(an earlier|a later) {schedkind} [please]
+wake (me|us) [up] (earlier|sooner|later)
+(move|change|reschedule|shift|push|postpone|adjust) the {schedkind} (for|about) {name} to {date:time}
+(move|change|reschedule|shift|push) (my|the) [next|upcoming] {schedkind} to {date:time} instead
+(move|change|reschedule|shift|push|postpone|adjust) (my|the) [next|upcoming] {schedkind} from {date:old} to {date:time}
+make (my|the) [next|upcoming] {schedkind} (an all day event|all day)
+(set|change) (my|the) [next|upcoming] {schedkind} to (an all day event|all day)
+make (my|the) {schedkind} a whole day event
 (lengthen|stretch) (my|the) timer by (five|ten|a few) minutes
 (trim|shave) (five|ten|two) minutes (from|off) (my|the) timer
 (turn|convert) (my|the) (event|appointment) into an all day (event|one)
@@ -35,3 +34,22 @@ from {date:old} to {date:time} (move|change|reschedule|shift|push|postpone) (my|
 (top up|extend) the (timer|countdown) (a bit|by a few minutes)
 (the|my) (timer|countdown) needs (more|extra) (time|minutes)
 (bump|move) (my|the) alarm (up|forward) (a bit|an hour)
+(move|change|shift|adjust|push|postpone|reschedule|adjourn) (my|the) (alarms|alarm clocks|timers|countdowns|reminders|events|appointments) to {date:time}
+reschedule (my|the) (alarms|alarm clocks|timers|countdowns|reminders|events|appointments) for {date:time}
+(postpone|adjourn|push) (my|the) (alarms|alarm clocks|timers|countdowns|reminders|events|appointments) until {date:time}
+(move|push|shift) (my|the) (alarms|alarm clocks|timers|countdowns|reminders|events|appointments) back to {date:time}
+(move|push|shift) (my|the) (alarms|alarm clocks|timers|countdowns|reminders|events|appointments) forward to {date:time}
+(could|would|can) you (move|change|shift|adjust|push|postpone|reschedule|adjourn) (my|the) (alarms|alarm clocks|timers|countdowns|reminders|events|appointments) to {date:time}
+(could|would|can) you reschedule (my|the) (alarms|alarm clocks|timers|countdowns|reminders|events|appointments) for {date:time}
+(could|would|can) you (postpone|adjourn|push) (my|the) (alarms|alarm clocks|timers|countdowns|reminders|events|appointments) until {date:time}
+(move|push|shift) (my|the) (alarms|alarm clocks|timers|countdowns|reminders|events|appointments) (earlier|sooner|later|forward|back)
+(change|reschedule|postpone|adjust) (my|the) (alarms|alarm clocks|timers|countdowns|reminders|events|appointments) (earlier|sooner|later)
+(move|change|reschedule|shift|push|postpone|adjust) (my|the) (alarms|alarm clocks|timers|countdowns|reminders|events|appointments) by {duration:duration} (earlier|sooner|later)
+(could|would|can) you make (my|the) (alarms|alarm clocks|timers|countdowns|reminders|events|appointments) (earlier|sooner|later|longer|shorter)
+(could|would|can) you set (my|the) (alarms|alarm clocks|timers|countdowns|reminders|events|appointments) (earlier|sooner|later)
+make (my|the) (alarms|alarm clocks|timers|countdowns|reminders|events|appointments) (earlier|sooner|later|longer|shorter)
+set (my|the) (alarms|alarm clocks|timers|countdowns|reminders|events|appointments) (earlier|sooner|later)
+(shorten|lengthen|extend|expand|increase|decrease) (my|the) (alarms|alarm clocks|timers|countdowns|reminders|events|appointments) [by {duration:duration}]
+(my|the) (alarms|alarm clocks|timers|countdowns|reminders|events|appointments) (earlier|sooner|later|longer|shorter) [please]
+(move|change|reschedule|shift|push) (my|the) (alarms|alarm clocks|timers|countdowns|reminders|events|appointments) to {date:time} instead
+(move|change|reschedule|shift|push|postpone|adjust) (my|the) (alarms|alarm clocks|timers|countdowns|reminders|events|appointments) from {date:old} to {date:time}

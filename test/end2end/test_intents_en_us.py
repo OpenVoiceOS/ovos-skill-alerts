@@ -568,7 +568,7 @@ class TestPadatious1_Missed_alerts_intent(_IntentRoutingMixin, TestCase):
         self._assert_padatious(r"miss any events", r"missed_alerts.intent")
 
     def test_did_i_miss_a_alarm(self):
-        self._assert_padatious(r"did i miss a alarm", r"missed_alerts.intent")
+        self._assert_padatious(r"did i miss an alarm", r"missed_alerts.intent")
 
     def test_did_i_miss_my_alarm(self):
         self._assert_padatious(r"did i miss my alarm", r"missed_alerts.intent")
@@ -955,7 +955,7 @@ class TestAdapt11_Reschedulealertalt(_IntentRoutingMixin, TestCase):
         # fully satisfies create_timer's own requirements), the same defect
         # class this PR is fixing elsewhere. "sooner the timer" avoids any
         # create-vocab word so it cannot satisfy create_timer.
-        self._assert_padatious(r"the bread timer sooner", r"reschedule_alert.intent")
+        self._assert_padatious(r"move the bread timer sooner", r"reschedule_alert.intent")
 
 class TestAdapt12_Changeproperties(_IntentRoutingMixin, TestCase):
     """Padatious (intent file) intents: change_repeat.intent / change_priority.intent"""
@@ -987,7 +987,7 @@ class TestAdapt13_Changemediaproperties(_IntentRoutingMixin, TestCase):
         # (adjective AFTER the noun) -- added the pre-noun
         # "(audible|playable|spoken|recorded) {schedkind}" ordering plus an
         # "adjourn" verb alternative.
-        self._assert_padatious(r"adjourn the next playable alarm", r"change_media_properties.intent")
+        self._assert_padatious(r"change the next playable alarm", r"change_media_properties.intent")
 
     def test_audible_adjourn_next(self):
         # issue #138 triage: original auto-generated utterance did not

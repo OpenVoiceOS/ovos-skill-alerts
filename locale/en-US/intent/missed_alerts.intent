@@ -1,10 +1,15 @@
 # Utterances asking which alerts, if any, were missed - optionally scoped to a kind.
-[(did|have) (i|we)] (miss|missed) [(a|an|any|some)] (alarm|alarms|alert|alerts|event|events|reminder|reminders|timer|timers|anything|something)
-(what|which) (alarm|alarms|alert|alerts|event|events|reminder|reminders|timer|timers|anything|something) (did|have) (i|we) (miss|missed)
+did (i|we) miss (an alarm|an alert|an event|a reminder|a timer)
+did (i|we) miss (any|some) (alarms|alerts|events|reminders|timers)
+have (i|we) missed (an alarm|an alert|an event|a reminder|a timer)
+have (i|we) missed (any|some) (alarms|alerts|events|reminders|timers)
+did (i|we) miss (anything|something)
+have (i|we) missed (anything|something)
+missed (alarms|alerts|events|reminders|timers)
+(what|which) (alarms|alerts|events|reminders|timers) did (i|we) miss
+(what|which) (alarms|alerts|events|reminders|timers) have (i|we) missed
 did i miss my alarm
 have i missed my reminder
-did i miss anything
-have i missed anything
 tell me if i missed any alarms
 tell me if i missed any reminders
 let me know if i missed any alarms
@@ -14,4 +19,12 @@ did any alarms go off that i missed
 did any reminders go off that i missed
 was i supposed to hear an alarm i missed
 what did i miss today
-did (an|any|my) (alarm|reminder|timer) (ring|go off) while i was (out|away|asleep)
+did (any|my) (alarm|reminder|timer) (ring|go off) while i was (out|away|asleep)
+did (an alarm|a reminder|a timer) (ring|go off) while i was (out|away|asleep)
+(miss|missed) any {alertkind}
+(miss|missed) (any|some) (alarms|alerts|events|reminders|timers)
+did (i|we) miss (alarms|alerts|events|reminders|timers)
+have (i|we) missed (alarms|alerts|events|reminders|timers)
+(did|have) (i|we) (miss|missed) any {alertkind}
+what {alertkind} did (i|we) miss
+what {alertkind} have (i|we) missed

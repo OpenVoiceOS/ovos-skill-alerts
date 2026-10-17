@@ -1,5 +1,5 @@
-(sæt|lav|tilføj) en [ny] påmindelse [om {reminder}] [klokken {date:time}]
-ny påmindelse [{reminder}]
+(sæt|lav|tilføj) en [ny] påmindelse [om at {reminder}] [klokken {date:time}]
+ny påmindelse [om at {reminder}]
 start påmindelse
 jeg har påmindelse
 mind mig om [at {reminder}] [klokken {date:time}]

@@ -18,8 +18,8 @@ alarme (às|para) {date:time}
 (defina|crie|adicione|agende|faça|comece|novo|coloque) (um|o|meu) alarme com a {mediakind}
 (defina|crie|adicione|agende|faça|comece|novo|coloque) (um|o|meu) alarme com minha {mediakind}
 (defina|crie|adicione|agende|faça|comece|novo|coloque) (um|o|meu) alarme com uma {mediakind}
-(defina|crie|adicione|agende|faça|comece|novo|coloque) (um|o|meu) alarme para tocar {mediakind}
-(defina|crie|adicione|agende|faça|comece|novo|coloque) (um|o|meu) alarme para tocar a {mediakind}
+(defina|crie|adicione|agende|faça|comece|novo|coloque) um alarme para tocar {mediakind}
+(defina|crie|adicione|agende|faça|comece|novo|coloque) um alarme para tocar a {mediakind}
 (defina|crie|adicione|agende|faça|comece|novo|coloque) (um|o|meu) alarme que toca {mediakind}
 (defina|crie|adicione|agende|faça|comece|novo|coloque) (um|o|meu) alarme que toca a {mediakind}
 (defina|crie|adicione|agende|faça|comece|novo|coloque) (um|o|meu) alarme tocando {mediakind}

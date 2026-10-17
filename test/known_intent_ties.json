@@ -39,6 +39,20 @@
    ],
    "winner": "change_repeat"
   },
+  "change my event to run until 5 pm": {
+   "tied": [
+    "change_until",
+    "reschedule_alert"
+   ],
+   "winner": "change_until"
+  },
+  "change my reminder to last until friday": {
+   "tied": [
+    "change_until",
+    "reschedule_alert"
+   ],
+   "winner": "change_until"
+  },
   "erase the items on my packing list": {
    "tied": [
     "delete_list",
