@@ -5,7 +5,7 @@
 (mude|defina|ajuste) o alerta (do meu|do|do meu próximo|do próximo) {schedkind} para (áudio|reprodução)
 (mude|defina|ajuste|deixe) (meu|o|meu próximo|o próximo|meu futuro) {schedkind} para tocar {mediakind}
 (mude|defina|ajuste|deixe) (meu|o|meu próximo|o próximo|meu futuro) {schedkind} para reproduzir {mediakind}
-(mude|defina|ajuste|deixe) (meu|o|meu próximo|o próximo) {schedkind} para {mediaform}
+(mude|defina|ajuste|deixe) (meu|o|meu próximo|o próximo) {schedkind} para (uma gravação|uma mensagem gravada|um lembrete de voz|um lembrete de áudio|um lembrete falado|um arquivo de som|um arquivo de áudio|um arquivo)
 (mude|defina|ajuste|deixe) (meu|o|meu próximo|o próximo) {schedkind} para usar {mediaform}
 (mude|defina|ajuste|deixe) (meu|o|meu próximo|o próximo) {schedkind} para repetir {mediaform}
 (mude|defina|ajuste|deixe) (meu|o|meu próximo|o próximo) {schedkind} para reproduzir {mediaform}
@@ -19,3 +19,26 @@
 (mude|defina|ajuste) o alerta (do meu|do|do meu próximo|do próximo) {schedkind} para {mediaform}
 quero (ouvir|escutar) (música|rádio|um podcast) quando o (alarme|despertador) tocar
 em vez do toque (normal|padrão) quero (música|uma gravação|uma voz) no (alarme|despertador|lembrete)
+
+(defina|crie|adicione|agende|faça|comece|novo|coloque) (o|meu) alarme com {mediakind} (às|para) {date:time}
+(defina|crie|adicione|agende|faça|comece|novo|coloque) (o|meu) alarme com a {mediakind} (às|para) {date:time}
+(defina|crie|adicione|agende|faça|comece|novo|coloque) (o|meu) alarme com uma {mediakind} (às|para) {date:time}
+(defina|crie|adicione|agende|faça|comece|novo|coloque) (o|meu) alarme para tocar {mediakind} (às|para) {date:time}
+(defina|crie|adicione|agende|faça|comece|novo|coloque) (o|meu) alarme que toca {mediakind} (às|para) {date:time}
+(defina|crie|adicione|agende|faça|comece|novo|coloque) (o|meu) alarme tocando {mediakind} (às|para) {date:time}
+(defina|crie|adicione|agende|faça|comece|novo|coloque) (o|meu) alarme com {mediakind}
+(defina|crie|adicione|agende|faça|comece|novo|coloque) (o|meu) alarme com a {mediakind}
+(defina|crie|adicione|agende|faça|comece|novo|coloque) (o|meu) alarme com minha {mediakind}
+(defina|crie|adicione|agende|faça|comece|novo|coloque) (o|meu) alarme com uma {mediakind}
+(crie|adicione|agende|faça|comece|novo|coloque) (o|meu) alarme para tocar {mediakind}
+(crie|adicione|agende|faça|comece|novo|coloque) (o|meu) alarme para tocar a {mediakind}
+(defina|crie|adicione|agende|faça|comece|novo|coloque) (o|meu) alarme que toca {mediakind}
+(defina|crie|adicione|agende|faça|comece|novo|coloque) (o|meu) alarme que toca a {mediakind}
+(defina|crie|adicione|agende|faça|comece|novo|coloque) (o|meu) alarme tocando {mediakind}
+(defina|crie|adicione|agende|faça|comece|novo|coloque) (o|meu) alarme tocando a {mediakind}
+(defina|crie|adicione|agende|faça|comece|novo|coloque) (o|meu) alarme tocando minha {mediakind}
+(faça|deixe) (meu|o) alarme tocar {mediakind} (às|para) {date:time}
+(faça|deixe) (meu|o) alarme tocar a {mediakind} (às|para) {date:time}
+(faça|deixe) (meu|o) alarme tocar {mediakind}
+(faça|deixe) (meu|o) alarme tocar a {mediakind}
+(faça|deixe) (meu|o) alarme tocar minha {mediakind}

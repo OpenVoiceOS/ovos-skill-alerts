@@ -4,7 +4,7 @@
 (change|set|adjust) (my|the|my next|the next) {schedkind} alert to (audio|playback)
 (change|set|adjust|make) (my|the|my next|the next|my upcoming) {schedkind} to playback {mediakind}
 (change|set|adjust|make) (my|the|my next|the next|my upcoming) {schedkind} to play {mediakind}
-(change|set|adjust|make) (my|the|my next|the next) {schedkind} to {mediaform}
+(change|set|adjust|make) (my|the|my next|the next) {schedkind} to (a recording|a recorded message|a voice reminder|an audio reminder|a spoken reminder|a sound file|an audio file|a file)
 (change|set|adjust|make) (my|the|my next|the next) {schedkind} to use {mediaform}
 (change|set|adjust|make) (my|the|my next|the next) {schedkind} to replay {mediaform}
 (change|set|adjust|make) (my|the|my next|the next) {schedkind} to playback {mediaform}
@@ -17,3 +17,27 @@
 (change|set|adjust) (my|the|my next|the next) {schedkind} sound to {mediaform}
 (change|set|adjust) (my|the|my next|the next) {schedkind} alert to {mediaform}
 read (my|the) (reminder|alarm) (aloud|out loud) when it (fires|rings|goes off)
+
+(set|create|add|schedule|make|start|new|put) my alarm with {mediakind} (at|for) {date:time}
+(set|create|add|schedule|make|start|new|put) my alarm with the {mediakind} (at|for) {date:time}
+(set|create|add|schedule|make|start|new|put) my alarm with an {mediakind} (at|for) {date:time}
+(set|create|add|schedule|make|start|new|put) my alarm to play {mediakind} (at|for) {date:time}
+(set|create|add|schedule|make|start|new|put) my alarm that plays {mediakind} (at|for) {date:time}
+(set|create|add|schedule|make|start|new|put) my alarm playing {mediakind} (at|for) {date:time}
+(set|create|add|schedule|make|start|new|put) my alarm with {mediakind}
+(set|create|add|schedule|make|start|new|put) my alarm with the {mediakind}
+(set|create|add|schedule|make|start|new|put) my alarm with my {mediakind}
+(set|create|add|schedule|make|start|new|put) my alarm with an {mediakind}
+(create|add|schedule|start|new|put) my alarm to play {mediakind}
+(create|add|schedule|start|new|put) my alarm to play the {mediakind}
+(set|create|add|schedule|make|start|new|put) my alarm that plays {mediakind}
+(set|create|add|schedule|make|start|new|put) my alarm that plays the {mediakind}
+(set|create|add|schedule|make|start|new|put) my alarm playing {mediakind}
+(set|create|add|schedule|make|start|new|put) my alarm playing the {mediakind}
+
+(make|set) (my|the) alarm play {mediakind} (at|for) {date:time}
+(make|set) (my|the) alarm play the {mediakind} (at|for) {date:time}
+(make|set) (my|the) alarm play {mediakind}
+(make|set) (my|the) alarm play the {mediakind}
+(make|set) (my|the) alarm play my {mediakind}
+(set|create|add|schedule|make|start|new|put) my alarm playing my {mediakind}
