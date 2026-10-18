@@ -61,7 +61,6 @@ from ovos_skill_alerts.util.parse_utils import (
     tokenize_utterance,
     build_alert_from_intent,
     parse_alert_name_from_message,
-    parse_alert_time_from_message,
     parse_timedelta_from_message,
     parse_relative_time_from_message,
     parse_timeframe_from_message,
@@ -295,9 +294,6 @@ class AlertSkill(ConversationalSkill):
         plain alarm.
         :param message: Message associated with request
         """
-        if message.data.get("mediakind"):
-            return self.handle_ocp_alarm(message)
-
         alarm = build_alert_from_intent(message)
         if alarm.expiration is None:
             time_ = self.get_response(
@@ -311,15 +307,19 @@ class AlertSkill(ConversationalSkill):
                 self.speak_dialog("error_no_time", {"kind": "alarm"}, wait=True)
                 return
 
+        if message.data.get("mediakind"):
+            return self.handle_ocp_alarm(message, alarm)
+
         self.confirm_alert(alarm, message)
 
-    def handle_ocp_alarm(self, message: Message):
+    def handle_ocp_alarm(self, message: Message, alarm: Alert):
         """
         Handler for creating an alarm that plays media via OCP. Reached via
         handle_create_alarm's {mediakind} branch (create_alarm.intent) --
         this used to be its own dedicated intent file/decorator, now folded
         in.
         :param message: Message associated with request
+        :param alarm: The new alarm, with its expiration already resolved
         """
         if not self.bus.wait_for_response(Message("ovos.common_play.ping"),
                                           "ovos.common_play.pong"):
@@ -329,19 +329,9 @@ class AlertSkill(ConversationalSkill):
         if ocp_result is None:
             return self.speak_dialog("ocp_breaking_up")
 
-        alert_time = parse_alert_time_from_message(message)
-        # in case no time was specified, use the next upcoming alarm
-        if not alert_time:
-            alarms = self._get_alerts_list(AlertType.ALARM)
-            if not alarms:
-                return self.speak_dialog("list_alert_none_upcoming",
-                                         {"kind": spoken_alert_type(AlertType.ALARM, self.lang)})
-            alarms[0].ocp_request = ocp_result
-        else:
-            alarm = build_alert_from_intent(message)
-            alarm.ocp_request = ocp_result
-            assert alarm.media_type == "ocp"
-            self.confirm_alert(alarm, message)
+        alarm.ocp_request = ocp_result
+        assert alarm.media_type == "ocp"
+        self.confirm_alert(alarm, message)
 
     #@killable_intent()
     @intent_handler("create_timer.intent")
