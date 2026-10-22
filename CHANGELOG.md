@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.12.49a3](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.12.49a3) (2026-10-22)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.12.49a2...0.12.49a3)
+
+**Merged pull requests:**
+
+- test: check every test utterance is tagged with its own language [\#424](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/424) ([JarbasAl](https://github.com/JarbasAl))
+
 ## [0.12.49a2](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.12.49a2) (2026-10-22)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.12.49a1...0.12.49a2)
