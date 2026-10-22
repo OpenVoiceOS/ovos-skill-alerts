@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.12.49a2](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.12.49a2) (2026-10-22)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.12.49a1...0.12.49a2)
+
+**Merged pull requests:**
+
+- test: keep a \_recurring intent variant from coming back [\#423](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/423) ([JarbasAl](https://github.com/JarbasAl))
+
 ## [0.12.49a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.12.49a1) (2026-10-15)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.12.48a1...0.12.49a1)
