@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.12.52a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.12.52a1) (2026-10-23)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.12.51a1...0.12.52a1)
+
+**Merged pull requests:**
+
+- fix: creating an alarm with media never changes another alarm [\#450](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/450) ([JarbasAl](https://github.com/JarbasAl))
+
 ## [0.12.51a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.12.51a1) (2026-10-23)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.12.50a1...0.12.51a1)
