@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.12.51a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.12.51a1) (2026-10-23)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.12.50a1...0.12.51a1)
+
+**Merged pull requests:**
+
+- fix\(locale\): drop dead vocabulary files [\#453](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/453) ([openvoiceos-bot](https://github.com/openvoiceos-bot))
+
 ## [0.12.50a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.12.50a1) (2026-10-23)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.12.49a3...0.12.50a1)
@@ -716,15 +724,15 @@
 
 ## [0.3.0a4](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.3.0a4) (2026-08-12)
 
-[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.3.0a2...0.3.0a4)
-
-## [0.3.0a2](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.3.0a2) (2026-08-11)
-
-[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.3.0a3...0.3.0a2)
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.3.0a3...0.3.0a4)
 
 ## [0.3.0a3](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.3.0a3) (2026-08-11)
 
-[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.3.0a1...0.3.0a3)
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.3.0a2...0.3.0a3)
+
+## [0.3.0a2](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.3.0a2) (2026-08-11)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.3.0a1...0.3.0a2)
 
 ## [0.3.0a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.3.0a1) (2026-08-11)
 
