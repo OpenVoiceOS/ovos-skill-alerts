@@ -89,11 +89,25 @@ def get_ocp_media_type(message: Message) -> str:
 
 
 def get_media_source_from_intent(message: Message):
+    """Where the requested sound comes from: "file", "ocp" or None.
+
+    The ``file`` and ``ocp`` keys come from the intent. A ``{mediakind}`` slot
+    holding a media kind ("the radio") is an OCP search, and one holding a
+    recording word ("a recording") names a file. With no slot the utterance
+    decides in the same way. A phrasing that names neither has no source.
+    """
     if message.data.get("file"):
         return "file"
-    elif message.data.get("ocp"):
+    if message.data.get("ocp"):
         return "ocp"
-    return None
+    lang = get_message_lang(message)
+    spoken = message.data.get("mediakind") or message.data.get("utterance")
+    if any(locale_voc_match(spoken, f"media_{type_}", lang)
+           for type_ in MEDIA_TYPES if type_ != "audio"):
+        return "ocp"
+    if locale_voc_match(spoken, "playable", lang):
+        return "file"
+    return "ocp" if message.data.get("mediakind") else None
 
 
 def validate_ocp_response(response):

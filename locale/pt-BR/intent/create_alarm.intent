@@ -6,20 +6,22 @@ eu tenho um alarme novo [para {date:time}]
 alarme (às|para) {date:time}
 (defina|crie) um alarme todo (dia útil|fim de semana|dia|de manhã|de noite) [às {date:time}]
 (defina|faça) um alarme de {date:time} [dia útil|fim de semana]
-(defina|crie|adicione|agende|faça|comece|novo|coloque) (um|o|meu) alarme com {mediakind} (às|para) {date:time}
-(defina|crie|adicione|agende|faça|comece|novo|coloque) (um|o|meu) alarme com a {mediakind} (às|para) {date:time}
-(defina|crie|adicione|agende|faça|comece|novo|coloque) (um|o|meu) alarme com uma {mediakind} (às|para) {date:time}
-(defina|crie|adicione|agende|faça|comece|novo|coloque) (um|o|meu) alarme para tocar {mediakind} (às|para) {date:time}
-(defina|crie|adicione|agende|faça|comece|novo|coloque) (um|o|meu) alarme que toca {mediakind} (às|para) {date:time}
-(defina|crie|adicione|agende|faça|comece|novo|coloque) (um|o|meu) alarme tocando {mediakind} (às|para) {date:time}
-(defina|crie|adicione|agende|faça|comece) (um|o|meu) alarme de {mediakind} (às|para) {date:time}
+(defina|crie|adicione|agende|faça|comece|novo|coloque) (um|o|meu|o meu) alarme com {mediakind} (às|para) {date:time}
+(defina|crie|adicione|agende|faça|comece|novo|coloque) (um|o|meu|o meu) alarme com a {mediakind} (às|para) {date:time}
+(defina|crie|adicione|agende|faça|comece|novo|coloque) (um|o|meu|o meu) alarme com uma {mediakind} (às|para) {date:time}
+(defina|crie|adicione|agende|faça|comece|novo|coloque) (um|o|meu|o meu) alarme para tocar {mediakind} (às|para) {date:time}
+(defina|crie|adicione|agende|faça|comece|novo|coloque) (um|o|meu|o meu) alarme que toca {mediakind} (às|para) {date:time}
+(defina|crie|adicione|agende|faça|comece|novo|coloque) (um|o|meu|o meu) alarme tocando {mediakind} (às|para) {date:time}
+(defina|crie|adicione|agende|faça|comece) (um|o|meu|o meu) alarme de {mediakind} (às|para) {date:time}
 (poderia|pode|consegue) você (definir|criar|adicionar|agendar|fazer|começar) um alarme que toca {mediakind} (às|para) {date:time}
 (defina|crie|adicione|agende|faça|comece|novo|coloque) (um|o|meu) alarme com {mediakind}
 (defina|crie|adicione|agende|faça|comece|novo|coloque) (um|o|meu) alarme com a {mediakind}
 (defina|crie|adicione|agende|faça|comece|novo|coloque) (um|o|meu) alarme com minha {mediakind}
 (defina|crie|adicione|agende|faça|comece|novo|coloque) (um|o|meu) alarme com uma {mediakind}
-(defina|crie|adicione|agende|faça|comece|novo|coloque) (um|o|meu) alarme para tocar {mediakind}
-(defina|crie|adicione|agende|faça|comece|novo|coloque) (um|o|meu) alarme para tocar a {mediakind}
+(defina|crie|adicione|agende|faça|comece|novo|coloque) um alarme para tocar {mediakind}
+(crie|adicione|agende|comece|novo|coloque) (o|meu) alarme para tocar {mediakind}
+(defina|crie|adicione|agende|faça|comece|novo|coloque) um alarme para tocar a {mediakind}
+(crie|adicione|agende|comece|novo|coloque) (o|meu) alarme para tocar a {mediakind}
 (defina|crie|adicione|agende|faça|comece|novo|coloque) (um|o|meu) alarme que toca {mediakind}
 (defina|crie|adicione|agende|faça|comece|novo|coloque) (um|o|meu) alarme que toca a {mediakind}
 (defina|crie|adicione|agende|faça|comece|novo|coloque) (um|o|meu) alarme tocando {mediakind}
@@ -33,11 +35,8 @@ alarme (às|para) {date:time}
 (poderia|pode|consegue) você (definir|criar|adicionar|agendar|fazer|começar) um alarme com uma {mediakind}
 (poderia|pode|consegue) você (definir|criar|adicionar|agendar|fazer|começar) um alarme que toca {mediakind}
 (poderia|pode|consegue) você (definir|criar|adicionar|agendar|fazer|começar) um alarme tocando {mediakind}
-(faça|deixe) (meu|o) alarme tocar {mediakind} (às|para) {date:time}
-(faça|deixe) (meu|o) alarme tocar a {mediakind} (às|para) {date:time}
-(faça|deixe) (meu|o) alarme tocar {mediakind}
-(faça|deixe) (meu|o) alarme tocar a {mediakind}
-(faça|deixe) (meu|o) alarme tocar minha {mediakind}
+(faça|deixe) (meu|o|o meu) alarme tocar {mediakind} (às|para) {date:time}
+(faça|deixe) (meu|o|o meu) alarme tocar a {mediakind} (às|para) {date:time}
 novo alarme com {mediakind} (às|para) {date:time}
 novo alarme tocando {mediakind} (às|para) {date:time}
 novo alarme com {mediakind}
