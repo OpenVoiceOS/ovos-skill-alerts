@@ -607,12 +607,12 @@ class AlertSkill(ConversationalSkill):
         begin, end = parse_timeframe_from_message(message)
 
         # week range
-        if self.voc_match("week", utterance, lang=self.lang):
+        if self.voc_match(utterance, "week", lang=self.lang):
             now = datetime.now(get_session_tz(message))
             # hack bc LF return None on "this week"
             begin, end = get_week_range(begin or now)
         elif not begin and not end:
-            if self.voc_match("next", utterance, lang=self.lang):
+            if self.voc_match(utterance, "next", lang=self.lang):
                 return self.handle_next_alert(message)
             return self.handle_list_all_alerts(message)
 
@@ -1950,7 +1950,7 @@ class AlertSkill(ConversationalSkill):
 
         while result is None:
             query = self.get_response(dialog, {"kind": kind})
-            if query is None or voc_match("cancel", query, self.lang):
+            if query is None or voc_match(query, "cancel", self.lang):
                 break
 
             if dialog == "alarm_ocp_request":
