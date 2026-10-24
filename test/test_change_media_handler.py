@@ -14,7 +14,7 @@ from ovos_skill_alerts.util.alert import Alert
 
 def _message(utterance, **data):
     return Message("change_media_properties.intent",
-                   {"utterance": utterance, "alarm": "alarm",
+                   {"utterance": utterance,
                     "mediakind": "the radio", "lang": "en-US", **data},
                    {"lang": "en-US"})
 
@@ -211,7 +211,7 @@ def test_a_reminder_request_with_a_time_is_not_turned_into_an_alarm():
         expiration=dt.datetime.now(get_default_tz()) + dt.timedelta(hours=2),
         alert_name="call mom", alert_type=AlertType.REMINDER)
     skill = _skill(reminder, {"title": "Radio X"})
-    message = _message("change my reminder to play the radio at 6 am", alarm=None, reminder="reminder")
+    message = _message("change my reminder to play the radio at 6 am")
     AlertSkill.handle_change_media_properties(skill, message)
     skill.handle_create_alarm.assert_not_called()
 

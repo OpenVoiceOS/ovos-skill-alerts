@@ -36,7 +36,7 @@ def _rescheduled_to(utterance, expiration):
         ask_for_prenotification=Mock())
     AlertSkill.handle_reschedule_alert(skill, Message(
         "reschedule_alert.intent",
-        {"utterance": utterance, "event": "event", "lang": "en-US"},
+        {"utterance": utterance, "lang": "en-US"},
         {"lang": "en-US"}))
     skill.alert_manager.reschedule_alert.assert_called_once()
     return skill.alert_manager.reschedule_alert.call_args[0][1]
