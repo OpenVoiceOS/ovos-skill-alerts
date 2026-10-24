@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.12.53a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.12.53a1) (2026-10-24)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.12.52a1...0.12.53a1)
+
+**Merged pull requests:**
+
+- fix: an alarm that repeats counts as ringing at its repeat times [\#459](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/459) ([openvoiceos-bot](https://github.com/openvoiceos-bot))
+
 ## [0.12.52a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.12.52a1) (2026-10-23)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.12.51a1...0.12.52a1)
