@@ -116,3 +116,94 @@ class TestOcpAlarmCreates(TestCase):
         self.assertIn(f"{SKILL_ID}:create_alarm", types)
         self.assertEqual(self._alarms(), [])
         self.assertIn("skill.converse.get_response.enable", types)
+
+
+def _day_at_seven(days_ahead: int) -> dt.datetime:
+    from ovos_config.locale import get_default_tz
+    day = dt.datetime.now(get_default_tz()) + dt.timedelta(days=days_ahead)
+    return day.replace(hour=7, minute=0, second=0, microsecond=0)
+
+
+class TestChangeMediaIntentWithATime(TestCase):
+    """The change_media_properties intent is sent straight to the skill, so
+    the guard is reached whatever the matcher would have routed the phrase to."""
+
+    setUp = TestOcpAlarmCreates.setUp
+    _alarms = TestOcpAlarmCreates._alarms
+
+    def _change_media(self, **slots):
+        session = Session("e2e-change-media-direct")
+        session.lang = LANG
+        session.pipeline = PIPELINE
+        data = {"utterance": "make my alarm play " + (slots.get("mediakind")
+                                                       or slots.get("mediaform")),
+                "lang": LANG, "alarm": "alarm", **slots}
+        capture = CaptureSession(_minicroft)
+        capture.capture(Message(f"{SKILL_ID}:change_media_properties", data,
+                                {"session": session.serialize()}),
+                        timeout=15)
+        return capture.finish()
+
+    def _seed(self, **kwargs):
+        from ovos_skill_alerts.util import AlertType
+        from ovos_skill_alerts.util.alert import Alert
+        alarm = Alert.create(alert_name="first", alert_type=AlertType.ALARM,
+                             lang=LANG, **kwargs)
+        self.skill.alert_manager.add_alert(alarm)
+        return alarm
+
+    def _sorted_alarms(self):
+        return sorted(self._alarms(), key=lambda alarm: alarm.expiration)
+
+    def test_a_request_for_another_day_creates_an_alarm_for_that_day(self):
+        self._seed(expiration=_day_at_seven(1))
+        later = _day_at_seven(2)
+        self._change_media(mediakind=f"jazz at 7 am on {later:%A}".lower())
+        alarms = self._sorted_alarms()
+        self.assertEqual([a.expiration for a in alarms], [_day_at_seven(1), later])
+        self.assertIsNone(alarms[0].ocp_request)
+        self.assertEqual(alarms[1].ocp_request, STATION)
+
+    def test_a_request_with_only_the_media_form_slot_creates_no_alarm(self):
+        self._seed(expiration=_day_at_seven(1))
+        later = _day_at_seven(2)
+        messages = self._change_media(
+            mediaform=f"a recording at 7 am on {later:%A}".lower())
+        self.assertEqual([a.expiration for a in self._alarms()],
+                         [_day_at_seven(1)])
+        dialogs = [m.data.get("meta", {}).get("dialog") for m in messages
+                   if m.msg_type == "ovos.utterance.speak"]
+        self.assertIn("error_no_script", dialogs)
+
+    def test_only_the_alarm_that_rings_then_is_offered_the_media(self):
+        from ovos_skill_alerts.util import Weekdays
+        daily = self._seed(expiration=_day_at_seven(1), repeat_days=set(Weekdays))
+        other = self._seed(expiration=_day_at_seven(1) + dt.timedelta(days=1))
+        later = _day_at_seven(4)
+        messages = self._change_media(
+            mediakind=f"jazz at 7 am on {later:%A}".lower())
+        by_id = {a.ident: a for a in self._alarms()}
+        self.assertEqual(set(by_id), {daily.ident, other.ident})
+        self.assertEqual(by_id[daily.ident].ocp_request, STATION)
+        self.assertIsNone(by_id[other.ident].ocp_request)
+        self.assertNotIn("skill.converse.get_response.enable",
+                         [m.msg_type for m in messages])
+
+    def test_a_daily_alarm_gets_the_media_and_no_second_alarm_is_created(self):
+        from ovos_skill_alerts.util import Weekdays
+        daily = self._seed(expiration=_day_at_seven(1), repeat_days=set(Weekdays))
+        later = _day_at_seven(3)
+        self._change_media(mediakind=f"jazz at 7 am on {later:%A}".lower())
+        self.assertEqual([a.ident for a in self._alarms()], [daily.ident])
+        self.assertEqual(self._alarms()[0].ocp_request, STATION)
+
+    def test_a_weekly_alarm_does_not_stop_a_request_for_another_weekday(self):
+        from ovos_skill_alerts.util import Weekdays
+        first = _day_at_seven(2)
+        self._seed(expiration=first, repeat_days={Weekdays(first.weekday())})
+        other = _day_at_seven(4)
+        self._change_media(mediakind=f"jazz at 7 am on {other:%A}".lower())
+        alarms = self._sorted_alarms()
+        self.assertEqual([a.expiration for a in alarms], [first, other])
+        self.assertIsNone(alarms[0].ocp_request)
+        self.assertEqual(alarms[1].ocp_request, STATION)

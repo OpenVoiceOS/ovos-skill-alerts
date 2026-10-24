@@ -8,7 +8,7 @@ from ovos_bus_client.message import Message
 from ovos_config.locale import get_default_tz
 
 from ovos_skill_alerts import AlertSkill
-from ovos_skill_alerts.util import AlertType
+from ovos_skill_alerts.util import AlertType, Weekdays
 from ovos_skill_alerts.util.alert import Alert
 
 
@@ -30,7 +30,7 @@ def _skill(alert, ocp_result=None):
         handle_create_alarm=Mock(),
         _get_alerts_list=Mock(return_value=[]),
         speak_dialog=Mock())
-    skill._alarm_rings_at = lambda when: AlertSkill._alarm_rings_at(skill, when)
+    skill._alarms_ringing_at = lambda when: AlertSkill._alarms_ringing_at(skill, when)
     return skill
 
 
@@ -192,7 +192,10 @@ def test_an_alarm_request_with_a_time_in_the_media_goes_to_the_create_path(
 
 
 def test_a_time_that_an_existing_alarm_rings_at_changes_that_alarm():
-    seven = Alert.create(expiration=_at_hour(7), alert_name="alarm",
+    today_seven = _at_hour(7) - dt.timedelta(days=1)
+    next_seven = today_seven if today_seven > dt.datetime.now(get_default_tz()) \
+        else _at_hour(7)
+    seven = Alert.create(expiration=next_seven, alert_name="alarm",
                          alert_type=AlertType.ALARM)
     skill = _skill(seven, {"title": "Radio X"})
     skill._get_alerts_list = Mock(return_value=[seven])
@@ -218,7 +221,121 @@ def test_an_alarm_on_another_day_does_not_ring_at_the_requested_time():
                             alert_type=AlertType.ALARM)
     skill = _skill(saturday)
     skill._get_alerts_list = Mock(return_value=[saturday])
-    assert AlertSkill._alarm_rings_at(skill, _at_hour(7))
-    assert AlertSkill._alarm_rings_at(skill, _at_hour(7) + dt.timedelta(seconds=40))
-    assert not AlertSkill._alarm_rings_at(skill, _at_hour(7) + dt.timedelta(days=2))
-    assert not AlertSkill._alarm_rings_at(skill, _at_hour(8))
+    assert AlertSkill._alarms_ringing_at(skill, _at_hour(7))
+    assert AlertSkill._alarms_ringing_at(skill, _at_hour(7) + dt.timedelta(seconds=40))
+    assert not AlertSkill._alarms_ringing_at(skill, _at_hour(7) + dt.timedelta(days=2))
+    assert not AlertSkill._alarms_ringing_at(skill, _at_hour(8))
+
+
+def _seven(days_ahead):
+    """07:00 on the day ``days_ahead`` days from today"""
+    day = dt.datetime.now(get_default_tz()) + dt.timedelta(days=days_ahead)
+    return day.replace(hour=7, minute=0, second=0, microsecond=0)
+
+
+def _skill_with(*alarms):
+    skill = _skill(alarms[0], {"title": "Radio X"})
+    skill._get_alerts_list = Mock(return_value=list(alarms))
+    return skill
+
+
+def test_a_daily_alarm_rings_every_day_at_its_time():
+    daily = Alert.create(expiration=_seven(1), alert_name="alarm",
+                         alert_type=AlertType.ALARM, repeat_days=set(Weekdays))
+    skill = _skill_with(daily)
+    assert AlertSkill._alarms_ringing_at(skill, _seven(4))
+    assert AlertSkill._alarms_ringing_at(skill, _seven(30))
+    assert not AlertSkill._alarms_ringing_at(skill, _seven(4).replace(hour=8))
+
+
+def test_a_weekly_alarm_rings_on_its_weekday_only():
+    first = _seven(2)
+    weekly = Alert.create(expiration=first, alert_name="alarm",
+                          alert_type=AlertType.ALARM,
+                          repeat_days={Weekdays(first.weekday())})
+    skill = _skill_with(weekly)
+    assert AlertSkill._alarms_ringing_at(skill, _seven(9))
+    assert not AlertSkill._alarms_ringing_at(skill, _seven(8))
+    assert not AlertSkill._alarms_ringing_at(skill, _seven(5))
+
+
+def test_an_alarm_that_repeats_every_two_days_rings_on_every_second_day():
+    alarm = Alert.create(expiration=_seven(1), alert_name="alarm",
+                         alert_type=AlertType.ALARM,
+                         repeat_frequency=dt.timedelta(days=2))
+    skill = _skill_with(alarm)
+    assert AlertSkill._alarms_ringing_at(skill, _seven(5))
+    assert not AlertSkill._alarms_ringing_at(skill, _seven(4))
+
+
+def test_a_one_off_alarm_does_not_ring_a_week_later():
+    alarm = Alert.create(expiration=_seven(1), alert_name="alarm",
+                         alert_type=AlertType.ALARM)
+    assert not AlertSkill._alarms_ringing_at(_skill_with(alarm), _seven(8))
+
+
+def _on_day(days_ahead):
+    return _seven(days_ahead).strftime("%A").lower()
+
+
+def test_a_daily_alarm_takes_the_media_of_a_request_for_another_day():
+    daily = Alert.create(expiration=_seven(1), alert_name="alarm",
+                         alert_type=AlertType.ALARM, repeat_days=set(Weekdays))
+    skill = _skill_with(daily)
+    media = f"jazz at 7 am on {_on_day(3)}"
+    AlertSkill.handle_change_media_properties(
+        skill, _message(f"make my alarm play {media}", mediakind=media))
+    skill.handle_create_alarm.assert_not_called()
+    assert daily.ocp_request == {"title": "Radio X"}
+
+
+def test_a_weekly_alarm_does_not_stop_a_request_for_another_weekday():
+    first = _seven(2)
+    weekly = Alert.create(expiration=first, alert_name="alarm",
+                          alert_type=AlertType.ALARM,
+                          repeat_days={Weekdays(first.weekday())})
+    skill = _skill_with(weekly)
+    media = f"jazz at 7 am on {_on_day(4)}"
+    AlertSkill.handle_change_media_properties(
+        skill, _message(f"make my alarm play {media}", mediakind=media))
+    skill.handle_create_alarm.assert_called_once()
+    assert weekly.ocp_request is None
+
+
+def test_a_one_off_alarm_does_not_stop_a_request_for_another_day():
+    one_off = Alert.create(expiration=_seven(1), alert_name="alarm",
+                           alert_type=AlertType.ALARM)
+    skill = _skill_with(one_off)
+    media = f"jazz at 7 am on {_on_day(3)}"
+    AlertSkill.handle_change_media_properties(
+        skill, _message(f"make my alarm play {media}", mediakind=media))
+    skill.handle_create_alarm.assert_called_once()
+    assert one_off.ocp_request is None
+
+
+def test_a_time_in_the_media_form_slot_alone_creates_no_alarm():
+    alarm = _alarm_with_source()
+    skill = _skill_with(alarm)
+    message = _message("set my alarm to use a recording at 6 am", mediakind=None,
+                       mediaform="a recording at 6 am")
+    AlertSkill.handle_change_media_properties(skill, message)
+    skill.handle_create_alarm.assert_not_called()
+    assert skill.speak_dialog.call_args[0][0] == "error_no_script"
+    assert alarm.ocp_request is None
+
+
+def test_only_the_alarm_that_rings_at_the_time_is_offered_for_the_media():
+    daily = Alert.create(expiration=_seven(1), alert_name="daily",
+                         alert_type=AlertType.ALARM, repeat_days=set(Weekdays))
+    other_day = Alert.create(expiration=_seven(2), alert_name="other",
+                             alert_type=AlertType.ALARM)
+    skill = _skill_with(daily, other_day)
+    skill._resolve_requested_alert = lambda *args, **kwargs: \
+        AlertSkill._resolve_requested_alert(skill, *args, **kwargs)
+    skill._pick_one_by_name = Mock(side_effect=AssertionError("asked which one"))
+    media = f"jazz at 7 am on {_on_day(3)}"
+    AlertSkill.handle_change_media_properties(
+        skill, _message(f"make my alarm play {media}", mediakind=media))
+    skill.handle_create_alarm.assert_not_called()
+    assert daily.ocp_request == {"title": "Radio X"}
+    assert other_day.ocp_request is None
