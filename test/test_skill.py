@@ -3210,24 +3210,14 @@ class TestParseUtils(unittest.TestCase):
         self.assertEqual(alert_time.time(), dt.time(hour=7))
 
         wakeup_in = _get_message_from_file("wake_me_up_in_time_alarm.json")
-        alert_time = parse_alert_time_from_message(wakeup_in).replace(microsecond=0)
+        before = dt.datetime.now(dt.timezone.utc)
+        alert_time = parse_alert_time_from_message(wakeup_in)
+        after = dt.datetime.now(dt.timezone.utc)
         self.assertIsInstance(alert_time, dt.datetime)
-        # parse_alert_time_from_message used to normalise the anchor's tzinfo
-        # to a fixed `dt.timezone(offset)`; that conversion is commented out in
-        # util/parse_utils.py now, so the named zone survives (a tzfile). That
-        # is the better of the two: a named zone knows its DST transitions and
-        # a fixed offset does not, which matters for an expiration months out.
-        # The invariant is the offset, not the tzinfo object's identity.
         self.assertIsNotNone(alert_time.tzinfo)
-        self.assertEqual(alert_time.utcoffset(),
-                         dt.datetime.now(alert_time.tzinfo).utcoffset())
-
-        valid_alert_time = dt.datetime.now(tzlocal()).replace(
-            microsecond=0
-        ) + dt.timedelta(hours=8)
-
-        self.assertEqual(valid_alert_time.tzinfo, tzlocal())
-        self.assertAlmostEqual(alert_time.timestamp(), valid_alert_time.timestamp(), 0)
+        # "in 8 hours" counts elapsed time, whatever the wall clock does
+        self.assertGreaterEqual(alert_time, before + dt.timedelta(hours=8))
+        self.assertLessEqual(alert_time, after + dt.timedelta(hours=8))
 
         multi_day_repeat = _get_message_from_file("alarm_every_monday_thursday.json")
         alert_time = parse_alert_time_from_message(multi_day_repeat)
