@@ -285,7 +285,7 @@ def build_alert_from_intent(message: Message) -> Optional[Alert]:
         data["context"]["stopwatch_mode"] = True
     elif alert_time is None:
         if repeat_interval:
-            alert_time = anchor_time + repeat_interval
+            alert_time = _add_elapsed(anchor_time, repeat_interval)
         elif until:
             alert_time = until
 
@@ -533,6 +533,11 @@ def parse_end_condition_from_message(message: Message,
     return None
 
 
+def _add_elapsed(anchor_time: dt.datetime, duration: dt.timedelta) -> dt.datetime:
+    """Add elapsed time to an aware datetime, across any DST change in its zone."""
+    return (anchor_time.astimezone(dt.timezone.utc) + duration).astimezone(anchor_time.tzinfo)
+
+
 def parse_alert_time_from_message(message: Message,
                                   tokens: Tokens = None,
                                   timezone: dt.tzinfo = None,
@@ -563,7 +568,7 @@ def parse_alert_time_from_message(message: Message,
         extracted = extract_duration(token, lang=lang)
         if extracted and extracted[0]:
             duration, remainder = extracted
-            alert_time = anchor_time + duration
+            alert_time = _add_elapsed(anchor_time, duration)
             tokens[tokens.index(token)] = remainder
             break
         extracted = extract_datetime(token, anchorDate=anchor_time, lang=lang)
@@ -597,7 +602,9 @@ def parse_timedelta_from_message(message: Message,
     alert_time = parse_alert_time_from_message(message, tokens,
                                                timezone, anchor_time)
 
-    return alert_time - anchor_time if alert_time else None
+    if not alert_time:
+        return None
+    return alert_time.astimezone(dt.timezone.utc) - anchor_time.astimezone(dt.timezone.utc)
 
 
 # TODO: Toss - should be handled via OCP
