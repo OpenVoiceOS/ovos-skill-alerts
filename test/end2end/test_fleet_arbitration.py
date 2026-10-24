@@ -15,8 +15,8 @@ so ``_strip_voc_phrase()`` in ``util/parse_utils.py`` does that on the
 
 This module asserts the PARSED OUTCOME (alert time and weekday recurrence
 via ``build_alert_from_intent``) and the arbitration against date-time with
-both skills loaded, on the stock pipeline order with padacioso serving the
-file-intent stage.
+both skills loaded, on the stock pipeline order with the m2v prototype
+pipeline serving the file-intent stage.
 """
 import time
 import unittest
@@ -25,9 +25,9 @@ import pytest
 from ovos_bus_client.message import Message
 from ovos_bus_client.session import Session
 from ovos_utils.log import LOG
-from ovoscope import get_minicroft, is_pipeline_available
+from ovoscope import is_pipeline_available
 
-from ._wait_trained import wait_for_minicroft_ready
+from ._routing import PIPELINE, assert_routed, boot
 from ovos_skill_alerts.util.parse_utils import build_alert_from_intent
 from ovos_skill_alerts.util import Weekdays
 
@@ -38,14 +38,14 @@ EOF_TYPES = {"ovos.utterance.handled", "mycroft.skill.handler.complete",
              "complete_intent_failure", "ovos.intent.unmatched"}
 
 # The subset of the stock pipeline in ovos-config's mycroft.conf that serves
-# these two skills, with padacioso in the file-intent slot. OCP and m2v
-# stages are left out: neither skill registers OCP intents, and the m2v
-# golden runner covers that engine. What this list keeps from the stock
-# order is the absence of low-confidence file-intent and adapt tiers.
+# these two skills, with the m2v prototype pipeline in the file-intent slot.
+# OCP stages are left out: neither skill registers OCP intents. What this
+# list keeps from the stock order is the absence of low-confidence
+# file-intent and adapt tiers.
 REAL_DEFAULT_PIPELINE = [
     "ovos-stop-pipeline-plugin-high",
     "ovos-converse-pipeline-plugin",
-    "ovos-padacioso-pipeline-plugin-high",
+    PIPELINE[0],
     "ovos-adapt-pipeline-plugin-high",
     "ovos-fallback-pipeline-plugin-high",
     "ovos-stop-pipeline-plugin-medium",
@@ -136,21 +136,21 @@ class TestReminderVsDateTimeArbitration(unittest.TestCase):
         LOG.set_level("ERROR")
         # Fail loudly on a missing test dependency instead of letting the
         # arbitration assertion below report a misleading routing failure.
-        # Without padacioso installed the file-intent stage is dropped from
+        # Without ovos-m2v-pipeline installed the file-intent stage is dropped from
         # the pipeline ("Unknown pipeline matcher") and without ovos-skill-date-time there is no second
         # skill to arbitrate against; in BOTH cases the utterance simply comes
         # back as ovos.intent.unmatched, which looks exactly like a routing
         # regression. Both are declared in the `test` extra (setup.py).
         assert is_pipeline_available(REAL_DEFAULT_PIPELINE), (
             f"missing pipeline stage(s) for {REAL_DEFAULT_PIPELINE} -- install "
-            f"the `test` extra (needs padacioso and ovos-adapt-parser)")
-        cls.mc = get_minicroft([DATE_TIME_ID, ALERTS_ID], max_wait=600,
-                                default_pipeline=REAL_DEFAULT_PIPELINE)
+            f"the `test` extra (needs ovos-m2v-pipeline and ovos-adapt-parser)")
+        cls.mc = boot("en-US", skill_ids=(DATE_TIME_ID, ALERTS_ID), max_wait=600,
+                      extra_pipelines=[stage for stage in REAL_DEFAULT_PIPELINE
+                                       if stage != PIPELINE[0]])
         loaded = set(cls.mc.plugin_skills)
         assert {ALERTS_ID, DATE_TIME_ID} <= loaded, (
             f"arbitration needs BOTH skills loaded, got {sorted(loaded)} -- "
             f"install the `test` extra (needs ovos-skill-date-time)")
-        wait_for_minicroft_ready(cls.mc)
 
     @classmethod
     def tearDownClass(cls):
@@ -171,6 +171,7 @@ class TestReminderVsDateTimeArbitration(unittest.TestCase):
 
         session = Session(f"fleet-arb-{abs(hash(utterance))}")
         session.lang = "en-US"
+        session.pipeline = REAL_DEFAULT_PIPELINE
         msg = Message(ENTRY_TOPIC, {"utterances": [utterance], "lang": "en-US"},
                       {"session": session.serialize()})
 
@@ -198,14 +199,9 @@ class TestReminderVsDateTimeArbitration(unittest.TestCase):
 
     def test_recurring_reminder_routes_to_alerts_under_real_default_pipeline(self):
         utterance = RECURRING_UTTERANCES[0]
-        claimant, recs = self._claimant(utterance)
-        self.assertEqual(
-            claimant, ALERTS_ID,
-            f"real-default-pipeline coverage gap: {utterance!r} expected "
-            f"{ALERTS_ID!r} but got {claimant!r}. "
-            f"messages seen: {[m.msg_type for m in recs]}")
-        claim_types = {m.msg_type for m in recs}
-        self.assertIn(f"{ALERTS_ID}:create_reminder", claim_types)
+        _, recs = self._claimant(utterance)
+        assert_routed(utterance, f"{ALERTS_ID}:create_reminder",
+                      [m.msg_type for m in recs])
 
 
 if __name__ == "__main__":

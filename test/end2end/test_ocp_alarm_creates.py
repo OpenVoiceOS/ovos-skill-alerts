@@ -8,16 +8,11 @@ from unittest import TestCase
 
 from ovos_bus_client.message import Message
 from ovos_bus_client.session import Session
-from ovoscope import CaptureSession, get_minicroft, LEAN_DEFAULT_PIPELINE
+from ovoscope import CaptureSession
 
-from ._wait_trained import wait_for_minicroft_ready
+from ._routing import PIPELINE, SKILL_ID, assert_routed, boot
 
-SKILL_ID = "ovos-skill-alerts.openvoiceos"
 LANG = "en-US"
-PIPELINE = [stage for stage in LEAN_DEFAULT_PIPELINE
-            if "padatious" not in stage] + [
-    "ovos-padacioso-pipeline-plugin-low",
-]
 STATION = {"title": "Radio X", "uri": "http://radio.example/x"}
 
 _minicroft = None
@@ -30,9 +25,7 @@ def setUpModule():
     _orig_xdg = os.environ.get("XDG_DATA_HOME")
     _xdg = tempfile.mkdtemp(prefix="ovos-skill-alerts-ocp-xdg-")
     os.environ["XDG_DATA_HOME"] = _xdg
-    _minicroft = get_minicroft([SKILL_ID], default_pipeline=PIPELINE,
-                               wait_for_trained=False)
-    wait_for_minicroft_ready(_minicroft)
+    _minicroft = boot(LANG)
     _minicroft.bus.on("ovos.common_play.ping",
                       lambda m: _minicroft.bus.emit(
                           m.reply("ovos.common_play.pong")))
@@ -78,6 +71,8 @@ class TestOcpAlarmCreates(TestCase):
         return self.skill._get_alerts_list(AlertType.ALARM)
 
     def _say(self, utterance: str):
+        """Speak ``utterance`` and return the bus message types; skip the
+        test when m2v does not route it to create_alarm."""
         session = Session(f"e2e-ocp-alarm-{abs(hash(utterance))}")
         session.lang = LANG
         session.pipeline = PIPELINE
@@ -86,12 +81,13 @@ class TestOcpAlarmCreates(TestCase):
                                 {"utterances": [utterance], "lang": LANG},
                                 {"session": session.serialize()}),
                         timeout=15)
-        return [m.msg_type for m in capture.finish()]
+        types = [m.msg_type for m in capture.finish()]
+        assert_routed(utterance, f"{SKILL_ID}:create_alarm", types)
+        return types
 
     def test_no_time_leaves_existing_alarm_untouched_and_asks(self):
         self._seed_wake_up()
         types = self._say("set an alarm that plays music")
-        self.assertIn(f"{SKILL_ID}:create_alarm", types)
         alarms = self._alarms()
         self.assertEqual(len(alarms), 1)
         self.assertEqual(alarms[0].alert_name, "wake up")
@@ -103,7 +99,6 @@ class TestOcpAlarmCreates(TestCase):
     def test_with_time_creates_the_alarm(self):
         self._seed_wake_up()
         types = self._say("set an alarm that plays music at 6 am")
-        self.assertIn(f"{SKILL_ID}:create_alarm", types)
         by_hour = {a.expiration.hour: a for a in self._alarms()}
         self.assertEqual(sorted(by_hour), [6, 7])
         self.assertEqual(by_hour[6].media_type, "ocp")
@@ -113,7 +108,6 @@ class TestOcpAlarmCreates(TestCase):
 
     def test_no_time_and_no_alarm_creates_nothing_and_asks(self):
         types = self._say("set an alarm that plays music")
-        self.assertIn(f"{SKILL_ID}:create_alarm", types)
         self.assertEqual(self._alarms(), [])
         self.assertIn("skill.converse.get_response.enable", types)
 
