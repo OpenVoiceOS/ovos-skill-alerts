@@ -548,15 +548,14 @@ class AlertSkill(ConversationalSkill):
         self._display_alert(alert)
         self.alert_manager.sync_dav_item(alert)
 
-    def _alarm_rings_at(self, when: datetime) -> bool:
+    def _alarms_ringing_at(self, when: datetime) -> List[Alert]:
         """
-        Whether a pending alarm rings at ``when``, to the minute
+        Pending alarms that ring at ``when``, to the minute, at their next
+        expiration or at a repeat of it
         :param when: timezone-aware datetime to look for
         """
-        minute = when.replace(second=0, microsecond=0)
-        return any(alarm.expiration and alarm.expiration.astimezone(when.tzinfo)
-                   .replace(second=0, microsecond=0) == minute
-                   for alarm in self._get_alerts_list(AlertType.ALARM))
+        return [alarm for alarm in self._get_alerts_list(AlertType.ALARM)
+                if alarm.rings_at(when)]
 
     @intent_handler("change_media_properties.intent")
     def handle_change_media_properties(self, message: Message):
@@ -565,13 +564,17 @@ class AlertSkill(ConversationalSkill):
         :param message: Message associated with request
         """
         alert_type, spoken_type = get_alert_type_from_intent(message)
+        ringing = None
         if alert_type == AlertType.ALARM:
             # a time in the media part ("make my alarm play jazz at 6") asks for
             # a new alarm, unless an existing alarm already rings at that time
             requested = parse_media_time_from_message(message)
-            if requested and not self._alarm_rings_at(requested):
-                return self.handle_create_alarm(message)
-        alert: Alert = self._resolve_requested_alert(message, alert_type)
+            if requested:
+                ringing = self._alarms_ringing_at(requested)
+                if not ringing:
+                    return self.handle_create_alarm(message)
+        alert: Alert = self._resolve_requested_alert(message, alert_type,
+                                                     alerts=ringing)
 
         if alert is None:
             return self.speak_dialog("error_no_scheduled_kind",
@@ -1352,20 +1355,22 @@ class AlertSkill(ConversationalSkill):
             alert_type: AlertType,
             tokens=None,
             disposition: AlertState = AlertState.PENDING,
-            dialog: str = "pick_multiple_entries"
+            dialog: str = "pick_multiple_entries",
+            alerts: Optional[List[Alert]] = None
     ) -> Optional[Alert]:
         """
         Resolve a valid requested alert from a user intent
         :param message: Message associated with the request
         :param alert_type: AlertType to consider
-        :param alerts: List of Alert objects to resolve from
+        :param alerts: List of Alert objects to resolve from, default all pending
         :returns: best matched Alert from alerts or None
         """
         tokens = tokens or tokenize_utterance(message)
         requested_time, requested_name = parse_alert_name_and_time_from_message(message, tokens)
 
-        alerts = self._get_alerts_list(alert_type,
-                                       disposition=disposition)
+        if alerts is None:
+            alerts = self._get_alerts_list(alert_type,
+                                           disposition=disposition)
         if not alerts:
             return None
 

@@ -441,6 +441,32 @@ class Alert:
         """
         return any((self.repeat_days, self.repeat_frequency))
 
+    def rings_at(self, when: dt.datetime) -> bool:
+        """
+        Whether this alert rings at ``when``, to the minute: at its next
+        expiration or at one of the repeats after it.
+        :param when: timezone-aware datetime to look for
+        """
+        expiration = self.expiration
+        if expiration is None:
+            return False
+        zone = gettz(self.timezone_name)
+        first = expiration.astimezone(zone).replace(second=0, microsecond=0, tzinfo=None)
+        asked = when.astimezone(zone).replace(second=0, microsecond=0, tzinfo=None)
+        if asked < first:
+            return False
+        if self.until and asked > self.until.astimezone(zone).replace(tzinfo=None):
+            return False
+        if self.repeat_frequency:
+            gap = round(self.repeat_frequency.total_seconds())
+            return round((asked - first).total_seconds()) % gap == 0
+        if self.repeat_days:
+            return asked.time() == first.time() and \
+                Weekdays(asked.weekday()) in self.repeat_days
+        if self.until is not None:
+            return asked.time() == first.time()
+        return asked == first
+
     def reset_repeat(self):
         """
         Resets the expiration time to the last expiration (or to the 
