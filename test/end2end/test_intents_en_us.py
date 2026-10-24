@@ -22,25 +22,12 @@ import pytest
 
 from ovos_bus_client.message import Message
 from ovos_bus_client.session import Session
-from ovoscope import CaptureSession, End2EndTest, get_minicroft, LEAN_DEFAULT_PIPELINE
+from ovoscope import CaptureSession
 
-from ._wait_trained import wait_for_minicroft_ready
+from ._routing import PIPELINE, assert_not_routed, assert_routed, boot
 
 SKILL_ID = "ovos-skill-alerts.openvoiceos"
 LANG = "en-US"
-
-# padacioso is the pure-Python, swig-free, exact-match template engine in
-# the padatious-compatible family (see OVOS-INTENT-1) -- no training phase,
-# so no "mycroft.skills.trained" wait and no confidence-tier fuzz to
-# calibrate. This fixture boots ONLY padacioso for the padatious-family
-# stage (never padatious itself, never nebulento -- engine choice is not
-# this skill's lane): LEAN_DEFAULT_PIPELINE already carries padacioso's
-# high/medium tiers, drop padatious and add padacioso's low tier explicitly
-# so the three tests that pin to "-low" below resolve.
-PADACIOSO_TEST_PIPELINE = [stage for stage in LEAN_DEFAULT_PIPELINE
-                          if "padatious" not in stage] + [
-    "ovos-padacioso-pipeline-plugin-low",
-]
 
 # A single MiniCroft is booted once for the whole module and shared across
 # every TestCase below. Booting one per class (the original generated
@@ -81,12 +68,7 @@ def setUpModule():
     _ORIGINAL_XDG_DATA_HOME = os.environ.get("XDG_DATA_HOME")
     _ISOLATED_XDG_DATA_HOME = tempfile.mkdtemp(prefix="ovos-skill-alerts-test-xdg-")
     os.environ["XDG_DATA_HOME"] = _ISOLATED_XDG_DATA_HOME
-    _MODULE_MINICROFT = get_minicroft([SKILL_ID],
-                                      default_pipeline=PADACIOSO_TEST_PIPELINE,
-                                      wait_for_trained=False)
-    # See end2end._wait_trained for why this wait (not a fixed sleep) is
-    # needed before the first real test can safely fire a query.
-    wait_for_minicroft_ready(_MODULE_MINICROFT)
+    _MODULE_MINICROFT = boot(LANG)
 
 
 def tearDownModule():
@@ -142,7 +124,7 @@ class _IntentRoutingMixin:
         capture.capture(message, timeout=30)
         messages = capture.finish()
         types = [m.msg_type for m in messages]
-        self.assertIn(intent_msg_type, types)
+        assert_routed(utterance, intent_msg_type, types)
         side_effects = ("speak", "gui.", "mycroft.audio.play_sound",
                         "skill.converse.get_response")
         self.assertTrue(
@@ -150,22 +132,18 @@ class _IntentRoutingMixin:
             f"no visible side effect for {utterance!r} -> {types}",
         )
 
-    def _assert_padatious(self, utterance: str, intent_file: str):
-        # The bus intent-matched message type is the padatious intent name
+    def _assert_routes(self, utterance: str, intent_file: str):
+        # The bus intent-matched message type is the file intent name
         # WITHOUT its file extension (e.g. "missed_alerts", not
         # "missed_alerts.intent") -- OVOS strips it when emitting
         # "<skill_id>:<intent_name>". Accept callers passing either form.
         intent_name = intent_file[:-len(".intent")] if intent_file.endswith(".intent") else intent_file
         intent_msg_type = f"{SKILL_ID}:{intent_name}"
-        self._assert_intent(utterance, intent_msg_type, [
-            "ovos-padacioso-pipeline-plugin-high",
-            "ovos-padacioso-pipeline-plugin-medium",
-            "ovos-padacioso-pipeline-plugin-low",
-        ])
+        self._assert_intent(utterance, intent_msg_type, PIPELINE)
 
-    def _assert_padatious_with_dialog_data(self, utterance: str, intent_file: str,
+    def _assert_routes_with_dialog_data(self, utterance: str, intent_file: str,
                                            dialog_key: str, expected_value: str):
-        """Like ``_assert_padatious``, but also asserts on the CONTENT of
+        """Like ``_assert_routes``, but also asserts on the CONTENT of
         the spoken ``ovos.utterance.speak`` dialog data, not just that some
         side effect occurred -- proves the matched slot value actually
         reached the spoken confirmation, not just that routing landed on
@@ -175,11 +153,7 @@ class _IntentRoutingMixin:
         intent_msg_type = f"{SKILL_ID}:{intent_name}"
         session = Session(f"e2e-en_us-dialog-{hash(utterance)}-{hash(intent_msg_type)}")
         session.lang = LANG
-        session.pipeline = [
-            "ovos-padacioso-pipeline-plugin-high",
-            "ovos-padacioso-pipeline-plugin-medium",
-            "ovos-padacioso-pipeline-plugin-low",
-        ]
+        session.pipeline = PIPELINE
         message = Message(
             "recognizer_loop:utterance",
             {"utterances": [utterance], "lang": LANG},
@@ -189,7 +163,7 @@ class _IntentRoutingMixin:
         capture.capture(message, timeout=30)
         messages = capture.finish()
         types = [m.msg_type for m in messages]
-        self.assertIn(intent_msg_type, types)
+        assert_routed(utterance, intent_msg_type, types)
         speaks = [m for m in messages if m.msg_type == "ovos.utterance.speak"]
         self.assertTrue(speaks, f"no ovos.utterance.speak for {utterance!r} -> {types}")
         dialog_data = speaks[0].data.get("meta", {}).get("data", {})
@@ -198,9 +172,9 @@ class _IntentRoutingMixin:
             f"spoken dialog data {dialog_key!r} was {dialog_data.get(dialog_key)!r}, "
             f"expected {expected_value!r} -- full dialog data: {dialog_data!r}")
 
-    def _assert_padatious_dialog(self, utterance: str, intent_file: str,
+    def _assert_routes_dialog(self, utterance: str, intent_file: str,
                                  dialog_keys, data: Optional[dict] = None):
-        """Like ``_assert_padatious``, but asserts WHICH dialog the skill
+        """Like ``_assert_routes``, but asserts WHICH dialog the skill
         spoke, and optionally its data.
 
         query_list_entries and delete_list_entries each serve two kinds of
@@ -215,11 +189,7 @@ class _IntentRoutingMixin:
         intent_msg_type = f"{SKILL_ID}:{intent_name}"
         session = Session(f"e2e-en_us-dialogkey-{hash(utterance)}-{hash(intent_msg_type)}")
         session.lang = LANG
-        session.pipeline = [
-            "ovos-padacioso-pipeline-plugin-high",
-            "ovos-padacioso-pipeline-plugin-medium",
-            "ovos-padacioso-pipeline-plugin-low",
-        ]
+        session.pipeline = PIPELINE
         message = Message(
             "recognizer_loop:utterance",
             {"utterances": [utterance], "lang": LANG},
@@ -229,7 +199,7 @@ class _IntentRoutingMixin:
         capture.capture(message, timeout=30)
         messages = capture.finish()
         types = [m.msg_type for m in messages]
-        self.assertIn(intent_msg_type, types)
+        assert_routed(utterance, intent_msg_type, types)
         speaks = [m for m in messages if m.msg_type == "ovos.utterance.speak"]
         self.assertTrue(speaks, f"no ovos.utterance.speak for {utterance!r} -> {types}")
         meta = speaks[0].data.get("meta", {})
@@ -244,17 +214,13 @@ class _IntentRoutingMixin:
                 f"{utterance!r} spoke {spoken!r} with {key!r}="
                 f"{meta.get('data', {}).get(key)!r}, expected {value!r}")
 
-    def _assert_padatious_dialog_any(self, utterance: str, intent_files,
+    def _assert_routes_dialog_any(self, utterance: str, intent_files,
                                      dialog_keys):
-        """Like ``_assert_padatious_dialog``, but accepts any one of several
+        """Like ``_assert_routes_dialog``, but accepts any one of several
         intents; the spoken dialog carries the assertion."""
         session = Session(f"e2e-en_us-dialogany-{hash(utterance)}")
         session.lang = LANG
-        session.pipeline = [
-            "ovos-padacioso-pipeline-plugin-high",
-            "ovos-padacioso-pipeline-plugin-medium",
-            "ovos-padacioso-pipeline-plugin-low",
-        ]
+        session.pipeline = PIPELINE
         message = Message(
             "recognizer_loop:utterance",
             {"utterances": [utterance], "lang": LANG},
@@ -265,8 +231,7 @@ class _IntentRoutingMixin:
         messages = capture.finish()
         types = [m.msg_type for m in messages]
         expected = {f"{SKILL_ID}:{f[:-len('.intent')]}" for f in intent_files}
-        self.assertTrue(expected & set(types),
-                        f"{utterance!r} matched none of {sorted(expected)}: {types}")
+        assert_routed(utterance, expected, types)
         speaks = [m for m in messages if m.msg_type == "ovos.utterance.speak"]
         self.assertTrue(speaks, f"no ovos.utterance.speak for {utterance!r} -> {types}")
         spoken = speaks[0].data.get("meta", {}).get("dialog")
@@ -274,8 +239,8 @@ class _IntentRoutingMixin:
                       f"{utterance!r} spoke dialog {spoken!r}, expected one of "
                       f"{sorted(dialog_keys)!r}")
 
-    def _assert_padatious_any(self, utterance: str, intent_files: list):
-        """Like _assert_padatious, but accepts any one of several sibling
+    def _assert_routes_any(self, utterance: str, intent_files: list):
+        """Like _assert_routes, but accepts any one of several sibling
         intent files as a pass -- ONLY legitimate when every name given
         resolves to the literal same handler callable in the running skill
         (two intent names, one handler), which this method verifies
@@ -283,8 +248,8 @@ class _IntentRoutingMixin:
         else, so a future caller can't misuse this to paper over a
         genuinely wrong sibling intent that happens to share a name.
 
-        For a phrasing whose winner flips between such siblings depending
-        on padatious's async training-compile timing, only the wire intent
+        For a phrasing whose winner flips between such siblings from one
+        boot to the next, only the wire intent
         NAME differs between winners, not skill behavior -- pinning to one
         exact name makes the row flaky for a distinction that carries no
         functional difference. This still pins the intent that actually
@@ -308,16 +273,12 @@ class _IntentRoutingMixin:
                     for h in handlers.values()}
         self.assertEqual(
             len(distinct), 1,
-            f"_assert_padatious_any is only valid across siblings bound to "
+            f"_assert_routes_any is only valid across siblings bound to "
             f"the SAME handler; {dict(handlers)!r} resolve to {len(distinct)} "
             f"distinct handlers")
 
         intent_msg_types = {f"{SKILL_ID}:{n}" for n in intent_names}
-        pipeline = [
-            "ovos-padacioso-pipeline-plugin-high",
-            "ovos-padacioso-pipeline-plugin-medium",
-            "ovos-padacioso-pipeline-plugin-low",
-        ]
+        pipeline = PIPELINE
         session = Session(f"e2e-en_us-{hash(utterance)}-{hash(tuple(intent_msg_types))}")
         session.lang = LANG
         session.pipeline = pipeline
@@ -330,9 +291,7 @@ class _IntentRoutingMixin:
         capture.capture(message, timeout=30)
         messages = capture.finish()
         types = [m.msg_type for m in messages]
-        self.assertTrue(
-            intent_msg_types.intersection(types),
-            f"none of {intent_msg_types!r} found in {types!r}")
+        assert_routed(utterance, intent_msg_types, types)
 
         starts = [m for m in messages if m.msg_type == "ovos.intent.handler.start"]
         self.assertTrue(
@@ -345,28 +304,15 @@ class _IntentRoutingMixin:
             f"{observed_names!r}, expected one of {intent_names!r} "
             f"(any sibling of the shared handler)")
 
-    def _assert_padatious_high(self, utterance: str, intent_file: str):
-        # Pins the match to the padatious-HIGH tier specifically (unlike
-        # _assert_padatious, which also accepts a medium/low-tier match).
-        # A phrase that only clears low-tier NN generalization is one a
-        # competing skill/fallback registered at a higher pipeline stage
-        # would steal in the real default pipeline (see issue #175's
-        # "wake the kids up at {time}" live finding) -- pinning it to
-        # padatious-high is what proves the .intent template itself, not
-        # a fuzzy neural guess, is what resolves the utterance.
+    def _assert_routes_high(self, utterance: str, intent_file: str):
+        # Pins the match to the m2v HIGH tier (unlike _assert_routes, which
+        # also accepts a medium or low tier match). A phrase that only clears
+        # a low tier is one a competing skill or fallback registered at a
+        # higher pipeline stage would steal in the real default pipeline
+        # (see issue #175's "wake the kids up at {time}" live finding).
         intent_name = intent_file[:-len(".intent")] if intent_file.endswith(".intent") else intent_file
         intent_msg_type = f"{SKILL_ID}:{intent_name}"
-        self._assert_intent(utterance, intent_msg_type, [
-            "ovos-padacioso-pipeline-plugin-high",
-        ])
-
-    def _assert_adapt(self, utterance: str, intent_label: str = ''):
-        intent_msg_type = f"{SKILL_ID}:{intent_label}"
-        self._assert_intent(utterance, intent_msg_type, [
-            "ovos-adapt-pipeline-plugin-high",
-            "ovos-adapt-pipeline-plugin-medium",
-            "ovos-adapt-pipeline-plugin-low",
-        ])
+        self._assert_intent(utterance, intent_msg_type, PIPELINE[:1])
 
     def _remove_list(self, list_name: str):
         """Complete a seeded list and its items, so later tests that resolve
@@ -446,7 +392,7 @@ class _IntentRoutingMixin:
         # Earlier tests in this module leave alerts behind. Set the ones of
         # this kind aside, so the request resolves to the seeded alert, and
         # put them back afterwards. With several events pending, "the next
-        # event" resolves to none of them: a padacioso match carries no
+        # event" resolves to none of them: a file intent match carries no
         # ``next`` flag.
         kind = AlertType[alert_type]
         for other in skill._get_alerts_list(kind):
@@ -459,11 +405,7 @@ class _IntentRoutingMixin:
 
         session = Session(f"e2e-en_us-resched-{hash(utterance)}")
         session.lang = LANG
-        session.pipeline = [
-            "ovos-padacioso-pipeline-plugin-high",
-            "ovos-padacioso-pipeline-plugin-medium",
-            "ovos-padacioso-pipeline-plugin-low",
-        ]
+        session.pipeline = PIPELINE
         capture = CaptureSession(self.minicroft)
         capture.capture(Message(
             "recognizer_loop:utterance",
@@ -471,7 +413,7 @@ class _IntentRoutingMixin:
             {"session": session.serialize()}), timeout=30)
         messages = capture.finish()
         types = [m.msg_type for m in messages]
-        self.assertIn(f"{SKILL_ID}:reschedule_alert", types)
+        assert_routed(utterance, f"{SKILL_ID}:reschedule_alert", types)
         spoken = [(m.data.get("meta", {}).get("dialog"), m.data.get("utterance"))
                   for m in messages
                   if m.msg_type in ("speak", "ovos.utterance.speak")]
@@ -489,28 +431,6 @@ class _IntentRoutingMixin:
                         f"{utterance!r} moved the alert from {expiration} to "
                         f"{moved[0]}, expected {expected}")
 
-    def _fire_adapt(self, utterance: str):
-        """Fire an utterance through the adapt-only pipeline with no
-        assertion -- used purely to set up state (e.g. create a todo list)
-        ahead of a test that needs it to already exist, without pulling in
-        an interactive get_response mock.
-        """
-        session = Session(f"e2e-en_us-seed-{hash(utterance)}")
-        session.lang = LANG
-        session.pipeline = [
-            "ovos-adapt-pipeline-plugin-high",
-            "ovos-adapt-pipeline-plugin-medium",
-            "ovos-adapt-pipeline-plugin-low",
-        ]
-        message = Message(
-            "recognizer_loop:utterance",
-            {"utterances": [utterance], "lang": LANG},
-            {"session": session.serialize()},
-        )
-        capture = CaptureSession(self.minicroft)
-        capture.capture(message, timeout=30)
-        capture.finish()
-
     def _assert_simple(self, utterance: str):
         """Fire an utterance and assert a "speak" response appears in the
         bus trace, as a SUBSET check (see _assert_intent's docstring for why
@@ -522,22 +442,7 @@ class _IntentRoutingMixin:
         """
         session = Session(f"e2e-en_us-simple-{hash(utterance)}")
         session.lang = LANG
-        # Unlike _assert_adapt/_assert_padatious, these "simple" rows are
-        # not pinned to one pipeline stage -- they need the full default
-        # order so either Adapt or Padatious can match. Leaving
-        # session.pipeline unset previously fell back to a pipeline that
-        # does not include this skill's plugins, producing
-        # 'ovos.intent.unmatched' for every row in this class regardless of
-        # utterance (auto-generation defect, same family as the
-        # adapt-only-pin rows -- see _assert_adapt/_assert_padatious).
-        session.pipeline = [
-            "ovos-padacioso-pipeline-plugin-high",
-            "ovos-adapt-pipeline-plugin-high",
-            "ovos-padacioso-pipeline-plugin-medium",
-            "ovos-adapt-pipeline-plugin-medium",
-            "ovos-padacioso-pipeline-plugin-low",
-            "ovos-adapt-pipeline-plugin-low",
-        ]
+        session.pipeline = PIPELINE
         message = Message(
             "recognizer_loop:utterance",
             {"utterances": [utterance], "lang": LANG},
@@ -547,6 +452,9 @@ class _IntentRoutingMixin:
         capture.capture(message, timeout=30)
         messages = capture.finish()
         types = [m.msg_type for m in messages]
+        skill = self.minicroft.plugin_skills[SKILL_ID].instance
+        assert_routed(utterance,
+                      {f"{SKILL_ID}:{name}" for name in skill._intent_handlers}, types)
         self.assertTrue(
             any("speak" in t for t in types),
             f"no speak message for {utterance!r} -> {types}",
@@ -554,78 +462,78 @@ class _IntentRoutingMixin:
 
 
 class TestPadatious1_Missed_alerts_intent(_IntentRoutingMixin, TestCase):
-    """Padatious intent: missed_alerts.intent"""
+    """File intent: missed_alerts.intent"""
     def test_did_i_miss_any_alarms(self):
-        self._assert_padatious(r"did i miss any alarms", r"missed_alerts.intent")
+        self._assert_routes(r"did i miss any alarms", r"missed_alerts.intent")
 
     def test_missed_any_reminder(self):
-        self._assert_padatious(r"missed any reminder", r"missed_alerts.intent")
+        self._assert_routes(r"missed any reminder", r"missed_alerts.intent")
 
     def test_have_i_missed_any_timers(self):
-        self._assert_padatious(r"have i missed any timers", r"missed_alerts.intent")
+        self._assert_routes(r"have i missed any timers", r"missed_alerts.intent")
 
     def test_miss_any_events(self):
-        self._assert_padatious(r"miss any events", r"missed_alerts.intent")
+        self._assert_routes(r"miss any events", r"missed_alerts.intent")
 
     def test_did_i_miss_a_alarm(self):
-        self._assert_padatious(r"did i miss a alarm", r"missed_alerts.intent")
+        self._assert_routes(r"did i miss a alarm", r"missed_alerts.intent")
 
     def test_did_i_miss_my_alarm(self):
-        self._assert_padatious(r"did i miss my alarm", r"missed_alerts.intent")
+        self._assert_routes(r"did i miss my alarm", r"missed_alerts.intent")
 
     def test_have_i_missed_my_reminder(self):
-        self._assert_padatious(r"have i missed my reminder", r"missed_alerts.intent")
+        self._assert_routes(r"have i missed my reminder", r"missed_alerts.intent")
 
     def test_did_i_miss_anything(self):
-        self._assert_padatious(r"did i miss anything", r"missed_alerts.intent")
+        self._assert_routes(r"did i miss anything", r"missed_alerts.intent")
 
     def test_have_i_missed_anything(self):
-        self._assert_padatious(r"have i missed anything", r"missed_alerts.intent")
+        self._assert_routes(r"have i missed anything", r"missed_alerts.intent")
 
     def test_tell_me_if_i_missed_any_alarms(self):
-        self._assert_padatious(r"tell me if i missed any alarms", r"missed_alerts.intent")
+        self._assert_routes(r"tell me if i missed any alarms", r"missed_alerts.intent")
 
     def test_tell_me_if_i_missed_any_reminders(self):
-        self._assert_padatious(r"tell me if i missed any reminders", r"missed_alerts.intent")
+        self._assert_routes(r"tell me if i missed any reminders", r"missed_alerts.intent")
 
     def test_let_me_know_if_i_missed_any_alarms(self):
-        self._assert_padatious(r"let me know if i missed any alarms", r"missed_alerts.intent")
+        self._assert_routes(r"let me know if i missed any alarms", r"missed_alerts.intent")
 
     def test_was_there_anything_i_missed(self):
-        self._assert_padatious(r"was there anything i missed", r"missed_alerts.intent")
+        self._assert_routes(r"was there anything i missed", r"missed_alerts.intent")
 
     def test_were_there_any_alerts_i_missed(self):
-        self._assert_padatious(r"were there any alerts i missed", r"missed_alerts.intent")
+        self._assert_routes(r"were there any alerts i missed", r"missed_alerts.intent")
 
     def test_did_any_alarms_go_off_that_i_missed(self):
-        self._assert_padatious(r"did any alarms go off that i missed", r"missed_alerts.intent")
+        self._assert_routes(r"did any alarms go off that i missed", r"missed_alerts.intent")
 
     def test_did_any_reminders_go_off_that_i_missed(self):
-        self._assert_padatious(r"did any reminders go off that i missed", r"missed_alerts.intent")
+        self._assert_routes(r"did any reminders go off that i missed", r"missed_alerts.intent")
 
     def test_was_i_supposed_to_hear_an_alarm_i_missed(self):
-        self._assert_padatious(r"was i supposed to hear an alarm i missed", r"missed_alerts.intent")
+        self._assert_routes(r"was i supposed to hear an alarm i missed", r"missed_alerts.intent")
 
     def test_what_did_i_miss_today(self):
-        self._assert_padatious(r"what did i miss today", r"missed_alerts.intent")
+        self._assert_routes(r"what did i miss today", r"missed_alerts.intent")
 
 class TestAdapt2_Createalarm(_IntentRoutingMixin, TestCase):
-    """Padatious (intent file) intent: create_alarm.intent"""
+    """File intent: create_alarm.intent"""
     def test_set_an_alarm(self):
-        self._assert_padatious(r"set an alarm", r"create_alarm.intent")
+        self._assert_routes(r"set an alarm", r"create_alarm.intent")
 
     def test_new_alarm_for_time(self):
-        self._assert_padatious(r"new alarm for 7 am", r"create_alarm.intent")
+        self._assert_routes(r"new alarm for 7 am", r"create_alarm.intent")
 
     def test_create_an_alarm_for_time(self):
-        self._assert_padatious(r"create an alarm for 7 am", r"create_alarm.intent")
+        self._assert_routes(r"create an alarm for 7 am", r"create_alarm.intent")
 
     def test_set_an_alarm_at_time(self):
         # PR #172 adversarial review: "set an alarm at 7 am" (the natural
         # preposition variant of "for") was unmatched (conf 0.19) after the
         # Adapt->padacioso migration. create_alarm.intent now has a
         # "(set|create) [an] alarm (at|for) {time}" line.
-        self._assert_padatious(r"set an alarm at 7 am", r"create_alarm.intent")
+        self._assert_routes(r"set an alarm at 7 am", r"create_alarm.intent")
 
     def test_make_a_10_am_weekend_alarm(self):
         # this used to tie non-deterministically against a separate
@@ -633,34 +541,33 @@ class TestAdapt2_Createalarm(_IntentRoutingMixin, TestCase):
         # registration racing the same template family). Its media lines
         # are now part of this same create_alarm.intent template, so there
         # is no sibling registration left to tie against.
-        self._assert_padatious(r"make a 10 am weekend alarm", r"create_alarm.intent")
+        self._assert_routes(r"make a 10 am weekend alarm", r"create_alarm.intent")
 
     def test_set_an_alarm_every_weekday_at_time(self):
         # PR #172 adversarial review: this phrasing previously misrouted to
         # the recurring reminder templates.
-        self._assert_padatious(r"set an alarm every weekday at 6", r"create_alarm.intent")
+        self._assert_routes(r"set an alarm every weekday at 6", r"create_alarm.intent")
 
-    @pytest.mark.xfail(strict=True, reason="issue #155: 'alarm in an hour' -- with no leading verb (set/create/...) and no explicit clock time -- scores below the padatious pipeline's confidence tiers under the full default pipeline; real skill defect carried over from the pre-migration Adapt-only xfail, not a test artifact. See https://github.com/OpenVoiceOS/ovos-skill-alerts/issues/155.")
     def test_alarm_in_an_hour(self):
-        self._assert_padatious(r"alarm in an hour", r"create_alarm.intent")
+        self._assert_routes(r"alarm in an hour", r"create_alarm.intent")
 
 class TestAdapt3_Createalarmalt(_IntentRoutingMixin, TestCase):
-    """Padatious (intent file) intent: create_alarm.intent, wake forms.
+    """File intent: create_alarm.intent, wake forms.
 
     These lines lived in create_alarm_alt.intent until the fold; a skill
     defines each intent once (RULES.md, One intent, one definition), so they
     are now part of create_alarm.intent and must still route there."""
     def test_wake_me_up(self):
-        self._assert_padatious(r"wake me up", r"create_alarm.intent")
+        self._assert_routes(r"wake me up", r"create_alarm.intent")
 
     def test_wake_me_up_at_time(self):
-        self._assert_padatious(r"wake me up at 7 am", r"create_alarm.intent")
+        self._assert_routes(r"wake me up at 7 am", r"create_alarm.intent")
 
     def test_can_you_wake_me_up(self):
-        self._assert_padatious(r"can you wake me up", r"create_alarm.intent")
+        self._assert_routes(r"can you wake me up", r"create_alarm.intent")
 
     def test_wake_us_up_every_weekday_at_time(self):
-        self._assert_padatious(r"wake us up every weekday at 6 am", r"create_alarm.intent")
+        self._assert_routes(r"wake us up every weekday at 6 am", r"create_alarm.intent")
 
     def test_wake_the_kids_up(self):
         # issue #175: third-person wake phrasings. wake.voc only had
@@ -668,19 +575,19 @@ class TestAdapt3_Createalarmalt(_IntentRoutingMixin, TestCase):
         # the "wake (the kids|everyone) [up] ..." lines, folded in from
         # create_alarm_alt.intent
         # already cover this natively -- no Adapt needed.
-        self._assert_padatious(r"wake the kids up", r"create_alarm.intent")
+        self._assert_routes(r"wake the kids up", r"create_alarm.intent")
 
     def test_wake_the_kids(self):
-        self._assert_padatious(r"wake the kids", r"create_alarm.intent")
+        self._assert_routes(r"wake the kids", r"create_alarm.intent")
 
     def test_wake_up_the_kids(self):
-        self._assert_padatious(r"wake up the kids", r"create_alarm.intent")
+        self._assert_routes(r"wake up the kids", r"create_alarm.intent")
 
     def test_wake_everyone_up(self):
-        self._assert_padatious(r"wake everyone up", r"create_alarm.intent")
+        self._assert_routes(r"wake everyone up", r"create_alarm.intent")
 
     def test_wake_everyone(self):
-        self._assert_padatious(r"wake everyone", r"create_alarm.intent")
+        self._assert_routes(r"wake everyone", r"create_alarm.intent")
 
     def test_wake_the_kids_up_at_time(self):
         # issue #175 live validation: the wake forms, then in
@@ -688,17 +595,16 @@ class TestAdapt3_Createalarmalt(_IntentRoutingMixin, TestCase):
         # only had "wake (me|us)" shapes -- "wake the kids up at 7"
         # never reached the padatious-tier template that carries {time}
         # and fell through to fallback.
-        self._assert_padatious_high(r"wake the kids up at 7", r"create_alarm.intent")
+        self._assert_routes_high(r"wake the kids up at 7", r"create_alarm.intent")
 
     def test_wake_up_the_kids_at_time(self):
-        self._assert_padatious_high(r"wake up the kids at 7", r"create_alarm.intent")
+        self._assert_routes_high(r"wake up the kids at 7", r"create_alarm.intent")
 
-    @pytest.mark.xfail(strict=False, reason="ENGINE ISSUE (padacioso), not this skill's .intent files: 'wake everyone up every weekday at 7' is a literal expansion of create_alarm.intent's 'wake (the kids|everyone) [up] every {days} at {time}' line and matches correctly at padacioso's MEDIUM confidence tier, but padacioso does not score it high enough to clear its own HIGH tier threshold (verified via a raw padacioso.IntentContainer probe outside the full pipeline). padacioso is meant to be an exact-match template engine; a literal grammar expansion not clearing its own top confidence tier is a matcher-scoring defect, not a phrasing/coverage gap in this skill's templates -- flagged for the engine lane, not fixed here.")
     def test_wake_everyone_up_every_weekday_at_time(self):
-        self._assert_padatious_high(r"wake everyone up every weekday at 7", r"create_alarm.intent")
+        self._assert_routes_high(r"wake everyone up every weekday at 7", r"create_alarm.intent")
 
 class TestAdapt4_Createocpalarm(_IntentRoutingMixin, TestCase):
-    """Padatious (intent file) intent: create_alarm.intent (media branch).
+    """File intent: create_alarm.intent (media branch).
 
     The dedicated media-alarm intent file's non-wake phrasings were folded
     into create_alarm.intent's template; a matched {mediakind} slot routes
@@ -712,10 +618,10 @@ class TestAdapt4_Createocpalarm(_IntentRoutingMixin, TestCase):
         # equivalent test intent/coverage rather than dropping the row.
         # create_alarm.intent's "(set|create|...) (a|an|my) alarm with
         # {mediakind}" line already covers this natively -- no Adapt needed.
-        self._assert_padatious(r"set an alarm with music", r"create_alarm.intent")
+        self._assert_routes(r"set an alarm with music", r"create_alarm.intent")
 
 class TestAdapt5_Createocpalarmalt(_IntentRoutingMixin, TestCase):
-    """Padatious (intent file) intent: create_alarm.intent (media branch).
+    """File intent: create_alarm.intent (media branch).
 
     The dedicated media-alarm intent file's wake-phrasing lines were folded
     into the wake forms, and those in turn into create_alarm.intent, so
@@ -723,21 +629,21 @@ class TestAdapt5_Createocpalarmalt(_IntentRoutingMixin, TestCase):
     no separate alt handler any more.
     """
     def test_wake_me_up_with_music(self):
-        self._assert_padatious(r"wake me up with music", r"create_alarm.intent")
+        self._assert_routes(r"wake me up with music", r"create_alarm.intent")
 
 class TestAdapt6_Createtimer(_IntentRoutingMixin, TestCase):
-    """Padatious (intent file) intent: create_timer.intent"""
+    """File intent: create_timer.intent"""
     def test_set_a_timer(self):
-        self._assert_padatious(r"set a timer", r"create_timer.intent")
+        self._assert_routes(r"set a timer", r"create_timer.intent")
 
     def test_new_timer_for_duration(self):
-        self._assert_padatious(r"new timer for 5 minutes", r"create_timer.intent")
+        self._assert_routes(r"new timer for 5 minutes", r"create_timer.intent")
 
     def test_start_a_countdown(self):
-        self._assert_padatious(r"start a countdown", r"create_timer.intent")
+        self._assert_routes(r"start a countdown", r"create_timer.intent")
 
     def test_start_a_timer(self):
-        self._assert_padatious(r"start a timer", r"create_timer.intent")
+        self._assert_routes(r"start a timer", r"create_timer.intent")
 
     # "create a baking timer" is intentionally NOT restored: with the
     # word-salad-style "create a <adjective> <noun>" shape it now ties on
@@ -753,20 +659,20 @@ class TestAdapt6_Createtimer(_IntentRoutingMixin, TestCase):
         # ("set timer 5 minutes", "start a 5 minute timer") misrouted or
         # were unmatched (conf as low as 0.17). create_timer.intent now has
         # "(set|start|make) a {duration} timer" / "set timer [for] {duration}".
-        self._assert_padatious(r"make a 5 hour timer", r"create_timer.intent")
+        self._assert_routes(r"make a 5 hour timer", r"create_timer.intent")
 
     def test_set_timer_5_minutes(self):
-        self._assert_padatious(r"set timer 5 minutes", r"create_timer.intent")
+        self._assert_routes(r"set timer 5 minutes", r"create_timer.intent")
 
     def test_start_a_5_minute_timer(self):
-        self._assert_padatious(r"start a 5 minute timer", r"create_timer.intent")
+        self._assert_routes(r"start a 5 minute timer", r"create_timer.intent")
 
     def test_put_timer_10_minutes(self):
         # issue #175: ESL verb gap. "put" is added to create_timer.intent's
         # "set timer [for] {duration}" line (create.voc's "put" entry alone
         # has no effect here -- create_timer is a padacioso template, not an
         # Adapt intent driven by create.voc).
-        self._assert_padatious(r"put timer 10 minutes", r"create_timer.intent")
+        self._assert_routes(r"put timer 10 minutes", r"create_timer.intent")
 
     def test_in_duration_let_me_know(self):
         # Keyword-less, duration-first create-timer gap: no "timer"/
@@ -775,44 +681,44 @@ class TestAdapt6_Createtimer(_IntentRoutingMixin, TestCase):
         # know" line for this. Also asserts on the spoken confirmation's
         # "remaining" dialog field to prove the matched {duration} slot
         # (not just the intent name) reached the actual timer created.
-        self._assert_padatious_with_dialog_data(
+        self._assert_routes_with_dialog_data(
             r"in 5 minutes let me know", r"create_timer.intent",
             "remaining", "five minutes")
 
     def test_could_you_set_a_timer_for_me(self):
-        self._assert_padatious(r"could you set a timer for me", r"create_timer.intent")
+        self._assert_routes(r"could you set a timer for me", r"create_timer.intent")
 
     def test_i_need_a_timer(self):
-        self._assert_padatious(r"i need a timer", r"create_timer.intent")
+        self._assert_routes(r"i need a timer", r"create_timer.intent")
 
     def test_i_want_to_set_a_timer(self):
-        self._assert_padatious(r"i want to set a timer", r"create_timer.intent")
+        self._assert_routes(r"i want to set a timer", r"create_timer.intent")
 
     def test_lets_set_a_timer(self):
-        self._assert_padatious(r"let's set a timer", r"create_timer.intent")
+        self._assert_routes(r"let's set a timer", r"create_timer.intent")
 
     def test_start_the_timer_now(self):
-        self._assert_padatious(r"start the timer now", r"create_timer.intent")
+        self._assert_routes(r"start the timer now", r"create_timer.intent")
 
 class TestAdapt7_Createreminder(_IntentRoutingMixin, TestCase):
-    """Padatious (intent file) intent: create_reminder.intent"""
+    """File intent: create_reminder.intent"""
     def test_set_a_reminder(self):
-        self._assert_padatious(r"set a reminder", r"create_reminder.intent")
+        self._assert_routes(r"set a reminder", r"create_reminder.intent")
 
     def test_set_a_reminder_for_me(self):
-        self._assert_padatious(r"set a reminder for me", r"create_reminder.intent")
+        self._assert_routes(r"set a reminder for me", r"create_reminder.intent")
 
     def test_set_a_new_reminder_to_reminder(self):
-        self._assert_padatious(r"set a new reminder to call mom", r"create_reminder.intent")
+        self._assert_routes(r"set a new reminder to call mom", r"create_reminder.intent")
 
     def test_new_reminder(self):
-        self._assert_padatious(r"new reminder call mom", r"create_reminder.intent")
+        self._assert_routes(r"new reminder call mom", r"create_reminder.intent")
 
     def test_create_a_reminder_to_go_to_work_at_9_am(self):
-        self._assert_padatious(r"create a reminder to go to work at 9 am daily for the next month", r"create_reminder.intent")
+        self._assert_routes(r"create a reminder to go to work at 9 am daily for the next month", r"create_reminder.intent")
 
     def test_create_a_reminder_to_go_to_work_every_weekday(self):
-        self._assert_padatious(r"create a reminder to go to work every weekday morning at 8", r"create_reminder.intent")
+        self._assert_routes(r"create a reminder to go to work every weekday morning at 8", r"create_reminder.intent")
 
     # "set a reminder every day to check for test failures until 2024" is
     # intentionally NOT restored: it scores below every padacioso
@@ -822,50 +728,50 @@ class TestAdapt7_Createreminder(_IntentRoutingMixin, TestCase):
     # scope for this fix. See the PR description.
 
 class TestAdapt8_Createreminderalt(_IntentRoutingMixin, TestCase):
-    """Padatious (intent file) intent: create_reminder.intent ("remind"/"tell me to" lines folded in)"""
+    """File intent: create_reminder.intent ("remind"/"tell me to" lines folded in)"""
     def test_remind_me(self):
-        self._assert_padatious(r"remind me", r"create_reminder.intent")
+        self._assert_routes(r"remind me", r"create_reminder.intent")
 
     def test_remind_me_to_reminder(self):
-        self._assert_padatious(r"remind me to call mom", r"create_reminder.intent")
+        self._assert_routes(r"remind me to call mom", r"create_reminder.intent")
 
     def test_tell_me_to_reminder(self):
-        self._assert_padatious(r"tell me to call mom", r"create_reminder.intent")
+        self._assert_routes(r"tell me to call mom", r"create_reminder.intent")
 
     def test_tell_me_to_walk_the_dog_every_weekday(self):
-        self._assert_padatious(r"tell me to walk the dog every weekday at 8", r"create_reminder.intent")
+        self._assert_routes(r"tell me to walk the dog every weekday at 8", r"create_reminder.intent")
 
     def test_tell_me_to_go_to_work_every_weekday_morning(self):
-        self._assert_padatious(r"tell me to go to work every weekday morning", r"create_reminder.intent")
+        self._assert_routes(r"tell me to go to work every weekday morning", r"create_reminder.intent")
 
     def test_tell_me_to_feed_the_cat_every_morning(self):
-        self._assert_padatious(r"tell me to feed the cat every morning at 7", r"create_reminder.intent")
+        self._assert_routes(r"tell me to feed the cat every morning at 7", r"create_reminder.intent")
 
     def test_tell_me_to_check_for_test_failures_every_day(self):
-        self._assert_padatious(r"tell me to check for test failures every day until 2024", r"create_reminder.intent")
+        self._assert_routes(r"tell me to check for test failures every day until 2024", r"create_reminder.intent")
 
     def test_remind_me_in_an_hour(self):
         # PR #172 adversarial review: "remind me in {duration}" had no
         # matching line at all. create_reminder.intent now has
         # "remind me in {duration} [to {reminder}]".
-        self._assert_padatious(r"remind me in an hour to call mom", r"create_reminder.intent")
+        self._assert_routes(r"remind me in an hour to call mom", r"create_reminder.intent")
 
 class TestAdapt9_Createevent(_IntentRoutingMixin, TestCase):
-    """Padatious (intent file) intent: create_event.intent"""
+    """File intent: create_event.intent"""
     def test_create_an_event(self):
-        self._assert_padatious(r"create an event", r"create_event.intent")
+        self._assert_routes(r"create an event", r"create_event.intent")
 
     def test_can_you_schedule_an_appointment(self):
-        self._assert_padatious(r"can you schedule an appointment", r"create_event.intent")
+        self._assert_routes(r"can you schedule an appointment", r"create_event.intent")
 
     def test_new_appointment(self):
-        self._assert_padatious(r"new appointment", r"create_event.intent")
+        self._assert_routes(r"new appointment", r"create_event.intent")
 
     def test_i_have_an_event(self):
-        self._assert_padatious(r"i have an event", r"create_event.intent")
+        self._assert_routes(r"i have an event", r"create_event.intent")
 
     def test_i_have_an_appointment_at_9_pm_every_weekend(self):
-        self._assert_padatious(r"I have an appointment at 9 PM every weekend night until next year", r"create_event.intent")
+        self._assert_routes(r"I have an appointment at 9 PM every weekend night until next year", r"create_event.intent")
 
     # "create a daily event to join zoom at 1 PM for the next year" is
     # intentionally NOT restored: it ties/misroutes across
@@ -880,10 +786,10 @@ class TestAdapt9_Createevent(_IntentRoutingMixin, TestCase):
         # not a test artifact: padacioso's create_event.intent matches this
         # utterance where Adapt's confidence-diluted keyword scoring did
         # not. Restored as a plain pass instead of an xfail.
-        self._assert_padatious(r"I have a work event next tuesday at 7 PM", r"create_event.intent")
+        self._assert_routes(r"I have a work event next tuesday at 7 PM", r"create_event.intent")
 
 class TestAdapt10_Reschedulealert(_IntentRoutingMixin, TestCase):
-    """Padatious (intent file) intent: reschedule_alert.intent"""
+    """File intent: reschedule_alert.intent"""
     def test_move_the_baseball_event_to_08_00_pm(self):
         # a time of day keeps the event on its own day, two days out
         self._assert_rescheduled(r"move the baseball event to 08:00 pm",
@@ -897,7 +803,7 @@ class TestAdapt10_Reschedulealert(_IntentRoutingMixin, TestCase):
         # (next|upcoming) {schedkind} {duration} (earlier|sooner|later)"
         # line -- a near-literal match for this exact phrasing family --
         # was folded into this file.
-        self._assert_padatious(
+        self._assert_routes(
             r"reschedule the next event two hours earlier",
             r"reschedule_alert.intent")
 
@@ -914,14 +820,14 @@ class TestAdapt10_Reschedulealert(_IntentRoutingMixin, TestCase):
                                  expiration - dt.timedelta(minutes=5))
 
 class TestAdapt11_Reschedulealertalt(_IntentRoutingMixin, TestCase):
-    """Padatious (intent file) intent: reschedule_alert.intent (earlier/sooner/longer/shorter lines folded in)"""
+    """File intent: reschedule_alert.intent (earlier/sooner/longer/shorter lines folded in)"""
     def test_move_the_baseball_event_to_08_00_pm(self):
         # issue #138 triage: original auto-generated utterance did not
         # route to this intent under the adapt-only pipeline pin (verified
         # locally with a standalone probe against every candidate phrasing).
         # Replaced with a phrasing confirmed to route correctly, keeping
         # equivalent test intent/coverage rather than dropping the row.
-        self._assert_padatious(r"shorten the timer", r"reschedule_alert.intent")
+        self._assert_routes(r"shorten the timer", r"reschedule_alert.intent")
 
     def test_reschedule_the_next_event_two_hours_earl(self):
         self._assert_rescheduled(r"reschedule the next event two hours earlier",
@@ -934,7 +840,7 @@ class TestAdapt11_Reschedulealertalt(_IntentRoutingMixin, TestCase):
         # locally with a standalone probe against every candidate phrasing).
         # Replaced with a phrasing confirmed to route correctly, keeping
         # equivalent test intent/coverage rather than dropping the row.
-        self._assert_padatious(r"increase the pizza timer", r"reschedule_alert.intent")
+        self._assert_routes(r"increase the pizza timer", r"reschedule_alert.intent")
 
     def test_decrease_the_bread_timer_by_5_minutes(self):
         # issue #138 triage: original auto-generated utterance did not
@@ -955,48 +861,46 @@ class TestAdapt11_Reschedulealertalt(_IntentRoutingMixin, TestCase):
         # fully satisfies create_timer's own requirements), the same defect
         # class this PR is fixing elsewhere. "sooner the timer" avoids any
         # create-vocab word so it cannot satisfy create_timer.
-        self._assert_padatious(r"the bread timer sooner", r"reschedule_alert.intent")
+        self._assert_routes(r"the bread timer sooner", r"reschedule_alert.intent")
 
 class TestAdapt12_Changeproperties(_IntentRoutingMixin, TestCase):
-    """Padatious (intent file) intents: change_repeat.intent / change_priority.intent"""
-    @pytest.mark.xfail(strict=False, reason="ENGINE ISSUE (padacioso), not this skill's .intent files: 'reschedule the wake alarm to every Monday and Tuesday' is a literal expansion of change_repeat.intent's '(...|reschedule) (my|the) {schedkind} to every {repeat}' line and padacioso resolves it correctly MOST runs, but the reschedule_alert/change_repeat tie for this phrasing is not deterministic across runs (observed passing in one full-module run and failing, misrouted to reschedule_alert, in another with no source change) -- flagged for the engine lane as a tie-break non-determinism, not fixed here.")
+    """File intents: change_repeat.intent / change_priority.intent"""
     def test_reschedule_the_wake_alarm_to_every_monda(self):
         # change_repeat.intent's "to every {repeat}" line only accepted
         # (change|set|adjust|make) as the leading verb; "reschedule" (the
         # natural verb for this phrasing) fell through to reschedule_alert's
         # own generic "... to {time}" line instead. Added "reschedule" as a
         # verb alternative.
-        self._assert_padatious(r"reschedule the wake alarm to every Monday and Tuesday", r"change_repeat.intent")
+        self._assert_routes(r"reschedule the wake alarm to every Monday and Tuesday", r"change_repeat.intent")
 
-    @pytest.mark.xfail(strict=False, reason="ENGINE ISSUE (padacioso), not this skill's .intent files: 'change the pill reminder frequency to 4 hours' is a literal expansion of change_repeat.intent's '(change|set|adjust) (my|the) {schedkind} (frequency|repetition|recurrance|repeat) to {repeat}' line -- a raw padacioso.IntentContainer probe outside the full pipeline correctly resolves it to change_repeat, but inside the real registered-skill pipeline (typed {schedkind} entity correction + skill-namespaced intent names) it misroutes to reschedule_alert with a duplicated/malformed slot key ('ovos-skill-alerts.openvoiceos:schedkind') in the match data, pointing at a namespacing bug in how padacioso applies entity-typed slot correction, not a coverage gap in this .intent file -- flagged for the engine lane, not fixed here.")
     def test_change_the_pill_reminder_frequency_to_4_(self):
-        self._assert_padatious(r"change the pill reminder frequency to 4 hours", r"change_repeat.intent")
+        self._assert_routes(r"change the pill reminder frequency to 4 hours", r"change_repeat.intent")
 
     def test_change_the_baseball_event_priority_to_10(self):
-        self._assert_padatious(r"change the baseball event priority to 10", r"change_priority.intent")
+        self._assert_routes(r"change the baseball event priority to 10", r"change_priority.intent")
 
 class TestAdapt13_Changemediaproperties(_IntentRoutingMixin, TestCase):
-    """Padatious (intent file) intent: change_media_properties.intent"""
+    """File intent: change_media_properties.intent"""
     def test_a_time_is_not_a_new_sound(self):
-        self._assert_padatious(r"change my alarm to 8", r"reschedule_alert.intent")
+        self._assert_routes(r"change my alarm to 8", r"reschedule_alert.intent")
 
     def test_my_alarm_to_the_radio(self):
-        self._assert_padatious(r"change my alarm to the radio", r"change_media_properties.intent")
+        self._assert_routes(r"change my alarm to the radio", r"change_media_properties.intent")
 
     def test_my_alarm_to_a_podcast(self):
-        self._assert_padatious(r"change my alarm to a podcast", r"change_media_properties.intent")
+        self._assert_routes(r"change my alarm to a podcast", r"change_media_properties.intent")
 
     def test_my_alarm_to_music(self):
-        self._assert_padatious(r"change my alarm to music", r"change_media_properties.intent")
+        self._assert_routes(r"change my alarm to music", r"change_media_properties.intent")
 
     def test_the_alarm_sound_goes_to_the_media_intent(self):
-        self._assert_padatious(r"change my alarm sound to the radio", r"change_media_properties.intent")
+        self._assert_routes(r"change my alarm sound to the radio", r"change_media_properties.intent")
 
     def test_my_alarm_to_play_a_podcast(self):
-        self._assert_padatious(r"set my alarm to play a podcast", r"change_media_properties.intent")
+        self._assert_routes(r"set my alarm to play a podcast", r"change_media_properties.intent")
 
     def test_make_my_alarm_play_music(self):
-        self._assert_padatious(r"make my alarm play music", r"change_media_properties.intent")
+        self._assert_routes(r"make my alarm play music", r"change_media_properties.intent")
 
     def test_audible_adjourn(self):
         # issue #138 triage: original auto-generated utterance did not
@@ -1008,7 +912,7 @@ class TestAdapt13_Changemediaproperties(_IntentRoutingMixin, TestCase):
         # (adjective AFTER the noun) -- added the pre-noun
         # "(audible|playable|spoken|recorded) {schedkind}" ordering plus an
         # "adjourn" verb alternative.
-        self._assert_padatious(r"adjourn the next playable alarm", r"change_media_properties.intent")
+        self._assert_routes(r"adjourn the next playable alarm", r"change_media_properties.intent")
 
     def test_audible_adjourn_next(self):
         # issue #138 triage: original auto-generated utterance did not
@@ -1016,30 +920,30 @@ class TestAdapt13_Changemediaproperties(_IntentRoutingMixin, TestCase):
         # locally with a standalone probe against every candidate phrasing).
         # Replaced with a phrasing confirmed to route correctly, keeping
         # equivalent test intent/coverage rather than dropping the row.
-        self._assert_padatious(r"change the playable event", r"change_media_properties.intent")
+        self._assert_routes(r"change the playable event", r"change_media_properties.intent")
 
 class TestAdapt14_Listalerts(_IntentRoutingMixin, TestCase):
-    """Padatious (intent file) intent: list_alerts.intent"""
+    """File intent: list_alerts.intent"""
     def test_tell_me_my_pending_alarms(self):
         # list_alerts.intent had no "(pending|upcoming|stored)" adjective
         # line at all -- added "(list|show|read|tell) (me|us) (my|the)
         # (pending|upcoming|stored) {alertkind}".
-        self._assert_padatious(r"tell me my pending alarms", r"list_alerts.intent")
+        self._assert_routes(r"tell me my pending alarms", r"list_alerts.intent")
 
     def test_what_are_my_upcoming_reminders(self):
         # Added "what (are|is) (my|the) (pending|upcoming|stored)
         # {alertkind}" for the verbless "what are my ..." phrasing.
-        self._assert_padatious(r"what are my upcoming reminders", r"list_alerts.intent")
+        self._assert_routes(r"what are my upcoming reminders", r"list_alerts.intent")
 
     def test_show_me_all_of_my_events(self):
         # Added "(list|show|read|tell) (me|us) all of (my|the) {alertkind}".
-        self._assert_padatious(r"show me all of my events", r"list_alerts.intent")
+        self._assert_routes(r"show me all of my events", r"list_alerts.intent")
 
     def test_got_any_reminder_next_week(self):
         # Added "got (any|some) {alertkind}" and "got (any|some) {alertkind}
         # (for|at|on|between|next) {timeframe}" -- the "got" verb had no
         # line in this file before.
-        self._assert_padatious(r"got any reminder next week", r"list_alerts.intent")
+        self._assert_routes(r"got any reminder next week", r"list_alerts.intent")
 
     def test_are_there_any_alerts_between_4_pm_and_5_(self):
         # This "are there any X between Y" shape is matched by the
@@ -1050,7 +954,7 @@ class TestAdapt14_Listalerts(_IntentRoutingMixin, TestCase):
         # handle_event_timeframe_check -- so folding their templates into
         # this one file changes only which file the phrasing lives in, not
         # routing or dialog).
-        self._assert_padatious(r"are there any alerts between 4 pm and 5 pm", r"list_alerts.intent")
+        self._assert_routes(r"are there any alerts between 4 pm and 5 pm", r"list_alerts.intent")
 
     def test_could_you_tell_me_what_reminders_i_have(self):
         # issue #175: create.voc's "i have" entry used to sit alongside
@@ -1061,64 +965,64 @@ class TestAdapt14_Listalerts(_IntentRoutingMixin, TestCase):
         # alarm's own line) needs it -- this pins the query routing
         # regardless. Added
         # "(could|would|can) you tell (me|us) what {alertkind} (i|we) have".
-        self._assert_padatious(r"could you tell me what reminders i have", r"list_alerts.intent")
+        self._assert_routes(r"could you tell me what reminders i have", r"list_alerts.intent")
 
     def test_what_reminders_do_i_have(self):
-        self._assert_padatious(r"what reminders do i have", r"list_alerts.intent")
+        self._assert_routes(r"what reminders do i have", r"list_alerts.intent")
 
 class TestAdapt15_Timerstatus(_IntentRoutingMixin, TestCase):
-    """Padatious (intent file) intent: timer_status.intent"""
+    """File intent: timer_status.intent"""
     def test_how_much_time_is_left(self):
-        self._assert_padatious(r"how much time is left", r"timer_status.intent")
+        self._assert_routes(r"how much time is left", r"timer_status.intent")
 
     def test_how_long_on_that_timer(self):
         # Added "how (long|much time|much longer) on (that|this|it)
         # (timer|countdown)" -- the demonstrative-pronoun form ("that
         # timer") had no matching line.
-        self._assert_padatious(r"how long on that timer", r"timer_status.intent")
+        self._assert_routes(r"how long on that timer", r"timer_status.intent")
 
     def test_what_is_the_timer_status(self):
-        self._assert_padatious(r"what is the timer status", r"timer_status.intent")
+        self._assert_routes(r"what is the timer status", r"timer_status.intent")
 
 class TestAdapt16_Cancelalert(_IntentRoutingMixin, TestCase):
-    """Padatious (intent file) intent: cancel_alert.intent"""
+    """File intent: cancel_alert.intent"""
     def test_cancel_my_next_alarm(self):
-        self._assert_padatious(r"cancel my next alarm", r"cancel_alert.intent")
+        self._assert_routes(r"cancel my next alarm", r"cancel_alert.intent")
 
     def test_cancel_all_reminders(self):
-        self._assert_padatious(r"cancel all reminders", r"cancel_alert.intent")
+        self._assert_routes(r"cancel all reminders", r"cancel_alert.intent")
 
     def test_clear_all_timers(self):
-        self._assert_padatious(r"clear all timers", r"cancel_alert.intent")
+        self._assert_routes(r"clear all timers", r"cancel_alert.intent")
 
     def test_delete_my_next_event(self):
-        self._assert_padatious(r"delete my next event", r"cancel_alert.intent")
+        self._assert_routes(r"delete my next event", r"cancel_alert.intent")
 
     def test_remove_my_next_alert(self):
-        self._assert_padatious(r"remove my next alert", r"cancel_alert.intent")
+        self._assert_routes(r"remove my next alert", r"cancel_alert.intent")
 
 class TestAdapt17_Createlist(_IntentRoutingMixin, TestCase):
-    """Padatious (intent file) intent: create_list.intent"""
+    """File intent: create_list.intent"""
     def test_create_a_list(self):
-        self._assert_padatious(r"create a list", r"create_list.intent")
+        self._assert_routes(r"create a list", r"create_list.intent")
 
     def test_new_list_called_name(self):
-        self._assert_padatious(r"new list called shopping", r"create_list.intent")
+        self._assert_routes(r"new list called shopping", r"create_list.intent")
 
     def test_create_a_named_shopping_list(self):
         # PR #172 adversarial review: pre-noun "a {list_name} list" phrasing
         # (name before "list", not after "called"/inside "[{list_name}]") was
         # unmatched. create_list.intent now has
         # "(create|make|add|start) a [new] {list_name} list".
-        self._assert_padatious(r"create a shopping list", r"create_list.intent")
+        self._assert_routes(r"create a shopping list", r"create_list.intent")
 
 class TestAdapt18_Addlistsubitems(_IntentRoutingMixin, TestCase):
-    """Padatious (intent file) intent: add_list_subitems.intent"""
+    """File intent: add_list_subitems.intent"""
     def test_add_items_to_the_list(self):
-        self._assert_padatious(r"add items to the list", r"add_list_subitems.intent")
+        self._assert_routes(r"add items to the list", r"add_list_subitems.intent")
 
     def test_add_list_items(self):
-        self._assert_padatious(r"add list items", r"add_list_subitems.intent")
+        self._assert_routes(r"add list items", r"add_list_subitems.intent")
 
     def test_add_things_to_the_named_camping_list(self):
         # PR #172 adversarial review: "add things to the shopping list"
@@ -1132,45 +1036,45 @@ class TestAdapt18_Addlistsubitems(_IntentRoutingMixin, TestCase):
         # TestAdapt17_Createlist's own test in the same module-shared
         # MiniCroft) would make this test order-dependent and hang once
         # that list exists.
-        self._assert_padatious(r"add things to the camping list", r"add_list_subitems.intent")
+        self._assert_routes(r"add things to the camping list", r"add_list_subitems.intent")
 
 class TestAdapt19_Querylistnames(_IntentRoutingMixin, TestCase):
-    """Padatious (intent file) intent: query_list_names.intent"""
+    """File intent: query_list_names.intent"""
     def test_what_lists_do_i_have(self):
-        self._assert_padatious(r"what lists do i have", r"query_list_names.intent")
+        self._assert_routes(r"what lists do i have", r"query_list_names.intent")
 
     def test_tell_me_my_lists(self):
-        self._assert_padatious(r"tell me my lists", r"query_list_names.intent")
+        self._assert_routes(r"tell me my lists", r"query_list_names.intent")
 
     def test_which_lists_are_stored(self):
-        self._assert_padatious(r"which lists are stored", r"query_list_names.intent")
+        self._assert_routes(r"which lists are stored", r"query_list_names.intent")
 
 class TestAdapt21_Querylistentries(_IntentRoutingMixin, TestCase):
-    """Padatious (intent file) intent: query_list_entries.intent"""
+    """File intent: query_list_entries.intent"""
     def test_what_items_are_on_my_list(self):
-        self._assert_padatious(r"what items are on my list", r"query_list_entries.intent")
+        self._assert_routes(r"what items are on my list", r"query_list_entries.intent")
 
     def test_what_is_on_the_name_list(self):
-        self._assert_padatious(r"what is on the shopping list", r"query_list_entries.intent")
+        self._assert_routes(r"what is on the shopping list", r"query_list_entries.intent")
 
     def test_what_items_are_on_my_named_shopping_list(self):
         # PR #172 adversarial review: "what items are on my shopping list"
         # (pre-noun {list_name}, "items" not "is") scored 0.15.
         # query_list_entries.intent now has "(what|which) (items|entries|
         # things) are (on|in) (my|the) {list_name} list".
-        self._assert_padatious(r"what items are on my shopping list", r"query_list_entries.intent")
+        self._assert_routes(r"what items are on my shopping list", r"query_list_entries.intent")
 
     TODO_KIND_DIALOGS = ("list_todo_reminder", "list_todo_no_reminder")
 
     def test_whats_on_my_todo(self):
         # The merged intent serves both kinds, so the intent name alone no
         # longer says which answer the user got -- assert the dialog.
-        self._assert_padatious_dialog(
+        self._assert_routes_dialog(
             r"what's on my todo", r"query_list_entries.intent",
             self.TODO_KIND_DIALOGS)
 
     def test_what_do_i_have_to_do(self):
-        self._assert_padatious_dialog(
+        self._assert_routes_dialog(
             r"what do i have to do", r"query_list_entries.intent",
             self.TODO_KIND_DIALOGS)
 
@@ -1185,7 +1089,7 @@ class TestAdapt21_Querylistentries(_IntentRoutingMixin, TestCase):
                           "read me the items on my todo list",
                           "show me the entries in my todo list"):
             with self.subTest(utterance):
-                self._assert_padatious_dialog(
+                self._assert_routes_dialog(
                     utterance, r"query_list_entries.intent",
                     self.TODO_KIND_DIALOGS)
 
@@ -1194,7 +1098,7 @@ class TestAdapt21_Querylistentries(_IntentRoutingMixin, TestCase):
         # utterance, and en-US todo.voc holds "notes". A list named "notes"
         # was answered with the todo summary instead of its own items.
         self._seed_list_with_item("notes", "milk")
-        self._assert_padatious_dialog(
+        self._assert_routes_dialog(
             r"what is on the notes list", r"query_list_entries.intent",
             ("list_todo_subitems",), {"name": "notes", "items": "milk"})
         self._remove_list("notes")
@@ -1206,7 +1110,7 @@ class TestAdapt21_Querylistentries(_IntentRoutingMixin, TestCase):
         # slot, so a {list_name} line needs the word "list" or a todo word.
         list_intents = {f"{SKILL_ID}:query_list_entries",
                         f"{SKILL_ID}:delete_list_entries"}
-        self._assert_padatious(r"what's on my shopping list",
+        self._assert_routes(r"what's on my shopping list",
                                r"query_list_entries.intent")
         for utterance in ("what's on my calendar", "what is on my schedule",
                           "what's on my agenda", "what's in my reminders",
@@ -1216,18 +1120,17 @@ class TestAdapt21_Querylistentries(_IntentRoutingMixin, TestCase):
             with self.subTest(utterance):
                 session = Session(f"e2e-en_us-neg-{hash(utterance)}")
                 session.lang = LANG
-                session.pipeline = PADACIOSO_TEST_PIPELINE
+                session.pipeline = PIPELINE
                 capture = CaptureSession(self.minicroft)
                 capture.capture(Message(
                     "recognizer_loop:utterance",
                     {"utterances": [utterance], "lang": LANG},
                     {"session": session.serialize()}), timeout=30)
-                types = {m.msg_type for m in capture.finish()}
-                self.assertFalse(types & list_intents,
-                                 f"{utterance!r} -> {sorted(types)}")
+                types = [m.msg_type for m in capture.finish()]
+                assert_not_routed(utterance, list_intents, types)
 
 class TestAdapt22_Deletelistentries(_IntentRoutingMixin, TestCase):
-    """Padatious (intent file) intent: delete_list_entries.intent
+    """File intent: delete_list_entries.intent
 
     Rows below use the "everything/all" phrasing (which resolves the
     "stored" adapt-vocab fallback to True and deletes without further
@@ -1237,17 +1140,14 @@ class TestAdapt22_Deletelistentries(_IntentRoutingMixin, TestCase):
     pytest.ini wall-clock timeout kills it (same reason
     ``_seed_list_with_item`` bypasses ``add_list_subitems``'s own cascade).
     """
-    @pytest.mark.xfail(strict=False, reason="ENGINE ISSUE (padacioso), not this skill's .intent files: 'delete all items from my list shopping' is a literal expansion of delete_list_entries.intent's '(delete|remove) (everything|all [the] (items|entries)) (from|on) (my|the) list [{list_name}]' line, but the full registered-skill pipeline misroutes it to cancel_alert (whose {alertkind} slot is a closed alarm/timer/reminder/event/alert entity that 'items' is not a member of) -- a matcher tie-break defect, not a coverage gap in this .intent file -- flagged for the engine lane, not fixed here.")
     def test_delete_all_items_from_my_list(self):
         self._seed_list_with_item("shopping", "milk")
-        self._assert_padatious(r"delete all items from my list shopping", r"delete_list_entries.intent")
+        self._assert_routes(r"delete all items from my list shopping", r"delete_list_entries.intent")
 
-    @pytest.mark.xfail(strict=False, reason="ENGINE ISSUE (padacioso) -- see test_delete_all_items_from_my_list's reason (same collision, different {list_name}).")
     def test_delete_all_the_items_from_my_list(self):
         self._seed_list_with_item("grocery", "eggs")
-        self._assert_padatious(r"delete all the items from my list grocery", r"delete_list_entries.intent")
+        self._assert_routes(r"delete all the items from my list grocery", r"delete_list_entries.intent")
 
-    @pytest.mark.xfail(strict=False, reason="ENGINE ISSUE (padacioso) -- see test_delete_all_items_from_my_list's reason (same cancel_alert collision, pre-noun {list_name} shape).")
     def test_remove_all_items_from_the_named_grocery_list(self):
         # PR #172 adversarial review: "remove items from the grocery list"
         # (pre-noun {list_name}) scored 0.15. Adds "all" (see class docstring)
@@ -1255,20 +1155,20 @@ class TestAdapt22_Deletelistentries(_IntentRoutingMixin, TestCase):
         # of the bare "items" phrasing, which the real handler always
         # bounces through an interactive cascade this harness can't answer.
         self._seed_list_with_item("groceries", "bread")
-        self._assert_padatious(r"remove all items from the groceries list", r"delete_list_entries.intent")
+        self._assert_routes(r"remove all items from the groceries list", r"delete_list_entries.intent")
 
     def test_delete_my_todo_list(self):
         # "todo" fills {list_name}, so delete_list.intent and
         # delete_list_entries.intent both accept this line. Both handlers
         # send a todo list_name to the todo entries.
-        self._assert_padatious_dialog_any(
+        self._assert_routes_dialog_any(
             r"delete my todo list",
             (r"delete_list_entries.intent", r"delete_list.intent"),
             ("list_todo_no_reminder", "list_todo_dont_exist",
              "list_todo_num_deleted"))
 
     def test_delete_everything_from_my_todo(self):
-        self._assert_padatious(r"delete everything from my todo", r"delete_list_entries.intent")
+        self._assert_routes(r"delete everything from my todo", r"delete_list_entries.intent")
 
     def test_delete_everything_from_my_todo_list_deletes_todos(self):
         # "todo" fills the list_name slot here; no list has that name, so the
@@ -1278,7 +1178,7 @@ class TestAdapt22_Deletelistentries(_IntentRoutingMixin, TestCase):
         # With stored todos the todo branch speaks it first, as it does on
         # dev. TestDeleteListEntriesAnswersWhenNoListMatches in
         # test/test_skill.py pins the list branch on its own.
-        self._assert_padatious_dialog(
+        self._assert_routes_dialog(
             r"delete everything from my todo list", r"delete_list_entries.intent",
             ("list_todo_no_reminder", "list_todo_dont_exist",
              "list_todo_num_deleted"))
@@ -1299,7 +1199,7 @@ class TestAdapt22_Deletelistentries(_IntentRoutingMixin, TestCase):
                             lang=LANG)
         skill.alert_manager.add_alert(todo)
         assert skill.alert_manager.get_unconnected_alerts(type=AlertType.TODO)
-        self._assert_padatious_dialog(
+        self._assert_routes_dialog(
             r"delete everything from my todo list", r"delete_list_entries.intent",
             ("list_todo_num_deleted",))
         left = [a.alert_name for a in
@@ -1307,39 +1207,38 @@ class TestAdapt22_Deletelistentries(_IntentRoutingMixin, TestCase):
         assert "buy stamps for everything test" not in left, left
 
 class TestAdapt23_Deletelist(_IntentRoutingMixin, TestCase):
-    """Padatious (intent file) intent: delete_list.intent"""
-    @pytest.mark.xfail(strict=False, reason="ENGINE ISSUE (padacioso), not this skill's .intent files: 'delete my list pantry' is a literal expansion of delete_list.intent's '(delete|remove|erase) (my|the) list [{list_name}]' line, but the full registered-skill pipeline misroutes it to cancel_alert -- same class of matcher tie-break defect as delete_list_entries' collisions (see TestAdapt22_Deletelistentries.test_delete_all_items_from_my_list's reason) -- flagged for the engine lane, not fixed here.")
+    """File intent: delete_list.intent"""
     def test_delete_my_list_name(self):
         self._seed_list_with_item("pantry", "flour")
-        self._assert_padatious(r"delete my list pantry", r"delete_list.intent")
+        self._assert_routes(r"delete my list pantry", r"delete_list.intent")
 
     def test_delete_all_my_lists(self):
-        self._assert_padatious(r"delete all my lists", r"delete_list.intent")
+        self._assert_routes(r"delete all my lists", r"delete_list.intent")
 
     def test_drop_the_named_pantry_list(self):
         # PR #172 adversarial review: "drop the pantry list" (pre-noun
         # {list_name}, "drop" verb) scored 0.15. delete_list.intent now has
         # "(delete|remove|erase|drop) (my|the) {list_name} list".
         self._seed_list_with_item("hardware", "nails")
-        self._assert_padatious(r"drop the hardware list", r"delete_list.intent")
+        self._assert_routes(r"drop the hardware list", r"delete_list.intent")
 
 class TestAdapt25_Calendarlist(_IntentRoutingMixin, TestCase):
-    """Padatious (intent file) intent: calendar_list.intent"""
+    """File intent: calendar_list.intent"""
     def test_what_calendars_are_available(self):
-        self._assert_padatious(r"what calendars are available", r"calendar_list.intent")
+        self._assert_routes(r"what calendars are available", r"calendar_list.intent")
 
     def test_show_me_the_calendar_choices(self):
-        self._assert_padatious(r"show me the calendar choices", r"calendar_list.intent")
+        self._assert_routes(r"show me the calendar choices", r"calendar_list.intent")
 
 class TestAdapt26_Davsync(_IntentRoutingMixin, TestCase):
-    """Padatious (intent file) intent: dav_sync.intent"""
+    """File intent: dav_sync.intent"""
     def test_download(self):
         # issue #138 triage: original auto-generated utterance did not
         # route to this intent under the adapt-only pipeline pin (verified
         # locally with a standalone probe against every candidate phrasing).
         # Replaced with a phrasing confirmed to route correctly, keeping
         # equivalent test intent/coverage rather than dropping the row.
-        self._assert_padatious(r"synchronize my calendar", r"dav_sync.intent")
+        self._assert_routes(r"synchronize my calendar", r"dav_sync.intent")
 
 class TestSimple27_Example_messages(_IntentRoutingMixin, TestCase):
     """Simple intent: example_messages"""
@@ -1369,41 +1268,38 @@ class TestAdaptMigration_Padatious_kw_split(_IntentRoutingMixin, TestCase):
     match the new templates route through padatious/padacioso instead.
     """
     def test_cancel_alert_padatious(self):
-        self._assert_padatious(r"cancel my next alarm", r"cancel_alert.intent")
+        self._assert_routes(r"cancel my next alarm", r"cancel_alert.intent")
 
     def test_list_alerts_padatious(self):
-        self._assert_padatious(r"what reminders do i have", r"list_alerts.intent")
+        self._assert_routes(r"what reminders do i have", r"list_alerts.intent")
 
     def test_timer_status_padatious(self):
-        self._assert_padatious(r"what is the timer status", r"timer_status.intent")
+        self._assert_routes(r"what is the timer status", r"timer_status.intent")
 
     def test_reschedule_alert_padatious(self):
-        self._assert_padatious(r"move the baseball event to 08:00 pm", r"reschedule_alert.intent")
+        self._assert_routes(r"move the baseball event to 08:00 pm", r"reschedule_alert.intent")
 
     def test_reschedule_alert_alt_padatious(self):
         # "shorten the timer" is one of reschedule_alert.intent's own phrasings.
-        self._assert_padatious(r"shorten the timer", r"reschedule_alert.intent")
+        self._assert_routes(r"shorten the timer", r"reschedule_alert.intent")
 
     def test_change_priority_padatious(self):
-        self._assert_padatious(r"change the baseball event priority to 10", r"change_priority.intent")
+        self._assert_routes(r"change the baseball event priority to 10", r"change_priority.intent")
 
-    @pytest.mark.xfail(strict=False, reason="ENGINE ISSUE (padacioso) -- see test_change_the_pill_reminder_frequency_to_4_'s reason (same utterance).")
     def test_change_repeat_padatious(self):
-        self._assert_padatious(r"change the pill reminder frequency to 4 hours", r"change_repeat.intent")
+        self._assert_routes(r"change the pill reminder frequency to 4 hours", r"change_repeat.intent")
 
     def test_create_ocp_alarm_padatious(self):
-        self._assert_padatious(r"set an alarm with music", r"create_alarm.intent")
+        self._assert_routes(r"set an alarm with music", r"create_alarm.intent")
 
     def test_create_ocp_alarm_alt_padatious(self):
-        self._assert_padatious(r"wake me up with music", r"create_alarm.intent")
+        self._assert_routes(r"wake me up with music", r"create_alarm.intent")
 
     def test_dav_sync_padatious(self):
-        self._assert_padatious(r"synchronize my calendar", r"dav_sync.intent")
+        self._assert_routes(r"synchronize my calendar", r"dav_sync.intent")
 
-    @pytest.mark.xfail(strict=False, reason="ENGINE ISSUE (padacioso): 'change my alarm sound to a recording' is a literal expansion of change_media_properties.intent's '(change|set|adjust) (my|the|my next|the next) {schedkind} sound to {mediakind}' line, and padacioso resolves it correctly most runs but the reschedule_alert/change_media_properties tie for this phrasing is not deterministic across runs (same class of non-determinism as test_reschedule_the_wake_alarm_to_every_monda) -- flagged for the engine lane, not fixed here.")
     def test_change_media_properties_padatious(self):
-        self._assert_padatious(r"change my alarm sound to a recording", r"change_media_properties.intent")
+        self._assert_routes(r"change my alarm sound to a recording", r"change_media_properties.intent")
 
-    @pytest.mark.xfail(strict=False, reason="ENGINE ISSUE (padacioso), not this skill's .intent files: 'change my event duration to an hour' is a literal expansion of change_until.intent's '(change|set|adjust|extend|shorten) (my|the) {schedkind} (duration|length) to {duration}' line, but the full registered-skill pipeline misroutes it to change_media_properties and that handler then raises inside handle_change_media_properties (visible as mycroft.skill.handler.error/ovos.intent.handler.error on the bus) -- a matcher-scoring/tie-break defect compounded by a handler that doesn't guard against being invoked for the wrong alert kind, not a coverage gap in this .intent file -- flagged for the engine lane, not fixed here.")
     def test_change_until_padatious(self):
-        self._assert_padatious(r"change my event duration to an hour", r"change_until.intent")
+        self._assert_routes(r"change my event duration to an hour", r"change_until.intent")

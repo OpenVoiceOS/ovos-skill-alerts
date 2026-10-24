@@ -1,6 +1,6 @@
 """Gate-evidence tests for the Class C fold (refactor/unify-timeframe-and-media-alarm).
 
-Runs the same padacioso MiniCroft engine as test_intents_en_us.py, but
+Runs the same m2v prototype MiniCroft as test_intents_en_us.py, but
 asserts BEHAVIOUR (spoken dialog content, stored alert media kind) rather
 than just intent-name routing:
 
@@ -24,13 +24,13 @@ from unittest.mock import Mock
 from ovos_bus_client.message import Message
 from ovos_bus_client.session import Session
 from ovos_config.locale import get_default_tz
-from ovoscope import CaptureSession, get_minicroft, LEAN_DEFAULT_PIPELINE
+from ovoscope import CaptureSession
 
 from ovos_skill_alerts.util import AlertState, AlertType
 from ovos_skill_alerts.util.alert import Alert
 from ovos_skill_alerts.util.parse_utils import parse_timeframe_from_message
 
-from ._wait_trained import wait_for_minicroft_ready
+from ._routing import PIPELINE, SKILL_ID, assert_routed, boot
 
 
 def _clock_words(moment: dt.datetime) -> str:
@@ -58,13 +58,7 @@ def _future_window(now: dt.datetime) -> tuple:
     return start, start + dt.timedelta(hours=1)
 
 
-SKILL_ID = "ovos-skill-alerts.openvoiceos"
 LANG = "en-US"
-
-PADACIOSO_TEST_PIPELINE = [stage for stage in LEAN_DEFAULT_PIPELINE
-                          if "padatious" not in stage] + [
-    "ovos-padacioso-pipeline-plugin-low",
-]
 
 
 class TestClassCFoldGate(TestCase):
@@ -77,10 +71,7 @@ class TestClassCFoldGate(TestCase):
         cls._orig_xdg = os.environ.get("XDG_DATA_HOME")
         cls._xdg = tempfile.mkdtemp(prefix="ovos-skill-alerts-class-c-gate-")
         os.environ["XDG_DATA_HOME"] = cls._xdg
-        cls.minicroft = get_minicroft([SKILL_ID],
-                                      default_pipeline=PADACIOSO_TEST_PIPELINE,
-                                      wait_for_trained=False)
-        wait_for_minicroft_ready(cls.minicroft)
+        cls.minicroft = boot(LANG)
         cls.skill = cls.minicroft.plugin_skills[SKILL_ID].instance
         # avoid real OCP bus round trips for the media-alarm path
         cls.skill.bus.wait_for_response = Mock(
@@ -113,10 +104,12 @@ class TestClassCFoldGate(TestCase):
     def tearDown(self):
         self._clear_alerts()
 
-    def _fire(self, utterance: str, timeout=30):
+    def _fire(self, utterance: str, expected: str, timeout=30):
+        """Speak ``utterance`` and return the bus messages; skip the test
+        when m2v does not route it to the intent ``expected``."""
         session = Session(f"e2e-classc-{hash(utterance)}")
         session.lang = LANG
-        session.pipeline = PADACIOSO_TEST_PIPELINE
+        session.pipeline = PIPELINE
         message = Message(
             "recognizer_loop:utterance",
             {"utterances": [utterance], "lang": LANG},
@@ -124,7 +117,10 @@ class TestClassCFoldGate(TestCase):
         )
         capture = CaptureSession(self.minicroft)
         capture.capture(message, timeout=timeout)
-        return capture.finish()
+        messages = capture.finish()
+        assert_routed(utterance, f"{SKILL_ID}:{expected}",
+                      [m.msg_type for m in messages])
+        return messages
 
     def _speak_dialogs(self, messages):
         """Return (dialog_name, dialog_data, utterance_text) for every
@@ -182,10 +178,8 @@ class TestClassCFoldGate(TestCase):
         self.skill.alert_manager.add_alert(inside)
         self.skill.alert_manager.add_alert(outside)
 
-        messages = self._fire(utterance)
+        messages = self._fire(utterance, "list_alerts")
         types = [m.msg_type for m in messages]
-        self.assertIn(f"{SKILL_ID}:list_alerts", types,
-                      f"did not route to list_alerts.intent: {types}")
 
         speaks = self._speak_dialogs(messages)
         self.assertTrue(speaks, f"no spoken dialog: {types}")
@@ -222,7 +216,7 @@ class TestClassCFoldGate(TestCase):
 
         utterance = (f"are there any alerts between {_clock_words(window_start)}"
                      f" and {_clock_words(window_end)}")
-        messages = self._fire(utterance)
+        messages = self._fire(utterance, "list_alerts")
         types = [m.msg_type for m in messages]
         self.assertNotIn("mycroft.skill.handler.error", types,
                          f"the timeframe query raised: {types}")
@@ -242,10 +236,8 @@ class TestClassCFoldGate(TestCase):
                              alert_type=AlertType.ALARM)
         self.skill.alert_manager.add_alert(alarm)
 
-        messages = self._fire("list my alarms")
+        messages = self._fire("list my alarms", "list_alerts")
         types = [m.msg_type for m in messages]
-        self.assertIn(f"{SKILL_ID}:list_alerts", types,
-                      f"did not route to list_alerts.intent: {types}")
         speaks = self._speak_dialogs(messages)
         spoken_text = " ".join(f"{d} {u}" for _, d, u in speaks)
         self.assertIn("wake up call", spoken_text,
@@ -254,10 +246,8 @@ class TestClassCFoldGate(TestCase):
     # -- media-alarm path (folded into create_alarm) --
 
     def test_media_alarm_stores_media_kind(self):
-        messages = self._fire("set an alarm with music at 7 am")
+        messages = self._fire("set an alarm with music at 7 am", "create_alarm")
         types = [m.msg_type for m in messages]
-        self.assertIn(f"{SKILL_ID}:create_alarm", types,
-                      f"did not route to create_alarm.intent: {types}")
 
         alerts = list(self.skill.alert_manager._pending_alerts.values())
         self.assertEqual(len(alerts), 1, f"expected exactly one stored alert: {alerts}")
@@ -265,10 +255,8 @@ class TestClassCFoldGate(TestCase):
                          "media alarm did not store an ocp media kind")
 
     def test_plain_alarm_stores_no_media_kind(self):
-        messages = self._fire("set an alarm at 7 am")
+        messages = self._fire("set an alarm at 7 am", "create_alarm")
         types = [m.msg_type for m in messages]
-        self.assertIn(f"{SKILL_ID}:create_alarm", types,
-                      f"did not route to create_alarm.intent: {types}")
 
         alerts = list(self.skill.alert_manager._pending_alerts.values())
         self.assertEqual(len(alerts), 1,

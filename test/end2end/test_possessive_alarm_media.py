@@ -9,15 +9,12 @@ from unittest import TestCase
 
 from ovos_bus_client.message import Message
 from ovos_bus_client.session import Session
-from ovoscope import CaptureSession, get_minicroft, LEAN_DEFAULT_PIPELINE
+from ovoscope import CaptureSession
 
-from ._wait_trained import wait_for_minicroft_ready
+from ._routing import PIPELINE, SKILL_ID, assert_routed, boot
 
-SKILL_ID = "ovos-skill-alerts.openvoiceos"
-PIPELINE = [stage for stage in LEAN_DEFAULT_PIPELINE
-            if "padatious" not in stage] + [
-    "ovos-padacioso-pipeline-plugin-low",
-]
+# Both intents create an alarm with media when the request names a time.
+ALARM_MEDIA_INTENTS = (f"{SKILL_ID}:create_alarm", f"{SKILL_ID}:change_media_properties")
 STATION = {"title": "Radio X", "uri": "http://radio.example/x"}
 
 
@@ -36,9 +33,7 @@ class _AlarmFixture:
         cls._orig_xdg = os.environ.get("XDG_DATA_HOME")
         cls._xdg = tempfile.mkdtemp(prefix="ovos-skill-alerts-poss-xdg-")
         os.environ["XDG_DATA_HOME"] = cls._xdg
-        cls.minicroft = get_minicroft([SKILL_ID], default_pipeline=PIPELINE,
-                                      wait_for_trained=False, lang=cls.LANG)
-        wait_for_minicroft_ready(cls.minicroft)
+        cls.minicroft = boot(cls.LANG)
         cls.minicroft.bus.on(
             "ovos.common_play.ping",
             lambda m: cls.minicroft.bus.emit(m.reply("ovos.common_play.pong")))
@@ -73,7 +68,9 @@ class _AlarmFixture:
         from ovos_skill_alerts.util import AlertType
         return self.skill._get_alerts_list(AlertType.ALARM)
 
-    def _say(self, utterance: str):
+    def _say(self, utterance: str, expected=ALARM_MEDIA_INTENTS):
+        """Speak ``utterance`` and return the bus message types; skip the
+        test when m2v routes it to none of ``expected``."""
         session = Session(f"e2e-poss-{abs(hash(utterance))}")
         session.lang = self.LANG
         session.pipeline = PIPELINE
@@ -82,7 +79,10 @@ class _AlarmFixture:
                                 {"utterances": [utterance], "lang": self.LANG},
                                 {"session": session.serialize()}),
                         timeout=15)
-        return [m.msg_type for m in capture.finish()]
+        types = [m.msg_type for m in capture.finish()]
+        if expected:
+            assert_routed(utterance, expected, types)
+        return types
 
 
 class _PossessiveAlarmMedia(_AlarmFixture):
@@ -96,8 +96,7 @@ class _PossessiveAlarmMedia(_AlarmFixture):
     def test_with_a_time_the_alarm_is_created_beside_the_existing_one(self):
         from ovos_skill_alerts.util import AlertType
         self._seed(AlertType.ALARM, 7, "wake up")
-        types = self._say(self.WITH_TIME)
-        self.assertIn(f"{SKILL_ID}:create_alarm", types)
+        types = self._say(self.WITH_TIME, f"{SKILL_ID}:create_alarm")
         self.assertNotIn(f"{SKILL_ID}:change_media_properties", types)
         by_hour = {a.expiration.hour: a for a in self._alarms()}
         self.assertEqual(sorted(by_hour), [6, 7])
@@ -135,8 +134,7 @@ class _PossessiveAlarmMedia(_AlarmFixture):
                     self.assertEqual(created[0].ocp_request, STATION)
 
     def test_with_a_time_and_no_alarm_the_alarm_is_created(self):
-        types = self._say(self.WITH_TIME_NO_ALARM)
-        self.assertIn(f"{SKILL_ID}:create_alarm", types)
+        self._say(self.WITH_TIME_NO_ALARM, f"{SKILL_ID}:create_alarm")
         alarms = self._alarms()
         self.assertEqual([a.expiration.hour for a in alarms], [6])
         self.assertEqual(alarms[0].ocp_request, STATION)
@@ -144,8 +142,7 @@ class _PossessiveAlarmMedia(_AlarmFixture):
     def test_a_create_verb_without_a_time_is_a_new_alarm_request(self):
         from ovos_skill_alerts.util import AlertType
         self._seed(AlertType.ALARM, 7, "wake up")
-        types = self._say(self.CREATE_VERB_NO_TIME)
-        self.assertIn(f"{SKILL_ID}:create_alarm", types)
+        types = self._say(self.CREATE_VERB_NO_TIME, f"{SKILL_ID}:create_alarm")
         self.assertNotIn(f"{SKILL_ID}:change_media_properties", types)
 
 
@@ -235,8 +232,7 @@ class TestPortuguese(_PossessiveAlarmMedia, _AnotherDay, TestCase):
                     self.skill.alert_manager.rm_alert(alarm.ident)
                 self.queries.clear()
                 self._seed(AlertType.ALARM, 7, "acordar")
-                types = self._say(utterance)
-                self.assertIn(f"{SKILL_ID}:change_media_properties", types)
+                self._say(utterance, f"{SKILL_ID}:change_media_properties")
                 self.assertEqual(len(self.queries), 1)
                 alarms = self._alarms()
                 self.assertEqual([a.expiration.hour for a in alarms], [7])
@@ -253,8 +249,7 @@ class TestPortuguese(_PossessiveAlarmMedia, _AnotherDay, TestCase):
                     self.skill.alert_manager.rm_alert(alarm.ident)
                 self.queries.clear()
                 self._seed(AlertType.ALARM, 7, "acordar")
-                types = self._say(utterance)
-                self.assertIn(f"{SKILL_ID}:change_media_properties", types)
+                types = self._say(utterance, f"{SKILL_ID}:change_media_properties")
                 self.assertNotIn(f"{SKILL_ID}:reschedule_alert", types)
                 alarms = self._alarms()
                 self.assertEqual([a.expiration.hour for a in alarms], [7])
@@ -267,5 +262,5 @@ class TestPersian(_AlarmFixture, TestCase):
     def test_the_alarm_clock_word_is_not_a_time(self):
         from ovos_skill_alerts.util import AlertType
         self._seed(AlertType.ALARM, 7, "wake up")
-        self._say("برای ساعت هشدار من یک ضبط پخش کن")
+        self._say("برای ساعت هشدار من یک ضبط پخش کن", expected=None)
         self.assertEqual([a.expiration.hour for a in self._alarms()], [7])

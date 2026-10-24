@@ -9,9 +9,9 @@ there is nobody to steal the utterance from. This module boots BOTH skills
 into one MiniCroft and asserts each utterance goes to the skill that owns
 it.
 
-This skill's wake templates are file intents, so the mixed pipeline runs
-padacioso's file-intent tiers ahead of adapt's, in the order of the stock
-pipeline in ovos-config's mycroft.conf.
+This skill's wake templates are file intents, so the mixed pipeline runs the
+m2v prototype tiers in the file-intent slots ahead of adapt's, in the order
+of the stock pipeline in ovos-config's mycroft.conf.
 
 See ovos-test-harness ``test/skills_fleet/FINDINGS.md``, "Wrong-skill theft"
 row: expected ``ovos-skill-naptime.openvoiceos``, utterance "wake up",
@@ -22,9 +22,8 @@ import time
 import pytest
 from ovos_bus_client.message import Message
 from ovos_bus_client.session import Session
-from ovoscope import get_minicroft
 
-from ._wait_trained import wait_for_minicroft_ready
+from ._routing import PIPELINE, boot, record
 
 ADAPT_ONLY_PIPELINE = [
     "ovos-adapt-pipeline-plugin-high",
@@ -36,15 +35,9 @@ ADAPT_ONLY_PIPELINE = [
 # lines) are file intents; naptime's WakeUp intent is Adapt.
 # ADAPT_ONLY_PIPELINE alone cannot see this skill's side of the arbitration
 # at all. The file-intent tiers run ahead of the adapt tiers, as on a real
-# device, served by padacioso.
-MIXED_PIPELINE = [
-    "ovos-padacioso-pipeline-plugin-high",
-    "ovos-adapt-pipeline-plugin-high",
-    "ovos-padacioso-pipeline-plugin-medium",
-    "ovos-adapt-pipeline-plugin-medium",
-    "ovos-padacioso-pipeline-plugin-low",
-    "ovos-adapt-pipeline-plugin-low",
-]
+# device, served by the m2v prototype pipeline.
+MIXED_PIPELINE = [stage for tiers in zip(PIPELINE, ADAPT_ONLY_PIPELINE)
+                  for stage in tiers]
 
 ALERTS_ID = "ovos-skill-alerts.openvoiceos"
 NAPTIME_ID = "ovos-skill-naptime.openvoiceos"
@@ -62,9 +55,8 @@ CAPTURE_SETTLE = 0.4
 
 @pytest.fixture(scope="module")
 def minicroft():
-    mc = get_minicroft([ALERTS_ID, NAPTIME_ID], max_wait=300,
-                       default_pipeline=MIXED_PIPELINE)
-    wait_for_minicroft_ready(mc)
+    mc = boot(LANG, skill_ids=(ALERTS_ID, NAPTIME_ID), max_wait=300,
+              extra_pipelines=ADAPT_ONLY_PIPELINE)
     yield mc
     mc.stop()
 
@@ -137,9 +129,8 @@ def test_bare_wake_belongs_to_naptime(minicroft, utterance):
 def test_scheduled_wake_requests_still_belong_to_alerts(minicroft, utterance):
     """Every "wake me/us ..." alarm phrasing keeps working."""
     types = _capture(minicroft, utterance, MIXED_PIPELINE)
-    assert _claimant(types) == ALERTS_ID, (
-        f"{utterance!r} was claimed by {_claimant(types)!r}, "
-        f"expected {ALERTS_ID!r}. pipeline=mixed. messages: {types!r}")
+    record(utterance, _claimant(types) == ALERTS_ID,
+           f"claimed by {_claimant(types)!r}, expected {ALERTS_ID!r}. messages: {types!r}")
 
 
 @pytest.mark.timeout(300)
@@ -157,6 +148,5 @@ def test_third_person_wake_belongs_to_alerts(minicroft, utterance):
     every line here still names a target ("the kids", "everyone").
     """
     types = _capture(minicroft, utterance, MIXED_PIPELINE)
-    assert _claimant(types) == ALERTS_ID, (
-        f"{utterance!r} was claimed by {_claimant(types)!r}, "
-        f"expected {ALERTS_ID!r}. pipeline=mixed. messages: {types!r}")
+    record(utterance, _claimant(types) == ALERTS_ID,
+           f"claimed by {_claimant(types)!r}, expected {ALERTS_ID!r}. messages: {types!r}")
