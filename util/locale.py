@@ -143,7 +143,8 @@ def spoken_duration(alert_time: Union[dt.timedelta, dt.datetime],
     if isinstance(alert_time, dt.datetime):
         anchor_time = anchor_time or \
                       dt.datetime.now(alert_time.tzinfo).replace(microsecond=0)
-        remaining_time: dt.timedelta = alert_time - anchor_time
+        remaining_time: dt.timedelta = \
+            alert_time.astimezone(dt.timezone.utc) - anchor_time.astimezone(dt.timezone.utc)
     else:
         remaining_time = alert_time
 

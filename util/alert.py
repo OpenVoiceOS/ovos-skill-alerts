@@ -689,7 +689,7 @@ class Alert:
             return None
 
         expiration = dt.datetime.fromisoformat(self._data.get("next_expiration_time"))
-        expiration = expiration.replace(tzinfo=self.timezone)
+        expiration = expiration.astimezone(self.timezone)
         now = dt.datetime.now(expiration.tzinfo) if not skip else expiration
 
         # Alert hasn't expired since last update
