@@ -675,7 +675,7 @@ class AlertSkill(ConversationalSkill):
 
         self._display_alerts(alert_type, alerts_list)
 
-        if message.data.get("alert"):
+        if alert_type == AlertType.ALL:
             kinds = {(a.alert_type.value, spoken_alert_type(a.alert_type))
                      for a in alerts_list if a.expiration is not None}
         else:
