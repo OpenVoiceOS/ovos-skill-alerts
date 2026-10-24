@@ -112,6 +112,20 @@ setup(
     url=URL,
     license='BSD-3-Clause',
     install_requires=get_requirements("requirements.txt"),
+    extras_require={
+        # ovos-skill-naptime is a TEST dependency only: test/end2end/
+        # test_wake_arbitration.py boots it alongside this skill to assert the
+        # "wake" vocabulary arbitrates correctly between the two.
+        # padacioso serves file intents in the tests; no test uses padatious.
+        # ovos-skill-date-time is the second skill in the cross-skill
+        # arbitration test, test/end2end/test_fleet_arbitration.py.
+        "test": ["mock", "ovoscope>=1.11.2a1", "ovos-adapt-parser",
+                 "ovos-spec-tools>=1.5.0a1", "pytest>=7.0.0", "pytest-timeout>=2.0.0",
+                 "ovos-skill-naptime>=0.4.0a5", "padacioso",
+                 "ovos-m2v-pipeline>=0.32.0a1",
+                 "ovos-skill-date-time"],
+        "dev": ["mock", "ovoscope>=0.13.1", "ovos-adapt-parser"],
+    },
     author=",".join(AUTHORS),
     author_email='',
     long_description=long_description,
@@ -120,5 +134,5 @@ setup(
     packages=[SKILL_PKG, f"{SKILL_PKG}.util"],
     package_data={SKILL_PKG: find_resource_files()},
     include_package_data=True,
-    entry_points={"ovos.plugin.skill": PLUGIN_ENTRY_POINT}
+    entry_points={"opm.skill": PLUGIN_ENTRY_POINT}
 )

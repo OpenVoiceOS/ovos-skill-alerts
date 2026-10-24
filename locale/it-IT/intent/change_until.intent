@@ -1,0 +1,8 @@
+cambia la durata del mio {schedkind} a {duration:duration}
+estendi il mio {schedkind} fino a {duration:duration}
+regola la lunghezza del prossimo {schedkind} a {duration:duration}
+fai durare il {schedkind} per {duration:duration}
+cambia il mio {schedkind} perché vada fino a {duration:duration}
+accorcia la durata del mio {schedkind} a {duration:duration}
+voglio che la suoneria della sveglia duri più a lungo
+lascia suonare l'allarme per tre minuti invece di uno

@@ -1,0 +1,29 @@
+{
+  "name": "Alertak",
+  "description": "Alarmak, tenporizadoreak, oroigarriak, gertaerak eta zereginak kudeatzeko trebetasuna, eta nahi izanez gero CalDAV zerbitzu batekin sinkronizatzeko.",
+  "examples": [
+    "Jarri alarma bat goizeko 8etan.",
+    "Abiarazi ogiaren tenporizadorea 30 minuturako.",
+    "Antolatu tenis gertaera bat ostiralean arratsaldeko 2etan, 2 orduz.",
+    "Jarri eguneroko alarma bat goizeko 8etan.",
+    "Jarri alarma bat larunbatetan goizeko 8etan.",
+    "gogorarazi zaborra ateratzeko ostegun eta igande bakoitzean arratsaldeko 7etan.",
+    "esnatu nazazu goizeko 8etan musikarekin.",
+    "Noiz da nire hurrengo alarma?",
+    "Zein dira nire oroigarriak?",
+    "Ezeztatu alarma guztiak.",
+    "Ezeztatu tenporizadore guztiak.",
+    "Ezeztatu oroigarri guztiak.",
+    "Zer galdu dut?",
+    "Zerbait galdu al dut?"
+  ],
+  "tags": [
+    "Produktibitatea",
+    "Egunerokoa",
+    "alerta",
+    "alarma",
+    "tenporizadorea",
+    "oroigarria",
+    "antolaketa"
+  ]
+}

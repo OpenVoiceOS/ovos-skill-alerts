@@ -1,0 +1,4 @@
+# Finland-Swedish machine draft, unvouched
+ge (mitt|min) (alarm|alarmet|larm|larmet|väckarklocka|väckarklockan|timer|timern|timrar|nedräkning|påminnelse|påminnelsen|påminnelser|händelse|händelsen|händelser|möte|mötet|möten) prioritet {number:priority}
+(höj|sänk) (mitt|min) {schedkind} till prioritet {number:priority}
+gör (mitt|min) (alarm|alarmet|larm|larmet|väckarklocka|väckarklockan|timer|timern|timrar|nedräkning|påminnelse|påminnelsen|påminnelser|händelse|händelsen|händelser|möte|mötet|möten) (viktigare|mindre viktig|mindre viktigt)

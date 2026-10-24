@@ -1,0 +1,31 @@
+# machine translation from en-US, unvouched
+quanto (tempo|tempo ainda|falta) (eu|nós|isso) (tenho|temos|tem) (restando|de sobra)
+quanto (tempo|tempo ainda|falta) (nesse|neste|no) (timer|contagem regressiva)
+quanto (tempo|tempo ainda|falta) (resta|restam) (no|para o) (timer|contagem regressiva) {name}
+quanto (tempo|tempo ainda|falta) (resta|restam) (no|para o) (meu|o) {timerkind}
+(diga|mostre|dê) (para mim|para nós) o tempo (restante|que falta) (no|para o) (meu|o) {timerkind}
+quanto (tempo|tempo ainda) (até|falta para) (meu|o) {timerkind} (terminar|ficar pronto|acabar|encerrar)
+(no|para o) (meu|o) {timerkind} quanto (tempo|tempo ainda) (resta|restam)
+quanto (tempo|tempo ainda|falta) (restando|de sobra) (no|para o) (meu|o) {timerkind}
+quanto (tempo|tempo ainda|falta) (resta|restam) no (timer|contagem regressiva) {name}
+quanto (tempo|tempo ainda|falta) (resta|restam) no meu (timer|contagem regressiva) {name}
+(o que|quanto) (resta|falta) (no|para o) (meu|o) {timerkind}
+(está|já ficou) (meu|o) {timerkind} (pronto|encerrado|terminado|finalizado|no fim)
+quando (vai|deve) (meu|o) {timerkind} (terminar|acabar|ficar pronto|encerrar)
+(o|meu) tempo (restante|que falta) (no|para o) (meu|o) {timerkind}
+(meu|o) {timerkind} quanto (tempo|tempo ainda) (resta|restam)
+quanto (tempo|tempo ainda|falta) (no|para o) (meu|o) {timerkind}
+quanto (tempo|tempo ainda|falta) (resta|restam)
+(diga|mostre|dê) (para mim|para nós) o tempo (restante|que falta)
+(diga|mostre|dê) (para mim|para nós) o estado (do meu|do) {timerkind}
+tempo (restante|que falta) (no|para o) (meu|o) {timerkind}
+quanto tempo (resta|restam) no meu (timer|contagem regressiva) {name}
+quanto (tempo|tempo ainda|falta|mais falta) (resta|restam)
+(diga|dê) (para mim|para nós) o estado (do meu|do) {timerkind}
+quanto (tempo|tempo ainda|falta) no (timer|contagem regressiva) {name}
+(qual é|como está) o estado do meu (timer|contagem regressiva) {name}
+(qual é|como está) o estado (do meu|do) {timerkind}
+(qual é|como está) o estado (do meu|do) {timerkind}
+quanto tempo (tem|dura) (meu|o) {timerkind}
+quanto (tempo|tempo ainda) (resta|falta)
+estado do {timerkind}

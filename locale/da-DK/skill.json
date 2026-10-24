@@ -1,0 +1,29 @@
+{
+  "name": "Advarsler",
+  "description": "En færdighed til at administrere alarmer, timere, påmindelser, begivenheder og gøremål og eventuelt synkronisere dem med en CalDAV-tjeneste.",
+  "examples": [
+    "Indstil en alarm til kl. 8.",
+    "Start en brødtimer i 30 minutter.",
+    "Planlæg en tennisbegivenhed til kl. 14.00 på fredag, der strækker sig over 2 timer.",
+    "Indstil en daglig alarm til kl.",
+    "Indstil en alarm til kl. 8 om lørdagen.",
+    "mindemig om at tage skraldet ud hver torsdag og søndag kl. 19.00.",
+    "væk mig kl. 8 med musik.",
+    "Hvornår er min næste alarm?",
+    "Hvad er mine påmindelser?",
+    "Annuller alle alarmer.",
+    "Annuller alle timere.",
+    "Annuller alle påmindelser.",
+    "Hvad gik jeg glip af?",
+    "Gik jeg glip af noget?"
+  ],
+  "tags": [
+    "Produktivitet",
+    "Daglig",
+    "alert",
+    "alarm",
+    "timer",
+    "påmindelse",
+    "skema"
+  ]
+}
