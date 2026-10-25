@@ -533,6 +533,42 @@ def parse_end_condition_from_message(message: Message,
     return None
 
 
+_NL_NUMBER_WORDS = r"(?:een|twee|drie|vier|vijf|zes|zeven|acht|negen|tien|elf|twaalf)"
+# "7 uur" / "zeven uur", as a Dutch speaker says a clock time
+_NL_CLOCK = rf"(?:\d{{1,2}}|{_NL_NUMBER_WORDS})\s+uur\b"
+_NL_DAY_WORDS = (r"(?:vandaag|vanochtend|vanmiddag|vanavond|vannacht|morgen|"
+                 r"morgenochtend|morgenmiddag|morgenavond|overmorgen)")
+
+
+def _normalize_nl_clock_phrase(text: str) -> str:
+    """
+    Rewrite Dutch clock phrasings that the date parser reads as a number of
+    hours from now into the one it reads as a time of day.
+
+    "zet een wekker voor 7 uur" and "... op 7 uur" mean 7 o'clock, but
+    ovos-date-parser only reads "om 7 uur" as a clock time and reads the others
+    as "7 hours from now". "morgenochtend 7 uur" has the same problem without
+    the "om". Only called for alarms, where a clock time is what is asked for.
+    :param text: utterance chunk (already lower-cased by the tokenizer)
+    :returns: the chunk with "om" in place of "voor"/"op" before a clock time
+    """
+    text = re.sub(rf"\b(?:voor|op)\s+(?={_NL_CLOCK})", "om ", text)
+    return re.sub(rf"\b({_NL_DAY_WORDS})\s+(?={_NL_CLOCK})", r"\1 om ", text)
+
+
+def _normalize_nl_duration_phrase(text: str) -> str:
+    """
+    Rewrite the Dutch quarter-hour words, which ovos-date-parser does not read
+    as a duration, into minutes: "een kwartier" -> "15 minuten", "drie kwartier"
+    and "driekwartier" -> "45 minuten". The utterance normalizer may already
+    have turned "een" into "1" and "drie" into "3".
+    :param text: utterance chunk (already lower-cased by the tokenizer)
+    :returns: the chunk with the quarter-hour words as minutes
+    """
+    text = re.sub(r"\b(?:(?:drie|3)\s+kwartier|driekwartier)\b", "45 minuten", text)
+    return re.sub(r"\b(?:(?:een|1)\s+)?kwartier\b", "15 minuten", text)
+
+
 def parse_alert_time_from_message(message: Message,
                                   tokens: Tokens = None,
                                   timezone: dt.tzinfo = None,
@@ -557,18 +593,47 @@ def parse_alert_time_from_message(message: Message,
     # tz = anchor_time.tzinfo.utcoffset(anchor_time)
     # anchor_time = anchor_time.replace(tzinfo=dt.timezone(tz))
 
-    alert_time = None
-    for token in tokens.unmatched():
-        LOG.debug(f"Trying to parse time from token: {token}")
+    is_alarm = get_alert_type(message) == AlertType.ALARM
+    is_dutch = (lang or "").lower().startswith("nl")
+
+    def _as_duration(token):
+        if is_dutch:
+            token = _normalize_nl_duration_phrase(token)
         extracted = extract_duration(token, lang=lang)
         if extracted and extracted[0]:
             duration, remainder = extracted
-            alert_time = anchor_time + duration
-            tokens[tokens.index(token)] = remainder
-            break
+            return anchor_time + duration, remainder
+        return None
+
+    def _as_datetime(token):
+        if is_dutch and is_alarm:
+            token = _normalize_nl_clock_phrase(token)
         extracted = extract_datetime(token, anchorDate=anchor_time, lang=lang)
         if extracted and extracted[0]:
-            alert_time, remainder = extracted
+            return extracted
+        return None
+
+    # A clock reading and a duration can be spelled the same: Dutch "7 uur" is
+    # both "7 o'clock" and "7 hours". A Dutch alarm is set for a time of day, so
+    # it reads a clock time first and a duration only as a fallback ("wek me over
+    # een uur"). Every other kind, and every other language, keeps reading a
+    # duration first: the clock-first order was measured to change the English
+    # "set an alarm for half an hour", so it is not applied there.
+    if is_alarm and is_dutch:
+        parsers = (_as_datetime, _as_duration)
+    else:
+        parsers = (_as_duration, _as_datetime)
+
+    alert_time = None
+    for token in tokens.unmatched():
+        LOG.debug(f"Trying to parse time from token: {token}")
+        parsed = None
+        for parse in parsers:
+            parsed = parse(token)
+            if parsed:
+                break
+        if parsed:
+            alert_time, remainder = parsed
             tokens[tokens.index(token)] = remainder
             break
     LOG.debug(f"Parsed alert time from message: {alert_time}")
