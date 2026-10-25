@@ -1,9 +1,8 @@
+# Wekker op een kloktijd of dag. Geschreven voor gesproken Nederlands:
+# "zet een wekker om 7 uur", "wek me om half 8", "maak me morgen om 6 uur wakker".
 (zet|maak|voeg) een wekker [toe] [voor {date:time}]
 nieuwe wekker [voor {date:time}]
 zet een wekker voor {date:time}
-ik heb wek me
-nieuwe wek me
-start wekker
 zet een wekker [toe] [voor {date:time}], zodat hij {mediakind} afspeelt
 (maak|wek) (me|mij|ons) wakker [om {date:time}]
 wek me met {mediakind} om {date:time}
@@ -11,3 +10,17 @@ wek me over {duration:duration}
 wek me elke {days} om {date:time}
 ik wil morgen vroeg door een wekker gewekt worden
 programmeer een wekker voor zeven uur morgen
+# machine draft, unvouched: written by Claude Sonnet 5.5. A native speaker checks the lines below.
+(zet|maak|stel|plan) (een|de|mijn) (wekker|alarm) [in] [(voor|op|om) {date:time}]
+nieuw alarm [(voor|op|om) {date:time}]
+(wekker|alarm) (voor|op|om) {date:time}
+(zet|maak|stel) (een|de|mijn) (wekker|alarm) [in] over {duration:duration}
+(zet|maak|stel) (een|de|mijn) (wekker|alarm) [in] (elke|iedere) {days} om {date:time}
+(kun|kan|zou) je [even] (een|de) (wekker|alarm) (zetten|instellen|maken) [(voor|op|om) {date:time}]
+ik (wil|heb) (een|de) (wekker|alarm) [nodig] [(voor|op|om) {date:time}]
+wek (me|mij|ons) om {date:time}
+(maak|wek) (me|mij|ons) om {date:time} wakker
+(maak|wek) (me|mij|ons) {date:time} wakker
+wek (me|mij|ons) (vandaag|morgen|overmorgen|vanavond|morgenochtend|vanochtend) om {date:time}
+(kun|kan|zou) je (me|mij|ons) [om {date:time}] wekken
+(maak|wek) (me|mij|ons) wakker met {mediakind} [om {date:time}]

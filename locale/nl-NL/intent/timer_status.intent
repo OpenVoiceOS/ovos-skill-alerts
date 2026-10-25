@@ -9,3 +9,9 @@ status van (mijn|de) {timerkind}
 wanneer (loopt|is) (mijn|de) {timerkind} (af|klaar)
 hoeveel minuten blijven er over tot de eierwekker klaar is
 hoe ver is het aftellen dat ik heb gestart
+# machine draft, unvouched: written by Claude Sonnet 5.5. A native speaker checks the lines below.
+hoe lang (duurt|loopt) (mijn|de) {timerkind} nog
+hoeveel tijd (is er|staat er|blijft er) nog [over] op (mijn|de) {timerkind}
+hoeveel tijd (is er|staat er|blijft er) nog [over]
+hoe lang nog [op (mijn|de) {timerkind}]
+hoeveel tijd (is er|staat er|blijft er) nog [over] op de {timerkind} (met de naam|genaamd) {name}

@@ -1,8 +1,15 @@
+# Timer op een duur. Geschreven voor gesproken Nederlands:
+# "zet een timer van 5 minuten", "start een eierwekker op 8 minuten".
 (zet|start|maak) een timer [voor {duration:duration}]
 nieuwe timer [voor {duration:duration}]
 (zet|start|maak) een {duration:duration} timer
-start timers
-ik heb timer
-maak timer
 tel vanaf nu vijf minuten af voor de pasta
 start een eierwekker van een kwartier voor de taart
+# machine draft, unvouched: written by Claude Sonnet 5.5. A native speaker checks the lines below.
+(zet|start|maak|stel) (een|de|mijn) (timer|aftelling|eierwekker|kookwekker) [in] [(voor|op|van) {duration:duration}]
+nieuwe (eierwekker|kookwekker|aftelling) [(voor|van|op) {duration:duration}]
+(zet|start|maak|stel) (een|de) {duration:duration} (eierwekker|kookwekker) [in]
+(timer|eierwekker|kookwekker) (voor|van|op) {duration:duration}
+(kun|kan|zou) je [even] (een|de) (timer|eierwekker|kookwekker) (zetten|starten|instellen|maken) [(voor|op|van) {duration:duration}]
+ik (wil|heb) een (timer|eierwekker|kookwekker) [nodig] [(voor|van|op) {duration:duration}]
+(start|begin) met aftellen [van {duration:duration}]
