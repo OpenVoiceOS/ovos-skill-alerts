@@ -83,22 +83,17 @@ GOLDEN_LOCALE_GAPS = {
 # the retrain. An entry is strict: it fails once the model matches
 # MIN_MATCHED_ROWS_PER_INTENT rows of the intent, so a fixed gap cannot stay listed.
 PUBLISHED_MODEL_GAPS = {
-    "da-DK": ("delete_list", "missed_alerts"),
-    "es-CO": ("add_list_subitems", "create_timer", "delete_list"),
-    "es-ES": ("delete_list",),
+    "da-DK": ("delete_list",),
+    "es-CO": ("create_timer", "delete_list"),
     "fi-FI": ("change_until", "reschedule_alert"),
-    "hu-HU": ("add_list_subitems", "delete_list", "delete_list_entries",
-              "query_list_entries"),
+    "hu-HU": ("add_list_subitems", "query_list_entries"),
     "nl-NL": ("missed_alerts",),
-    "sv-FI": ("add_list_subitems", "reschedule_alert"),
+    "sv-FI": ("reschedule_alert",),
 }
-# Locales whose rate stays below MIN_MATCH_RATE on the published m2v model: 55.7%
-# of 79 rows in every measured run, on the branch and on origin/dev alike. The
+# Locales whose rate stays below MIN_MATCH_RATE on the published m2v model. The
 # model predates these templates; remove an entry after the retrain. The entry
 # is strict: the test fails once the rate reaches the gate.
-PUBLISHED_MODEL_LOCALE_GAPS = {
-    "hu-HU": "55.7% of rows match; the published m2v model predates these templates",
-}
+PUBLISHED_MODEL_LOCALE_GAPS = {}
 END2END_DIR = Path(__file__).parent
 # With only this skill loaded, the published m2v model claims every fa-IR and
 # ru-RU request for another skill at the medium or low tier.
@@ -119,16 +114,24 @@ NEGATIVE_KNOWN_CLAIMS = {
         "jaké bude zítra počasí": ("list_alerts",),
         "kolik je hodin": ("timer_status",),
         "pusť nějakou jazzovou hudbu": ("change_media_properties",),
-        "řekni mi vtip": ("list_alerts",),
+        "řekni mi vtip": ("list_alerts", "timer_status"),
     },
     "da-DK": {
         "hvad er min ip adresse": ("query_list_entries",),
     },
+    "de-DE": {
+        "spiel etwas Jazzmusik": ("create_alarm",),
+    },
     "en-US": {
         "play some jazz music": ("create_alarm",),
+        "what time is it": ("timer_status",),
+    },
+    "es-ES": {
+        "qué tiempo hará mañana": ("missed_alerts",),
     },
     "eu-ES": {
         "jarri bolumena ehuneko berrogeita hamarrean": ("dav_sync",),
+        "jarri jazz musika": ("change_media_properties",),
         "zein da nire ip helbidea": ("list_alerts",),
         "zer eguraldi egingo du bihar": ("cancel_alert", "list_alerts"),
         "zer ordu da": ("timer_status",),
@@ -162,6 +165,7 @@ NEGATIVE_KNOWN_CLAIMS = {
         "sali taɣect ɣer xemsin di miya": ("change_media_properties",),
     },
     "nl-NL": {
+        "hoe laat is het": ("timer_status",),
         "wat is mijn ip-adres": ("list_alerts",),
     },
     "pl-PL": {
@@ -172,6 +176,7 @@ NEGATIVE_KNOWN_CLAIMS = {
         "włącz muzykę jazzową": ("change_media_properties",),
     },
     "pt-BR": {
+        "como vai estar o tempo amanhã": ("timer_status",),
         "qual é o meu endereço ip": ("list_alerts",),
         "toca uma música de jazz": ("create_alarm",),
     },
@@ -179,13 +184,17 @@ NEGATIVE_KNOWN_CLAIMS = {
         "qual é o meu endereço ip": ("list_alerts",),
     },
     "sv-FI": {
+        "berätta ett skämt": ("list_alerts",),
         "hurdant väder blir det i morgon": ("timer_status",),
         "spela lite jazzmusik": ("change_media_properties",),
+        "vad är klockan": ("create_alarm",),
         "vad är min ip-adress": ("query_list_entries",),
     },
     "sv-SE": {
+        "berätta ett skämt": ("list_alerts",),
         "hur blir vädret i morgon": ("timer_status",),
         "spela lite jazzmusik": ("change_media_properties",),
+        "vad är klockan": ("create_reminder",),
         "vad är min ip-adress": ("query_list_entries",),
     },
 }

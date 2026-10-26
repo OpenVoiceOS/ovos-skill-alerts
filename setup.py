@@ -122,7 +122,7 @@ setup(
         "test": ["mock", "ovoscope>=1.11.2a1", "ovos-adapt-parser",
                  "ovos-spec-tools>=1.5.0a1", "pytest>=7.0.0", "pytest-timeout>=2.0.0",
                  "ovos-skill-naptime>=0.4.0a5", "padacioso",
-                 "ovos-m2v-pipeline>=0.32.0a1",
+                 "ovos-m2v-pipeline>=0.37.3a1",
                  "ovos-skill-date-time"],
         "dev": ["mock", "ovoscope>=0.13.1", "ovos-adapt-parser"],
     },
