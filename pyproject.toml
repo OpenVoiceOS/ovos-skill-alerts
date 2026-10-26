@@ -1,0 +1,64 @@
+[build-system]
+requires = ["setuptools>=61", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ovos-skill-alerts"
+dynamic = ["version"]
+readme = { file = "README.md", content-type = "text/markdown" }
+license = { text = "BSD-3-Clause" }
+authors = [{ name = "Emphasize,OpenVoiceOS" }]
+dependencies = [
+    "json_database>=0.5",
+    "combo_lock>=0.2",
+    "ovos-utils>=0.0.32",
+    "ovos-bus-client>=2.11.0a1,<3.0.0",
+    "ovos-workshop>=9.6.4a1,<10.0.0",
+    "caldav~=1.2",
+    "icalendar~=5.0",
+    "ovos-utterance-normalizer>=0.0.1,<1.0.0",
+    "ovos-number-parser>=0.0.1,<1.0.0",
+    "ovos-date-parser>=0.0.3,<1.0.0",
+    "langcodes",
+    "ovos-spec-tools>=1.12.0a1",
+]
+
+[project.optional-dependencies]
+# ovos-skill-naptime is a test dependency only: test/end2end/
+# test_wake_arbitration.py boots it alongside this skill to assert the
+# "wake" vocabulary arbitrates correctly between the two.
+# padacioso serves file intents in the tests; no test uses padatious.
+# ovos-skill-date-time is the second skill in the cross-skill
+# arbitration test, test/end2end/test_fleet_arbitration.py.
+test = [
+    "mock",
+    "ovoscope>=1.11.2a1",
+    "ovos-adapt-parser",
+    "ovos-spec-tools>=1.5.0a1",
+    "pytest>=7.0.0",
+    "pytest-timeout>=2.0.0",
+    "ovos-skill-naptime>=0.4.0a5",
+    "padacioso",
+    "ovos-m2v-pipeline>=0.32.0a1",
+    "ovos-skill-date-time",
+]
+dev = ["mock", "ovoscope>=0.13.1", "ovos-adapt-parser"]
+
+[project.urls]
+Homepage = "https://github.com/OpenVoiceOS/ovos-skill-alerts"
+
+[project.entry-points."opm.skill"]
+"ovos-skill-alerts.openvoiceos" = "ovos_skill_alerts:AlertSkill"
+
+[tool.setuptools]
+include-package-data = true
+packages = ["ovos_skill_alerts", "ovos_skill_alerts.util"]
+
+[tool.setuptools.package-dir]
+ovos_skill_alerts = ""
+
+[tool.setuptools.package-data]
+ovos_skill_alerts = ["skill.json", "locale/**/*", "gui/**/*", "res/**/*"]
+
+[tool.setuptools.dynamic]
+version = { attr = "version.__version__" }
