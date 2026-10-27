@@ -1,5 +1,5 @@
 json_database>=0.5
-combo_lock>=0.2
+filelock>=3.12
 ovos-utils>=0.0.32
 ovos-bus-client>=2.11.0a1,<3.0.0
 ovos-workshop>=9.6.4a1,<10.0.0

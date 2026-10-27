@@ -28,6 +28,9 @@
 
 import datetime as dt
 import os
+from base64 import urlsafe_b64encode
+from pathlib import Path
+from tempfile import gettempdir
 from uuid import uuid4
 from copy import deepcopy
 from typing import List, Dict, Tuple, Optional, Union, Any
@@ -35,7 +38,7 @@ from typing import List, Dict, Tuple, Optional, Union, Any
 from dateutil.relativedelta import relativedelta
 import caldav
 from caldav.lib.error import NotFoundError
-from combo_lock import NamedLock
+from filelock import FileLock
 from json_database import JsonStorage
 from ovos_bus_client.message import Message
 from ovos_utils.log import LOG
@@ -45,7 +48,28 @@ from ovos_skill_alerts.util.alert import Alert, alert_time_in_range, is_alert_ty
 from ovos_skill_alerts.util.dav_utils import get_dav_items, DAVCredentials
 from ovos_skill_alerts.util.parse_utils import get_default_alert_name, has_default_name
 
-SYNC_LOCK = NamedLock("alert_dav_sync")
+
+
+def _named_lock(name: str) -> FileLock:
+    """Return a lock shared by every process and thread that uses ``name``.
+
+    The lock file path is the one combo-lock uses when the temp directory is
+    in RAM, so a process that still runs combo-lock waits on the same lock.
+    The directory and the file are writable by all users, because services
+    that share a lock can run as different users.
+    """
+    lock_dir = Path(gettempdir(), "combo_locks")
+    try:
+        lock_dir.mkdir()
+    except FileExistsError:
+        pass
+    else:
+        lock_dir.chmod(0o777)
+    filename = urlsafe_b64encode(name.encode()).decode() + ".lock"
+    return FileLock(lock_dir / filename, mode=0o666)
+
+
+SYNC_LOCK = _named_lock("alert_dav_sync")
 
 _ALERTFILE = "alerts.json"
 _SYNC_RESTRICTED = (AlertType.TIMER, AlertType.ALARM, AlertType.UNKNOWN, AlertType.ALL)
@@ -114,7 +138,7 @@ class AlertManager:
         self._missed_alerts = dict()
         self._active_alerts = dict()
         self._synchron_ids = set()
-        self._read_lock = NamedLock("alert_manager")
+        self._read_lock = _named_lock("alert_manager")
         self._active_gui_timers : List[Alert] = list()
         self._dav_clients = dict()
 
