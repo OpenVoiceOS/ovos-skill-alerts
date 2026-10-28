@@ -1,11 +1,11 @@
 {
-    "type": "skill-alerts.neongeckocom:DeleteList",
+    "type": "skill-alerts.neongeckocom:delete_list",
     "data": {
       "utterances": [
         "delete shopping list"
       ],
       "lang": "en-us",
-      "intent_type": "skill-alerts.neongeckocom:DeleteList",
+      "intent_type": "skill-alerts.neongeckocom:delete_list",
       "delete": "delete",
       "list": "list",
       "target": null,

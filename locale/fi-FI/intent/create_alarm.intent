@@ -1,0 +1,17 @@
+(aseta|luo|lisää) hälytys [kello {date:time}]
+uusi hälytys [{date:time}]
+aseta hälytys kello {date:time}
+uusi herätä minut
+uusi hälytykset
+luo hälytykset
+aseta hälytys [kello {date:time}] soittamaan {mediakind}
+herätä minut [kello {date:time}]
+herätä minut soittamaan {mediakind} kello {date:time}
+herätä minut joka {days} kello {date:time}
+herätä minut {duration:duration} kuluttua
+(voitko|voisitko) herättää minut [kello {date:time}]
+(voitko|voisitko) herättää minut {duration:duration} päästä
+haluan herätyksen [kello {date:time}]
+# machine draft, unvouched: written by Claude Opus 5.5. A native speaker checks the lines below.
+tarvitsen herätyksen aamulla [kello {date:time}]
+muista herättää minut aamulla

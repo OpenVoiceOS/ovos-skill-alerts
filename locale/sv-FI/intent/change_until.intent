@@ -1,0 +1,10 @@
+# Finland-Swedish machine draft, unvouched
+justera längden på nästa {schedkind} till {duration:duration}
+ändra (mitt|min) {schedkind} så att (det|den) varar {duration:duration}
+korta ner (mitt|min) {schedkind} till {duration:duration}
+ändra hur länge (mitt|min) {schedkind} (ringer|pågår) till {duration:duration}
+# machine draft, unvouched: written by Claude Opus 5.5. A native speaker checks the lines below.
+jag vill att (alarmet|larmet|väckarklockan) ringer i {duration:duration}
+förläng ringtiden för (alarmet|larmet|väckarklockan|timern) till {duration:duration}
+öka ringtiden för (alarmet|larmet|väckarklockan|timern)
+(alarmet|larmet|väckarklockan) får ringa längre

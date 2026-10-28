@@ -27,6 +27,7 @@
 # SOFTWARE,  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import datetime as dt
+import re
 from time import time
 from typing import Optional, List, Union, Tuple, Any
 from uuid import uuid4
@@ -39,7 +40,7 @@ from ovos_date_parser import nice_time, nice_day, extract_datetime, extract_dura
 from ovos_number_parser import extract_number
 from ovos_skill_alerts.util import AlertPriority, Weekdays, AlertType, DAVType, LOCAL_USER
 from ovos_skill_alerts.util.alert import Alert
-from ovos_skill_alerts.util.config import use_24h_format, find_resource_file, get_date_format
+from ovos_skill_alerts.util.config import use_24h_format, find_resource_file, get_date_format, get_session_tz
 from ovos_skill_alerts.util.locale import (
     voc_match,
     spoken_alert_type,
@@ -144,6 +145,30 @@ def tokenize_utterance(message: Message) -> Tokens:
     return tokens
 
 
+def parse_media_time_from_message(message: Message) -> Optional[dt.datetime]:
+    """
+    Parse a time named inside the media part of a request, such as
+    "music at 6 am" in "set the alarm to play music at 6 am".
+    It goes through the create path's parser, not ``extract_dt_or_duration``, so
+    a request reads as the same time here as when it creates the alarm.
+    The alarm words are removed first, so an alarm-clock word that holds a
+    time word (fa-IR "ساعت هشدار") is not read as a time. A request whose
+    media slot names no time returns None, even when a time elsewhere in
+    the utterance picks which alarm to change ("my 7 am alarm").
+    :param message: Message associated with intent match
+    :returns: Parsed datetime or None if the media part holds no time
+    """
+    media = message.data.get("mediakind")
+    if not media:
+        return None
+    media_message = Message(message.msg_type,
+                            {**message.data, "utterance": media, "__tags__": []},
+                            message.context)
+    tokens = tokenize_utterance(media_message)
+    _strip_voc_phrase(tokens, "alarm", get_message_lang(message))
+    return parse_alert_time_from_message(media_message, tokens)
+
+
 def round_nearest_minute(alert_time: dt.datetime,
                          cutoff: dt.timedelta = dt.timedelta(minutes=10)) -> \
         dt.datetime:
@@ -228,8 +253,9 @@ def build_alert_from_intent(message: Message) -> Optional[Alert]:
 
     data = dict()
     data["context"] = parse_alert_context_from_message(message)
+    data["message_context"] = message.context
 
-    timezone = get_default_tz()
+    timezone = get_session_tz(message)
     timestamp = data.get("context").get("created")
     anchor_time = dt.datetime.fromtimestamp(timestamp).astimezone(timezone)
 
@@ -259,7 +285,7 @@ def build_alert_from_intent(message: Message) -> Optional[Alert]:
         data["context"]["stopwatch_mode"] = True
     elif alert_time is None:
         if repeat_interval:
-            alert_time = anchor_time + repeat_interval
+            alert_time = _add_elapsed(anchor_time, repeat_interval)
         elif until:
             alert_time = until
 
@@ -282,7 +308,75 @@ def build_alert_from_intent(message: Message) -> Optional[Alert]:
     if alert_type == AlertType.TODO:
         data["dav_type"] = DAVType.VTODO
     data["lang"] = lang
-    return Alert.create(**data)
+    return Alert.create(timezone=timezone, **data)
+
+
+def _strip_voc_phrase(tokens: Optional[Tokens], resource: str, lang: str = None) -> None:
+    """
+    Remove the vocab phrase (eg. "weekday") that matched ``resource`` from
+    every token string in-place, so it doesn't pollute a later
+    extract_datetime() call on the same token.
+
+    This mirrors what adapt already does for tagged keywords (they are
+    split out of the token stream before time parsing runs); it's only
+    needed for the voc_match() fallback path used by intents that don't tag
+    entities (eg. padatious template intents).
+    :param tokens: mutable Tokens list to strip the phrase from, or None
+    :param resource: vocab resource name (without ".voc") to match against
+    :param lang: language of the vocab resource
+    """
+    if not tokens:
+        return
+    if not resource.endswith(".voc"):
+        resource = f"{resource}.voc"
+    words = sorted(get_words_list(resource, lang), key=len, reverse=True)
+    for i, token in enumerate(tokens):
+        if not isinstance(token, str):
+            continue
+        new_token = token
+        for word in words:
+            new_token = re.sub(r"(?i)\b" + re.escape(word) + r"\b", " ", new_token)
+        new_token = re.sub(r"\s+", " ", new_token).strip()
+        if new_token != token:
+            tokens[i] = new_token
+
+
+def _voc_match_index(tokens: Tokens, resource: str, lang: str = None) -> Optional[int]:
+    """
+    Fallback for the adapt ``tokens.index(message.data["<resource>"]) + 1``
+    pattern used to locate a clause that follows a tagged keyword (eg.
+    "until" or "repeat"), for matches that never populate that adapt data
+    (eg. padatious template intents). Finds the longest vocab phrase for
+    ``resource`` present in the utterance, splits the token that contains it
+    into a "before" token and an "after" token (mirroring how
+    ``tokenize_utterance`` already splits on adapt-tagged keywords), and
+    returns the index of the "after" token -- the same index a caller would
+    get from the adapt branch, pointing at the clause to pop and parse.
+
+    :param tokens: mutable Tokens list to search/split, or None
+    :param resource: vocab resource name (without ".voc") to match against
+    :param lang: language of the vocab resource
+    :returns: index of the clause following the matched phrase, or None
+    """
+    if not tokens:
+        return None
+    if not resource.endswith(".voc"):
+        resource = f"{resource}.voc"
+    words = sorted(get_words_list(resource, lang), key=len, reverse=True)
+    for i, token in enumerate(tokens):
+        if not isinstance(token, str):
+            continue
+        for word in words:
+            match = re.search(r"(?i)\b" + re.escape(word) + r"\b", token)
+            if match:
+                before = token[:match.start()].strip()
+                after = token[match.end():].strip()
+                if not after:
+                    return None
+                tokens[i] = before
+                tokens.insert(i + 1, after)
+                return i + 1
+    return None
 
 
 def parse_repeat_from_message(message: Message,
@@ -302,16 +396,34 @@ def parse_repeat_from_message(message: Message,
     repeat_days = list()
     lang = get_message_lang(message)
     # NOTE: voc_match is used in case intent was invoked without using adapt
+    # (eg. a padatious template intent, which does not populate __tags__ /
+    # message.data["weekdays"]/["weekends"]/["everyday"] the way adapt does).
+    # In that case the recurrence phrase (eg. "weekday") is still sitting
+    # inside the token(s) that will later be handed to extract_datetime() for
+    # time parsing, and needs to be stripped here just like adapt already
+    # strips its tagged keywords, or the date parser chokes on the mixed
+    # recurrence+time phrase and returns garbage.
     utt = message.data.get("utterance", "")
     if message.data.get("everyday") or voc_match(utt, "everyday", lang=lang):
         repeat_days = [Weekdays(i) for i in range(0, 7)]
+        if not message.data.get("everyday"):
+            _strip_voc_phrase(tokens, "everyday", lang)
     elif message.data.get("weekends") or voc_match(utt, "weekends", lang=lang):
         repeat_days = [Weekdays(i) for i in (5, 6)]
+        if not message.data.get("weekends"):
+            _strip_voc_phrase(tokens, "weekends", lang)
     elif message.data.get("weekdays") or voc_match(utt, "weekdays", lang=lang):
         repeat_days = [Weekdays(i) for i in range(0, 5)]
-    elif message.data.get("repeat"):
+        if not message.data.get("weekdays"):
+            _strip_voc_phrase(tokens, "weekdays", lang)
+    elif message.data.get("repeat") or voc_match(utt, "repeat", lang=lang):
         tokens = tokens or tokenize_utterance(message)
-        repeat_index = tokens.index(message.data["repeat"]) + 1
+        if message.data.get("repeat"):
+            repeat_index = tokens.index(message.data["repeat"]) + 1
+        else:
+            repeat_index = _voc_match_index(tokens, "repeat", lang)
+            if repeat_index is None:
+                return []
         if repeat_index > len(tokens) - 1:
             return []
 
@@ -385,8 +497,14 @@ def parse_end_condition_from_message(message: Message,
     tokens = tokens or tokenize_utterance(message)
     timezone = timezone or get_default_tz()
     anchor_date = anchor_time or dt.datetime.now(timezone)
-    if message.data.get("until"):
-        idx = tokens.index(message.data["until"]) + 1
+    utt = message.data.get("utterance", "")
+    if message.data.get("until") or voc_match(utt, "until", lang=lang):
+        if message.data.get("until"):
+            idx = tokens.index(message.data["until"]) + 1
+        else:
+            idx = _voc_match_index(tokens, "until", lang)
+            if idx is None:
+                return None
         if idx > len(tokens) - 1:
             return None
         end_clause = tokens.pop(idx)
@@ -413,6 +531,11 @@ def parse_end_condition_from_message(message: Message,
         return anchor_date.replace(hour=23, minute=59, second=59)
 
     return None
+
+
+def _add_elapsed(anchor_time: dt.datetime, duration: dt.timedelta) -> dt.datetime:
+    """Add elapsed time to an aware datetime, across any DST change in its zone."""
+    return (anchor_time.astimezone(dt.timezone.utc) + duration).astimezone(anchor_time.tzinfo)
 
 
 def parse_alert_time_from_message(message: Message,
@@ -445,7 +568,7 @@ def parse_alert_time_from_message(message: Message,
         extracted = extract_duration(token, lang=lang)
         if extracted and extracted[0]:
             duration, remainder = extracted
-            alert_time = anchor_time + duration
+            alert_time = _add_elapsed(anchor_time, duration)
             tokens[tokens.index(token)] = remainder
             break
         extracted = extract_datetime(token, anchorDate=anchor_time, lang=lang)
@@ -479,7 +602,9 @@ def parse_timedelta_from_message(message: Message,
     alert_time = parse_alert_time_from_message(message, tokens,
                                                timezone, anchor_time)
 
-    return alert_time - anchor_time if alert_time else None
+    if not alert_time:
+        return None
+    return alert_time.astimezone(dt.timezone.utc) - anchor_time.astimezone(dt.timezone.utc)
 
 
 # TODO: Toss - should be handled via OCP
@@ -526,6 +651,28 @@ def parse_alert_name_from_message(message: Message,
     """
     lang = get_message_lang(message)
 
+    # A padatious intent fills its own slot and populates no `__tags__`, so
+    # `tokens.unmatched()` is the whole utterance: "delete my shopping list"
+    # parses as the name "delete shopping list", and the skill then speaks
+    # "There is no entry delete shopping list stored." The slot the intent
+    # file declares is the name the user said, so it wins when it is there.
+    # Adapt keeps working: it populates `__tags__` and neither slot.
+    #
+    # Both slots that carry a name the user said are read. `{list_name}` is
+    # declared by the list intents; `{name}` by cancel_alert, timer_status and
+    # reschedule_alert, which held the identical defect. No intent file
+    # declares both, so the order settles a tie that cannot occur.
+    #
+    # `{event}`, `{reminder}` and `{items}` are deliberately not read here.
+    # `{items}` holds the items to add, not a name. `{event}` and `{reminder}`
+    # name a thing being created rather than one to match, and the suite
+    # asserts token-parsed names for them, such as "start making dinner", so
+    # reading those slots would change behaviour this change does not measure.
+    for slot_key in ("list_name", "name"):
+        slot_name = message.data.get(slot_key)
+        if slot_name and isinstance(slot_name, str) and slot_name.strip():
+            return slot_name.strip().lower()
+
     tokens = tokens or tokenize_utterance(message)
     tokens.strip_time()
 
@@ -533,8 +680,14 @@ def parse_alert_name_from_message(message: Message,
     candidate_names = list()
     # First try to parse a name from the remainder tokens
     for chunk in tokens.unmatched():
+        # A word with no letter or digit in it is punctuation left over by the
+        # normaliser, not a name. The tokenizer keeps the trailing period of
+        # "wake me up every monday and thursday at 9 AM." as its own " ."
+        # token, and after `strip_time()` that period is the whole remainder,
+        # so without this the alert is named ".".
         cleaned_chunk = " ".join([word.lower() for word in chunk.split()
-                                  if word not in noise_words])
+                                  if word not in noise_words
+                                  and any(c.isalnum() for c in word)])
         if cleaned_chunk:
             candidate_names.append(cleaned_chunk)
     # default name
@@ -581,8 +734,7 @@ def parse_alert_context_from_message(message: Message) -> dict:
         "lang": get_message_lang(message),
         "ident": message.context.get("ident") or str(uuid4()),
         "origin_ident": message.context.get('ident'),
-        "created": message.context.get("timing",
-                                       {}).get("handle_utterance") or time()
+        "created": time()
     }
     return required_context
 
@@ -626,20 +778,47 @@ def parse_relative_time_from_message(message: Message,
                                      tokens: Optional[Tokens] = None,
                                      timezone: Optional[dt.tzinfo] = None,
                                      anchor_time: Optional[dt.datetime] = None):
+    """
+    Parse the new time of a rescheduled alert.
+
+    A duration is returned as a signed delta for the caller to apply to the
+    alert: negative when the utterance asks for earlier, by a word of
+    earlier.voc or by Adapt's ``earlier`` tag. A time of day is read on the
+    day of ``anchor_time``, the alert's own day, so "move the event to 8 pm"
+    keeps the event's date. A phrase that resolves to another day, such as
+    "tomorrow at 8 pm", a phrase that names today by a word of today.voc,
+    such as "tonight at 10", and a time already past on the alert's day are
+    read from now.
+    :param message: Message associated with the request
+    :param tokens: optional tokens parsed from message by `tokenize_utterances`
+    :param timezone: timezone of the request
+    :param anchor_time: the alert's day; the time of day is ignored
+    :returns: datetime, signed timedelta or relativedelta, or None
+    """
     lang = get_message_lang(message)
-    earlier = "earlier" in message.data
+    earlier = "earlier" in message.data or \
+        voc_match(message.data.get("utterance", ""), "earlier", lang)
 
     timezone = timezone or get_default_tz()
     tokens = tokens or tokenize_utterance(message)
 
     for token in tokens.unmatched():
-        time_, remainder = extract_dt_or_duration(token, lang,
-                                                  anchor_time,
-                                                  timezone,
-                                                  not earlier)
-        if time_:
-            tokens[tokens.index(token)] = remainder
-            return time_
+        time_, remainder = extract_dt_or_duration(token, lang, None,
+                                                  timezone, not earlier)
+        if not time_:
+            continue
+        # "tonight at 10" names today: read it from now, not on the alert's day
+        if anchor_time is not None and isinstance(time_, dt.datetime) and \
+                not voc_match(token, "today", lang):
+            day = anchor_time.replace(hour=0, minute=0, second=0,
+                                      microsecond=0)
+            on_day, on_day_remainder = extract_datetime(
+                token, anchorDate=day, lang=lang) or (None, remainder)
+            if on_day and on_day.date() == day.date() and \
+                    on_day > dt.datetime.now(on_day.tzinfo):
+                time_, remainder = on_day, on_day_remainder
+        tokens[tokens.index(token)] = remainder
+        return time_
     return None
 
 
@@ -661,9 +840,22 @@ def parse_timeframe_from_message(message: Message,
     """
     end = None
     tokens = tokens or tokenize_utterance(message)
+    lang = get_message_lang(message)
+    utterance = message.data.get("utterance", "")
+    has_and = message.data.get("and") or voc_match(utterance, "and", lang=lang)
+
+    if has_and and not message.data.get("and"):
+        # NOTE: adapt already splits the token stream on a tagged "and",
+        # giving parse_alert_time_from_message a clean "before"/"after"
+        # token for each clock time. A padatious template intent never
+        # populates message.data["and"], so without this split a single
+        # extract_datetime() call across the whole "between X and Y" phrase
+        # only returns the last time and silently drops the first one.
+        _voc_match_index(tokens, "and", lang)
+
     begin = parse_alert_time_from_message(message, tokens, timezone)
 
-    if message.data.get("and") or voc_match(message.data.get("utterance", ""), "and"):
+    if has_and:
         end = parse_alert_time_from_message(message,
                                             tokens,
                                             timezone,

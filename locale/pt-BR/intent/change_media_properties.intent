@@ -1,0 +1,41 @@
+# machine translation from en-US, unvouched
+(mude|defina|ajuste|deixe) (meu|o|meu próximo|o próximo) {schedkind} para ser (audível|tocável|gravado)
+(mude|defina|ajuste|deixe) (meu|o|meu próximo|o próximo) {schedkind} (audível|tocável|gravado)
+(mude|defina|ajuste|deixe|adie) (meu|o|meu próximo|o próximo) {schedkind} (audível|tocável|gravado)
+(mude|defina|ajuste) o alerta (do meu|do|do meu próximo|do próximo) {schedkind} para (áudio|reprodução)
+(mude|defina|ajuste|deixe) (meu|o|meu próximo|o próximo|meu futuro) {schedkind} para tocar {mediakind}
+(mude|defina|ajuste|deixe) (meu|o|meu próximo|o próximo|meu futuro) {schedkind} para reproduzir {mediakind}
+(mude|defina|ajuste|deixe) (meu|o|meu próximo|o próximo) {schedkind} para (uma gravação|uma mensagem gravada|um lembrete de voz|um lembrete de áudio|um lembrete falado|um arquivo de som|um arquivo de áudio|um arquivo|a música|o rádio|as notícias|o áudio|o podcast|os podcasts|o audiolivro|os audiolivros|o vídeo|os vídeos|música|rádio|notícias|áudio|podcasts|audiolivros|vídeos|um podcast|um audiolivro|um vídeo)
+(mude|defina|ajuste|deixe) (meu|o|meu próximo|o próximo) {schedkind} para usar {mediaform}
+(mude|defina|ajuste|deixe) (meu|o|meu próximo|o próximo) {schedkind} para repetir {mediaform}
+(mude|defina|ajuste|deixe) (meu|o|meu próximo|o próximo) {schedkind} para reproduzir {mediaform}
+(mude|defina|ajuste|deixe) (meu|o|meu próximo|o próximo) {schedkind} para tocar {mediaform}
+(mude|defina|ajuste|deixe) (meu|o|meu próximo|o próximo) {schedkind} para tocar a {mediakind}
+(mude|defina|ajuste|deixe) (meu|o|meu próximo|o próximo) {schedkind} para tocar minha {mediakind}
+(mude|defina|ajuste|deixe) (meu|o|meu próximo|o próximo) {schedkind} para tocar uma {mediakind}
+(mude|defina|ajuste|deixe) (meu|o|meu próximo|o próximo) {schedkind} tocando {mediaform}
+(mude|defina|ajuste) o som (do meu|do|do meu próximo|do próximo) {schedkind} para {mediakind}
+(mude|defina|ajuste) o som (do meu|do|do meu próximo|do próximo) {schedkind} para {mediaform}
+(mude|defina|ajuste) o alerta (do meu|do|do meu próximo|do próximo) {schedkind} para {mediaform}
+quero (ouvir|escutar) (música|rádio|um podcast) quando o (alarme|despertador) tocar
+em vez do toque (normal|padrão) quero (música|uma gravação|uma voz) no (alarme|despertador|lembrete)
+
+(defina|faça) (o|meu|o meu) alarme para tocar (música|músicas|rádio|notícias|podcast|podcasts|audiolivro|audiolivros|vídeo|vídeos|áudio)
+(defina|faça) (o|meu|o meu) alarme para tocar a (música|músicas|rádio|notícias|podcast|podcasts|audiolivro|audiolivros|vídeo|vídeos|áudio)
+(defina|faça) (o|meu|o meu) alarme para tocar o (música|músicas|rádio|notícias|podcast|podcasts|audiolivro|audiolivros|vídeo|vídeos|áudio)
+(defina|faça) (o|meu|o meu) alarme para tocar as (música|músicas|rádio|notícias|podcast|podcasts|audiolivro|audiolivros|vídeo|vídeos|áudio)
+(defina|faça) (o|meu|o meu) alarme para tocar os (música|músicas|rádio|notícias|podcast|podcasts|audiolivro|audiolivros|vídeo|vídeos|áudio)
+(defina|faça) (o|meu|o meu) alarme para tocar minha (música|músicas|rádio|notícias|podcast|podcasts|audiolivro|audiolivros|vídeo|vídeos|áudio)
+(defina|faça) (o|meu|o meu) alarme para tocar meu (música|músicas|rádio|notícias|podcast|podcasts|audiolivro|audiolivros|vídeo|vídeos|áudio)
+(defina|faça) (o|meu|o meu) alarme para tocar um (música|músicas|rádio|notícias|podcast|podcasts|audiolivro|audiolivros|vídeo|vídeos|áudio)
+(defina|faça) (o|meu|o meu) alarme para tocar uma (música|músicas|rádio|notícias|podcast|podcasts|audiolivro|audiolivros|vídeo|vídeos|áudio)
+(faça|deixe) (meu|o|o meu) alarme tocar (música|músicas|rádio|notícias|podcast|podcasts|audiolivro|audiolivros|vídeo|vídeos|áudio)
+(faça|deixe) (meu|o|o meu) alarme tocar a (música|músicas|rádio|notícias|podcast|podcasts|audiolivro|audiolivros|vídeo|vídeos|áudio)
+(faça|deixe) (meu|o|o meu) alarme tocar o (música|músicas|rádio|notícias|podcast|podcasts|audiolivro|audiolivros|vídeo|vídeos|áudio)
+(faça|deixe) (meu|o|o meu) alarme tocar as (música|músicas|rádio|notícias|podcast|podcasts|audiolivro|audiolivros|vídeo|vídeos|áudio)
+(faça|deixe) (meu|o|o meu) alarme tocar os (música|músicas|rádio|notícias|podcast|podcasts|audiolivro|audiolivros|vídeo|vídeos|áudio)
+(faça|deixe) (meu|o|o meu) alarme tocar minha (música|músicas|rádio|notícias|podcast|podcasts|audiolivro|audiolivros|vídeo|vídeos|áudio)
+(faça|deixe) (meu|o|o meu) alarme tocar meu (música|músicas|rádio|notícias|podcast|podcasts|audiolivro|audiolivros|vídeo|vídeos|áudio)
+(faça|deixe) (meu|o|o meu) alarme tocar um (música|músicas|rádio|notícias|podcast|podcasts|audiolivro|audiolivros|vídeo|vídeos|áudio)
+(faça|deixe) (meu|o|o meu) alarme tocar uma (música|músicas|rádio|notícias|podcast|podcasts|audiolivro|audiolivros|vídeo|vídeos|áudio)
+(faça|deixe) (meu|o|o meu) alarme tocar {mediakind}
