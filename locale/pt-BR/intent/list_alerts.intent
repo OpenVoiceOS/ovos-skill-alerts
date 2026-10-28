@@ -23,9 +23,12 @@ o que (eu|nós) (defini|agendei|guardei|agendamos|guardamos) (para|em|às|amanh�
 (eu|nós) (tenho|temos|guardei|marquei) (algum|alguns) {alertkind}
 (eu|nós) (defini|agendei|guardei|definimos) (algum|alguns) {alertkind}
 (tem|existe) (algum|alguns) {alertkind} (guardado|salvo|pendente|próximo|agendado)
-(eu tenho|nós temos|eu tinha) (algum|alguns|um|uma) {alertkind}
+(eu tenho|nós temos|eu tinha) (algum|alguns) {alertkind}
+(eu tenho|nós temos|eu tinha) um (alarme|despertador|timer|lembrete|alerta)
+(eu tenho|nós temos|eu tinha) uma contagem regressiva
 (quais|que|quantos) {alertkind} (eu tenho|nós temos|eu tinha)
 (quais|que) {alertkind} e {alertkind2} (eu tenho|nós temos)
 (quando|qual) é meu {alertkind} (próximo|futuro)
 (tem|existe) (algum|alguns) {alertkind}
 (me fala|lista) (todos os|os) lembretes (que eu tenho|programados)
+(nós temos|eu tinha) um (evento|compromisso)

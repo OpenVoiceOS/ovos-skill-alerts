@@ -1,10 +1,10 @@
-(change|set|adjust|make) (my|the|my next|the next) {schedkind} to be (audible|playable|spoken|recorded)
-(change|set|adjust|make) (my|the|my next|the next) {schedkind} (audible|playable|spoken|recorded)
-(change|set|adjust|make|adjourn) (my|the|my next|the next) (audible|playable|spoken|recorded) {schedkind}
+(change|set|adjust|make) (my|the|my next|the next) {schedkind} to be (audible|playable|recorded)
+(change|set|adjust|make) (my|the|my next|the next) {schedkind} (audible|playable|recorded)
+(change|set|adjust|make|adjourn) (my|the|my next|the next) (audible|playable|recorded) {schedkind}
 (change|set|adjust) (my|the|my next|the next) {schedkind} alert to (audio|playback)
 (change|set|adjust|make) (my|the|my next|the next|my upcoming) {schedkind} to playback {mediakind}
 (change|set|adjust|make) (my|the|my next|the next|my upcoming) {schedkind} to play {mediakind}
-(change|set|adjust|make) (my|the|my next|the next) {schedkind} to {mediaform}
+(change|set|adjust|make) (my|the|my next|the next) {schedkind} to (a recording|a recorded message|a voice reminder|an audio reminder|a spoken reminder|a sound file|an audio file|a file|the radio|the news|the music|the audio|the podcast|the podcasts|the audiobook|the audiobooks|the video|the videos|music|some music|radio|news|audio|podcasts|audiobooks|videos|some podcasts|a podcast|an audiobook|a video)
 (change|set|adjust|make) (my|the|my next|the next) {schedkind} to use {mediaform}
 (change|set|adjust|make) (my|the|my next|the next) {schedkind} to replay {mediaform}
 (change|set|adjust|make) (my|the|my next|the next) {schedkind} to playback {mediaform}
@@ -16,4 +16,9 @@
 (change|set|adjust) (my|the|my next|the next) {schedkind} sound to {mediakind}
 (change|set|adjust) (my|the|my next|the next) {schedkind} sound to {mediaform}
 (change|set|adjust) (my|the|my next|the next) {schedkind} alert to {mediaform}
-read (my|the) (reminder|alarm) (aloud|out loud) when it (fires|rings|goes off)
+
+(set|make) my alarm to play {mediakind}
+(set|make) my alarm to play the {mediakind}
+(make|set) (my|the) alarm play {mediakind}
+(make|set) (my|the) alarm play the {mediakind}
+(make|set) (my|the) alarm play my {mediakind}

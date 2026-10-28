@@ -145,6 +145,30 @@ def tokenize_utterance(message: Message) -> Tokens:
     return tokens
 
 
+def parse_media_time_from_message(message: Message) -> Optional[dt.datetime]:
+    """
+    Parse a time named inside the media part of a request, such as
+    "music at 6 am" in "set the alarm to play music at 6 am".
+    It goes through the create path's parser, not ``extract_dt_or_duration``, so
+    a request reads as the same time here as when it creates the alarm.
+    The alarm words are removed first, so an alarm-clock word that holds a
+    time word (fa-IR "ساعت هشدار") is not read as a time. A request whose
+    media slot names no time returns None, even when a time elsewhere in
+    the utterance picks which alarm to change ("my 7 am alarm").
+    :param message: Message associated with intent match
+    :returns: Parsed datetime or None if the media part holds no time
+    """
+    media = message.data.get("mediakind")
+    if not media:
+        return None
+    media_message = Message(message.msg_type,
+                            {**message.data, "utterance": media, "__tags__": []},
+                            message.context)
+    tokens = tokenize_utterance(media_message)
+    _strip_voc_phrase(tokens, "alarm", get_message_lang(message))
+    return parse_alert_time_from_message(media_message, tokens)
+
+
 def round_nearest_minute(alert_time: dt.datetime,
                          cutoff: dt.timedelta = dt.timedelta(minutes=10)) -> \
         dt.datetime:

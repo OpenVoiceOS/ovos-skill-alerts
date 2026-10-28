@@ -52,6 +52,7 @@ from ovos_skill_alerts.util.locale import (
     get_alert_type_from_intent,
     datetime_display
 )
+from ovos_skill_alerts.util.parse_utils import parse_media_time_from_message
 from ovos_skill_alerts.util.media import (
     ocp_query,
     ocp_request,
@@ -61,7 +62,6 @@ from ovos_skill_alerts.util.parse_utils import (
     tokenize_utterance,
     build_alert_from_intent,
     parse_alert_name_from_message,
-    parse_alert_time_from_message,
     parse_timedelta_from_message,
     parse_relative_time_from_message,
     parse_timeframe_from_message,
@@ -295,9 +295,6 @@ class AlertSkill(ConversationalSkill):
         plain alarm.
         :param message: Message associated with request
         """
-        if message.data.get("mediakind"):
-            return self.handle_ocp_alarm(message)
-
         alarm = build_alert_from_intent(message)
         if alarm.expiration is None:
             time_ = self.get_response(
@@ -311,15 +308,19 @@ class AlertSkill(ConversationalSkill):
                 self.speak_dialog("error_no_time", {"kind": "alarm"}, wait=True)
                 return
 
+        if message.data.get("mediakind"):
+            return self.handle_ocp_alarm(message, alarm)
+
         self.confirm_alert(alarm, message)
 
-    def handle_ocp_alarm(self, message: Message):
+    def handle_ocp_alarm(self, message: Message, alarm: Alert):
         """
         Handler for creating an alarm that plays media via OCP. Reached via
         handle_create_alarm's {mediakind} branch (create_alarm.intent) --
         this used to be its own dedicated intent file/decorator, now folded
         in.
         :param message: Message associated with request
+        :param alarm: The new alarm, with its expiration already resolved
         """
         if not self.bus.wait_for_response(Message("ovos.common_play.ping"),
                                           "ovos.common_play.pong"):
@@ -329,19 +330,9 @@ class AlertSkill(ConversationalSkill):
         if ocp_result is None:
             return self.speak_dialog("ocp_breaking_up")
 
-        alert_time = parse_alert_time_from_message(message)
-        # in case no time was specified, use the next upcoming alarm
-        if not alert_time:
-            alarms = self._get_alerts_list(AlertType.ALARM)
-            if not alarms:
-                return self.speak_dialog("list_alert_none_upcoming",
-                                         {"kind": spoken_alert_type(AlertType.ALARM, self.lang)})
-            alarms[0].ocp_request = ocp_result
-        else:
-            alarm = build_alert_from_intent(message)
-            alarm.ocp_request = ocp_result
-            assert alarm.media_type == "ocp"
-            self.confirm_alert(alarm, message)
+        alarm.ocp_request = ocp_result
+        assert alarm.media_type == "ocp"
+        self.confirm_alert(alarm, message)
 
     #@killable_intent()
     @intent_handler("create_timer.intent")
@@ -557,6 +548,15 @@ class AlertSkill(ConversationalSkill):
         self._display_alert(alert)
         self.alert_manager.sync_dav_item(alert)
 
+    def _alarms_ringing_at(self, when: datetime) -> List[Alert]:
+        """
+        Pending alarms that ring at ``when``, to the minute, at their next
+        expiration or at a repeat of it
+        :param when: timezone-aware datetime to look for
+        """
+        return [alarm for alarm in self._get_alerts_list(AlertType.ALARM)
+                if alarm.rings_at(when)]
+
     @intent_handler("change_media_properties.intent")
     def handle_change_media_properties(self, message: Message):
         """
@@ -564,24 +564,51 @@ class AlertSkill(ConversationalSkill):
         :param message: Message associated with request
         """
         alert_type, spoken_type = get_alert_type_from_intent(message)
-        alert: Alert = self._resolve_requested_alert(message, alert_type)
+        ringing = None
+        if alert_type == AlertType.ALARM:
+            # a time in the media part ("make my alarm play jazz at 6") asks for
+            # a new alarm, unless an existing alarm already rings at that time
+            requested = parse_media_time_from_message(message)
+            if requested:
+                ringing = self._alarms_ringing_at(requested)
+                if not ringing:
+                    return self.handle_create_alarm(message)
+        alert: Alert = self._resolve_requested_alert(message, alert_type,
+                                                     alerts=ringing)
 
-        old_media = alert.media_type
-        new_media = get_media_source_from_intent(message)
-        if new_media == "file":
+        if alert is None:
+            return self.speak_dialog("error_no_scheduled_kind",
+                                     {"kind": spoken_type}, wait=True)
+
+        old_source = alert.media_source
+        if isinstance(old_source, dict):
+            old_source = old_source.get("title") or message.data.get("media")
+        source = get_media_source_from_intent(message)
+        if source == "file":
             audio = parse_audio_file_from_message(message)
-            if audio:
-                alert.audio_file = f"file:/{audio}"
-            else:
+            if not audio:
                 return self.speak_dialog("error_no_script", {"kind": spoken_type})
-
-        if old_media:
-            self.speak_dialog("media_type_changed",
-                              {"old": translate(old_media, lang=self.lang),
-                               "new": translate(new_media, lang=self.lang)})
+            alert.audio_file = f"file:/{audio}"
+            new_source = audio
+        elif source is None:
+            return self.speak_dialog("error_no_script", {"kind": spoken_type})
         else:
-            self.speak_dialog("media_type_set",
-                              {"new": translate(new_media, lang=self.lang)})
+            if not self.bus.wait_for_response(Message("ovos.common_play.ping"),
+                                              "ovos.common_play.pong"):
+                return self.speak_dialog("ocp_missing")
+            ocp_result = self._ocp_query(message)
+            if ocp_result is None:
+                return self.speak_dialog("ocp_breaking_up")
+            alert.ocp_request = ocp_result
+            new_source = message.data.get("mediakind") or ocp_result.get("title", "")
+        self.alert_manager.write_cache_now()
+        self.alert_manager.sync_dav_item(alert)
+
+        if old_source:
+            self.speak_dialog("media_type_changed",
+                              {"old": old_source, "new": new_source})
+        else:
+            self.speak_dialog("media_type_set", {"new": new_source})
 
     # Query Alerts
     @intent_handler("list_alerts.intent")
@@ -1328,20 +1355,22 @@ class AlertSkill(ConversationalSkill):
             alert_type: AlertType,
             tokens=None,
             disposition: AlertState = AlertState.PENDING,
-            dialog: str = "pick_multiple_entries"
+            dialog: str = "pick_multiple_entries",
+            alerts: Optional[List[Alert]] = None
     ) -> Optional[Alert]:
         """
         Resolve a valid requested alert from a user intent
         :param message: Message associated with the request
         :param alert_type: AlertType to consider
-        :param alerts: List of Alert objects to resolve from
+        :param alerts: List of Alert objects to resolve from, default all pending
         :returns: best matched Alert from alerts or None
         """
         tokens = tokens or tokenize_utterance(message)
         requested_time, requested_name = parse_alert_name_and_time_from_message(message, tokens)
 
-        alerts = self._get_alerts_list(alert_type,
-                                       disposition=disposition)
+        if alerts is None:
+            alerts = self._get_alerts_list(alert_type,
+                                           disposition=disposition)
         if not alerts:
             return None
 
