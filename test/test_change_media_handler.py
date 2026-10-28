@@ -339,3 +339,67 @@ def test_only_the_alarm_that_rings_at_the_time_is_offered_for_the_media():
     skill.handle_create_alarm.assert_not_called()
     assert daily.ocp_request == {"title": "Radio X"}
     assert other_day.ocp_request is None
+
+
+def _two_hourly_alarms_ringing_together(day):
+    """Two alarms that repeat every two hours and both ring at 07:00 on ``day``"""
+    return [Alert.create(expiration=_seven(day) - dt.timedelta(hours=hours),
+                         alert_name=name, alert_type=AlertType.ALARM,
+                         repeat_frequency=dt.timedelta(hours=2))
+            for name, hours in (("early", 4), ("late", 2))]
+
+
+def test_alarms_that_ring_together_are_all_offered_and_the_picked_one_gets_the_media():
+    early, late = _two_hourly_alarms_ringing_together(1)
+    skill = _skill_with(early, late)
+    skill._resolve_requested_alert = lambda *args, **kwargs: \
+        AlertSkill._resolve_requested_alert(skill, *args, **kwargs)
+    skill._pick_one_by_name = lambda alerts, dialog="": \
+        AlertSkill._pick_one_by_name(skill, alerts, dialog)
+    skill.ask_selection = Mock(return_value="late")
+    media = f"jazz at 7 am on {_on_day(1)}"
+    AlertSkill.handle_change_media_properties(
+        skill, _message(f"make my alarm play {media}", mediakind=media))
+    skill.handle_create_alarm.assert_not_called()
+    assert skill.ask_selection.call_args[0][0] == ["early", "late"]
+    assert skill.speak_dialog.call_args_list[0][0][0] == "pick_multiple_entries"
+    assert late.ocp_request == {"title": "Radio X"}
+    assert early.ocp_request is None
+    assert "error_no_scheduled_kind" not in \
+        [call[0][0] for call in skill.speak_dialog.call_args_list]
+
+
+def _declining_skill(*alarms):
+    skill = _skill_with(*alarms)
+    skill._resolve_requested_alert = lambda *args, **kwargs: \
+        AlertSkill._resolve_requested_alert(skill, *args, **kwargs)
+    skill._pick_one_by_name = lambda alerts, dialog="": \
+        AlertSkill._pick_one_by_name(skill, alerts, dialog)
+    skill.ask_selection = Mock(return_value=None)
+    skill.get_response = Mock(return_value=None)
+    return skill
+
+
+def test_a_declined_picker_over_alarms_that_ring_together_is_asked_once():
+    alarms = _two_hourly_alarms_ringing_together(1)
+    skill = _declining_skill(*alarms)
+    media = f"jazz at 7 am on {_on_day(1)}"
+    AlertSkill.handle_change_media_properties(
+        skill, _message(f"make my alarm play {media}", mediakind=media))
+    assert skill.ask_selection.call_count == 1
+    assert skill.speak_dialog.call_args[0][0] == "error_no_scheduled_kind"
+    assert [alarm.ocp_request for alarm in alarms] == [None, None]
+
+
+def test_a_declined_picker_over_alarms_due_at_the_time_is_asked_once():
+    daily = Alert.create(expiration=_seven(1), alert_name="daily",
+                         alert_type=AlertType.ALARM, repeat_days=set(Weekdays))
+    one_off = Alert.create(expiration=_seven(1), alert_name="oneoff",
+                           alert_type=AlertType.ALARM)
+    skill = _declining_skill(daily, one_off)
+    media = f"jazz at 7 am on {_on_day(1)}"
+    AlertSkill.handle_change_media_properties(
+        skill, _message(f"make my alarm play {media}", mediakind=media))
+    assert skill.ask_selection.call_count == 1
+    assert skill.speak_dialog.call_args[0][0] == "error_no_scheduled_kind"
+    assert daily.ocp_request is None and one_off.ocp_request is None

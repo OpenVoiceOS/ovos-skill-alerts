@@ -152,6 +152,13 @@ class TestChangeMediaIntentWithATime(TestCase):
         self.skill.alert_manager.add_alert(alarm)
         return alarm
 
+    def _seed_named(self, name, expiration, **kwargs):
+        from ovos_skill_alerts.util import AlertType
+        from ovos_skill_alerts.util.alert import Alert
+        self.skill.alert_manager.add_alert(
+            Alert.create(expiration=expiration, alert_name=name,
+                         alert_type=AlertType.ALARM, lang=LANG, **kwargs))
+
     def _sorted_alarms(self):
         return sorted(self._alarms(), key=lambda alarm: alarm.expiration)
 
@@ -207,3 +214,49 @@ class TestChangeMediaIntentWithATime(TestCase):
         self.assertEqual([a.expiration for a in alarms], [first, other])
         self.assertIsNone(alarms[0].ocp_request)
         self.assertEqual(alarms[1].ocp_request, STATION)
+
+    def test_alarms_that_ring_together_are_offered_and_the_picked_one_gets_the_media(self):
+        offered = []
+        original = self.skill.ask_selection
+        self.skill.ask_selection = lambda options, *args, **kwargs: (
+            offered.append(list(options)) or options[1])
+        try:
+            first = _day_at_seven(1)
+            names = ("early", "late")
+            for name, hours in zip(names, (4, 2)):
+                self._seed_named(name, first - dt.timedelta(hours=hours),
+                                 repeat_frequency=dt.timedelta(hours=2))
+            messages = self._change_media(
+                mediakind=f"jazz at 7 am on {first:%A}".lower())
+        finally:
+            self.skill.ask_selection = original
+        self.assertEqual(offered, [["early", "late"]])
+        by_name = {a.alert_name: a for a in self._alarms()}
+        self.assertEqual(sorted(by_name), ["early", "late"])
+        self.assertEqual(by_name["late"].ocp_request, STATION)
+        self.assertIsNone(by_name["early"].ocp_request)
+        dialogs = [m.data.get("meta", {}).get("dialog") for m in messages
+                   if m.msg_type == "ovos.utterance.speak"]
+        self.assertNotIn("error_no_scheduled_kind", dialogs)
+
+    def test_a_declined_picker_is_asked_once_and_changes_no_alarm(self):
+        asked = []
+        original = (self.skill.ask_selection, self.skill.get_response)
+        self.skill.ask_selection = lambda options, *args, **kwargs: \
+            asked.append(list(options))
+        self.skill.get_response = lambda *args, **kwargs: None
+        try:
+            from ovos_skill_alerts.util import Weekdays
+            first = _day_at_seven(1)
+            self._seed_named("daily", first, repeat_days=set(Weekdays))
+            self._seed_named("oneoff", first)
+            messages = self._change_media(
+                mediakind=f"jazz at 7 am on {first:%A}".lower())
+        finally:
+            self.skill.ask_selection, self.skill.get_response = original
+        self.assertEqual(len(asked), 1)
+        self.assertEqual([a.ocp_request for a in self._alarms()],
+                         [None] * len(self._alarms()))
+        dialogs = [m.data.get("meta", {}).get("dialog") for m in messages
+                   if m.msg_type == "ovos.utterance.speak"]
+        self.assertIn("error_no_scheduled_kind", dialogs)

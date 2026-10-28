@@ -573,8 +573,8 @@ class AlertSkill(ConversationalSkill):
                 ringing = self._alarms_ringing_at(requested)
                 if not ringing:
                     return self.handle_create_alarm(message)
-        alert: Alert = self._resolve_requested_alert(message, alert_type,
-                                                     alerts=ringing)
+        alert: Alert = self._resolve_requested_alert(
+            message, alert_type, alerts=ringing, ask_if_unmatched=bool(ringing))
 
         if alert is None:
             return self.speak_dialog("error_no_scheduled_kind",
@@ -1356,13 +1356,15 @@ class AlertSkill(ConversationalSkill):
             tokens=None,
             disposition: AlertState = AlertState.PENDING,
             dialog: str = "pick_multiple_entries",
-            alerts: Optional[List[Alert]] = None
+            alerts: Optional[List[Alert]] = None,
+            ask_if_unmatched: bool = False
     ) -> Optional[Alert]:
         """
         Resolve a valid requested alert from a user intent
         :param message: Message associated with the request
         :param alert_type: AlertType to consider
         :param alerts: List of Alert objects to resolve from, default all pending
+        :param ask_if_unmatched: ask the user to pick from ``alerts`` when none matches
         :returns: best matched Alert from alerts or None
         """
         tokens = tokens or tokenize_utterance(message)
@@ -1425,7 +1427,8 @@ class AlertSkill(ConversationalSkill):
             if match_acc >= 90:
                 candidates.append((match_acc, alert,))
         if not candidates:
-            return None
+            return self._pick_one_by_name(alerts, dialog) \
+                if ask_if_unmatched else None
 
         candidates.sort(key=lambda match: match[0], reverse=True)
         return self._pick_one_by_name([alert for _, alert in candidates],
