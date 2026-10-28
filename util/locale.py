@@ -143,7 +143,8 @@ def spoken_duration(alert_time: Union[dt.timedelta, dt.datetime],
     if isinstance(alert_time, dt.datetime):
         anchor_time = anchor_time or \
                       dt.datetime.now(alert_time.tzinfo).replace(microsecond=0)
-        remaining_time: dt.timedelta = alert_time - anchor_time
+        remaining_time: dt.timedelta = \
+            alert_time.astimezone(dt.timezone.utc) - anchor_time.astimezone(dt.timezone.utc)
     else:
         remaining_time = alert_time
 
@@ -181,47 +182,49 @@ def get_abbreviation(wd: Weekdays, lang=None) -> str:
         return translate("abbreviation_sunday", lang=lang)
 
 
-def _migrate_adapt(message: Message):
-    """if intent is not triggered via adapt (other intent plugins exist) the keyword matches won't be present in message.data
+_INTENT_ALERT_TYPES = {
+    "create_alarm": AlertType.ALARM,
+    "create_timer": AlertType.TIMER,
+    "create_reminder": AlertType.REMINDER,
+    "create_event": AlertType.EVENT,
+}
 
-    This util method is here as a compatibility layer since this skill was designed to depend heavily on adapt particularities"""
-    utterance = message.data.get("utterance")
-    if utterance:
-        lang = get_message_lang(message)
-        for k in ["event", "alarm", "wake", "timer", "reminder", "remind", "alert"]:
-            word = message.data.get(k) or kw_match(utterance, k, lang)
-            if word:
-                message.data[k] = word
-    return message
+# vocabularies in priority order; the first one in the utterance names the type
+_VOC_ALERT_TYPES = (
+    ("alarm", AlertType.ALARM),
+    ("wake", AlertType.ALARM),
+    ("timer", AlertType.TIMER),
+    ("event", AlertType.EVENT),
+    ("reminder", AlertType.REMINDER),
+    ("remind", AlertType.REMINDER),
+)
 
 
 def get_alert_type_from_intent(message: Message) \
         -> Tuple[AlertType, str]:
     """
-    Determines the alert type from an intent message using data flags and keyword matching.
-    
-    Examines the message data and utterance to identify if the intent refers to an alarm, timer, event, reminder, or generic alert. Returns a tuple containing the detected AlertType and its localized spoken string.
-     
+    Determines the alert type of an intent message.
+
+    A create intent names its type. For any other intent, the first alert
+    type vocabulary found in the utterance decides, and AlertType.ALL is the
+    answer when none is found. The message is not changed.
+
     Args:
-        message: The intent message containing data and utterance.
-    
+        message: The intent message.
+
     Returns:
         A tuple of (AlertType, spoken_type), where spoken_type is the localized string for the detected alert type.
     """
-    message = _migrate_adapt(message)
     lang = get_message_lang(message)
-    if message.data.get("alarm") or message.data.get("wake"):
-        return AlertType.ALARM, translate("alarm", lang)
-    elif message.data.get('timer'):
-        return AlertType.TIMER, translate("timer", lang)
-    elif message.data.get('event'):
-        return AlertType.EVENT, translate("event", lang)
-    elif message.data.get('reminder') or \
-            message.data.get('remind'):
-        return AlertType.REMINDER, translate("reminder", lang)
-    elif message.data.get('alert'):
-        return AlertType.ALL, translate("alert", lang)
-    return AlertType.ALL, translate("alert", lang)
+    # the topic is "<skill_id>:<intent>", with a ".intent" suffix before ovos-workshop strips it
+    intent_name = message.msg_type.rpartition(":")[2].removesuffix(".intent")
+    alert_type = _INTENT_ALERT_TYPES.get(intent_name)
+    if alert_type is None:
+        utterance = message.data.get("utterance", "")
+        alert_type = next((type_ for voc, type_ in _VOC_ALERT_TYPES
+                           if voc_match(utterance, voc, lang)),
+                          AlertType.ALL)
+    return alert_type, spoken_alert_type(alert_type, lang)
 
 
 def get_alert_type(message: Message) -> AlertType:
@@ -355,23 +358,3 @@ def voc_match(utterance: str,
             return any(w.strip().lower() == utterance.lower() for w in words)
         else:
             return any([re.match(r".*\b" + re.escape(w.lower()) + r"\b.*", utterance.lower()) for w in words])
-
-
-# TODO - get rid of this and use the skill methods, dont reimplement... pass skill object around if needed
-def kw_match(utterance: str,
-             resource: str,
-             lang: str = None,
-             exact: bool = False) -> Optional[str]:
-    if not resource or not utterance:
-        return None
-
-    if not resource.endswith(".voc"):
-        resource = f"{resource}.voc"
-    words = get_words_list(resource, lang)
-
-    for w in words:
-        if exact:
-            if w.strip() == utterance.lower():
-                return w
-        elif re.match(r".*\b" + re.escape(w.lower()) + r"\b.*", utterance.lower()):
-            return w

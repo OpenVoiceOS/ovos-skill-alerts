@@ -41,6 +41,7 @@ test = [
     "padacioso>=2.5.4a1",
     "ovos-m2v-pipeline>=0.37.3a1",
     "ovos-skill-date-time",
+    "time-machine",
 ]
 dev = ["mock", "ovoscope>=0.13.1", "ovos-adapt-parser"]
 
