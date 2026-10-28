@@ -123,7 +123,7 @@ setup(
                  "ovos-spec-tools>=1.5.0a1", "pytest>=7.0.0", "pytest-timeout>=2.0.0",
                  "ovos-skill-naptime>=0.4.0a5", "padacioso",
                  "ovos-m2v-pipeline>=0.37.3a1",
-                 "ovos-skill-date-time"],
+                 "ovos-skill-date-time", "time-machine"],
         "dev": ["mock", "ovoscope>=0.13.1", "ovos-adapt-parser"],
     },
     author=",".join(AUTHORS),
