@@ -1,0 +1,29 @@
+{
+  "name": "Alertas",
+  "description": "Uma habilidade para gerir alarmes, temporizadores, lembretes, eventos e listas de tarefas e, opcionalmente, sincronizá-los com um serviço CalDAV.",
+  "examples": [
+    "põe um alarme para as 8 da manhã",
+    "põe um temporizador de 30 minutos",
+    "agenda um compromisso de ténis na sexta às 14 horas",
+    "acorda-me às 8 da manhã",
+    "acorda-me com música às 8 da manhã",
+    "lembra-me de levar o lixo à rua às 19 horas",
+    "cria um lembrete para a consulta às 15 horas",
+    "novo alarme",
+    "temporizador novo de 10 minutos",
+    "lista alarmes",
+    "cancelar alarmes",
+    "cancelar temporizadores",
+    "cancelar lembretes",
+    "alertas perdidos"
+  ],
+  "tags": [
+    "Produtividade",
+    "Diário",
+    "alerta",
+    "alarme",
+    "temporizador",
+    "lembrete",
+    "agenda"
+  ]
+}

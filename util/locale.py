@@ -1,10 +1,9 @@
 import datetime as dt
-import os
 import re
-from os.path import join, dirname
+from functools import lru_cache
+from os.path import join, dirname, splitext
 from typing import Optional, List, Union, Tuple
 
-from langcodes import closest_match
 from ovos_bus_client.message import Message
 from ovos_bus_client.util import get_message_lang
 from ovos_config.locale import get_default_lang
@@ -17,7 +16,7 @@ from ovos_date_parser import (
 from ovos_skill_alerts.util import AlertType, Weekdays, WEEKDAYS, WEEKENDS, EVERYDAY
 from ovos_skill_alerts.util.alert import Alert
 from ovos_skill_alerts.util.config import use_24h_format, get_date_format
-from ovos_utils.bracket_expansion import expand_template
+from ovos_spec_tools.resources import LocaleResources
 from ovos_workshop.skills.ovos import join_word_list
 
 
@@ -62,15 +61,28 @@ def date_display(dt_obj: dt.datetime,
     return display
 
 
-# TODO - get rid of this and use the skill methods, dont reimplement... pass skill object around if needed
+@lru_cache(maxsize=1)
+def _locale_resources() -> LocaleResources:
+    """The skill's locale/ tree, read by the OVOS-INTENT-2 reference loader."""
+    return LocaleResources(join(dirname(dirname(__file__)), "locale"))
+
+
+def locale_voc_match(utterance: str, base_name: str, lang: str = None) -> bool:
+    """Whether ``utterance`` holds a phrase of ``<base_name>.voc``, by the
+    OVOS-INTENT-2 occurrence rule: whole words, ignoring case, accents and
+    punctuation."""
+    if not utterance:
+        return False
+    return _locale_resources().voc_match(utterance, base_name,
+                                         lang or get_default_lang())
+
 def translate(word, lang=None):
+    """The first phrase of ``<word>.dialog`` for ``lang``.
+
+    Raises FileNotFoundError when the locale has no such dialog.
+    """
     lang = lang or get_default_lang()
-    lang = lang.lower()
-    file = find_resource(f"{word}.dialog", lang)
-    if file:
-        with open(file) as f:
-            return f.read().split("\n")[0]
-    raise FileNotFoundError
+    return _locale_resources().load_dialog(word, lang)[0]
 
 
 def spoken_alert_type(alert_type: AlertType, lang: str = None) -> str:
@@ -93,57 +105,22 @@ def spoken_alert_type(alert_type: AlertType, lang: str = None) -> str:
     return translate("alert", lang)
 
 
-# TODO - get rid of this and use the skill methods, dont reimplement... pass skill object around if needed
 def get_words_list(res_name, lang: str = None) -> List[str]:
     """
-    Returns a list of localized words from a skill resource
+    Returns the localized phrases of a skill resource, or [] if it is missing.
+    :param res_name: ``<name>.voc`` (expanded) or ``<name>.dialog`` (verbatim)
     :param lang: the language of the resource
-    :returns list of noise words
     """
     lang = lang or get_default_lang()
-    file = find_resource(res_name, lang)
-    if file:
-        with open(file) as f:
-            entries = f.read().split("\n")
-            word_list = []
-            for entry in entries:
-                if not entry or entry.startswith("#"):
-                    continue
-                word_list.extend(expand_template(entry))
-            return word_list
-    return list()
-
-
-# TODO - get rid of this and use the skill methods, dont reimplement... pass skill object around if needed
-def find_resource(res_name, lang=None):
-    """
-    Finds the path to a localized resource file for the closest supported language.
-    
-    Searches the locale directory for the resource file under the language closest to the requested one. Returns the file path if found, otherwise returns None.
-    
-    Args:
-        res_name: The name of the resource file to locate.
-    
-    Returns:
-        The path to the resource file as a string if found, or None if not found.
-    """
-    base_dir = dirname(dirname(__file__))
-    root_path = join(base_dir, "locale")
-
-    lang = lang or get_default_lang()
-    langs = os.listdir(root_path)
-    closest, score = closest_match(lang, langs, max_distance=10)
-    if closest == "und":
-        return None  # unsupported lang
-
-    path = join(root_path, closest)
-    for root, dirs, files in os.walk(path):
-        for f in files:
-            if f == res_name:
-                return join(root, f)
-
-    return None  # missing translation
-
+    name, extension = splitext(res_name)
+    if extension == ".voc":
+        return _locale_resources().voc_list(name, lang)
+    if extension == ".dialog":
+        try:
+            return _locale_resources().load_dialog(name, lang)
+        except FileNotFoundError:
+            return []
+    raise ValueError(f"not a .voc or .dialog resource: {res_name!r}")
 
 def spoken_duration(alert_time: Union[dt.timedelta, dt.datetime],
                     anchor_time: Optional[dt.datetime] = None,
@@ -166,7 +143,8 @@ def spoken_duration(alert_time: Union[dt.timedelta, dt.datetime],
     if isinstance(alert_time, dt.datetime):
         anchor_time = anchor_time or \
                       dt.datetime.now(alert_time.tzinfo).replace(microsecond=0)
-        remaining_time: dt.timedelta = alert_time - anchor_time
+        remaining_time: dt.timedelta = \
+            alert_time.astimezone(dt.timezone.utc) - anchor_time.astimezone(dt.timezone.utc)
     else:
         remaining_time = alert_time
 
@@ -204,47 +182,49 @@ def get_abbreviation(wd: Weekdays, lang=None) -> str:
         return translate("abbreviation_sunday", lang=lang)
 
 
-def _migrate_adapt(message: Message):
-    """if intent is not triggered via adapt (other intent plugins exist) the keyword matches won't be present in message.data
+_INTENT_ALERT_TYPES = {
+    "create_alarm": AlertType.ALARM,
+    "create_timer": AlertType.TIMER,
+    "create_reminder": AlertType.REMINDER,
+    "create_event": AlertType.EVENT,
+}
 
-    This util method is here as a compatibility layer since this skill was designed to depend heavily on adapt particularities"""
-    utterance = message.data.get("utterance")
-    if utterance:
-        lang = get_message_lang(message)
-        for k in ["event", "alarm", "wake", "timer", "reminder", "remind", "alert"]:
-            word = message.data.get(k) or kw_match(utterance, k, lang)
-            if word:
-                message.data[k] = word
-    return message
+# vocabularies in priority order; the first one in the utterance names the type
+_VOC_ALERT_TYPES = (
+    ("alarm", AlertType.ALARM),
+    ("wake", AlertType.ALARM),
+    ("timer", AlertType.TIMER),
+    ("event", AlertType.EVENT),
+    ("reminder", AlertType.REMINDER),
+    ("remind", AlertType.REMINDER),
+)
 
 
 def get_alert_type_from_intent(message: Message) \
         -> Tuple[AlertType, str]:
     """
-    Determines the alert type from an intent message using data flags and keyword matching.
-    
-    Examines the message data and utterance to identify if the intent refers to an alarm, timer, event, reminder, or generic alert. Returns a tuple containing the detected AlertType and its localized spoken string.
-     
+    Determines the alert type of an intent message.
+
+    A create intent names its type. For any other intent, the first alert
+    type vocabulary found in the utterance decides, and AlertType.ALL is the
+    answer when none is found. The message is not changed.
+
     Args:
-        message: The intent message containing data and utterance.
-    
+        message: The intent message.
+
     Returns:
         A tuple of (AlertType, spoken_type), where spoken_type is the localized string for the detected alert type.
     """
-    message = _migrate_adapt(message)
     lang = get_message_lang(message)
-    if message.data.get("alarm") or message.data.get("wake"):
-        return AlertType.ALARM, translate("alarm", lang)
-    elif message.data.get('timer'):
-        return AlertType.TIMER, translate("timer", lang)
-    elif message.data.get('event'):
-        return AlertType.EVENT, translate("event", lang)
-    elif message.data.get('reminder') or \
-            message.data.get('remind'):
-        return AlertType.REMINDER, translate("reminder", lang)
-    elif message.data.get('alert'):
-        return AlertType.ALL, translate("alert", lang)
-    return AlertType.ALL, translate("alert", lang)
+    # the topic is "<skill_id>:<intent>", with a ".intent" suffix before ovos-workshop strips it
+    intent_name = message.msg_type.rpartition(":")[2].removesuffix(".intent")
+    alert_type = _INTENT_ALERT_TYPES.get(intent_name)
+    if alert_type is None:
+        utterance = message.data.get("utterance", "")
+        alert_type = next((type_ for voc, type_ in _VOC_ALERT_TYPES
+                           if voc_match(utterance, voc, lang)),
+                          AlertType.ALL)
+    return alert_type, spoken_alert_type(alert_type, lang)
 
 
 def get_alert_type(message: Message) -> AlertType:
@@ -378,23 +358,3 @@ def voc_match(utterance: str,
             return any(w.strip().lower() == utterance.lower() for w in words)
         else:
             return any([re.match(r".*\b" + re.escape(w.lower()) + r"\b.*", utterance.lower()) for w in words])
-
-
-# TODO - get rid of this and use the skill methods, dont reimplement... pass skill object around if needed
-def kw_match(utterance: str,
-             resource: str,
-             lang: str = None,
-             exact: bool = False) -> Optional[str]:
-    if not resource or not utterance:
-        return None
-
-    if not resource.endswith(".voc"):
-        resource = f"{resource}.voc"
-    words = get_words_list(resource, lang)
-
-    for w in words:
-        if exact:
-            if w.strip() == utterance.lower():
-                return w
-        elif re.match(r".*\b" + re.escape(w.lower()) + r"\b.*", utterance.lower()):
-            return w

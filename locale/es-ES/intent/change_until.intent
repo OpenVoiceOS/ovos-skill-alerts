@@ -1,0 +1,10 @@
+cambia la duración de mi {schedkind} a {duration:duration}
+extiende mi {schedkind} hasta {duration:duration}
+ajusta la longitud del próximo {schedkind} a {duration:duration}
+haz que el {schedkind} dure {duration:duration}
+cambia mi {schedkind} para que vaya hasta {duration:duration}
+acorta la duración de mi {schedkind} a {duration:duration}
+(que|haz que) (la|mi) alarma (dure|suene) hasta más tarde
+haz que mi alarma dure un poco más
+alarga la duración de mi alarma
+que el evento termine más tarde

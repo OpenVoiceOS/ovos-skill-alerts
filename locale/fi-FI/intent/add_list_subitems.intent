@@ -1,0 +1,5 @@
+lisää (asioita|kohteita) listaan [{list_name}]
+lisää (asioita|kohteita) {list_name} listaan
+lisää {items} (listalle|listaan|ostoslistalle|kauppalistalle|tehtävälistalle)
+laita {items} (listalle|ostoslistalle|kauppalistalle)
+lisää {items} (tehtävälistalleni|ostoslistalleni|kauppalistalleni|muistilistalleni)

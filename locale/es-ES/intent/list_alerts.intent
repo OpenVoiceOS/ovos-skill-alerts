@@ -1,0 +1,15 @@
+(qué|cuáles) {alertkind} tengo
+cuáles son mis {alertkind}
+(lista|muestra|dime|lee) mis {alertkind}
+(lista|muestra|dime|lee) {alertkind}
+tengo (algún|alguna) {alertkind}
+(hay|existe) (algún|alguna) {alertkind}
+hay {alertkind} (programados|programadas|guardados|guardadas)
+(cuándo|cuál) es mi próximo {alertkind}
+qué tengo (programado|guardado|apuntado)
+(léeme|enséñame) todas las alarmas que siguen activas
+(hay|queda) alguna alarma por sonar (hoy|esta semana)
+(dime|enséñame) si hay alguna alarma activa
+léeme todas las alarmas que tengo programadas
+qué alarmas tengo puestas para esta semana
+léeme la lista de mis alarmas
