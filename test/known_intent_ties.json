@@ -1,5 +1,12 @@
 {
  "cs-CZ": {
+  "nastav budík, aby přehrával hudbu": {
+   "tied": [
+    "change_media_properties",
+    "create_alarm"
+   ],
+   "winner": "create_alarm"
+  },
   "odstraň všechno z mého nákupního seznamu": {
    "tied": [
     "cancel_alert",
