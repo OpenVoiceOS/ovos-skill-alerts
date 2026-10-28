@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.12.56a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.12.56a1) (2026-10-28)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.12.54a1...0.12.56a1)
+
+**Merged pull requests:**
+
+- fix: count hour and minute offsets as elapsed time across a DST change [\#463](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/463) ([openvoiceos-bot](https://github.com/openvoiceos-bot))
+- fix: ask which alarm gets the media when several ring at the requested time [\#461](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/461) ([openvoiceos-bot](https://github.com/openvoiceos-bot))
+- fix: take the alert type from the intent, not from message.data [\#458](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/458) ([openvoiceos-bot](https://github.com/openvoiceos-bot))
+- fix: pass the utterance first to voc\_match in three handlers [\#454](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/454) ([openvoiceos-bot](https://github.com/openvoiceos-bot))
+
 ## [0.12.54a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.12.54a1) (2026-10-28)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.12.53a2...0.12.54a1)
