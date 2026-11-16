@@ -1,7 +1,7 @@
 import datetime as dt
 import unittest
-from unittest.mock import patch
 
+import time_machine
 from ovos_bus_client.message import Message
 
 from ovos_skill_alerts.util.parse_utils import parse_timeframe_from_message
@@ -22,9 +22,7 @@ class TestTimeframeBetween(unittest.TestCase):
     def test_between_two_clock_times(self):
         message = _padatious_message(
             "are there any alerts between 4 pm and 5 pm")
-        with patch("ovos_skill_alerts.util.parse_utils.dt.datetime") as mock_dt:
-            mock_dt.now.return_value = ANCHOR
-            mock_dt.timedelta = dt.timedelta
+        with time_machine.travel(ANCHOR, tick=False):
             begin, end = parse_timeframe_from_message(message, timezone=dt.timezone.utc)
         self.assertEqual(begin, dt.datetime(2024, 2, 2, 16, 0, tzinfo=dt.timezone.utc))
         self.assertEqual(end, dt.datetime(2024, 2, 2, 17, 0, tzinfo=dt.timezone.utc))
@@ -32,9 +30,7 @@ class TestTimeframeBetween(unittest.TestCase):
     def test_between_two_clock_times_alt_phrasing(self):
         message = _padatious_message(
             "do i have anything between 9 am and 11 am")
-        with patch("ovos_skill_alerts.util.parse_utils.dt.datetime") as mock_dt:
-            mock_dt.now.return_value = ANCHOR
-            mock_dt.timedelta = dt.timedelta
+        with time_machine.travel(ANCHOR, tick=False):
             begin, end = parse_timeframe_from_message(message, timezone=dt.timezone.utc)
         self.assertEqual(begin, dt.datetime(2024, 2, 2, 9, 0, tzinfo=dt.timezone.utc))
         self.assertEqual(end, dt.datetime(2024, 2, 2, 11, 0, tzinfo=dt.timezone.utc))
