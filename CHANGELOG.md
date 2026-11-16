@@ -1,5 +1,39 @@
 # Changelog
 
+## [0.12.58a2](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.12.58a2) (2026-11-16)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.12.58a1...0.12.58a2)
+
+**Merged pull requests:**
+
+- test: expect single spaces in spoken remaining time [\#474](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/474) ([openvoiceos-bot](https://github.com/openvoiceos-bot))
+
+## [0.12.58a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.12.58a1) (2026-10-28)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.12.57a1...0.12.58a1)
+
+## [0.12.57a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.12.57a1) (2026-10-28)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.12.56a1...0.12.57a1)
+
+## [0.12.56a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.12.56a1) (2026-10-28)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.12.55a1...0.12.56a1)
+
+**Merged pull requests:**
+
+- fix: count hour and minute offsets as elapsed time across a DST change [\#463](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/463) ([openvoiceos-bot](https://github.com/openvoiceos-bot))
+
+## [0.12.55a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.12.55a1) (2026-10-28)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.12.54a1...0.12.55a1)
+
+**Merged pull requests:**
+
+- fix: ask which alarm gets the media when several ring at the requested time [\#461](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/461) ([openvoiceos-bot](https://github.com/openvoiceos-bot))
+- fix: take the alert type from the intent, not from message.data [\#458](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/458) ([openvoiceos-bot](https://github.com/openvoiceos-bot))
+- fix: pass the utterance first to voc\_match in three handlers [\#454](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/454) ([openvoiceos-bot](https://github.com/openvoiceos-bot))
+
 ## [0.12.54a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.12.54a1) (2026-10-28)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.12.53a2...0.12.54a1)
@@ -333,17 +367,9 @@
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.12.30a2...0.12.31a1)
 
-**Merged pull requests:**
-
-- fix: a lapsed pending alert no longer breaks every timeframe query [\#367](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/367) ([openvoiceos-bot](https://github.com/openvoiceos-bot))
-
 ## [0.12.30a2](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.12.30a2) (2026-09-28)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.12.30a1...0.12.30a2)
-
-**Merged pull requests:**
-
-- locale: draft es-CO from es-ES [\#368](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/368) ([openvoiceos-bot](https://github.com/openvoiceos-bot))
 
 ## [0.12.30a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.12.30a1) (2026-09-28)
 
@@ -739,15 +765,15 @@
 
 ## [0.3.0a4](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.3.0a4) (2026-08-12)
 
-[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.3.0a3...0.3.0a4)
-
-## [0.3.0a3](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.3.0a3) (2026-08-11)
-
-[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.3.0a2...0.3.0a3)
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.3.0a2...0.3.0a4)
 
 ## [0.3.0a2](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.3.0a2) (2026-08-11)
 
-[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.3.0a1...0.3.0a2)
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.3.0a3...0.3.0a2)
+
+## [0.3.0a3](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.3.0a3) (2026-08-11)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.3.0a1...0.3.0a3)
 
 ## [0.3.0a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.3.0a1) (2026-08-11)
 
