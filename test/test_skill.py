@@ -2866,7 +2866,7 @@ class TestParseUtils(unittest.TestCase):
                 ]
             )
         )
-        self.assertEqual(to_speak, "six days  twenty three hours")
+        self.assertEqual(to_speak, "six days twenty three hours")
 
         days_alert = now_time + dt.timedelta(
             weeks=1, days=1, hours=1, minutes=1, seconds=1
@@ -2882,7 +2882,7 @@ class TestParseUtils(unittest.TestCase):
                 ]
             )
         )
-        self.assertEqual(to_speak, "eight days ")
+        self.assertEqual(to_speak, "eight days")
 
         # w/ timedelta
         eight_hours = dt.timedelta(hours=8)
