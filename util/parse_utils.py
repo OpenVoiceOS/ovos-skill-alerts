@@ -36,8 +36,10 @@ from dateutil.relativedelta import relativedelta
 from ovos_bus_client.message import Message, dig_for_message
 from ovos_bus_client.util import get_message_lang
 from ovos_config.locale import get_default_lang, get_default_tz
-from ovos_date_parser import nice_time, nice_day, extract_datetime, extract_duration
-from ovos_number_parser import extract_number
+import chronologia
+from chronologia import DAY_PARTS, extract_timespan
+from numtag import Reason, tag_numbers
+from ovos_date_parser import nice_time, nice_day
 from ovos_skill_alerts.util import AlertPriority, Weekdays, AlertType, DAVType, LOCAL_USER
 from ovos_skill_alerts.util.alert import Alert
 from ovos_skill_alerts.util.config import use_24h_format, find_resource_file, get_date_format, get_session_tz
@@ -53,6 +55,100 @@ from ovos_utterance_normalizer import UtteranceNormalizerPlugin
 from rapidfuzz import fuzz
 
 
+#: A span this narrow names an instant: "at 9 am" is a minute wide.
+_INSTANT = dt.timedelta(minutes=1)
+
+
+def _wall_clock(anchor: Optional[dt.datetime]) -> dt.datetime:
+    """The anchor as chronologia reads it: a naive wall-clock time.
+
+    With no anchor, "now" is the wall clock of the configured time zone.
+    """
+    anchor = anchor or dt.datetime.now(get_default_tz())
+    return anchor.replace(tzinfo=None)
+
+
+def extract_duration(text: str, lang: str,
+                     anchor: Optional[dt.datetime] = None
+                     ) -> Tuple[Optional[dt.timedelta], str]:
+    """Read a length of time with chronologia.
+
+    A month or a year is counted on the calendar from ``anchor``.
+    :returns: the duration and the words around it, or (None, text)
+    """
+    found = chronologia.extract_duration(text, lang.split("-")[0].lower(),
+                                         anchor=_wall_clock(anchor))
+    if found is None:
+        return None, text
+    return found.duration, found.remainder
+
+
+def _day_parts(code: str) -> set:
+    """The (start, end) times of the locale's parts of the day."""
+    own = {(part.start, part.end) for part in DAY_PARTS.values() if part.lang == code}
+    return own or {(part.start, part.end) for part in DAY_PARTS.values() if part.lang is None}
+
+
+def _read_timespan(text: str, lang: str, anchor: Optional[dt.datetime] = None
+                   ) -> Optional[Tuple[dt.datetime, Optional[dt.datetime], str]]:
+    """Read a point in time with chronologia, and the days it covers.
+
+    chronologia answers the stretch of time a phrase names. An alert needs
+    one instant, so the start of the span answers, with one exception: a
+    part of the day said with no clock ("tomorrow morning", "tonight")
+    answers the middle of its band, cut at midnight, or the anchor once
+    that middle has passed. These are rulings 10 and 10a of the chronologia
+    disagreement classes.
+
+    A span of whole days ("tomorrow", "this week") also gives its last
+    second, so a time frame covers every day the phrase names.
+    :returns: the instant and the last second of a span of whole days (or
+        None), both in the anchor's zone, and the words around them; or None
+    """
+    code = lang.split("-")[0].lower()
+    wall = _wall_clock(anchor)
+    found = extract_timespan(text, code, wall)
+    if found is None:
+        return None
+    start, end = found.span.start_datetime, found.span.end_datetime
+    if start is None or end is None:
+        return None
+    zone = anchor.tzinfo if anchor else get_default_tz()
+    last = None
+    if start.time() == dt.time() and end - start >= dt.timedelta(days=1):
+        last = (end - dt.timedelta(seconds=1)).replace(tzinfo=zone)
+    elif end - start > _INSTANT and (start.time(), end.time()) in _day_parts(code):
+        end = min(end, start.replace(hour=0, minute=0, second=0, microsecond=0)
+                  + dt.timedelta(days=1))
+        middle = start + (end - start) / 2
+        start = wall if middle < wall < end else middle
+    return start.replace(tzinfo=zone), last, found.remainder
+
+
+def extract_datetime(text: str, lang: str,
+                     anchor: Optional[dt.datetime] = None
+                     ) -> Optional[Tuple[dt.datetime, str]]:
+    """Read a point in time with chronologia, as ``_read_timespan`` does.
+
+    :returns: the instant in the anchor's zone and the words around it, or None
+    """
+    found = _read_timespan(text, lang, anchor)
+    if found is None:
+        return None
+    return found[0], found[2]
+
+
+def extract_count(text: str, lang: str) -> Optional[int]:
+    """Read the first whole number in ``text`` with numtag.
+
+    A word that is also an article ("an alarm", "uma hora") is no count.
+    """
+    for mention in tag_numbers(text, lang.split("-")[0].lower()):
+        if Reason.ARTICLE not in mention.reasons and mention.value.lstrip("-").isdigit():
+            return int(mention.value)
+    return None
+
+
 class Tokens(list):
     def __init__(self, chunks: list, message: Message = None):
         super().__init__(chunks)
@@ -61,6 +157,7 @@ class Tokens(list):
         self.message = message
         self.time_stripped = False
         self.extracted_time: Union[dt.datetime, dt.timedelta] = None
+        self.extracted_last: Optional[dt.datetime] = None
 
     @property
     def lang(self):
@@ -88,21 +185,20 @@ class Tokens(list):
         for i, token in enumerate(self):
             if self.is_matched(token):
                 continue
-            time_ = None
-            try:
-                time_, remainder = extract_duration(token, lang=lang)
-            except TypeError:
-                pass
-            if time_ is None:
-                try:
-                    extracted_content = extract_datetime(token, lang=lang)
-                    if not extracted_content:
-                        continue
-                    time_, remainder = extracted_content
-                except TypeError:
-                    pass
-            if time_:
-                time_data.append(time_)
+            # one chunk can name several times: "monday and thursday at 9 am"
+            remainder = token
+            while remainder:
+                time_, rest = extract_duration(remainder, lang)
+                if time_ is None:
+                    found = extract_datetime(remainder, lang)
+                    if not found:
+                        break
+                    time_, rest = found
+                if time_:
+                    time_data.append(time_)
+                if len(rest) >= len(remainder):
+                    break
+                remainder = rest
             self[i] = remainder
 
         self.extracted_time = time_data[0] if time_data else None
@@ -121,7 +217,6 @@ def tokenize_utterance(message: Message) -> Tokens:
     :returns: list of utterance tokens where a tag defines a token
     """
     utterance: str = message.data.get("utterance", "").lower()
-    lang = get_message_lang(message)
     if utterance is None:
         return Tokens([], message)
 
@@ -139,10 +234,9 @@ def tokenize_utterance(message: Message) -> Tokens:
             parsed = parsed.strip("-")
             chunks.extend((parsed, word))
         chunks.append(utterance)
-    normalizer = UtteranceNormalizerPlugin.get_normalizer(lang=lang)
-    tokens = Tokens([normalizer.normalize(chunk).lower()
-                     for chunk in chunks if chunk.strip()], message)
-    return tokens
+    # chronologia folds spelled numbers itself, and a normaliser that drops
+    # the "e" of pt "seis e meia" or rewrites the clock loses the time.
+    return Tokens([chunk.strip() for chunk in chunks if chunk.strip()], message)
 
 
 def parse_media_time_from_message(message: Message) -> Optional[dt.datetime]:
@@ -399,10 +493,10 @@ def parse_repeat_from_message(message: Message,
     # (eg. a padatious template intent, which does not populate __tags__ /
     # message.data["weekdays"]/["weekends"]/["everyday"] the way adapt does).
     # In that case the recurrence phrase (eg. "weekday") is still sitting
-    # inside the token(s) that will later be handed to extract_datetime() for
-    # time parsing, and needs to be stripped here just like adapt already
-    # strips its tagged keywords, or the date parser chokes on the mixed
-    # recurrence+time phrase and returns garbage.
+    # inside the token(s) that later give the alert time and the name, and
+    # needs to be stripped here just like adapt already strips its tagged
+    # keywords: chronologia reads pt "fim de semana" as the coming weekend,
+    # and the name would keep the words.
     utt = message.data.get("utterance", "")
     if message.data.get("everyday") or voc_match(utt, "everyday", lang=lang):
         repeat_days = [Weekdays(i) for i in range(0, 7)]
@@ -438,7 +532,7 @@ def parse_repeat_from_message(message: Message,
                     # Don't try to parse time intervals
                     remainder += f' {word}'
                     continue
-                extracted_content = extract_datetime(word, lang=lang)
+                extracted_content = extract_datetime(word, lang)
                 if not extracted_content:
                     remainder += f' {word}'
                     continue
@@ -453,10 +547,10 @@ def parse_repeat_from_message(message: Message,
 
         # Parse repeat interval
         if not repeat_days:
-            extracted_duration = extract_duration(repeat_clause, lang=lang)
+            extracted_duration = extract_duration(repeat_clause, lang)
             if extracted_duration and not extracted_duration[0]:
                 # Replace "the next week" with "1 week", etc.
-                extracted_duration = extract_duration(f"1 {extracted_duration[1]}", lang=lang)
+                extracted_duration = extract_duration(f"1 {extracted_duration[1]}", lang)
             if extracted_duration and extracted_duration[0]:
                 duration, remainder = extracted_duration
                 if remainder and remainder.strip():
@@ -509,15 +603,15 @@ def parse_end_condition_from_message(message: Message,
             return None
         end_clause = tokens.pop(idx)
 
-        extracted_duration = extract_duration(end_clause, lang=lang)
+        extracted_duration = extract_duration(end_clause, lang, anchor_date)
         # extract duration first because of overlaps
         if extracted_duration and not extracted_duration[0]:
             # Replace "the next week" with "1 week", etc.
-            extracted_duration = extract_duration(f"1 {extracted_duration[1]}", lang=lang)
+            extracted_duration = extract_duration(f"1 {extracted_duration[1]}", lang, anchor_date)
         if extracted_duration and extracted_duration[0]:
             end_time, remainder = extracted_duration
         else:
-            extracted_dt = extract_datetime(end_clause, anchorDate=anchor_date, lang=lang)
+            extracted_dt = extract_datetime(end_clause, lang, anchor_date)
             if extracted_dt is None:
                 end_time = extracted_dt
                 remainder = end_clause
@@ -563,17 +657,18 @@ def parse_alert_time_from_message(message: Message,
     # anchor_time = anchor_time.replace(tzinfo=dt.timezone(tz))
 
     alert_time = None
+    tokens.extracted_last = None
     for token in tokens.unmatched():
         LOG.debug(f"Trying to parse time from token: {token}")
-        extracted = extract_duration(token, lang=lang)
+        extracted = extract_duration(token, lang, anchor_time)
         if extracted and extracted[0]:
             duration, remainder = extracted
             alert_time = _add_elapsed(anchor_time, duration)
             tokens[tokens.index(token)] = remainder
             break
-        extracted = extract_datetime(token, anchorDate=anchor_time, lang=lang)
-        if extracted and extracted[0]:
-            alert_time, remainder = extracted
+        extracted = _read_timespan(token, lang, anchor_time)
+        if extracted:
+            alert_time, tokens.extracted_last, remainder = extracted
             tokens[tokens.index(token)] = remainder
             break
     LOG.debug(f"Parsed alert time from message: {alert_time}")
@@ -635,7 +730,7 @@ def parse_alert_priority_from_message(message: Message,
 
     priority = AlertPriority.AVERAGE.value
     if message.data.get("priority") or voc_match(message.data.get("utterance", ""), "priority", lang=lang):
-        num = extract_number(" ".join(tokens.unmatched()), lang=lang)
+        num = extract_count(" ".join(tokens.unmatched()), lang)
         priority = num if num and num in range(1, 11) else priority
     return priority
 
@@ -677,9 +772,11 @@ def parse_alert_name_from_message(message: Message,
     tokens.strip_time()
 
     noise_words = noise_words or get_words_list("noise_words.voc", lang)
+    normalizer = UtteranceNormalizerPlugin.get_normalizer(lang=lang)
     candidate_names = list()
     # First try to parse a name from the remainder tokens
     for chunk in tokens.unmatched():
+        chunk = normalizer.normalize(chunk).lower()
         # A word with no letter or digit in it is punctuation left over by the
         # normaliser, not a name. The tokenizer keeps the trailing period of
         # "wake me up every monday and thursday at 9 AM." as its own " ."
@@ -761,10 +858,9 @@ def extract_dt_or_duration(
     # else:
     #     anchor_time = dt.datetime.now(timezone)
 
-    time_, remainder = extract_duration(text, lang=lang)
+    time_, remainder = extract_duration(text, lang, anchor_time)
     if time_ is None:
-        # now = dt.datetime.now(timezone)
-        time_, remainder = extract_datetime(text, anchorDate=anchor_time, lang=lang) or (None, text)
+        time_, remainder = extract_datetime(text, lang, anchor_time) or (None, text)
     if isinstance(time_, (dt.timedelta, relativedelta)):
         if anchor_time is not None:
             return anchor_time + time_ if add else anchor_time - time_, remainder
@@ -813,7 +909,7 @@ def parse_relative_time_from_message(message: Message,
             day = anchor_time.replace(hour=0, minute=0, second=0,
                                       microsecond=0)
             on_day, on_day_remainder = extract_datetime(
-                token, anchorDate=day, lang=lang) or (None, remainder)
+                token, lang, day) or (None, remainder)
             if on_day and on_day.date() == day.date() and \
                     on_day > dt.datetime.now(on_day.tzinfo):
                 time_, remainder = on_day, on_day_remainder
@@ -854,22 +950,19 @@ def parse_timeframe_from_message(message: Message,
         _voc_match_index(tokens, "and", lang)
 
     begin = parse_alert_time_from_message(message, tokens, timezone)
+    begin_last = tokens.extracted_last
 
     if has_and:
         end = parse_alert_time_from_message(message,
                                             tokens,
                                             timezone,
                                             anchor_time=begin)
-        if end:
-            # Set this to next day if 'end' is parsed as 00:00
-            # queries about "today and tomorrow" should likely include
-            # tomorrow
-            if end.minute == 0 and end.hour == 0:
-                end = end + dt.timedelta(days=1, seconds=-1)
-    # if parsed time is 00:00 this is considerred a whole day check
-    # eg "today", "tomorrow", "3rd of october", "tuesday"
-    if end is None and begin and begin.minute == 0 and begin.hour == 0:
-        end = begin + dt.timedelta(days=1, seconds=-1)
+        # "today and tomorrow" ends with the last second of tomorrow
+        end = tokens.extracted_last or end
+    # a span of whole days ("tomorrow", "this week", "3rd of october")
+    # covers each of its days
+    if end is None:
+        end = begin_last
 
     return begin, end
 
@@ -895,17 +988,14 @@ def validate_dt(response: str) -> Union[dt.datetime, str]:
     if voc_match(response, "no", lang):
         return "no"
     else:
-        dt_ = extract_datetime(response, lang=lang)
+        dt_ = extract_datetime(response, lang)
         return dt_ if dt_ is None else dt_[0]
 
 
 def validate_number(response: str) -> int:
     message = dig_for_message()  # used inside get_response
     lang = get_message_lang(message) if message else get_default_lang()
-    num = extract_number(response, lang=lang)
-    if num:
-        return int(num)
-    return False
+    return extract_count(response, lang) or False
 
 
 def get_week_range(ref_date: dt.datetime) -> Tuple[dt.datetime, dt.datetime]:
