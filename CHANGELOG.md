@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.13.1a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.13.1a1) (2026-11-18)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.13.0a1...0.13.1a1)
+
+**Merged pull requests:**
+
+- fix: read an article followed by a courtesy word as the number one [\#485](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/485) ([openvoiceos-bot](https://github.com/openvoiceos-bot))
+
 ## [0.13.0a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.13.0a1) (2026-11-18)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.12.58a4...0.13.0a1)
@@ -218,10 +226,6 @@
 ## [0.12.37a2](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.12.37a2) (2026-10-15)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.12.37a1...0.12.37a2)
-
-**Merged pull requests:**
-
-- test: freeze the clock in test\_build\_alert\_from\_intent\_timer [\#379](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/379) ([openvoiceos-bot](https://github.com/openvoiceos-bot))
 
 ## [0.12.37a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.12.37a1) (2026-10-13)
 
