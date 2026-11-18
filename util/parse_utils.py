@@ -142,12 +142,17 @@ def extract_count(text: str, lang: str) -> Optional[int]:
     """Read the first whole number in ``text`` with numtag.
 
     A word that is also an article ("an alarm", "uma hora") is no count,
-    unless no word follows it: the answer "um" to "which one?" is 1.
+    unless no word follows it: the answer "um" to "which one?" is 1. An
+    article followed only by courtesy words ("um por favor") is 1 too.
     """
+    courtesy = sorted(get_words_list("courtesy.voc", lang), key=len, reverse=True)
     for mention in tag_numbers(text, lang.split("-")[0].lower()):
         if not mention.value.lstrip("-").isdigit():
             continue
-        followed = any(c.isalnum() for c in text[mention.char_span[1]:])
+        remainder = text[mention.char_span[1]:]
+        for phrase in courtesy:
+            remainder = re.sub(r"(?i)(?<!\w)" + re.escape(phrase) + r"(?!\w)", " ", remainder)
+        followed = any(c.isalnum() for c in remainder)
         if Reason.ARTICLE in mention.reasons and followed:
             continue
         return int(mention.value)
