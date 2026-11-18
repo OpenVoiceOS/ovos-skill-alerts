@@ -18,7 +18,8 @@ arithmetic on that anchor:
   is the whole anchor day.
 - An article is not a number: "dagli una priorità più bassa" names no
   priority, so the default one stays. An article with no word after it is
-  the answer: "um" to "which one?" is 1.
+  the answer: "um" to "which one?" is 1. An article followed only by
+  courtesy words is the answer too: "um por favor" is 1.
 """
 import datetime as dt
 import unittest
@@ -142,6 +143,28 @@ class TestNumberAnswer(unittest.TestCase):
 
     def test_an_article_before_a_noun_is_no_count(self):
         self.assertEqual(self._answer("um alarme às 8", "pt-PT"), 8)
+
+    def test_a_courtesy_word_after_a_lone_one_is_the_first(self):
+        answers = [("pt-PT", "um por favor"), ("pt-PT", "uma por favor"),
+                   ("pt-PT", "um obrigado"), ("pt-BR", "um por favor"),
+                   ("fr-FR", "un s'il vous plaît"), ("fr-FR", "un merci"),
+                   ("it-IT", "uno per favore"), ("it-IT", "uno grazie"),
+                   ("es-ES", "una por favor"), ("gl-ES", "un por favor"),
+                   ("sv-SE", "ett tack"), ("de-DE", "einen bitte"),
+                   ("hu-HU", "egy kérem"), ("nl-NL", "een alstublieft"),
+                   ("ca-ES", "un si us plau"), ("da-DK", "en tak"),
+                   ("eu-ES", "bat mesedez"), ("nl-NL", "een a.u.b.")]
+        for lang, text in answers:
+            with self.subTest(lang=lang, text=text):
+                self.assertEqual(self._answer(text, lang), 1)
+
+    def test_a_noun_after_the_article_still_blocks_the_count(self):
+        self.assertIs(self._answer("um alarme por favor", "pt-PT"), False)
+        self.assertIs(self._answer("un rappel merci", "fr-FR"), False)
+
+    def test_a_number_word_with_a_courtesy_word_is_read(self):
+        self.assertEqual(self._answer("dois por favor", "pt-PT"), 2)
+        self.assertEqual(self._answer("deux s'il vous plaît", "fr-FR"), 2)
 
 
 if __name__ == "__main__":
