@@ -1,0 +1,11 @@
+zmień powtarzanie mojego {schedkind} na co każdy {repeat}
+spraw, żeby mój {schedkind} powtarzał się co {repeat}
+dostosuj częstotliwość {schedkind} do {repeat}
+zmień mój następny {schedkind}, żeby powtarzał się {repeat}
+chcę, żeby {schedkind} powtarzał się co {repeat}
+zmień powtórzenie mojego {schedkind} na {repeat}
+niech (mój|moje) (alarm|budzik|minutnik|przypomnienie) powtarza się (codziennie|co tydzień|w dni robocze|w weekendy)
+(alarm|budzik|minutnik) ma się powtarzać {repeat}
+(powtarzaj|powtórz) (alarm|budzik|minutnik|przypomnienie) {repeat}
+# machine draft, unvouched: written by Claude Opus 5.5. A native speaker checks the lines below.
+przestaw (alarm|budzik|przypomnienie) na powtarzanie {repeat}

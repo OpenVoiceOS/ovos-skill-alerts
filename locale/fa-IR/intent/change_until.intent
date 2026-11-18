@@ -1,0 +1,26 @@
+تغییر من {schedkind} تا زمانی که طول می کشد {duration:duration}
+تنظیم من {schedkind} تا زمانی که طول می کشد {duration:duration}
+گسترش من {schedkind} تا زمانی که طول می کشد {duration:duration}
+تغییرات طولانی مدت در {schedkind} برای {duration:duration}
+تنظیم مدت زمان طولانی مدت {schedkind} برای {duration:duration}
+تغییر در طول دوره {schedkind} برای {duration:duration}
+تغییر بعدی من {schedkind} مدت زمان برای {duration:duration}
+قرار دادن بعدی من {schedkind} مدت زمان برای {duration:duration}
+من بعدی را تنظیم می کنم {schedkind} مدت زمان برای {duration:duration}
+در این {schedkind} تغییر مدت زمان برای {duration:duration}
+در این {schedkind} مدت زمان تعیین شده برای {duration:duration}
+در این {schedkind} تنظیم مدت زمان برای {duration:duration}
+در این {schedkind} تغییر طول برای {duration:duration}
+تغییر من {schedkind} برای ماندن برای {duration:duration}
+تنظیم من {schedkind} برای ماندن برای {duration:duration}
+گسترش من {schedkind} برای ماندن برای {duration:duration}
+تغییر من {schedkind} مدت زمان برای {duration:duration}
+تنظیم من {schedkind} مدت زمان برای {duration:duration}
+گسترش من {schedkind} مدت زمان برای {duration:duration}
+تغییر من {schedkind} تا زمانی که {duration:duration}
+تنظیم من {schedkind} تا زمانی که {duration:duration}
+گسترش من {schedkind} تا زمانی که {duration:duration}
+(بگذار|بذار) {schedkind} به مدت {duration:duration} طول (بکشد|بکشه)
+مدت زمان {schedkind}م را (عوض کن|تغییر بده) [به {duration:duration}]
+{schedkind} را (چند دقیقه|نیم ساعت|یک ساعت) (کوتاه‌تر|طولانی‌تر) کن
+مدت {schedkind}م را (کوتاه|کمتر|بیشتر|طولانی‌تر) کن

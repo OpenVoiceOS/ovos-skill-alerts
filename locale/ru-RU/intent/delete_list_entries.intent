@@ -1,0 +1,5 @@
+(удали|сотри) (пункты|всё) из [моего] списка [{list_name}]
+очисти [мой] список {list_name}
+(удали|сотри) всё из [моего] списка {list_name}
+# machine draft, unvouched: written by Claude Opus 5.5. A native speaker checks the lines below.
+(удали|сотри|вычеркни) все пункты из [моего] списка [{list_name}]

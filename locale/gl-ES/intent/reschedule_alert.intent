@@ -1,0 +1,9 @@
+# machine translation from en-US, unvouched
+(move|cambia|aprazar) (o|a|o meu|a miña) {schedkind} ás {date:time}
+(move|cambia) (o|a|o meu|a miña) {schedkind} de {date:old} ás {date:time}
+(move|cambia) (o|a) {schedkind} de {name} ás {date:time}
+(adianta|atrasa) (o|a|o meu|a miña) (próximo|próxima|seguinte) {schedkind}
+(alonga|acurta) (o|a|o meu|a miña) {schedkind}
+(apraza|atrasa) (o|a|o meu|a miña) (próximo|próxima|seguinte) {schedkind} uns {duration:duration}
+(o|a|o meu|a miña) {schedkind} (móveo|cámbiao|móvea|cámbiaa) ás {date:time}
+(pon|deixa) (o|a|o meu|a miña) (próximo|próxima|seguinte) {schedkind} (antes|máis tarde)

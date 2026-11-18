@@ -1,0 +1,9 @@
+# machine translation from en-US, unvouched
+(mou|canvia|desplaça|ajorna) (el|la|el meu|la meva) {schedkind} a {date:time}
+(mou|canvia|desplaça) (el|la|el meu|la meva) {schedkind} de {date:old} a {date:time}
+(mou|canvia|desplaça) (el|la) {schedkind} de {name} a {date:time}
+(avança|retarda) (el|la|el meu|la meva) (pròxim|pròxima|següent) {schedkind}
+(allarga|escurça) (el|la|el meu|la meva) {schedkind}
+(ajorna|retarda) (el|la|el meu|la meva) (pròxim|pròxima|següent) {schedkind} durant {duration:duration}
+(el|la|el meu|la meva) {schedkind} (mou|canvia) (el|la) a {date:time}
+(posa|fes) (el|la|el meu|la meva) (pròxim|pròxima|següent) {schedkind} (abans|més tard)

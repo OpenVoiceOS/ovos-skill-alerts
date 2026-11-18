@@ -1,0 +1,8 @@
+(zet|start|maak) een timer [voor {duration:duration}]
+nieuwe timer [voor {duration:duration}]
+(zet|start|maak) een {duration:duration} timer
+start timers
+ik heb timer
+maak timer
+tel vanaf nu vijf minuten af voor de pasta
+start een eierwekker van een kwartier voor de taart

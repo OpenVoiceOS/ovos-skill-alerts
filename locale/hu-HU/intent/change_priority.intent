@@ -1,0 +1,6 @@
+változtasd meg a {schedkind}-om prioritását erre: {number:priority}
+emeld a {schedkind} prioritását {number:priority} szintre
+állítsd be a következő {schedkind}-om prioritását
+állítsd be a {schedkind}-ot {number:priority} prioritással
+csökkentsd a {schedkind}-om prioritását
+változtasd meg a {schedkind} prioritási szintjét erre: {number:priority}

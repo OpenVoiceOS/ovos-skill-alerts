@@ -1,0 +1,32 @@
+{
+  "name": "Alerts",
+  "description": "A skill to manage alarms, timers, reminders, events and todos and optionally sync them with a CalDAV service.",
+  "examples": [
+    "anwa awitayen yellan",
+    "sfeḍ alarma-inu",
+    "err alarma-inu ad yili yettwasel",
+    "sers priorité n alarma-inu",
+    "err alarma-inu ad yales yal yal yiwen",
+    "sbedd-iyi-d tadyant tamaynut",
+    "xdem-iyi-d tabdart tamaynut",
+    "rnu-yi-d asmekti amaynut asmekti",
+    "smektay-iyi ad ssiweḍ aqjun yal ṣṣbeḥ n ussan n ddurt ɣef 7",
+    "sader azday",
+    "kkes akk tibdiwin-inu",
+    "kkes tabdart n twuriwin-inu",
+    "anta alarma i sɛiɣ",
+    "sken-iyi-d twuriwin-inu",
+    "anwi tibdiwin i sɛiɣ",
+    "sbeɛɛed alarma-inu ɣer sdat",
+    "d acu i d-yeqqimen deg timer"
+  ],
+  "tags": [
+    "Productivity",
+    "Daily",
+    "alert",
+    "alarm",
+    "timer",
+    "reminder",
+    "schedule"
+  ]
+}

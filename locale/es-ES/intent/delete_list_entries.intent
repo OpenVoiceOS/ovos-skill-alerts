@@ -1,0 +1,16 @@
+(elimina|borra|quita) (los elementos|las entradas) de (mi|la) lista [{list_name}]
+(elimina|borra) todo de (mi|la) lista [{list_name}]
+(elimina|borra) todo de mi lista de {list_name}
+quita (todo|las cosas) de (la|esa) lista de tareas
+(borra|quita) (las tareas|las cosas) de (la|esa|mi) lista sin borrar la lista
+deja vacía la lista de (tareas|la compra)
+borra todo lo que hay dentro de la lista
+vacía por completo el contenido de la lista
+elimina cada elemento de mi lista
+limpia mi lista y déjala sin nada
+quita todos los elementos de mi lista de tareas
+borra todas las cosas apuntadas en la lista
+# machine draft, unvouched: written by Claude Opus 5.5. A native speaker checks the lines below.
+deja la lista de {list_name} sin elementos
+quiero que la lista de {list_name} quede vacía pero sin eliminarla
+saca todo lo que tengo apuntado en la lista de {list_name}

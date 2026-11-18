@@ -1,7 +1,0 @@
-{
-    "/intent/missed_alerts.intent": [
-        "(did i|) miss (a|an|any|) (event|reminder|timer|alarm|alert|events|reminders|timers|alarms|alerts)",
-        "(have i|) missed (a|an|any|) (event|reminder|timer|alarm|alert|events|reminders|timers|alarms|alerts)",
-        "(what|which) (event|reminder|timer|alarm|alert|events|reminders|timers|alarms|alerts) (did i miss|have i missed)"
-    ]
-}

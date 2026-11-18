@@ -1,0 +1,9 @@
+# machine translation from en-US, unvouched
+hur (lång tid|mycket tid) är kvar på (min|mitt|den) {timerkind}
+hur (lång tid|mycket tid) är kvar på {timerkind} som heter {name}
+hur (lång tid|länge) (är det|dröjer det) (innan|till) (min|mitt|den) {timerkind} (är klar|går ut)
+är (min|mitt|den) {timerkind} (klar|slut)
+(säg|ge) mig tiden som är kvar på (min|mitt|den) {timerkind}
+vad är statusen på (min|mitt|den) {timerkind}
+status på (min|mitt|den) {timerkind}
+när (är|blir) (min|mitt|den) {timerkind} (klar|slut)
