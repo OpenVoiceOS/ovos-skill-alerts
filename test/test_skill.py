@@ -3175,8 +3175,8 @@ class TestParseUtils(unittest.TestCase):
         self.assertIsInstance(repeat, dt.timedelta)
         self.assertEqual(repeat, dt.timedelta(days=3))
 
-    @pytest.mark.xfail(strict=True, reason="chronologia-family:FOR-TO (TigreGotico/chronologia#1007): "
-                       "chronologia reads no bare hour after 'for' ('create an alarm for 10 daily')")
+    @pytest.mark.xfail(strict=True, reason="OpenVoiceOS/ovos-skill-alerts#482: the Adapt tags split 'alarm' from "
+                       "'for 10', and chronologia reads a bare hour after 'for' only after the noun")
     def test_parse_alert_time_from_message_alarm_for_a_bare_hour(self):
         from ovos_skill_alerts.util.parse_utils import parse_alert_time_from_message
 
@@ -3456,8 +3456,8 @@ class TestParseUtils(unittest.TestCase):
              "source", "user"],
         )
 
-    @pytest.mark.xfail(strict=True, reason="chronologia-family:FOR-TO (TigreGotico/chronologia#1007): "
-                       "chronologia reads no bare hour after 'for' ('create an alarm for 10 daily')")
+    @pytest.mark.xfail(strict=True, reason="OpenVoiceOS/ovos-skill-alerts#482: the Adapt tags split 'alarm' from "
+                       "'for 10', and chronologia reads a bare hour after 'for' only after the noun")
     def test_parse_alert_name_from_message_for_a_bare_hour(self):
         from ovos_skill_alerts.util.parse_utils import parse_alert_name_from_message
 
@@ -3468,8 +3468,8 @@ class TestParseUtils(unittest.TestCase):
         self.assertEqual(parse_alert_name_from_message(daily_alarm,
                                                        noise_words=noise_words), "")
 
-    @pytest.mark.xfail(strict=True, reason="chronologia-family:FOR-TO (TigreGotico/chronologia#1007): "
-                       "chronologia reads no bare hour after 'for' ('create an alarm for 10 daily')")
+    @pytest.mark.xfail(strict=True, reason="OpenVoiceOS/ovos-skill-alerts#482: the Adapt tags split 'alarm' from "
+                       "'for 10', and chronologia reads a bare hour after 'for' only after the noun")
     def test_build_alert_from_intent_alarm_for_a_bare_hour(self):
         from ovos_skill_alerts.util.parse_utils import build_alert_from_intent
 

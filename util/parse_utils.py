@@ -141,11 +141,16 @@ def extract_datetime(text: str, lang: str,
 def extract_count(text: str, lang: str) -> Optional[int]:
     """Read the first whole number in ``text`` with numtag.
 
-    A word that is also an article ("an alarm", "uma hora") is no count.
+    A word that is also an article ("an alarm", "uma hora") is no count,
+    unless no word follows it: the answer "um" to "which one?" is 1.
     """
     for mention in tag_numbers(text, lang.split("-")[0].lower()):
-        if Reason.ARTICLE not in mention.reasons and mention.value.lstrip("-").isdigit():
-            return int(mention.value)
+        if not mention.value.lstrip("-").isdigit():
+            continue
+        followed = any(c.isalnum() for c in text[mention.char_span[1]:])
+        if Reason.ARTICLE in mention.reasons and followed:
+            continue
+        return int(mention.value)
     return None
 
 
