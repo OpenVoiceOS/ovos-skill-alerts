@@ -7,6 +7,7 @@ import shutil
 import tempfile
 from unittest import TestCase
 
+import pytest
 from ovos_bus_client.message import Message
 from ovos_bus_client.session import Session
 from ovoscope import CaptureSession, get_minicroft, LEAN_DEFAULT_PIPELINE
@@ -25,6 +26,19 @@ def _tomorrow_at(hour: int) -> dt.datetime:
     from ovos_config.locale import get_default_tz
     day = dt.datetime.now(get_default_tz()) + dt.timedelta(days=1)
     return day.replace(hour=hour, minute=0, second=0, microsecond=0)
+
+
+def _hour(hour) -> int:
+    """The hour an alarm gets. A string is an hour spoken with no am or pm:
+    chronologia ruling 17 gives the next of its two twelve-hour readings."""
+    if isinstance(hour, int):
+        return hour
+    from ovos_config.locale import get_default_tz
+    now = dt.datetime.now(get_default_tz())
+    morning = int(hour) % 12
+    return next((h for h in (morning, morning + 12)
+                 if now < now.replace(hour=h, minute=0, second=0, microsecond=0)),
+                morning)
 
 
 class _AlarmFixture:
@@ -89,6 +103,7 @@ class _PossessiveAlarmMedia(_AlarmFixture):
     """Subclasses name the phrasings of one locale."""
     WITH_TIME: str
     WITH_TIME_NO_ALARM: str
+    WITH_TIME_HOUR = 6
     CREATE_VERB_NO_TIME: str
     EXTRA_WITH_TIME: tuple = ()
     TIMED: tuple = ()
@@ -99,29 +114,35 @@ class _PossessiveAlarmMedia(_AlarmFixture):
         types = self._say(self.WITH_TIME)
         self.assertIn(f"{SKILL_ID}:create_alarm", types)
         self.assertNotIn(f"{SKILL_ID}:change_media_properties", types)
+        hour = _hour(self.WITH_TIME_HOUR)
         by_hour = {a.expiration.hour: a for a in self._alarms()}
-        self.assertEqual(sorted(by_hour), [6, 7])
-        self.assertEqual(by_hour[6].ocp_request, STATION)
+        self.assertEqual(sorted(by_hour), sorted([hour, 7]))
+        self.assertEqual(by_hour[hour].ocp_request, STATION)
         self.assertIsNone(by_hour[7].ocp_request)
 
-    def test_every_extra_phrasing_with_a_time_creates_the_alarm(self):
+    def _assert_creates_the_alarm(self, utterance: str, hour):
         from ovos_skill_alerts.util import AlertType
-        for utterance in self.EXTRA_WITH_TIME:
+        hour = _hour(hour)
+        for alarm in self._alarms():
+            self.skill.alert_manager.rm_alert(alarm.ident)
+        self._seed(AlertType.ALARM, 7, "wake up")
+        self._say(utterance)
+        self.assertEqual(sorted(a.expiration.hour
+                                for a in self._alarms()), sorted([hour, 7]))
+        for alarm in self._alarms():
+            self.skill.alert_manager.rm_alert(alarm.ident)
+        self._say(utterance)
+        self.assertEqual([a.expiration.hour for a in self._alarms()], [hour])
+
+    def test_every_extra_phrasing_with_a_time_creates_the_alarm(self):
+        for utterance, hour in self.EXTRA_WITH_TIME:
             with self.subTest(utterance=utterance):
-                for alarm in self._alarms():
-                    self.skill.alert_manager.rm_alert(alarm.ident)
-                self._seed(AlertType.ALARM, 7, "wake up")
-                self._say(utterance)
-                self.assertEqual(sorted(a.expiration.hour
-                                        for a in self._alarms()), [6, 7])
-                for alarm in self._alarms():
-                    self.skill.alert_manager.rm_alert(alarm.ident)
-                self._say(utterance)
-                self.assertEqual([a.expiration.hour for a in self._alarms()], [6])
+                self._assert_creates_the_alarm(utterance, hour)
 
     def test_a_written_time_creates_the_alarm_with_and_without_another_alarm(self):
         from ovos_skill_alerts.util import AlertType
-        for utterance, hour in self.TIMED:
+        for utterance, spoken in self.TIMED:
+            hour = _hour(spoken)
             for seeded in (True, False):
                 with self.subTest(utterance=utterance, seeded=seeded):
                     for alarm in self._alarms():
@@ -138,7 +159,7 @@ class _PossessiveAlarmMedia(_AlarmFixture):
         types = self._say(self.WITH_TIME_NO_ALARM)
         self.assertIn(f"{SKILL_ID}:create_alarm", types)
         alarms = self._alarms()
-        self.assertEqual([a.expiration.hour for a in alarms], [6])
+        self.assertEqual([a.expiration.hour for a in alarms], [_hour(self.WITH_TIME_HOUR)])
         self.assertEqual(alarms[0].ocp_request, STATION)
 
     def test_a_create_verb_without_a_time_is_a_new_alarm_request(self):
@@ -174,9 +195,9 @@ class TestEnglish(_PossessiveAlarmMedia, _AnotherDay, TestCase):
     WITH_TIME = "set my alarm to play music at 6 am"
     WITH_TIME_NO_ALARM = "set my alarm to play music at 6 am"
     CREATE_VERB_NO_TIME = "create my alarm with music"
-    EXTRA_WITH_TIME = ("set the alarm to play music at 6 am",
-                       "set the alarm to play the radio for 6 am",
-                       "make my alarm play the radio for 6 am")
+    EXTRA_WITH_TIME = (("set the alarm to play music at 6 am", 6),
+                       ("set the alarm to play the radio for 6 am", 6),
+                       ("make my alarm play the radio for 6 am", 6))
     ANOTHER_DAY = "make my alarm play jazz at 7 am on {day}"
     DAYS = ("monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday")
     TIMED = (("make my alarm play the radio at 18:00 tomorrow", 18),
@@ -203,6 +224,7 @@ class TestDanish(_PossessiveAlarmMedia, TestCase):
     LANG = "da-DK"
     WITH_TIME = "sæt min alarm med musik klokken 6"
     WITH_TIME_NO_ALARM = "sæt min alarm med musik klokken 6"
+    WITH_TIME_HOUR = "6"
     CREATE_VERB_NO_TIME = "opret min alarm med musik"
 
 
@@ -210,6 +232,7 @@ class TestPortuguese(_PossessiveAlarmMedia, _AnotherDay, TestCase):
     LANG = "pt-BR"
     WITH_TIME = "defina o alarme para tocar música às 6"
     WITH_TIME_NO_ALARM = "defina o alarme para tocar música às 6"
+    WITH_TIME_HOUR = "6"
     CREATE_VERB_NO_TIME = "crie meu alarme com música"
     ANOTHER_DAY = "deixe o alarme tocar jazz às 7 de {day}"
     DAYS = ("segunda", "terça", "quarta", "quinta", "sexta", "sábado", "domingo")
@@ -218,12 +241,16 @@ class TestPortuguese(_PossessiveAlarmMedia, _AnotherDay, TestCase):
              ("deixe o alarme tocar música às 18h", 18),
              ("deixe o alarme tocar jazz às 6h", 6),
              ("deixe o alarme tocar música ao meio-dia", 12),
-             ("deixe o alarme tocar música à uma", 1))
-    EXTRA_WITH_TIME = ("deixe o alarme tocar música às 6",
-                       "faça o meu alarme tocar música às 6",
-                       "defina o meu alarme para tocar música às 6",
-                       "deixe o alarme tocar música para as 6",
-                       "faça o meu alarme tocar jazz às 6h30")
+             ("deixe o alarme tocar música à uma", "1"))
+    EXTRA_WITH_TIME = (("deixe o alarme tocar música às 6", "6"),
+                       ("faça o meu alarme tocar música às 6", "6"),
+                       ("defina o meu alarme para tocar música às 6", "6"),
+                       ("faça o meu alarme tocar jazz às 6h30", 6))
+
+    @pytest.mark.xfail(strict=True, reason="chronologia-family:FOR-TO (TigreGotico/chronologia#1008): "
+                       "chronologia reads no bare hour after 'para as'")
+    def test_a_spoken_hour_after_para_creates_the_alarm(self):
+        self._assert_creates_the_alarm("deixe o alarme tocar música para as 6", "6")
 
     def test_an_unlisted_kind_changes_the_existing_alarm(self):
         from ovos_skill_alerts.util import AlertType

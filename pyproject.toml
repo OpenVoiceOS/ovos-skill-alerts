@@ -6,6 +6,7 @@ build-backend = "setuptools.build_meta"
 name = "ovos-skill-alerts"
 dynamic = ["version"]
 readme = { file = "README.md", content-type = "text/markdown" }
+requires-python = ">=3.11"
 license = { text = "BSD-3-Clause" }
 authors = [{ name = "Emphasize,OpenVoiceOS" }]
 dependencies = [
@@ -19,6 +20,8 @@ dependencies = [
     "ovos-utterance-normalizer>=0.0.1,<1.0.0",
     "ovos-number-parser>=0.0.1,<1.0.0",
     "ovos-date-parser>=0.37.1a1,<1.0.0",
+    "chronologia>=0.33.2a1",
+    "numtag>=0.15.3a1",
     "langcodes",
     "ovos-spec-tools>=1.12.0a1",
 ]
