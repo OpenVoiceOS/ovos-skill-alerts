@@ -21,7 +21,6 @@ Remove the Mycroft alarm, reminder and timer skills first. Their intents collide
 
 ```text
 "set an alarm for 8 am"                  -> Your alarm is set for eight a.m., in six hours thirty six minutes.
-"set a timer for 30 minutes"             -> Timer for thirty minutes, starting now.
 "remind me to call mom tomorrow at 9 am" -> Your reminder is set for nine a.m., in one day seven hours.
 ```
 

@@ -15,7 +15,6 @@ These answers come from a run of the skill in en-US:
 
 ```text
 "set an alarm for 8 am"                    -> Your alarm is set for eight a.m., in six hours thirty six minutes.
-"set a timer for 30 minutes"               -> Timer for thirty minutes, starting now.
 "remind me to take out the trash at 7 pm"  -> Your reminder is set for seven p.m., in seventeen hours thirty six minutes.
 "remind me to call mom tomorrow at 9 am"   -> Your reminder is set for nine a.m., in one day seven hours.
 "remind me to walk the dog"                -> should i remind you at a specific time?
@@ -37,7 +36,7 @@ An alarm rings at a time of day. It can repeat daily or on given weekdays. With 
 
 ## Timers
 
-A timer counts down a length of time. A timer with no length counts up from now. Say "timer stop" to stop it and hear the time that passed.
+A timer counts down a length of time. A timer with no length counts up from the moment you start it. Say "timer stop" to stop it and hear the time that passed.
 
 - "Set a bread timer for 30 minutes."
 - "How much time is left on my bread timer?"
@@ -75,7 +74,7 @@ With CalDAV sync on, a removed todo becomes a completed task on the server.
 
 ## Active and missed alerts
 
-An active alert is an alert that rings now.
+An active alert is an alert that rings at this moment.
 
 - "Stop alert."
 - "Snooze." The default snooze is 15 minutes.
