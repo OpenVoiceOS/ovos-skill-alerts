@@ -5,7 +5,8 @@ import datetime as dt
 import os
 import shutil
 import tempfile
-from unittest import TestCase
+from unittest import TestCase, mock
+from zoneinfo import ZoneInfo
 
 import pytest
 from ovos_bus_client.message import Message
@@ -22,22 +23,28 @@ PIPELINE = [stage for stage in LEAN_DEFAULT_PIPELINE
 STATION = {"title": "Radio X", "uri": "http://radio.example/x"}
 
 
-def _tomorrow_at(hour: int) -> dt.datetime:
-    from ovos_config.locale import get_default_tz
-    day = dt.datetime.now(get_default_tz()) + dt.timedelta(days=1)
-    return day.replace(hour=hour, minute=0, second=0, microsecond=0)
+#: Every request runs in this zone, with the skill clock frozen at ANCHOR_HOUR
+#: tomorrow, so an hour with no am or pm reads the same on any CI clock.
+TZ_CODE = "America/Sao_Paulo"
+TZ = ZoneInfo(TZ_CODE)
+ANCHOR_HOUR = 10
 
 
-def _hour(hour) -> int:
+def _tomorrow_at(hour: int, minute: int = 0) -> dt.datetime:
+    day = dt.datetime.now(TZ) + dt.timedelta(days=1)
+    return day.replace(hour=hour, minute=minute, second=0, microsecond=0)
+
+
+def _hour(hour, anchor: dt.datetime = None) -> int:
     """The hour an alarm gets. A string is an hour spoken with no am or pm:
-    chronologia ruling 17 gives the next of its two twelve-hour readings."""
+    chronologia ruling 17 gives the next of its two twelve-hour readings
+    after the anchor."""
     if isinstance(hour, int):
         return hour
-    from ovos_config.locale import get_default_tz
-    now = dt.datetime.now(get_default_tz())
+    anchor = anchor or _tomorrow_at(ANCHOR_HOUR)
     morning = int(hour) % 12
     return next((h for h in (morning, morning + 12)
-                 if now < now.replace(hour=h, minute=0, second=0, microsecond=0)),
+                 if anchor < anchor.replace(hour=h, minute=0)),
                 morning)
 
 
@@ -87,15 +94,19 @@ class _AlarmFixture:
         from ovos_skill_alerts.util import AlertType
         return self.skill._get_alerts_list(AlertType.ALARM)
 
-    def _say(self, utterance: str):
-        session = Session(f"e2e-poss-{abs(hash(utterance))}")
+    def _say(self, utterance: str, anchor: dt.datetime = None):
+        anchor = anchor or _tomorrow_at(ANCHOR_HOUR)
+        session = Session(f"e2e-poss-{abs(hash(utterance))}",
+                          location_prefs={"timezone": {"code": TZ_CODE}})
         session.lang = self.LANG
         session.pipeline = PIPELINE
         capture = CaptureSession(self.minicroft)
-        capture.capture(Message("recognizer_loop:utterance",
-                                {"utterances": [utterance], "lang": self.LANG},
-                                {"session": session.serialize()}),
-                        timeout=15)
+        with mock.patch("ovos_skill_alerts.util.parse_utils.time",
+                        return_value=anchor.timestamp()):
+            capture.capture(Message("recognizer_loop:utterance",
+                                    {"utterances": [utterance], "lang": self.LANG},
+                                    {"session": session.serialize()}),
+                            timeout=15)
         return [m.msg_type for m in capture.finish()]
 
 
@@ -176,10 +187,8 @@ class _AnotherDay:
     DAYS: tuple
 
     def test_a_request_for_another_day_creates_an_alarm_for_that_day(self):
-        import datetime as dt
-        from ovos_config.locale import get_default_tz
         from ovos_skill_alerts.util import AlertType
-        monday = dt.datetime.now(get_default_tz()) + dt.timedelta(days=2)
+        monday = _tomorrow_at(ANCHOR_HOUR) + dt.timedelta(days=1)
         utterance = self.ANOTHER_DAY.format(day=self.DAYS[monday.weekday()])
         self._seed(AlertType.ALARM, 7, "first")
         self._say(utterance)
@@ -237,7 +246,7 @@ class TestPortuguese(_PossessiveAlarmMedia, _AnotherDay, TestCase):
     ANOTHER_DAY = "deixe o alarme tocar jazz às 7 de {day}"
     DAYS = ("segunda", "terça", "quarta", "quinta", "sexta", "sábado", "domingo")
     TIMED = (("deixe o alarme tocar música às 6h30", 6),
-             ("deixe o alarme tocar música às 6:30", 6),
+             ("deixe o alarme tocar música às 6:30", "6"),
              ("deixe o alarme tocar música às 18h", 18),
              ("deixe o alarme tocar jazz às 6h", 6),
              ("deixe o alarme tocar música ao meio-dia", 12),
@@ -246,6 +255,19 @@ class TestPortuguese(_PossessiveAlarmMedia, _AnotherDay, TestCase):
                        ("faça o meu alarme tocar música às 6", "6"),
                        ("defina o meu alarme para tocar música às 6", "6"),
                        ("faça o meu alarme tocar jazz às 6h30", 6))
+
+    def test_a_written_time_with_no_am_or_pm_is_the_next_of_its_two_readings(self):
+        for anchor_hour, expected in ((5, _tomorrow_at(6, 30)),
+                                      (10, _tomorrow_at(18, 30)),
+                                      (23, _tomorrow_at(6, 30) + dt.timedelta(days=1))):
+            with self.subTest(anchor_hour=anchor_hour):
+                for alarm in self._alarms():
+                    self.skill.alert_manager.rm_alert(alarm.ident)
+                self._say("deixe o alarme tocar música às 6:30",
+                          anchor=_tomorrow_at(anchor_hour))
+                self.assertEqual([a.expiration.astimezone(TZ).replace(tzinfo=None)
+                                  for a in self._alarms()],
+                                 [expected.replace(tzinfo=None)])
 
     @pytest.mark.xfail(strict=True, reason="chronologia-family:FOR-TO (TigreGotico/chronologia#1008): "
                        "chronologia reads no bare hour after 'para as'")
