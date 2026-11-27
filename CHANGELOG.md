@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.13.3a4](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.13.3a4) (2026-11-27)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.13.3a3...0.13.3a4)
+
+**Merged pull requests:**
+
+- chore: raise numtag floor to 0.46.0a2 for the sv, eu and pl writers [\#501](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/501) ([openvoiceos-bot](https://github.com/openvoiceos-bot))
+
 ## [0.13.3a3](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.13.3a3) (2026-11-27)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.13.3a2...0.13.3a3)
@@ -378,8 +386,6 @@
 **Merged pull requests:**
 
 - fix\(pl-PL\): list\_alerts and cancel\_alert hear the language, not a word list [\#390](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/390) ([openvoiceos-bot](https://github.com/openvoiceos-bot))
-- fix\(hu-HU\): list\_alerts and cancel\_alert hear the language, not a word list [\#389](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/389) ([openvoiceos-bot](https://github.com/openvoiceos-bot))
-- fix\(eu-ES\): list\_alerts and cancel\_alert hear the language, not a word list [\#388](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/388) ([openvoiceos-bot](https://github.com/openvoiceos-bot))
 
 ## [0.12.31a5](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.12.31a5) (2026-09-28)
 
