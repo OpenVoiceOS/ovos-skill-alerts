@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.13.2a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.13.2a1) (2026-11-27)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.13.1a1...0.13.2a1)
+
+**Merged pull requests:**
+
+- fix\(test\): freeze the clock in the possessive alarm media e2e tests [\#492](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/492) ([openvoiceos-bot](https://github.com/openvoiceos-bot))
+
 ## [0.13.1a1](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.13.1a1) (2026-11-18)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.13.0a1...0.13.1a1)
@@ -362,10 +370,6 @@
 ## [0.12.31a5](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.12.31a5) (2026-09-28)
 
 [Full Changelog](https://github.com/OpenVoiceOS/ovos-skill-alerts/compare/0.12.31a4...0.12.31a5)
-
-**Merged pull requests:**
-
-- locale: skill.json for the drafted locales, from their own intent lines [\#380](https://github.com/OpenVoiceOS/ovos-skill-alerts/pull/380) ([openvoiceos-bot](https://github.com/openvoiceos-bot))
 
 ## [0.12.31a4](https://github.com/OpenVoiceOS/ovos-skill-alerts/tree/0.12.31a4) (2026-09-28)
 
