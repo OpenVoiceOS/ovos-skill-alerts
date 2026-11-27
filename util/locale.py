@@ -51,7 +51,7 @@ def spoken_number(n: int, lang: str, dialog: Optional[str] = None,
         return spell(str(n), lang, gender=gender,
                      form=SpokenForm.ORDINAL if ordinal else SpokenForm.CARDINAL)[0].text
     except UnsupportedLanguageError:
-        # numtag has no writer for this language (eu, fa, oc, pl, sv)
+        # numtag has no writer for this language (fa, oc)
         return pronounce_number(n, lang=lang, ordinals=ordinal)
 
 

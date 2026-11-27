@@ -19,7 +19,8 @@ spoken_number(1, "pt-PT", "list_todo_lists")        # uma  (listas, feminine)
 spoken_number(1, "es-ES", "list_todo_num_deleted")  # una  (tareas, feminine)
 spoken_number(1, "de-DE", "list_todo_lists")        # eine (Listen, feminine)
 spoken_number(1, "da-DK", "list_todo_num_deleted")  # et   (elementer, neuter)
-spoken_number(2, "pl-PL")                           # dwa  (fallback)
+spoken_number(1, "sv-SE", ordinal=True)             # första
+spoken_number(2, "fa-IR")                           # دو   (fallback)
 ```
 
 `docs/verify_examples.py` runs these examples and compares each value.
@@ -29,7 +30,7 @@ spoken_number(2, "pl-PL")                           # dwa  (fallback)
 1. The skill gives numtag the number, the language and the gender of the noun.
 2. The table `NOUN_GENDER` in `util/locale.py` holds the gender for each dialog and each language. A language that is not in the table gets the default gender of the numtag writer.
 3. The ordinals that name timers ("first timer", "second timer") use the gender of the `timer_status` row.
-4. numtag has no writer for eu, fa, oc, pl and sv. For these languages, the skill uses `pronounce_number` from ovos-number-parser.
+4. numtag has no writer for fa and oc. For these languages, the skill uses `pronounce_number` from ovos-number-parser.
 
 ## Reference
 
