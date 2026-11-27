@@ -37,7 +37,6 @@ from dateutil.relativedelta import relativedelta
 from ovos_bus_client.message import Message
 from ovos_bus_client.session import SessionManager
 from ovos_date_parser import nice_date_time, nice_time, nice_duration
-from ovos_number_parser import pronounce_number
 from ovos_skill_alerts.util import AlertState, MatchLevel, AlertPriority, WEEKDAYS
 from ovos_skill_alerts.util.alert import Alert, AlertType, DAVType, LOCAL_USER
 from ovos_skill_alerts.util.alert_manager import AlertManager, SYNC_LOCK
@@ -48,6 +47,7 @@ from ovos_skill_alerts.util.locale import (
     spoken_duration,
     spoken_alert_type,
     spoken_weekday,
+    spoken_number,
     get_alert_dialog_data,
     get_alert_type_from_intent,
     datetime_display
@@ -750,7 +750,7 @@ class AlertSkill(ConversationalSkill):
         for i, timer in enumerate(user_timers):
             dialog_data = get_alert_dialog_data(timer, self.lang)
             if not dialog_data["name"] and len(user_timers) > 1:
-                dialog_data["name"] = pronounce_number(i + 1, lang=self.lang, ordinals=True)
+                dialog_data["name"] = spoken_number(i + 1, self.lang, "timer_status", ordinal=True)
             self.speak_dialog("timer_status", dialog_data, wait=True)
 
     # TODO - connect this to naptime skill - mycroft.awoken bus message
@@ -898,7 +898,7 @@ class AlertSkill(ConversationalSkill):
             self.alert_manager.add_alert(alert)
         self.speak_dialog(
             "list_todo_subitems_added",
-            {"num": pronounce_number(len(items), lang=self.lang)},
+            {"num": spoken_number(len(items), self.lang, "list_todo_subitems_added")},
         )
 
     @intent_handler("query_list_names.intent")
@@ -916,7 +916,7 @@ class AlertSkill(ConversationalSkill):
                 self._display_list(todos)
             self.speak_dialog(
                 "list_todo_lists",
-                {"num": pronounce_number(len(names), lang=self.lang),
+                {"num": spoken_number(len(names), self.lang, "list_todo_lists"),
                  "lists": join_word_list(names, connector="and", sep=",", lang=self.lang)},
             )
         else:
@@ -1055,7 +1055,7 @@ class AlertSkill(ConversationalSkill):
                 self.speak_dialog("list_todo_dont_exist", {"name": item})
                 deleted.remove(item)
         self.speak_dialog("list_todo_num_deleted",
-                          {"num": pronounce_number(len(deleted), lang=self.lang)})
+                          {"num": spoken_number(len(deleted), self.lang, "list_todo_num_deleted")})
 
     #@killable_intent()
     @intent_handler("delete_list.intent")
@@ -1117,7 +1117,7 @@ class AlertSkill(ConversationalSkill):
                 self.speak_dialog("list_todo_dont_exist", {"name": item})
                 deleted.remove(item)
         self.speak_dialog("list_todo_num_deleted",
-                          {"num": pronounce_number(len(deleted), lang=self.lang)})
+                          {"num": spoken_number(len(deleted), self.lang, "list_todo_num_deleted")})
 
     # Query DAV
     @intent_handler("calendar_list.intent")
@@ -1473,7 +1473,7 @@ class AlertSkill(ConversationalSkill):
         if len(alerts) > 1:
             alerts.sort(key=lambda x: x.expiration)
             spoken_list = [
-                f"{pronounce_number(i + 1, lang=self.lang)}. \
+                f"{spoken_number(i + 1, self.lang)}. \
                     {nice_date_time(alert.expiration, use_24hour=self.use_24hour, use_ampm=not self.use_24hour, lang=self.lang)}"
                 for i, alert in enumerate(alerts)
             ]

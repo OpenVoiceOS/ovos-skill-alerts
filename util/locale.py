@@ -7,6 +7,8 @@ from typing import Optional, List, Union, Tuple
 from ovos_bus_client.message import Message
 from ovos_bus_client.util import get_message_lang
 from ovos_config.locale import get_default_lang
+from numtag import SpokenForm, UnsupportedLanguageError, spell
+from ovos_number_parser import pronounce_number
 from ovos_date_parser import (
     nice_duration,
     nice_time,
@@ -18,6 +20,39 @@ from ovos_skill_alerts.util.alert import Alert
 from ovos_skill_alerts.util.config import use_24h_format, get_date_format
 from ovos_spec_tools.resources import LocaleResources
 from ovos_workshop.skills.ovos import join_word_list
+
+
+# Grammatical gender of the noun that each number dialog counts, per language.
+# A language not listed takes the writer default.
+NOUN_GENDER = {
+    # temporizador, minuteur, timer, temporitzador: masculine
+    "timer_status": {"pt": "masculine", "es": "masculine", "fr": "masculine",
+                     "it": "masculine", "ca": "masculine", "gl": "masculine"},
+    # itens, tareas, tâches, cose, Einträge, elements, elementos, elementer
+    "list_todo_num_deleted": {"pt": "masculine", "es": "feminine", "fr": "feminine",
+                              "it": "feminine", "de": "masculine", "ca": "masculine",
+                              "gl": "masculine", "da": "neuter"},
+    # entradas, entrées, voci, Einträge, entrades, rexistros
+    "list_todo_subitems_added": {"pt": "feminine", "es": "feminine", "fr": "feminine",
+                                 "it": "feminine", "de": "masculine", "ca": "feminine",
+                                 "gl": "masculine"},
+    # lista, liste, Listen, llistes
+    "list_todo_lists": {"pt": "feminine", "es": "feminine", "fr": "feminine",
+                        "it": "feminine", "de": "feminine", "ca": "feminine",
+                        "gl": "feminine"},
+}
+
+
+def spoken_number(n: int, lang: str, dialog: Optional[str] = None,
+                  ordinal: bool = False) -> str:
+    """`n` in words, in the gender of the noun that `dialog` counts."""
+    gender = NOUN_GENDER.get(dialog, {}).get(lang.split("-")[0].lower())
+    try:
+        return spell(str(n), lang, gender=gender,
+                     form=SpokenForm.ORDINAL if ordinal else SpokenForm.CARDINAL)[0].text
+    except UnsupportedLanguageError:
+        # numtag has no writer for this language (eu, fa, kab, oc, pl, ru, sv)
+        return pronounce_number(n, lang=lang, ordinals=ordinal)
 
 
 def datetime_display(begin: dt.datetime,
