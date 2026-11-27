@@ -23,7 +23,7 @@ NUMBERS = {
     ("da-DK", "list_todo_num_deleted"): "et",
     ("en-US", "list_todo_lists"): "one",
 }
-FALLBACK = {"eu-ES": "bi", "pl-PL": "dwa", "sv-SE": "två"}
+FALLBACK = {"fa-IR": "دو"}
 
 failed = 0
 for (text, lang), want in TIMES.items():
@@ -36,6 +36,9 @@ for (lang, dialog), want in NUMBERS.items():
     got = spoken_number(1, lang, dialog)
     failed += got != want
     print(f"1 {lang} {dialog}: {got} (want {want})")
+got = spoken_number(1, "sv-SE", ordinal=True)
+failed += got != "första"
+print(f"1 sv-SE ordinal: {got} (want första)")
 for lang, want in FALLBACK.items():
     got = spoken_number(2, lang)
     failed += got != want
