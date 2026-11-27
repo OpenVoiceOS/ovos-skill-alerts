@@ -33,6 +33,11 @@ EXPECTED = {
     "nl-NL": (("eerste", "tweede", "derde"), "één"),
     "da-DK": (("første", "anden", "tredje"), "et"),           # elementer (n)
     "en-US": (("first", "second", "third"), "one"),
+    # numtag tests/gold/ru.jsonl, CLDR RBNF ru masculine forms
+    "ru-RU": (("первый", "второй", "третий"), "один"),
+    # numtag tests/gold/kab.jsonl: ordinal is "wis" and a cardinal; the gold
+    # cites no ordinal 1, so the test checks only the cardinal word.
+    "kab": ((None, "sin", "tlata"), "yiwen"),
 }
 
 
@@ -114,6 +119,8 @@ class TestSpokenNumbers(unittest.TestCase):
                 self.skill.handle_timer_status(message)
                 self.assertEqual(len(self.spoken), 3, self.spoken)
                 for word, said in zip(ordinals, self.spoken):
+                    if word is None:
+                        continue
                     self.assertIn(word, _words(said), said)
 
     def test_delete_all_count(self):

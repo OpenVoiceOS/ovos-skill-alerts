@@ -21,7 +21,7 @@ dependencies = [
     "ovos-number-parser>=0.0.1,<1.0.0",
     "ovos-date-parser>=0.37.1a1,<1.0.0",
     "chronologia>=0.33.2a1",
-    "numtag>=0.15.3a1",
+    "numtag>=0.44.0a1",
     "langcodes",
     "ovos-spec-tools>=1.12.0a1",
 ]
