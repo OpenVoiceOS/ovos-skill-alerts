@@ -18,7 +18,7 @@ uv pip install --prerelease=allow ovos-skill-alerts
 Say "set an alarm for 8 am". The skill answers:
 
 ```text
-Your alarm is set for eight a.m., in six hours thirty six minutes.
+Your alarm is set for eight a.m., in <time until the alert>.
 ```
 
 ## Pages

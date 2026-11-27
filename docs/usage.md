@@ -3,7 +3,7 @@
 covers: the alert types and the example phrases that create, query, change and cancel each one
 source: locale/en-US/intent/
 generated: no
-verify: ls locale/en-US/intent/create_alarm.intent locale/en-US/intent/create_timer.intent locale/en-US/intent/create_reminder.intent locale/en-US/intent/create_list.intent
+verify: .venv/bin/python docs/verify_phrases.py >/dev/null 2>&1
 see: times.md
 -->
 
@@ -14,9 +14,9 @@ This page lists the alert types and the phrases that control them. "Alert" is th
 These answers come from a run of the skill in en-US:
 
 ```text
-"set an alarm for 8 am"                    -> Your alarm is set for eight a.m., in six hours thirty six minutes.
-"remind me to take out the trash at 7 pm"  -> Your reminder is set for seven p.m., in seventeen hours thirty six minutes.
-"remind me to call mom tomorrow at 9 am"   -> Your reminder is set for nine a.m., in one day seven hours.
+"set an alarm for 8 am"                    -> Your alarm is set for eight a.m., in <time until the alert>.
+"remind me to take out the trash at 7 pm"  -> Your reminder is set for seven p.m., in <time until the alert>.
+"remind me to call mom tomorrow at 9 am"   -> Your reminder is set for nine a.m., in <time until the alert>.
 "remind me to walk the dog"                -> should i remind you at a specific time?
 ```
 
@@ -38,10 +38,10 @@ An alarm rings at a time of day. It can repeat daily or on given weekdays. With 
 
 A timer counts down a length of time. A timer with no length counts up from the moment you start it. Say "timer stop" to stop it and hear the time that passed.
 
-- "Set a bread timer for 30 minutes."
-- "How much time is left on my bread timer?"
-- "Extend the bread timer by 2 minutes."
-- "Extend the bread timer until 10 am."
+- "Set a timer for 30 minutes."
+- "How much time is left on my timer?"
+- "Extend the timer by 2 minutes."
+- "Extend the timer until 10 am."
 
 ## Reminders and events
 
@@ -49,10 +49,8 @@ A reminder has only a start time. An event can also have an end time. The skill 
 
 - "Remind me to take out the trash every Thursday and Sunday at 7 PM."
 - "Remind me to take out the trash every day at 7 PM until next saturday."
-- "Schedule a tennis event for 2 PM on friday spanning 2 hours."
-- "Push the tennis event by one hour."
+- "Schedule an appointment for tennis on friday at 2 PM."
 - "Move my next event one hour earlier."
-- "Change tennis event length to 3 hours."
 - "Are there any events between friday and sunday?"
 
 When you move a recurring alert, the skill asks if the change is for all occurrences or only the next one.
@@ -66,20 +64,21 @@ A todo has no time. You can put todos in named lists, for example a shopping lis
 - "Add items to the shopping list." Say the items one at a time. Silence stops the recording.
 - "Which items are on the shopping list?"
 - "Which lists are stored?"
-- "Scratch milk entry from the shopping list."
 - "Remove all items on the shopping list."
-- "Remove shopping list."
+- "Delete the shopping list."
 
 With CalDAV sync on, a removed todo becomes a completed task on the server.
 
 ## Active and missed alerts
 
-An active alert is an alert that rings at this moment.
+An active alert is an alert that rings at this moment. The skill reads these phrases while the alert rings, not through an intent:
 
-- "Stop alert."
-- "Snooze." The default snooze is 15 minutes.
-- "Snooze for 1 minute." or "Snooze until 8 AM."
-- "Remind me again at 10 AM." Do not name the alert here.
+| Say | Result |
+| :--- | :--- |
+| Stop alert | the alert stops |
+| Snooze | the alert rings again after `snooze_mins` (15 minutes by default) |
+| Snooze for 1 minute, or snooze until 8 AM | the alert rings again at that time |
+| Remind me again at 10 AM | the alert rings again at that time, without the alert name |
 
 An alert that you do not stop goes on the missed list.
 
@@ -89,8 +88,7 @@ An alert that you do not stop goes on the missed list.
 
 - "Cancel my 8 AM alarm."
 - "Cancel all alarms."
-- "Cancel alerts on saturday."
-- "Cancel alerts between Friday 8 AM and 10 AM."
+- "Cancel the alarms on saturday."
 
 "Cancel all alerts" also removes all reminders and events. With CalDAV sync on, it removes them on the server too.
 

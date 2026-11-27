@@ -3,7 +3,7 @@
 covers: what the skill does, install, a quickstart and the docs link table
 source: pyproject.toml
 generated: no
-verify: test -f docs/index.md
+verify: diff <(ls docs/*.md | xargs -n1 basename | sort) <(grep -o '(docs/[a-z0-9-]*\.md)' README.md | sed 's%(docs/%%; s%)%%' | sort -u)
 see: docs/index.md
 -->
 
@@ -20,8 +20,8 @@ Remove the Mycroft alarm, reminder and timer skills first. Their intents collide
 ## Quickstart
 
 ```text
-"set an alarm for 8 am"                  -> Your alarm is set for eight a.m., in six hours thirty six minutes.
-"remind me to call mom tomorrow at 9 am" -> Your reminder is set for nine a.m., in one day seven hours.
+"set an alarm for 8 am"                  -> Your alarm is set for eight a.m., in <time until the alert>.
+"remind me to call mom tomorrow at 9 am" -> Your reminder is set for nine a.m., in <time until the alert>.
 ```
 
 ## Documentation
