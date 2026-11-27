@@ -1,0 +1,6 @@
+(vilka poster|vad) (står|finns) på [min|] lista[n] [{list_name}]
+(läs|visa) [mig] posterna på lista[n] [{list_name}]
+(vilka poster|vad) (står|finns) på {list_name} lista[n]
+(läs|visa) [mig] posterna på {list_name} lista[n]
+vad (står|finns) på min (att göra|todo)[-lista]
+vad ska jag göra

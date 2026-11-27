@@ -1,0 +1,8 @@
+milyen {alertkind} vannak
+milyen {alertkind} van (beállítva|elmentve)
+(mutasd|mutasd meg|listázd|olvasd fel) (nekem|nekünk) (a|az) {alertkind}
+van {alertkind}
+van (valami|valamilyen) {alertkind}
+(van|vannak) (elmentett|beállított|betervezett) {alertkind}
+mi (a|az) (következő|soron következő) {alertkind}
+mi van (elmentve|betervezve|beállítva)

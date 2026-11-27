@@ -1,0 +1,6 @@
+(zruš|odstraň|smaž|vymaž|zahoď) {alertkind}
+(zruš|odstraň|smaž|vymaž) (ten|ta|to) {alertkind}
+(zruš|odstraň|smaž|vymaž) všechny (moje|mé) {alertkind}
+(zruš|odstraň|smaž|vymaž) (můj|moje|má) {alertkind}
+(zruš|odstraň|smaž) (ten|ta|to) (příští|další) {alertkind}
+(zruš|odstraň|smaž|vymaž) (můj|moje|má) {alertkind} pro {name}

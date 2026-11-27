@@ -1,0 +1,18 @@
+(pon|crea|añade) un recordatorio [para {reminder}] [a las {date:time}]
+recordatorio nuevo [{reminder}]
+crear recordatorios
+iniciar recordatorios
+programar recordatorios
+recuérda(me|nos) [que {reminder}] [a las {date:time}]
+dime que {reminder} [a las {date:time}]
+(no me dejes olvidar|que no se me olvide) {reminder}
+quiero que me recuerdes una cosa más tarde
+avísame de una cosa dentro de un rato
+recuérdame ir al trabajo entre semana por la mañana a las 8
+recuérdame cada mañana entre semana tomar mi medicina a las 8
+recuérdame pasear al perro entre semana por la mañana a las 7
+recuérdame revisar el correo entre semana por la mañana a las 9
+recuérdame cada tarde entre semana llamar a mi madre a las 6
+recuérdame regar las plantas los fines de semana por la mañana a las 8
+(avísame|recuérdame) todos los días laborables (a las|sobre las) (6|7|8|9)
+(avísame|recuérdame) de lunes a viernes (al levantarme|por la tarde|por la noche) (a las|sobre las) (6|7|8|9)

@@ -1,0 +1,7 @@
+cambia la recurrencia de mi {schedkind} a cada {repeat}
+haz que mi {schedkind} se repita cada {repeat}
+ajusta la frecuencia del {schedkind} a {repeat}
+cambia mi próximo {schedkind} para que se repita {repeat}
+quiero que el {schedkind} se repita cada {repeat}
+cambia la repetición de mi {schedkind} a cada {repeat}
+(ponga|deje) (mi|el|la) (alarma|alarmas|el despertador|temporizador|temporizadores|cuenta regresiva|recordatorio|recordatorios|evento|acontecimientos|cita|citas|cronómetro) (para que se repita|repitiendo) {repeat}

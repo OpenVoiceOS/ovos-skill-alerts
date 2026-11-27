@@ -1,0 +1,6 @@
+(cancela|cancelar|borra|borrar|elimina|eliminar|descarta|descartar) {alertkind}
+(cancela|cancelar|borra|borrar|elimina|eliminar|descarta|descartar) (o|a|os|as) {alertkind}
+(cancela|cancelar|borra|borrar|elimina|eliminar) (todos os|todas as) {alertkind}
+(cancela|cancelar|borra|borrar|elimina|eliminar) (o meu|a miña|os meus|as miñas) {alertkind}
+(cancela|cancelar|borra|borrar) (o|a) próximo {alertkind}
+(cancela|anula|elimina|borra|quita) (o meu|a miña|os meus|as miñas) {alertkind} de {name}

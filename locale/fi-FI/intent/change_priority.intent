@@ -1,0 +1,6 @@
+vaihda {schedkind} prioriteetti tasolle {number:priority}
+nosta {schedkind} prioriteetti tasolle {number:priority}
+säädä seuraavan {schedkind} prioriteettia
+aseta {schedkind} prioriteetiksi {number:priority}
+laske {schedkind} prioriteettia
+vaihda {schedkind} prioriteettitaso arvoon {number:priority}

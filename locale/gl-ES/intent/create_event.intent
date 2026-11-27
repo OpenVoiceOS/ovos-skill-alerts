@@ -1,0 +1,6 @@
+(crea|engade|agenda) (un evento|unha cita) [{event}]
+evento novo [{event}]
+teño (un evento|unha cita) [{event}]
+(apunta|anota) na axenda (unha cita|o médico|unha reunión)
+(engade|pon) (un evento|unha cita) (na axenda|no calendario) (para o venres|para mañá)
+(engade|mete) un evento novo (no calendario|na axenda)

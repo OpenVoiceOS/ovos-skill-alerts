@@ -1,0 +1,8 @@
+(slet|fjern) (punkterne|posterne|alt) (fra|på) [min|] liste[n] [{list_name}]
+(slet|fjern) (punkterne|posterne|alt) (fra|på) {list_name} liste[n]
+ryd min {list_name} liste
+ryd min (todo|huskeliste)[-liste]
+(slet|fjern) alt (fra|på) min {list_name} liste
+(slet|fjern) alt (fra|på) min (todo|huskeliste)
+tag alle punkter af indkøbslisten uden at slette den
+ryd indholdet af min opgaveliste men behold listen

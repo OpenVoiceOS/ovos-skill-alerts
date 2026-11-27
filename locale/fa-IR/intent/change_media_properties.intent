@@ -1,0 +1,39 @@
+تغییر من {schedkind} برای شنیدن
+تنظیم من {schedkind} برای شنیدن
+من را بسازید {schedkind} برای شنیدن
+تغییر من {schedkind} شنیده می شود
+تنظیم من {schedkind} شنیده می شود
+من را بسازید {schedkind} شنیده می شود
+تغییر شنوایی من {schedkind}
+تغییر هشدار من {schedkind} به صدا
+تنظیم من {schedkind} هشدار به صدا
+تنظیم هشدار من {schedkind} به صدا
+تغییر هشدار {schedkind} به صدا
+تغییر من {schedkind} به playback {mediakind}
+تنظیم من {schedkind} به playback {mediakind}
+من را بسازید {schedkind} به playback {mediakind}
+تغییر من {schedkind} برای {mediaform}
+تنظیم من {schedkind} برای {mediaform}
+من را بسازید {schedkind} برای {mediaform}
+تغییر من {schedkind} برای استفاده {mediaform}
+تنظیم من {schedkind} برای استفاده {mediaform}
+من را بسازید {schedkind} برای استفاده {mediaform}
+تغییر من {schedkind} بازنویسی {mediaform}
+تنظیم من {schedkind} بازنویسی {mediaform}
+من را بسازید {schedkind} بازنویسی {mediaform}
+تغییر من {schedkind} به playback {mediaform}
+تنظیم من {schedkind} به playback {mediaform}
+من را بسازید {schedkind} به playback {mediaform}
+تغییر من {schedkind} صدا برای {mediakind}
+تنظیم من {schedkind} صدا برای {mediakind}
+تغییراتی در {schedkind} صدا برای {mediakind}
+تغییر من {schedkind} صدا برای {mediaform}
+تنظیم من {schedkind} صدا برای {mediaform}
+تغییراتی در {schedkind} صدا برای {mediaform}
+تغییر من {schedkind} هشدار به {mediaform}
+تنظیم من {schedkind} هشدار به {mediaform}
+تغییراتی در {schedkind} هشدار به {mediaform}
+برای (هشدار|ساعت هشدار|زمانبندی|شمارش|یادآوری|رویداد|رویدادها|زنگ ساعت|زنگ|آلارم|تایمر|قرار|قرار ملاقات|جلسه) (من|بعدی) (یک ضبط|پیام ثبت شده|صدای یادآوری|یک یادآوری صوتی|یک یادآوری سخنرانی|یک فایل صوتی|یک فایل) (بگذار|پخش کن|استفاده کن)
+(می‌خواهم|میخوام) {schedkind} (من|بعدی‌ام) با {mediakind} پخش (شود|بشه)
+نوع پخش {schedkind} را (به|روی) {mediakind} (تغییر بده|بگذار)
+{schedkind} (من|بعدی) (صوتی|با صدا) (پخش|اعلام) (شود|بشه)

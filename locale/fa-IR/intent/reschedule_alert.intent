@@ -1,0 +1,104 @@
+من {date:old} هشدارها را به {date:time}
+در این {date:old} هشدارها را به {date:time}
+من {date:old} زمان آن را به {date:time}
+در این {date:old} زمان آن را به {date:time}
+حرکت من {date:old} هشدار به {date:time}
+تغییر من {date:old} هشدار به {date:time}
+بازگرداندن من {date:old} هشدار به {date:time}
+آیا می توانم بعدی خود را حرکت دهم؟ {schedkind} برای {date:time}
+اگر می خواهی بعدی من را حرکت دهی {schedkind} برای {date:time}
+آیا می توانم بعدی خود را حرکت دهم {schedkind} برای {date:time}
+آیا می توانم بعدی خود را تغییر دهم؟ {schedkind} برای {date:time}
+من {date:old} هشدار حرکت به {date:time}
+در این {date:old} هشدار حرکت به {date:time}
+من {date:old} زمان حرکت به {date:time}
+در این {date:old} زمان حرکت به {date:time}
+حرکت بعدی من {schedkind} قبلی
+بعدی من را فشار دهید {schedkind} قبلی
+جایگزین بعدی من {schedkind} قبلی
+حرکت بعدی {schedkind} قبلی
+شما می توانید من را {schedkind} قبلی
+اگر می خواهی من را {schedkind} قبلی
+می توانید من را بسازید {schedkind} قبلی
+می توانی من را قرار دهی {schedkind} قبلی
+بعدی من {schedkind} قبلی
+بعدی {schedkind} قبلی
+آینده من {schedkind} قبلی
+در آینده {schedkind} قبلی
+بعدی من را بفرستید {schedkind} قبلی
+قرار دادن بعدی من {schedkind} قبلی
+بعدی را بسازید {schedkind} قبلی
+قرار دادن بعدی {schedkind} قبلی
+حرکت من {schedkind} قبلی
+من را فشار دهید {schedkind} قبلی
+تغییر من {schedkind} قبلی
+حرکت می کند {schedkind} قبلی
+کوتاه کردن بعدی {schedkind}
+بعدی گسترش من {schedkind}
+من {schedkind} قبلی
+در این {schedkind} قبلی
+من {schedkind} زودتر
+در این {schedkind} زودتر
+من را بسازید {schedkind} قبلی
+تنظیم من {schedkind} قبلی
+این را بسازید {schedkind} قبلی
+قرار دادن آن {schedkind} قبلی
+کوتاه کردن من {schedkind}
+گسترش من {schedkind}
+{schedkind} قبلی
+{schedkind} زودتر
+{schedkind} بعداً
+{schedkind} طولانی تر
+قبلی {schedkind}
+زودتر {schedkind}
+بعداً {schedkind}
+طولانی تر {schedkind}
+شما می توانید من را حرکت دهید {schedkind} برای {date:time}
+اگر حرکت می کنی من {schedkind} برای {date:time}
+می توانی من را عوض کنی {schedkind} برای {date:time}
+حرکت بعدی من {schedkind} برای {date:time}
+تغییر بعدی من {schedkind} برای {date:time}
+بعدی من را بازگردانید {schedkind} برای {date:time}
+جایگزین بعدی من {schedkind} برای {date:time}
+تغییر بعدی من {schedkind} قبلی
+بعدی من را بازگردانید {schedkind} قبلی
+حرکت بعدی من {schedkind} با {duration:duration} قبلی
+تغییر بعدی من {schedkind} با {duration:duration} قبلی
+بعدی من را بازگردانید {schedkind} با {duration:duration} قبلی
+جایگزین بعدی من {schedkind} با {duration:duration} قبلی
+حرکت من {schedkind} برای {date:time}
+تغییر من {schedkind} برای {date:time}
+بازگرداندن من {schedkind} برای {date:time}
+بعدی من را بفرستید {schedkind} تمام روز
+قرار دادن بعدی من {schedkind} تمام روز
+تغییر بعدی من {schedkind} تمام روز
+بعدی را بسازید {schedkind} تمام روز
+حرکت می کند {schedkind} برای {name} برای {date:time}
+تغییراتی در {schedkind} برای {name} برای {date:time}
+بازگرداندن آن {schedkind} برای {name} برای {date:time}
+تغییر را تغییر دهید {schedkind} برای {name} برای {date:time}
+بازگرداندن من {schedkind} قبلی
+در این {schedkind} برای {date:old} حرکت می کند برای {date:time}
+در این {schedkind} برای {date:old} تغییر آن برای {date:time}
+در این {schedkind} برای {date:old} آن را برای {date:time}
+من {schedkind} حرکت به {date:time}
+در این {schedkind} حرکت به {date:time}
+من {schedkind} تغییر به {date:time}
+در این {schedkind} تغییر به {date:time}
+حرکت من {schedkind} برای {date:time} به جای آن
+تغییر من {schedkind} برای {date:time} به جای آن
+بازگرداندن من {schedkind} برای {date:time} به جای آن
+من را بسازید {schedkind} تمام روز
+تنظیم من {schedkind} تمام روز
+تغییر من {schedkind} تمام روز
+این را بسازید {schedkind} تمام روز
+حرکت من {schedkind} از {date:old} برای {date:time}
+تغییر من {schedkind} از {date:old} برای {date:time}
+بازگرداندن من {schedkind} از {date:old} برای {date:time}
+از {date:old} برای {date:time} حرکت من {schedkind}
+از {date:old} برای {date:time} تغییر من {schedkind}
+از {date:old} برای {date:time} بازگرداندن من {schedkind}
+(هشدار|ساعت هشدار|زمانبندی|شمارش|یادآوری|رویداد|رویدادها|زنگ ساعت|زنگ|آلارم|تایمر|قرار|قرار ملاقات|جلسه) را (زودتر|دیرتر) (کن|بگذار)
+{schedkind} را [برای] تمام روز (کن|بگذار)
+# machine draft, unvouched: written by Claude Opus 5.5. A native speaker checks the lines below.
+{schedkind} را به وقت دیگری ببر

@@ -1,0 +1,29 @@
+{
+  "name": "Alerty",
+  "description": "Umiejętność do zarządzania alarmami, minutnikami, przypomnieniami, wydarzeniami i listami zadań, opcjonalnie z synchronizacją z usługą CalDAV.",
+  "examples": [
+    "Ustaw alarm na 8 rano.",
+    "Włącz minutnik na chleb na 30 minut.",
+    "Zaplanuj wydarzenie tenis na piątek na 14:00 na dwie godziny.",
+    "Ustaw codzienny alarm na 8 rano.",
+    "Ustaw alarm na 8 rano w soboty.",
+    "przypominaj mi o wyniesieniu śmieci w każdy czwartek i niedzielę o 19:00.",
+    "obudź mnie o 8 rano muzyką.",
+    "Kiedy jest mój następny alarm?",
+    "Jakie mam przypomnienia?",
+    "Anuluj wszystkie alarmy.",
+    "Anuluj wszystkie minutniki.",
+    "Anuluj wszystkie przypomnienia.",
+    "Co mnie ominęło?",
+    "Czy coś mnie ominęło?"
+  ],
+  "tags": [
+    "Produktywność",
+    "Codzienne",
+    "alert",
+    "alarm",
+    "minutnik",
+    "przypomnienie",
+    "harmonogram"
+  ]
+}

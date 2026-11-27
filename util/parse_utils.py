@@ -27,6 +27,7 @@
 # SOFTWARE,  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import datetime as dt
+import re
 from time import time
 from typing import Optional, List, Union, Tuple, Any
 from uuid import uuid4
@@ -35,11 +36,13 @@ from dateutil.relativedelta import relativedelta
 from ovos_bus_client.message import Message, dig_for_message
 from ovos_bus_client.util import get_message_lang
 from ovos_config.locale import get_default_lang, get_default_tz
-from ovos_date_parser import nice_time, nice_day, extract_datetime, extract_duration
-from ovos_number_parser import extract_number
+import chronologia
+from chronologia import DAY_PARTS, extract_timespan
+from numtag import Reason, tag_numbers
+from ovos_date_parser import nice_time, nice_day
 from ovos_skill_alerts.util import AlertPriority, Weekdays, AlertType, DAVType, LOCAL_USER
 from ovos_skill_alerts.util.alert import Alert
-from ovos_skill_alerts.util.config import use_24h_format, find_resource_file, get_date_format
+from ovos_skill_alerts.util.config import use_24h_format, find_resource_file, get_date_format, get_session_tz
 from ovos_skill_alerts.util.locale import (
     voc_match,
     spoken_alert_type,
@@ -52,6 +55,110 @@ from ovos_utterance_normalizer import UtteranceNormalizerPlugin
 from rapidfuzz import fuzz
 
 
+#: A span this narrow names an instant: "at 9 am" is a minute wide.
+_INSTANT = dt.timedelta(minutes=1)
+
+
+def _wall_clock(anchor: Optional[dt.datetime]) -> dt.datetime:
+    """The anchor as chronologia reads it: a naive wall-clock time.
+
+    With no anchor, "now" is the wall clock of the configured time zone.
+    """
+    anchor = anchor or dt.datetime.now(get_default_tz())
+    return anchor.replace(tzinfo=None)
+
+
+def extract_duration(text: str, lang: str,
+                     anchor: Optional[dt.datetime] = None
+                     ) -> Tuple[Optional[dt.timedelta], str]:
+    """Read a length of time with chronologia.
+
+    A month or a year is counted on the calendar from ``anchor``.
+    :returns: the duration and the words around it, or (None, text)
+    """
+    found = chronologia.extract_duration(text, lang.split("-")[0].lower(),
+                                         anchor=_wall_clock(anchor))
+    if found is None:
+        return None, text
+    return found.duration, found.remainder
+
+
+def _day_parts(code: str) -> set:
+    """The (start, end) times of the locale's parts of the day."""
+    own = {(part.start, part.end) for part in DAY_PARTS.values() if part.lang == code}
+    return own or {(part.start, part.end) for part in DAY_PARTS.values() if part.lang is None}
+
+
+def _read_timespan(text: str, lang: str, anchor: Optional[dt.datetime] = None
+                   ) -> Optional[Tuple[dt.datetime, Optional[dt.datetime], str]]:
+    """Read a point in time with chronologia, and the days it covers.
+
+    chronologia answers the stretch of time a phrase names. An alert needs
+    one instant, so the start of the span answers, with one exception: a
+    part of the day said with no clock ("tomorrow morning", "tonight")
+    answers the middle of its band, cut at midnight, or the anchor once
+    that middle has passed. These are rulings 10 and 10a of the chronologia
+    disagreement classes.
+
+    A span of whole days ("tomorrow", "this week") also gives its last
+    second, so a time frame covers every day the phrase names.
+    :returns: the instant and the last second of a span of whole days (or
+        None), both in the anchor's zone, and the words around them; or None
+    """
+    code = lang.split("-")[0].lower()
+    wall = _wall_clock(anchor)
+    found = extract_timespan(text, code, wall)
+    if found is None:
+        return None
+    start, end = found.span.start_datetime, found.span.end_datetime
+    if start is None or end is None:
+        return None
+    zone = anchor.tzinfo if anchor else get_default_tz()
+    last = None
+    if start.time() == dt.time() and end - start >= dt.timedelta(days=1):
+        last = (end - dt.timedelta(seconds=1)).replace(tzinfo=zone)
+    elif end - start > _INSTANT and (start.time(), end.time()) in _day_parts(code):
+        end = min(end, start.replace(hour=0, minute=0, second=0, microsecond=0)
+                  + dt.timedelta(days=1))
+        middle = start + (end - start) / 2
+        start = wall if middle < wall < end else middle
+    return start.replace(tzinfo=zone), last, found.remainder
+
+
+def extract_datetime(text: str, lang: str,
+                     anchor: Optional[dt.datetime] = None
+                     ) -> Optional[Tuple[dt.datetime, str]]:
+    """Read a point in time with chronologia, as ``_read_timespan`` does.
+
+    :returns: the instant in the anchor's zone and the words around it, or None
+    """
+    found = _read_timespan(text, lang, anchor)
+    if found is None:
+        return None
+    return found[0], found[2]
+
+
+def extract_count(text: str, lang: str) -> Optional[int]:
+    """Read the first whole number in ``text`` with numtag.
+
+    A word that is also an article ("an alarm", "uma hora") is no count,
+    unless no word follows it: the answer "um" to "which one?" is 1. An
+    article followed only by courtesy words ("um por favor") is 1 too.
+    """
+    courtesy = sorted(get_words_list("courtesy.voc", lang), key=len, reverse=True)
+    for mention in tag_numbers(text, lang.split("-")[0].lower()):
+        if not mention.value.lstrip("-").isdigit():
+            continue
+        remainder = text[mention.char_span[1]:]
+        for phrase in courtesy:
+            remainder = re.sub(r"(?i)(?<!\w)" + re.escape(phrase) + r"(?!\w)", " ", remainder)
+        followed = any(c.isalnum() for c in remainder)
+        if Reason.ARTICLE in mention.reasons and followed:
+            continue
+        return int(mention.value)
+    return None
+
+
 class Tokens(list):
     def __init__(self, chunks: list, message: Message = None):
         super().__init__(chunks)
@@ -60,6 +167,7 @@ class Tokens(list):
         self.message = message
         self.time_stripped = False
         self.extracted_time: Union[dt.datetime, dt.timedelta] = None
+        self.extracted_last: Optional[dt.datetime] = None
 
     @property
     def lang(self):
@@ -87,21 +195,20 @@ class Tokens(list):
         for i, token in enumerate(self):
             if self.is_matched(token):
                 continue
-            time_ = None
-            try:
-                time_, remainder = extract_duration(token, lang=lang)
-            except TypeError:
-                pass
-            if time_ is None:
-                try:
-                    extracted_content = extract_datetime(token, lang=lang)
-                    if not extracted_content:
-                        continue
-                    time_, remainder = extracted_content
-                except TypeError:
-                    pass
-            if time_:
-                time_data.append(time_)
+            # one chunk can name several times: "monday and thursday at 9 am"
+            remainder = token
+            while remainder:
+                time_, rest = extract_duration(remainder, lang)
+                if time_ is None:
+                    found = extract_datetime(remainder, lang)
+                    if not found:
+                        break
+                    time_, rest = found
+                if time_:
+                    time_data.append(time_)
+                if len(rest) >= len(remainder):
+                    break
+                remainder = rest
             self[i] = remainder
 
         self.extracted_time = time_data[0] if time_data else None
@@ -120,7 +227,6 @@ def tokenize_utterance(message: Message) -> Tokens:
     :returns: list of utterance tokens where a tag defines a token
     """
     utterance: str = message.data.get("utterance", "").lower()
-    lang = get_message_lang(message)
     if utterance is None:
         return Tokens([], message)
 
@@ -138,10 +244,33 @@ def tokenize_utterance(message: Message) -> Tokens:
             parsed = parsed.strip("-")
             chunks.extend((parsed, word))
         chunks.append(utterance)
-    normalizer = UtteranceNormalizerPlugin.get_normalizer(lang=lang)
-    tokens = Tokens([normalizer.normalize(chunk).lower()
-                     for chunk in chunks if chunk.strip()], message)
-    return tokens
+    # chronologia folds spelled numbers itself, and a normaliser that drops
+    # the "e" of pt "seis e meia" or rewrites the clock loses the time.
+    return Tokens([chunk.strip() for chunk in chunks if chunk.strip()], message)
+
+
+def parse_media_time_from_message(message: Message) -> Optional[dt.datetime]:
+    """
+    Parse a time named inside the media part of a request, such as
+    "music at 6 am" in "set the alarm to play music at 6 am".
+    It goes through the create path's parser, not ``extract_dt_or_duration``, so
+    a request reads as the same time here as when it creates the alarm.
+    The alarm words are removed first, so an alarm-clock word that holds a
+    time word (fa-IR "ساعت هشدار") is not read as a time. A request whose
+    media slot names no time returns None, even when a time elsewhere in
+    the utterance picks which alarm to change ("my 7 am alarm").
+    :param message: Message associated with intent match
+    :returns: Parsed datetime or None if the media part holds no time
+    """
+    media = message.data.get("mediakind")
+    if not media:
+        return None
+    media_message = Message(message.msg_type,
+                            {**message.data, "utterance": media, "__tags__": []},
+                            message.context)
+    tokens = tokenize_utterance(media_message)
+    _strip_voc_phrase(tokens, "alarm", get_message_lang(message))
+    return parse_alert_time_from_message(media_message, tokens)
 
 
 def round_nearest_minute(alert_time: dt.datetime,
@@ -228,8 +357,9 @@ def build_alert_from_intent(message: Message) -> Optional[Alert]:
 
     data = dict()
     data["context"] = parse_alert_context_from_message(message)
+    data["message_context"] = message.context
 
-    timezone = get_default_tz()
+    timezone = get_session_tz(message)
     timestamp = data.get("context").get("created")
     anchor_time = dt.datetime.fromtimestamp(timestamp).astimezone(timezone)
 
@@ -259,7 +389,7 @@ def build_alert_from_intent(message: Message) -> Optional[Alert]:
         data["context"]["stopwatch_mode"] = True
     elif alert_time is None:
         if repeat_interval:
-            alert_time = anchor_time + repeat_interval
+            alert_time = _add_elapsed(anchor_time, repeat_interval)
         elif until:
             alert_time = until
 
@@ -282,7 +412,75 @@ def build_alert_from_intent(message: Message) -> Optional[Alert]:
     if alert_type == AlertType.TODO:
         data["dav_type"] = DAVType.VTODO
     data["lang"] = lang
-    return Alert.create(**data)
+    return Alert.create(timezone=timezone, **data)
+
+
+def _strip_voc_phrase(tokens: Optional[Tokens], resource: str, lang: str = None) -> None:
+    """
+    Remove the vocab phrase (eg. "weekday") that matched ``resource`` from
+    every token string in-place, so it doesn't pollute a later
+    extract_datetime() call on the same token.
+
+    This mirrors what adapt already does for tagged keywords (they are
+    split out of the token stream before time parsing runs); it's only
+    needed for the voc_match() fallback path used by intents that don't tag
+    entities (eg. padatious template intents).
+    :param tokens: mutable Tokens list to strip the phrase from, or None
+    :param resource: vocab resource name (without ".voc") to match against
+    :param lang: language of the vocab resource
+    """
+    if not tokens:
+        return
+    if not resource.endswith(".voc"):
+        resource = f"{resource}.voc"
+    words = sorted(get_words_list(resource, lang), key=len, reverse=True)
+    for i, token in enumerate(tokens):
+        if not isinstance(token, str):
+            continue
+        new_token = token
+        for word in words:
+            new_token = re.sub(r"(?i)\b" + re.escape(word) + r"\b", " ", new_token)
+        new_token = re.sub(r"\s+", " ", new_token).strip()
+        if new_token != token:
+            tokens[i] = new_token
+
+
+def _voc_match_index(tokens: Tokens, resource: str, lang: str = None) -> Optional[int]:
+    """
+    Fallback for the adapt ``tokens.index(message.data["<resource>"]) + 1``
+    pattern used to locate a clause that follows a tagged keyword (eg.
+    "until" or "repeat"), for matches that never populate that adapt data
+    (eg. padatious template intents). Finds the longest vocab phrase for
+    ``resource`` present in the utterance, splits the token that contains it
+    into a "before" token and an "after" token (mirroring how
+    ``tokenize_utterance`` already splits on adapt-tagged keywords), and
+    returns the index of the "after" token -- the same index a caller would
+    get from the adapt branch, pointing at the clause to pop and parse.
+
+    :param tokens: mutable Tokens list to search/split, or None
+    :param resource: vocab resource name (without ".voc") to match against
+    :param lang: language of the vocab resource
+    :returns: index of the clause following the matched phrase, or None
+    """
+    if not tokens:
+        return None
+    if not resource.endswith(".voc"):
+        resource = f"{resource}.voc"
+    words = sorted(get_words_list(resource, lang), key=len, reverse=True)
+    for i, token in enumerate(tokens):
+        if not isinstance(token, str):
+            continue
+        for word in words:
+            match = re.search(r"(?i)\b" + re.escape(word) + r"\b", token)
+            if match:
+                before = token[:match.start()].strip()
+                after = token[match.end():].strip()
+                if not after:
+                    return None
+                tokens[i] = before
+                tokens.insert(i + 1, after)
+                return i + 1
+    return None
 
 
 def parse_repeat_from_message(message: Message,
@@ -302,16 +500,34 @@ def parse_repeat_from_message(message: Message,
     repeat_days = list()
     lang = get_message_lang(message)
     # NOTE: voc_match is used in case intent was invoked without using adapt
+    # (eg. a padatious template intent, which does not populate __tags__ /
+    # message.data["weekdays"]/["weekends"]/["everyday"] the way adapt does).
+    # In that case the recurrence phrase (eg. "weekday") is still sitting
+    # inside the token(s) that later give the alert time and the name, and
+    # needs to be stripped here just like adapt already strips its tagged
+    # keywords: chronologia reads pt "fim de semana" as the coming weekend,
+    # and the name would keep the words.
     utt = message.data.get("utterance", "")
     if message.data.get("everyday") or voc_match(utt, "everyday", lang=lang):
         repeat_days = [Weekdays(i) for i in range(0, 7)]
+        if not message.data.get("everyday"):
+            _strip_voc_phrase(tokens, "everyday", lang)
     elif message.data.get("weekends") or voc_match(utt, "weekends", lang=lang):
         repeat_days = [Weekdays(i) for i in (5, 6)]
+        if not message.data.get("weekends"):
+            _strip_voc_phrase(tokens, "weekends", lang)
     elif message.data.get("weekdays") or voc_match(utt, "weekdays", lang=lang):
         repeat_days = [Weekdays(i) for i in range(0, 5)]
-    elif message.data.get("repeat"):
+        if not message.data.get("weekdays"):
+            _strip_voc_phrase(tokens, "weekdays", lang)
+    elif message.data.get("repeat") or voc_match(utt, "repeat", lang=lang):
         tokens = tokens or tokenize_utterance(message)
-        repeat_index = tokens.index(message.data["repeat"]) + 1
+        if message.data.get("repeat"):
+            repeat_index = tokens.index(message.data["repeat"]) + 1
+        else:
+            repeat_index = _voc_match_index(tokens, "repeat", lang)
+            if repeat_index is None:
+                return []
         if repeat_index > len(tokens) - 1:
             return []
 
@@ -326,7 +542,7 @@ def parse_repeat_from_message(message: Message,
                     # Don't try to parse time intervals
                     remainder += f' {word}'
                     continue
-                extracted_content = extract_datetime(word, lang=lang)
+                extracted_content = extract_datetime(word, lang)
                 if not extracted_content:
                     remainder += f' {word}'
                     continue
@@ -341,10 +557,10 @@ def parse_repeat_from_message(message: Message,
 
         # Parse repeat interval
         if not repeat_days:
-            extracted_duration = extract_duration(repeat_clause, lang=lang)
+            extracted_duration = extract_duration(repeat_clause, lang)
             if extracted_duration and not extracted_duration[0]:
                 # Replace "the next week" with "1 week", etc.
-                extracted_duration = extract_duration(f"1 {extracted_duration[1]}", lang=lang)
+                extracted_duration = extract_duration(f"1 {extracted_duration[1]}", lang)
             if extracted_duration and extracted_duration[0]:
                 duration, remainder = extracted_duration
                 if remainder and remainder.strip():
@@ -385,21 +601,27 @@ def parse_end_condition_from_message(message: Message,
     tokens = tokens or tokenize_utterance(message)
     timezone = timezone or get_default_tz()
     anchor_date = anchor_time or dt.datetime.now(timezone)
-    if message.data.get("until"):
-        idx = tokens.index(message.data["until"]) + 1
+    utt = message.data.get("utterance", "")
+    if message.data.get("until") or voc_match(utt, "until", lang=lang):
+        if message.data.get("until"):
+            idx = tokens.index(message.data["until"]) + 1
+        else:
+            idx = _voc_match_index(tokens, "until", lang)
+            if idx is None:
+                return None
         if idx > len(tokens) - 1:
             return None
         end_clause = tokens.pop(idx)
 
-        extracted_duration = extract_duration(end_clause, lang=lang)
+        extracted_duration = extract_duration(end_clause, lang, anchor_date)
         # extract duration first because of overlaps
         if extracted_duration and not extracted_duration[0]:
             # Replace "the next week" with "1 week", etc.
-            extracted_duration = extract_duration(f"1 {extracted_duration[1]}", lang=lang)
+            extracted_duration = extract_duration(f"1 {extracted_duration[1]}", lang, anchor_date)
         if extracted_duration and extracted_duration[0]:
             end_time, remainder = extracted_duration
         else:
-            extracted_dt = extract_datetime(end_clause, anchorDate=anchor_date, lang=lang)
+            extracted_dt = extract_datetime(end_clause, lang, anchor_date)
             if extracted_dt is None:
                 end_time = extracted_dt
                 remainder = end_clause
@@ -413,6 +635,11 @@ def parse_end_condition_from_message(message: Message,
         return anchor_date.replace(hour=23, minute=59, second=59)
 
     return None
+
+
+def _add_elapsed(anchor_time: dt.datetime, duration: dt.timedelta) -> dt.datetime:
+    """Add elapsed time to an aware datetime, across any DST change in its zone."""
+    return (anchor_time.astimezone(dt.timezone.utc) + duration).astimezone(anchor_time.tzinfo)
 
 
 def parse_alert_time_from_message(message: Message,
@@ -440,17 +667,18 @@ def parse_alert_time_from_message(message: Message,
     # anchor_time = anchor_time.replace(tzinfo=dt.timezone(tz))
 
     alert_time = None
+    tokens.extracted_last = None
     for token in tokens.unmatched():
         LOG.debug(f"Trying to parse time from token: {token}")
-        extracted = extract_duration(token, lang=lang)
+        extracted = extract_duration(token, lang, anchor_time)
         if extracted and extracted[0]:
             duration, remainder = extracted
-            alert_time = anchor_time + duration
+            alert_time = _add_elapsed(anchor_time, duration)
             tokens[tokens.index(token)] = remainder
             break
-        extracted = extract_datetime(token, anchorDate=anchor_time, lang=lang)
-        if extracted and extracted[0]:
-            alert_time, remainder = extracted
+        extracted = _read_timespan(token, lang, anchor_time)
+        if extracted:
+            alert_time, tokens.extracted_last, remainder = extracted
             tokens[tokens.index(token)] = remainder
             break
     LOG.debug(f"Parsed alert time from message: {alert_time}")
@@ -479,7 +707,9 @@ def parse_timedelta_from_message(message: Message,
     alert_time = parse_alert_time_from_message(message, tokens,
                                                timezone, anchor_time)
 
-    return alert_time - anchor_time if alert_time else None
+    if not alert_time:
+        return None
+    return alert_time.astimezone(dt.timezone.utc) - anchor_time.astimezone(dt.timezone.utc)
 
 
 # TODO: Toss - should be handled via OCP
@@ -510,7 +740,7 @@ def parse_alert_priority_from_message(message: Message,
 
     priority = AlertPriority.AVERAGE.value
     if message.data.get("priority") or voc_match(message.data.get("utterance", ""), "priority", lang=lang):
-        num = extract_number(" ".join(tokens.unmatched()), lang=lang)
+        num = extract_count(" ".join(tokens.unmatched()), lang)
         priority = num if num and num in range(1, 11) else priority
     return priority
 
@@ -526,15 +756,45 @@ def parse_alert_name_from_message(message: Message,
     """
     lang = get_message_lang(message)
 
+    # A padatious intent fills its own slot and populates no `__tags__`, so
+    # `tokens.unmatched()` is the whole utterance: "delete my shopping list"
+    # parses as the name "delete shopping list", and the skill then speaks
+    # "There is no entry delete shopping list stored." The slot the intent
+    # file declares is the name the user said, so it wins when it is there.
+    # Adapt keeps working: it populates `__tags__` and neither slot.
+    #
+    # Both slots that carry a name the user said are read. `{list_name}` is
+    # declared by the list intents; `{name}` by cancel_alert, timer_status and
+    # reschedule_alert, which held the identical defect. No intent file
+    # declares both, so the order settles a tie that cannot occur.
+    #
+    # `{event}`, `{reminder}` and `{items}` are deliberately not read here.
+    # `{items}` holds the items to add, not a name. `{event}` and `{reminder}`
+    # name a thing being created rather than one to match, and the suite
+    # asserts token-parsed names for them, such as "start making dinner", so
+    # reading those slots would change behaviour this change does not measure.
+    for slot_key in ("list_name", "name"):
+        slot_name = message.data.get(slot_key)
+        if slot_name and isinstance(slot_name, str) and slot_name.strip():
+            return slot_name.strip().lower()
+
     tokens = tokens or tokenize_utterance(message)
     tokens.strip_time()
 
     noise_words = noise_words or get_words_list("noise_words.voc", lang)
+    normalizer = UtteranceNormalizerPlugin.get_normalizer(lang=lang)
     candidate_names = list()
     # First try to parse a name from the remainder tokens
     for chunk in tokens.unmatched():
+        chunk = normalizer.normalize(chunk).lower()
+        # A word with no letter or digit in it is punctuation left over by the
+        # normaliser, not a name. The tokenizer keeps the trailing period of
+        # "wake me up every monday and thursday at 9 AM." as its own " ."
+        # token, and after `strip_time()` that period is the whole remainder,
+        # so without this the alert is named ".".
         cleaned_chunk = " ".join([word.lower() for word in chunk.split()
-                                  if word not in noise_words])
+                                  if word not in noise_words
+                                  and any(c.isalnum() for c in word)])
         if cleaned_chunk:
             candidate_names.append(cleaned_chunk)
     # default name
@@ -581,8 +841,7 @@ def parse_alert_context_from_message(message: Message) -> dict:
         "lang": get_message_lang(message),
         "ident": message.context.get("ident") or str(uuid4()),
         "origin_ident": message.context.get('ident'),
-        "created": message.context.get("timing",
-                                       {}).get("handle_utterance") or time()
+        "created": time()
     }
     return required_context
 
@@ -609,10 +868,9 @@ def extract_dt_or_duration(
     # else:
     #     anchor_time = dt.datetime.now(timezone)
 
-    time_, remainder = extract_duration(text, lang=lang)
+    time_, remainder = extract_duration(text, lang, anchor_time)
     if time_ is None:
-        # now = dt.datetime.now(timezone)
-        time_, remainder = extract_datetime(text, anchorDate=anchor_time, lang=lang) or (None, text)
+        time_, remainder = extract_datetime(text, lang, anchor_time) or (None, text)
     if isinstance(time_, (dt.timedelta, relativedelta)):
         if anchor_time is not None:
             return anchor_time + time_ if add else anchor_time - time_, remainder
@@ -626,20 +884,47 @@ def parse_relative_time_from_message(message: Message,
                                      tokens: Optional[Tokens] = None,
                                      timezone: Optional[dt.tzinfo] = None,
                                      anchor_time: Optional[dt.datetime] = None):
+    """
+    Parse the new time of a rescheduled alert.
+
+    A duration is returned as a signed delta for the caller to apply to the
+    alert: negative when the utterance asks for earlier, by a word of
+    earlier.voc or by Adapt's ``earlier`` tag. A time of day is read on the
+    day of ``anchor_time``, the alert's own day, so "move the event to 8 pm"
+    keeps the event's date. A phrase that resolves to another day, such as
+    "tomorrow at 8 pm", a phrase that names today by a word of today.voc,
+    such as "tonight at 10", and a time already past on the alert's day are
+    read from now.
+    :param message: Message associated with the request
+    :param tokens: optional tokens parsed from message by `tokenize_utterances`
+    :param timezone: timezone of the request
+    :param anchor_time: the alert's day; the time of day is ignored
+    :returns: datetime, signed timedelta or relativedelta, or None
+    """
     lang = get_message_lang(message)
-    earlier = "earlier" in message.data
+    earlier = "earlier" in message.data or \
+        voc_match(message.data.get("utterance", ""), "earlier", lang)
 
     timezone = timezone or get_default_tz()
     tokens = tokens or tokenize_utterance(message)
 
     for token in tokens.unmatched():
-        time_, remainder = extract_dt_or_duration(token, lang,
-                                                  anchor_time,
-                                                  timezone,
-                                                  not earlier)
-        if time_:
-            tokens[tokens.index(token)] = remainder
-            return time_
+        time_, remainder = extract_dt_or_duration(token, lang, None,
+                                                  timezone, not earlier)
+        if not time_:
+            continue
+        # "tonight at 10" names today: read it from now, not on the alert's day
+        if anchor_time is not None and isinstance(time_, dt.datetime) and \
+                not voc_match(token, "today", lang):
+            day = anchor_time.replace(hour=0, minute=0, second=0,
+                                      microsecond=0)
+            on_day, on_day_remainder = extract_datetime(
+                token, lang, day) or (None, remainder)
+            if on_day and on_day.date() == day.date() and \
+                    on_day > dt.datetime.now(on_day.tzinfo):
+                time_, remainder = on_day, on_day_remainder
+        tokens[tokens.index(token)] = remainder
+        return time_
     return None
 
 
@@ -661,23 +946,33 @@ def parse_timeframe_from_message(message: Message,
     """
     end = None
     tokens = tokens or tokenize_utterance(message)
-    begin = parse_alert_time_from_message(message, tokens, timezone)
+    lang = get_message_lang(message)
+    utterance = message.data.get("utterance", "")
+    has_and = message.data.get("and") or voc_match(utterance, "and", lang=lang)
 
-    if message.data.get("and") or voc_match(message.data.get("utterance", ""), "and"):
+    if has_and and not message.data.get("and"):
+        # NOTE: adapt already splits the token stream on a tagged "and",
+        # giving parse_alert_time_from_message a clean "before"/"after"
+        # token for each clock time. A padatious template intent never
+        # populates message.data["and"], so without this split a single
+        # extract_datetime() call across the whole "between X and Y" phrase
+        # only returns the last time and silently drops the first one.
+        _voc_match_index(tokens, "and", lang)
+
+    begin = parse_alert_time_from_message(message, tokens, timezone)
+    begin_last = tokens.extracted_last
+
+    if has_and:
         end = parse_alert_time_from_message(message,
                                             tokens,
                                             timezone,
                                             anchor_time=begin)
-        if end:
-            # Set this to next day if 'end' is parsed as 00:00
-            # queries about "today and tomorrow" should likely include
-            # tomorrow
-            if end.minute == 0 and end.hour == 0:
-                end = end + dt.timedelta(days=1, seconds=-1)
-    # if parsed time is 00:00 this is considerred a whole day check
-    # eg "today", "tomorrow", "3rd of october", "tuesday"
-    if end is None and begin and begin.minute == 0 and begin.hour == 0:
-        end = begin + dt.timedelta(days=1, seconds=-1)
+        # "today and tomorrow" ends with the last second of tomorrow
+        end = tokens.extracted_last or end
+    # a span of whole days ("tomorrow", "this week", "3rd of october")
+    # covers each of its days
+    if end is None:
+        end = begin_last
 
     return begin, end
 
@@ -703,17 +998,14 @@ def validate_dt(response: str) -> Union[dt.datetime, str]:
     if voc_match(response, "no", lang):
         return "no"
     else:
-        dt_ = extract_datetime(response, lang=lang)
+        dt_ = extract_datetime(response, lang)
         return dt_ if dt_ is None else dt_[0]
 
 
 def validate_number(response: str) -> int:
     message = dig_for_message()  # used inside get_response
     lang = get_message_lang(message) if message else get_default_lang()
-    num = extract_number(response, lang=lang)
-    if num:
-        return int(num)
-    return False
+    return extract_count(response, lang) or False
 
 
 def get_week_range(ref_date: dt.datetime) -> Tuple[dt.datetime, dt.datetime]:
